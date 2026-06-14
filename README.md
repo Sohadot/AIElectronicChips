@@ -12,11 +12,12 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 0: Compute Sovereignty Foundation**
+**Sprint 2: Chip Dependency Map Foundation**
 
-This repository currently establishes the asset's governing thesis, ontology,
-research rules, interface direction, buyer logic, intelligence production
-model, and monetization boundaries.
+The repository now includes the governed, machine-readable foundation for the
+future Chip Dependency Map. It defines the protocol, controlled vocabularies,
+dependency record schema, diagnostic questions, and automated validation. It
+does not implement a score, ranking, chatbot, API, or operational assessment.
 
 ## Foundation Documents
 
@@ -29,6 +30,19 @@ model, and monetization boundaries.
 - [Asset Intelligence Factory Plan](ASSET_INTELLIGENCE_FACTORY_PLAN.md)
 - [Monetization Boundary](MONETIZATION_BOUNDARY.md)
 - [Decision Log](DECISION_LOG.md)
+
+## Chip Dependency Map Foundation
+
+- [Governed model](data/chip-dependency-model.json)
+- [Chip Dependency Map Protocol](CHIP_DEPENDENCY_MAP_PROTOCOL.md)
+- [Dependency Record Schema](DEPENDENCY_RECORD_SCHEMA.md)
+- [Model validation script](scripts/validate_chip_dependency_model.py)
+
+Validate the model with:
+
+```powershell
+python scripts/validate_chip_dependency_model.py
+```
 
 ## Development Roadmap
 

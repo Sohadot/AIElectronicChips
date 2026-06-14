@@ -75,3 +75,36 @@ for Sprint 1, subject to continued compliance with its policies and boundaries.
 Sprint 1 may begin the focused Public Reference Surface. It should contain only
 the pages necessary to explain the category, sovereignty stack, methodology,
 sources, first tool, and strategic availability.
+
+## ADR-004: Establish the Chip Dependency Map Foundation
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+The Chip Dependency Map foundation is defined as a governed, machine-readable
+diagnostic model. It contains eight dependency layers, six exposure types, four
+confidence levels, four artifact outputs, and twelve bounded diagnostic
+questions.
+
+The model reveals layered dependency exposure. It does not aggregate findings
+into a sovereignty score, rank entities, or create claims about specific
+companies, countries, chips, or governments.
+
+### Rationale
+
+Governance must precede interaction. A controlled vocabulary, protocol,
+dependency record schema, and validation process make future outputs
+inspectable and prevent an interface from implying unsupported certainty.
+
+### Consequences
+
+- The canonical model is `data/chip-dependency-model.json`.
+- Model vocabulary and references must pass
+  `scripts/validate_chip_dependency_model.py`.
+- A diagnostic response is an input to investigation, not an operational
+  finding.
+- `insufficient` confidence produces no operational finding.
+- Any future interface must remain a model preview until evidence-backed
+  assessment workflows are governed and implemented.

@@ -1,0 +1,134 @@
+{
+  "model_id": "chip_dependency_map_foundation",
+  "version": "0.1.0",
+  "status": "model_preview",
+  "purpose": "Reveal layered dependency exposure through governed diagnostic questions.",
+  "prohibited_outputs": [
+    "sovereignty_score",
+    "ranking",
+    "unsupported_operational_claim"
+  ],
+  "layers": [
+    "design",
+    "fabrication",
+    "packaging",
+    "memory",
+    "interconnect",
+    "power_thermal",
+    "controls",
+    "deployment"
+  ],
+  "exposure_types": [
+    "concentration_exposure",
+    "access_exposure",
+    "capacity_exposure",
+    "technology_exposure",
+    "operational_exposure",
+    "evidence_exposure"
+  ],
+  "confidence_levels": [
+    "high",
+    "medium",
+    "low",
+    "insufficient"
+  ],
+  "artifact_outputs": [
+    "compute_sovereignty_brief",
+    "chip_dependency_audit",
+    "infrastructure_readiness_brief",
+    "premium_reference_dossier"
+  ],
+  "answer_options": [
+    "controlled",
+    "accessible",
+    "constrained",
+    "unknown",
+    "not_applicable"
+  ],
+  "questions": [
+    {
+      "id": "design_control",
+      "prompt": "Is the required design capability controlled, licensed, or dependent on external access?",
+      "layers": ["design"],
+      "exposure_types": ["access_exposure", "technology_exposure", "evidence_exposure"],
+      "suggested_artifacts": ["compute_sovereignty_brief", "chip_dependency_audit"]
+    },
+    {
+      "id": "design_tooling_continuity",
+      "prompt": "Can the required design tools, intellectual property, and specialist capability be accessed and sustained?",
+      "layers": ["design"],
+      "exposure_types": ["access_exposure", "technology_exposure", "operational_exposure"],
+      "suggested_artifacts": ["chip_dependency_audit", "premium_reference_dossier"]
+    },
+    {
+      "id": "fabrication_access",
+      "prompt": "Is suitable fabrication capacity accessible under the assessment scope and time horizon?",
+      "layers": ["fabrication"],
+      "exposure_types": ["access_exposure", "capacity_exposure", "concentration_exposure"],
+      "suggested_artifacts": ["compute_sovereignty_brief", "chip_dependency_audit"]
+    },
+    {
+      "id": "packaging_capacity",
+      "prompt": "Is the required packaging, assembly, and test capability available at the needed capacity?",
+      "layers": ["packaging"],
+      "exposure_types": ["capacity_exposure", "technology_exposure", "concentration_exposure"],
+      "suggested_artifacts": ["chip_dependency_audit", "premium_reference_dossier"]
+    },
+    {
+      "id": "memory_access",
+      "prompt": "Is the required memory type, bandwidth, capacity, and qualification accessible?",
+      "layers": ["memory"],
+      "exposure_types": ["access_exposure", "capacity_exposure", "concentration_exposure"],
+      "suggested_artifacts": ["chip_dependency_audit", "premium_reference_dossier"]
+    },
+    {
+      "id": "interconnect_fit",
+      "prompt": "Can the required interconnect topology and capability support the intended deployment?",
+      "layers": ["interconnect"],
+      "exposure_types": ["technology_exposure", "capacity_exposure", "operational_exposure"],
+      "suggested_artifacts": ["infrastructure_readiness_brief", "premium_reference_dossier"]
+    },
+    {
+      "id": "power_capacity",
+      "prompt": "Can the deployment obtain and sustain the required power capacity and density?",
+      "layers": ["power_thermal"],
+      "exposure_types": ["capacity_exposure", "operational_exposure", "evidence_exposure"],
+      "suggested_artifacts": ["infrastructure_readiness_brief", "chip_dependency_audit"]
+    },
+    {
+      "id": "thermal_capacity",
+      "prompt": "Can the deployment remove heat reliably under the intended operating conditions?",
+      "layers": ["power_thermal"],
+      "exposure_types": ["capacity_exposure", "operational_exposure", "technology_exposure"],
+      "suggested_artifacts": ["infrastructure_readiness_brief", "premium_reference_dossier"]
+    },
+    {
+      "id": "control_applicability",
+      "prompt": "Are applicable controls, licenses, thresholds, exceptions, and effective dates understood?",
+      "layers": ["controls"],
+      "exposure_types": ["access_exposure", "evidence_exposure"],
+      "suggested_artifacts": ["compute_sovereignty_brief", "premium_reference_dossier"]
+    },
+    {
+      "id": "deployment_readiness",
+      "prompt": "Can the system be installed, operated, maintained, and recovered within the declared scope?",
+      "layers": ["deployment"],
+      "exposure_types": ["operational_exposure", "capacity_exposure", "evidence_exposure"],
+      "suggested_artifacts": ["infrastructure_readiness_brief", "chip_dependency_audit"]
+    },
+    {
+      "id": "substitution_path",
+      "prompt": "Are credible substitutes available for material dependencies across the assessed layers?",
+      "layers": ["design", "fabrication", "packaging", "memory", "interconnect", "power_thermal", "controls", "deployment"],
+      "exposure_types": ["concentration_exposure", "access_exposure", "technology_exposure"],
+      "suggested_artifacts": ["compute_sovereignty_brief", "chip_dependency_audit"]
+    },
+    {
+      "id": "evidence_completeness",
+      "prompt": "Is the evidence sufficient, current, attributable, and scoped for a governed finding?",
+      "layers": ["design", "fabrication", "packaging", "memory", "interconnect", "power_thermal", "controls", "deployment"],
+      "exposure_types": ["evidence_exposure"],
+      "suggested_artifacts": ["compute_sovereignty_brief", "premium_reference_dossier"]
+    }
+  ]
+}
