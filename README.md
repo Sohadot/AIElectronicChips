@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 2A: Model Coherence Audit Complete**
+**Sprint 3: Compute Sovereignty Standard**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -20,6 +20,8 @@ dependency record schema, diagnostic questions, and automated validation. It
 does not implement a score, ranking, chatbot, API, or operational assessment.
 The foundation has passed a coherence audit covering layer balance, exposure
 types, confidence, diagnostic wording, artifact boundaries, and model safety.
+Sprint 3 adds a formal interpretation standard for reading layered dependency
+exposure without reducing it to a score, ranking, benchmark, or maturity grade.
 
 ## Foundation Documents
 
@@ -40,6 +42,7 @@ types, confidence, diagnostic wording, artifact boundaries, and model safety.
 - [Dependency Record Schema](DEPENDENCY_RECORD_SCHEMA.md)
 - [Model validation script](scripts/validate_chip_dependency_model.py)
 - [Model Coherence Audit](MODEL_COHERENCE_AUDIT.md)
+- [Compute Sovereignty Standard](COMPUTE_SOVEREIGNTY_STANDARD.md)
 
 Validate the model with:
 

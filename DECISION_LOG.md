@@ -145,3 +145,37 @@ overstate what an output represents.
   authorized.
 - Sprint 2A authorizes no score, ranking, operational assessment, or production
   interface.
+
+## ADR-006: Establish the Compute Sovereignty Standard
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+AEC-CS-001 is established as the foundation Compute Sovereignty Standard.
+
+> Compute sovereignty is interpreted through layered dependency exposure, not
+> reduced to a single score.
+
+The standard governs how dependency records, exposure types, evidence,
+confidence, changing conditions, and bounded artifacts are interpreted. It does
+not assign sovereignty or non-sovereignty and does not create a score, ranking,
+benchmark, or maturity grade.
+
+### Rationale
+
+The ontology and diagnostic model define what is mapped. A separate
+interpretation standard defines how supported findings may be read,
+synthesized, issued, limited, and reviewed without overstating the evidence.
+
+### Consequences
+
+- Conforming artifacts must follow `COMPUTE_SOVEREIGNTY_STANDARD.md`.
+- Confidence reflects evidence quality and completeness, not rhetorical
+  certainty or favorable capability.
+- `insufficient` evidence produces no operational finding.
+- Changing policy, capacity, ownership, access, and operating conditions
+  require dated findings and review before reuse.
+- No sovereignty score, assignment, ranking, benchmark, or maturity grade is
+  authorized.
