@@ -1,0 +1,215 @@
+{
+  "offerings_version": "0.1.0",
+  "updated_at": "2026-06-14",
+  "protocol_reference": "STRATEGIC_AVAILABILITY_PROTOCOL.md",
+  "premium_boundary_reference": "PREMIUM_BRIEF_BOUNDARY.md",
+  "monetization_boundary_reference": "MONETIZATION_BOUNDARY.md",
+  "strategic_offerings": [
+    {
+      "id": "compute_sovereignty_brief",
+      "label": "Compute Sovereignty Brief",
+      "purpose": "Deliver a scoped, governed synthesis of layered compute dependency exposure for a declared entity, sector, or deployment context.",
+      "suitable_when": [
+        "An executive or strategy team needs a bounded read of dependency exposure before a major decision",
+        "The question is defined by sovereignty-stack layers, time horizon, and geographic scope",
+        "The client accepts that conclusions follow evidence quality and may remain partial"
+      ],
+      "not_suitable_when": [
+        "The client requires a sovereignty score, ranking, or predetermined verdict",
+        "The request seeks investment, legal, procurement, or national-security advice",
+        "The client expects guaranteed outcomes, certification, or vendor comparison"
+      ],
+      "required_inputs": [
+        "Entity, sector, or deployment subject",
+        "Decision context and intended use of the work",
+        "Declared time horizon and geographic scope",
+        "Relevant sovereignty-stack layers",
+        "Known constraints, exclusions, and confidentiality boundaries"
+      ],
+      "deliverable_boundary": "A dated brief that separates evidence, analysis, confidence, unknowns, and limitations within the declared scope. It may describe exposure types and dependency conditions; it does not assign sovereignty or non-sovereignty.",
+      "evidence_basis": "Governed source registry records, primary attributable evidence, and claim review under SOURCE_POLICY.md and CLAIM_POLICY.md. Insufficient evidence produces no operational finding.",
+      "prohibited_outputs": [
+        "sovereignty_score",
+        "sovereignty_assignment",
+        "ranking",
+        "benchmark",
+        "certification",
+        "outcome_guarantee",
+        "investment_advice",
+        "legal_advice",
+        "procurement_recommendation",
+        "national_security_advice"
+      ],
+      "trust_constraints": [
+        "Public and private work follow the same source and claim standards",
+        "Commercial relationships must be disclosed where material",
+        "No predetermined conclusion may be purchased",
+        "Material conflicts must be disclosed rather than averaged away"
+      ],
+      "inquiry_type": "brief_request"
+    },
+    {
+      "id": "chip_dependency_audit",
+      "label": "Chip Dependency Audit",
+      "purpose": "Review layered dependency exposure against the Chip Dependency Map model for a declared scope, producing governed dependency-record outputs where evidence permits.",
+      "suitable_when": [
+        "A team needs structured dependency exposure mapped to the sovereignty stack",
+        "The scope, layers, and evidence base can be declared before work begins",
+        "The client accepts audit outputs as governed records, not certifications"
+      ],
+      "not_suitable_when": [
+        "The client requires certification of independence, resilience, compliance, or readiness",
+        "The request depends on unavailable, stale, or unattributable evidence",
+        "The client expects a universal score or comparative league table"
+      ],
+      "required_inputs": [
+        "Audit subject and declared scope",
+        "Layers and exposure types under review",
+        "Available evidence, data access boundaries, and known gaps",
+        "Time horizon and as-of requirements",
+        "Intended audience and use restrictions"
+      ],
+      "deliverable_boundary": "Scoped dependency records, diagnostic responses, confidence labels, limitations, and as-of dates where evidence supports them. The audit reveals exposure; it does not certify capability, access, or deployment success.",
+      "evidence_basis": "Chip Dependency Map protocol, dependency record schema, registered sources, and claim-specific review. Diagnostic questions are evidence-led; missing evidence is recorded as insufficient rather than weakness.",
+      "prohibited_outputs": [
+        "certification",
+        "readiness_guarantee",
+        "compliance_verdict",
+        "resilience_certification",
+        "ranking",
+        "benchmark",
+        "sovereignty_score",
+        "unsupported_operational_claim"
+      ],
+      "trust_constraints": [
+        "Audit scope and evidence limits are stated before delivery",
+        "No question response is treated as a deployment or purchase recommendation",
+        "Registry presence does not automatically create a finding",
+        "Conflicts and stale evidence require visible disclosure"
+      ],
+      "inquiry_type": "audit_request"
+    },
+    {
+      "id": "premium_reference_dossier",
+      "label": "Premium Reference Dossier",
+      "purpose": "Produce a deep, governed reference dossier on a declared topic within the compute sovereignty ontology for durable institutional use.",
+      "suitable_when": [
+        "A research, policy, or strategy organization needs a maintained reference artifact",
+        "The topic can be bounded by layers, geography, and time",
+        "The client values source transparency and methodological limits over headline conclusions"
+      ],
+      "not_suitable_when": [
+        "The client requires product reviews, vendor rankings, or affiliate-style recommendations",
+        "The topic depends on speculative supply, capacity, or market-share narratives without evidence",
+        "The client expects investment advice or procurement direction"
+      ],
+      "required_inputs": [
+        "Dossier topic and declared boundaries",
+        "Target audience and retention or licensing intent",
+        "Required layers, geographies, and temporal scope",
+        "Known exclusions and update expectations",
+        "Confidentiality and citation requirements"
+      ],
+      "deliverable_boundary": "A structured reference dossier with sourced claims, confidence labels, limitations, registry references, and as-of dating. It extends public reference value; it does not become a ranking, purchase recommendation, or investment brief.",
+      "evidence_basis": "Source registry, primary evidence hierarchy, Compute Sovereignty Standard, and explicit separation of verified fact, attributed statement, estimate, analysis, and unknown.",
+      "prohibited_outputs": [
+        "ranking",
+        "purchase_recommendation",
+        "investment_advice",
+        "product_review",
+        "affiliate_conclusion",
+        "sponsored_conclusion",
+        "sovereignty_assignment",
+        "outcome_guarantee"
+      ],
+      "trust_constraints": [
+        "Dossier claims remain bounded by evidence and scope",
+        "Sponsored or commercial influence must not alter source selection",
+        "Corrections follow visible governance when material errors are found",
+        "Public excerpts must preserve the same claim standards as private work"
+      ],
+      "inquiry_type": "dossier_request"
+    },
+    {
+      "id": "ontology_methodology_licensing",
+      "label": "Ontology and Methodology Licensing",
+      "purpose": "License governed use of the compute sovereignty ontology, Chip Dependency Map methodology, standards, or reference structures under written terms.",
+      "suitable_when": [
+        "An institution wants to apply the ontology or methodology inside its own governed analysis",
+        "The use case requires documented boundaries, attribution, and update expectations",
+        "The licensee accepts that licensing does not confer official accreditation"
+      ],
+      "not_suitable_when": [
+        "The request seeks resale of rankings, scores, or ungoverned derivative products",
+        "The licensee requires implied government, industry, or academic endorsement",
+        "The use case depends on stripping evidence, confidence, or limitation requirements"
+      ],
+      "required_inputs": [
+        "Intended use case and deployment context",
+        "Requested components: ontology, methodology, standard, or model elements",
+        "Geographic scope, audience, and modification requirements",
+        "Attribution, maintenance, and confidentiality expectations",
+        "Term length and governance contact"
+      ],
+      "deliverable_boundary": "A written licensing scope covering permitted use, required attribution, evidence standards, prohibited derivatives, and update boundaries. Licensing grants structured reference rights; it does not certify the licensee's outputs or confer sovereignty judgments.",
+      "evidence_basis": "Published foundation documents, Compute Sovereignty Standard, Chip Dependency Map protocol, and source registry governance. Licensed use must preserve claim classes, confidence labels, and limitation disclosure.",
+      "prohibited_outputs": [
+        "official_accreditation",
+        "implied_endorsement",
+        "ungoverned_score_product",
+        "ranking_product",
+        "benchmark_product",
+        "certification_program",
+        "stripped_claim_standards"
+      ],
+      "trust_constraints": [
+        "License terms preserve neutrality and evidence requirements",
+        "Derivative products must not misrepresent governed outputs as official findings",
+        "Material changes to licensed methodology require documented agreement",
+        "Public references to the asset must not imply purchased conclusions"
+      ],
+      "inquiry_type": "licensing_request"
+    },
+    {
+      "id": "strategic_acquisition_inquiry",
+      "label": "Strategic Acquisition Inquiry",
+      "purpose": "Provide a serious, bounded channel for institutions evaluating strategic interest in the asset, ontology, reference library, or governed engagement pathways.",
+      "suitable_when": [
+        "A buyer or institution is evaluating strategic fit, durability, and governance",
+        "The inquiry concerns the asset, methodology, or reference surface rather than a predetermined operational verdict",
+        "The party accepts that public reference value and private analysis follow the same standards"
+      ],
+      "not_suitable_when": [
+        "The inquiry seeks a packaged sovereignty verdict on a country, company, or chip",
+        "The party expects revenue projections, price quotes, or checkout through the public site",
+        "The contact is primarily seeking affiliate, advertising, or sponsored-content placement"
+      ],
+      "required_inputs": [
+        "Organization and decision context",
+        "Strategic interest: asset, ontology, dossiers, audits, or licensing",
+        "Time horizon and intended post-acquisition use",
+        "Governance, neutrality, and evidence requirements",
+        "Confidentiality expectations"
+      ],
+      "deliverable_boundary": "A qualified strategic conversation covering asset scope, governance, evidence posture, commercial boundaries, and fit. It does not provide acquisition recommendations, valuations, or guarantees about future performance.",
+      "evidence_basis": "Public foundation documents, governed model and registry assets, decision log, monetization boundary, and disclosed limitations of the current reference surface.",
+      "prohibited_outputs": [
+        "acquisition_recommendation",
+        "valuation_guarantee",
+        "performance_guarantee",
+        "sovereignty_assignment",
+        "ranking",
+        "investment_advice",
+        "checkout_flow",
+        "public_price_list"
+      ],
+      "trust_constraints": [
+        "Strategic discussions preserve reference independence",
+        "No public claim of official accreditation or government endorsement",
+        "Acquisition interest does not alter public findings or source posture",
+        "Serious inquiries only; vague or promotional contacts may be declined"
+      ],
+      "inquiry_type": "acquisition_inquiry"
+    }
+  ]
+}

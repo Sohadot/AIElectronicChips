@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 3C: HBM Evidence Gap and Source Quality Patch**
+**Sprint 4: Strategic Availability and Premium Brief Layer**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -31,6 +31,11 @@ registered evidence and findings.
 Sprint 3C strengthens the HBM evidence layer with bounded official technical
 disclosures while preserving the prohibition on availability, capacity,
 supplier-position, and ranking conclusions.
+Sprint 4 turns `strategic-availability/` into a serious commercial pathway for
+premium briefs, scoped audits, reference dossiers, ontology licensing, and
+strategic acquisition inquiry. It adds a governed offerings model and protocol
+boundary without prices, checkout, scores, rankings, certifications, or
+guarantees.
 
 ## Foundation Documents
 
@@ -70,6 +75,19 @@ Validate the model with:
 
 ```powershell
 python scripts/validate_chip_dependency_model.py
+```
+
+## Strategic Availability
+
+- [Governed offerings model](data/strategic-offerings.json)
+- [Strategic Availability Protocol](STRATEGIC_AVAILABILITY_PROTOCOL.md)
+- [Premium Brief Boundary](PREMIUM_BRIEF_BOUNDARY.md)
+- [Strategic availability reference](strategic-availability/index.html)
+
+Validate the offerings model with:
+
+```powershell
+py scripts/validate_strategic_offerings.py
 ```
 
 ## Development Roadmap

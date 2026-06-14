@@ -275,3 +275,36 @@ availability.
 - Product specifications and company announcements are not independent
   verification.
 - The HBM page must continue to disclose evidence limits and freshness.
+
+## ADR-010: Strategic Availability and Premium Brief Layer
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+Sprint 4 will define five governed strategic offerings in
+`data/strategic-offerings.json` and publish the Strategic Availability Protocol
+and Premium Brief Boundary.
+
+The public `strategic-availability/` page will present serious pathways only:
+briefs, audits, dossiers, licensing, and strategic acquisition inquiry. Inquiry
+will use qualified contact, not checkout or public pricing.
+
+### Rationale
+
+The asset now has thesis, ontology, reference surface, dependency model,
+standard, source registry, and evidence-linked pages. The next durable step is
+a bounded commercial layer that can generate respectful revenue without
+weakening trust, neutrality, or acquisition value.
+
+### Consequences
+
+- Five offering IDs are machine-readable and validator-governed.
+- No prices, checkout flow, score, ranking, benchmark, certification, or
+  guarantee may appear on the public strategic availability surface.
+- Paid work follows the same source and claim standards as public reference
+  material.
+- Clients may define questions but may not purchase predetermined conclusions.
+- Strategic acquisition interest must not alter public findings or source
+  posture.
