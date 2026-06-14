@@ -179,3 +179,37 @@ synthesized, issued, limited, and reviewed without overstating the evidence.
   require dated findings and review before reuse.
 - No sovereignty score, assignment, ranking, benchmark, or maturity grade is
   authorized.
+
+## ADR-007: Establish the Governed Source Registry
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+The project will maintain a governed source registry containing attributable,
+dated, scoped, and limited source metadata for future reference pages,
+dependency records, briefs, and audits.
+
+Registration does not create a finding, approve every statement in a source,
+or authorize an interpretation. Source use remains claim-specific and governed
+by `SOURCE_POLICY.md`, `CLAIM_POLICY.md`, and
+`COMPUTE_SOVEREIGNTY_STANDARD.md`.
+
+### Rationale
+
+The ontology, dependency model, and interpretation standard require a
+traceable evidence layer. A controlled registry allows source identity,
+freshness, scope, limitations, and review status to be inspected before a
+source is used.
+
+### Consequences
+
+- The canonical registry is `data/source-registry.json`.
+- Registry structure and controlled values must pass
+  `scripts/validate_source_registry.py`.
+- Sources use `active`, `pending_review`, or `retired` status.
+- Confidence belongs to a supported finding after review; it is not inherited
+  from publisher identity or registry status.
+- No registered source automatically creates a finding, score, ranking,
+  recommendation, or sovereignty assignment.

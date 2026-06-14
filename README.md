@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 3: Compute Sovereignty Standard**
+**Sprint 3A: Source Registry and Reference Evidence Seed**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -22,6 +22,9 @@ The foundation has passed a coherence audit covering layer balance, exposure
 types, confidence, diagnostic wording, artifact boundaries, and model safety.
 Sprint 3 adds a formal interpretation standard for reading layered dependency
 exposure without reducing it to a score, ranking, benchmark, or maturity grade.
+Sprint 3A adds the first governed source registry and evidence seed. Registry
+presence makes a source discoverable; it does not automatically create a
+finding or approve every statement in the source.
 
 ## Foundation Documents
 
@@ -43,6 +46,19 @@ exposure without reducing it to a score, ranking, benchmark, or maturity grade.
 - [Model validation script](scripts/validate_chip_dependency_model.py)
 - [Model Coherence Audit](MODEL_COHERENCE_AUDIT.md)
 - [Compute Sovereignty Standard](COMPUTE_SOVEREIGNTY_STANDARD.md)
+
+## Source Registry
+
+- [Governed source registry](data/source-registry.json)
+- [Source Registry Protocol](SOURCE_REGISTRY_PROTOCOL.md)
+- [Source registry validation script](scripts/validate_source_registry.py)
+- [Public source registry reference](sources/index.html)
+
+Validate the registry with:
+
+```powershell
+py scripts/validate_source_registry.py
+```
 
 Validate the model with:
 
