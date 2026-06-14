@@ -213,3 +213,33 @@ source is used.
   from publisher identity or registry status.
 - No registered source automatically creates a finding, score, ranking,
   recommendation, or sovereignty assignment.
+
+## ADR-008: Link Public Reference Pages to Registry Evidence Posture
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+Selected public reference pages will disclose a compact evidence posture using
+related source registry IDs, supported uses, prohibited inferences, freshness,
+and confidence boundaries.
+
+A registry link identifies potentially relevant evidence for governed review.
+It is not a citation-backed finding and does not inherit confidence from source
+status or publisher identity.
+
+### Rationale
+
+Visible evidence posture makes the public reference surface inspectable without
+overloading it with unsupported claims or turning the source registry into a
+conclusions database.
+
+### Consequences
+
+- Evidence posture sections must use only existing registry IDs.
+- `pending_review` status must remain visible where linked.
+- Reference pages must state what linked records can and cannot support.
+- Every page-level source posture must link to `/sources/`.
+- Source links do not authorize findings, rankings, recommendations, or
+  sovereignty assignments.

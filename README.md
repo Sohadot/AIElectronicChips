@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 3A: Source Registry and Reference Evidence Seed**
+**Sprint 3B: Evidence-Linked Reference Surface**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -25,6 +25,9 @@ exposure without reducing it to a score, ranking, benchmark, or maturity grade.
 Sprint 3A adds the first governed source registry and evidence seed. Registry
 presence makes a source discoverable; it does not automatically create a
 finding or approve every statement in the source.
+Sprint 3B links selected public reference pages to relevant registry IDs while
+preserving source scope, freshness, limitations, and the boundary between
+registered evidence and findings.
 
 ## Foundation Documents
 
