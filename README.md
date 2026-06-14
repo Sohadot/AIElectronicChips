@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 4: Strategic Availability and Premium Brief Layer**
+**Sprint 4A: Strategic Availability Trust Gate**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -36,6 +36,9 @@ premium briefs, scoped audits, reference dossiers, ontology licensing, and
 strategic acquisition inquiry. It adds a governed offerings model and protocol
 boundary without prices, checkout, scores, rankings, certifications, or
 guarantees.
+Sprint 4A adds the Strategic Availability Trust Gate, a commercial trust audit,
+and `validate_all.py` to enforce validator and prohibited-language checks before
+any commercial surface is accepted.
 
 ## Foundation Documents
 
@@ -82,12 +85,20 @@ python scripts/validate_chip_dependency_model.py
 - [Governed offerings model](data/strategic-offerings.json)
 - [Strategic Availability Protocol](STRATEGIC_AVAILABILITY_PROTOCOL.md)
 - [Premium Brief Boundary](PREMIUM_BRIEF_BOUNDARY.md)
+- [Strategic Availability Trust Gate](STRATEGIC_AVAILABILITY_TRUST_GATE.md)
+- [Commercial Trust Audit](COMMERCIAL_TRUST_AUDIT.md)
 - [Strategic availability reference](strategic-availability/index.html)
 
 Validate the offerings model with:
 
 ```powershell
 py scripts/validate_strategic_offerings.py
+```
+
+Run all validators and the commercial trust-language scan with:
+
+```powershell
+py scripts/validate_all.py
 ```
 
 ## Development Roadmap

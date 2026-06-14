@@ -308,3 +308,31 @@ weakening trust, neutrality, or acquisition value.
 - Clients may define questions but may not purchase predetermined conclusions.
 - Strategic acquisition interest must not alter public findings or source
   posture.
+
+## ADR-011: Strategic Availability Trust Gate
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+Sprint 4A will add `STRATEGIC_AVAILABILITY_TRUST_GATE.md`,
+`COMMERCIAL_TRUST_AUDIT.md`, and `scripts/validate_all.py`.
+
+The commercial layer is accepted only when validators pass and risky commercial
+or scoring language appears solely in prohibition or boundary contexts.
+
+### Rationale
+
+Sprint 4 introduced the first revenue pathway. Before quiet launch, the asset
+requires an explicit trust gate to ensure the commercial surface does not weaken
+neutrality, buyer logic, or strategic acquisition value.
+
+### Consequences
+
+- `validate_all.py` becomes the pre-release check for model, registry, offerings,
+  and commercial trust language.
+- The Sprint 4 implementation is audited as PASS in `COMMERCIAL_TRUST_AUDIT.md`.
+- HTML and JSON offering copy must remain manually aligned until a later
+  automation sprint.
+- CI integration for `validate_all.py` remains deferred.
