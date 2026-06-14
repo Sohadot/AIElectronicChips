@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 3B: Evidence-Linked Reference Surface**
+**Sprint 3C: HBM Evidence Gap and Source Quality Patch**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -28,6 +28,9 @@ finding or approve every statement in the source.
 Sprint 3B links selected public reference pages to relevant registry IDs while
 preserving source scope, freshness, limitations, and the boundary between
 registered evidence and findings.
+Sprint 3C strengthens the HBM evidence layer with bounded official technical
+disclosures while preserving the prohibition on availability, capacity,
+supplier-position, and ranking conclusions.
 
 ## Foundation Documents
 

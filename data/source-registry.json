@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.1.0",
+  "registry_version": "0.2.0",
   "updated_at": "2026-06-14",
   "source_policy_reference": "SOURCE_POLICY.md",
   "source_records": [
@@ -162,6 +162,54 @@
       "confidence_use": "May support attributed statements about the released specification's stated scope",
       "use_limitations": ["Press-release listing is not a substitute for reviewing the specification", "Does not establish adoption or interoperability for a specific deployment"],
       "status": "pending_review"
+    },
+    {
+      "id": "amd-instinct-mi300x-accelerator-2023",
+      "title": "AMD Instinct MI300X Accelerators",
+      "publisher": "Advanced Micro Devices, Inc.",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+      "effective_date": "2023-12-06",
+      "accessed_at": "2026-06-14",
+      "ontology_layers": ["design", "memory", "packaging", "interconnect"],
+      "supported_claim_types": ["technical_specification", "product_integration_context", "memory_bandwidth_context"],
+      "geographic_scope": "Product-level technical disclosure",
+      "temporal_scope": "Launch-date and currently published product specifications; must be reviewed before reuse",
+      "confidence_use": "May support attributed product-level statements about disclosed HBM integration, memory capacity, and bandwidth",
+      "use_limitations": ["Product specifications do not establish wider HBM availability or supply", "Does not support vendor comparison, deployment performance, or capacity findings"],
+      "status": "active"
+    },
+    {
+      "id": "samsung-hbm3e-12h-technical-disclosure-2024",
+      "title": "Samsung Develops Industry-First 36GB HBM3E 12H DRAM",
+      "publisher": "Samsung Electronics",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://news.samsung.com/global/samsung-develops-industry-first-36gb-hbm3e-12h-dram",
+      "publication_date": "2024-02-27",
+      "accessed_at": "2026-06-14",
+      "ontology_layers": ["memory", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "stacking_integration_context", "memory_bandwidth_context"],
+      "geographic_scope": "Company-reported product development",
+      "temporal_scope": "Published 2024-02-27; technical statements remain attributable to the company disclosure",
+      "confidence_use": "May support attributed statements about the disclosed HBM3E 12H design, stacking approach, bandwidth, and capacity",
+      "use_limitations": ["Company technical disclosure is not independent verification", "Does not establish availability, allocation, production capacity, supplier position, or future supply"],
+      "status": "active"
+    },
+    {
+      "id": "micron-hbm3e-technical-disclosure-2024",
+      "title": "Micron Commences Volume Production of Industry-Leading HBM3E Solution to Accelerate the Growth of AI",
+      "publisher": "Micron Technology, Inc.",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://investors.micron.com/news-releases/news-release-details/micron-commences-volume-production-industry-leading-hbm3e",
+      "publication_date": "2024-02-26",
+      "accessed_at": "2026-06-14",
+      "ontology_layers": ["memory", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "packaging_integration_context", "memory_bandwidth_context"],
+      "geographic_scope": "Company-reported product and production announcement",
+      "temporal_scope": "Published 2024-02-26; statements remain attributable and require current-condition review",
+      "confidence_use": "May support attributed statements about disclosed HBM3E design, TSV and packaging context, and stated technical characteristics",
+      "use_limitations": ["Announcement does not independently verify availability, allocation, or production capacity", "Does not support supplier ranking, future supply, or entity-level access findings"],
+      "status": "active"
     }
   ]
 }

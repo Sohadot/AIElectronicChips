@@ -243,3 +243,35 @@ conclusions database.
 - Every page-level source posture must link to `/sources/`.
 - Source links do not authorize findings, rankings, recommendations, or
   sovereignty assignments.
+
+## ADR-009: Patch the HBM Evidence Gap with Official Technical Disclosures
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+The HBM evidence layer will add three attributable official technical
+disclosures covering product-level HBM integration, bandwidth context,
+stacking, and packaging.
+
+`official_technical_disclosure` is added as an approved source type because
+these primary company materials are neither filings nor technical standards.
+They remain attributed and cannot establish market-wide conditions.
+
+### Rationale
+
+The initial HBM posture contained only a controls-related record. Technical
+framing requires primary evidence about how HBM relates to memory bandwidth,
+accelerator integration, and advanced packaging without inferring supply or
+availability.
+
+### Consequences
+
+- HBM technical disclosures may support bounded and attributed technical
+  framing.
+- They must not support availability, allocation, production-capacity, future
+  supply, supplier-position, ranking, or entity-level access findings.
+- Product specifications and company announcements are not independent
+  verification.
+- The HBM page must continue to disclose evidence limits and freshness.

@@ -9,7 +9,7 @@ from pathlib import Path
 
 LAYERS = {"design", "fabrication", "packaging", "memory", "interconnect", "power_thermal", "controls", "deployment"}
 STATUSES = {"active", "pending_review", "retired"}
-SOURCE_TYPES = {"government_rule", "regulation", "company_filing", "annual_report", "institutional_report", "technical_standard", "peer_reviewed_research", "official_dataset"}
+SOURCE_TYPES = {"government_rule", "regulation", "company_filing", "annual_report", "official_technical_disclosure", "institutional_report", "technical_standard", "peer_reviewed_research", "official_dataset"}
 TOP_LEVEL = {"registry_version", "updated_at", "source_policy_reference", "source_records"}
 REQUIRED = {"id", "title", "publisher", "source_type", "canonical_url", "accessed_at", "ontology_layers", "supported_claim_types", "geographic_scope", "temporal_scope", "confidence_use", "use_limitations", "status"}
 

@@ -12,7 +12,8 @@ every statement it contains.
 Prefer sources in this order where practicable:
 
 1. government rules, regulations, official notices, and official datasets;
-2. company filings, audited statements, and annual reports;
+2. company filings, audited statements, annual reports, and attributable
+   official technical disclosures;
 3. technical standards and peer-reviewed research;
 4. official institutional reports with disclosed methodology.
 
@@ -36,6 +37,11 @@ limitations, and status.
 
 Status does not describe whether the source's subject is favorable or reliable
 in every context.
+
+`official_technical_disclosure` records preserve attributable product,
+architecture, integration, or engineering context that does not fit a filing
+or technical-standard classification. They must remain attributed and cannot
+establish market-wide availability, capacity, adoption, or supplier position.
 
 ## Freshness and Review
 
