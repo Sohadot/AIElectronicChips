@@ -30,7 +30,7 @@ operational records.
 | `question_ids` | array | Diagnostic questions that led to investigation. |
 | `substitutability` | string | `available`, `constrained`, `unavailable`, or `unknown`. |
 | `criticality` | string | `low`, `moderate`, `high`, or `unknown` within the declared scope. |
-| `suggested_artifact` | string | One valid artifact output from the model. |
+| `suggested_artifact` | string | One valid artifact classification hint from the model; not a recommendation. |
 | `next_review_date` | date | Scheduled review for changing conditions. |
 
 ## Evidence Record
@@ -70,4 +70,3 @@ support an operational finding.
   "review_owner": "Unassigned"
 }
 ```
-

@@ -43,6 +43,7 @@ REQUIRED_SECTIONS = {
     "exposure_types",
     "confidence_levels",
     "artifact_outputs",
+    "artifact_boundaries",
     "answer_options",
     "questions",
 }
@@ -78,6 +79,18 @@ def validate(model: dict) -> list[str]:
     for required in {"sovereignty_score", "ranking"}:
         if required not in prohibited:
             errors.append(f"prohibited_outputs must include {required}")
+
+    boundaries = model.get("artifact_boundaries", {})
+    if not isinstance(boundaries, dict) or set(boundaries) != EXPECTED_ARTIFACTS:
+        errors.append("artifact_boundaries must define exactly the four governed artifact outputs")
+    else:
+        for artifact, definition in boundaries.items():
+            if not isinstance(definition, dict):
+                errors.append(f"artifact boundary for {artifact} must be an object")
+                continue
+            for field in {"purpose", "boundary"}:
+                if not isinstance(definition.get(field), str) or not definition[field].strip():
+                    errors.append(f"artifact boundary for {artifact} requires non-empty {field}")
 
     questions = model.get("questions", [])
     if not isinstance(questions, list) or not 8 <= len(questions) <= 16:

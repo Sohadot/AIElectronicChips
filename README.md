@@ -12,12 +12,14 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 2: Chip Dependency Map Foundation**
+**Sprint 2A: Model Coherence Audit Complete**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
 dependency record schema, diagnostic questions, and automated validation. It
 does not implement a score, ranking, chatbot, API, or operational assessment.
+The foundation has passed a coherence audit covering layer balance, exposure
+types, confidence, diagnostic wording, artifact boundaries, and model safety.
 
 ## Foundation Documents
 
@@ -37,6 +39,7 @@ does not implement a score, ranking, chatbot, API, or operational assessment.
 - [Chip Dependency Map Protocol](CHIP_DEPENDENCY_MAP_PROTOCOL.md)
 - [Dependency Record Schema](DEPENDENCY_RECORD_SCHEMA.md)
 - [Model validation script](scripts/validate_chip_dependency_model.py)
+- [Model Coherence Audit](MODEL_COHERENCE_AUDIT.md)
 
 Validate the model with:
 

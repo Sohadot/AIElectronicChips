@@ -108,3 +108,40 @@ inspectable and prevent an interface from implying unsupported certainty.
 - `insufficient` confidence produces no operational finding.
 - Any future interface must remain a model preview until evidence-backed
   assessment workflows are governed and implemented.
+
+## ADR-005: Accept the Sprint 2A Model Coherence Audit
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+The Chip Dependency Map foundation passes the Sprint 2A Model Coherence Audit
+after limited governance and wording improvements.
+
+The governing principle is reaffirmed:
+
+> The Chip Dependency Map reveals layered exposure. It does not assign
+> sovereignty.
+
+Diagnostic questions must request or test evidence rather than invite
+unsupported self-assessment. Artifact output hints classify the appropriate
+next governed analysis format; they are not purchase, investment, deployment,
+or operational recommendations.
+
+### Rationale
+
+The model covers all eight layers proportionately, uses all six exposure types
+coherently, preserves evidence-based confidence, and keeps every output bounded.
+Machine-readable artifact boundaries reduce the risk that future interfaces
+overstate what an output represents.
+
+### Consequences
+
+- The audit verdict and deferred risks are recorded in
+  `MODEL_COHERENCE_AUDIT.md`.
+- The canonical model must define complete boundaries for all artifact outputs.
+- No automatic mapping from responses to findings, confidence, or judgments is
+  authorized.
+- Sprint 2A authorizes no score, ranking, operational assessment, or production
+  interface.

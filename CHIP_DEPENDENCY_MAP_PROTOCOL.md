@@ -14,7 +14,7 @@ The model may:
 - ask bounded questions across the eight sovereignty layers;
 - identify relevant exposure types and evidence gaps;
 - attach confidence and limitations to findings;
-- suggest an appropriate governed artifact.
+- classify the appropriate next governed analysis format.
 
 The model must not:
 
@@ -47,8 +47,24 @@ The model must not:
 - `insufficient` confidence results in no operational finding.
 - Exposure types may coexist and must not be treated as mutually exclusive.
 - Control of one layer does not imply control of adjacent layers.
-- Suggested artifacts identify the appropriate next analysis format; they are
-  not recommendations to purchase.
+- Suggested artifacts are classification hints identifying the appropriate next
+  analysis format. They are not recommendations to purchase, invest, deploy, or
+  act.
+
+## Artifact Boundaries
+
+- **Compute Sovereignty Brief:** a bounded synthesis across supported layers
+  for a declared decision context; it does not assign sovereignty or provide an
+  operational verdict.
+- **Chip Dependency Audit:** a scoped review of dependency records, evidence,
+  limitations, and unknowns; it does not certify independence, resilience,
+  compliance, or readiness.
+- **Infrastructure Readiness Brief:** a bounded assessment of supported
+  deployment and operating conditions; it does not guarantee capacity,
+  availability, performance, or successful deployment.
+- **Premium Reference Dossier:** a deep governed reference on a defined layer
+  or evidence question; it does not provide a ranking, purchase recommendation,
+  or investment advice.
 
 ## Output Contract
 
@@ -69,4 +85,3 @@ The canonical machine-readable foundation is
 `data/chip-dependency-model.json`. Changes to its controlled vocabularies,
 question boundaries, or prohibited outputs require validation and a recorded
 decision.
-
