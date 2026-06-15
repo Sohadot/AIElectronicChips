@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 4A: Strategic Availability Trust Gate**
+**Sprint 5: Public Launch Readiness / Indexation Hardening**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -39,6 +39,8 @@ guarantees.
 Sprint 4A adds the Strategic Availability Trust Gate, a commercial trust audit,
 and `validate_all.py` to enforce validator and prohibited-language checks before
 any commercial surface is accepted.
+Sprint 5 prepares the public site for launch, crawling, and indexing with a
+launch checklist, indexation audit, `CNAME`, and `validate_public_launch.py`.
 
 ## Foundation Documents
 
@@ -99,6 +101,20 @@ Run all validators and the commercial trust-language scan with:
 
 ```powershell
 py scripts/validate_all.py
+```
+
+## Public Launch Readiness
+
+- [Public launch checklist](PUBLIC_LAUNCH_READINESS_CHECKLIST.md)
+- [Indexation hardening audit](INDEXATION_HARDENING_AUDIT.md)
+- [Sitemap](sitemap.xml)
+- [Robots](robots.txt)
+- [Custom domain CNAME](CNAME)
+
+Validate launch readiness with:
+
+```powershell
+py scripts/validate_public_launch.py
 ```
 
 ## Development Roadmap

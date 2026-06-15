@@ -336,3 +336,31 @@ neutrality, buyer logic, or strategic acquisition value.
 - HTML and JSON offering copy must remain manually aligned until a later
   automation sprint.
 - CI integration for `validate_all.py` remains deferred.
+
+## ADR-012: Public Launch Readiness and Indexation Hardening
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+Sprint 5 will add `PUBLIC_LAUNCH_READINESS_CHECKLIST.md`,
+`INDEXATION_HARDENING_AUDIT.md`, `scripts/validate_public_launch.py`, and
+`CNAME` for custom-domain readiness.
+
+The sprint hardens sitemap, robots, canonical, metadata, internal links,
+accessibility basics, and dependency safety without adding new products or
+content expansion.
+
+### Rationale
+
+After governance, reference surface, evidence linkage, and strategic availability
+trust gating, the asset needs a launch-readiness layer before quiet public
+discovery and indexing.
+
+### Consequences
+
+- `validate_public_launch.py` becomes the pre-launch structural gate.
+- All 13 public routes must remain aligned across HTML files and `sitemap.xml`.
+- GitHub Pages and DNS setup remain manual post-sprint steps.
+- CI integration for launch validators remains deferred.
