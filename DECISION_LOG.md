@@ -423,3 +423,35 @@ and overclaiming before any stronger tool or dependency map is built.
 - No Chip Sovereignty Score, country ranking, company ranking, or product
   comparison is authorized.
 - Any future tool or diagnostic output must conform to AEC-CS-001 v1.0.0.
+
+## ADR-015: Establish Chip Dependency Map Model v1
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+Sprint 8 will publish `CHIP_DEPENDENCY_MAP_MODEL.md` as version 1.0.0 after
+ontology v1, the Claim Boundary Matrix, and Compute Sovereignty Standard v1.
+
+The model defines five non-numeric dependency states mapped across all eight
+ontology layers, evidence posture inheritance, and named-entity governance. It
+does not score sovereignty or assign sovereign status to any entity.
+
+### Rationale
+
+Map dependencies before scoring sovereignty. The asset requires an explicit
+dependency mapping model before any stronger diagnostic tool, exposure map, or
+score-like output is considered. Named entities may appear as bounded references
+inside the framework; they must never define the framework.
+
+### Consequences
+
+- `scripts/validate_chip_dependency_model.py` validates both the JSON foundation
+  and the v1 model document; it remains wired into `validate_all.py`.
+- Public pages receive light dependency-map model references only; no new routes
+  or content sprawl.
+- No Chip Sovereignty Score, country ranking, company ranking, product comparison,
+  company-led pages, or market-news framing is authorized.
+- Any future tool, exposure map, audit, or brief output must conform to
+  AEC-CDM-001 v1.0.0 and AEC-CS-001 v1.0.0.

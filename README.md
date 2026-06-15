@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 7: Compute Sovereignty Standard v1**
+**Sprint 8: Chip Dependency Map Model v1**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -48,6 +48,12 @@ Sprint 7 establishes Compute Sovereignty Standard v1 as the responsible
 interpretation standard for the eight-layer ontology, with evidence posture
 levels and a dedicated validator. No score, ranking, or route expansion is
 introduced.
+Sprint 8 establishes Chip Dependency Map Model v1 as a non-numeric dependency
+mapping model across the eight ontology layers under the standard and claim
+boundary matrix. Five descriptive dependency states replace any scoring impulse.
+Named entities remain governed and non-anchoring. No company pages, country
+assessments, product comparisons, monetization, pilot, or route expansion is
+introduced.
 
 ## Foundation Documents
 
@@ -70,6 +76,7 @@ introduced.
 - [Model validation script](scripts/validate_chip_dependency_model.py)
 - [Model Coherence Audit](MODEL_COHERENCE_AUDIT.md)
 - [Compute Sovereignty Standard v1](COMPUTE_SOVEREIGNTY_STANDARD.md) — Defines responsible interpretation rules for the eight-layer compute sovereignty ontology.
+- [Chip Dependency Map Model v1](CHIP_DEPENDENCY_MAP_MODEL.md) — Defines non-numeric dependency states and named-entity governance for mapping relationships across the eight ontology layers.
 
 ## Source Registry
 
