@@ -168,6 +168,7 @@ def main() -> None:
         "validate_chip_dependency_model.py",
         "validate_source_registry.py",
         "validate_strategic_offerings.py",
+        "validate_compute_sovereignty_standard.py",
     ]
 
     failures: list[str] = []

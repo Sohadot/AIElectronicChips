@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 6: Reference Authority Foundation**
+**Sprint 7: Compute Sovereignty Standard v1**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -44,6 +44,10 @@ launch checklist, indexation audit, `CNAME`, and `validate_public_launch.py`.
 Sprint 6 expands the source registry, publishes the Claim Boundary Matrix,
 stabilizes Compute Sovereignty Ontology v1, and upgrades all thirteen public
 routes into a reference-grade foundation without content sprawl.
+Sprint 7 establishes Compute Sovereignty Standard v1 as the responsible
+interpretation standard for the eight-layer ontology, with evidence posture
+levels and a dedicated validator. No score, ranking, or route expansion is
+introduced.
 
 ## Foundation Documents
 
@@ -65,7 +69,7 @@ routes into a reference-grade foundation without content sprawl.
 - [Dependency Record Schema](DEPENDENCY_RECORD_SCHEMA.md)
 - [Model validation script](scripts/validate_chip_dependency_model.py)
 - [Model Coherence Audit](MODEL_COHERENCE_AUDIT.md)
-- [Compute Sovereignty Standard](COMPUTE_SOVEREIGNTY_STANDARD.md)
+- [Compute Sovereignty Standard v1](COMPUTE_SOVEREIGNTY_STANDARD.md) — Defines responsible interpretation rules for the eight-layer compute sovereignty ontology.
 
 ## Source Registry
 
@@ -84,6 +88,12 @@ Validate the model with:
 
 ```powershell
 python scripts/validate_chip_dependency_model.py
+```
+
+Validate the standard with:
+
+```powershell
+py scripts/validate_compute_sovereignty_standard.py
 ```
 
 ## Strategic Availability

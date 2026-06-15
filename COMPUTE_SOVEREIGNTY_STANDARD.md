@@ -1,213 +1,303 @@
-# Compute Sovereignty Standard
-
-## Status and Core Principle
+# Compute Sovereignty Standard v1.0.0
 
 - **Standard ID:** AEC-CS-001
-- **Version:** 0.1.0
-- **Status:** Foundation standard
+- **Version:** 1.0.0
+- **Status:** Active interpretation standard
 - **Thesis:** AI chips are the physical substrate of compute sovereignty.
 
-AEC-CS-001 is an internal project interpretation standard. It is not an
-external accreditation, certification, or industry-wide standard.
+## Purpose
 
-> **Compute sovereignty is interpreted through layered dependency exposure, not
-> reduced to a single score.**
+This standard defines how AIElectronicChips.com reads compute sovereignty
+responsibly after ontology and claim boundaries are established.
 
-## 1. Purpose
+**Ontology** answers: what are the layers?
+**Standard** answers: how may those layers be discussed without overclaiming?
 
-This standard defines how AIElectronicChips.com interprets compute sovereignty
-through evidence-backed, layered dependency exposure. It governs how findings,
-confidence, limitations, and artifacts are read without converting them into a
-score or final sovereignty judgment.
+The standard does not assign sovereignty to any company, country, product, or
+institution. It defines the conditions required to discuss compute sovereignty
+responsibly.
 
-## 2. Scope and Non-Scope
+## What the Standard Does
 
-The standard governs dependency records, the eight sovereignty layers, the six
-exposure types, evidence, confidence, bounded artifacts, unknowns, conflicts,
-and changing conditions.
+- governs how the eight ontology layers may be interpreted;
+- defines evidence posture levels for responsible layer discussion;
+- requires scope, attribution, confidence discipline, and `as_of` dating;
+- preserves unknowns, conflicts, and insufficient evidence;
+- applies to public reference pages, dependency records, briefs, audits, and
+  dossiers;
+- constrains any future tool, map, or diagnostic output.
 
-It does not assign sovereignty or non-sovereignty; create a score, ranking,
-benchmark, or maturity grade; certify independence, resilience, compliance,
-readiness, or performance; or provide investment, procurement, purchase,
-deployment, or policy advice.
+## What the Standard Does Not Do
 
-## 3. Normative Language and Unit of Interpretation
+The standard does **not**:
 
-**MUST** and **MUST NOT** are required for conformance. **SHOULD** and **SHOULD
-NOT** are expected unless a documented reason supports an exception. **MAY** is
-permitted but not required.
+- assign sovereignty or non-sovereignty to any entity;
+- produce a score, ranking, benchmark, maturity grade, or league table;
+- certify independence, resilience, compliance, readiness, or performance;
+- provide investment, legal, procurement, deployment, or policy advice;
+- compare products, vendors, countries, or chips as winners or losers;
+- replace the source registry, claim boundary matrix, or primary evidence review.
 
-The unit of interpretation is a bounded dependency record within a declared
-scope. A record MUST identify layers, dependency, exposure types, finding,
-evidence, confidence, limitations, review ownership, and an `as_of` date.
+## Relationship to the Compute Sovereignty Ontology
 
-A diagnostic response is an input to investigation, not a finding. A collection
-of findings is not a sovereignty verdict.
+`COMPUTE_SOVEREIGNTY_ONTOLOGY.md` defines the eight dependency layers and
+cross-layer surfaces. This standard defines how each layer may be read.
 
-## 4. Sovereignty Stack Layers
+Every layer discussion MUST:
 
-Every finding MUST reference one or more valid layers:
+- name the relevant ontology layer or layers;
+- remain bounded by declared scope and time horizon;
+- avoid inferring control at one layer from evidence at another;
+- treat the stack as interconnected exposure, not a single capability label.
 
-| Layer | Interpretation focus |
+## Relationship to the Claim Boundary Matrix
+
+`CLAIM_BOUNDARY_MATRIX.md` governs what claims may be stated and how they must
+be supported. This standard governs how layered dependency exposure is
+interpreted once claim classes are applied.
+
+A conforming interpretation MUST:
+
+- respect permitted, source-required, and confidence-qualified claim categories;
+- treat prohibited claims as non-publishable;
+- use `insufficient` when evidence does not support an operational finding.
+
+## Evidence Posture Levels
+
+Evidence posture describes whether a layer can be discussed responsibly with
+available public reference evidence. These levels are **not** scores and **not**
+rankings.
+
+| Level | Meaning |
 | --- | --- |
-| `design` | Architecture, rights, tools, verification, and specialist capability. |
-| `fabrication` | Manufacturing access, process capability, capacity, equipment, and yield. |
-| `packaging` | Integration, assembly, substrates, test, and deployable-system preparation. |
-| `memory` | Required memory type, bandwidth, capacity, qualification, and access. |
-| `interconnect` | Data movement within and between systems and deployments. |
-| `power_thermal` | Power capacity, density, cooling, heat rejection, and operating constraints. |
-| `controls` | Applicable rules, licenses, thresholds, exceptions, scope, and effective dates. |
-| `deployment` | Installation, operation, maintenance, recovery, and geographic distribution. |
+| **Documented** | Sufficient official or primary sources exist to discuss the layer within declared scope. |
+| **Partially Documented** | Sources exist, but they do not cover all elements required for a complete layer reading. |
+| **Source-Constrained** | The layer is material, but publicly available governed sources are limited or narrow. |
+| **Not Assessable** | Available evidence does not support a responsible layer reading without further scoped review. |
 
-No layer may be interpreted as sovereign in isolation. Control or access at one
-layer MUST NOT be used to infer control or access at another layer.
+Evidence posture guides caution in language. It does not measure national
+strength, vendor quality, or product superiority.
 
-## 5. Exposure Types
+## The Eight Standard Dimensions
 
-| Exposure type | Meaning |
-| --- | --- |
-| `concentration_exposure` | Dependence on a narrow source, location, pathway, or substitute set. |
-| `access_exposure` | Dependence on permission, licensing, allocation, contractual access, or another access condition. |
-| `capacity_exposure` | A supported constraint in scale, lead time, throughput, power, cooling, or deployable capacity. |
-| `technology_exposure` | Dependence on proprietary capability, tools, integration, expertise, or compatibility. |
-| `operational_exposure` | A supported constraint affecting installation, operation, maintenance, continuity, or recovery. |
-| `evidence_exposure` | Evidence is incomplete, stale, conflicting, unattributable, or insufficient for the intended finding. |
+### 1. Design Layer
 
-Exposure types may coexist. They MUST NOT be treated as mutually exclusive,
-automatically negative, or equivalent to a sovereignty judgment.
+**Definition:** The rights, tools, talent, architecture, and verification
+capability required to turn compute intent into a manufacturable design.
 
-## 6. Confidence Model
+**Why it matters:** Design control shapes what can be built, licensed, verified,
+and transferred before any fabrication step begins.
 
-Confidence describes evidence quality and completeness. It does not describe
-how certain an author feels and MUST NOT be used as rhetorical emphasis.
+**Evidence required:** Attributed disclosures on architecture rights, design
+capability, IP context, tools, or program scope from filings, official technical
+material, or primary policy documents within scope.
 
-| Confidence | Standard interpretation |
-| --- | --- |
-| `high` | Strong, attributable, sufficiently current evidence directly supports the bounded finding; material conflicts and limitations are disclosed. |
-| `medium` | Credible evidence supports the finding, but material limitations, indirect elements, or unresolved conflicts remain. |
-| `low` | Limited or indirect evidence permits only a narrow, visibly qualified finding. |
-| `insufficient` | Evidence does not support an operational finding; the output may document the evidence gap only. |
+**Claim boundary:** May support attributed design-capability framing. Must not
+support sovereignty assignment, vendor ranking, or product superiority claims.
 
-Confidence MUST NOT be calculated from diagnostic answers alone. It MUST be
-assigned through governed review of evidence and scope.
+**Misinterpretation risk:** Treating a product announcement as full design
+control across the stack.
 
-## 7. Evidence Requirements
+**Related routes:** `/design-fabrication-packaging/`, `/compute-sovereignty/`,
+`/sovereignty-stack/`
 
-A conforming finding MUST cite attributable evidence appropriate to its risk;
-prefer primary, dated, official sources where practicable; identify publication
-or effective date and date accessed; state relevant scope; include an `as_of`
-date; distinguish fact, attributed statement, estimate, analysis, and unknown;
-disclose credible conflicts; and state material limitations.
+### 2. Fabrication Layer
 
-Evidence MUST NOT be invented, inferred from absence, or represented as current
-after its supported time horizon.
+**Definition:** Manufacturing access, process capability, equipment dependency,
+materials, yield, and the conditions under which silicon can be produced.
 
-## 8. Interpretation Rules
+**Why it matters:** A design without fabrication access remains a dependency,
+not deployable compute substrate.
 
-1. Findings MUST remain bounded by declared scope, time horizon, and evidence.
-2. Findings MUST be read by layer and exposure type before cross-layer synthesis.
-3. Synthesis MUST preserve contradictions, unknowns, and differing confidence.
-4. Missing evidence MUST be treated as evidence exposure, not proof of weakness.
-5. Substitutability and criticality MUST be scoped and supported.
-6. A change in one layer MUST NOT be generalized to the full stack.
-7. Artifact hints identify a next analysis format; they are not recommendations.
-8. Every artifact MUST disclose limitations and an `as_of` date.
+**Evidence required:** Government policy, regulation, filings, annual reports, or
+official institutional material on manufacturing scope, reported risk, or
+program context.
 
-## 9. Prohibited Interpretations
+**Claim boundary:** May support attributed fabrication-access framing within
+source scope. Must not support market-wide capacity conclusions, supplier
+ranking, or operating guarantees.
 
-The following are non-conforming:
+**Misinterpretation risk:** Inferring current production conditions from strategy
+documents or announcements alone.
 
-- declaring an entity sovereign or non-sovereign;
-- aggregating findings into a score, rank, benchmark, or maturity grade;
-- treating high confidence as proof of favorable capability;
-- treating low or insufficient confidence as proof of weakness;
-- treating exposure as failure or dependence as misconduct;
-- assigning intent without evidence;
-- converting artifact hints into commercial or investment recommendations;
-- presenting announced policy or planned capacity as an operating condition;
-- comparing entities without equivalent scope, evidence, time horizon, and
-  methodology.
+**Related routes:** `/design-fabrication-packaging/`, `/export-control-layer/`,
+`/sources/`
 
-## 10. Artifact Rules
+### 3. Packaging Layer
 
-### Compute Sovereignty Brief
+**Definition:** Die integration, substrates, assembly, test, thermal design, and
+the capability required to turn manufactured dies into deployable systems.
 
-May be issued when supported findings across one or more layers answer a
-declared decision question. It MUST preserve layer-level exposure, confidence,
-unknowns, and limitations. It MUST NOT assign sovereignty or provide an
-operational verdict.
+**Why it matters:** Advanced AI compute often depends on packaging integration,
+not isolated die performance.
 
-### Chip Dependency Audit
+**Evidence required:** Technical standards releases, official technical
+disclosures, filings, or institutional reports on packaging, assembly, or
+integration scope.
 
-May be issued when a scoped set of dependency records has sufficient evidence
-for structured review. It MUST identify assessed and unassessed layers. It MUST
-NOT certify independence, resilience, compliance, or readiness.
+**Claim boundary:** May support attributed integration and packaging framing.
+Must not support adoption, interoperability, or supplier-position conclusions
+without scoped evidence.
 
-### Infrastructure Readiness Brief
+**Misinterpretation risk:** Treating a standard release or product disclosure as
+proof of deployable packaging access everywhere.
 
-May be issued when deployment, interconnect, power, thermal, and operating
-conditions are sufficiently evidenced. It MUST distinguish planned, accessible,
-and operating conditions. It MUST NOT guarantee capacity, availability,
-performance, or successful deployment.
+**Related routes:** `/design-fabrication-packaging/`, `/hbm-memory/`,
+`/interconnects/`
 
-### Premium Reference Dossier
+### 4. Memory Layer
 
-May be issued when a defined layer, dependency, or evidence question can be
-documented deeply and consistently. It MUST separate reference material from
-analysis. It MUST NOT provide a ranking, purchase recommendation, or investment
-advice.
+**Definition:** Required memory type, bandwidth, capacity, qualification,
+integration, and access conditions for AI compute.
 
-## 11. When Findings Must Be Insufficient
+**Why it matters:** Memory bandwidth and integration can bound usable compute
+even when processors are available.
 
-A finding MUST be labeled `insufficient` when evidence is absent,
-unattributable, unverifiable, materially incomplete, stale, or disproportionate
-to claim risk; credible conflicts cannot be resolved; applicable scope,
-thresholds, exceptions, or effective dates are unclear; unsupported inference
-is required; or material layers remain unassessed.
+**Evidence required:** Official technical disclosures, product specifications,
+controls-related records, or filings within attributed scope.
 
-`insufficient` MUST result in no operational finding. It MAY identify evidence
-needed for future review.
+**Claim boundary:** May support attributed memory-bandwidth and integration
+framing. Must not support market-wide availability, allocation, supplier
+ranking, or future-supply findings.
 
-## 12. Changing Conditions
+**Misinterpretation risk:** Using product-level HBM disclosures to infer general
+market access or supply dominance.
 
-Policy, capacity, ownership, access, and operating conditions can change. Every
-affected finding MUST carry an `as_of` date and SHOULD define a review date or
-trigger.
+**Related routes:** `/hbm-memory/`, `/design-fabrication-packaging/`
 
-A finding MUST be reviewed before reuse when a relevant rule, license,
-threshold, exception, capacity condition, ownership condition, access
-condition, source, deployment scope, or decision context materially changes.
-Historical evidence MUST NOT silently represent current conditions.
+### 5. Interconnect Layer
 
-## 13. Why No Sovereignty Score Is Permitted
+**Definition:** Data movement within systems, across racks, facilities, and
+regions, including fabrics, switching, topology, latency, and compatibility.
 
-A score is not permitted because layers contain different kinds of capability
-and access; exposure types are contextual and not naturally commensurable;
-confidence varies by finding; aggregation hides unknowns and conflicts; weights
-would introduce unsupported normative judgments; and a number could be misread
-as a political, commercial, or operational verdict.
+**Why it matters:** Interconnect fit determines whether compute, memory, and
+hosts function as a usable system.
 
-No score may be introduced without a separately governed standard revision,
-documented methodology, validation evidence, and explicit approval. This
-standard does not imply that such approval will be appropriate.
+**Evidence required:** Technical standards, official technical disclosures,
+filings, or institutional infrastructure context within scope.
 
-## 14. Future Upgrade Path
+**Claim boundary:** May support attributed interconnect and integration framing.
+Must not support vendor comparison, deployment verdict, or performance ranking.
 
-Future revisions MAY formalize review workflows, conformance checklists,
-criticality and substitutability terminology, evidence freshness rules,
-artifact templates, correction and versioning procedures, and a separately
-governed evidence-backed pilot.
+**Misinterpretation risk:** Treating disclosed topology or standard scope as proof
+of deployment success.
 
-No upgrade may silently introduce a score, ranking, sovereignty assignment, or
-automated operational judgment.
+**Related routes:** `/interconnects/`, `/ai-chip-infrastructure/`,
+`/hbm-memory/`
 
-## 15. Conformance
+### 6. Power / Thermal Layer
 
-An artifact conforms to AEC-CS-001 only when it follows this standard and
-`SOURCE_POLICY.md` and `CLAIM_POLICY.md`; preserves unknowns; applies
-`insufficient` where required; respects artifact boundaries; discloses scope,
-`as_of` date, confidence, evidence, and limitations; and avoids every
-prohibited interpretation.
+**Definition:** Power delivery, density, cooling, heat rejection, water use,
+and operating constraints that bound deployable compute.
 
-Conformance means the artifact follows this interpretation standard. It does
-not certify the subject of the artifact.
+**Why it matters:** Power and thermal limits can make otherwise available chips
+undeployable in practice.
+
+**Evidence required:** Institutional reports, official recommendations, modeled
+projections, or facility-context disclosures with stated scope and dates.
+
+**Claim boundary:** May support attributed infrastructure and energy-context
+framing. Must not support site-level readiness, operating guarantees, or
+current availability conclusions.
+
+**Misinterpretation risk:** Treating projections or recommendations as present
+operating facts.
+
+**Related routes:** `/power-and-thermal-limits/`, `/ai-chip-infrastructure/`
+
+### 7. Export-Control Layer
+
+**Definition:** Rules, licenses, thresholds, exceptions, sanctions, procurement
+constraints, and effective dates that shape access and transfer.
+
+**Why it matters:** Legal and administrative controls can constrain design,
+equipment, memory, fabrication, and deployment paths.
+
+**Evidence required:** Government rules, regulations, official notices, and
+attributed company or institutional disclosures after primary-text review.
+
+**Claim boundary:** May support attributed control-scope framing. Must not
+support compliance verdicts, geopolitical conclusions, or entity-level access
+findings without scoped evidence.
+
+**Misinterpretation risk:** Treating announcements as implemented operating
+conditions.
+
+**Related routes:** `/export-control-layer/`, `/sources/`, `/methodology/`
+
+### 8. Deployment Layer
+
+**Definition:** Installation, facilities, operations, maintenance, recovery,
+cloud or on-premises access, and geographic distribution of compute.
+
+**Why it matters:** A chip becomes useful compute only inside an operating
+infrastructure with continuing access.
+
+**Evidence required:** Institutional infrastructure reports, filings, official
+program material, and scoped operating-context disclosures.
+
+**Claim boundary:** May support attributed deployment and infrastructure framing.
+Must not support readiness certification, performance guarantees, or entity-level
+deployment conclusions.
+
+**Misinterpretation risk:** Inferring operational resilience from component-level
+or policy-level evidence alone.
+
+**Related routes:** `/ai-chip-infrastructure/`, `/power-and-thermal-limits/`,
+`/chip-dependency-map/`
+
+## Responsible Interpretation Rules
+
+1. Read by layer and exposure type before cross-layer synthesis.
+2. Preserve contradictions, unknowns, and differing confidence across findings.
+3. Treat missing evidence as `insufficient`, not proof of weakness.
+4. Distinguish verified fact, attributed statement, estimate, analysis, and unknown.
+5. Carry an `as_of` date on material findings and review before reuse.
+6. Use exposure types as contextual framing, not verdicts:
+   concentration, access, capacity, technology, operational, and evidence exposure.
+7. Use finding confidence (`high`, `medium`, `low`, `insufficient`) only after
+   governed evidence review; confidence is not a score.
+8. Treat diagnostic responses and artifact hints as investigation inputs, not
+   recommendations.
+9. Disclose material conflicts rather than averaging them away.
+10. Any future tool or map MUST conform to this standard before public scoring is
+    even considered.
+
+## Prohibited Uses
+
+The following are non-conforming under AEC-CS-001 v1.0.0:
+
+- assigning sovereignty or non-sovereignty to any company, country, product, or
+  institution;
+- public or private rankings, league tables, benchmarks, or maturity grades;
+- Chip Sovereignty Score or any numeric sovereignty index;
+- country, company, or product comparison presented as winner/loser framing;
+- best-chip, best-HBM, or superiority marketing language in reference findings;
+- investment, legal, procurement, or national-security advice;
+- certification, guarantee, or readiness verdicts;
+- treating evidence posture levels as performance scores;
+- using ontology layer control at one layer to imply full-stack sovereignty;
+- publishing news-cycle commentary as foundational evidence.
+
+## Versioning Notes
+
+- **0.1.0** established the foundation interpretation standard before public
+  reference authority work was complete.
+- **1.0.0** formalizes responsible reading rules after ontology v1 and the
+  Claim Boundary Matrix, with eight standard dimensions and non-numeric evidence
+  posture levels.
+
+No score, ranking, sovereignty assignment, or automated operational judgment may
+be introduced without a separately governed standard revision, documented
+methodology, validation evidence, and explicit approval. This version does not
+imply that such approval will ever be appropriate.
+
+Future revisions MAY add conformance checklists, artifact templates, and tool
+binding rules. They MUST NOT silently introduce scoring or ranking products.
+
+## Related Documents
+
+- [Compute Sovereignty Ontology v1](COMPUTE_SOVEREIGNTY_ONTOLOGY.md)
+- [Claim Boundary Matrix](CLAIM_BOUNDARY_MATRIX.md)
+- [Claim Policy](CLAIM_POLICY.md)
+- [Source Registry Protocol](SOURCE_REGISTRY_PROTOCOL.md)

@@ -393,3 +393,33 @@ claim boundaries before category-scale expansion.
 - Interconnect and deployment pages gain registry-linked evidence posture.
 - Claim and ontology documents become first-class foundation references in
   `README.md`.
+
+## ADR-014: Establish Compute Sovereignty Standard v1
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+Sprint 7 will publish `COMPUTE_SOVEREIGNTY_STANDARD.md` as version 1.0.0 after
+ontology v1 and the Claim Boundary Matrix.
+
+The standard defines responsible interpretation rules, four non-numeric evidence
+posture levels, and eight standard dimensions. It does not assign sovereign
+status to any entity.
+
+### Rationale
+
+No score before standard. No standard before ontology. No claim before boundary.
+The asset requires an explicit reading standard to prevent rankings, opinions,
+and overclaiming before any stronger tool or dependency map is built.
+
+### Consequences
+
+- `scripts/validate_compute_sovereignty_standard.py` is added and wired into
+  `validate_all.py`.
+- Public pages receive light standard references only; no new routes or content
+  sprawl.
+- No Chip Sovereignty Score, country ranking, company ranking, or product
+  comparison is authorized.
+- Any future tool or diagnostic output must conform to AEC-CS-001 v1.0.0.
