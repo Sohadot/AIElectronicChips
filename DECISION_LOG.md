@@ -364,3 +364,32 @@ discovery and indexing.
 - All 13 public routes must remain aligned across HTML files and `sitemap.xml`.
 - GitHub Pages and DNS setup remain manual post-sprint steps.
 - CI integration for launch validators remains deferred.
+
+## ADR-013: Reference Authority Foundation
+
+- **Date:** 2026-06-14
+- **Status:** Accepted
+
+### Decision
+
+Sprint 6 will expand the source registry with primary and official sources,
+publish `CLAIM_BOUNDARY_MATRIX.md`, stabilize `COMPUTE_SOVEREIGNTY_ONTOLOGY.md`
+as v1, and upgrade all thirteen public routes with reference summaries,
+ontology mapping, and clearer evidence boundaries.
+
+No new public routes, scores, rankings, or content sprawl are authorized.
+
+### Rationale
+
+After public launch readiness, the asset must move from technical readiness to
+reference authority. Sensitive claims require governed sources and explicit
+claim boundaries before category-scale expansion.
+
+### Consequences
+
+- The source registry grows to twenty records with government, filing, and
+  institutional coverage across ontology layers.
+- Every public route gains a reference summary and clearer boundary language.
+- Interconnect and deployment pages gain registry-linked evidence posture.
+- Claim and ontology documents become first-class foundation references in
+  `README.md`.

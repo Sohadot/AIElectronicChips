@@ -105,6 +105,7 @@ reference surface into a sales funnel or degrading its independence.
 
 ## Related Documents
 
+- [Claim Boundary Matrix](CLAIM_BOUNDARY_MATRIX.md)
 - [Premium Brief Boundary](PREMIUM_BRIEF_BOUNDARY.md)
 - [Monetization Boundary](MONETIZATION_BOUNDARY.md)
 - [Buyer Logic](BUYER_LOGIC.md)

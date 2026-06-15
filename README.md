@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 5: Public Launch Readiness / Indexation Hardening**
+**Sprint 6: Reference Authority Foundation**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -41,11 +41,15 @@ and `validate_all.py` to enforce validator and prohibited-language checks before
 any commercial surface is accepted.
 Sprint 5 prepares the public site for launch, crawling, and indexing with a
 launch checklist, indexation audit, `CNAME`, and `validate_public_launch.py`.
+Sprint 6 expands the source registry, publishes the Claim Boundary Matrix,
+stabilizes Compute Sovereignty Ontology v1, and upgrades all thirteen public
+routes into a reference-grade foundation without content sprawl.
 
 ## Foundation Documents
 
 - [Category Thesis](CATEGORY_THESIS.md)
-- [Compute Sovereignty Ontology](COMPUTE_SOVEREIGNTY_ONTOLOGY.md)
+- [Compute Sovereignty Ontology v1](COMPUTE_SOVEREIGNTY_ONTOLOGY.md)
+- [Claim Boundary Matrix](CLAIM_BOUNDARY_MATRIX.md)
 - [Source Policy](SOURCE_POLICY.md)
 - [Claim Policy](CLAIM_POLICY.md)
 - [Interface Thesis](INTERFACE_THESIS.md)

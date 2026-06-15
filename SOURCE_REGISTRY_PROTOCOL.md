@@ -77,3 +77,10 @@ Registered sources must not be used to:
   facts;
 - create affiliate, product-review, or promotional conclusions;
 - conceal source conflicts, limitations, or status.
+
+Claim review must also follow `CLAIM_BOUNDARY_MATRIX.md`.
+
+## Related Documents
+
+- [Claim Boundary Matrix](CLAIM_BOUNDARY_MATRIX.md)
+- [Claim Policy](CLAIM_POLICY.md)
