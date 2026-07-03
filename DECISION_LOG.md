@@ -455,3 +455,43 @@ inside the framework; they must never define the framework.
   company-led pages, or market-news framing is authorized.
 - Any future tool, exposure map, audit, or brief output must conform to
   AEC-CDM-001 v1.0.0 and AEC-CS-001 v1.0.0.
+
+## ADR-016: Register in the Sovereign Asset System Portfolio as Tier 1
+
+- **Date:** 2026-07-03
+- **Status:** Accepted
+
+### Decision
+
+AIElectronicChips.com is registered as a **Tier 1 — Sovereign Build
+Candidate** in the `Sohadot/sovereign-asset-system` portfolio, via
+`portfolio/asset-dossiers/aielectronicchips.com/ASSET_INTELLIGENCE_FACTORY_PLAN.md`
+in that repository. The dossier is a portfolio-level cross-reference and gap
+tracker; it does not supersede this repository's own governance documents,
+which remain the authoritative source for ontology, standard, model, and
+claim decisions.
+
+### Rationale
+
+Eight sprints of governed foundation work (category thesis, ontology,
+standard, dependency map model, source registry, claim boundary matrix,
+public reference surface, and interface thesis) satisfy Layers 1–5, 7, 8, and
+11 of `docs/INTELLIGENCE_FACTORY_DOCTRINE.md` in the sovereign asset system.
+The remaining gap to full Category Intelligence Factory grade is explicit:
+Layer 6 (Engine) is specified (`CHIP_DEPENDENCY_MAP_MODEL.md`,
+`DEPENDENCY_RECORD_SCHEMA.md`) but not yet operational, and distribution
+(GitHub Pages, DNS) is prepared (`CNAME`, `PUBLIC_LAUNCH_READINESS_CHECKLIST.md`)
+but not yet switched on. Formal portfolio registration makes this gap
+trackable at the portfolio level rather than only inside this repository.
+
+### Consequences
+
+- The portfolio dossier's Execution Sequence supersedes no existing
+  document here; it orders the same remaining work already implied by the
+  README roadmap (engine, launch, respectable income activation, interface
+  governance review, adoption monitoring).
+- Future sprints that build the Chip Dependency Map engine or activate
+  distribution should reference ADR-016 and update the portfolio dossier's
+  status alongside this log.
+- No new public routes, scores, rankings, or content sprawl are authorized
+  by this entry.
