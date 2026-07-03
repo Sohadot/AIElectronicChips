@@ -12,7 +12,7 @@ high-volume AI blog.
 
 ## Current Phase
 
-**Sprint 8: Chip Dependency Map Model v1**
+**Sprint 9: Chip Dependency Map Engine v1 — Live at [aielectronicchips.com](https://aielectronicchips.com/)**
 
 The repository now includes the governed, machine-readable foundation for the
 future Chip Dependency Map. It defines the protocol, controlled vocabularies,
@@ -62,15 +62,6 @@ at Medium, and a candidate next governed artifact format — never a score,
 ranking, or entity-specific finding. Nothing is collected, transmitted, or
 stored. This is the first and only page on the site permitted to load local
 JavaScript.
-
-## Portfolio Registration
-
-This asset is registered as a **Tier 1 — Sovereign Build Candidate** in the
-[Sovereign Asset System](https://github.com/Sohadot/sovereign-asset-system)
-portfolio. See
-[`portfolio/asset-dossiers/aielectronicchips.com/ASSET_INTELLIGENCE_FACTORY_PLAN.md`](https://github.com/Sohadot/sovereign-asset-system/blob/main/portfolio/asset-dossiers/aielectronicchips.com/ASSET_INTELLIGENCE_FACTORY_PLAN.md)
-for the portfolio-level factory plan, gap tracking, and execution sequence
-(ADR-016).
 
 ## Portfolio Registration
 
@@ -191,5 +182,3 @@ The planned first release covers:
 Material claims must be sourced, dated, bounded, and labeled by confidence.
 Primary evidence is preferred. Uncertainty is disclosed, and insufficient
 evidence results in no finding.
-
-Deployment refresh confirmed.
