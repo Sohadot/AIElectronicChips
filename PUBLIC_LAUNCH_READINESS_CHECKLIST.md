@@ -35,6 +35,8 @@
 - [x] Every page has a canonical URL on `https://aielectronicchips.com/`
 - [x] Every page has `robots` meta set to `index, follow`
 - [x] Every page has Open Graph basics (`og:type`, `og:site_name`, `og:title`, `og:description`, `og:url`)
+- [x] Every page has a governed `og:image` (1200×630, local `/assets/og/`, regenerated only via `scripts/generate-og-images.mjs`) and `twitter:card` (ADR-019)
+- [x] Every page carries exactly one valid JSON-LD `@graph`; the ontology is published as a schema.org `DefinedTermSet` with stable term `@id`s (ADR-019)
 - [x] Home page thesis remains visible in title and description
 
 ## Robots and Sitemap Checklist
@@ -42,6 +44,7 @@
 - [x] `robots.txt` allows crawling (`Allow: /`)
 - [x] `robots.txt` references `https://aielectronicchips.com/sitemap.xml`
 - [x] `sitemap.xml` uses production domain URLs
+- [x] `sitemap.xml` carries `<lastmod>` on every URL
 - [x] All 13 public routes appear in `sitemap.xml`
 - [x] No missing or extra sitemap routes
 - [x] `sources/` remains indexable
