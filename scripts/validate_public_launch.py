@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -256,15 +257,47 @@ def check_page_structure(path: Path, errors: list[str]) -> None:
     lowered = content.lower()
 
     script_tags = re.findall(r"<script\b[^>]*>", content, re.IGNORECASE)
-    if script_tags:
+    for tag in script_tags:
+        if re.search(r'type="application/ld\+json"', tag, re.IGNORECASE):
+            continue  # structured data is required on every page, checked below
         if str(rel) not in SCRIPT_ALLOWED_PAGES:
-            errors.append(f"{rel}: contains script tag outside SCRIPT_ALLOWED_PAGES")
-        else:
-            for tag in script_tags:
-                src_match = re.search(r'src="([^"]+)"', tag, re.IGNORECASE)
-                if src_match and not src_match.group(1).startswith("/assets/js/"):
-                    errors.append(f"{rel}: script src must be a local /assets/js/ path, found {src_match.group(1)}")
-    if re.search(r"https?://[^\s\"']+\.js", content):
+            errors.append(f"{rel}: contains executable script tag outside SCRIPT_ALLOWED_PAGES")
+            continue
+        src_match = re.search(r'src="([^"]+)"', tag, re.IGNORECASE)
+        if src_match and not src_match.group(1).startswith("/assets/js/"):
+            errors.append(f"{rel}: script src must be a local /assets/js/ path, found {src_match.group(1)}")
+
+    # Structured data: every public page must carry exactly one valid JSON-LD
+    # graph (ADR-019). Agent legibility is a doctrine requirement, not a nicety.
+    ld_blocks = re.findall(
+        r'<script type="application/ld\+json">(.*?)</script>', content, re.DOTALL | re.IGNORECASE
+    )
+    if len(ld_blocks) != 1:
+        errors.append(f"{rel}: expected exactly one JSON-LD block, found {len(ld_blocks)}")
+    else:
+        try:
+            data = json.loads(ld_blocks[0])
+            graph = data.get("@graph", [])
+            if data.get("@context") != "https://schema.org" or not graph:
+                errors.append(f"{rel}: JSON-LD must declare schema.org @context and a non-empty @graph")
+        except json.JSONDecodeError as exc:
+            errors.append(f"{rel}: JSON-LD does not parse: {exc}")
+
+    # og:image must point at an existing local asset with correct dimensions declared.
+    og_image = re.search(r'<meta property="og:image" content="([^"]+)"', content)
+    if not og_image:
+        errors.append(f"{rel}: missing og:image")
+    else:
+        img_path = og_image.group(1)
+        if not img_path.startswith(f"{DOMAIN}/assets/og/"):
+            errors.append(f"{rel}: og:image must live under {DOMAIN}/assets/og/, found {img_path}")
+        elif not (ROOT / img_path.replace(f"{DOMAIN}/", "")).is_file():
+            errors.append(f"{rel}: og:image file does not exist: {img_path}")
+        for dim, expected in (("og:image:width", "1200"), ("og:image:height", "630")):
+            m = re.search(rf'<meta property="{dim}" content="([^"]+)"', content)
+            if not m or m.group(1) != expected:
+                errors.append(f"{rel}: {dim} must be {expected}")
+    if re.search(r"https?://[^\s\"']+\.js\b(?!on)", content):
         errors.append(f"{rel}: references external JavaScript")
     if re.search(r"(fonts\.googleapis|fonts\.gstatic|cdn\.|unpkg|jsdelivr)", content, re.I):
         errors.append(f"{rel}: references external CDN or font dependency")
