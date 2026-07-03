@@ -23,21 +23,32 @@
   <main id="main">
     <header class="page-hero">
       <div class="trace" aria-hidden="true"></div>
-      <p class="eyebrow">Model preview · Governed diagnostic foundation</p>
+      <p class="eyebrow">Self-reported preview · Governed diagnostic engine</p>
       <h1>Chip Dependency Map</h1>
-      <p class="lead">Reveal layered dependency exposure without producing a sovereignty score or ranking.</p>
-      <p class="intro">The foundation defines controlled vocabularies, diagnostic questions, dependency records, confidence, and output boundaries. It contains no claims about a specific entity.</p>
-      <div class="framing-note"><strong>Model preview</strong><span>This is a non-functional reference view of the governed model. It is not an assessment, score, ranking, chatbot, or operational finding.</span></div>
+      <p class="lead">Preview layered dependency exposure from your own answers, without producing a sovereignty score or ranking.</p>
+      <p class="intro">Answer as many of the twelve governed questions as apply. The engine runs entirely in your browser: nothing you enter is saved, transmitted, or stored.</p>
+      <div class="framing-note"><strong>Boundary</strong><span>This tool returns a self-reported, unverified preview of your own inputs. It is not an assessment, score, ranking, chatbot, or operational finding, and it says nothing about any specific company, country, or product.</span></div>
     </header>
     <div class="content-shell">
       <section class="reference-sections" aria-label="Reference authority summary">
-        <article class="reference-block"><div class="block-index">00</div><div><h2>Reference summary</h2><p><strong>Definition.</strong> The Chip Dependency Map is a governed diagnostic foundation that maps layered dependency exposure across all eight ontology layers.</p><p><strong>Compute sovereignty relationship.</strong> The model reveals exposure types, confidence, and unknowns without assigning sovereignty or producing a public score.</p><p><strong>Boundary.</strong> This page is a non-functional model preview. The Chip Dependency Map Model does not score sovereignty, assign rankings, or assess any company, country, or product. It maps dependency relationships across eight ontology layers using five non-numeric states and bounded evidence.</p></div></article>
+        <article class="reference-block"><div class="block-index">00</div><div><h2>Reference summary</h2><p><strong>Definition.</strong> The Chip Dependency Map is a governed diagnostic engine that maps layered dependency exposure across all eight ontology layers from a visitor's own structured answers.</p><p><strong>Compute sovereignty relationship.</strong> The engine reveals exposure types, confidence, and unknowns without assigning sovereignty or producing a public score.</p><p><strong>Boundary.</strong> This engine does not score sovereignty, assign rankings, or assess any company, country, or product. It reads a visitor's own twelve answers deterministically under the governed engine specification and the Chip Dependency Map Model in this repository.</p></div></article>
       </section>
+
+      <section class="cdm-engine" aria-labelledby="engine-title">
+        <div class="section-label blue">Governed diagnostic engine</div>
+        <h2 id="engine-title">Preview your dependency reading</h2>
+        <p>Twelve governed questions, five answer options each. Unanswered questions are treated as not applicable. Nothing is saved, transmitted, or stored — the reading exists only in this page.</p>
+        <noscript>
+          <p class="framing-note"><strong>JavaScript required</strong><span>The interactive engine needs JavaScript to run entirely in your browser. With JavaScript off, the governed model and engine specification remain readable directly in the repository — every reference page on this site remains fully readable without JavaScript.</span></p>
+        </noscript>
+        <div id="cdm-engine-root"></div>
+      </section>
+
       <section class="instrument-preview" aria-labelledby="preview-title">
         <div>
           <div class="section-label blue">Structured output boundary</div>
           <h2 id="preview-title">Compute Dependency Exposure Map</h2>
-          <p>A future bounded output that groups supported dependency records by layer, preserves unknowns, states evidence confidence, and classifies the appropriate next governed analysis format.</p>
+          <p>The bounded output above groups your touched layers, preserves unknowns, states a capped confidence label, and classifies the appropriate next governed analysis format.</p>
         </div>
         <div class="signal-grid" aria-label="Governed output fields">
           <span>Dependency layers</span>
@@ -87,5 +98,6 @@
     <nav aria-label="Footer navigation"><a href="/compute-sovereignty/">Compute sovereignty</a><a href="/sovereignty-stack/">Sovereignty stack</a><a href="/methodology/">Methodology</a><a href="/strategic-availability/">Strategic availability</a></nav>
     <p class="footer-note">Reference framing is not an operational finding. Material claims require dated, attributable evidence.</p>
   </footer>
+  <script src="/assets/js/chip-dependency-map.js" defer></script>
 </body>
 </html>

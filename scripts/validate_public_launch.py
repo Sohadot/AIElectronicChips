@@ -13,6 +13,11 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 DOMAIN = "https://aielectronicchips.com"
 ALLOWED_SKIP_TARGETS = {"#main"}
+# Pages authorized to load local, same-origin JavaScript for a governed
+# client-side engine (CHIP_DEPENDENCY_MAP_ENGINE_SPEC.md, ADR-017). Every
+# other page must remain script-free. Script tags on allowed pages may only
+# reference local /assets/js/ files — never a CDN or third-party URL.
+SCRIPT_ALLOWED_PAGES = {"chip-dependency-map/index.html"}
 
 RISKY_TERMS = [
     "sovereignty score",
@@ -48,6 +53,7 @@ GOVERNANCE_FILES = {
     "COMPUTE_SOVEREIGNTY_ONTOLOGY.md",
     "CHIP_DEPENDENCY_MAP_MODEL.md",
     "CHIP_DEPENDENCY_MAP_PROTOCOL.md",
+    "CHIP_DEPENDENCY_MAP_ENGINE_SPEC.md",
     "SOURCE_REGISTRY_PROTOCOL.md",
     "SOURCE_POLICY.md",
     "CLAIM_POLICY.md",
@@ -245,8 +251,15 @@ def check_page_structure(path: Path, errors: list[str]) -> None:
     content = path.read_text(encoding="utf-8")
     lowered = content.lower()
 
-    if "<script" in lowered:
-        errors.append(f"{rel}: contains script tag")
+    script_tags = re.findall(r"<script\b[^>]*>", content, re.IGNORECASE)
+    if script_tags:
+        if str(rel) not in SCRIPT_ALLOWED_PAGES:
+            errors.append(f"{rel}: contains script tag outside SCRIPT_ALLOWED_PAGES")
+        else:
+            for tag in script_tags:
+                src_match = re.search(r'src="([^"]+)"', tag, re.IGNORECASE)
+                if src_match and not src_match.group(1).startswith("/assets/js/"):
+                    errors.append(f"{rel}: script src must be a local /assets/js/ path, found {src_match.group(1)}")
     if re.search(r"https?://[^\s\"']+\.js", content):
         errors.append(f"{rel}: references external JavaScript")
     if re.search(r"(fonts\.googleapis|fonts\.gstatic|cdn\.|unpkg|jsdelivr)", content, re.I):

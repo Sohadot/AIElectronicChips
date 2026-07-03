@@ -66,7 +66,16 @@
 
 ## Performance / Dependency Checklist
 
-- [x] No external JavaScript
+- [x] No external or CDN JavaScript anywhere on the site
+- [x] Local JavaScript limited to exactly one page: `/chip-dependency-map/`
+      loads `/assets/js/chip-dependency-map.js` (`SCRIPT_ALLOWED_PAGES` in
+      `scripts/validate_public_launch.py`, ADR-017); every other route
+      remains script-free
+- [x] The Chip Dependency Map engine runs entirely client-side; it makes no
+      network request other than fetching the same-origin governed model
+      file, and transmits, stores, or logs nothing
+- [x] `<noscript>` fallback present on `/chip-dependency-map/`; reference
+      content on every page remains readable without JavaScript
 - [x] No frameworks or CDN scripts
 - [x] No tracking dependencies
 - [x] No external font CDN dependency

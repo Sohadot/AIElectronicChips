@@ -495,3 +495,55 @@ trackable at the portfolio level rather than only inside this repository.
   status alongside this log.
 - No new public routes, scores, rankings, or content sprawl are authorized
   by this entry.
+
+## ADR-017: Ship Chip Dependency Map Engine v1 and Authorize Local JavaScript on One Page
+
+- **Date:** 2026-07-03
+- **Status:** Accepted
+
+### Decision
+
+`/chip-dependency-map/` becomes a working engine, not a model preview. It
+implements `CHIP_DEPENDENCY_MAP_ENGINE_SPEC.md` (AEC-CDM-ENGINE-001 v1.0.0):
+a fully static, client-side, deterministic tool that takes a visitor's own
+answers to the twelve governed diagnostic questions in
+`data/chip-dependency-model.json` and returns touched layers, raised exposure
+types, a capped confidence label (Medium is the ceiling; High is never
+returned), and a candidate next governed artifact format. Nothing is
+collected, transmitted, or stored. The tool never uses the five Dependency
+States from `CHIP_DEPENDENCY_MAP_MODEL.md`, since those require attributed
+evidence a self-service form cannot supply.
+
+This requires local JavaScript (`assets/js/chip-dependency-map.js`), the
+first script on this site. `scripts/validate_public_launch.py` previously
+forbade `<script` tags on every page; it now permits local
+`/assets/js/`-only script tags exclusively on `chip-dependency-map/index.html`
+(`SCRIPT_ALLOWED_PAGES`), and continues to forbid external/CDN JavaScript
+everywhere, unchanged. Every other public route remains script-free. The page
+carries a `<noscript>` fallback; all reference content on the site remains
+readable without JavaScript.
+
+### Rationale
+
+Per `docs/INTELLIGENCE_FACTORY_DOCTRINE.md` (sovereign-asset-system), Layer 6
+(Engine) is what elevates a category artifact to a Category Intelligence
+Factory: "a rules-based, fully static, client-side diagnostic... is a valid
+engine." Sprint 8 correctly built the model before any tool; ADR-016 recorded
+this as the asset's largest remaining gap to factory grade. Shipping it
+requires evolving the zero-JavaScript launch gate precisely rather than
+working around it silently — the gate is amended, not bypassed, and the
+amendment is scoped to exactly one page and exactly one directory.
+
+### Consequences
+
+- `scripts/validate_public_launch.py` and `scripts/validate_all.py` both
+  gained `CHIP_DEPENDENCY_MAP_ENGINE_SPEC.md` as a recognized governance file
+  for the risky-language scan.
+- `PUBLIC_LAUNCH_READINESS_CHECKLIST.md`'s performance checklist is updated to
+  describe local, page-scoped JavaScript instead of claiming zero JavaScript
+  site-wide.
+- No dependency record, score, ranking, or entity-specific output is
+  authorized by this entry. Paid brief and audit production still requires
+  the governed, evidence-reviewed pipeline in `ASSET_INTELLIGENCE_FACTORY_PLAN.md`.
+- Future engine changes require a `DECISION_LOG.md` entry, matching
+  governance for every other model change in this repository.
