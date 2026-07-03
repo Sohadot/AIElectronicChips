@@ -50,10 +50,15 @@
 ## GitHub Pages / Custom Domain Readiness
 
 - [x] `CNAME` contains `aielectronicchips.com`
-- [ ] GitHub Pages enabled on repository (manual)
-- [ ] Custom domain configured in GitHub settings (manual)
-- [ ] DNS `A` / `CNAME` records pointed to GitHub Pages (manual)
-- [ ] HTTPS certificate active on custom domain (manual post-DNS)
+- [x] GitHub Pages enabled on repository (deploy from `main`, root)
+- [x] Custom domain configured in GitHub settings (DNS check successful)
+- [x] DNS `A` / `CNAME` records pointed to GitHub Pages
+- [x] HTTPS certificate active on custom domain (Enforce HTTPS enabled)
+- [x] `.nojekyll` present so Pages serves the static site without a Jekyll build
+
+**Site went live 2026-07-03.** The first Pages deployment failed with a
+transient GitHub-side error; a manual redeploy (`.nojekyll` / `CNAME`
+refresh) resolved it.
 
 ## Accessibility Checklist
 
@@ -99,16 +104,20 @@ py scripts\validate_strategic_offerings.py
 ## Pre-Launch Manual Review Checklist
 
 - [ ] Open each route in a browser on desktop and mobile
-- [ ] Confirm custom domain resolves to GitHub Pages
-- [ ] Confirm canonical URLs render correctly on production host
+- [x] Confirm custom domain resolves to GitHub Pages (2026-07-03, HTTP 200 over HTTPS)
+- [x] Confirm canonical URLs render correctly on production host
 - [ ] Submit sitemap in Google Search Console (optional, post-launch)
 - [ ] Verify `agent@sohadot.com` inquiry mailto works from production
 - [ ] Confirm strategic availability page still reads institutional, not sales-heavy
 
 ## Post-Launch Checks
 
-- [ ] Crawl public routes and confirm HTTP 200
-- [ ] Confirm no unexpected `noindex` on production
+- [x] Crawl public routes and confirm HTTP 200 (all 13 routes + sitemap,
+      robots, model JSON, CSS, and engine JS returned 200 on 2026-07-03)
+- [x] Confirm no unexpected `noindex` on production (`index, follow` verified
+      on sampled routes)
+- [x] Production files verified byte-identical (SHA-256) to the
+      browser-tested engine build on 2026-07-03
 - [ ] Monitor Search Console indexing for core routes
 - [ ] Re-run `validate_public_launch.py` after any HTML or sitemap change
 - [ ] Re-run `validate_all.py` after any commercial-surface change
