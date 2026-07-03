@@ -72,6 +72,15 @@ portfolio. See
 for the portfolio-level factory plan, gap tracking, and execution sequence
 (ADR-016).
 
+## Portfolio Registration
+
+This asset is registered as a **Tier 1 — Sovereign Build Candidate** in the
+[Sovereign Asset System](https://github.com/Sohadot/sovereign-asset-system)
+portfolio. See
+[`portfolio/asset-dossiers/aielectronicchips.com/ASSET_INTELLIGENCE_FACTORY_PLAN.md`](https://github.com/Sohadot/sovereign-asset-system/blob/main/portfolio/asset-dossiers/aielectronicchips.com/ASSET_INTELLIGENCE_FACTORY_PLAN.md)
+for the portfolio-level factory plan, gap tracking, and execution sequence
+(ADR-016).
+
 ## Foundation Documents
 
 - [Category Thesis](CATEGORY_THESIS.md)
