@@ -54,6 +54,14 @@ boundary matrix. Five descriptive dependency states replace any scoring impulse.
 Named entities remain governed and non-anchoring. No company pages, country
 assessments, product comparisons, monetization, pilot, or route expansion is
 introduced.
+Sprint 9 ships Chip Dependency Map Engine v1 (ADR-017): `/chip-dependency-map/`
+becomes a working, fully static, client-side diagnostic instead of a model
+preview. It reads a visitor's own answers to the twelve governed questions
+and returns touched layers, raised exposure types, a confidence label capped
+at Medium, and a candidate next governed artifact format — never a score,
+ranking, or entity-specific finding. Nothing is collected, transmitted, or
+stored. This is the first and only page on the site permitted to load local
+JavaScript.
 
 ## Portfolio Registration
 
@@ -86,6 +94,7 @@ for the portfolio-level factory plan, gap tracking, and execution sequence
 - [Model Coherence Audit](MODEL_COHERENCE_AUDIT.md)
 - [Compute Sovereignty Standard v1](COMPUTE_SOVEREIGNTY_STANDARD.md) — Defines responsible interpretation rules for the eight-layer compute sovereignty ontology.
 - [Chip Dependency Map Model v1](CHIP_DEPENDENCY_MAP_MODEL.md) — Defines non-numeric dependency states and named-entity governance for mapping relationships across the eight ontology layers.
+- [Chip Dependency Map Engine v1](CHIP_DEPENDENCY_MAP_ENGINE_SPEC.md) — Specifies the deterministic, client-side, self-service engine live at [`/chip-dependency-map/`](chip-dependency-map/index.html).
 
 ## Source Registry
 
