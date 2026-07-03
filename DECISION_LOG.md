@@ -547,3 +547,49 @@ amendment is scoped to exactly one page and exactly one directory.
   the governed, evidence-reviewed pipeline in `ASSET_INTELLIGENCE_FACTORY_PLAN.md`.
 - Future engine changes require a `DECISION_LOG.md` entry, matching
   governance for every other model change in this repository.
+
+## ADR-018: Add the Qualified Inquiry Builder to Strategic Availability
+
+- **Date:** 2026-07-03
+- **Status:** Accepted
+
+### Decision
+
+`/strategic-availability/` gains a Qualified Inquiry Builder: a client-side
+form that reads the five governed pathways from
+`data/strategic-offerings.json`, collects the structured fields the page
+already requires of a serious inquiry (pathway, entity or topic, decision
+context, time horizon, sovereignty layers, geographic scope, constraints),
+and composes a structured email that opens in the visitor's own mail client.
+Nothing entered is transmitted, stored, or logged by this site; the only
+same-origin request is fetching the public offerings file. The plain mailto
+pathway remains as the no-JavaScript fallback.
+
+`strategic-availability/index.html` is added to `SCRIPT_ALLOWED_PAGES` in
+`scripts/validate_public_launch.py`, becoming the second and only other page
+authorized to load local `/assets/js/` JavaScript under the rule established
+in ADR-017. External and CDN scripts remain forbidden everywhere.
+
+### Rationale
+
+`MONETIZATION_BOUNDARY.md` permits paid briefs, audits, dossiers, and
+licensing but forbids checkout, price lists, and predetermined conclusions.
+The gap between a bare mailto button and a real commercial pathway is intake
+quality: the inquiry page itself states that useful inquiries name seven
+structured elements and that vague contacts may be declined. The builder
+operationalizes that stated standard without adding a server, a price, or a
+purchase flow, and it embeds the no-predetermined-conclusions acknowledgment
+directly in the composed email.
+
+### Consequences
+
+- Respectable income intake (briefs, audits, dossiers, licensing,
+  acquisition dialogue) now has a structured, self-qualifying entry channel
+  consistent with the Strategic Availability Trust Gate.
+- The composed email carries an explicit acknowledgment that no score,
+  ranking, certification, guarantee, or predetermined conclusion can be
+  purchased.
+- No checkout, pricing, payment processing, analytics, or data collection is
+  authorized by this entry.
+- Changes to the builder's fields or composed-email wording follow the same
+  decision-log discipline as other governed surfaces.
