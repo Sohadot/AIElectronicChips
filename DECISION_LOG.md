@@ -594,6 +594,7 @@ directly in the composed email.
 - Changes to the builder's fields or composed-email wording follow the same
   decision-log discipline as other governed surfaces.
 
+
 ## ADR-019: Encode the Ontology as Structured Data and Establish the og:image Visual System
 
 - **Date:** 2026-07-03
@@ -650,3 +651,4 @@ strategic buyer gets in email, chat, and social contexts.
   thesis and the eight-layer enumeration respectively.
 - No tracking, analytics, external requests, or executable script scope is
   added by this entry.
+  
