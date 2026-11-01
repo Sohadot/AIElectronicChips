@@ -1,0 +1,85 @@
+{
+  "atlas_id": "aec-dependency-evidence-atlas",
+  "version": "0.1.0",
+  "status": "foundation",
+  "as_of": "2026-11-01",
+  "ontology_reference": "COMPUTE_SOVEREIGNTY_ONTOLOGY.md",
+  "standard_reference": "COMPUTE_SOVEREIGNTY_STANDARD.md",
+  "source_registry_reference": "data/source-registry.json",
+  "description": "Ontology-level scaffold. No supplier, company, capacity, access or operational relationships have been established by this file.",
+  "nodes": [
+    {
+      "id": "layer-design",
+      "label": "Design",
+      "kind": "ontology_layer",
+      "layers": [
+        "design"
+      ],
+      "description": "Architecture, design tools, IP and verification capability."
+    },
+    {
+      "id": "layer-fabrication",
+      "label": "Fabrication",
+      "kind": "ontology_layer",
+      "layers": [
+        "fabrication"
+      ],
+      "description": "Manufacturing processes, capacity, equipment and production access."
+    },
+    {
+      "id": "layer-packaging",
+      "label": "Packaging",
+      "kind": "ontology_layer",
+      "layers": [
+        "packaging"
+      ],
+      "description": "Advanced integration, assembly, substrates, testing and thermal interfaces."
+    },
+    {
+      "id": "layer-memory",
+      "label": "Memory",
+      "kind": "ontology_layer",
+      "layers": [
+        "memory"
+      ],
+      "description": "Memory architecture, bandwidth, capacity, qualification and integration."
+    },
+    {
+      "id": "layer-interconnect",
+      "label": "Interconnect",
+      "kind": "ontology_layer",
+      "layers": [
+        "interconnect"
+      ],
+      "description": "Data movement inside and between compute systems."
+    },
+    {
+      "id": "layer-power-thermal",
+      "label": "Power / Thermal",
+      "kind": "ontology_layer",
+      "layers": [
+        "power_thermal"
+      ],
+      "description": "Power delivery, heat removal and physical operating constraints."
+    },
+    {
+      "id": "layer-controls",
+      "label": "Export Controls",
+      "kind": "ontology_layer",
+      "layers": [
+        "controls"
+      ],
+      "description": "Applicable rules, licenses, thresholds and effective dates."
+    },
+    {
+      "id": "layer-deployment",
+      "label": "Deployment",
+      "kind": "ontology_layer",
+      "layers": [
+        "deployment"
+      ],
+      "description": "Installation, operations, maintenance and continuity of compute infrastructure."
+    }
+  ],
+  "relationships": []
+}

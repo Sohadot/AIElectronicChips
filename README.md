@@ -96,6 +96,12 @@ for the portfolio-level factory plan, gap tracking, and execution sequence
 - [Chip Dependency Map Model v1](CHIP_DEPENDENCY_MAP_MODEL.md) — Defines non-numeric dependency states and named-entity governance for mapping relationships across the eight ontology layers.
 - [Chip Dependency Map Engine v1](CHIP_DEPENDENCY_MAP_ENGINE_SPEC.md) — Specifies the deterministic, client-side, self-service engine live at [`/chip-dependency-map/`](chip-dependency-map/index.html).
 
+## Dependency Evidence Atlas (governed scaffold)
+
+The [Dependency Evidence Atlas](DEPENDENCY_EVIDENCE_ATLAS.md) defines a source-linked, machine-readable structure separate from the self-reported diagnostic engine. The initial [Atlas JSON](data/dependency-atlas.json) contains the eight ontology-layer nodes and no reviewed operational relationships. Every future relationship must cite active entries in the existing [Source Registry](data/source-registry.json), declare scope, dates, review ownership and limitations, and pass [the dedicated validator](scripts/validate_dependency_atlas.py). Unreviewed relationships cannot be published through the governed gate.
+
+All repository gates run in `scripts/validate_all.py`; the GitHub Actions workflow also checks the public site and negative-test suite. **GitHub Pages must be set to deploy from GitHub Actions rather than directly from the main branch**, and the validation status must be required before merging, for the gate to prevent publication.
+
 ## Source Registry
 
 - [Governed source registry](data/source-registry.json)
