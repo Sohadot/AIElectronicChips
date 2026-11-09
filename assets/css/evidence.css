@@ -98,6 +98,12 @@
 .ref-figure .f-rdl-line { stroke: var(--muted); stroke-width: 1; }
 .ref-figure .f-lsi { fill: #cfe5e7; stroke: var(--teal-ink); stroke-width: 1.5; }
 .ref-figure .f-panel { fill: var(--ink-strong); font: 700 13px var(--sans); }
+/* Bandwidth-tier chart: vendor-stated values solid; calculated values light with a dashed edge. */
+.ref-figure .f-bar { fill: var(--teal); }
+.ref-figure .f-bar-calc { fill: #e2f0f1; stroke: var(--teal-ink); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.ref-figure .f-grid { stroke: var(--line); stroke-width: 1; }
+.ref-figure .f-axis { fill: var(--muted); font: 500 11px var(--sans); }
+.ref-figure .f-val { fill: var(--ink-strong); font: 600 12px var(--sans); }
 
 .ref-list { padding-left: 1.6rem; font-size: .92rem; color: var(--ink); }
 .ref-list li { margin: .75rem 0; scroll-margin-top: 1rem; }

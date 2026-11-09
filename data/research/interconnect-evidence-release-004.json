@@ -1,0 +1,1316 @@
+{
+  "release_id": "aec-ide-004-interconnect",
+  "version": "1.0.0",
+  "status": "research_candidate",
+  "publication_eligible": false,
+  "as_of": "2026-11-09",
+  "title": "Industrial Dependency Evidence Release 004: Interconnect and Data Movement",
+  "reference_page": "interconnects/index.html",
+  "source_registry_reference": "data/source-registry.json",
+  "atlas_reference": "data/dependency-atlas.json",
+  "description": "Research-candidate findings on how data moves in AI systems: on-package fabric, memory versus device-interconnect bandwidth, CXL host interfaces, accelerator fabrics (AMD Instinct MI300X as the primary case, NVIDIA Vera Rubin NVL72 as a bounded contrast) and scale-out networking. Every bandwidth figure carries its unit, direction, scope and basis. Nothing in this file is a published Atlas relationship; every candidate requires named human review before it may be moved into data/dependency-atlas.json.",
+  "rights_note": "Classification, unit normalisation, arithmetic and analysis are original project work by AIElectronicChips.com (Sohadot). Quoted passages are short excerpts (at most 20 words each, 40 per citation) reproduced for citation and verification; the underlying texts and specifications remain the property of their publishers. No endorsement by AMD, NVIDIA, the CXL Consortium or the Ultra Ethernet Consortium is implied. This file is a research candidate: it is visible in the public repository but is excluded from the published website.",
+  "findings": [
+    {
+      "id": "i-amd-on-package-fabric",
+      "claim_class": "attributed_statement",
+      "topic": "architecture",
+      "statement": "AMD states that CDNA 3 uses its 4th Gen Infinity architecture fabric more extensively inside the package. It says each XCD's L2 connects to its I/O die over sixteen 64-byte channels, 1 KB per XCD at the IOD interface, and that Infinity Fabric ties the package's components together over a 4 TB/s fabric.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "Communication and scaling section: \"fabric more prolifically inside the package\"; memory section: \"for a total of 1K-bytes per XCD at the IOD interface\"; conclusion: \"ties together all the components over a massive 4TB/s fabric\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "On-package data movement in AMD Instinct MI300 Series, as described by AMD",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The 4 TB/s figure has no stated direction, clock or measurement basis",
+        "On-package fabric bandwidth is a different domain from GPU-to-GPU link bandwidth; die-to-die integration itself is covered by the packaging reference (IDE-003)"
+      ],
+      "quantities": [
+        {
+          "value": "4",
+          "unit": "TB/s",
+          "quantity": "Infinity Fabric bandwidth tying package components together",
+          "direction": "not_stated",
+          "scope": "per_package",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ]
+    },
+    {
+      "id": "i-amd-on-package-tiers",
+      "claim_class": "attributed_statement",
+      "topic": "measurement_scope",
+      "statement": "AMD gives MI300 Series on-package bandwidths at three tiers: up to 34.4 TB/s aggregate L2 read bandwidth, 17.2 TB/s peak from the Infinity Cache, and 5.3 TB/s peak HBM3 memory bandwidth. A figure legend in the same paper labels L2-to-XCD bandwidth 51.6 TB/s (aggregate), a scope the text does not reconcile with 34.4 TB/s.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"up to 34.4 TB/s aggregate read bandwidth\"; \"The peak bandwidth from the Infinity Cache is an astounding 17.2 TB/s\"; Figure 6 legend: \"51.6 TB/s (Aggregate)\"; table: \"up to 5.3 TB/sec\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "MI300 Series cache and memory bandwidth tiers as AMD states them",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Read-only, aggregate and peak figures are mixed in AMD's own presentation",
+        "The 34.4 and 51.6 TB/s L2 figures are recorded as stated, not reconciled"
+      ],
+      "quantities": [
+        {
+          "value": "34.4",
+          "unit": "TB/s",
+          "quantity": "aggregate L2 read bandwidth",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "17.2",
+          "unit": "TB/s",
+          "quantity": "Infinity Cache peak bandwidth",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "5.3",
+          "unit": "TB/s",
+          "quantity": "HBM3 peak memory bandwidth",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "51.6",
+          "unit": "TB/s",
+          "quantity": "L2-to-XCD aggregate bandwidth (figure legend)",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ]
+    },
+    {
+      "id": "i-amd-hbm-arithmetic",
+      "claim_class": "attributed_statement",
+      "topic": "measurement_scope",
+      "statement": "AMD derives MI300X's peak memory bandwidth arithmetically: an 8,192-bit memory bus at a 5.2 Gbps data rate, divided by eight, for a total peak of 5.325 TB/s.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "Footnote MI300-13: \"MI300X memory bus interface is 8,192\"; \"memory data rate is 5.2 Gbps for total peak memory bandwidth of 5.325 TB/s\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "MI300X HBM3 peak theoretical bandwidth, AMD Performance Labs calculation as of 2023-11-07",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "A peak theoretical calculation, not a measured or application bandwidth"
+      ],
+      "quantities": [
+        {
+          "value": "5.2",
+          "unit": "Gbps",
+          "quantity": "HBM3 data rate per pin",
+          "direction": "not_applicable",
+          "scope": "per_lane",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "5.325",
+          "unit": "TB/s",
+          "quantity": "total peak HBM3 memory bandwidth",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ]
+    },
+    {
+      "id": "i-nvidia-rubin-io-ledger",
+      "claim_class": "attributed_statement",
+      "topic": "scale_up_fabric",
+      "statement": "In one post (2026-07-21), NVIDIA states for the Rubin GPU: up to 22 TB/s of peak HBM4 bandwidth, 3,600 GB/s of NVLink 6 scale-up bandwidth to the NVLink Switch, 1,800 GB/s of NVLink-C2C bandwidth for coherent CPU-GPU communication, and up to 256 GB/s of host connectivity over x16 PCIe Gen 6.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "\"to deliver up to 22 TB/s of peak bandwidth\"; \"NVIDIA NVLink 6 provides 3,600 GB/s scale-up bandwidth to the NVLink Switch\"; \"NVLink-C2C delivers 1,800 GB/s\"; \"x16 PCIe Gen 6 provides up to 256 GB/s of host connectivity\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Rubin GPU interface figures as stated by NVIDIA on 2026-07-21",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "NVIDIA's later post (2026-11-05) gives 19.2 TB/s for Rubin memory bandwidth; the HBM reference records that conflict unresolved",
+        "This post states no direction for the NVLink, NVLink-C2C or PCIe figures"
+      ],
+      "quantities": [
+        {
+          "value": "22",
+          "unit": "TB/s",
+          "quantity": "peak HBM4 memory bandwidth",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-gpu-architecture-2026"
+        },
+        {
+          "value": "3,600",
+          "unit": "GB/s",
+          "quantity": "NVLink 6 scale-up bandwidth to the NVLink Switch",
+          "direction": "not_stated",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-gpu-architecture-2026"
+        },
+        {
+          "value": "1,800",
+          "unit": "GB/s",
+          "quantity": "NVLink-C2C coherent CPU-GPU bandwidth",
+          "direction": "not_stated",
+          "scope": "per_link",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-gpu-architecture-2026"
+        },
+        {
+          "value": "256",
+          "unit": "GB/s",
+          "quantity": "x16 PCIe Gen 6 host connectivity",
+          "direction": "not_stated",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-gpu-architecture-2026"
+        }
+      ]
+    },
+    {
+      "id": "i-nvidia-nvlink6-figures",
+      "claim_class": "attributed_statement",
+      "topic": "scale_up_fabric",
+      "statement": "NVIDIA states NVLink 6 bandwidth per Rubin GPU differently across dated posts. On 2026-01-05 it gives 3.6 TB/s of bidirectional GPU-to-GPU bandwidth per GPU. On 2026-07-21 it gives 3,600 GB/s of scale-up bandwidth. On 2026-11-05 it says each Rubin GPU brings 3.0 TB/s of NVLink 6 bandwidth.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"NVIDIA NVLink 6 delivers 3.6 TB/s of bidirectional GPU-to-GPU bandwidth per GPU\""
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "\"NVIDIA NVLink 6 provides 3,600 GB/s scale-up bandwidth to the NVLink Switch\""
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "\"Each Rubin GPU brings up to 288 GB of HBM4 and 3.0 TB/s of NVLink 6 bandwidth\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Per-GPU NVLink 6 bandwidth as stated by NVIDIA, 2026-01-05 to 2026-11-05",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The 3.0 TB/s figure has no stated direction; it was still on the live page on 2026-11-09",
+        "This release records the conflict and does not reconcile it"
+      ],
+      "quantities": [
+        {
+          "value": "3.6",
+          "unit": "TB/s",
+          "quantity": "NVLink 6 GPU-to-GPU bandwidth",
+          "direction": "bidirectional",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        },
+        {
+          "value": "3,600",
+          "unit": "GB/s",
+          "quantity": "NVLink 6 scale-up bandwidth",
+          "direction": "not_stated",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-gpu-architecture-2026"
+        },
+        {
+          "value": "3.0",
+          "unit": "TB/s",
+          "quantity": "NVLink 6 bandwidth",
+          "direction": "not_stated",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-co-design-memory-2026"
+        }
+      ]
+    },
+    {
+      "id": "i-cxl-protocols",
+      "claim_class": "attributed_statement",
+      "topic": "host_interface",
+      "statement": "The CXL Consortium describes CXL as multiplexing three protocols: CXL.io, based on PCIe, for I/O; CXL.cache for caching; and CXL.memory for memory semantics. It says CXL maintains a unified, coherent memory space between the host CPU and memory on an attached CXL device.",
+      "evidence": [
+        {
+          "source_id": "cxl-3-0-white-paper-2022",
+          "locator": "\"I/O (CXL.io, based on PCIe), caching (CXL.cache), and memory (CXL.memory) semantics\"; \"CXL maintains a unified, coherent memory space between the CPU (host processor) and any memory on the attached CXL device\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "CXL protocol layering as described in the consortium's CXL 3.0 white paper",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "A description of what the specification provides, not of any product's behaviour"
+      ]
+    },
+    {
+      "id": "i-cxl-3-rate",
+      "claim_class": "attributed_statement",
+      "topic": "host_interface",
+      "statement": "The CXL 3.0 white paper says CXL 3.0, based on PCIe 6.0 technology, doubles the transfer rate to 64 GT/s, for aggregate raw bandwidth of up to 256 GB/s on an x16 link, using 256-byte flits on PAM-4 signalling.",
+      "evidence": [
+        {
+          "source_id": "cxl-3-0-white-paper-2022",
+          "locator": "\"CXL 3.0, which is based on PCIe 6.0 technology, doubles the transfer rate to 64GT/s\"; \"aggregate raw bandwidth of up to 256GB/s for x16 width link\"; \"256B flits on PAM-4 signaling\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "CXL 3.0 physical rate and raw bandwidth as described by the consortium",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "'Raw' excludes flit, FEC and protocol overhead; the white paper does not state payload bandwidth",
+        "The PCIe 6.0 basis is the consortium's statement; PCI-SIG documents could not be retrieved"
+      ],
+      "quantities": [
+        {
+          "value": "64",
+          "unit": "GT/s",
+          "quantity": "transfer rate",
+          "direction": "not_applicable",
+          "scope": "per_lane",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "cxl-3-0-white-paper-2022"
+        },
+        {
+          "value": "256",
+          "unit": "GB/s",
+          "quantity": "aggregate raw bandwidth of an x16 link",
+          "direction": "not_stated",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "cxl-3-0-white-paper-2022"
+        }
+      ]
+    },
+    {
+      "id": "i-cxl-pooling-sharing",
+      "claim_class": "attributed_statement",
+      "topic": "host_interface",
+      "statement": "The consortium distinguishes memory pooling, introduced in CXL 2.0, from memory sharing, introduced in CXL 3.0. Pooling allocates CXL-attached memory to different hosts as needed. Sharing lets a region be coherently accessed by more than one host at once using hardware coherency. It describes fabric-attached memory reachable by up to 4,095 nodes through port-based routing.",
+      "evidence": [
+        {
+          "source_id": "cxl-3-0-white-paper-2022",
+          "locator": "\"Memory pooling is the ability to treat CXL-attached memory as a fungible resource\"; \"Memory sharing is the ability of CXL-attached memory to be coherently shared across hosts using hardware coherency\"; \"accessed by multiple nodes (up to 4095)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "CXL 2.0 and 3.0 memory pooling and sharing as defined by the consortium",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Specification capability, not evidence that any product or deployment pools or shares memory"
+      ]
+    },
+    {
+      "id": "i-cxl-4-release",
+      "claim_class": "attributed_statement",
+      "topic": "host_interface",
+      "statement": "The CXL Consortium announced CXL 4.0 on 2025-11-18, doubling the rate from 64 GT/s to 128 GT/s, adding bundled ports and memory RAS features, and keeping backward compatibility with earlier versions. It says members showed live demonstrations at SC25.",
+      "evidence": [
+        {
+          "source_id": "cxl-4-0-specification-release-2025",
+          "locator": "\"CXL 4.0 specification doubles bandwidth from 64GTs to 128GTs\"; \"Implements CXL bundled port capabilities\"; \"showcasing live CXL technology demonstrations at Supercomputing 2025\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "CXL 4.0 as announced on 2025-11-18",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Announcement, not the specification; the CXL 4.0 text is offered under an evaluation agreement and was not reviewed",
+        "Trade-show demonstrations are not compliance or interoperability results"
+      ],
+      "quantities": [
+        {
+          "value": "64",
+          "unit": "GT/s",
+          "quantity": "CXL 3.x transfer rate",
+          "direction": "not_applicable",
+          "scope": "per_lane",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "cxl-4-0-specification-release-2025"
+        },
+        {
+          "value": "128",
+          "unit": "GT/s",
+          "quantity": "CXL 4.0 transfer rate",
+          "direction": "not_applicable",
+          "scope": "per_lane",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "cxl-4-0-specification-release-2025"
+        }
+      ]
+    },
+    {
+      "id": "i-nvidia-host-links",
+      "claim_class": "attributed_statement",
+      "topic": "host_interface",
+      "statement": "NVIDIA lists three Vera Rubin connection types: NVLink 6 for GPU-to-GPU traffic, NVLink-C2C for coherent CPU-GPU connectivity and PCIe Gen6 for host and device integration. It states NVLink-C2C provides 1.8 TB/s of coherent bandwidth between Vera CPUs and Rubin GPUs with a unified address space, about 7x the 256 GB/s of an x16 PCIe Gen 6 link. Its CPU comparison table lists the Vera CPU with PCIe Gen6 and CXL 3.1.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"PCIe Gen6 for host and device integration\"; \"Second-generation NVLink-C2C provides 1.8 TB/s of coherent bandwidth between Vera CPUs and Rubin GPUs\"; Table 1: \"Gen6/CXL 3.1\""
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "\"roughly 7x the 256 GB/s of an x16 PCIe Gen 6 link\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Vera Rubin host and CPU-GPU connectivity as stated by NVIDIA",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "CXL 3.1 is listed for the Vera CPU, not for the Rubin GPU; no CXL device behaviour or test result is described",
+        "No direction is stated for the 1.8 TB/s or 256 GB/s figures"
+      ],
+      "quantities": [
+        {
+          "value": "1.8",
+          "unit": "TB/s",
+          "quantity": "NVLink-C2C coherent CPU-GPU bandwidth",
+          "direction": "not_stated",
+          "scope": "per_link",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        },
+        {
+          "value": "256",
+          "unit": "GB/s",
+          "quantity": "x16 PCIe Gen 6 link bandwidth",
+          "direction": "not_stated",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-co-design-memory-2026"
+        }
+      ]
+    },
+    {
+      "id": "i-amd-mi300x-links",
+      "claim_class": "attributed_statement",
+      "topic": "scale_up_fabric",
+      "statement": "AMD states that CDNA 3 communication links operate at up to 32 Gbps and that each I/O die has two 16-lane, bidirectional Infinity Fabric links to other AMD accelerators. One of those links can instead act as an x16 PCIe Gen 5 link. For MI300X, its specification table lists seven x16 Infinity Fabric links and one x16 PCIe Gen 5 link to the host CPU.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"communication links have been systematically enhanced to operate at up to 32Gbps\"; \"Each IOD includes two 16-lane, bi-directional inter-package AMD Infinity Fabric links\"; table: \"7 x16 AMD Infinity Fabric™ links\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "MI300X external links as described by AMD",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "AMD does not state whether 32 Gbps is a per-lane rate or what encoding the links use",
+        "Infinity Fabric is AMD's proprietary interface; no third-party interoperability is described"
+      ],
+      "quantities": [
+        {
+          "value": "32",
+          "unit": "Gbps",
+          "quantity": "communication link rate",
+          "direction": "not_stated",
+          "scope": "not_stated",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ]
+    },
+    {
+      "id": "i-amd-mi300x-topology",
+      "claim_class": "attributed_statement",
+      "topic": "scale_up_fabric",
+      "statement": "AMD states that MI300X GPUs use seven Infinity Fabric links to form a fully connected 8-GPU system, each GPU also connected to the host CPU by an x16 PCIe Gen 5 link, on the OCP Universal Base Board form factor. Its table gives a P2P ring peak aggregate I/O bandwidth of 896 GB/s, labelled '8 GPUs', and a total peak aggregate I/O bandwidth of 1024 GB/s.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"uses these seven highbandwidth and low-latency AMD Infinity Fabric links to form a fully connected 8-GPU system\"; \"connected to the host CPU via a x16 PCIe® Gen 5 link\"; table: \"896 GB/s (8 GPUs)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "AMD Instinct MI300X 8-GPU platform as described by AMD (white paper revision 2025-04-07)",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "AMD does not state the direction of the 896 and 1024 GB/s figures, or whether '8 GPUs' means per GPU or per platform",
+        "No switch is shown in AMD's description; whether a deployed platform adds one is outside these sources"
+      ],
+      "quantities": [
+        {
+          "value": "896",
+          "unit": "GB/s",
+          "quantity": "P2P ring peak aggregate I/O bandwidth",
+          "direction": "not_stated",
+          "scope": "not_stated",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "1024",
+          "unit": "GB/s",
+          "quantity": "total peak aggregate I/O bandwidth",
+          "direction": "not_stated",
+          "scope": "not_stated",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ]
+    },
+    {
+      "id": "i-nvidia-nvl72-switching",
+      "claim_class": "attributed_statement",
+      "topic": "scale_up_fabric",
+      "statement": "NVIDIA states that Vera Rubin NVL72 connects 72 Rubin GPUs through NVLink 6 switch trays, each with four NVLink 6 switch chips. The trays form a single all-to-all topology across the rack with in-network compute for collective operations.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"Each switch tray incorporates four NVLink 6 switch chips\"; \"NVLink 6 switch trays form a single all-to-all topology across the rack\"; \"in-network SHARP compute\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Vera Rubin NVL72 scale-up topology as described by NVIDIA on 2026-01-05",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The number of switch trays and links per GPU per switch are not stated in the reviewed post",
+        "'Consistent latency and bandwidth' is NVIDIA's characterisation; no measurement is given"
+      ]
+    },
+    {
+      "id": "i-nvidia-gb200-aggregate",
+      "claim_class": "attributed_statement",
+      "topic": "measurement_scope",
+      "statement": "NVIDIA states that GB200 NVL72 has 130 TB/s of aggregate NVLink bandwidth, a rack-level figure, and that NVLink 6 doubles per-GPU scale-up bandwidth over the prior generation.",
+      "evidence": [
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "\"On GB200 NVL72, 130 TB/s of aggregate NVLink bandwidth absorbs that traffic\""
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"doubling per-GPU scale-up bandwidth over the prior generation\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVLink aggregate and generational figures as stated by NVIDIA",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "An aggregate across 72 GPUs; it is not one device's bandwidth"
+      ],
+      "quantities": [
+        {
+          "value": "130",
+          "unit": "TB/s",
+          "quantity": "aggregate NVLink bandwidth of GB200 NVL72",
+          "direction": "not_stated",
+          "scope": "per_system",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-co-design-memory-2026"
+        }
+      ]
+    },
+    {
+      "id": "i-uec-network-types",
+      "claim_class": "verified_fact",
+      "topic": "scale_out_network",
+      "statement": "The Ultra Ethernet Specification v1.1 describes three network types: a frontend network, a backend scale-out network and a local scale-up network. It names AMD's XGMI, NVIDIA's NVLINK, Intel's Xe Link, switched PCI Express and CXL systems as scale-up examples. It says scale-up domains are limited to dozens or hundreds of endpoints today, against hundreds of thousands to millions for global networks.",
+      "evidence": [
+        {
+          "source_id": "uec-specification-1-1-2026",
+          "locator": "Section 1.5.1: \"1. Frontend network 2. Backend scale-out network 3. Local scale-up network\"; \"include AMD’s XGMI, NVIDIA’s NVLINK, Intel’s Xe Link, switched PCIExpress, and CXL systems\"; \"limited to dozens, maybe hundreds, of endpoints today\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "What the UE Specification v1.1 text states in its informative introduction",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Informative background, not a normative requirement",
+        "Establishes what the specification says, not how any deployment is built"
+      ]
+    },
+    {
+      "id": "i-uec-scope",
+      "claim_class": "verified_fact",
+      "topic": "scale_out_network",
+      "statement": "The Ultra Ethernet Specification v1.1 states that endpoint hardware interface details are out of scope, that UE is designed to support the libibverbs and libfabric v2.0 APIs, and that it does not currently address interactions across administrative domains. Its physical-layer chapter covers PHYs for 100 Gb/s and 200 Gb/s per-lane signalling.",
+      "evidence": [
+        {
+          "source_id": "uec-specification-1-1-2026",
+          "locator": "\"The details of the hardware interface at the endpoint are out of scope for the UE specifications\"; \"UE is designed to support libibverbs and libfabric v2.0 APIs\"; \"UE PHYs for 100 Gb/s per Lane Signaling\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Scope statements and chapter structure of the UE Specification v1.1",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Only introductory sections and the table of contents were read",
+        "Per-lane signalling rates are not per-port or per-device bandwidths"
+      ],
+      "quantities": [
+        {
+          "value": "100",
+          "unit": "Gb/s",
+          "quantity": "per-lane signalling rate",
+          "direction": "not_stated",
+          "scope": "per_lane",
+          "peak_or_sustained": "not_stated",
+          "basis": "specified",
+          "source_id": "uec-specification-1-1-2026"
+        },
+        {
+          "value": "200",
+          "unit": "Gb/s",
+          "quantity": "per-lane signalling rate",
+          "direction": "not_stated",
+          "scope": "per_lane",
+          "peak_or_sustained": "not_stated",
+          "basis": "specified",
+          "source_id": "uec-specification-1-1-2026"
+        }
+      ]
+    },
+    {
+      "id": "i-uec-launch-claims",
+      "claim_class": "attributed_statement",
+      "topic": "interoperability",
+      "statement": "The Ultra Ethernet Consortium's 1.0 announcement (2025-06-11) presents UEC 1.0 as an Ethernet-based stack with modern RDMA for AI and HPC. It says implementations and compliance programs are already in progress and invites members to join upcoming compliance and interoperability programs.",
+      "evidence": [
+        {
+          "source_id": "uec-specification-1-0-launch-2025",
+          "locator": "\"Modern RDMA for Ethernet and IP\"; \"With active implementations and compliance programs already in progress\"; \"participate in upcoming compliance and interoperability programs\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "UEC 1.0 as announced on 2025-06-11",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Programs in progress are not compliance or interoperability results",
+        "The announcement's descriptions of interoperability and adoption are the consortium's own"
+      ]
+    },
+    {
+      "id": "i-nvidia-scale-out",
+      "claim_class": "attributed_statement",
+      "topic": "scale_out_network",
+      "statement": "NVIDIA states that ConnectX-9 SuperNICs give Vera Rubin NVL72 1.6 Tb/s of scale-out connectivity per GPU. It says BlueField-4 provides up to 800 Gb/s of Ethernet or InfiniBand connectivity, Spectrum-6 Ethernet switches use co-packaged optics, and DGX SuperPOD composes eight NVL72 systems with Spectrum-X Ethernet scale-out.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"ConnectX-9 SuperNICs provide high-bandwidth scale-out connectivity (1.6 Tb/s per GPU)\"; \"delivering up to 800 Gb/s of ultra-low-latency Ethernet or InfiniBand connectivity\"; \"Spectrum-6 Ethernet switches using co-packaged optics\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Vera Rubin scale-out networking as described by NVIDIA on 2026-01-05",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "1.6 Tb/s is in bits per second and has no stated direction",
+        "DGX SuperPOD is NVIDIA's reference configuration, not evidence of how any deployment is built",
+        "No reviewed source states that Spectrum-X follows the Ultra Ethernet specification"
+      ],
+      "quantities": [
+        {
+          "value": "1.6",
+          "unit": "Tb/s",
+          "quantity": "ConnectX-9 scale-out connectivity",
+          "direction": "not_stated",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        },
+        {
+          "value": "800",
+          "unit": "Gb/s",
+          "quantity": "BlueField-4 network connectivity",
+          "direction": "not_stated",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        }
+      ]
+    },
+    {
+      "id": "i-an-mi300x-link-arithmetic",
+      "claim_class": "bounded_analysis",
+      "topic": "measurement_scope",
+      "statement": "Medium confidence. If AMD's 32 Gb/s is a per-lane rate, an x16 Infinity Fabric link carries 512 Gb/s, or 64 GB/s, in each direction, so 128 GB/s counting both directions. Seven links then give 896 GB/s, matching AMD's P2P figure. Adding one x16 PCIe Gen 5 link at 32 GT/s gives a further 128 GB/s and a total of 1,024 GB/s, matching AMD's total. AMD's two table figures are therefore consistent with raw, both-direction sums for one GPU, before encoding and protocol overhead, and with '8 GPUs' naming the platform rather than multiplying the figure.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"operate at up to 32Gbps\"; table: \"896 GB/s (8 GPUs)\"; \"1024 GB/s\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Arithmetic consistency check of AMD's MI300X link figures",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Consistency is not confirmation: AMD does not state per-link bandwidth or direction",
+        "Raw figures exclude encoding and protocol overhead; effective bandwidth is lower and not disclosed"
+      ],
+      "quantities": [
+        {
+          "value": "32",
+          "unit": "Gb/s",
+          "quantity": "assumed per-lane Infinity Fabric rate",
+          "direction": "per_direction",
+          "scope": "per_lane",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "512",
+          "unit": "Gb/s",
+          "quantity": "x16 link raw rate",
+          "direction": "per_direction",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "64",
+          "unit": "GB/s",
+          "quantity": "x16 link raw bandwidth",
+          "direction": "per_direction",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "128",
+          "unit": "GB/s",
+          "quantity": "x16 link raw bandwidth, both directions",
+          "direction": "bidirectional",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "896",
+          "unit": "GB/s",
+          "quantity": "seven links, both directions",
+          "direction": "bidirectional",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "32",
+          "unit": "GT/s",
+          "quantity": "PCIe Gen 5 transfer rate",
+          "direction": "not_applicable",
+          "scope": "per_lane",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "1,024",
+          "unit": "GB/s",
+          "quantity": "seven links plus one x16 PCIe Gen 5 link, both directions",
+          "direction": "bidirectional",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ],
+      "assumptions": [
+        "32 Gbps is a per-lane, per-direction raw rate",
+        "PCIe Gen 5 runs at 32 GT/s per lane",
+        "No encoding overhead is subtracted"
+      ]
+    },
+    {
+      "id": "i-an-memory-vs-fabric",
+      "claim_class": "bounded_analysis",
+      "topic": "measurement_scope",
+      "statement": "Medium confidence. Memory bandwidth and fabric bandwidth are different quantities, but their ratio shows how much faster a GPU reaches its own memory than its peers. For MI300X, 5.3 TB/s peak HBM3 against 896 GB/s of total fabric bandwidth is about 6x. Against the 128 GB/s of the single link joining two GPUs in AMD's mesh, it is about 41x. For Rubin, 22 TB/s, or the later 19.2 TB/s, against 3.6 TB/s of bidirectional NVLink 6 is about 5x to 6x. Through NVIDIA's switches that NVLink bandwidth can reach any peer.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "table: \"up to 5.3 TB/sec\"; \"896 GB/s (8 GPUs)\""
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "\"to deliver up to 22 TB/s of peak bandwidth\""
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "\"bandwidth rose to 19.2 TB/s\""
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"3.6 TB/s of bidirectional GPU-to-GPU bandwidth per GPU\"; \"allowing any GPU to communicate with any other GPU\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Ratio of vendor-stated peak memory bandwidth to vendor-stated fabric bandwidth, per GPU",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "HBM bandwidth is a combined read/write capability, not a both-direction sum; the ratios compare different measurement domains",
+        "Peak figures only; no effective or application bandwidth was reviewed",
+        "The 128 GB/s per-pair figure depends on the assumptions in i-an-mi300x-link-arithmetic"
+      ],
+      "quantities": [
+        {
+          "value": "5.3",
+          "unit": "TB/s",
+          "quantity": "MI300X peak HBM3 bandwidth",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "896",
+          "unit": "GB/s",
+          "quantity": "MI300X P2P aggregate fabric bandwidth",
+          "direction": "bidirectional",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "128",
+          "unit": "GB/s",
+          "quantity": "one MI300X peer link, both directions",
+          "direction": "bidirectional",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "22",
+          "unit": "TB/s",
+          "quantity": "Rubin peak HBM4 bandwidth (2026-07-21)",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-gpu-architecture-2026"
+        },
+        {
+          "value": "19.2",
+          "unit": "TB/s",
+          "quantity": "Rubin memory bandwidth (2026-11-05)",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-co-design-memory-2026"
+        },
+        {
+          "value": "3.6",
+          "unit": "TB/s",
+          "quantity": "Rubin NVLink 6 bandwidth",
+          "direction": "bidirectional",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        }
+      ],
+      "assumptions": [
+        "AMD's 896 GB/s is a per-GPU, both-direction sum (see i-an-mi300x-link-arithmetic)",
+        "Ratios are of stated peaks and say nothing about achieved throughput"
+      ]
+    },
+    {
+      "id": "i-an-direct-vs-switched",
+      "claim_class": "bounded_analysis",
+      "topic": "scale_up_fabric",
+      "statement": "Medium confidence. The two documented systems reach their scale-up domains differently. In AMD's MI300X platform, each GPU dedicates one of its seven links to each of seven peers, so the domain is fixed at eight GPUs by the link count and each pair shares one link. In NVIDIA's NVL72, GPUs connect to switch trays and the trays form an all-to-all fabric of 72 GPUs, so the domain is set by switch silicon and rack design. A direct mesh avoids a switch-chip dependency but caps the domain. A switched fabric widens the domain but adds a dependency on switch chips, which in NVL72 NVIDIA also supplies. This is a structural comparison, not a performance ranking.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"seven highbandwidth and low-latency AMD Infinity Fabric links to form a fully connected 8-GPU system\""
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"Each switch tray incorporates four NVLink 6 switch chips\"; \"NVLink 6 switch trays form a single all-to-all topology across the rack\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Topology comparison of two vendor-documented scale-up designs",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No measured collective or all-to-all throughput was reviewed for either system",
+        "Different generations and dates: MI300X (2023) and Vera Rubin NVL72 (2026)"
+      ],
+      "assumptions": [
+        "The vendor descriptions are complete for the scale-up domain they describe"
+      ]
+    },
+    {
+      "id": "i-an-units-and-directions",
+      "claim_class": "bounded_analysis",
+      "topic": "measurement_scope",
+      "statement": "Medium confidence. Several stated figures cannot be compared until units and directions are aligned. NVIDIA's 3.6 TB/s NVLink 6 figure is in bytes and bidirectional, equal to 28.8 Tb/s. Its 1.6 Tb/s ConnectX-9 figure is in bits with no direction, equal to 200 GB/s. Per GPU, scale-up therefore exceeds scale-out about 9x if 1.6 Tb/s is per direction, or 18x if it counts both directions. For CXL 3.0, 64 GT/s across 16 lanes is 1,024 Gb/s, or 128 GB/s per direction before overhead. The consortium's 256 GB/s 'aggregate raw' figure therefore counts both directions, as does NVIDIA's 256 GB/s for x16 PCIe Gen 6 if it uses the same basis.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"3.6 TB/s of bidirectional GPU-to-GPU bandwidth per GPU\"; \"(1.6 Tb/s per GPU)\""
+        },
+        {
+          "source_id": "cxl-3-0-white-paper-2022",
+          "locator": "\"doubles the transfer rate to 64GT/s\"; \"aggregate raw bandwidth of up to 256GB/s for x16 width link\""
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "\"the 256 GB/s of an x16 PCIe Gen 6 link\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Unit and direction normalisation of vendor and consortium figures",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Arithmetic conversion only; real payload throughput after flit, FEC and protocol overhead is lower and not disclosed",
+        "NVIDIA does not state the basis of its 256 GB/s PCIe figure"
+      ],
+      "quantities": [
+        {
+          "value": "3.6",
+          "unit": "TB/s",
+          "quantity": "NVLink 6 per-GPU bandwidth",
+          "direction": "bidirectional",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        },
+        {
+          "value": "28.8",
+          "unit": "Tb/s",
+          "quantity": "NVLink 6 per-GPU bandwidth in bits",
+          "direction": "bidirectional",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "calculated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        },
+        {
+          "value": "1.6",
+          "unit": "Tb/s",
+          "quantity": "ConnectX-9 per-GPU scale-out connectivity",
+          "direction": "not_stated",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        },
+        {
+          "value": "200",
+          "unit": "GB/s",
+          "quantity": "ConnectX-9 per-GPU connectivity in bytes",
+          "direction": "not_stated",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "calculated",
+          "source_id": "nvidia-rubin-platform-architecture-2026"
+        },
+        {
+          "value": "64",
+          "unit": "GT/s",
+          "quantity": "CXL 3.0 transfer rate",
+          "direction": "not_applicable",
+          "scope": "per_lane",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "cxl-3-0-white-paper-2022"
+        },
+        {
+          "value": "1,024",
+          "unit": "Gb/s",
+          "quantity": "x16 raw rate",
+          "direction": "per_direction",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "cxl-3-0-white-paper-2022"
+        },
+        {
+          "value": "128",
+          "unit": "GB/s",
+          "quantity": "x16 raw bandwidth",
+          "direction": "per_direction",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "calculated",
+          "source_id": "cxl-3-0-white-paper-2022"
+        },
+        {
+          "value": "256",
+          "unit": "GB/s",
+          "quantity": "x16 aggregate raw bandwidth",
+          "direction": "bidirectional",
+          "scope": "per_link",
+          "peak_or_sustained": "peak",
+          "basis": "vendor_stated",
+          "source_id": "cxl-3-0-white-paper-2022"
+        }
+      ],
+      "assumptions": [
+        "One transfer carries one bit per lane before encoding",
+        "8 bits per byte; no overhead subtracted"
+      ]
+    },
+    {
+      "id": "i-an-scale-up-to-out",
+      "claim_class": "bounded_analysis",
+      "topic": "scale_out_network",
+      "statement": "Medium confidence. Leaving the scale-up domain changes the dependency model, not only the bandwidth. Inside NVL72, GPU-to-GPU traffic runs over NVIDIA's NVLink switches. Beyond the rack it runs over NICs, Ethernet switches and optics. NVIDIA's own reference design uses ConnectX-9, Spectrum-X and Spectrum-6 with co-packaged optics, and the UE specification describes the backend scale-out network as a separate network with its own transport. The scale-out tier therefore adds NIC, switch, optics and network-software dependencies that the scale-up fabric does not have. The reviewed sources do not show which of those components are interchangeable in practice.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"Spectrum-X Ethernet extends that capability beyond the rack\"; \"Spectrum-6 Ethernet switches using co-packaged optics\""
+        },
+        {
+          "source_id": "uec-specification-1-1-2026",
+          "locator": "\"The backend network is usually a specialized high-performance network of limited scope relative to the frontend network\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Structural change in dependencies between scale-up and scale-out tiers",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No deployment, supplier-availability or performance inference is made",
+        "UEC membership or specification release does not establish that any named product follows the specification"
+      ],
+      "assumptions": [
+        "The documented NVIDIA reference design is representative of how a scale-out tier is added"
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "u-i-nvlink6-figure",
+      "topic": "scale_up_fabric",
+      "question": "Is Rubin's per-GPU NVLink 6 bandwidth 3.6 TB/s bidirectional or 3.0 TB/s, and what does the 3.0 TB/s figure measure?",
+      "why_unresolved": "NVIDIA states 3.6 TB/s bidirectional (2026-01-05) and 3,600 GB/s (2026-07-21), then 3.0 TB/s with no direction (2026-11-05). None of the posts labels either figure preliminary.",
+      "sources_checked": [
+        "nvidia-rubin-platform-architecture-2026",
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-co-design-memory-2026"
+      ],
+      "next_evidence_needed": "An NVIDIA datasheet or specification stating the per-GPU NVLink 6 figure, its direction and any configuration dependence."
+    },
+    {
+      "id": "u-i-amd-link-scope",
+      "topic": "measurement_scope",
+      "question": "What are the per-link bandwidth, direction and encoding of MI300X's Infinity Fabric links, and is the 896 GB/s figure per GPU?",
+      "why_unresolved": "AMD gives 32 Gbps links, seven x16 links and an 896 GB/s 'P2P ring peak aggregate' labelled '8 GPUs', but states no per-link figure or direction. The arithmetic is consistent with a per-GPU, both-direction sum, but it is not confirmed.",
+      "sources_checked": [
+        "amd-cdna3-white-paper-2025"
+      ],
+      "next_evidence_needed": "AMD documentation stating Infinity Fabric per-link bandwidth, direction and encoding for MI300X."
+    },
+    {
+      "id": "u-i-l2-figures",
+      "topic": "measurement_scope",
+      "question": "How do AMD's 34.4 TB/s aggregate L2 read bandwidth and the 51.6 TB/s L2-to-XCD figure in its legend relate?",
+      "why_unresolved": "Both appear in the same white paper with different labels, and the text does not reconcile them.",
+      "sources_checked": [
+        "amd-cdna3-white-paper-2025"
+      ],
+      "next_evidence_needed": "AMD clarification of each figure's scope, for example read-only versus read plus write."
+    },
+    {
+      "id": "u-i-effective-bandwidth",
+      "topic": "measurement_scope",
+      "question": "What collective or application bandwidth do the MI300X 8-GPU platform and Vera Rubin NVL72 achieve in practice?",
+      "why_unresolved": "All reviewed figures are vendor-stated peaks. No measured all-reduce, all-to-all or application bandwidth with a stated method was reviewed.",
+      "sources_checked": [
+        "amd-cdna3-white-paper-2025",
+        "nvidia-rubin-platform-architecture-2026",
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-co-design-memory-2026"
+      ],
+      "next_evidence_needed": "Measured results with disclosed workload, message sizes and method, from a vendor technical paper or independent study."
+    },
+    {
+      "id": "u-i-latency",
+      "topic": "measurement_scope",
+      "question": "What latencies do these fabrics achieve, under what workloads and measurement methods?",
+      "why_unresolved": "NVIDIA describes 'consistent latency' and the UE specification describes sub-microsecond targets for scale-up networks, but no reviewed source gives a measured latency with method.",
+      "sources_checked": [
+        "nvidia-rubin-platform-architecture-2026",
+        "uec-specification-1-1-2026",
+        "amd-cdna3-white-paper-2025"
+      ],
+      "next_evidence_needed": "Latency measurements with disclosed methodology."
+    },
+    {
+      "id": "u-i-pcie-primary",
+      "topic": "host_interface",
+      "question": "What do the PCI-SIG PCIe 6.0 and 7.0 specifications and announcements state about rates, encoding and payload efficiency?",
+      "why_unresolved": "pcisig.com refused automated access (HTTP 403). PCIe figures here come only from the CXL Consortium and GPU vendors.",
+      "sources_checked": [
+        "cxl-3-0-white-paper-2022",
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-co-design-memory-2026",
+        "amd-cdna3-white-paper-2025"
+      ],
+      "next_evidence_needed": "PCI-SIG announcements or specification summaries read directly."
+    },
+    {
+      "id": "u-i-cxl-on-accelerators",
+      "topic": "host_interface",
+      "question": "Do MI300X or Rubin GPUs implement CXL, and which device type and coherency behaviour would apply?",
+      "why_unresolved": "The reviewed AMD sources do not mention CXL for MI300X. NVIDIA lists CXL 3.1 for the Vera CPU, not the Rubin GPU, and describes no CXL device behaviour.",
+      "sources_checked": [
+        "amd-cdna3-white-paper-2025",
+        "nvidia-rubin-platform-architecture-2026",
+        "cxl-3-0-white-paper-2022"
+      ],
+      "next_evidence_needed": "Product documentation naming CXL support and device type, and compliance or interoperability results."
+    },
+    {
+      "id": "u-i-cxl-normative",
+      "topic": "standard",
+      "question": "What do the normative CXL 3.x and 4.0 specifications require for coherency, sharing and the 128 GT/s physical layer?",
+      "why_unresolved": "The CXL 4.0 text is offered under an evaluation agreement, which was not accepted. Only the CXL 3.0 cover page was opened; announcements and a white paper were read.",
+      "sources_checked": [
+        "cxl-3-0-specification-release-2022",
+        "cxl-3-0-white-paper-2022",
+        "cxl-4-0-specification-release-2025"
+      ],
+      "next_evidence_needed": "A reviewer reads the relevant CXL specification sections."
+    },
+    {
+      "id": "u-i-uec-compliance",
+      "topic": "interoperability",
+      "question": "Which products comply with the Ultra Ethernet specification, and have multi-vendor interoperability results been published?",
+      "why_unresolved": "UEC describes compliance programs as in progress or upcoming. No reviewed source names a compliant product or a test result, and NVIDIA does not state that Spectrum-X follows the specification.",
+      "sources_checked": [
+        "uec-specification-1-0-launch-2025",
+        "uec-specification-1-1-2026",
+        "nvidia-rubin-platform-architecture-2026"
+      ],
+      "next_evidence_needed": "Published UEC compliance or interoperability results naming products."
+    },
+    {
+      "id": "u-i-optics",
+      "topic": "scale_out_network",
+      "question": "What optical link counts, reach and reliability apply to co-packaged-optics switches in deployed AI clusters?",
+      "why_unresolved": "NVIDIA states that Spectrum-6 uses co-packaged optics but gives no link counts, reach or field data in the reviewed post.",
+      "sources_checked": [
+        "nvidia-rubin-platform-architecture-2026"
+      ],
+      "next_evidence_needed": "Switch datasheets and published field-reliability data."
+    }
+  ],
+  "candidate_nodes": [
+    {
+      "id": "tech-amd-instinct-mi300x",
+      "label": "AMD Instinct MI300X",
+      "kind": "technology",
+      "layers": [
+        "design",
+        "packaging",
+        "memory"
+      ],
+      "description": "AMD accelerator built from 8 accelerator complex dies stacked on 4 I/O dies with 8 HBM3 stacks, as AMD describes it."
+    },
+    {
+      "id": "tech-amd-infinity-fabric-gpu-links",
+      "label": "AMD Infinity Fabric GPU-to-GPU links",
+      "kind": "technology",
+      "layers": [
+        "interconnect"
+      ],
+      "description": "AMD's x16 inter-package links between Instinct accelerators; MI300X has seven, as AMD describes them."
+    },
+    {
+      "id": "tech-nvidia-vera-rubin-nvl72",
+      "label": "NVIDIA Vera Rubin NVL72",
+      "kind": "technology",
+      "layers": [
+        "design",
+        "interconnect",
+        "deployment"
+      ],
+      "description": "NVIDIA rack-scale system of 72 Rubin GPUs and Vera CPUs, as NVIDIA describes it."
+    },
+    {
+      "id": "tech-nvidia-nvlink-6-switch",
+      "label": "NVIDIA NVLink 6 switch",
+      "kind": "technology",
+      "layers": [
+        "interconnect"
+      ],
+      "description": "NVIDIA's sixth-generation NVLink switch chip, mounted four per switch tray in Vera Rubin NVL72."
+    },
+    {
+      "id": "tech-nvidia-spectrum-x-ethernet",
+      "label": "NVIDIA Spectrum-X Ethernet",
+      "kind": "technology",
+      "layers": [
+        "interconnect",
+        "deployment"
+      ],
+      "description": "NVIDIA's Ethernet switching and NIC platform used for scale-out beyond the NVLink domain, as NVIDIA describes it."
+    }
+  ],
+  "candidate_relationships": [
+    {
+      "id": "rel-mi300x-requires-infinity-fabric-gpu-links",
+      "from": "tech-amd-instinct-mi300x",
+      "to": "tech-amd-infinity-fabric-gpu-links",
+      "relation_type": "requires",
+      "statement": "AMD states that MI300X GPUs use seven Infinity Fabric links to form a fully connected 8-GPU platform.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "supported_claim_type": "interconnect_specification"
+        }
+      ],
+      "geographic_scope": "AMD Instinct MI300X 8-GPU platform as described by AMD",
+      "temporal_scope": "White paper revision dated 2025-04-07, about a product available since 2023-12-06",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "Company description; per-link bandwidth and direction are not stated",
+        "Applies to AMD's described 8-GPU platform, not to every MI300X deployment"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "AMD's white paper names the links, their count and the fully connected topology for MI300X.",
+        "changes_in_release": "New candidate introduced in IDE-004.",
+        "evidence_gaps": [
+          "Infinity Fabric per-link bandwidth, direction and encoding"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-vera-rubin-nvl72-requires-nvlink-6-switch",
+      "from": "tech-nvidia-vera-rubin-nvl72",
+      "to": "tech-nvidia-nvlink-6-switch",
+      "relation_type": "requires",
+      "statement": "NVIDIA states that Vera Rubin NVL72 connects its 72 GPUs through NVLink 6 switch trays, each with four NVLink 6 switch chips, in an all-to-all topology.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "supported_claim_type": "interconnect_specification"
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "supported_claim_type": "interconnect_specification"
+        }
+      ],
+      "geographic_scope": "Vera Rubin NVL72 as described by NVIDIA",
+      "temporal_scope": "NVIDIA posts dated 2026-01-05 and 2026-07-21",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "Company description; tray count and per-GPU link split are not stated",
+        "Per-GPU NVLink 6 bandwidth is stated inconsistently (u-i-nvlink6-figure)"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "Two NVIDIA posts describe NVL72's scale-up fabric as switched through NVLink 6 switch trays.",
+        "changes_in_release": "New candidate introduced in IDE-004.",
+        "evidence_gaps": [
+          "Reconciliation of the 3.6 and 3.0 TB/s per-GPU figures"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-vera-rubin-nvl72-integrates-with-spectrum-x",
+      "from": "tech-nvidia-vera-rubin-nvl72",
+      "to": "tech-nvidia-spectrum-x-ethernet",
+      "relation_type": "integrates_with",
+      "statement": "NVIDIA states that DGX SuperPOD composes eight DGX Vera Rubin NVL72 systems with Spectrum-X Ethernet scale-out.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "supported_claim_type": "interconnect_specification"
+        }
+      ],
+      "geographic_scope": "NVIDIA's DGX SuperPOD reference configuration",
+      "temporal_scope": "NVIDIA post dated 2026-01-05",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "A reference configuration, not evidence of how deployments are built",
+        "Does not exclude other scale-out networks"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "Scoped to NVIDIA's own reference configuration, which the post describes directly.",
+        "changes_in_release": "New candidate introduced in IDE-004.",
+        "evidence_gaps": [
+          "Deployed configurations other than DGX SuperPOD"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    }
+  ]
+}

@@ -63,7 +63,22 @@ TOPICS = {
     "commercialization", "accelerator_integration", "substitution",
     # Advanced packaging and chiplet integration (IDE-003)
     "interposer_bridge", "chiplet_interface", "assembly_test", "production_chain", "interoperability",
+    # Interconnect and data movement (IDE-004)
+    "host_interface", "scale_up_fabric", "scale_out_network", "measurement_scope",
 }
+# Bandwidth and rate figures must carry their measurement scope. In these topics every
+# figure in a finding's statement needs a matching entry in its "quantities" list.
+QUANTIFIED_TOPICS = {"host_interface", "scale_up_fabric", "scale_out_network", "measurement_scope"}
+QUANTITY_FIELDS = {"value", "unit", "quantity", "direction", "scope", "peak_or_sustained", "basis", "source_id"}
+QUANTITY_UNITS = {"TB/s", "GB/s", "Tb/s", "Gb/s", "Gbps", "GT/s"}
+QUANTITY_DIRECTIONS = {"bidirectional", "per_direction", "not_stated", "not_applicable"}
+QUANTITY_SCOPES = {"per_lane", "per_link", "per_port", "per_device", "per_stack", "per_switch", "per_system", "per_package", "not_stated"}
+QUANTITY_PEAK = {"peak", "sustained", "not_stated"}
+# "specified": stated by a published standard; "vendor_stated": by a company or consortium announcement.
+QUANTITY_BASES = {"vendor_stated", "specified", "calculated", "measured"}
+# A measured figure needs a measurement record, not a vendor or consortium statement.
+MEASUREMENT_SOURCE_TYPES = {"peer_reviewed_research", "official_dataset"}
+FIGURE = re.compile(r"(\d[\d,]*(?:\.\d+)?)\s?(TB/s|GB/s|Tb/s|Gb/s|Gbps|GT/s)")
 UNRESOLVED_FIELDS = {"id", "topic", "question", "why_unresolved", "sources_checked", "next_evidence_needed"}
 CANDIDATE_EXTRA_FIELDS = {"review_status", "research_recommendation"}
 # An AI-assisted source check may recommend a decision for the human reviewer.
@@ -86,6 +101,55 @@ def reference_page(release: dict) -> Path | None:
         return None
     page = ROOT / rel
     return page if page.is_file() else None
+
+
+def check_quantities(finding: dict, where: str, cited_ids: set[str], sources: dict) -> list[str]:
+    """Each bandwidth or rate figure states its unit, direction, scope, peak/sustained status and basis."""
+    errors: list[str] = []
+    quantities = finding.get("quantities")
+    statement = str(finding.get("statement", ""))
+    figures = {(v.replace(",", ""), u) for v, u in FIGURE.findall(statement)}
+    if quantities is None:
+        if finding.get("topic") in QUANTIFIED_TOPICS and figures:
+            errors.append(f"{where} states bandwidth or rate figures without a quantities list")
+        return errors
+    if not isinstance(quantities, list) or not quantities:
+        return [f"{where}.quantities must be a non-empty list"]
+    described = set()
+    for k, q in enumerate(quantities):
+        qwhere = f"{where}.quantities[{k}]"
+        if not isinstance(q, dict) or set(q) != QUANTITY_FIELDS:
+            errors.append(f"{qwhere} must contain exactly {sorted(QUANTITY_FIELDS)}")
+            continue
+        value, unit = str(q["value"]).replace(",", ""), q["unit"]
+        described.add((value, unit))
+        if unit not in QUANTITY_UNITS:
+            errors.append(f"{qwhere} unit must be one of {sorted(QUANTITY_UNITS)}")
+        if q["direction"] not in QUANTITY_DIRECTIONS:
+            errors.append(f"{qwhere} direction must be one of {sorted(QUANTITY_DIRECTIONS)}")
+        if q["scope"] not in QUANTITY_SCOPES:
+            errors.append(f"{qwhere} scope must be one of {sorted(QUANTITY_SCOPES)}")
+        if q["peak_or_sustained"] not in QUANTITY_PEAK:
+            errors.append(f"{qwhere} peak_or_sustained must be one of {sorted(QUANTITY_PEAK)}")
+        if q["basis"] not in QUANTITY_BASES:
+            errors.append(f"{qwhere} basis must be one of {sorted(QUANTITY_BASES)}")
+        if not nonempty(q["quantity"]):
+            errors.append(f"{qwhere} must name the quantity measured")
+        if unit == "GT/s" and (q["scope"] != "per_lane" or q["direction"] != "not_applicable"):
+            errors.append(f"{qwhere} GT/s is a per-lane transfer rate, not payload bandwidth: use scope per_lane and direction not_applicable")
+        if q["source_id"] not in cited_ids:
+            errors.append(f"{qwhere} source_id must be one of the finding's cited sources")
+        if q["basis"] == "calculated" and finding.get("claim_class") != "bounded_analysis":
+            errors.append(f"{qwhere} a calculated figure belongs in a bounded_analysis finding")
+        if q["basis"] == "specified" and sources.get(q["source_id"], {}).get("source_type") != "technical_standard":
+            errors.append(f"{qwhere} a specified figure must come from a technical_standard source")
+        if q["basis"] == "measured" and sources.get(q["source_id"], {}).get("source_type") not in MEASUREMENT_SOURCE_TYPES:
+            errors.append(f"{qwhere} a measured figure needs a measurement source, not a vendor or consortium statement")
+        if (value, unit) not in figures:
+            errors.append(f"{qwhere} {q['value']} {unit} does not appear in the finding statement")
+    for value, unit in sorted(figures - described):
+        errors.append(f"{where} figure {value} {unit} has no quantities entry")
+    return errors
 
 
 def check_release(release: object, registry: dict, atlas: dict, today: date, label: str) -> list[str]:
@@ -140,7 +204,7 @@ def check_release(release: object, registry: dict, atlas: dict, today: date, lab
             errors.append(f"{where} must be an object")
             continue
         cls = finding.get("claim_class")
-        allowed = FINDING_FIELDS | ({"assumptions"} if cls == "bounded_analysis" else set())
+        allowed = FINDING_FIELDS | {"quantities"} | ({"assumptions"} if cls == "bounded_analysis" else set())
         if set(finding) - allowed or FINDING_FIELDS - set(finding):
             errors.append(f"{where} fields mismatch: missing={sorted(FINDING_FIELDS - set(finding))}, extra={sorted(set(finding) - allowed)}")
         fid = finding.get("id")
@@ -211,6 +275,7 @@ def check_release(release: object, registry: dict, atlas: dict, today: date, lab
             errors.append(f"{where} verified_fact cannot cite a pending_review source")
         if cls == "verified_fact" and cited_types and all(t in SELF_REPORTED_SOURCE_TYPES for t in cited_types):
             errors.append(f"{where} verified_fact cannot rest solely on self-reported company sources")
+        errors.extend(check_quantities(finding, where, cited_ids, sources))
 
     # --- unresolved ---------------------------------------------------------
     unresolved = release.get("unresolved")
@@ -364,7 +429,7 @@ def check_review_representation(page: Path, compiled_dates: set[str]) -> list[st
 
 # Inference boundaries: wording that turns supplier self-descriptions into
 # platform facts, or company structure into capability claims.
-NEGATION = re.compile(r"\b(?:not|no|never|neither|nor|unknown|unresolved|cannot|without)\b|n't\b", re.I)
+NEGATION = re.compile(r"\b(?:not|no|none|nothing|never|neither|nor|unknown|unresolved|cannot|without)\b|n't\b", re.I)
 MULTI_SOURCING = re.compile(r"multi-?sourc|interchangeab|dual[- ]sourc|second[- ]sourc|designed to accept", re.I)
 QUALIFIED = re.compile(r"\b(?:qualified (?:by|for|on)|has qualified|have qualified|completed qualification)\b", re.I)
 IN_HOUSE_OVERREACH = re.compile(r"in-house[^.]*\b(?:eliminat\w*|removes? the need|no longer (?:needs?|requires?|depends?)|independent of|no dependency|avoids? (?:the )?need)", re.I)
@@ -372,6 +437,23 @@ LOGIC_BASE_DIE = re.compile(r"base[- ]die[^.]*logic[- ]process|logic[- ]process[
 SUPPLIER_NAMED = re.compile(r"SK hynix|Samsung|Micron|TSMC|N12|N3|4nm", re.I)
 # CoWoS is one packaging platform: no product-level or universal integration claim without evidence.
 COWOS_PRODUCT_CLAIM = re.compile(r"CoWoS[^.]*\b(?:Rubin|Vera|Blackwell|MI\d{3}|GB\d{3}|every HBM4|all HBM4)|\b(?:Rubin|Vera|Blackwell|MI\d{3}|GB\d{3}|every HBM4|all HBM4)[^.]*CoWoS", re.I)
+# Interoperability and compliance are test results; a standard's release or a product's
+# announcement does not establish them, nor that a product implements a standard.
+INTEROP_ASSERTION = re.compile(
+    r"\b(?:(?:is|are|was|were|be|been)\s+(?:fully\s+)?interoperable|interoperates?\s+with|"
+    r"demonstrated\s+interoperability\s+(?:between|with|across|among)|(?:is|are)\s+(?:fully\s+)?compliant\s+with|"
+    r"passed\s+(?:the\s+)?compliance)", re.I)
+STANDARD_IMPLEMENTATION = re.compile(r"\b(?:implements|supports|adopts)\s+(?:the\s+)?(?:UCIe|CXL|Ultra Ethernet|UEC)\b", re.I)
+# "whether a product implements X" or "a claim that a product implements X" names no product.
+GENERIC_SUBJECT = re.compile(r"(?:\b(?:a|any|a given|each|every)\s+(?:product|device|accelerator)\s*|\bwhether\b[^.]*)$", re.I)
+
+
+# A product's support for a standard may be reported only as that vendor's statement.
+ATTRIBUTED = re.compile(r"\b(?:states?|stated|lists?|listed|says?|said|describes?|described|according to|reports?|reported|claims?)\b", re.I)
+
+
+def _names_a_product(sentence: str) -> bool:
+    return any(not GENERIC_SUBJECT.search(sentence[:m.start()]) for m in STANDARD_IMPLEMENTATION.finditer(sentence))
 COWOS_PRODUCT = re.compile(r"\b(?:Rubin|Vera|Blackwell|MI\d{3}[A-Z]?|GB\d{3})\b", re.I)
 COWOS_UNIVERSAL = re.compile(r"\b(?:every|all) HBM4\b", re.I)
 # Citation markers kept from a page so a sentence can be matched to the sources it cites.
@@ -421,6 +503,10 @@ def inference_boundary_errors(sentence: str, where: str, evidence: dict[str, set
         errors.append(f"{where}: treats in-house manufacture as removing a manufacturing dependency: {sentence[:120]!r}")
     if COWOS_PRODUCT_CLAIM.search(sentence) and not negated and not _cowos_claim_supported(sentence, evidence, cited):
         errors.append(f"{where}: ties CoWoS to a product or to all HBM4 without a product-level disclosure: {sentence[:120]!r}")
+    if INTEROP_ASSERTION.search(sentence) and not negated:
+        errors.append(f"{where}: asserts interoperability or compliance without a published test result: {sentence[:120]!r}")
+    if STANDARD_IMPLEMENTATION.search(sentence) and not negated and _names_a_product(sentence) and not ATTRIBUTED.search(sentence):
+        errors.append(f"{where}: asserts, unattributed, that a product implements a standard: {sentence[:120]!r}")
     if LOGIC_BASE_DIE.search(sentence) and not SUPPLIER_NAMED.search(sentence) and not negated:
         errors.append(f"{where}: generalizes a logic-process base die beyond the suppliers that disclose it: {sentence[:120]!r}")
     return errors
