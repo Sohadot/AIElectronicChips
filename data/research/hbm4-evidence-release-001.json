@@ -423,7 +423,7 @@
       "id": "f-mu-base-die",
       "claim_class": "attributed_statement",
       "topic": "base_die",
-      "statement": "Micron's FY2026 Form 10-K states that its HBM4 uses advanced CMOS technology on the base logic die and DRAM core dies, which are designed and manufactured in-house. It does not state the base die's process node.",
+      "statement": "Micron's FY2026 Form 10-K states that its HBM4 uses advanced complementary metal-oxide-semiconductor (CMOS) [...] on the base logic die and DRAM core dies, which are designed and manufactured in-house. It does not state the base die's process node.",
       "evidence": [
         {
           "source_id": "micron-fy2026-form-10-k",
@@ -435,7 +435,8 @@
       "as_of": "2026-11-09",
       "limitations": [
         "Company statement in a regulatory filing, not independent verification",
-        "Only part of the filing was read verbatim"
+        "Only part of the filing was read verbatim; the words between the two quoted fragments were not captured",
+        "In-house manufacture identifies who makes the die; it does not imply that advanced manufacturing capability is unnecessary"
       ]
     },
     {
@@ -461,7 +462,7 @@
       "id": "f-an-logic-coupling",
       "claim_class": "bounded_analysis",
       "topic": "base_die",
-      "statement": "HBM4 base dies are now made in three different ways among the suppliers reviewed. SK hynix planned to use TSMC's advanced logic process (2024 plan, not restated in later reviewed sources); Samsung states a 4nm logic process, which its HBM4E release attributes to Samsung Foundry; Micron states its base logic die is designed and manufactured in-house. Where the base die comes from a logic foundry, HBM4 supply depends on logic-wafer fabrication as well as DRAM fabrication; the dependency is external for SK hynix, intra-company for Samsung and, as disclosed, internal to Micron's own manufacturing. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new dependency is our inference.",
+      "statement": "Every HBM4 stack depends on fabricating both the DRAM core dies and the base logic die. The suppliers reviewed source the base die in three different ways: SK hynix planned to use TSMC's advanced logic process (2024 plan, not restated in later reviewed sources); Samsung states a 4nm logic process, which its HBM4E release attributes to Samsung Foundry; Micron states its base logic die is designed and manufactured in-house with advanced CMOS. These arrangements change who supplies the base die, not whether advanced semiconductor manufacturing capability is required: in-house manufacture still depends on Micron's own process capability and capacity, while an external foundry adds a dependency on that foundry. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new external dependency for SK hynix is our inference.",
       "evidence": [
         {
           "source_id": "skhynix-tsmc-hbm4-mou-2024",
@@ -489,7 +490,8 @@
       "as_of": "2026-11-09",
       "limitations": [
         "No capacity or allocation inference is made",
-        "Micron does not state its base die's process node, so whether it uses a logic-class process is unknown"
+        "Micron does not state its base die's process node",
+        "No supplier's relative manufacturing capability is assessed"
       ],
       "assumptions": [
         "SK hynix's 2024 plan was carried into production; this is not confirmed in its later reviewed releases or the portion of its 2026 prospectus read"
@@ -851,9 +853,9 @@
     },
     {
       "id": "f-an-substitution",
-      "claim_class": "bounded_analysis",
+      "claim_class": "attributed_statement",
       "topic": "substitution",
-      "statement": "Micron and Samsung each state that their HBM4 is designed for NVIDIA Vera Rubin, so the platform is designed to accept HBM4 from more than one supplier. Whether supply can in practice shift between suppliers, at what qualification status and in what volume, is not established by any reviewed source.",
+      "statement": "Micron and Samsung each state that their HBM4 is designed for NVIDIA Vera Rubin. These are supplier statements about their own products; the NVIDIA sources reviewed do not name Rubin's memory suppliers or qualified parts. The statements do not establish NVIDIA qualification of either supplier, interchangeable supply, or that Rubin is actually multi-sourced.",
       "evidence": [
         {
           "source_id": "micron-hbm4-volume-production-2026",
@@ -862,6 +864,18 @@
         {
           "source_id": "samsung-hbm4-gtc-2026",
           "locator": "\"designed for the\" NVIDIA Vera Rubin platform"
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "Full article text searched 2026-11-09: no mention of SK hynix, Samsung or Micron, and no memory-qualification statement"
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "Full article text searched 2026-11-09: no mention of SK hynix, Samsung or Micron, and no memory-qualification statement"
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "Full article text searched 2026-11-09: no mention of SK hynix, Samsung or Micron, and no memory-qualification statement"
         }
       ],
       "evidence_state": "cited_sources_active",
@@ -869,11 +883,9 @@
       "as_of": "2026-11-09",
       "limitations": [
         "SK hynix's reviewed releases name no platform",
-        "No qualification, share or allocation evidence was reviewed",
-        "Package-level and speed-grade differences may limit substitution"
-      ],
-      "assumptions": [
-        "'Designed for' indicates an intended interoperability target, not a completed qualification"
+        "No platform-vendor qualification, share or allocation evidence was reviewed",
+        "'Designed for' states a supplier's design target, not a platform vendor's qualification",
+        "Package-level and speed-grade differences could limit substitution; none is documented either way"
       ]
     }
   ],
@@ -1020,7 +1032,7 @@
         "memory",
         "fabrication"
       ],
-      "description": "The bottom die of an HBM stack carrying the interface and control logic, made on a logic process for HBM4 by suppliers that disclose it."
+      "description": "The bottom die of an HBM stack carrying the interface and control logic. For HBM4, SK hynix (as planned) and Samsung disclose a logic-process base die; Micron discloses in-house manufacture with advanced CMOS."
     },
     {
       "id": "cap-advanced-logic-foundry-process",
@@ -1106,7 +1118,7 @@
           "supported_claim_type": "base_die_process_context"
         }
       ],
-      "geographic_scope": "TSMC offering and SK hynix plan only; does not hold for Micron, which reports in-house base logic die manufacture",
+      "geographic_scope": "TSMC offering and SK hynix plan only. No external logic-foundry dependency is disclosed for Micron, which reports in-house base logic die manufacture; in-house manufacture still requires advanced CMOS capability",
       "temporal_scope": "Disclosures dated 2024-04-19 and 2025-04-23",
       "as_of": "2026-11-09",
       "reviewed_at": null,
@@ -1114,7 +1126,7 @@
       "confidence": "low",
       "limitations": [
         "Does not establish which shipping products use which node",
-        "Micron's FY2026 10-K reports in-house manufacture of its HBM4 base logic die, so this relationship is not industry-wide",
+        "Micron's FY2026 10-K reports in-house manufacture of its HBM4 base logic die, so an external-foundry relationship is not industry-wide",
         "No capacity or allocation inference"
       ],
       "review_status": "awaiting_human_review"
@@ -1177,7 +1189,7 @@
       "confidence": "high",
       "limitations": [
         "Per-GPU bandwidth conflict between NVIDIA's own dated articles (22 vs 19.2 TB/s) is unresolved",
-        "Supplier qualification and share are not established"
+        "Supplier statements that HBM4 is 'designed for' Vera Rubin do not establish NVIDIA qualification, interchangeable supply or multi-sourcing"
       ],
       "review_status": "awaiting_human_review"
     }
