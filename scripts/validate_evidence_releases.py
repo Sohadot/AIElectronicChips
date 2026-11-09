@@ -59,7 +59,12 @@ TOPICS = {
     "commercialization", "accelerator_integration", "substitution",
 }
 UNRESOLVED_FIELDS = {"id", "topic", "question", "why_unresolved", "sources_checked", "next_evidence_needed"}
-CANDIDATE_EXTRA_FIELDS = {"review_status"}
+CANDIDATE_EXTRA_FIELDS = {"review_status", "research_recommendation"}
+# An AI-assisted source check may recommend a decision for the human reviewer.
+# It is never a review: it cannot change review_status, reviewed_at or review_owner.
+RECOMMENDATION_FIELDS = {"decision", "rationale", "changes_in_release", "evidence_gaps", "assessed_at", "assessment_method"}
+RECOMMENDATION_DECISIONS = {"ACCEPT", "REVISE", "REJECT", "DEFER"}
+RECOMMENDATION_METHOD = "ai_assisted_source_check"
 # Priority and superiority language may only be reported as what a company said.
 ATTRIBUTION_ONLY = re.compile(
     r"\b(?:world'?s first|world’s first|industry'?s first|industry-first|industry-leading|"
@@ -242,6 +247,26 @@ def check_release(release: object, registry: dict, atlas: dict, today: date, lab
             errors.append(f"{where} reviewed_at must be null until a human review is recorded in the Atlas")
         if edge.get("review_owner") != "unassigned":
             errors.append(f"{where} review_owner must be 'unassigned' in a candidate release")
+        rec = edge.get("research_recommendation")
+        if rec is not None:
+            rwhere = f"{where}.research_recommendation"
+            if not isinstance(rec, dict) or set(rec) != RECOMMENDATION_FIELDS:
+                errors.append(f"{rwhere} must contain exactly {sorted(RECOMMENDATION_FIELDS)}")
+            else:
+                if rec["decision"] not in RECOMMENDATION_DECISIONS:
+                    errors.append(f"{rwhere}.decision must be one of {sorted(RECOMMENDATION_DECISIONS)}")
+                if rec["assessment_method"] != RECOMMENDATION_METHOD:
+                    errors.append(f"{rwhere}.assessment_method must be '{RECOMMENDATION_METHOD}'; a recommendation is not a human review")
+                for field in ("rationale", "changes_in_release"):
+                    if not nonempty(rec[field]):
+                        errors.append(f"{rwhere}.{field} must be non-empty")
+                if not isinstance(rec["evidence_gaps"], list) or not all(nonempty(g) for g in rec["evidence_gaps"]):
+                    errors.append(f"{rwhere}.evidence_gaps must be a list of non-empty strings")
+                rdate = parse_date(rec["assessed_at"], f"{rwhere}.assessed_at", errors)
+                if rdate and rdate > today:
+                    errors.append(f"{rwhere}.assessed_at is in the future")
+                if rec["decision"] == "DEFER" and not rec["evidence_gaps"]:
+                    errors.append(f"{rwhere}: DEFER must name the evidence gaps that block a decision")
         simulated = {k: v for k, v in edge.items() if k not in CANDIDATE_EXTRA_FIELDS}
         simulated["reviewed_at"] = release.get("as_of")
         simulated["review_owner"] = "simulated reviewer (structural precheck only)"
@@ -328,6 +353,8 @@ QUALIFIED = re.compile(r"\b(?:qualified (?:by|for|on)|has qualified|have qualifi
 IN_HOUSE_OVERREACH = re.compile(r"in-house[^.]*\b(?:eliminat\w*|removes? the need|no longer (?:needs?|requires?|depends?)|independent of|no dependency|avoids? (?:the )?need)", re.I)
 LOGIC_BASE_DIE = re.compile(r"base[- ]die[^.]*logic[- ]process|logic[- ]process[^.]*base[- ]die", re.I)
 SUPPLIER_NAMED = re.compile(r"SK hynix|Samsung|Micron|TSMC|N12|N3|4nm", re.I)
+# CoWoS is one packaging platform: no product-level or universal integration claim without evidence.
+COWOS_PRODUCT_CLAIM = re.compile(r"CoWoS[^.]*\b(?:Rubin|Vera|Blackwell|MI\d{3}|GB\d{3}|every HBM4|all HBM4)|\b(?:Rubin|Vera|Blackwell|MI\d{3}|GB\d{3}|every HBM4|all HBM4)[^.]*CoWoS", re.I)
 
 
 def inference_boundary_errors(sentence: str, where: str) -> list[str]:
@@ -341,13 +368,45 @@ def inference_boundary_errors(sentence: str, where: str) -> list[str]:
         errors.append(f"{where}: asserts completed qualification without evidence: {sentence[:120]!r}")
     if IN_HOUSE_OVERREACH.search(sentence):
         errors.append(f"{where}: treats in-house manufacture as removing a manufacturing dependency: {sentence[:120]!r}")
+    if COWOS_PRODUCT_CLAIM.search(sentence) and not negated:
+        errors.append(f"{where}: ties CoWoS to a product or to all HBM4 without a product-level disclosure: {sentence[:120]!r}")
     if LOGIC_BASE_DIE.search(sentence) and not SUPPLIER_NAMED.search(sentence) and not negated:
         errors.append(f"{where}: generalizes a logic-process base die beyond the suppliers that disclose it: {sentence[:120]!r}")
     return errors
 
 
 def sentences(text: str) -> list[str]:
-    return [x.strip() for x in re.split(r"(?<=[.!?])\s+", re.sub(r"\s+", " ", text)) if x.strip()]
+    """Split on sentence punctuation and on line breaks (block boundaries)."""
+    out = []
+    for block in re.split(r"\n+", text):
+        out.extend(x.strip() for x in re.split(r"(?<=[.!?])\s+", re.sub(r"[ \t\r\f\v]+", " ", block)) if x.strip())
+    return out
+
+
+CELL = re.compile(r"(<t[hd]\b[^>]*>)(.*?)(</t[hd]>)", re.S)
+
+
+def _negation_columns(match: re.Match) -> str:
+    table = match.group(0)
+    head = re.search(r"<thead>(.*?)</thead>", table, re.S)
+    if not head:
+        return table
+    headers = [re.sub(r"<[^>]+>", "", c[1]).strip().lower() for c in CELL.findall(head.group(1))]
+    columns = {i for i, h in enumerate(headers) if h.startswith("does not establish")}
+    if not columns:
+        return table
+
+    def row(r: re.Match) -> str:
+        n = [-1]
+
+        def cell(c: re.Match) -> str:
+            n[0] += 1
+            return c.group(1) + ("Does not establish: " if n[0] in columns else "") + c.group(2) + c.group(3)
+        return CELL.sub(cell, r.group(0))
+    body = re.search(r"<tbody>.*?</tbody>", table, re.S)
+    if not body:
+        return table
+    return table[:body.start()] + re.sub(r"<tr>.*?</tr>", row, body.group(0), flags=re.S) + table[body.end():]
 
 
 def check_inference_boundaries(release: dict, page: Path) -> list[str]:
@@ -366,6 +425,12 @@ def check_inference_boundaries(release: dict, page: Path) -> list[str]:
     except OSError as exc:
         return errors + [f"{page.name}: unreadable: {exc}"]
     main = html_text.split("<main", 1)[-1]
+    # The table of contents only repeats section headings, which are checked in place.
+    main = re.sub(r'<nav class="ref-toc".*?</nav>', " ", main, flags=re.S)
+    # Cells under a "Does not establish" column are read with that header as their context.
+    main = re.sub(r"<table\b.*?</table>", _negation_columns, main, flags=re.S)
+    # Table cells, list items, paragraphs and headings are separate statements.
+    main = re.sub(r"</?(?:td|th|li|p|h[1-6]|tr|caption|figcaption|div|ul|ol|table)\b[^>]*>", "\n", main, flags=re.I)
     text = html.unescape(re.sub(r"<[^>]+>", " ", main))
     rel = page.relative_to(ROOT) if page.is_relative_to(ROOT) else page.name
     for sent in sentences(text):

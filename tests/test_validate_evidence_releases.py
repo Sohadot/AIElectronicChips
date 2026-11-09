@@ -323,6 +323,106 @@ class InferenceBoundaryTests(unittest.TestCase):
         self.assertIn("do not establish", f["statement"])
 
 
+class PageParsingTests(unittest.TestCase):
+    """Block boundaries separate statements; a 'Does not establish' column supplies its negation."""
+
+    def page_errors(self, body):
+        release, _, _ = load()
+        release = {**release, "findings": [], "candidate_relationships": [], "candidate_nodes": []}
+        html = "<html><main>" + body + "</main></html>"
+        with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
+            page = Path(tmp) / "index.html"
+            page.write_text(html, encoding="utf-8")
+            return check_inference_boundaries(release, page)
+
+    def test_negation_column_cells_are_read_as_negated(self):
+        table = ("<table><thead><tr><th>Date</th><th>Does not establish</th></tr></thead>"
+                 "<tbody><tr><td>2026</td><td>completed qualification elsewhere</td></tr></tbody></table>")
+        self.assertEqual([], self.page_errors(table))
+
+    def test_same_cell_without_negation_column_is_flagged(self):
+        table = ("<table><thead><tr><th>Date</th><th>Status</th></tr></thead>"
+                 "<tbody><tr><td>2026</td><td>completed qualification on Rubin</td></tr></tbody></table>")
+        self.assertTrue(self.page_errors(table))
+
+    def test_adjacent_cells_are_separate_statements(self):
+        table = ("<table><thead><tr><th>A</th><th>B</th></tr></thead>"
+                 "<tbody><tr><td>TSMC describes CoWoS as serving HBM</td><td>Rubin placement: NVIDIA statement</td></tr></tbody></table>")
+        self.assertEqual([], self.page_errors(table))
+
+
+class ResearchRecommendationTests(unittest.TestCase):
+    """IDE-002: AI-assisted recommendations are recorded, but never stand in for human review."""
+
+    EXPECTED = {
+        "rel-hbm4-requires-logic-base-die": "ACCEPT",
+        "rel-hbm-base-die-requires-logic-foundry": "REJECT",
+        "rel-hbm4-integrates-with-cowos": "DEFER",
+        "rel-rubin-gpu-requires-hbm4": "ACCEPT",
+    }
+
+    def candidate(self, release, cid):
+        return next(e for e in release["candidate_relationships"] if e["id"] == cid)
+
+    def test_four_reviewed_candidates_carry_recommendations(self):
+        release, _, _ = load()
+        for cid, decision in self.EXPECTED.items():
+            rec = self.candidate(release, cid)["research_recommendation"]
+            self.assertEqual(decision, rec["decision"], cid)
+            self.assertEqual("ai_assisted_source_check", rec["assessment_method"])
+
+    def test_recommendations_do_not_review_or_publish(self):
+        release, _, atlas = load()
+        self.assertEqual([], atlas["relationships"])
+        for e in release["candidate_relationships"]:
+            self.assertEqual("awaiting_human_review", e["review_status"])
+            self.assertIsNone(e["reviewed_at"])
+            self.assertEqual("unassigned", e["review_owner"])
+
+    def test_rejected_candidate_is_kept_for_audit(self):
+        release, _, _ = load()
+        self.assertIn("rel-hbm-base-die-requires-logic-foundry", [e["id"] for e in release["candidate_relationships"]])
+
+    def test_human_review_method_rejected(self):
+        release, registry, atlas = load()
+        self.candidate(release, "rel-rubin-gpu-requires-hbm4")["research_recommendation"]["assessment_method"] = "human_scientific_review"
+        errors = check_release(release, registry, atlas, TODAY, "fixture")
+        self.assertTrue(any("not a human review" in e for e in errors), errors)
+
+    def test_invalid_decision_rejected(self):
+        release, registry, atlas = load()
+        self.candidate(release, "rel-rubin-gpu-requires-hbm4")["research_recommendation"]["decision"] = "APPROVED"
+        errors = check_release(release, registry, atlas, TODAY, "fixture")
+        self.assertTrue(any("decision must be one of" in e for e in errors), errors)
+
+    def test_defer_requires_evidence_gaps(self):
+        release, registry, atlas = load()
+        self.candidate(release, "rel-hbm4-integrates-with-cowos")["research_recommendation"]["evidence_gaps"] = []
+        errors = check_release(release, registry, atlas, TODAY, "fixture")
+        self.assertTrue(any("DEFER must name the evidence gaps" in e for e in errors), errors)
+
+    def test_accept_recommendation_cannot_set_review(self):
+        release, registry, atlas = load()
+        self.candidate(release, "rel-rubin-gpu-requires-hbm4")["reviewed_at"] = "2026-11-09"
+        errors = check_release(release, registry, atlas, TODAY, "fixture")
+        self.assertTrue(any("reviewed_at must be null" in e for e in errors), errors)
+
+    def test_rubin_candidate_does_not_rest_on_supplier_claims(self):
+        release, _, _ = load()
+        sources = {ev["source_id"] for ev in self.candidate(release, "rel-rubin-gpu-requires-hbm4")["evidence"]}
+        self.assertTrue(sources and all(s.startswith("nvidia-") for s in sources), sources)
+
+
+class CowosBoundaryTests(unittest.TestCase):
+    def test_cowos_product_claims_rejected(self):
+        self.assertTrue(inference_boundary_errors("Rubin integrates its HBM4 on CoWoS.", "fixture"))
+        self.assertTrue(inference_boundary_errors("All HBM4 is packaged with CoWoS.", "fixture"))
+
+    def test_negated_or_general_cowos_allowed(self):
+        self.assertEqual([], inference_boundary_errors("No reviewed source ties Rubin's HBM4 to CoWoS.", "fixture"))
+        self.assertEqual([], inference_boundary_errors("TSMC describes CoWoS as serving logic and HBM.", "fixture"))
+
+
 class EvidenceReleaseCliTests(unittest.TestCase):
     def test_repository_exit_zero(self):
         result = subprocess.run([sys.executable, str(VALIDATOR)], capture_output=True, text=True, check=False)
