@@ -43,6 +43,14 @@ architecture, integration, or engineering context that does not fit a filing
 or technical-standard classification. They must remain attributed and cannot
 establish market-wide availability, capacity, adoption, or supplier position.
 
+`company_announcement` records preserve company-issued releases that are not
+technical disclosures and not regulatory filings, such as earnings press
+releases or product-status announcements. They support attributed statements
+about what the company reported (for example a stated production stage) and,
+like technical disclosures, can never by themselves establish a verified fact
+in the Dependency Evidence Atlas. Where a regulatory filing exists, it should be
+registered separately as `company_filing`.
+
 ## Freshness and Review
 
 Every source must carry `accessed_at` and a temporal scope. Rules, policy,

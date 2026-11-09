@@ -1,0 +1,1197 @@
+{
+  "release_id": "aec-hbm4-evidence-release-001",
+  "version": "1.0.0",
+  "status": "research_candidate",
+  "publication_eligible": false,
+  "as_of": "2026-11-09",
+  "title": "HBM4 Evidence Release 001",
+  "source_registry_reference": "data/source-registry.json",
+  "atlas_reference": "data/dependency-atlas.json",
+  "description": "Research-candidate findings and proposed Atlas relationships for HBM3E, HBM4 and HBM4E. Nothing in this file is a published Atlas relationship; every candidate requires named human review against the cited passages before it may be moved into data/dependency-atlas.json.",
+  "rights_note": "Classification, analysis and arithmetic are original project work by AIElectronicChips.com (Sohadot). Quoted passages are short excerpts (at most 20 words each, 40 per citation) reproduced for citation and verification; the underlying texts, specifications and standards remain the property of their publishers. No endorsement by JEDEC or any company is implied. This file is a research candidate: it is visible in the public repository but is excluded from the published website.",
+  "findings": [
+    {
+      "id": "f-std-interface",
+      "claim_class": "attributed_statement",
+      "topic": "standard",
+      "statement": "JEDEC's 2025-04-16 announcement of JESD270-4 (HBM4) states transfer speeds up to 8 Gb/s across a 2048-bit interface, for total bandwidth up to 2 TB/s.",
+      "evidence": [
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"With transfer speeds up to 8 Gb/s across a 2048-bit interface, HBM4 boosts total bandwidth up to 2 TB/s.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Industry standard as announced; not a statement about shipped products",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
+        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed"
+      ]
+    },
+    {
+      "id": "f-std-channels",
+      "claim_class": "attributed_statement",
+      "topic": "standard",
+      "statement": "JEDEC's HBM4 announcement states that independent channels per stack double from 16 (HBM3) to 32, with two pseudo-channels per channel.",
+      "evidence": [
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"from 16 channels (HBM3) to 32 channels with 2 pseudo-channels per channel\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Industry standard as announced",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
+        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed"
+      ]
+    },
+    {
+      "id": "f-std-stacks",
+      "claim_class": "attributed_statement",
+      "topic": "stack_configuration",
+      "statement": "JEDEC's HBM4 announcement lists 4-high, 8-high, 12-high and 16-high DRAM stack configurations with 24 Gb or 32 Gb die densities, providing a cube density of 64GB (32 Gb, 16-high).",
+      "evidence": [
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"4-high, 8-high, 12-high and 16-high DRAM stack configurations with 24 Gb or 32 Gb die densities\"; \"a higher cube density of 64GB (32 Gb 16-High)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Industry standard as announced; permitted configurations, not products offered",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
+        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
+        "A permitted configuration is not evidence that any supplier offers it"
+      ]
+    },
+    {
+      "id": "f-std-compat",
+      "claim_class": "attributed_statement",
+      "topic": "standard",
+      "statement": "JEDEC's HBM4 announcement states backward compatibility with existing HBM3 controllers, allowing a single controller to work with both if needed, and Directed Refresh Management (DRFM) for improved row-hammer mitigation and RAS.",
+      "evidence": [
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"backwards compatibility with existing HBM3 controllers\"; \"allowing a single controller to work with both HBM3 and HBM4 if needed\"; \"Directed Refresh Management (DRFM) for improved row-hammer mitigation\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Industry standard as announced",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
+        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
+        "Controller compatibility does not imply drop-in substitution at the package or platform level"
+      ]
+    },
+    {
+      "id": "f-std-voltage",
+      "claim_class": "attributed_statement",
+      "topic": "standard",
+      "statement": "JEDEC's HBM4 announcement states that JESD270-4 supports vendor-specific VDDQ levels of 0.7 V, 0.75 V, 0.8 V or 0.9 V and VDDC levels of 1.0 V or 1.05 V, which it associates with lower power consumption.",
+      "evidence": [
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"vendor specific VDDQ (0.7V, 0.75V, 0.8V or 0.9V) and VDDC (1.0V or 1.05V) levels\"; \"resulting in lower power consumption\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Industry standard as announced",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
+        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
+        "The announcement gives no power figures; which levels any supplier uses is not stated"
+      ]
+    },
+    {
+      "id": "f-skh-io-speed",
+      "claim_class": "attributed_statement",
+      "topic": "interface_bandwidth",
+      "statement": "SK hynix reports that its HBM4 doubles bandwidth through 2,048 I/O terminals and operates at over 10 Gbps, which it contrasts with a JEDEC standard operating speed of 8 Gbps.",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-development-mass-production-2025",
+          "locator": "\"the bandwidth doubled through adoption of 2,048 I/O terminals\"; \"over 10Gbps\"; \"far exceeded the JEDEC* standard operating speed(8Gbps)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix HBM4 as described 2025-09-12",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company-reported speed; no independent measurement",
+        "No absolute per-stack bandwidth figure is given"
+      ]
+    },
+    {
+      "id": "f-mu-2025",
+      "claim_class": "attributed_statement",
+      "topic": "interface_bandwidth",
+      "statement": "Micron reported shipping 36GB 12-high HBM4 samples in June 2025 with a 2048-bit interface, greater than 2.0 TB/s per stack, built on its 1-beta DRAM process.",
+      "evidence": [
+        {
+          "source_id": "micron-hbm4-samples-2025",
+          "locator": "\"Micron HBM4 features a 2048-bit interface, achieving speeds greater than 2.0 TB/s per memory stack\"; \"Built on its well-established 1ß (1-beta) DRAM process\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Micron HBM4 samples as described 2025-06-10",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Bandwidth basis per footnote is internal Micron testing",
+        "Sample stage only"
+      ]
+    },
+    {
+      "id": "f-mu-2026",
+      "claim_class": "attributed_statement",
+      "topic": "interface_bandwidth",
+      "statement": "Micron reported in March 2026 that its HBM4 achieves over 11 Gb/s pin speeds and bandwidth greater than 2.8 TB/s per stack.",
+      "evidence": [
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "\"With HBM4, Micron achieves over 11 Gb/s pin speeds\"; \"enabling a bandwidth greater than 2.8 TB/s\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Micron HBM4 36GB 12H as described 2026-03-16",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Footnote: internal testing and confidential customer test-vehicle validation",
+        "Does not restate interface width or DRAM process"
+      ]
+    },
+    {
+      "id": "f-ss-hbm4-speed",
+      "claim_class": "attributed_statement",
+      "topic": "interface_bandwidth",
+      "statement": "Samsung reported on 2026-02-12 that its HBM4 runs at a consistent 11.7 Gbps, about 46% above the 8 Gbps industry standard, can be enhanced to 13 Gbps, and reaches a maximum of 3.3 TB/s per stack (2.7x HBM3E). It said data I/Os double from 1,024 to 2,048 and that the core uses its 1c DRAM process.",
+      "evidence": [
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"consistent processing speed of 11.7 gigabits-per-second (Gbps)\"; \"exceeding the industry standard of 8Gbps by approximately 46%\"; \"increased by 2.7x compared to HBM3E, to a maximum of 3.3 terabytes-per-second (TB/s)\"; \"doubling of data I/Os from 1,024 to 2,048 pins\""
+        },
+        {
+          "source_id": "samsung-hbm4-gtc-2026",
+          "locator": "\"sixth-generation 10-nanometer (nm)-class DRAM process (1c)\"; \"can be enhanced to 13Gbps\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung HBM4 as described 2026-02-12 and 2026-03-17",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company-reported figures; the release gives no test conditions or footnotes",
+        "'Maximum' bandwidth is stated without the pin rate it applies to"
+      ]
+    },
+    {
+      "id": "f-ss-hbm4-config",
+      "claim_class": "attributed_statement",
+      "topic": "stack_configuration",
+      "statement": "Samsung reported offering HBM4 in 12-layer capacities from 24GB to 36GB, with 16-layer stacking planned to expand offerings to up to 48GB, and a 4nm logic base die.",
+      "evidence": [
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"Samsung offers HBM4 in capacities ranging from 24 gigabytes (GB) to 36GB\"; \"16-layer stacking, which will expand offerings to up to 48GB\"; \"4nm logic base die\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung HBM4 as described 2026-02-12",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "16-layer HBM4 is a stated plan, not a reported shipment",
+        "The release does not say which plant or business unit makes the base die"
+      ]
+    },
+    {
+      "id": "f-ss-hbm4e",
+      "claim_class": "attributed_statement",
+      "topic": "interface_bandwidth",
+      "statement": "Samsung reported shipping 12-layer, 48GB HBM4E samples in May 2026 with a stable 14 Gbps pin speed scalable to 16 Gbps and up to 3.6 TB/s per stack.",
+      "evidence": [
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"begun shipping the industry's first 12-layer HBM4E samples\"; \"offered in a 48-gigabyte (GB) capacity\"; \"a stable pin speed of 14 gigabits-per-second (Gbps)\"; \"scalable up to 16Gbps\"; \"up to 3.6 terabytes-per-second (TB/s) per stack\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung HBM4E samples as described 2026-05-29",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Sample stage only",
+        "HBM4E I/O count is not stated",
+        "No JEDEC HBM4E document is cited"
+      ]
+    },
+    {
+      "id": "f-an-bandwidth",
+      "claim_class": "bounded_analysis",
+      "topic": "interface_bandwidth",
+      "statement": "Per-stack bandwidth equals interface width times per-pin rate divided by eight. At 2,048 bits, 8 Gb/s gives 2.05 TB/s, 10 Gb/s gives 2.56 TB/s, 11 Gb/s gives 2.82 TB/s, 13 Gb/s gives 3.33 TB/s, 14 Gb/s gives 3.58 TB/s and 16 Gb/s gives 4.10 TB/s. Every disclosed vendor figure is arithmetically consistent with a 2,048-bit interface, including Samsung's HBM4E figures, whose release gives no I/O count. Samsung's HBM4 maximum of 3.3 TB/s matches its 13 Gb/s enhanced rate, not its 11.7 Gb/s consistent rate (3.00 TB/s). For HBM3E, 1,024 bits at Samsung's stated 9.6 Gb/s gives 1.23 TB/s, consistent with Samsung's 2.7x multiple and Micron's cited 1.2 TB/s.",
+      "evidence": [
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"transfer speeds up to 8 Gb/s across a 2048-bit interface\""
+        },
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "\"over 11 Gb/s pin speeds\"; \"greater than 2.8 TB/s\""
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"14 gigabits-per-second\"; \"up to 3.6 terabytes-per-second (TB/s) per stack\""
+        },
+        {
+          "source_id": "samsung-hbm4-gtc-2026",
+          "locator": "HBM4E: \"16Gbps per pin and 4.0 terabytes-per-second (TB/s) bandwidth\""
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"to a maximum of 3.3 terabytes-per-second (TB/s)\"; \"maximum pin speed of 9.6Gbps of its predecessor, HBM3E\"; \"2.7x\""
+        },
+        {
+          "source_id": "micron-hbm4-samples-2025",
+          "locator": "footnote: \"published HBM3E specifications (2.0 TB/s vs. 1.2 TB/s)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Arithmetic on disclosed figures; decimal terabytes",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Consistency is not proof that HBM4E keeps a 2,048-bit interface",
+        "Peak interface bandwidth is not sustained application bandwidth"
+      ],
+      "assumptions": [
+        "TB/s means 10^12 bytes per second",
+        "All 2,048 data bits transfer at the stated per-pin rate",
+        "Samsung does not state which pin rate its 3.3 TB/s maximum corresponds to; matching it to 13 Gb/s is arithmetic, not a Samsung statement"
+      ]
+    },
+    {
+      "id": "f-skh-12h",
+      "claim_class": "attributed_statement",
+      "topic": "stack_configuration",
+      "statement": "SK hynix reported shipping 12-layer, 36GB HBM4 samples in March 2025, using its Advanced MR-MUF process, with bandwidth of more than 2 TB per second.",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-12h-samples-2025",
+          "locator": "\"shipped the samples of 12-layer HBM4\"; \"adopted the Advanced MR-MUF process to achieve the capacity of 36GB\"; \"more than 2TB (terabytes) of data per second\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix HBM4 samples as described 2025-03-19",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Sample stage only",
+        "Customers not named"
+      ]
+    },
+    {
+      "id": "f-mu-16h",
+      "claim_class": "attributed_statement",
+      "topic": "stack_configuration",
+      "statement": "Micron reported in March 2026 that it is shipping 48GB 16-high HBM4 samples, a 33% capacity increase per HBM placement over 36GB 12-high.",
+      "evidence": [
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "\"by shipping samples of HBM4 48GB 16H to customers\"; footnote: \"33% increase in capacity per HBM placement\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Micron HBM4 16H samples as described 2026-03-16",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Samples, not volume production"
+      ]
+    },
+    {
+      "id": "f-ss-hbm4e-configs",
+      "claim_class": "attributed_statement",
+      "topic": "stack_configuration",
+      "statement": "Samsung states its HBM4E lineup is planned to expand from the 12-layer 48GB part to 32GB 8-layer and 64GB 16-layer configurations.",
+      "evidence": [
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"with plans to expand the lineup to include 32GB (8-layer) and 64GB (16-layer) configurations\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung HBM4E roadmap as described 2026-05-29",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Forward-looking plan, not shipped products"
+      ]
+    },
+    {
+      "id": "f-an-die-density",
+      "claim_class": "bounded_analysis",
+      "topic": "stack_configuration",
+      "statement": "Dividing disclosed stack capacity by layer count gives 3 GB (24 Gb) per DRAM die for 36GB 12-high and 48GB 16-high HBM4, and 4 GB (32 Gb) per die for Samsung's 48GB 12-layer HBM4E and its planned 64GB 16-layer part. Both densities match the 24 Gb and 32 Gb options in JEDEC's HBM4 announcement.",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-12h-samples-2025",
+          "locator": "\"12-layer\"; \"36GB\""
+        },
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "\"HBM4 48GB 16H\""
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"48-gigabyte (GB) capacity\"; \"64GB (16-layer)\""
+        },
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"24 Gb or 32 Gb die densities\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Arithmetic on disclosed capacities",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Vendors do not state per-die density in the reviewed releases"
+      ],
+      "assumptions": [
+        "Every layer is a DRAM core die of equal density",
+        "The base die contributes no user-addressable capacity",
+        "GB is 2^30-style binary gigabytes as used for DRAM capacity"
+      ]
+    },
+    {
+      "id": "f-skh-base-die",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "SK hynix states that HBM is made by stacking core DRAM dies on a base die featuring TSVs, that it used proprietary technology for base dies up to HBM3E, and that it planned to adopt TSMC's advanced logic process for the HBM4 base die.",
+      "evidence": [
+        {
+          "source_id": "skhynix-tsmc-hbm4-mou-2024",
+          "locator": "\"stacking a core DRAM die on top of a base die that features TSV\"; \"proprietary technology to make base dies up to HBM3E\"; \"TSMC’s advanced logic process for HBM4’s base die\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix plans as described 2024-04-19",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "MOU-stage plan; later reviewed SK hynix releases do not restate the base-die source"
+      ]
+    },
+    {
+      "id": "f-tsmc-base-die",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "TSMC listed \"N12 and N3 logic base die for HBM4\" among its offerings at its April 2025 North America Technology Symposium.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-na-technology-symposium",
+          "locator": "\"N12 and N3 logic base die for HBM4\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC offerings as described 2025-04-23",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Does not name customers or which HBM products use which node"
+      ]
+    },
+    {
+      "id": "f-ss-base-die",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "Samsung states its HBM4 uses a 4nm logic base die with a 1c DRAM core (2026-02-12). Its HBM4E release attributes the 4nm logic base die to Samsung Foundry and says HBM4E uses the same combination of core and base die.",
+      "evidence": [
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"adopted the most advanced nodes like the 1c DRAM and 4nm logic process for HBM4\""
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"Samsung Foundry's 4nm logic base die\"; \"using the same combination of core and base die\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung HBM4 and HBM4E as described 2026-02-12 and 2026-05-29",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The HBM4 release names a 4nm logic process but not the manufacturing unit; Samsung Foundry is named only in the HBM4E release"
+      ]
+    },
+    {
+      "id": "f-mu-base-die",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "Micron's FY2026 Form 10-K states that its HBM4 uses advanced complementary metal-oxide-semiconductor (CMOS) [...] on the base logic die and DRAM core dies, which are designed and manufactured in-house. It does not state the base die's process node.",
+      "evidence": [
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "locator": "\"Our HBM4 uses advanced complementary metal-oxide-semiconductor\"; \"on the base logic die and DRAM core dies, which are designed and manufactured in-house\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Micron HBM4 as described in its annual filing for the fiscal year ended 2026-09-03",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company statement in a regulatory filing, not independent verification",
+        "Only part of the filing was read verbatim; the words between the two quoted fragments were not captured",
+        "In-house manufacture identifies who makes the die; it does not imply that advanced manufacturing capability is unnecessary"
+      ]
+    },
+    {
+      "id": "f-skh-custom-hbm",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "SK hynix's July 2026 prospectus defines custom HBM as an HBM product that integrates certain functions of GPUs and ASICs into the HBM base die, configured to customer requirements.",
+      "evidence": [
+        {
+          "source_id": "skhynix-424b4-prospectus-2026",
+          "locator": "\"An HBM product that integrates certain functions of GPUs and ASICs into the HBM base die\"; \"configured to reflect customer requirements\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix glossary definition, prospectus dated 2026-07-09",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "A definition, not a statement about which products ship as custom HBM",
+        "The portion read does not name the base die's manufacturer or process"
+      ]
+    },
+    {
+      "id": "f-an-logic-coupling",
+      "claim_class": "bounded_analysis",
+      "topic": "base_die",
+      "statement": "Every HBM4 stack depends on fabricating both the DRAM core dies and the base logic die. The suppliers reviewed source the base die in three different ways: SK hynix planned to use TSMC's advanced logic process (2024 plan, not restated in later reviewed sources); Samsung states a 4nm logic process, which its HBM4E release attributes to Samsung Foundry; Micron states its base logic die is designed and manufactured in-house with advanced CMOS. These arrangements change who supplies the base die, not whether advanced semiconductor manufacturing capability is required: in-house manufacture still depends on Micron's own process capability and capacity, while an external foundry adds a dependency on that foundry. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new external dependency for SK hynix is our inference.",
+      "evidence": [
+        {
+          "source_id": "skhynix-tsmc-hbm4-mou-2024",
+          "locator": "\"plans to adopt TSMC’s advanced logic process for HBM4’s base die\""
+        },
+        {
+          "source_id": "tsmc-2025-na-technology-symposium",
+          "locator": "\"N12 and N3 logic base die for HBM4\""
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"Samsung Foundry's 4nm logic base die\""
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"4nm logic process for HBM4\""
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "locator": "\"on the base logic die and DRAM core dies, which are designed and manufactured in-house\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Structural dependency inference for disclosed suppliers only",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No capacity or allocation inference is made",
+        "Micron does not state its base die's process node",
+        "No supplier's relative manufacturing capability is assessed"
+      ],
+      "assumptions": [
+        "SK hynix's 2024 plan was carried into production; this is not confirmed in its later reviewed releases or the portion of its 2026 prospectus read"
+      ]
+    },
+    {
+      "id": "f-tsmc-cowos",
+      "claim_class": "attributed_statement",
+      "topic": "packaging_integration",
+      "statement": "TSMC states it continues to advance CoWoS to meet AI's need for more logic and HBM, and plans to bring 9.5-reticle CoWoS to volume production in 2027, enabling 12 or more HBM stacks in a package.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-na-technology-symposium",
+          "locator": "\"continues to advance its Chip on Wafer on Substrate (CoWoS®) technology\"; \"9.5 reticle size CoWoS to volume production in 2027\"; \"enabling integration of 12 HBM stacks or more in a package\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC roadmap as described 2025-04-23",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Forward-looking; 2027 timing is a plan",
+        "Does not name which accelerators use which CoWoS variant"
+      ]
+    },
+    {
+      "id": "f-skh-cowos",
+      "claim_class": "attributed_statement",
+      "topic": "packaging_integration",
+      "statement": "SK hynix's 2024 MOU announcement states an aim to optimise the integration of SK hynix HBM with TSMC CoWoS technology.",
+      "evidence": [
+        {
+          "source_id": "skhynix-tsmc-hbm4-mou-2024",
+          "locator": "\"optimize the integration of SK hynix’s HBM and TSMC’s CoWoS®2 technology\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix plans as described 2024-04-19",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Statement of intent"
+      ]
+    },
+    {
+      "id": "f-ss-hcb",
+      "claim_class": "attributed_statement",
+      "topic": "stacking_process",
+      "statement": "Samsung describes hybrid copper bonding as a method that will let next-generation HBM reach 16 or more layers while reducing heat resistance by more than 20% compared with thermal compression bonding.",
+      "evidence": [
+        {
+          "source_id": "samsung-hbm4-gtc-2026",
+          "locator": "\"enable next-generation HBM to achieve 16 or more layers\"; \"reducing heat resistance by more than 20 percent\"; compared with \"thermal compression bonding (TCB)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung technology roadmap as described 2026-03-17",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Not stated as used in HBM4 or HBM4E",
+        "Company-reported thermal figure"
+      ]
+    },
+    {
+      "id": "f-skh-mrmuf",
+      "claim_class": "attributed_statement",
+      "topic": "stacking_process",
+      "statement": "SK hynix states its Advanced MR-MUF (mass reflow molded underfill) process helps prevent chip warpage and improves heat dissipation, and that it used the process in HBM4.",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-12h-samples-2025",
+          "locator": "MR-MUF \"helps prevent chip warpage, while maximizing product stability by improving heat dissipation\""
+        },
+        {
+          "source_id": "skhynix-hbm4-development-mass-production-2025",
+          "locator": "\"adopted the Advanced MR-MUF* process in HBM4\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix HBM4 as described 2025",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company-reported process benefits"
+      ]
+    },
+    {
+      "id": "f-power-claims",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_power",
+      "statement": "Suppliers report different HBM4-generation efficiency gains against different baselines: SK hynix more than 40% better power efficiency; Samsung a 40% power-efficiency improvement for HBM4 versus HBM3E, with thermal resistance enhanced by 10% and heat dissipation by 30%; Micron more than 20% versus its HBM3E (a 2025 simulation basis and a 2026 internal-calculator basis at 9.2 Gbps); Samsung 16% better energy efficiency and more than 14% better thermal resistance for HBM4E versus its previous generation.",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-development-mass-production-2025",
+          "locator": "\"power efficiency improved by more than 40%\""
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"a 40% improvement in power efficiency\"; \"enhancing thermal resistance by 10% and heat dissipation by 30%\""
+        },
+        {
+          "source_id": "micron-hbm4-samples-2025",
+          "locator": "\"over 20% better power efficiency compared to Micron's previous-generation HBM3E\""
+        },
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "footnote: \"HBM4 12H vs. HBM3E 12H at 9.2 Gbps\""
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"improved energy efficiency by 16% and thermal resistance characteristics by more than 14%\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Company-reported relative figures",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Baselines, workloads and methods differ; the figures are not comparable across suppliers and must not be used to compare them",
+        "Samsung's HBM4 release gives no methodology and does not state whether 'enhancing thermal resistance' means a higher or lower value"
+      ]
+    },
+    {
+      "id": "f-tsmc-ivr",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_power",
+      "statement": "TSMC announced an integrated voltage regulator for AI with 5x vertical power density delivery compared with a separate power-management chip on the board.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-na-technology-symposium",
+          "locator": "\"a new Integrated Voltage Regulator (IVR) for AI with 5X vertical power density delivery\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC offering as described 2025-04-23",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Not specific to HBM; relevant to package-level power delivery"
+      ]
+    },
+    {
+      "id": "f-skh-stage",
+      "claim_class": "attributed_statement",
+      "topic": "commercialization",
+      "statement": "SK hynix's reported HBM4 stages: 12-layer samples shipped (2025-03-19); development completed and mass-production system readied (2025-09-12); entered mass production with shipments to begin in Q4 2025 (2025-10-29); large-scale production underway, supplying HBM3E and HBM4 simultaneously (2026-01-28).",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-12h-samples-2025",
+          "locator": "\"shipped the samples of 12-layer HBM4\""
+        },
+        {
+          "source_id": "skhynix-hbm4-development-mass-production-2025",
+          "locator": "\"completed development and finished preparation of HBM4\""
+        },
+        {
+          "source_id": "skhynix-3q25-results-2025",
+          "locator": "\"HBM4, which completed development in September and entered mass production\"; \"Shipments will begin in the fourth quarter this year\""
+        },
+        {
+          "source_id": "skhynix-fy25-results-2026",
+          "locator": "\"the large-scale production of the next-generation HBM has been underway\"; \"stably supplying both HBM3E and HBM4 simultaneously\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix self-reported status sequence",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No volumes, yields or customers disclosed",
+        "Q4 2025 shipment start is the company's stated plan as of 2025-10-29"
+      ]
+    },
+    {
+      "id": "f-mu-stage",
+      "claim_class": "attributed_statement",
+      "topic": "commercialization",
+      "statement": "Micron's reported HBM4 stages: 36GB 12-high samples shipped (2025-06-10); volume shipment of 36GB 12H begun in calendar Q1 2026, described as high-volume production and designed for NVIDIA Vera Rubin (2026-03-16); HBM4 'in high-volume shipments for our lead customer's platform', with qualification samples shipped to multiple end-customers (2026-06-24); and, in its FY2026 10-K, volume production of HBM4 36GB 12-high begun in 2026.",
+      "evidence": [
+        {
+          "source_id": "micron-hbm4-samples-2025",
+          "locator": "\"the shipment of HBM4 36GB 12-high samples to multiple key customers\""
+        },
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "\"has begun volume shipment of its HBM4 36GB 12H in the first quarter of calendar year 2026\""
+        },
+        {
+          "source_id": "micron-q3-fy2026-results-2026",
+          "locator": "\"is in high-volume shipments for our lead customer's platform\"; \"qualification samples have been shipped to multiple end-customers\""
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "locator": "\"In 2026, we began volume production of our HBM4 36GB 12-high\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Micron self-reported status sequence",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "'High-volume' is not quantified, and the lead customer is not named",
+        "Qualification samples are not completed qualification",
+        "'Designed for' is not a qualification or allocation disclosure"
+      ]
+    },
+    {
+      "id": "f-ss-stage",
+      "claim_class": "attributed_statement",
+      "topic": "commercialization",
+      "statement": "Samsung reported beginning HBM4 mass production and shipping commercial products to unnamed customers (2026-02-12); HBM4 in mass production and designed for the NVIDIA Vera Rubin platform (2026-03-17); and shipping 12-layer HBM4E samples, with mass production planned to align with customer schedules (2026-05-29).",
+      "evidence": [
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"has begun mass production of its industry-leading HBM4 and has shipped commercial products to customers\""
+        },
+        {
+          "source_id": "samsung-hbm4-gtc-2026",
+          "locator": "\"the new sixth-generation HBM4, which is now in mass production and is designed for the\" NVIDIA Vera Rubin platform"
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"Samsung plans to begin mass production for HBM4E aligned with customer schedules\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung self-reported status sequence",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Customers are not named in the February release",
+        "'Stable yields' is unquantified",
+        "No HBM4E mass-production date is given"
+      ]
+    },
+    {
+      "id": "f-priority-conflict",
+      "claim_class": "attributed_statement",
+      "topic": "commercialization",
+      "statement": "Suppliers make competing priority claims that use different milestones: SK hynix claims the world's first 12-layer HBM4 samples and first HBM4 mass-production system; Samsung claims the industry's first mass production and commercial shipment of HBM4 and the first HBM4E samples. This release does not adjudicate them.",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-12h-samples-2025",
+          "locator": "\"to major customers for the first time in the world\""
+        },
+        {
+          "source_id": "skhynix-hbm4-development-mass-production-2025",
+          "locator": "\"the world’s first mass production system of HBM4\""
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "locator": "\"Following the industry's first mass production and commercial shipment of its industry-leading HBM4\"; \"industry's first 12-layer HBM4E samples\""
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"This achievement marks a first in the industry\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Company characterisations only",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "'Sample', 'mass production system' and 'commercial shipment' are different milestones",
+        "No independent arbiter of priority was reviewed"
+      ]
+    },
+    {
+      "id": "f-nv-rubin",
+      "claim_class": "attributed_statement",
+      "topic": "accelerator_integration",
+      "statement": "NVIDIA's Rubin platform article (2026-01-05) states up to 288 GB of HBM4 per GPU and \"aggregate bandwidth of up to 22 TB/s\"; its GPU architecture article (2026-07-21) states up to 288 GB on 12-Hi stacks with up to 22 TB/s of peak bandwidth, and that HBM4 doubles interface width relative to HBM3E.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"Up to 288 GB of HBM4 per GPU\"; \"Aggregate bandwidth of up to 22 TB/s\""
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "\"Rubin integrates up to 288 GB of HBM4 memory, driven by dedicated HBM controllers and 12-Hi stacks\"; \"up to 22 TB/s of peak bandwidth\"; \"HBM4 doubles interface width relative to HBM3e\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA product disclosure dated 2026-07-21",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "NVIDIA's 2026-11-05 article and current NVL72 product page give an unqualified 19.2 TB/s; the difference is unexplained",
+        "Stack count and memory suppliers are not stated"
+      ]
+    },
+    {
+      "id": "f-nv-rubin-192",
+      "claim_class": "attributed_statement",
+      "topic": "accelerator_integration",
+      "statement": "NVIDIA's 2026-11-05 technical article states that from GB300 to Rubin, HBM capacity held at 288 GB while bandwidth rose to 19.2 TB/s. The figure carries no qualifier, and the article does not mention the 22 TB/s figure.",
+      "evidence": [
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "\"From GB300 to NVIDIA Rubin, capacity held at 288 GB while bandwidth rose to 19.2 TB/s.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA product discussion dated 2026-11-05",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Differs from the 'up to 22 TB/s' in NVIDIA's 2026-01-05 and 2026-07-21 articles; no explanation, revision note or 'preliminary' label is given",
+        "NVIDIA's undated, unregistered NVL72 product page also lists 19.2 TB/s per GPU, while its HGX page lists 22 TB/s"
+      ]
+    },
+    {
+      "id": "f-nv-production",
+      "claim_class": "attributed_statement",
+      "topic": "accelerator_integration",
+      "statement": "NVIDIA stated on 2026-01-05 that Rubin is in full production and that Rubin-based products will be available from partners in the second half of 2026.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-ces-2026",
+          "locator": "\"NVIDIA Rubin is in full production\"; products \"available from partners the second half of 2026\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA company announcement",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The release does not mention HBM",
+        "Partner availability was forward-looking as of publication"
+      ]
+    },
+    {
+      "id": "f-an-rubin-stacks",
+      "claim_class": "bounded_analysis",
+      "topic": "accelerator_integration",
+      "statement": "If Rubin's 288 GB is built from 36GB 12-high HBM4 stacks, it uses eight stacks. NVIDIA's 22 TB/s peak then implies about 2.75 TB/s per stack (about 10.7 Gb/s per pin at 2,048 bits); the 19.2 TB/s figure in NVIDIA's 2026-11-05 article implies about 2.4 TB/s per stack (about 9.4 Gb/s per pin). Both exceed JEDEC's announced 8 Gb/s baseline, which shows the platform relies on above-baseline HBM4 speed grades.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "\"up to 288 GB of HBM4\"; \"12-Hi stacks\"; \"up to 22 TB/s\""
+        },
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "\"HBM4 36GB 12H\""
+        },
+        {
+          "source_id": "skhynix-hbm4-12h-samples-2025",
+          "locator": "\"12-layer\"; \"36GB\""
+        },
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"transfer speeds up to 8 Gb/s\""
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "\"bandwidth rose to 19.2 TB/s\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Arithmetic on disclosed figures",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "NVIDIA does not state the stack count",
+        "Which of the two bandwidth figures is current is unresolved"
+      ],
+      "assumptions": [
+        "Each 12-high HBM4 stack is 36GB, as SK hynix and Micron disclose for 12-high HBM4",
+        "Each stack uses a 2,048-bit interface",
+        "All stacks run at the same rate"
+      ]
+    },
+    {
+      "id": "f-an-substitution",
+      "claim_class": "attributed_statement",
+      "topic": "substitution",
+      "statement": "Micron and Samsung each state that their HBM4 is designed for NVIDIA Vera Rubin. These are supplier statements about their own products; the NVIDIA sources reviewed do not name Rubin's memory suppliers or qualified parts. The statements do not establish NVIDIA qualification of either supplier, interchangeable supply, or that Rubin is actually multi-sourced.",
+      "evidence": [
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "locator": "\"designed for NVIDIA Vera Rubin\""
+        },
+        {
+          "source_id": "samsung-hbm4-gtc-2026",
+          "locator": "\"designed for the\" NVIDIA Vera Rubin platform"
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "Full article text searched 2026-11-09: no mention of SK hynix, Samsung or Micron, and no memory-qualification statement"
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "Full article text searched 2026-11-09: no mention of SK hynix, Samsung or Micron, and no memory-qualification statement"
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "Full article text searched 2026-11-09: no mention of SK hynix, Samsung or Micron, and no memory-qualification statement"
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Technical multi-sourcing indication only",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "SK hynix's reviewed releases name no platform",
+        "No platform-vendor qualification, share or allocation evidence was reviewed",
+        "'Designed for' states a supplier's design target, not a platform vendor's qualification",
+        "Package-level and speed-grade differences could limit substitution; none is documented either way"
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "u-jedec-text",
+      "topic": "standard",
+      "question": "What do the normative JESD270-4 and JESD270-4A documents specify beyond the announcement, including timing, any speed bins above 8 Gb/s and the revision-A changes?",
+      "why_unresolved": "JEDEC's 2025-04-16 announcement has now been read through a Business Wire syndication, but an announcement summarises a standard. The JESD270-4 and JESD270-4A documents themselves have not been reviewed.",
+      "sources_checked": [
+        "jedec-jesd270-4-hbm4-standard-2025"
+      ],
+      "next_evidence_needed": "A reviewer reads the JESD270-4A document from JEDEC before any normative statement is made."
+    },
+    {
+      "id": "u-hbm4e-standard",
+      "topic": "standard",
+      "question": "Has JEDEC published an HBM4E standard, and what parameters does it define?",
+      "why_unresolved": "No reviewed source cites a JEDEC HBM4E document; Samsung's HBM4E release cites none.",
+      "sources_checked": [
+        "samsung-hbm4e-samples-2026",
+        "samsung-hbm4-gtc-2026"
+      ],
+      "next_evidence_needed": "JEDEC publication record or committee statement."
+    },
+    {
+      "id": "u-micron-base-die",
+      "topic": "base_die",
+      "question": "What process node is Micron's in-house HBM4 base logic die built on?",
+      "why_unresolved": "Micron's FY2026 10-K states the base logic die is designed and manufactured in-house using advanced CMOS, but gives no node. Its press releases do not mention the base die.",
+      "sources_checked": [
+        "micron-hbm4-samples-2025",
+        "micron-hbm4-volume-production-2026",
+        "micron-fy2026-form-10-k",
+        "micron-q3-fy2026-results-2026"
+      ],
+      "next_evidence_needed": "A Micron technical disclosure or filing naming the base logic die's process node."
+    },
+    {
+      "id": "u-skh-base-die-implementation",
+      "topic": "base_die",
+      "question": "Does SK hynix's production HBM4 use a TSMC-made logic base die, and on which node?",
+      "why_unresolved": "The 2024 MOU states a plan. SK hynix's later reviewed releases do not restate it, the portion of its July 2026 prospectus read defines custom HBM by base-die integration but names no manufacturer or process, and TSMC does not name customers.",
+      "sources_checked": [
+        "skhynix-tsmc-hbm4-mou-2024",
+        "skhynix-hbm4-development-mass-production-2025",
+        "tsmc-2025-na-technology-symposium",
+        "skhynix-424b4-prospectus-2026"
+      ],
+      "next_evidence_needed": "SK hynix or TSMC disclosure tying the production base die to a named node."
+    },
+    {
+      "id": "u-capacity",
+      "topic": "commercialization",
+      "question": "What is each supplier's HBM4 production capacity, yield and customer allocation?",
+      "why_unresolved": "No reviewed primary source quantifies them; 'mass', 'large-scale' and 'high-volume' production are unquantified.",
+      "sources_checked": [
+        "skhynix-3q25-results-2025",
+        "skhynix-fy25-results-2026",
+        "micron-hbm4-volume-production-2026",
+        "samsung-hbm4-gtc-2026"
+      ],
+      "next_evidence_needed": "Audited filings with segment or product-level disclosure; this project will not estimate it."
+    },
+    {
+      "id": "u-qualification",
+      "topic": "commercialization",
+      "question": "Which suppliers' HBM4 is qualified for which accelerator platforms, and at what speed grade?",
+      "why_unresolved": "'Designed for' statements are not qualification disclosures. Micron reports high-volume HBM4 shipments for one unnamed lead customer and qualification samples shipped to multiple end-customers; no supplier reports completed qualification by named platform.",
+      "sources_checked": [
+        "micron-hbm4-volume-production-2026",
+        "micron-q3-fy2026-results-2026",
+        "samsung-hbm4-gtc-2026",
+        "nvidia-rubin-gpu-architecture-2026"
+      ],
+      "next_evidence_needed": "Platform-vendor or supplier disclosure of completed qualification."
+    },
+    {
+      "id": "u-rubin-bandwidth",
+      "topic": "accelerator_integration",
+      "question": "Is Rubin's per-GPU HBM4 bandwidth 22 TB/s or 19.2 TB/s?",
+      "why_unresolved": "NVIDIA's dated articles give 'aggregate bandwidth of up to 22 TB/s' (2026-01-05) and 'up to 22 TB/s of peak bandwidth' (2026-07-21), then an unqualified 'bandwidth rose to 19.2 TB/s' (2026-11-05). Current undated product pages still disagree: Vera Rubin NVL72 lists 19.2 TB/s per GPU (1,400 TB/s per rack); HGX lists 22 TB/s per GPU. No page labels either figure preliminary, projected or subject to change, and none explains the difference. A later revision, a configuration difference and a peak-versus-rated distinction all remain possible; none is established.",
+      "sources_checked": [
+        "nvidia-rubin-platform-architecture-2026",
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-co-design-memory-2026"
+      ],
+      "next_evidence_needed": "A dated NVIDIA datasheet or specification note that states per-GPU memory bandwidth and the configuration or conditions it applies to."
+    },
+    {
+      "id": "u-16h-thermal",
+      "topic": "thermal_power",
+      "question": "What are the thermal limits of 16-high HBM4 stacks, and does reaching them require hybrid bonding?",
+      "why_unresolved": "Samsung presents hybrid copper bonding as a future method; Micron is sampling 16-high HBM4 without disclosing its stacking method; no reviewed source establishes a requirement.",
+      "sources_checked": [
+        "samsung-hbm4-gtc-2026",
+        "micron-hbm4-volume-production-2026"
+      ],
+      "next_evidence_needed": "Peer-reviewed or supplier technical paper on 16-high HBM4 thermal behaviour and bonding."
+    },
+    {
+      "id": "u-interposer-substrate",
+      "topic": "packaging_integration",
+      "question": "Which interposer or bridge technology, substrate and assembly providers do HBM4 accelerator packages depend on?",
+      "why_unresolved": "Reviewed sources describe CoWoS generally and do not identify per-product interposer type, substrate suppliers or assembly sites.",
+      "sources_checked": [
+        "tsmc-2025-na-technology-symposium",
+        "tsmc-2024-annual-report"
+      ],
+      "next_evidence_needed": "Foundry, OSAT and substrate-supplier disclosures tied to HBM4 products."
+    },
+    {
+      "id": "u-test",
+      "topic": "packaging_integration",
+      "question": "How are HBM4 stacks tested before integration (known-good-stack), and who performs that testing?",
+      "why_unresolved": "No reviewed primary source addresses HBM4 test flows.",
+      "sources_checked": [],
+      "next_evidence_needed": "Supplier or test-equipment technical disclosures."
+    },
+    {
+      "id": "u-sphbm4",
+      "topic": "standard",
+      "question": "What is the status and scope of JEDEC's reduced-pin-count SPHBM4 effort?",
+      "why_unresolved": "The JEDEC page could not be retrieved; only a search-index summary was seen, which is not used as evidence.",
+      "sources_checked": [],
+      "next_evidence_needed": "JEDEC release text."
+    }
+  ],
+  "candidate_nodes": [
+    {
+      "id": "tech-hbm4",
+      "label": "HBM4",
+      "kind": "technology",
+      "layers": [
+        "memory"
+      ],
+      "description": "High Bandwidth Memory generation announced by JEDEC as JESD270-4: stacked DRAM core dies on a base die, which suppliers disclose with a 2,048-bit interface."
+    },
+    {
+      "id": "tech-hbm-logic-base-die",
+      "label": "HBM logic base die",
+      "kind": "technology",
+      "layers": [
+        "memory",
+        "fabrication"
+      ],
+      "description": "The bottom die of an HBM stack carrying the interface and control logic. For HBM4, SK hynix (as planned) and Samsung disclose a logic-process base die; Micron discloses in-house manufacture with advanced CMOS."
+    },
+    {
+      "id": "cap-advanced-logic-foundry-process",
+      "label": "Advanced logic foundry process",
+      "kind": "capability",
+      "layers": [
+        "fabrication"
+      ],
+      "description": "Logic wafer fabrication at nodes such as 12nm-class, 4nm-class or 3nm-class, as offered by logic foundries."
+    },
+    {
+      "id": "tech-cowos",
+      "label": "CoWoS",
+      "kind": "technology",
+      "layers": [
+        "packaging"
+      ],
+      "description": "TSMC's Chip on Wafer on Substrate advanced-packaging family, used to place logic dies and HBM stacks in one package."
+    },
+    {
+      "id": "tech-nvidia-rubin-gpu",
+      "label": "NVIDIA Rubin GPU",
+      "kind": "technology",
+      "layers": [
+        "design",
+        "memory"
+      ],
+      "description": "NVIDIA accelerator generation disclosed with up to 288 GB of HBM4."
+    }
+  ],
+  "candidate_relationships": [
+    {
+      "id": "rel-hbm4-requires-logic-base-die",
+      "from": "tech-hbm4",
+      "to": "tech-hbm-logic-base-die",
+      "relation_type": "requires",
+      "statement": "HBM stacks core DRAM dies on a TSV-bearing base die; for HBM4, SK hynix planned a logic-process base die, Samsung states a 4nm logic base die, and Micron states its base logic die is made in-house.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "skhynix-tsmc-hbm4-mou-2024",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "samsung-hbm4e-samples-2026",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "supported_claim_type": "base_die_process_context"
+        }
+      ],
+      "geographic_scope": "Disclosing suppliers (SK hynix, Samsung, Micron)",
+      "temporal_scope": "Disclosures dated 2024-04-19 to 2026-09-03 (Micron fiscal year end)",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "SK hynix statement is an MOU-stage plan",
+        "Micron does not state its base die's process node"
+      ],
+      "review_status": "awaiting_human_review"
+    },
+    {
+      "id": "rel-hbm-base-die-requires-logic-foundry",
+      "from": "tech-hbm-logic-base-die",
+      "to": "cap-advanced-logic-foundry-process",
+      "relation_type": "requires",
+      "statement": "TSMC lists N12 and N3 logic base dies for HBM4, and SK hynix planned to use TSMC's advanced logic process for its HBM4 base die.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-na-technology-symposium",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "skhynix-tsmc-hbm4-mou-2024",
+          "supported_claim_type": "base_die_process_context"
+        }
+      ],
+      "geographic_scope": "TSMC offering and SK hynix plan only. No external logic-foundry dependency is disclosed for Micron, which reports in-house base logic die manufacture; in-house manufacture still requires advanced CMOS capability",
+      "temporal_scope": "Disclosures dated 2024-04-19 and 2025-04-23",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "low",
+      "limitations": [
+        "Does not establish which shipping products use which node",
+        "Micron's FY2026 10-K reports in-house manufacture of its HBM4 base logic die, so an external-foundry relationship is not industry-wide",
+        "No capacity or allocation inference"
+      ],
+      "review_status": "awaiting_human_review"
+    },
+    {
+      "id": "rel-hbm4-integrates-with-cowos",
+      "from": "tech-hbm4",
+      "to": "tech-cowos",
+      "relation_type": "integrates_with",
+      "statement": "TSMC describes CoWoS as advancing to meet AI demand for logic and HBM, planning 12 or more HBM stacks per package with 9.5-reticle CoWoS in 2027; SK hynix aimed to optimise its HBM integration with CoWoS.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-na-technology-symposium",
+          "supported_claim_type": "packaging_roadmap"
+        },
+        {
+          "source_id": "skhynix-tsmc-hbm4-mou-2024",
+          "supported_claim_type": "packaging_integration_context"
+        }
+      ],
+      "geographic_scope": "TSMC packaging offering; not the only HBM integration route",
+      "temporal_scope": "Disclosures dated 2024-04-19 and 2025-04-23; 2027 plan is forward-looking",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "Other packaging providers and routes are not assessed",
+        "The 2027 volume-production plan is not a verified outcome"
+      ],
+      "review_status": "awaiting_human_review"
+    },
+    {
+      "id": "rel-rubin-gpu-requires-hbm4",
+      "from": "tech-nvidia-rubin-gpu",
+      "to": "tech-hbm4",
+      "relation_type": "requires",
+      "statement": "NVIDIA states Rubin integrates up to 288 GB of HBM4 on 12-Hi stacks; Micron and Samsung each state their HBM4 is designed for NVIDIA Vera Rubin.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "supported_claim_type": "product_integration_context"
+        },
+        {
+          "source_id": "micron-hbm4-volume-production-2026",
+          "supported_claim_type": "product_integration_context"
+        },
+        {
+          "source_id": "samsung-hbm4-gtc-2026",
+          "supported_claim_type": "product_integration_context"
+        }
+      ],
+      "geographic_scope": "Single accelerator product line",
+      "temporal_scope": "Disclosures dated 2026-03-16 to 2026-07-21",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "Per-GPU bandwidth conflict between NVIDIA's own dated articles (22 vs 19.2 TB/s) is unresolved",
+        "Supplier statements that HBM4 is 'designed for' Vera Rubin do not establish NVIDIA qualification, interchangeable supply or multi-sourcing"
+      ],
+      "review_status": "awaiting_human_review"
+    }
+  ]
+}

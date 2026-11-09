@@ -15,7 +15,7 @@ Each future entry in `relationships` MUST contain:
 | `id`, `from`, `to` | Unique edge ID; both endpoints must be existing, distinct node IDs |
 | `relation_type` | One of `requires`, `integrates_with`, `constrained_by`, `governed_by`, `enables` |
 | `statement` | A narrow, independently reviewable explanation of the relationship |
-| `claim_class` | `verified_fact`, `attributed_statement` or `bounded_analysis`. A `verified_fact` cannot rest solely on `official_technical_disclosure` sources (company announcements and product pages); it must also cite an independent record type such as a standard, filing, rule or dataset |
+| `claim_class` | `verified_fact`, `attributed_statement` or `bounded_analysis`. A `verified_fact` cannot rest solely on `official_technical_disclosure` or `company_announcement` sources (product announcements, product pages and earnings releases); it must also cite an independent record type such as a standard, filing, rule or dataset |
 | `evidence` | At least one `{ "source_id": "...", "supported_claim_type": "..." }`; every source must be `active` in the existing registry and must allow that claim type |
 | `geographic_scope`, `temporal_scope` | Explicit limits; a company disclosure must not become a general industry finding |
 | `as_of`, `reviewed_at`, `review_owner` | Valid `YYYY-MM-DD` dates (`as_of` ≤ `reviewed_at` ≤ today; every cited source's publication or effective date ≤ `as_of`) and an accountable, non-placeholder human reviewer |

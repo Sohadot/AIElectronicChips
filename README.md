@@ -102,6 +102,12 @@ The [Dependency Evidence Atlas](DEPENDENCY_EVIDENCE_ATLAS.md) defines a source-l
 
 All repository gates run in `scripts/validate_all.py`; the GitHub Actions workflow also checks the public site and negative-test suite. **GitHub Pages must be set to deploy from GitHub Actions rather than directly from the main branch**, and the validation status must be required before merging, for the gate to prevent publication.
 
+## Evidence Releases
+
+Research-candidate evidence lives in [`data/research/`](data/research/) and is validated by [`scripts/validate_evidence_releases.py`](scripts/validate_evidence_releases.py). Releases hold classified findings (verified fact, attributed statement, bounded analysis), explicit unresolved questions, and candidate Atlas relationships that are **not published** until a named human reviewer moves them into the Atlas.
+
+- [HBM4 Evidence Release 001](HBM4_EVIDENCE_RELEASE_001.md): HBM3E/HBM4/HBM4E, base-die and packaging dependencies, and supplier-reported status, behind the [`/hbm-memory/`](hbm-memory/index.html) reference.
+
 ## Source Registry
 
 - [Governed source registry](data/source-registry.json)

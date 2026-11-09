@@ -4,14 +4,40 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
 LAYERS = {"design", "fabrication", "packaging", "memory", "interconnect", "power_thermal", "controls", "deployment"}
 STATUSES = {"active", "pending_review", "retired"}
-SOURCE_TYPES = {"government_rule", "regulation", "company_filing", "annual_report", "official_technical_disclosure", "institutional_report", "technical_standard", "peer_reviewed_research", "official_dataset"}
+SOURCE_TYPES = {"government_rule", "regulation", "company_filing", "annual_report", "official_technical_disclosure", "company_announcement", "institutional_report", "technical_standard", "peer_reviewed_research", "official_dataset"}
 TOP_LEVEL = {"registry_version", "updated_at", "source_policy_reference", "source_records"}
 REQUIRED = {"id", "title", "publisher", "source_type", "canonical_url", "accessed_at", "ontology_layers", "supported_claim_types", "geographic_scope", "temporal_scope", "confidence_use", "use_limitations", "status"}
+
+
+def check_public_index(page: Path, records: list) -> list[str]:
+    """The public /sources/ index must list exactly the registry IDs, marking pending ones."""
+    try:
+        html = page.read_text(encoding="utf-8")
+    except OSError as exc:
+        return [f"could not read public registry index: {exc}"]
+    match = re.search(r'aria-label="Seed source registry IDs">(.*?)</ul>', html, re.DOTALL)
+    if not match:
+        return ["public registry index list not found in sources/index.html"]
+    listed = dict(
+        (sid, bool(pending))
+        for pending, sid in re.findall(r'<li( class="pending")?>([a-z0-9-]+)', match.group(1))
+    )
+    errors = []
+    status = {r.get("id"): r.get("status") for r in records if isinstance(r, dict)}
+    for sid in sorted(set(status) - set(listed)):
+        errors.append(f"sources/index.html does not list registry ID: {sid}")
+    for sid in sorted(set(listed) - set(status)):
+        errors.append(f"sources/index.html lists unregistered ID: {sid}")
+    for sid, pending in listed.items():
+        if sid in status and pending != (status[sid] == "pending_review"):
+            errors.append(f"sources/index.html pending marker for {sid} disagrees with registry status {status[sid]}")
+    return errors
 
 
 def main() -> None:
@@ -52,6 +78,7 @@ def main() -> None:
             errors.append(f"{label} has invalid ontology_layers: {layers}")
         if not str(record.get("canonical_url", "")).startswith("https://"):
             errors.append(f"{label} canonical_url must use https")
+    errors.extend(check_public_index(path.parents[1] / "sources" / "index.html", records))
     if errors:
         for error in errors:
             print(f"FAIL: {error}", file=sys.stderr)
