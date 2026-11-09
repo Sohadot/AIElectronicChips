@@ -1,6 +1,6 @@
 {
   "release_id": "aec-hbm4-evidence-release-001",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "status": "research_candidate",
   "publication_eligible": false,
   "as_of": "2026-11-09",
@@ -467,7 +467,37 @@
       "scope": "Samsung HBM4 and HBM4E as described 2026-02-12 and 2026-05-29",
       "as_of": "2026-11-09",
       "limitations": [
-        "The HBM4 release names a 4nm logic process but not the manufacturing unit; Samsung Foundry is named only in the HBM4E release"
+        "The HBM4 release names a 4nm logic process but not the manufacturing unit; Samsung Foundry is named as maker only in the HBM4E release. Samsung's Foundry Business statements on HBM4 base-die supply are recorded separately in f-ss-base-die-foundry"
+      ]
+    },
+    {
+      "id": "f-ss-base-die-foundry",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "Samsung's Q3 2025 results (2025-10-30) state a plan for its Foundry Business to focus in 2026 on a stable supply of the HBM4 base-die; this was forward-looking at that date. Its Q3 2026 results (2026-10-29) report Foundry revenue and earnings improvement on HBM base-die sales growth, without naming the HBM generation. Its HBM4 product page describes HBM4 as incorporating 1c DRAM, and as built on 1c DRAM and 4nm foundry technologies.",
+      "evidence": [
+        {
+          "source_id": "samsung-q3-2025-results-2025",
+          "locator": "\"the Foundry Business will focus on providing a stable supply of new 2nm GAA products and the HBM4 base-die\""
+        },
+        {
+          "source_id": "samsung-q3-2026-results-2026",
+          "locator": "\"The Foundry Business experienced a notable revenue and earnings improvement on HBM base-die sales growth\""
+        },
+        {
+          "source_id": "samsung-hbm4-product-page-2026",
+          "locator": "\"Samsung HBM4 incorporates 1c DRAM\"; \"built on 1c DRAM and 4nm foundry technologies\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Samsung's own statements on HBM4 base-die supply by its Foundry Business, 2025-10-30 to 2026-10-29, and its HBM4 product page",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The 2025 statement is a plan, not a reported outcome",
+        "The 2026 statement does not identify how much of the HBM base-die sales growth came from HBM4",
+        "Neither results release names a base-die process node, fab location, volume or customer; the 2nm GAA products and the Taylor fab mentioned nearby are not attributed to the base die",
+        "On the product page, the subject of the 4nm sentence is 'MAX', which the page does not define, and the page does not say which die uses 4nm",
+        "Company statements in earnings releases and a product page; no independent production confirmation"
       ]
     },
     {
@@ -513,7 +543,7 @@
       "id": "f-an-logic-coupling",
       "claim_class": "bounded_analysis",
       "topic": "base_die",
-      "statement": "Every HBM4 stack depends on fabricating both the DRAM core dies and the base logic die. The suppliers reviewed source the base die in three different ways: SK hynix states it applies TSMC's advanced logic process technology starting with HBM4; Samsung states a 4nm logic process, which its HBM4E release attributes to Samsung Foundry; Micron states its base logic die is designed and manufactured in-house with advanced CMOS. These arrangements change who supplies the base die, not whether advanced semiconductor manufacturing capability is required: in-house manufacture still depends on Micron's own process capability and capacity, while an external foundry adds a dependency on that foundry. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new external dependency for SK hynix is our inference.",
+      "statement": "Every HBM4 stack depends on fabricating both the DRAM core dies and the base logic die. The suppliers reviewed source the base die in three different ways: SK hynix states it applies TSMC's advanced logic process technology starting with HBM4; Samsung states a 4nm logic process for HBM4, and its Foundry Business stated in 2025 a plan to supply the HBM4 base-die in 2026 and reported in 2026 improvement on HBM base-die sales growth (its HBM4E release separately names Samsung Foundry's 4nm logic base die); Micron states its base logic die is designed and manufactured in-house with advanced CMOS. These arrangements change who supplies the base die, not whether advanced semiconductor manufacturing capability is required: in-house manufacture still depends on Micron's own process capability and capacity, while an external foundry adds a dependency on that foundry. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new external dependency for SK hynix is our inference.",
       "evidence": [
         {
           "source_id": "skhynix-tsmc-hbm4-mou-2024",
@@ -532,6 +562,14 @@
           "locator": "\"4nm logic process for HBM4\""
         },
         {
+          "source_id": "samsung-q3-2025-results-2025",
+          "locator": "\"the Foundry Business will focus on providing a stable supply of new 2nm GAA products and the HBM4 base-die\""
+        },
+        {
+          "source_id": "samsung-q3-2026-results-2026",
+          "locator": "\"The Foundry Business experienced a notable revenue and earnings improvement on HBM base-die sales growth\""
+        },
+        {
           "source_id": "micron-fy2026-form-10-k",
           "locator": "\"on the base logic die and DRAM core dies, which are designed and manufactured in-house\""
         },
@@ -546,7 +584,8 @@
       "limitations": [
         "No capacity or allocation inference is made",
         "Micron does not state its base die's process node",
-        "No supplier's relative manufacturing capability is assessed"
+        "No supplier's relative manufacturing capability is assessed",
+        "Samsung does not state which fab makes its HBM4 base die, in what volume, or how much of its reported HBM base-die sales growth is HBM4"
       ],
       "assumptions": [
         "The suppliers' own statements of their base-die sourcing are accurate; no independent production confirmation was reviewed"
@@ -997,7 +1036,7 @@
       "id": "f-an-dependency-pathways",
       "claim_class": "bounded_analysis",
       "topic": "architecture",
-      "statement": "Medium confidence: an HBM4-equipped accelerator depends on four separable stages. DRAM core dies are made on each supplier's DRAM process. The base logic die is sourced differently by each supplier (external foundry, intra-company foundry or in-house). Stack assembly is described by SK hynix and Samsung as their own packaging capability. Package integration with the accelerator is platform-specific; for NVIDIA Rubin the reviewed sources establish on-package placement but not the packaging technology. The first and fourth stages are inherent to HBM4 as an on-package memory; the base-die source and the integration route are supplier- or platform-specific.",
+      "statement": "Medium confidence: an HBM4-equipped accelerator depends on four separable stages. DRAM core dies are made on each supplier's DRAM process. The base logic die is sourced differently by each supplier: SK hynix states it applies TSMC's advanced logic process; Samsung's Foundry Business stated a plan to supply the HBM4 base-die in 2026 and later reported HBM base-die sales growth; Micron states in-house design and manufacture. Stack assembly is described by SK hynix and Samsung as their own packaging capability. Package integration with the accelerator is platform-specific; for NVIDIA Rubin the reviewed sources establish on-package placement but not the packaging technology. The first and fourth stages are inherent to HBM4 as an on-package memory; the base-die source and the integration route are supplier- or platform-specific.",
       "evidence": [
         {
           "source_id": "skhynix-tsmc-hbm4-mou-2024",
@@ -1014,6 +1053,10 @@
         {
           "source_id": "samsung-hbm4-commercial-shipment-2026",
           "locator": "\"adopted the most advanced nodes like the 1c DRAM and 4nm logic process for HBM4\""
+        },
+        {
+          "source_id": "samsung-q3-2025-results-2025",
+          "locator": "\"the Foundry Business will focus on providing a stable supply of new 2nm GAA products and the HBM4 base-die\""
         },
         {
           "source_id": "nvidia-rubin-gpu-architecture-2026",
@@ -1389,7 +1432,7 @@
       "from": "tech-hbm-logic-base-die",
       "to": "cap-logic-cmos-fabrication",
       "relation_type": "requires",
-      "statement": "Each supplier reviewed makes its HBM4 base logic die with logic-class CMOS fabrication but sources it differently: SK hynix states it applies TSMC advanced logic process technology, Samsung states a 4nm logic process attributed to Samsung Foundry, and Micron states in-house design and manufacture with advanced CMOS.",
+      "statement": "Each supplier reviewed makes its HBM4 base logic die with logic-class CMOS fabrication but sources it differently: SK hynix states it applies TSMC advanced logic process technology, Samsung states a 4nm logic process for HBM4 and its Foundry Business stated in 2025 a plan to supply the HBM4 base-die in 2026, and Micron states in-house design and manufacture with advanced CMOS.",
       "claim_class": "bounded_analysis",
       "evidence": [
         {
@@ -1398,6 +1441,14 @@
         },
         {
           "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "samsung-q3-2025-results-2025",
+          "supported_claim_type": "base_die_sourcing_context"
+        },
+        {
+          "source_id": "samsung-hbm4-product-page-2026",
           "supported_claim_type": "base_die_process_context"
         },
         {
@@ -1418,15 +1469,17 @@
       "limitations": [
         "Process nodes are not stated by SK hynix or Micron",
         "Company statements; no independent production confirmation",
-        "Says nothing about capacity or allocation"
+        "Says nothing about capacity or allocation",
+        "Samsung's base-die sourcing rests on a 2025 forward-looking plan and a 2026 report of HBM base-die sales growth that does not separate HBM4"
       ],
       "review_status": "awaiting_human_review",
       "research_recommendation": {
         "decision": "ACCEPT",
-        "rationale": "Replaces the rejected foundry-specific edge with a sourcing-neutral capability dependency that every disclosing supplier's statement supports.",
-        "changes_in_release": "New candidate introduced in IDE-002.",
+        "rationale": "Replaces the rejected foundry-specific edge with a sourcing-neutral capability dependency that every disclosing supplier's statement supports. Samsung's part now rests on its own Foundry Business statements (a 2025 plan to supply the HBM4 base-die, and 2026 reported HBM base-die sales growth) rather than on its HBM4E release.",
+        "changes_in_release": "New candidate introduced in IDE-002; Samsung wording and evidence corrected in release 1.1.1 to separate the 2025 plan from 2026 reported Foundry activity.",
         "evidence_gaps": [
-          "Nodes for SK hynix and Micron base dies"
+          "Nodes for SK hynix and Micron base dies",
+          "Share of Samsung's reported HBM base-die sales attributable to HBM4"
         ],
         "assessed_at": "2026-11-09",
         "assessment_method": "ai_assisted_source_check"

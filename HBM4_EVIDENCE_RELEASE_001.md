@@ -9,7 +9,7 @@
 
 This is the first production-grade evidence release for the memory layer. It covers HBM3E, HBM4 and HBM4E as a reference case for how the asset converts primary disclosures into classified, machine-readable findings without overstating them. It records:
 
-- **42 findings**, each with registered sources, a quoted locator, a scope, a date and limitations, classified as:
+- **43 findings**, each with registered sources, a quoted locator, a scope, a date and limitations, classified as:
   - `verified_fact` (A): established by a standard or other independent record within its scope. **None at present.** JEDEC's announcement has been read, but it is not the normative standard, so its five findings (`f-std-*`) remain attributed statements. A company filing such as Micron's 10-K is also kept attributed: it is the company's own statement. The validator rejects any `verified_fact` that rests only on announcements or cites a pending source.
   - `attributed_statement` (B): what a company disclosed. No independent verification is implied.
   - `bounded_analysis` (C): project derivations, with explicit `assumptions`.
@@ -62,12 +62,18 @@ None of this checks that a passage actually says what a finding states. **That i
 - [ ] For each candidate relationship you accept: move it to `data/dependency-atlas.json` with a named `review_owner` and `reviewed_at`, add its nodes, set Atlas `status` to `evidence_backed`, and delete it from this release. Both validators enforce the move.
 - [ ] Note the exposure model. This repository is public, so this file is readable on GitHub regardless. The Actions deploy job now stages the site without `data/research/`, and the validator fails if that exclusion is removed. Branch-mode Pages would still serve the file, so switch Pages to GitHub Actions before merging.
 
-## Industrial Dependency Evidence Release 002 (IDE-002, release version 1.1.0)
+## Industrial Dependency Evidence Release 002 (IDE-002, release version 1.1.1)
 
 IDE-002 follows the HBM4 dependency chain: architecture, base-die sourcing, stack assembly, package integration and platform qualification. Its public form is the "Industrial dependency pathways" section of `/hbm-memory/`.
 
 - **New sources:** SK hynix, 2026-07-08 (`skhynix-full-stack-memory-2026`) and 2026-04-23 (`skhynix-tsmc-symposium-2026`). SK hynix now *states* it applies TSMC advanced logic process technology to the base die starting with HBM4. That is still a company statement, and no node is named.
 - **New findings:** `f-skh-base-die-2026`, `f-packaging-stages`, `f-nv-on-package`, `f-dram-core-process` and the bounded analysis `f-an-dependency-pathways`.
+- **Samsung base-die correction (1.1.1):** three Samsung records were added (registry now 44 records). Each was read in full on 2026-11-09.
+  - `samsung-q3-2025-results-2025` (2025-10-30): the Foundry Business planned, as a forward-looking statement, to supply "the HBM4 base-die" in 2026.
+  - `samsung-q3-2026-results-2026` (2026-10-29): Foundry improvement "on HBM base-die sales growth". The release does not identify the HBM4 share.
+  - `samsung-hbm4-product-page-2026` (dated 2026-04-16 in page metadata): "1c DRAM and 4nm foundry technologies". The page does not say which die uses 4nm, and the sentence's subject, "MAX", is not defined.
+
+  These are recorded in the new attributed finding `f-ss-base-die-foundry`. Samsung's HBM4 base-die sourcing no longer rests on its HBM4E release. No fab, volume, customer or independent confirmation is inferred. The TSMC sentence on `/hbm-memory/` now reads as a conditional structural dependency based on SK hynix's own statements.
 - **Could not be read:** TSMC's 2026 North America Technology Symposium release (pr.tsmc.com/english/news/3302) returned HTTP 503 to the fetch tool and 403 to direct retrieval. Nothing from it is used.
 
 | Candidate | AI-assisted recommendation | Basis |
