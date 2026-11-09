@@ -275,6 +275,40 @@ def check_public_references(page: Path, registry: dict) -> list[str]:
     return errors
 
 
+# Three different events must not be conflated on a public page:
+#   evidence compilation  -> "Evidence compiled: <release as_of>"
+#   automated validation  -> CI only; never presented as review
+#   human scientific review -> not yet recorded for any research_candidate release
+REVIEW_PENDING_TEXT = "Scientific review pending"
+REVIEW_COMPLETION_CLAIM = re.compile(
+    r'"lastReviewed"|"reviewedBy"|\bReviewed:?\s+\d{4}-\d{2}-\d{2}|'
+    r"\b(?:scientifically|peer|independently)[ -]reviewed\b|\breview(?:ed)? (?:completed|approved)\b|\bapproved by\b",
+    re.IGNORECASE,
+)
+
+
+def check_review_representation(page: Path, compiled_dates: set[str]) -> list[str]:
+    """A page backed by a research_candidate release may state when evidence was
+    compiled, but must not claim a completed human scientific review."""
+    try:
+        html = page.read_text(encoding="utf-8")
+    except OSError as exc:
+        return [f"{page.name}: unreadable: {exc}"]
+    rel = page.relative_to(ROOT) if page.is_relative_to(ROOT) else page.name
+    errors = []
+    match = REVIEW_COMPLETION_CLAIM.search(html)
+    if match:
+        errors.append(f"{rel}: claims a completed scientific review ({match.group(0)!r}) but no human review is recorded")
+    if REVIEW_PENDING_TEXT not in html:
+        errors.append(f"{rel}: must state '{REVIEW_PENDING_TEXT}' while its evidence release is a research candidate")
+    stated = set(re.findall(r"Evidence compiled: (\d{4}-\d{2}-\d{2})", html))
+    if not stated:
+        errors.append(f"{rel}: must state 'Evidence compiled: YYYY-MM-DD'")
+    elif not stated <= compiled_dates:
+        errors.append(f"{rel}: evidence compilation date {sorted(stated)} does not match any release as_of {sorted(compiled_dates)}")
+    return errors
+
+
 def check_pages_exclusion(workflow: Path, research_dir: Path) -> list[str]:
     """Unpublished research candidates must not ship in the Pages artifact."""
     if not any(research_dir.glob("*.json")):
@@ -303,6 +337,7 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(1)
     errors: list[str] = []
     summary = []
+    compiled_dates: set[str] = set()
     for path in paths:
         try:
             release = json.loads(path.read_text(encoding="utf-8"))
@@ -311,6 +346,8 @@ def main(argv: list[str] | None = None) -> None:
             continue
         errors.extend(check_release(release, registry, atlas, date.today(), path.name))
         if isinstance(release, dict):
+            if release.get("status") == "research_candidate" and isinstance(release.get("as_of"), str):
+                compiled_dates.add(release["as_of"])
             summary.append(
                 f"{path.name}: {len(release.get('findings', []))} findings, "
                 f"{len(release.get('unresolved', []))} unresolved, "
@@ -318,6 +355,8 @@ def main(argv: list[str] | None = None) -> None:
             )
     for page in REFERENCE_PAGES:
         errors.extend(check_public_references(page, registry))
+        if compiled_dates:
+            errors.extend(check_review_representation(page, compiled_dates))
     errors.extend(check_pages_exclusion(WORKFLOW, RESEARCH_DIR))
     if errors:
         for err in errors:

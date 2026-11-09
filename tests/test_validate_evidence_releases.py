@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from validate_evidence_releases import (  # noqa: E402
     check_pages_exclusion,
+    check_review_representation,
     check_public_references,
     check_release,
 )
@@ -193,6 +194,49 @@ class PublicExposureTests(unittest.TestCase):
             wf.write_text("        with:\n          path: .\n", encoding="utf-8")
             errors = check_pages_exclusion(wf, ROOT / "data" / "research")
         self.assertTrue(errors)
+
+
+class ReviewRepresentationTests(unittest.TestCase):
+    """Evidence compilation, automated validation and human review are different events."""
+
+    PAGE = ROOT / "hbm-memory" / "index.html"
+
+    def check(self, html, dates=frozenset({"2026-11-09"})):
+        with tempfile.TemporaryDirectory() as tmp:
+            page = Path(tmp) / "index.html"
+            page.write_text(html, encoding="utf-8")
+            return check_review_representation(page, set(dates))
+
+    def test_repository_page_states_compilation_and_pending_review(self):
+        self.assertEqual([], check_review_representation(self.PAGE, {"2026-11-09"}))
+
+    def test_page_matches_release_compilation_date(self):
+        release, _, _ = load()
+        self.assertEqual([], check_review_representation(self.PAGE, {release["as_of"]}))
+
+    def test_last_reviewed_jsonld_rejected(self):
+        html = self.PAGE.read_text(encoding="utf-8").replace('"dateModified": "2026-11-09",', '"dateModified": "2026-11-09", "lastReviewed": "2026-11-09",')
+        self.assertTrue(any("completed scientific review" in e for e in self.check(html)))
+
+    def test_dated_reviewed_claim_rejected(self):
+        html = self.PAGE.read_text(encoding="utf-8") + "<p>Reviewed 2026-11-09</p>"
+        self.assertTrue(any("completed scientific review" in e for e in self.check(html)))
+
+    def test_peer_review_claim_rejected(self):
+        html = self.PAGE.read_text(encoding="utf-8") + "<p>This page was peer-reviewed.</p>"
+        self.assertTrue(any("completed scientific review" in e for e in self.check(html)))
+
+    def test_pending_statement_required(self):
+        html = self.PAGE.read_text(encoding="utf-8").replace("Scientific review pending", "")
+        self.assertTrue(any("Scientific review pending" in e for e in self.check(html)))
+
+    def test_compilation_date_must_match_release(self):
+        errors = check_review_representation(self.PAGE, {"2026-12-01"})
+        self.assertTrue(any("does not match any release as_of" in e for e in errors), errors)
+
+    def test_validation_wording_alone_is_not_review(self):
+        html = self.PAGE.read_text(encoding="utf-8") + "<p>Automated validation passed 2026-11-09.</p>"
+        self.assertEqual([], self.check(html))
 
 
 class EvidenceReleaseCliTests(unittest.TestCase):

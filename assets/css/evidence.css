@@ -142,3 +142,4 @@
 .unresolved-list li{margin:.8rem 0;color:var(--muted);max-width:820px}
 .unresolved-list strong{color:var(--text)}
 @media (max-width:700px){.ref-toc ol{columns:1}.data-table{font-size:.76rem}}
+@media (max-width:600px){.framing-note strong{white-space:normal}}
