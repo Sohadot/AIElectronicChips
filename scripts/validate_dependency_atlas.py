@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -33,6 +34,10 @@ EDGE_FIELDS = {
     "reviewed_at", "review_owner", "confidence", "limitations",
 }
 EVIDENCE_FIELDS = {"source_id", "supported_claim_type"}
+# A company's own announcement or product page records what the company said; it
+# cannot on its own establish a verified_fact. Such edges must be classified as
+# attributed_statement (or bounded_analysis), or cite an additional record type.
+SELF_REPORTED_SOURCE_TYPES = {"official_technical_disclosure"}
 
 
 def nonempty(value: object) -> bool:
@@ -156,6 +161,7 @@ def validate(atlas: object, registry: object, today: date | None = None) -> list
         errors.append("foundation atlas cannot contain published relationships; change status after review")
 
     edge_ids: set[str] = set()
+    edge_keys: set[tuple] = set()
     for i, edge in enumerate(relationships):
         where = f"relationships[{i}]"
         if not isinstance(edge, dict):
@@ -175,6 +181,11 @@ def validate(atlas: object, registry: object, today: date | None = None) -> list
             errors.append(f"{where} references unknown endpoint(s)")
         elif a == b:
             errors.append(f"{where} has a self-loop")
+        else:
+            key = (a, b, edge.get("relation_type"))
+            if key in edge_keys:
+                errors.append(f"{where} duplicates an existing from/to/relation_type relationship")
+            edge_keys.add(key)
         if edge.get("relation_type") not in RELATION_TYPES:
             errors.append(f"{where} invalid relation_type")
         if edge.get("claim_class") not in CLAIM_CLASSES:
@@ -201,6 +212,7 @@ def validate(atlas: object, registry: object, today: date | None = None) -> list
             errors.append(f"{where}.evidence must contain at least one registry citation")
             continue
         used_sources: set[str] = set()
+        cited_types: list[object] = []
         for j, citation in enumerate(citations):
             cwhere = f"{where}.evidence[{j}]"
             if not isinstance(citation, dict) or set(citation) != EVIDENCE_FIELDS:
@@ -217,6 +229,7 @@ def validate(atlas: object, registry: object, today: date | None = None) -> list
             if source is None:
                 errors.append(f"{cwhere} unregistered source: {sid}")
                 continue
+            cited_types.append(source.get("source_type"))
             if source.get("status") != "active":
                 errors.append(f"{cwhere} source is not active: {sid}")
             supported = source.get("supported_claim_types", [])
@@ -230,13 +243,30 @@ def validate(atlas: object, registry: object, today: date | None = None) -> list
             accessed = parse_date(source.get("accessed_at"), f"registry[{sid}].accessed_at", errors)
             if reviewed and accessed and reviewed < accessed:
                 errors.append(f"{cwhere} reviewer date predates recorded source access")
+            published_field = "publication_date" if source.get("publication_date") else "effective_date"
+            published = parse_date(source.get(published_field), f"registry[{sid}].{published_field}", errors)
+            if published and as_of and published > as_of:
+                errors.append(f"{cwhere} source {published_field} is later than the relationship as_of date")
+        if (
+            edge.get("claim_class") == "verified_fact"
+            and cited_types
+            and all(t in SELF_REPORTED_SOURCE_TYPES for t in cited_types)
+        ):
+            errors.append(
+                f"{where} verified_fact cannot rest solely on self-reported company disclosures; "
+                "classify as attributed_statement or cite an independent record"
+            )
     return errors
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--atlas", type=Path, default=ATLAS, help="atlas JSON path (default: repository atlas)")
+    parser.add_argument("--registry", type=Path, default=REGISTRY, help="source registry JSON path")
+    args = parser.parse_args(argv)
     try:
-        atlas = json.loads(ATLAS.read_text(encoding="utf-8"))
-        registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+        atlas = json.loads(args.atlas.read_text(encoding="utf-8"))
+        registry = json.loads(args.registry.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         print(f"FAIL: dependency atlas or source registry unreadable: {exc}", file=sys.stderr)
         raise SystemExit(1)

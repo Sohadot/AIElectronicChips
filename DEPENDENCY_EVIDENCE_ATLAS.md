@@ -15,12 +15,14 @@ Each future entry in `relationships` MUST contain:
 | `id`, `from`, `to` | Unique edge ID; both endpoints must be existing, distinct node IDs |
 | `relation_type` | One of `requires`, `integrates_with`, `constrained_by`, `governed_by`, `enables` |
 | `statement` | A narrow, independently reviewable explanation of the relationship |
-| `claim_class` | `verified_fact`, `attributed_statement` or `bounded_analysis` |
+| `claim_class` | `verified_fact`, `attributed_statement` or `bounded_analysis`. A `verified_fact` cannot rest solely on `official_technical_disclosure` sources (company announcements and product pages); it must also cite an independent record type such as a standard, filing, rule or dataset |
 | `evidence` | At least one `{ "source_id": "...", "supported_claim_type": "..." }`; every source must be `active` in the existing registry and must allow that claim type |
 | `geographic_scope`, `temporal_scope` | Explicit limits; a company disclosure must not become a general industry finding |
-| `as_of`, `reviewed_at`, `review_owner` | Valid dates and accountable human review |
+| `as_of`, `reviewed_at`, `review_owner` | Valid `YYYY-MM-DD` dates (`as_of` ≤ `reviewed_at` ≤ today; every cited source's publication or effective date ≤ `as_of`) and an accountable, non-placeholder human reviewer |
 | `confidence` | `high`, `medium` or `low`, assessed from the actual evidence rather than the publisher name |
 | `limitations` | Non-empty list recording unknowns, limitations and material conflicts |
+
+Each `(from, to, relation_type)` triple may appear only once; additional evidence belongs in the existing edge's `evidence` list rather than a parallel edge.
 
 Nodes may be `ontology_layer`, `technology`, `capability`, `infrastructure` or `policy`. Every node declares one or more of the existing eight ontology layers. The existing eight layer nodes must remain present and correctly mapped.
 
@@ -34,6 +36,12 @@ Nodes may be `ontology_layer`, `technology`, `capability`, `infrastructure` or `
 - Registry metadata validation is necessary but does not independently verify the truth of an edge. Human claim-level review remains required.
 - Unknown, outdated, unpublished, pending-review or retired evidence must never silently become a published relation.
 - Do not populate speculative company, capacity, availability or supplier edges merely to fill out the graph.
+
+## What the validator does and does not establish
+
+`scripts/validate_dependency_atlas.py` establishes **structural and referential consistency**: schema shape, unique identifiers, resolvable endpoints and registry IDs, active source status, permitted claim types, ontology overlap, date ordering and the presence of scope, limitations and a named reviewer. It does **not** read the cited documents and cannot confirm that a source actually says what an edge states. A passing run is a precondition for human evidence review, never a substitute for it.
+
+The validator accepts `--atlas` and `--registry` paths so its exit status can be regression-tested against malformed fixtures (`tests/test_validate_dependency_atlas.py`, `AtlasCliExitCodeTests`). Any error exits with status 1, which `scripts/validate_all.py` and the CI workflow propagate.
 
 ## How to add a relationship
 

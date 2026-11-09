@@ -4,7 +4,10 @@
 from __future__ import annotations
 
 import copy
+import json
+import subprocess
 import sys
+import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
@@ -12,6 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from validate_dependency_atlas import LAYERS, validate  # noqa: E402
+
+VALIDATOR = ROOT / "scripts" / "validate_dependency_atlas.py"
 
 TODAY = date(2026, 11, 1)
 
@@ -58,6 +63,7 @@ def fixture():
     }
     registry = {"source_records": [{
         "id": "official-test-source", "status": "active", "accessed_at": "2026-06-14",
+        "source_type": "official_technical_disclosure", "publication_date": "2025-04-16",
         "supported_claim_types": ["technical_specification"],
         "ontology_layers": ["memory", "packaging"],
     }]}
@@ -143,6 +149,147 @@ class AtlasGateTests(unittest.TestCase):
         atlas, registry = fixture()
         atlas["relationships"][0]["unreviewed_opinion"] = "yes"
         self.assert_fails(atlas, registry, "fields mismatch")
+
+    # --- Additional rejection paths (Sprint 10 hardening) -------------------
+
+    def test_invalid_claim_class(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["claim_class"] = "confirmed"
+        self.assert_fails(atlas, registry, "invalid claim_class")
+
+    def test_invalid_relation_type(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["relation_type"] = "supplies"
+        self.assert_fails(atlas, registry, "invalid relation_type")
+
+    def test_malformed_date(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["as_of"] = "2026-13-40"
+        self.assert_fails(atlas, registry, "valid ISO date")
+
+    def test_non_canonical_date_format(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["reviewed_at"] = "20260614"
+        self.assert_fails(atlas, registry, "reviewed_at")
+
+    def test_as_of_after_review(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["as_of"] = "2026-06-20"
+        self.assert_fails(atlas, registry, "as_of exceeds reviewed_at")
+
+    def test_missing_geographic_scope(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["geographic_scope"] = "  "
+        self.assert_fails(atlas, registry, "geographic_scope must be specific")
+
+    def test_missing_temporal_scope(self):
+        atlas, registry = fixture()
+        del atlas["relationships"][0]["temporal_scope"]
+        self.assert_fails(atlas, registry, "temporal_scope must be specific")
+
+    def test_placeholder_reviewer(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["review_owner"] = "TBD"
+        self.assert_fails(atlas, registry, "review_owner must be specific")
+
+    def test_missing_evidence(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["evidence"] = []
+        self.assert_fails(atlas, registry, "evidence must contain at least one")
+
+    def test_duplicate_edge_id(self):
+        atlas, registry = fixture()
+        twin = copy.deepcopy(atlas["relationships"][0])
+        twin["relation_type"] = "requires"
+        atlas["relationships"].append(twin)
+        self.assert_fails(atlas, registry, "duplicate edge ID")
+
+    def test_semantic_duplicate_edge(self):
+        atlas, registry = fixture()
+        twin = copy.deepcopy(atlas["relationships"][0])
+        twin["id"] = "rel-hbm-packaging-copy"
+        atlas["relationships"].append(twin)
+        self.assert_fails(atlas, registry, "duplicates an existing from/to/relation_type")
+
+    def test_duplicate_registry_id(self):
+        atlas, registry = fixture()
+        registry["source_records"].append(copy.deepcopy(registry["source_records"][0]))
+        self.assert_fails(atlas, registry, "duplicate registry ID")
+
+    def test_self_loop(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["to"] = "tech-hbm"
+        self.assert_fails(atlas, registry, "self-loop")
+
+    def test_invalid_confidence(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["confidence"] = "certain"
+        self.assert_fails(atlas, registry, "invalid confidence")
+
+    def test_verified_fact_on_company_disclosure_only(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["claim_class"] = "verified_fact"
+        self.assert_fails(atlas, registry, "verified_fact cannot rest solely")
+
+    def test_verified_fact_with_independent_record_passes(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["claim_class"] = "verified_fact"
+        registry["source_records"].append({
+            "id": "standard-test-source", "status": "active", "accessed_at": "2026-06-14",
+            "source_type": "technical_standard", "publication_date": "2025-04-16",
+            "supported_claim_types": ["technical_specification"],
+            "ontology_layers": ["memory"],
+        })
+        atlas["relationships"][0]["evidence"].append(
+            {"source_id": "standard-test-source", "supported_claim_type": "technical_specification"})
+        self.assertEqual([], validate(atlas, registry, today=TODAY))
+
+    def test_source_published_after_relationship_date(self):
+        atlas, registry = fixture()
+        registry["source_records"][0]["publication_date"] = "2026-07-01"
+        self.assert_fails(atlas, registry, "later than the relationship as_of")
+
+    def test_retired_source(self):
+        atlas, registry = fixture()
+        registry["source_records"][0]["status"] = "retired"
+        self.assert_fails(atlas, registry, "not active")
+
+
+class AtlasCliExitCodeTests(unittest.TestCase):
+    """Prove the gate is fail-closed at the process level, which is what CI consumes."""
+
+    def run_cli(self, atlas, registry):
+        with tempfile.TemporaryDirectory() as tmp:
+            atlas_path = Path(tmp) / "atlas.json"
+            registry_path = Path(tmp) / "registry.json"
+            atlas_path.write_text(json.dumps(atlas), encoding="utf-8")
+            registry_path.write_text(json.dumps(registry), encoding="utf-8")
+            return subprocess.run(
+                [sys.executable, str(VALIDATOR), "--atlas", str(atlas_path), "--registry", str(registry_path)],
+                capture_output=True, text=True, check=False,
+            )
+
+    def test_repository_files_exit_zero(self):
+        result = subprocess.run([sys.executable, str(VALIDATOR)], capture_output=True, text=True, check=False)
+        self.assertEqual(0, result.returncode, result.stderr)
+
+    def test_malformed_relationship_exits_nonzero(self):
+        atlas, registry = fixture()
+        atlas["relationships"][0]["evidence"][0]["source_id"] = "fictional-source"
+        result = self.run_cli(atlas, registry)
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("unregistered source", result.stderr)
+
+    def test_unparseable_json_exits_nonzero(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bad = Path(tmp) / "atlas.json"
+            bad.write_text("{not json", encoding="utf-8")
+            result = subprocess.run(
+                [sys.executable, str(VALIDATOR), "--atlas", str(bad)],
+                capture_output=True, text=True, check=False,
+            )
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("unreadable", result.stderr)
 
 
 if __name__ == "__main__":
