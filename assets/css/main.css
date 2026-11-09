@@ -85,7 +85,7 @@ main p a:hover, .reference-block li a:not([class]):hover, main td a:hover { text
 }
 .brand-mark:after { content: ""; position: absolute; inset: 5px; border: 1px solid var(--ink); }
 .primary-nav, .site-footer nav { display: flex; gap: 1.5rem; align-items: center; }
-.primary-nav a, .site-footer nav a { color: var(--muted); text-decoration: none; font-size: .84rem; letter-spacing: .01em; padding: .3rem 0; }
+.primary-nav a, .site-footer nav a { color: var(--muted); text-decoration: none; font-size: .9rem; letter-spacing: .01em; padding: .3rem 0; }
 .primary-nav a:hover, .primary-nav a:focus-visible, .site-footer a:hover { color: var(--ink-strong); text-decoration: underline; text-underline-offset: .3em; }
 .primary-nav a[aria-current=page] { color: var(--ink-strong); border-bottom: 2px solid var(--teal); }
 
@@ -97,7 +97,7 @@ h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); line-height: 1.05; letter-spacing:
 h2 { font-size: clamp(1.75rem, 3.4vw, 2.7rem); line-height: 1.15; letter-spacing: -.01em; }
 h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
 .eyebrow, .section-label {
-  text-transform: uppercase; letter-spacing: .14em; font-size: .74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .84rem; font-weight: 700;
   color: var(--copper-ink); margin: 0 0 1.1rem; font-family: var(--sans);
 }
 .blue { color: var(--teal-ink); }
@@ -121,7 +121,7 @@ h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
   display: flex; gap: 1rem; align-items: flex-start; border-left: 3px solid var(--teal);
   padding: .9rem 1.1rem; background: var(--tint); max-width: 760px; margin-top: 2rem;
 }
-.framing-note strong { font-size: .74rem; text-transform: uppercase; letter-spacing: .1em; color: var(--teal-ink); white-space: nowrap; }
+.framing-note strong { font-size: .875rem; text-transform: uppercase; letter-spacing: .1em; color: var(--teal-ink); white-space: nowrap; }
 .framing-note span { font-size: .9rem; color: var(--ink); }
 
 /* Wafer: concentric die rings with the scribe cross; the core counts the eight layers. */
@@ -140,7 +140,7 @@ h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
   width: 43%; aspect-ratio: 1; background: var(--surface); border: 1.5px solid var(--copper);
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 1;
 }
-.wafer-core span, .wafer-core small { font-size: .66rem; letter-spacing: .14em; color: var(--muted); font-family: var(--mono); }
+.wafer-core span, .wafer-core small { font-size: .8rem; letter-spacing: .14em; color: var(--muted); font-family: var(--mono); }
 .wafer-core strong { font-size: 3rem; font-weight: 600; line-height: 1.2; color: var(--ink-strong); font-family: var(--serif); }
 
 /* ---------- Sections ---------- */
@@ -156,7 +156,7 @@ h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
 .stack li { border-bottom: 1px solid var(--line); position: relative; }
 .stack a { display: grid; grid-template-columns: 70px 1fr 30px; gap: 1rem; padding: 1.15rem .4rem 1.15rem 0; text-decoration: none; align-items: center; }
 .stack a:hover, .stack a:focus-visible { background: linear-gradient(90deg, rgba(20, 120, 129, .07), transparent 70%); }
-.layer-id, .block-index { font-family: var(--mono); font-size: .76rem; color: var(--copper-ink); letter-spacing: .06em; font-weight: 600; }
+.layer-id, .block-index { font-family: var(--mono); font-size: .875rem; color: var(--copper-ink); letter-spacing: .06em; font-weight: 600; }
 .stack .layer-id {
   justify-self: center; position: relative; z-index: 1; background: var(--surface); border: 1px solid var(--copper);
   padding: .15rem .35rem; line-height: 1.2;
@@ -249,7 +249,7 @@ h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
 
 /* ---------- Strategic availability inquiry ---------- */
 .sa-field { margin: 1.2rem 0; max-width: 760px; }
-.sa-field label, .sa-layers legend { display: block; font-size: .76rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .45rem; padding: 0; font-weight: 700; }
+.sa-field label, .sa-layers legend { display: block; font-size: .875rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .45rem; padding: 0; font-weight: 700; }
 .sa-field select, .sa-field textarea {
   width: 100%; background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink);
   font: inherit; font-size: .98rem; padding: .7rem .8rem;
@@ -306,7 +306,7 @@ h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
 @media (max-width: 900px) {
   .site-header { height: auto; min-height: 64px; flex-wrap: wrap; row-gap: .2rem; padding-top: .8rem; padding-bottom: .6rem; }
   .primary-nav { display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; width: 100%; }
-  .primary-nav a { font-size: .86rem; padding: .35rem 0; }
+  .primary-nav a { font-size: .9rem; padding: .35rem 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
