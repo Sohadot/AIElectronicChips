@@ -1,10 +1,10 @@
 // Generate the governed og:image set (1200x630) for every public route.
-// The visual system embodies INTERFACE_THESIS.md: deep black substrate with
-// micro-grid, copper wafer cross-section, reserved electric blue, monospace
-// layer identifiers. Run: node scripts/generate-og-images.mjs
+// Light "Luminous Silicon Atlas" palette, matching assets/css/main.css: pale
+// silicon substrate with the die-reticle grid, copper/teal wafer, ink type,
+// teal rule, monospace layer identifiers. Run: node scripts/generate-og-images.mjs
 // Requires the globally installed playwright and the preinstalled Chromium.
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
-import { mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -31,30 +31,29 @@ const PAGES = [
 function template({ eyebrow, title, id, small }) {
   return `<!doctype html><html><head><meta charset="utf-8"><style>
   *{margin:0;box-sizing:border-box}
-  body{width:1200px;height:630px;background:#080a0c;color:#eef1f3;
+  body{width:1200px;height:630px;background:#f5f7f5;color:#1a2935;
     font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
-    background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+    background-image:linear-gradient(rgba(38,55,70,.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(38,55,70,.06) 1px,transparent 1px);
     background-size:48px 48px;position:relative;overflow:hidden;
     display:flex;flex-direction:column;justify-content:center;padding:0 84px}
   .wafer{position:absolute;right:-140px;top:50%;transform:translateY(-50%);
-    width:520px;height:520px;border:1px solid #394149;border-radius:50%;
-    background:repeating-radial-gradient(circle at center,transparent 0 34px,rgba(166,107,69,.14) 35px 36px),
-      linear-gradient(45deg,transparent 49.7%,rgba(166,107,69,.5) 50%,transparent 50.3%),
-      linear-gradient(-45deg,transparent 49.7%,rgba(166,107,69,.35) 50%,transparent 50.3%);
-    box-shadow:inset 0 0 100px rgba(166,107,69,.1)}
-  .wafer:before{content:"";position:absolute;left:-30%;top:50%;width:160%;height:1px;background:#a66b45;opacity:.4}
-  .wafer:after{content:"";position:absolute;top:-30%;left:50%;height:160%;width:1px;background:#a66b45;opacity:.4}
+    width:520px;height:520px;border:2px solid #147881;border-radius:50%;background-color:#ffffff;
+    background-image:repeating-radial-gradient(circle at center,transparent 0 34px,rgba(165,104,67,.25) 35px 36px),
+      linear-gradient(45deg,transparent 49.7%,rgba(20,120,129,.4) 50%,transparent 50.3%),
+      linear-gradient(-45deg,transparent 49.7%,rgba(20,120,129,.3) 50%,transparent 50.3%)}
+  .wafer:before{content:"";position:absolute;left:-30%;top:50%;width:160%;height:1px;background:#a56843;opacity:.7}
+  .wafer:after{content:"";position:absolute;top:-30%;left:50%;height:160%;width:1px;background:#a56843;opacity:.7}
   .core{position:absolute;right:75px;top:50%;transform:translateY(-50%);
-    width:210px;height:210px;background:#101419;border:1px solid #a66b45;
+    width:210px;height:210px;background:#ffffff;border:2px solid #a56843;
     display:flex;align-items:center;justify-content:center}
-  .core span{font-family:ui-monospace,Consolas,monospace;font-size:64px;color:#a66b45;letter-spacing:.04em}
+  .core span{font-family:ui-monospace,Consolas,monospace;font-size:64px;color:#8a5232;letter-spacing:.04em}
   .copy{max-width:740px;position:relative;z-index:2}
-  .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:22px;font-weight:700;color:#a66b45;margin-bottom:30px}
-  h1{font-size:${small ? '58px' : '76px'};line-height:1.02;letter-spacing:-.045em;font-weight:700}
-  .rule{width:120px;height:3px;background:#56a9e9;margin:38px 0 26px}
-  .domain{font-size:26px;color:#98a1aa;letter-spacing:.03em}
-  .domain b{color:#eef1f3;font-weight:700}
+  .eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:22px;font-weight:700;color:#8a5232;margin-bottom:30px}
+  h1{font-family:Charter,"Bitstream Charter","Iowan Old Style",Georgia,serif;font-size:${small ? '58px' : '76px'};line-height:1.05;letter-spacing:-.02em;font-weight:600}
+  .rule{width:120px;height:3px;background:#147881;margin:38px 0 26px}
+  .domain{font-size:26px;color:#4f5e6b;letter-spacing:.03em}
+  .domain b{color:#1a2935;font-weight:700}
   </style></head><body>
     <div class="wafer"></div>
     ${id ? `<div class="core"><span>${id}</span></div>` : ''}
@@ -67,9 +66,8 @@ function template({ eyebrow, title, id, small }) {
   </body></html>`;
 }
 
-const browser = await chromium.launch({
-  executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-});
+const PINNED = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const browser = await chromium.launch(existsSync(PINNED) ? { executablePath: PINNED } : {});
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 for (const p of PAGES) {
   await page.setContent(template(p), { waitUntil: 'networkidle' });

@@ -162,6 +162,7 @@
           <h2>How an HBM stack works</h2>
           <p class="detail">Conventional DRAM interfaces run a narrow bus fast. HBM takes the other route: an extremely wide bus at moderate per-pin speed. That trade only works because the memory sits beside the processor in the same package, where thousands of short connections are practical, rather than across a circuit board.</p>
           <figure class="hbm-figure">
+            <div class="figure-frame" tabindex="0" role="region" aria-label="Figure 1 drawing; scrolls horizontally on narrow screens">
             <svg viewBox="0 0 760 330" role="img" aria-labelledby="fig1-title fig1-desc">
               <title id="fig1-title">Schematic cross-section of an HBM stack beside an accelerator in a 2.5D package</title>
               <desc id="fig1-desc">From bottom to top: package substrate, an interposer or bridge layer, then an accelerator die on the left and an HBM stack on the right. The HBM stack is a logic base die with several DRAM core dies above it, linked by vertical through-silicon vias. Short horizontal wiring in the interposer connects the base die to the accelerator.</desc>
@@ -186,10 +187,10 @@
                 <rect class="f-dram" x="470" y="54" width="190" height="16"/>
                 <rect class="f-dram" x="470" y="34" width="190" height="16"/>
               </g>
-              <line class="f-tsv" x1="510" y1="34" x2="510" y2="224"/>
-              <line class="f-tsv" x1="545" y1="34" x2="545" y2="224"/>
-              <line class="f-tsv" x1="585" y1="34" x2="585" y2="224"/>
-              <line class="f-tsv" x1="620" y1="34" x2="620" y2="224"/>
+              <line class="f-tsv" x1="510" y1="34" x2="510" y2="196"/>
+              <line class="f-tsv" x1="545" y1="34" x2="545" y2="196"/>
+              <line class="f-tsv" x1="585" y1="34" x2="585" y2="196"/>
+              <line class="f-tsv" x1="620" y1="34" x2="620" y2="196"/>
               <rect class="f-bump" x="120" y="226" width="170" height="4"/>
               <rect class="f-bump" x="480" y="226" width="170" height="4"/>
               <path class="f-lead" d="M662 110 H690"/>
@@ -200,6 +201,7 @@
               <text class="f-note" x="100" y="70">Stack shown with 8 core dies;</text>
               <text class="f-note" x="100" y="86">JEDEC announces 4- to 16-high stacks</text>
             </svg>
+            </div>
             <figcaption>Figure 1. Original schematic by AIElectronicChips.com, not to scale. It shows the general 2.5D arrangement. The interposer or bridge technology, die count and dimensions vary by product and are not specified by the sources on this page. <span class="tag tag-c">C</span></figcaption>
           </figure>
           <ul class="detail">
@@ -213,7 +215,7 @@
         <article class="reference-block" id="generations"><div class="block-index">02</div><div>
           <h2>HBM3E, HBM4 and HBM4E compared</h2>
           <p class="detail">The HBM3E column is built from how HBM4 disclosures describe their predecessor, not from a re-review of HBM3E product records. No JEDEC HBM4E document appears in any source reviewed here, so the HBM4E column reflects one supplier's sample disclosure only.</p>
-          <div class="table-scroll">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Generation parameters by evidence class (scrollable table)">
             <table class="data-table">
               <caption>Generation parameters by evidence class. Bracketed numbers refer to the reference list.</caption>
               <thead><tr><th scope="col">Parameter</th><th scope="col">HBM3E (as referenced)</th><th scope="col">HBM4: JEDEC announcement</th><th scope="col">HBM4: supplier disclosures</th><th scope="col">HBM4E: supplier disclosure</th></tr></thead>
@@ -235,7 +237,7 @@
         <article class="reference-block" id="bandwidth"><div class="block-index">03</div><div>
           <h2>Bandwidth arithmetic <span class="tag tag-c">C</span></h2>
           <p class="detail">Per-stack peak bandwidth is the interface width times the per-pin rate, divided by eight bits per byte. The table applies this to a 2,048-bit interface and sets the result beside the disclosed figures.</p>
-          <div class="table-scroll">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Peak per-stack bandwidth at 2,048 bits (decimal TB/s) (scrollable table)">
             <table class="data-table">
               <caption>Peak per-stack bandwidth at 2,048 bits (decimal TB/s). Assumes all data bits transfer at the stated rate. Peak bandwidth is not sustained application bandwidth.</caption>
               <thead><tr><th scope="col">Per-pin rate</th><th scope="col">Computed peak</th><th scope="col">Closest disclosed figure</th></tr></thead>
@@ -288,7 +290,7 @@
         <article class="reference-block" id="thermal"><div class="block-index">06</div><div>
           <h2>Power and thermal disclosures</h2>
           <p class="detail">Each supplier reports an efficiency gain, but against a different baseline. The figures are shown together so the differences are visible, not so they can be compared.</p>
-          <div class="table-scroll">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Supplier-reported efficiency claims (scrollable table)">
             <table class="data-table">
               <caption>Supplier-reported efficiency claims <span class="tag tag-a">A</span>. Not comparable across rows.</caption>
               <thead><tr><th scope="col">Source</th><th scope="col">Claim</th><th scope="col">Stated basis</th></tr></thead>
@@ -307,7 +309,7 @@
         <article class="reference-block" id="status"><div class="block-index">07</div><div>
           <h2>Commercialization ledger</h2>
           <p class="detail">Each row records the stage a company said it had reached, in its own words. Samples, a readied "mass production system", volume shipment and commercial shipment are different milestones and must not be merged.</p>
-          <div class="table-scroll">
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Company-reported HBM4 and HBM4E milestones, in date order (scrollable table)">
             <table class="data-table">
               <caption>Company-reported HBM4 and HBM4E milestones <span class="tag tag-a">A</span>, in date order.</caption>
               <thead><tr><th scope="col">Date</th><th scope="col">Company</th><th scope="col">Reported stage</th><th scope="col">Does not establish</th></tr></thead>
