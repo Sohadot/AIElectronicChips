@@ -14,38 +14,37 @@
       "id": "f-std-interface",
       "claim_class": "attributed_statement",
       "topic": "standard",
-      "statement": "JEDEC's 2025-04-16 announcement of JESD270-4 (HBM4) states a 2048-bit interface, transfer speeds up to 8 Gb/s and total bandwidth up to 2 TB/s per stack.",
+      "statement": "JEDEC's 2025-04-16 announcement of JESD270-4 (HBM4) states transfer speeds up to 8 Gb/s across a 2048-bit interface, for total bandwidth up to 2 TB/s.",
       "evidence": [
         {
           "source_id": "jedec-jesd270-4-hbm4-standard-2025",
-          "locator": "Announcement text not retrieved (HTTP 403 from jedec.org and Business Wire on 2026-11-09); figures as surfaced by a search index, to be confirmed by a reviewer"
+          "locator": "\"With transfer speeds up to 8 Gb/s across a 2048-bit interface, HBM4 boosts total bandwidth up to 2 TB/s.\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Industry standard as announced; not a statement about shipped products",
       "as_of": "2026-11-09",
       "limitations": [
-        "Pending direct review of the JEDEC announcement text (jedec.org and Business Wire refused retrieval)",
-        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
-        "JEDEC lists a later JESD270-4A revision (Dec 2025) whose changes are not reviewed"
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
+        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed"
       ]
     },
     {
       "id": "f-std-channels",
       "claim_class": "attributed_statement",
       "topic": "standard",
-      "statement": "JEDEC's HBM4 announcement states that independent channels per stack double from 16 (HBM3) to 32, each with two pseudo-channels.",
+      "statement": "JEDEC's HBM4 announcement states that independent channels per stack double from 16 (HBM3) to 32, with two pseudo-channels per channel.",
       "evidence": [
         {
           "source_id": "jedec-jesd270-4-hbm4-standard-2025",
-          "locator": "Announcement text not retrieved (HTTP 403 from jedec.org and Business Wire on 2026-11-09); figures as surfaced by a search index, to be confirmed by a reviewer"
+          "locator": "\"from 16 channels (HBM3) to 32 channels with 2 pseudo-channels per channel\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Industry standard as announced",
       "as_of": "2026-11-09",
       "limitations": [
-        "Pending direct review of the JEDEC announcement text (jedec.org and Business Wire refused retrieval)",
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
         "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed"
       ]
     },
@@ -53,18 +52,18 @@
       "id": "f-std-stacks",
       "claim_class": "attributed_statement",
       "topic": "stack_configuration",
-      "statement": "JEDEC's HBM4 announcement lists 4-high, 8-high, 12-high and 16-high TSV stacks using 24 Gb or 32 Gb dies, with a maximum cube density of 64 GB.",
+      "statement": "JEDEC's HBM4 announcement lists 4-high, 8-high, 12-high and 16-high DRAM stack configurations with 24 Gb or 32 Gb die densities, providing a cube density of 64GB (32 Gb, 16-high).",
       "evidence": [
         {
           "source_id": "jedec-jesd270-4-hbm4-standard-2025",
-          "locator": "Announcement text not retrieved (HTTP 403 from jedec.org and Business Wire on 2026-11-09); figures as surfaced by a search index, to be confirmed by a reviewer"
+          "locator": "\"4-high, 8-high, 12-high and 16-high DRAM stack configurations with 24 Gb or 32 Gb die densities\"; \"a higher cube density of 64GB (32 Gb 16-High)\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Industry standard as announced; permitted configurations, not products offered",
       "as_of": "2026-11-09",
       "limitations": [
-        "Pending direct review of the JEDEC announcement text (jedec.org and Business Wire refused retrieval)",
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
         "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
         "A permitted configuration is not evidence that any supplier offers it"
       ]
@@ -73,20 +72,40 @@
       "id": "f-std-compat",
       "claim_class": "attributed_statement",
       "topic": "standard",
-      "statement": "JEDEC's HBM4 announcement states compatibility with HBM3 controllers, so one controller can support both, and the addition of Directed Refresh Management (DRFM) for row-hammer mitigation.",
+      "statement": "JEDEC's HBM4 announcement states backward compatibility with existing HBM3 controllers, allowing a single controller to work with both if needed, and Directed Refresh Management (DRFM) for improved row-hammer mitigation and RAS.",
       "evidence": [
         {
           "source_id": "jedec-jesd270-4-hbm4-standard-2025",
-          "locator": "Announcement text not retrieved (HTTP 403 from jedec.org and Business Wire on 2026-11-09); figures as surfaced by a search index, to be confirmed by a reviewer"
+          "locator": "\"backwards compatibility with existing HBM3 controllers\"; \"allowing a single controller to work with both HBM3 and HBM4 if needed\"; \"Directed Refresh Management (DRFM) for improved row-hammer mitigation\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Industry standard as announced",
       "as_of": "2026-11-09",
       "limitations": [
-        "Pending direct review of the JEDEC announcement text (jedec.org and Business Wire refused retrieval)",
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
         "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
         "Controller compatibility does not imply drop-in substitution at the package or platform level"
+      ]
+    },
+    {
+      "id": "f-std-voltage",
+      "claim_class": "attributed_statement",
+      "topic": "standard",
+      "statement": "JEDEC's HBM4 announcement states that JESD270-4 supports vendor-specific VDDQ levels of 0.7 V, 0.75 V, 0.8 V or 0.9 V and VDDC levels of 1.0 V or 1.05 V, which it associates with lower power consumption.",
+      "evidence": [
+        {
+          "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+          "locator": "\"vendor specific VDDQ (0.7V, 0.75V, 0.8V or 0.9V) and VDDC (1.0V or 1.05V) levels\"; \"resulting in lower power consumption\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Industry standard as announced",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
+        "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
+        "The announcement gives no power figures; which levels any supplier uses is not stated"
       ]
     },
     {
@@ -154,7 +173,7 @@
       "evidence": [
         {
           "source_id": "samsung-hbm4-commercial-shipment-2026",
-          "locator": "\"consistent processing speed of 11.7 gigabits-per-second (Gbps), exceeding the industry standard of 8Gbps by approximately 46%\"; \"to a maximum of 3.3 terabytes-per-second (TB/s)\"; \"doubling of data I/Os from 1,024 to 2,048 pins\""
+          "locator": "\"consistent processing speed of 11.7 gigabits-per-second (Gbps)\"; \"exceeding the industry standard of 8Gbps by approximately 46%\"; \"increased by 2.7x compared to HBM3E, to a maximum of 3.3 terabytes-per-second (TB/s)\"; \"doubling of data I/Os from 1,024 to 2,048 pins\""
         },
         {
           "source_id": "samsung-hbm4-gtc-2026",
@@ -196,7 +215,7 @@
       "evidence": [
         {
           "source_id": "samsung-hbm4e-samples-2026",
-          "locator": "\"a stable pin speed of 14 gigabits-per-second (Gbps), with performance scalable up to 16Gbps\"; \"up to 3.6 terabytes-per-second (TB/s) per stack\""
+          "locator": "\"begun shipping the industry's first 12-layer HBM4E samples\"; \"offered in a 48-gigabyte (GB) capacity\"; \"a stable pin speed of 14 gigabits-per-second (Gbps)\"; \"scalable up to 16Gbps\"; \"up to 3.6 terabytes-per-second (TB/s) per stack\""
         }
       ],
       "evidence_state": "cited_sources_active",
@@ -216,7 +235,7 @@
       "evidence": [
         {
           "source_id": "jedec-jesd270-4-hbm4-standard-2025",
-          "locator": "JEDEC release text as surfaced by a search index on 2026-11-09; jedec.org returned HTTP 403 to direct retrieval, so the passage has not been read in full"
+          "locator": "\"transfer speeds up to 8 Gb/s across a 2048-bit interface\""
         },
         {
           "source_id": "micron-hbm4-volume-production-2026",
@@ -239,7 +258,7 @@
           "locator": "footnote: \"published HBM3E specifications (2.0 TB/s vs. 1.2 TB/s)\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Arithmetic on disclosed figures; decimal terabytes",
       "as_of": "2026-11-09",
       "limitations": [
@@ -327,10 +346,10 @@
         },
         {
           "source_id": "jedec-jesd270-4-hbm4-standard-2025",
-          "locator": "JEDEC release text as surfaced by a search index on 2026-11-09; jedec.org returned HTTP 403 to direct retrieval, so the passage has not been read in full"
+          "locator": "\"24 Gb or 32 Gb die densities\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Arithmetic on disclosed capacities",
       "as_of": "2026-11-09",
       "limitations": [
@@ -401,10 +420,48 @@
       ]
     },
     {
+      "id": "f-mu-base-die",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "Micron's FY2026 Form 10-K states that its HBM4 uses advanced CMOS technology on the base logic die and DRAM core dies, which are designed and manufactured in-house. It does not state the base die's process node.",
+      "evidence": [
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "locator": "\"Our HBM4 uses advanced complementary metal-oxide-semiconductor\"; \"on the base logic die and DRAM core dies, which are designed and manufactured in-house\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Micron HBM4 as described in its annual filing for the fiscal year ended 2026-09-03",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company statement in a regulatory filing, not independent verification",
+        "Only part of the filing was read verbatim"
+      ]
+    },
+    {
+      "id": "f-skh-custom-hbm",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "SK hynix's July 2026 prospectus defines custom HBM as an HBM product that integrates certain functions of GPUs and ASICs into the HBM base die, configured to customer requirements.",
+      "evidence": [
+        {
+          "source_id": "skhynix-424b4-prospectus-2026",
+          "locator": "\"An HBM product that integrates certain functions of GPUs and ASICs into the HBM base die\"; \"configured to reflect customer requirements\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix glossary definition, prospectus dated 2026-07-09",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "A definition, not a statement about which products ship as custom HBM",
+        "The portion read does not name the base die's manufacturer or process"
+      ]
+    },
+    {
       "id": "f-an-logic-coupling",
       "claim_class": "bounded_analysis",
       "topic": "base_die",
-      "statement": "HBM4 couples the memory layer to advanced-logic fabrication. Two of the three HBM4 suppliers reviewed here disclose a logic-process base die (SK hynix via a TSMC plan; Samsung via a 4nm logic base die, which its HBM4E release attributes to Samsung Foundry). For those suppliers, HBM4 supply depends on logic-foundry capacity as well as DRAM fabrication, a dependency SK hynix says did not exist in that form for its base dies up to HBM3E.",
+      "statement": "HBM4 base dies are now made in three different ways among the suppliers reviewed. SK hynix planned to use TSMC's advanced logic process (2024 plan, not restated in later reviewed sources); Samsung states a 4nm logic process, which its HBM4E release attributes to Samsung Foundry; Micron states its base logic die is designed and manufactured in-house. Where the base die comes from a logic foundry, HBM4 supply depends on logic-wafer fabrication as well as DRAM fabrication; the dependency is external for SK hynix, intra-company for Samsung and, as disclosed, internal to Micron's own manufacturing. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new dependency is our inference.",
       "evidence": [
         {
           "source_id": "skhynix-tsmc-hbm4-mou-2024",
@@ -421,18 +478,21 @@
         {
           "source_id": "samsung-hbm4-commercial-shipment-2026",
           "locator": "\"4nm logic process for HBM4\""
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "locator": "\"on the base logic die and DRAM core dies, which are designed and manufactured in-house\""
         }
       ],
       "evidence_state": "cited_sources_active",
       "scope": "Structural dependency inference for disclosed suppliers only",
       "as_of": "2026-11-09",
       "limitations": [
-        "Micron's reviewed disclosures do not state its base-die process or manufacturer",
         "No capacity or allocation inference is made",
-        "Intra-company foundry supply (Samsung) and external foundry supply (TSMC) carry different dependency profiles"
+        "Micron does not state its base die's process node, so whether it uses a logic-class process is unknown"
       ],
       "assumptions": [
-        "SK hynix's 2024 plan was carried into production; this is not confirmed in its later reviewed releases"
+        "SK hynix's 2024 plan was carried into production; this is not confirmed in its later reviewed releases or the portion of its 2026 prospectus read"
       ]
     },
     {
@@ -601,7 +661,7 @@
       "id": "f-mu-stage",
       "claim_class": "attributed_statement",
       "topic": "commercialization",
-      "statement": "Micron's reported HBM4 stages: 36GB 12-high samples shipped (2025-06-10); volume shipment of 36GB 12H begun in calendar Q1 2026 and described as high-volume production, designed for NVIDIA Vera Rubin (2026-03-16).",
+      "statement": "Micron's reported HBM4 stages: 36GB 12-high samples shipped (2025-06-10); volume shipment of 36GB 12H begun in calendar Q1 2026, described as high-volume production and designed for NVIDIA Vera Rubin (2026-03-16); HBM4 'in high-volume shipments for our lead customer's platform', with qualification samples shipped to multiple end-customers (2026-06-24); and, in its FY2026 10-K, volume production of HBM4 36GB 12-high begun in 2026.",
       "evidence": [
         {
           "source_id": "micron-hbm4-samples-2025",
@@ -610,13 +670,22 @@
         {
           "source_id": "micron-hbm4-volume-production-2026",
           "locator": "\"has begun volume shipment of its HBM4 36GB 12H in the first quarter of calendar year 2026\""
+        },
+        {
+          "source_id": "micron-q3-fy2026-results-2026",
+          "locator": "\"is in high-volume shipments for our lead customer's platform\"; \"qualification samples have been shipped to multiple end-customers\""
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "locator": "\"In 2026, we began volume production of our HBM4 36GB 12-high\""
         }
       ],
       "evidence_state": "cited_sources_active",
       "scope": "Micron self-reported status sequence",
       "as_of": "2026-11-09",
       "limitations": [
-        "'High-volume' is not quantified",
+        "'High-volume' is not quantified, and the lead customer is not named",
+        "Qualification samples are not completed qualification",
         "'Designed for' is not a qualification or allocation disclosure"
       ]
     },
@@ -683,8 +752,12 @@
       "id": "f-nv-rubin",
       "claim_class": "attributed_statement",
       "topic": "accelerator_integration",
-      "statement": "NVIDIA states Rubin integrates up to 288 GB of HBM4 using 12-Hi stacks with up to 22 TB/s of peak bandwidth, and that HBM4 doubles interface width relative to HBM3E.",
+      "statement": "NVIDIA's Rubin platform article (2026-01-05) states up to 288 GB of HBM4 per GPU and \"aggregate bandwidth of up to 22 TB/s\"; its GPU architecture article (2026-07-21) states up to 288 GB on 12-Hi stacks with up to 22 TB/s of peak bandwidth, and that HBM4 doubles interface width relative to HBM3E.",
       "evidence": [
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "\"Up to 288 GB of HBM4 per GPU\"; \"Aggregate bandwidth of up to 22 TB/s\""
+        },
         {
           "source_id": "nvidia-rubin-gpu-architecture-2026",
           "locator": "\"Rubin integrates up to 288 GB of HBM4 memory, driven by dedicated HBM controllers and 12-Hi stacks\"; \"up to 22 TB/s of peak bandwidth\"; \"HBM4 doubles interface width relative to HBM3e\""
@@ -694,7 +767,7 @@
       "scope": "NVIDIA product disclosure dated 2026-07-21",
       "as_of": "2026-11-09",
       "limitations": [
-        "NVIDIA's 2026-11-05 technical article states 19.2 TB/s for Rubin; the conflict is unresolved",
+        "NVIDIA's 2026-11-05 article and current NVL72 product page give an unqualified 19.2 TB/s; the difference is unexplained",
         "Stack count and memory suppliers are not stated"
       ]
     },
@@ -713,8 +786,8 @@
       "scope": "NVIDIA product discussion dated 2026-11-05",
       "as_of": "2026-11-09",
       "limitations": [
-        "Conflicts with the 22 TB/s peak figure in NVIDIA's 2026-07-21 architecture article",
-        "No explanation or revision note is given"
+        "Differs from the 'up to 22 TB/s' in NVIDIA's 2026-01-05 and 2026-07-21 articles; no explanation, revision note or 'preliminary' label is given",
+        "NVIDIA's undated, unregistered NVL72 product page also lists 19.2 TB/s per GPU, while its HGX page lists 22 TB/s"
       ]
     },
     {
@@ -756,14 +829,14 @@
         },
         {
           "source_id": "jedec-jesd270-4-hbm4-standard-2025",
-          "locator": "JEDEC release text as surfaced by a search index on 2026-11-09; jedec.org returned HTTP 403 to direct retrieval, so the passage has not been read in full"
+          "locator": "\"transfer speeds up to 8 Gb/s\""
         },
         {
           "source_id": "nvidia-co-design-memory-2026",
           "locator": "\"bandwidth rose to 19.2 TB/s\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Arithmetic on disclosed figures",
       "as_of": "2026-11-09",
       "limitations": [
@@ -808,12 +881,12 @@
     {
       "id": "u-jedec-text",
       "topic": "standard",
-      "question": "What do JEDEC's 2025-04-16 announcement and the normative JESD270-4 / JESD270-4A documents actually state, including voltages and any revision-A changes?",
-      "why_unresolved": "jedec.org and the Business Wire distribution of the announcement refused automated retrieval (HTTP 403) on 2026-11-09. Verifying the announcement would still not verify the normative standard, which is a separate JEDEC document.",
+      "question": "What do the normative JESD270-4 and JESD270-4A documents specify beyond the announcement, including timing, any speed bins above 8 Gb/s and the revision-A changes?",
+      "why_unresolved": "JEDEC's 2025-04-16 announcement has now been read through a Business Wire syndication, but an announcement summarises a standard. The JESD270-4 and JESD270-4A documents themselves have not been reviewed.",
       "sources_checked": [
         "jedec-jesd270-4-hbm4-standard-2025"
       ],
-      "next_evidence_needed": "A reviewer reads the announcement (to activate the registry record) and, separately, the licensed JESD270-4A document (to support any normative statement)."
+      "next_evidence_needed": "A reviewer reads the JESD270-4A document from JEDEC before any normative statement is made."
     },
     {
       "id": "u-hbm4e-standard",
@@ -829,23 +902,26 @@
     {
       "id": "u-micron-base-die",
       "topic": "base_die",
-      "question": "What process and manufacturer does Micron use for its HBM4 logic base die?",
-      "why_unresolved": "Neither reviewed Micron release states it.",
+      "question": "What process node is Micron's in-house HBM4 base logic die built on?",
+      "why_unresolved": "Micron's FY2026 10-K states the base logic die is designed and manufactured in-house using advanced CMOS, but gives no node. Its press releases do not mention the base die.",
       "sources_checked": [
         "micron-hbm4-samples-2025",
-        "micron-hbm4-volume-production-2026"
+        "micron-hbm4-volume-production-2026",
+        "micron-fy2026-form-10-k",
+        "micron-q3-fy2026-results-2026"
       ],
-      "next_evidence_needed": "Micron technical disclosure or filing naming the base-die process."
+      "next_evidence_needed": "A Micron technical disclosure or filing naming the base logic die's process node."
     },
     {
       "id": "u-skh-base-die-implementation",
       "topic": "base_die",
       "question": "Does SK hynix's production HBM4 use a TSMC-made logic base die, and on which node?",
-      "why_unresolved": "The 2024 MOU states a plan; later reviewed SK hynix releases do not restate it, and TSMC does not name customers.",
+      "why_unresolved": "The 2024 MOU states a plan. SK hynix's later reviewed releases do not restate it, the portion of its July 2026 prospectus read defines custom HBM by base-die integration but names no manufacturer or process, and TSMC does not name customers.",
       "sources_checked": [
         "skhynix-tsmc-hbm4-mou-2024",
         "skhynix-hbm4-development-mass-production-2025",
-        "tsmc-2025-na-technology-symposium"
+        "tsmc-2025-na-technology-symposium",
+        "skhynix-424b4-prospectus-2026"
       ],
       "next_evidence_needed": "SK hynix or TSMC disclosure tying the production base die to a named node."
     },
@@ -866,9 +942,10 @@
       "id": "u-qualification",
       "topic": "commercialization",
       "question": "Which suppliers' HBM4 is qualified for which accelerator platforms, and at what speed grade?",
-      "why_unresolved": "'Designed for' statements are not qualification disclosures; platform vendors do not name memory suppliers in reviewed sources.",
+      "why_unresolved": "'Designed for' statements are not qualification disclosures. Micron reports high-volume HBM4 shipments for one unnamed lead customer and qualification samples shipped to multiple end-customers; no supplier reports completed qualification by named platform.",
       "sources_checked": [
         "micron-hbm4-volume-production-2026",
+        "micron-q3-fy2026-results-2026",
         "samsung-hbm4-gtc-2026",
         "nvidia-rubin-gpu-architecture-2026"
       ],
@@ -878,12 +955,13 @@
       "id": "u-rubin-bandwidth",
       "topic": "accelerator_integration",
       "question": "Is Rubin's per-GPU HBM4 bandwidth 22 TB/s or 19.2 TB/s?",
-      "why_unresolved": "Two dated NVIDIA technical articles disagree: 'up to 22 TB/s of peak bandwidth' (2026-07-21) and 'bandwidth rose to 19.2 TB/s' (2026-11-05). Undated NVIDIA product pages split the same way (HGX page 22 TB/s; Vera Rubin NVL72 page 19.2 TB/s per GPU and 1,400 TB/s per rack). NVIDIA states no reason for the difference, and this release adopts no reconciliation.",
+      "why_unresolved": "NVIDIA's dated articles give 'aggregate bandwidth of up to 22 TB/s' (2026-01-05) and 'up to 22 TB/s of peak bandwidth' (2026-07-21), then an unqualified 'bandwidth rose to 19.2 TB/s' (2026-11-05). Current undated product pages still disagree: Vera Rubin NVL72 lists 19.2 TB/s per GPU (1,400 TB/s per rack); HGX lists 22 TB/s per GPU. No page labels either figure preliminary, projected or subject to change, and none explains the difference. A later revision, a configuration difference and a peak-versus-rated distinction all remain possible; none is established.",
       "sources_checked": [
+        "nvidia-rubin-platform-architecture-2026",
         "nvidia-rubin-gpu-architecture-2026",
         "nvidia-co-design-memory-2026"
       ],
-      "next_evidence_needed": "A dated NVIDIA datasheet stating per-GPU memory bandwidth and the configuration it applies to."
+      "next_evidence_needed": "A dated NVIDIA datasheet or specification note that states per-GPU memory bandwidth and the configuration or conditions it applies to."
     },
     {
       "id": "u-16h-thermal",
@@ -979,7 +1057,7 @@
       "from": "tech-hbm4",
       "to": "tech-hbm-logic-base-die",
       "relation_type": "requires",
-      "statement": "HBM stacks core DRAM dies on a TSV-bearing base die; for HBM4, SK hynix planned a logic-process base die and Samsung states a 4nm logic base die.",
+      "statement": "HBM stacks core DRAM dies on a TSV-bearing base die; for HBM4, SK hynix planned a logic-process base die, Samsung states a 4nm logic base die, and Micron states its base logic die is made in-house.",
       "claim_class": "attributed_statement",
       "evidence": [
         {
@@ -993,17 +1071,21 @@
         {
           "source_id": "samsung-hbm4e-samples-2026",
           "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "supported_claim_type": "base_die_process_context"
         }
       ],
-      "geographic_scope": "Disclosing suppliers only (SK hynix, Samsung)",
-      "temporal_scope": "Disclosures dated 2024-04-19 to 2026-05-29",
+      "geographic_scope": "Disclosing suppliers (SK hynix, Samsung, Micron)",
+      "temporal_scope": "Disclosures dated 2024-04-19 to 2026-09-03 (Micron fiscal year end)",
       "as_of": "2026-11-09",
       "reviewed_at": null,
       "review_owner": "unassigned",
       "confidence": "medium",
       "limitations": [
-        "Micron's base-die process is not disclosed in reviewed sources",
-        "SK hynix statement is an MOU-stage plan"
+        "SK hynix statement is an MOU-stage plan",
+        "Micron does not state its base die's process node"
       ],
       "review_status": "awaiting_human_review"
     },
@@ -1024,14 +1106,15 @@
           "supported_claim_type": "base_die_process_context"
         }
       ],
-      "geographic_scope": "TSMC offering and SK hynix plan; not industry-wide",
+      "geographic_scope": "TSMC offering and SK hynix plan only; does not hold for Micron, which reports in-house base logic die manufacture",
       "temporal_scope": "Disclosures dated 2024-04-19 and 2025-04-23",
       "as_of": "2026-11-09",
       "reviewed_at": null,
       "review_owner": "unassigned",
-      "confidence": "medium",
+      "confidence": "low",
       "limitations": [
         "Does not establish which shipping products use which node",
+        "Micron's FY2026 10-K reports in-house manufacture of its HBM4 base logic die, so this relationship is not industry-wide",
         "No capacity or allocation inference"
       ],
       "review_status": "awaiting_human_review"

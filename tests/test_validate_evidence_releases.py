@@ -91,9 +91,24 @@ class EvidenceReleaseTests(unittest.TestCase):
 
     def test_pending_source_must_be_disclosed(self):
         release, registry, atlas = load()
-        pending = next(f for f in release["findings"] if f["evidence_state"] == "includes_pending_source")
-        pending["evidence_state"] = "cited_sources_active"
+        finding = next(f for f in release["findings"] if f["id"] == "f-std-interface")
+        sid = finding["evidence"][0]["source_id"]
+        next(s for s in registry["source_records"] if s["id"] == sid)["status"] = "pending_review"
+        self.assertEqual("cited_sources_active", finding["evidence_state"])
         self.assert_fails(release, registry, atlas, "evidence_state must be includes_pending_source")
+
+    def test_announcement_cannot_be_promoted_to_verified_fact(self):
+        """JEDEC's announcement is not the normative standard: it cannot alone establish a verified fact."""
+        release, registry, atlas = load()
+        next(f for f in release["findings"] if f["id"] == "f-std-interface")["claim_class"] = "verified_fact"
+        self.assert_fails(release, registry, atlas, "cannot rest solely on self-reported")
+
+    def test_jedec_findings_remain_attributed(self):
+        release, _, _ = load()
+        jedec = [f for f in release["findings"] if f["id"].startswith("f-std-")]
+        self.assertGreaterEqual(len(jedec), 5)
+        self.assertTrue(all(f["claim_class"] == "attributed_statement" for f in jedec))
+        self.assertTrue(all(any("normative" in l for l in f["limitations"]) for f in jedec))
 
     def test_retired_source(self):
         release, registry, atlas = load()
@@ -134,7 +149,7 @@ class EvidenceReleaseTests(unittest.TestCase):
     def test_candidate_citing_pending_source_is_blocked(self):
         release, registry, atlas = load()
         release["candidate_relationships"][0]["evidence"].append(
-            {"source_id": "jedec-jesd270-4-hbm4-standard-2025", "supported_claim_type": "technical_specification"})
+            {"source_id": "ucie-2-specification-release-2024", "supported_claim_type": "standard_release"})
         self.assert_fails(release, registry, atlas, "source is not active")
 
     def test_candidate_already_published(self):
@@ -150,8 +165,11 @@ class EvidenceReleaseTests(unittest.TestCase):
 
     def test_pending_source_cannot_be_verified_fact(self):
         release, registry, atlas = load()
-        pending = next(f for f in release["findings"] if f["evidence_state"] == "includes_pending_source")
-        pending["claim_class"] = "verified_fact"
+        finding = next(f for f in release["findings"] if f["id"] == "f-std-interface")
+        sid = finding["evidence"][0]["source_id"]
+        next(s for s in registry["source_records"] if s["id"] == sid)["status"] = "pending_review"
+        finding["evidence_state"] = "includes_pending_source"
+        finding["claim_class"] = "verified_fact"
         self.assert_fails(release, registry, atlas, "verified_fact cannot cite a pending_review source")
 
     def test_long_quote_rejected(self):
@@ -178,12 +196,29 @@ class PublicExposureTests(unittest.TestCase):
         errors = check_public_references(ROOT / "hbm-memory" / "index.html", registry)
         self.assertTrue(any(sid in e for e in errors), errors)
 
+    def check_modified_page(self, registry, old, new):
+        html = (ROOT / "hbm-memory" / "index.html").read_text(encoding="utf-8")
+        self.assertIn(old, html)
+        with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
+            page = Path(tmp) / "index.html"
+            page.write_text(html.replace(old, new, 1), encoding="utf-8")
+            return check_public_references(page, registry)
+
     def test_active_source_cannot_be_labelled_pending(self):
         _, registry, _ = load()
         sid = "jedec-jesd270-4-hbm4-standard-2025"
-        next(s for s in registry["source_records"] if s["id"] == sid)["status"] = "active"
-        errors = check_public_references(ROOT / "hbm-memory" / "index.html", registry)
+        errors = self.check_modified_page(registry, f"<code>{sid}</code>.", f"<code>{sid}</code> · <strong>pending_review</strong>.")
         self.assertTrue(any(sid in e for e in errors), errors)
+
+    def test_reference_numbering_must_follow_list_order(self):
+        _, registry, _ = load()
+        errors = self.check_modified_page(registry, '<li id="ref-2">', '<li id="ref-99">')
+        self.assertTrue(any("must run 1..n in order" in e for e in errors), errors)
+
+    def test_dangling_citation_rejected(self):
+        _, registry, _ = load()
+        errors = self.check_modified_page(registry, 'href="#ref-1">[1]</a>', 'href="#ref-42">[42]</a>')
+        self.assertTrue(any("has no matching reference" in e for e in errors), errors)
 
     def test_workflow_excludes_research(self):
         self.assertEqual([], check_pages_exclusion(ROOT / ".github" / "workflows" / "validate-and-deploy.yml", ROOT / "data" / "research"))
