@@ -266,6 +266,16 @@ def check_public_references(page: Path, registry: dict) -> list[str]:
     status = {s.get("id"): s.get("status") for s in registry.get("source_records", []) if isinstance(s, dict)}
     rel = page.relative_to(ROOT)
     errors = []
+    # Visible numbering of an <ol> follows position, so ids must run 1..n in order,
+    # every [n] citation must resolve, and every reference must be cited.
+    ids = [int(n) for n in re.findall(r'<li id="ref-(\d+)"', html)]
+    if ids != list(range(1, len(ids) + 1)):
+        errors.append(f"{rel}: reference list ids must run 1..n in order, found {ids}")
+    cited = {int(n) for n in re.findall(r'href="#ref-(\d+)"', html)}
+    for n in sorted(cited - set(ids)):
+        errors.append(f"{rel}: citation [{n}] has no matching reference")
+    for n in sorted(set(ids) - cited):
+        errors.append(f"{rel}: reference [{n}] is never cited")
     for item in re.findall(r'<li id="ref-\d+">(.*?)</li>', html, re.DOTALL):
         for sid in re.findall(r"<code>([a-z0-9-]+)</code>", item):
             if sid not in status:
