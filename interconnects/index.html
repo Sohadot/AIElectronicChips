@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Interconnects | AIElectronicChips.com</title>
-  <meta name="description" content="A reference framing for the systems that move data within and between AI compute.">
+  <title>Interconnects: Data Movement in AI Systems, from Package to Scale-Out | AIElectronicChips.com</title>
+  <meta name="description" content="Evidence-classified reference to how data moves in AI systems: memory versus fabric bandwidth, PCIe and CXL host interfaces, direct and switched accelerator fabrics, scale-out networking and how to read bandwidth figures.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aielectronicchips.com/interconnects/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AIElectronicChips.com">
-  <meta property="og:title" content="Interconnects">
-  <meta property="og:description" content="A reference framing for the systems that move data within and between AI compute.">
+  <meta property="og:title" content="Interconnects: Data Movement in AI Systems, from Package to Scale-Out">
+  <meta property="og:description" content="The movement of data defines the usable shape of AI compute. An evidence-classified reference to memory, host, accelerator-fabric and scale-out bandwidth, with every figure's unit, direction and scope.">
   <meta property="og:url" content="https://aielectronicchips.com/interconnects/">
   <meta property="og:image" content="https://aielectronicchips.com/assets/og/interconnects.png">
   <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
       "@id": "https://aielectronicchips.com/interconnects/#webpage",
       "url": "https://aielectronicchips.com/interconnects/",
       "name": "Interconnect",
-      "description": "Ontology layer 05: how data moves within and between AI compute systems, from network fabrics to optical links and switching capacity.",
+      "description": "Ontology layer 05: how data moves within and between AI compute systems, from on-package fabrics and memory to accelerator fabrics, host interfaces and scale-out networks.",
       "isPartOf": {
         "@id": "https://aielectronicchips.com/#website"
       },
@@ -36,6 +36,12 @@
       "mainEntity": {
         "@id": "https://aielectronicchips.com/interconnects/#interconnect"
       },
+      "citation": [
+        { "@type": "CreativeWork", "name": "Introducing AMD CDNA 3 Architecture", "publisher": { "@type": "Organization", "name": "Advanced Micro Devices, Inc." }, "datePublished": "2025-04-07", "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf" },
+        { "@type": "CreativeWork", "name": "Inside the NVIDIA Rubin Platform: Six New Chips, One AI Supercomputer", "publisher": { "@type": "Organization", "name": "NVIDIA" }, "datePublished": "2026-01-05", "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/" },
+        { "@type": "CreativeWork", "name": "Compute Express Link 3.0", "publisher": { "@type": "Organization", "name": "CXL Consortium" }, "datePublished": "2022-08-02", "url": "https://computeexpresslink.org/wp-content/uploads/2023/12/CXL_3.0_white-paper_FINAL.pdf" },
+        { "@type": "CreativeWork", "name": "Ultra Ethernet Specification v1.1", "publisher": { "@type": "Organization", "name": "Ultra Ethernet Consortium" }, "datePublished": "2026-10-12", "url": "https://ultraethernet.org/wp-content/uploads/sites/20/2026/10/UE-Specification-1.1.pdf" }
+      ],
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -75,7 +81,365 @@
     <a class="brand" href="/" aria-label="AIElectronicChips.com home"><span class="brand-mark" aria-hidden="true"></span><span>AI<span>Electronic</span>Chips</span></a>
     <nav class="primary-nav" aria-label="Primary navigation"><a href="/">Overview</a><a href="/sovereignty-stack/">Stack</a><a href="/chip-dependency-map/">Dependency Map</a><a href="/methodology/">Methodology</a><a href="/strategic-availability/">Strategic Availability</a></nav>
   </header>
-  <main id="main"><header class="page-hero"><div class="trace" aria-hidden="true"></div><p class="eyebrow">Reference layer · 05 Interconnect</p><h1>Interconnects</h1><p class="lead">The movement of data defines the usable shape of AI compute.</p><p class="intro">Interconnect analysis examines how data moves within a system, across systems, and through a deployed compute environment. It connects device capability to system-level operation.</p><div class="framing-note"><strong>Reference framing</strong><span>This page defines an analytical layer. It does not make a current operational claim about any entity.</span></div></header><div class="content-shell"><section class="reference-sections" aria-label="Reference authority summary"><article class="reference-block"><div class="block-index">00</div><div><h2>Reference summary</h2><p><strong>Definition.</strong> This page covers Ontology Layer 05: Interconnect as the systems that move data within and between AI compute environments.</p><p><strong>Compute sovereignty relationship.</strong> Interconnect fit affects whether accelerators, memory, and hosts operate as a usable system rather than isolated components.</p><p><strong>Boundary.</strong> This page does not rank products, providers, or deployments. Operational conclusions require scoped evidence.</p></div></article></section><section class="reference-sections" aria-label="Interconnects reference sections"><article class="reference-block"><div class="block-index">01</div><div><h2>Within systems</h2><p>A reference assessment considers fabrics, switching, topology, bandwidth, latency, compatibility, and the dependencies required to connect accelerators, memory, and hosts.</p></div></article><article class="reference-block"><div class="block-index">02</div><div><h2>Between systems</h2><p>Scaling across racks, facilities, or regions introduces additional networking, optical, operational, and geographic dependencies that should be mapped separately.</p></div></article><article class="reference-block"><div class="block-index">03</div><div><h2>No isolated conclusion</h2><p>Interconnect capability must be interpreted with workload, architecture, deployment, and evidence scope. This page defines the layer; it does not rank products or providers.</p></div></article></section><section class="evidence-posture" aria-labelledby="evidence-title"><div class="section-label blue">Evidence posture · Registry-linked</div><h2 id="evidence-title">Source posture</h2><p class="evidence-intro">These registry records can support attributed technical framing of interconnect standards, accelerator integration context, and product-level specifications. They do not establish deployment performance, adoption, or vendor comparison.</p><ul class="source-id-list" aria-label="Related source registry IDs"><li class="pending">ucie-2-specification-release-2024 · pending_review</li><li>nvidia-fiscal-2025-form-10-k</li><li>amd-instinct-mi300x-accelerator-2023</li></ul><div class="posture-grid"><article><h3>Can support</h3><p>Attributed statements about disclosed interconnect scope, integration context, and technical specifications within source boundaries.</p></article><article><h3>Cannot support</h3><p>Vendor ranking, purchase recommendation, deployment verdict, or entity-level access finding.</p></article><article><h3>Confidence and freshness</h3><p>Reviewed as of 2026-06-14. Pending-review and product disclosures require current-condition review before claim use.</p></article></div><a class="evidence-link" href="/sources/">Inspect the governed source registry →</a></section><section class="related" aria-labelledby="related-title"><div class="section-label">Continue the reference path</div><h2 id="related-title">Related reference surfaces</h2><div class="related-grid"><a class="related-card" href="/hbm-memory/"><strong>HBM Memory</strong><span>A reference framing for memory bandwidth as a compute dependency layer.</span><span class="text-link">Open reference →</span></a><a class="related-card" href="/ai-chip-infrastructure/"><strong>AI Chip Infrastructure</strong><span>Why AI chips must be understood as infrastructure rather than isolated hardware.</span><span class="text-link">Open reference →</span></a><a class="related-card" href="/power-and-thermal-limits/"><strong>Power and Thermal Limits</strong><span>Why energy delivery and heat removal belong inside compute sovereignty analysis.</span><span class="text-link">Open reference →</span></a></div></section></div></main>
+  <main id="main">
+    <header class="page-hero">
+      <div class="trace" aria-hidden="true"></div>
+      <p class="eyebrow">Reference layer · 05 Interconnect · Evidence release 004</p>
+      <h1>Interconnects</h1>
+      <p class="lead">The movement of data defines the usable shape of AI compute.</p>
+      <p class="intro">Interconnect analysis examines how data moves within a system, across systems, and through a deployed compute environment. This reference follows data outward from the processor: through on-package fabric and local memory, across links to other accelerators and the host, and into the scale-out network. It shows where each bandwidth figure applies and where two figures cannot be compared.</p>
+      <div class="framing-note"><strong>Evidence compiled: 2026-11-09 · Scientific review pending</strong><span>Vendor and consortium statements remain attributed. Every bandwidth figure is given with its unit, direction and scope. Nothing here establishes measured performance, deployment, interoperability or supply.</span></div>
+      <ul class="class-legend" aria-label="Evidence classes used on this page">
+        <li><span class="tag tag-s">S</span>Standard text: what a published specification itself states, read directly</li>
+        <li><span class="tag tag-a">A</span>Attributed: what a company or consortium disclosed, not independently verified</li>
+        <li><span class="tag tag-c">C</span>Bounded analysis: our derivation or arithmetic, with stated assumptions</li>
+        <li><span class="tag tag-u">U</span>Unresolved: evidence absent, blocked or conflicting</li>
+      </ul>
+    </header>
+    <div class="content-shell">
+      <section class="reference-sections" aria-label="Reference authority summary">
+        <article class="reference-block" id="summary"><div class="block-index">00</div><div>
+          <h2>Reference summary</h2>
+          <p><strong>Definition.</strong> This page covers Ontology Layer 05: Interconnect as the systems that move data within and between AI compute environments.</p>
+          <p><strong>Compute sovereignty relationship.</strong> Interconnect fit affects whether accelerators, memory, and hosts operate as a usable system rather than isolated components.</p>
+          <p><strong>Boundary.</strong> This page does not rank products, providers, or deployments. Its sections report what AMD, NVIDIA, the CXL Consortium and the Ultra Ethernet Consortium have published, classify each statement and record where the disclosures conflict or stop.</p>
+        </div></article>
+      </section>
+
+      <section class="reference-sections" aria-label="Interconnects reference sections">
+        <article class="reference-block"><div class="block-index">01</div><div>
+          <h2>Within systems</h2>
+          <p>A reference assessment considers fabrics, switching, topology, bandwidth, latency, compatibility, and the dependencies required to connect accelerators, memory, and hosts.</p>
+        </div></article>
+        <article class="reference-block"><div class="block-index">02</div><div>
+          <h2>Between systems</h2>
+          <p>Scaling across racks, facilities, or regions introduces additional networking, optical, operational, and geographic dependencies that should be mapped separately.</p>
+        </div></article>
+        <article class="reference-block"><div class="block-index">03</div><div>
+          <h2>No isolated conclusion</h2>
+          <p>Interconnect capability must be interpreted with workload, architecture, deployment, and evidence scope. This page defines the layer; it does not rank products or providers.</p>
+        </div></article>
+      </section>
+
+      <nav class="ref-toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">Data movement reference</h2>
+        <ol start="4">
+          <li><a href="#hierarchy">The data-movement hierarchy</a></li>
+          <li><a href="#on-package">Within the package</a></li>
+          <li><a href="#memory-vs-fabric">Memory bandwidth versus fabric bandwidth</a></li>
+          <li><a href="#host">Host and CPU interfaces: PCIe, CXL and coherent links</a></li>
+          <li><a href="#fabrics">Accelerator fabrics: direct and switched</a></li>
+          <li><a href="#scale-out">From scale-up to scale-out</a></li>
+          <li><a href="#case-mi300x">Case study: the AMD MI300X 8-GPU platform</a></li>
+          <li><a href="#measurement">Reading a bandwidth figure</a></li>
+          <li><a href="#matrix">Data movement dependency matrix</a></li>
+          <li><a href="#questions">Questions this evidence can and cannot answer</a></li>
+          <li><a href="#unresolved">Unresolved questions</a></li>
+        </ol>
+      </nav>
+
+      <section class="reference-sections" aria-label="Interconnect and data movement reference">
+        <article class="reference-block" id="hierarchy"><div class="block-index">04</div><div>
+          <h2>The data-movement hierarchy</h2>
+          <p class="detail">Data in an accelerator moves through tiers. Each tier is a different physical path with its own bandwidth. In this illustrative selection the reported peak figures decrease outward from compute units, but their measurement domains are not directly comparable. AMD's white paper gives figures for most of these tiers in a single document, which makes the MI300X a usable reference for the shape of the hierarchy. <a class="cite" href="#ref-1">[1]</a></p>
+          <figure class="ref-figure">
+            <div class="figure-frame" tabindex="0" role="region" aria-label="Figure 1 chart; scrolls horizontally on narrow screens">
+            <svg viewBox="0 0 820 330" role="img" aria-labelledby="bw-fig-title bw-fig-desc">
+              <title id="bw-fig-title">Illustrative MI300X bandwidth tiers: reported and inferred figures with differing scopes, logarithmic scale</title>
+              <desc id="bw-fig-desc">Horizontal bars on a logarithmic scale from 0.1 to 100 terabytes per second. L2 cache aggregate read: 34.4 TB/s. Infinity Cache peak: 17.2 TB/s. HBM3 peak memory: 5.3 TB/s. AMD-reported P2P ring peak aggregate: 0.896 TB/s (labelled 8 GPUs; per-GPU versus per-platform scope not established). One Infinity Fabric link to one peer GPU, calculated: 0.128 TB/s. One x16 PCIe Gen 5 host link, calculated: 0.128 TB/s. The first four are AMD-stated peaks; the last two are this project's arithmetic.</desc>
+              <line class="f-grid" x1="250" y1="34" x2="250" y2="286"/>
+              <line class="f-grid" x1="423" y1="34" x2="423" y2="286"/>
+              <line class="f-grid" x1="597" y1="34" x2="597" y2="286"/>
+              <line class="f-grid" x1="770" y1="34" x2="770" y2="286"/>
+              <text class="f-axis" x="250" y="304" text-anchor="middle">0.1</text>
+              <text class="f-axis" x="423" y="304" text-anchor="middle">1</text>
+              <text class="f-axis" x="597" y="304" text-anchor="middle">10</text>
+              <text class="f-axis" x="770" y="304" text-anchor="middle">100 TB/s</text>
+              <text class="f-axis" x="510" y="324" text-anchor="middle">Peak bandwidth, logarithmic scale</text>
+              <g>
+                <title>L2 cache aggregate read bandwidth: 34.4 TB/s (AMD-stated peak)</title>
+                <text class="f-lbl" x="240" y="57" text-anchor="end">L2 CACHE (READ)</text>
+                <rect class="f-bar" x="250" y="42" width="440" height="22" rx="2"/>
+                <text class="f-val" x="698" y="58">34.4 TB/s</text>
+              </g>
+              <g>
+                <title>Infinity Cache peak bandwidth: 17.2 TB/s (AMD-stated peak)</title>
+                <text class="f-lbl" x="240" y="99" text-anchor="end">INFINITY CACHE</text>
+                <rect class="f-bar" x="250" y="84" width="387" height="22" rx="2"/>
+                <text class="f-val" x="645" y="100">17.2 TB/s</text>
+              </g>
+              <g>
+                <title>HBM3 peak memory bandwidth: 5.3 TB/s (AMD-stated peak)</title>
+                <text class="f-lbl" x="240" y="141" text-anchor="end">HBM3 MEMORY</text>
+                <rect class="f-bar" x="250" y="126" width="299" height="22" rx="2"/>
+                <text class="f-val" x="557" y="142">5.3 TB/s</text>
+              </g>
+              <g>
+                <title>AMD P2P ring peak aggregate: 896 GB/s (8 GPUs; device-level scope and direction unconfirmed)</title>
+                <text class="f-lbl" x="240" y="183" text-anchor="end">7 GPU LINKS (TOTAL)</text>
+                <rect class="f-bar" x="250" y="168" width="165" height="22" rx="2"/>
+                <text class="f-val" x="423" y="184">0.896 TB/s</text>
+              </g>
+              <g>
+                <title>One Infinity Fabric link to one peer GPU: 128 GB/s both directions (calculated)</title>
+                <text class="f-lbl" x="240" y="225" text-anchor="end">1 PEER LINK</text>
+                <rect class="f-bar-calc" x="250" y="210" width="19" height="22" rx="2"/>
+                <text class="f-val" x="277" y="226">0.128 TB/s (calculated)</text>
+              </g>
+              <g>
+                <title>One x16 PCIe Gen 5 link to the host: 128 GB/s both directions, raw (calculated)</title>
+                <text class="f-lbl" x="240" y="267" text-anchor="end">HOST PCIe GEN 5</text>
+                <rect class="f-bar-calc" x="250" y="252" width="19" height="22" rx="2"/>
+                <text class="f-val" x="277" y="268">0.128 TB/s (calculated)</text>
+              </g>
+            </svg>
+            </div>
+            <figcaption>Figure 1. Original chart by AIElectronicChips.com from AMD's stated peaks for MI300X. <a class="cite" href="#ref-1">[1]</a> Solid bars are AMD-stated; dashed bars are our arithmetic (section 10). These values have different physical and reporting scopes. AMD gives 896 GB/s with an '8 GPUs' label but does not confirm whether that figure applies per device or per platform, or whether it combines directions. The one-peer and host-link bars are conditional raw calculations, not measured performance. Each step on the scale is ten times the last. <span class="tag tag-c">C</span></figcaption>
+          </figure>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Data movement tiers (scrollable table)">
+            <table class="data-table">
+              <caption>The tiers in Figure 1, with what each moves and how its figure was obtained.</caption>
+              <thead><tr><th scope="col">Tier</th><th scope="col">What moves</th><th scope="col">MI300X figure</th><th scope="col">Basis</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">L2 cache</th><td>Data between compute units and their die's cache</td><td class="num">34.4 TB/s</td><td><span class="tag tag-a">A</span>AMD: aggregate read <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">Infinity Cache</th><td>Data between XCDs and the shared cache on the I/O dies</td><td class="num">17.2 TB/s</td><td><span class="tag tag-a">A</span>AMD: peak <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">HBM3</th><td>Data between the package and its eight memory stacks</td><td class="num">5.3 TB/s</td><td><span class="tag tag-a">A</span>AMD: peak theoretical, from bus width × data rate <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">GPU-to-GPU links</th><td>Data between packages over Infinity Fabric</td><td class="num">896 GB/s</td><td><span class="tag tag-a">A</span>AMD: "P2P ring peak aggregate" <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">One peer link</th><td>Data between one specific pair of GPUs</td><td class="num">128 GB/s</td><td><span class="tag tag-c">C</span>Our arithmetic from AMD's link rate and lane count</td></tr>
+                <tr><th scope="row">Host link</th><td>Data between the GPU and the host CPU</td><td class="num">128 GB/s</td><td><span class="tag tag-c">C</span>Our arithmetic for x16 PCIe Gen 5, raw, both directions</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="on-package"><div class="block-index">05</div><div>
+          <h2>Within the package</h2>
+          <p class="detail"><span class="tag tag-a">A</span>AMD says CDNA 3 uses its Infinity Fabric "more prolifically inside the package". Each XCD's L2 connects to its I/O die over sixteen 64-byte channels, 1 KB per XCD at the interface, and the fabric ties the package together at a stated 4 TB/s. <a class="cite" href="#ref-1">[1]</a> AMD gives no direction or clock for that figure.</p>
+          <p class="detail"><span class="tag tag-u">U</span>AMD's text gives 34.4 TB/s of aggregate L2 read bandwidth, while a legend in the same paper labels L2-to-XCD bandwidth 51.6 TB/s. The paper does not reconcile the two, so both are recorded as stated. <a class="cite" href="#ref-1">[1]</a></p>
+          <p class="detail">How dies are physically joined inside a package (interposers, silicon bridges, die stacking) and what the UCIe interface standard covers are set out in the <a href="/design-fabrication-packaging/#chiplet-interfaces">packaging reference</a>. That page also keeps UCIe's announcements separate from product implementation. This page starts where data leaves the compute die.</p>
+        </div></article>
+
+        <article class="reference-block" id="memory-vs-fabric"><div class="block-index">06</div><div>
+          <h2>Memory bandwidth versus fabric bandwidth</h2>
+          <p class="detail">Five different quantities are often called "bandwidth":</p>
+          <ul class="detail">
+            <li><strong>HBM interface bandwidth:</strong> one stack's interface width × pin rate. Per-stack figures are covered in the <a href="/hbm-memory/#bandwidth">HBM reference</a>.</li>
+            <li><strong>Memory-controller capability:</strong> how much of that the processor's controllers can drive. <span class="tag tag-u">U</span>It is not separately disclosed in the reviewed sources.</li>
+            <li><strong>Aggregate memory bandwidth:</strong> all stacks together. <span class="tag tag-a">A</span>AMD derives MI300X's 5.325 TB/s from an 8,192-bit bus at a 5.2 Gbps data rate. <a class="cite" href="#ref-1">[1]</a></li>
+            <li><strong>Effective application bandwidth:</strong> what a workload achieves. <span class="tag tag-u">U</span>No reviewed source measures it.</li>
+            <li><strong>Device-to-device bandwidth:</strong> traffic between accelerators over a fabric, a separate physical path with its own figure.</li>
+          </ul>
+          <p class="detail"><span class="tag tag-a">A</span>NVIDIA's 2026-07-21 post states, for one Rubin GPU, up to 22 TB/s of peak HBM4 bandwidth and 3,600 GB/s of NVLink 6 scale-up bandwidth. It also gives 1,800 GB/s of NVLink-C2C bandwidth to the CPU and up to 256 GB/s over x16 PCIe Gen 6. <a class="cite" href="#ref-2">[2]</a> These are four different paths and are not interchangeable figures. NVIDIA's 2026-11-05 post gives 19.2 TB/s for Rubin memory bandwidth instead; that conflict stays unresolved in the <a href="/hbm-memory/#accelerators">HBM reference</a>. <a class="cite" href="#ref-4">[4]</a></p>
+          <p class="detail"><span class="tag tag-c">C</span><strong>Where memory bandwidth ends and fabric bandwidth begins (medium confidence).</strong> If AMD's ambiguous 896 GB/s P2P figure is a per-GPU, both-direction sum, MI300X's 5.3 TB/s peak HBM3 is numerically about 6× that figure; it is about 41× the inferred 128 GB/s single-peer-link figure under the same assumptions. On Rubin, peak HBM4 (22 TB/s, or the later 19.2 TB/s) is about 5× to 6× NVLink 6 (3.6 TB/s bidirectional), which NVIDIA's switches make available toward any peer. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> These ratios compare stated peaks from different measurement domains. Memory figures are combined read/write capability; link figures count both directions. They show numerical orders of magnitude under stated assumptions, not memory access speed, peer access latency, achieved throughput, or application performance.</p>
+        </div></article>
+
+        <article class="reference-block" id="host"><div class="block-index">07</div><div>
+          <h2>Host and CPU interfaces: PCIe, CXL and coherent links</h2>
+          <p class="detail">Linking a host to a device is not the same as sharing memory with it. Being able to send data over a link does not make the two sides' memory coherent. A protocol's capability is not a product's configuration. The sources distinguish these layers.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Host interface capabilities distinguished (scrollable table)">
+            <table class="data-table">
+              <caption>Host and CPU connectivity in the reviewed sources, by what each statement establishes.</caption>
+              <thead><tr><th scope="col">Layer</th><th scope="col">In the reviewed sources</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Host/device link</th><td><span class="tag tag-a">A</span>MI300X: one x16 PCIe Gen 5 link to the host CPU <a class="cite" href="#ref-1">[1]</a>. Rubin: PCIe Gen6 "for host and device integration" <a class="cite" href="#ref-3">[3]</a></td><td>Achieved transfer rates</td></tr>
+                <tr><th scope="row">Protocol capability</th><td><span class="tag tag-a">A</span>CXL multiplexes CXL.io (based on PCIe), CXL.cache and CXL.memory, with a coherent memory space between host and attached device <a class="cite" href="#ref-5">[5]</a></td><td>That any named accelerator uses these protocols</td></tr>
+                <tr><th scope="row">Memory pooling</th><td><span class="tag tag-a">A</span>CXL 2.0 onward: attached memory allocated to different hosts as needed <a class="cite" href="#ref-5">[5]</a></td><td>Pooling in any deployment</td></tr>
+                <tr><th scope="row">Memory sharing</th><td><span class="tag tag-a">A</span>CXL 3.0: one region coherently accessible by several hosts at once, using hardware coherency <a class="cite" href="#ref-5">[5]</a><a class="cite" href="#ref-6">[6]</a></td><td>Sharing in any product</td></tr>
+                <tr><th scope="row">Coherent CPU-GPU link</th><td><span class="tag tag-a">A</span>NVLink-C2C: "1.8 TB/s of coherent bandwidth" between Vera CPUs and Rubin GPUs, with a unified address space <a class="cite" href="#ref-3">[3]</a></td><td>Coherency outside NVIDIA's own CPU-GPU pairing</td></tr>
+                <tr><th scope="row">CXL on the documented products</th><td><span class="tag tag-a">A</span>NVIDIA lists the Vera CPU with "Gen6/CXL 3.1" <a class="cite" href="#ref-3">[3]</a>. <span class="tag tag-u">U</span>No reviewed source states CXL for the Rubin GPU or for MI300X</td><td>CXL device type, behaviour or test results</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="detail"><span class="tag tag-a">A</span>The CXL Consortium says CXL 3.0 is based on PCIe 6.0 and runs at 64 GT/s, giving "aggregate raw bandwidth of up to 256GB/s" on an x16 link with 256-byte flits on PAM-4 signalling. <a class="cite" href="#ref-5">[5]</a> CXL 4.0, announced on 2025-11-18, doubles the rate to 128 GT/s and adds bundled ports. <a class="cite" href="#ref-7">[7]</a> Members showed live demonstrations at SC25. Trade-show demonstrations are not compliance or interoperability results, and the CXL 4.0 text, offered under an evaluation agreement, was not reviewed.</p>
+          <p class="detail"><span class="tag tag-u">U</span>PCI-SIG's own site refused automated access, so PCIe rates on this page come from the CXL Consortium and the GPU vendors, not from PCI-SIG.</p>
+        </div></article>
+
+        <article class="reference-block" id="fabrics"><div class="block-index">08</div><div>
+          <h2>Accelerator fabrics: direct and switched</h2>
+          <p class="detail">The two documented systems reach their scale-up domain, the set of accelerators joined by the fast fabric, in different ways.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Direct and switched accelerator fabrics compared (scrollable table)">
+            <table class="data-table">
+              <caption>Two vendor-documented scale-up designs. Figures are stated by different vendors in different measurement domains and are not directly comparable.</caption>
+              <thead><tr><th scope="col">Attribute</th><th scope="col">AMD MI300X 8-GPU platform</th><th scope="col">NVIDIA Vera Rubin NVL72</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Topology</th><td><span class="tag tag-a">A</span>Fully connected: seven Infinity Fabric links per GPU, one to each peer <a class="cite" href="#ref-1">[1]</a></td><td><span class="tag tag-a">A</span>Switched: NVLink 6 switch trays forming "a single all-to-all topology across the rack" <a class="cite" href="#ref-3">[3]</a></td></tr>
+                <tr><th scope="row">Domain size</th><td>8 GPUs <a class="cite" href="#ref-1">[1]</a></td><td>72 GPUs <a class="cite" href="#ref-3">[3]</a></td></tr>
+                <tr><th scope="row">Switch silicon</th><td>None shown in AMD's description</td><td>Four NVLink 6 switch chips per switch tray <a class="cite" href="#ref-3">[3]</a></td></tr>
+                <tr><th scope="row">Per-GPU fabric figure</th><td class="num">896 GB/s, direction not stated <a class="cite" href="#ref-1">[1]</a></td><td class="num">3.6 TB/s bidirectional (2026-01-05) <a class="cite" href="#ref-3">[3]</a>; 3.0 TB/s (2026-11-05) <a class="cite" href="#ref-4">[4]</a></td></tr>
+                <tr><th scope="row">Generation and date</th><td>CDNA 3; available 2023</td><td>NVLink 6; announced 2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="detail"><span class="tag tag-u">U</span>NVIDIA's own figure for NVLink 6 per Rubin GPU differs across its posts. It is 3.6 TB/s bidirectional on 2026-01-05 and 3,600 GB/s on 2026-07-21, but 3.0 TB/s, with no direction, on 2026-11-05. The later figure was still on the live page on 2026-11-09. <a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> This page does not choose between them.</p>
+          <p class="detail"><span class="tag tag-c">C</span><strong>What the topology changes (medium confidence).</strong> In a direct mesh, the link count fixes the domain: seven links reach seven peers, and each pair shares one link. In a switched fabric, the domain is set by switch silicon and rack design, so it can be larger, but it adds a dependency on switch chips. In NVL72, NVIDIA supplies those chips itself. A direct mesh avoids that dependency but caps the domain. This is a structural comparison, not a performance ranking; no measured collective throughput was reviewed for either system.</p>
+          <p class="detail"><span class="tag tag-a">A</span>NVIDIA gives a rack-level figure for the previous generation, "130 TB/s of aggregate NVLink bandwidth" on GB200 NVL72. <a class="cite" href="#ref-4">[4]</a> An aggregate over 72 GPUs is a system figure and must not be read as one device's bandwidth.</p>
+        </div></article>
+
+        <article class="reference-block" id="scale-out"><div class="block-index">09</div><div>
+          <h2>From scale-up to scale-out</h2>
+          <p class="detail"><span class="tag tag-s">S</span>The Ultra Ethernet Specification v1.1 describes three network types: a frontend network, a backend scale-out network and a local scale-up network. Its scale-up examples include "AMD’s XGMI, NVIDIA’s NVLINK, Intel’s Xe Link, switched PCIExpress, and CXL systems". It describes scale-up domains as "limited to dozens, maybe hundreds, of endpoints today". <a class="cite" href="#ref-8">[8]</a> The same text puts endpoint hardware interface details out of scope. It says UE is designed to support the libibverbs and libfabric APIs, and covers PHYs for 100 Gb/s and 200 Gb/s per-lane signalling. <a class="cite" href="#ref-8">[8]</a> These are statements of the specification's own text, from its introductory chapters and contents; most of the 764-page document was not read.</p>
+          <p class="detail"><span class="tag tag-a">A</span>The consortium's 1.0 announcement (2025-06-11) says "active implementations and compliance programs" are in progress. It also invites members into "upcoming compliance and interoperability programs". <a class="cite" href="#ref-9">[9]</a> <span class="tag tag-u">U</span>No reviewed source names a product that follows the specification or publishes a compliance result.</p>
+          <p class="detail"><span class="tag tag-a">A</span>For Vera Rubin, NVIDIA states 1.6 Tb/s of ConnectX-9 scale-out connectivity per GPU, and up to 800 Gb/s of "Ethernet or InfiniBand" connectivity from BlueField-4. It states that Spectrum-6 Ethernet switches use co-packaged optics. Its DGX SuperPOD reference design composes eight NVL72 racks with Spectrum-X Ethernet. <a class="cite" href="#ref-3">[3]</a> No reviewed source states that Spectrum-X follows the Ultra Ethernet specification.</p>
+          <p class="detail"><span class="tag tag-c">C</span><strong>What changes at the rack boundary (medium confidence).</strong> Inside NVL72, GPU-to-GPU traffic runs over NVLink switches. Beyond it, traffic runs over NICs, Ethernet switches and optics, on a separate network with its own transport. Per GPU, NVLink 6's 3.6 TB/s (28.8 Tb/s) is about 9× ConnectX-9's 1.6 Tb/s if that figure is per direction, or 18× if it counts both. Scale-out therefore adds NIC, switch, optics and network-software dependencies that the scale-up fabric does not have. The reviewed sources do not show which of those components are interchangeable in practice.</p>
+        </div></article>
+
+        <article class="reference-block" id="case-mi300x"><div class="block-index">10</div><div>
+          <h2>Case study: the AMD MI300X 8-GPU platform</h2>
+          <p class="detail">This case was chosen because one primary document, AMD's CDNA 3 white paper with its footnotes, discloses the memory figures, the link counts, the topology and the host connection together. <a class="cite" href="#ref-1">[1]</a> NVIDIA's NVL72 is used above only as a bounded contrast.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="MI300X platform data path (scrollable table)">
+            <table class="data-table">
+              <caption>Tracing data through the MI300X 8-GPU platform, as AMD describes it.</caption>
+              <thead><tr><th scope="col">Question</th><th scope="col">MI300X platform</th><th scope="col">Evidence</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">1. Where data originates</th><td>In each GPU's HBM3 (192 GB) and caches, or in host memory</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">2. Which interface carries it</th><td>Infinity Fabric between GPUs; x16 PCIe Gen 5 to the host CPU</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">3. Which hardware participates</th><td>Eight MI300X OAM modules on one OCP Universal Base Board; each I/O die carries two x16 links, one of which can act as PCIe Gen 5</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">4. The disclosed topology</th><td>Fully connected: seven links per GPU, one to each peer, with no switch shown</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">5. The bandwidth scope</th><td>"P2P ring peak aggregate" 896 GB/s and "total peak aggregate" 1024 GB/s, with no stated direction; links "up to 32Gbps", not stated as per lane</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">6. The dependency created</th><td>Peer traffic depends on AMD's proprietary Infinity Fabric links and on a board that wires the full mesh; the domain is fixed at eight GPUs</td><td><span class="tag tag-c">C</span>Derived from 2–4</td></tr>
+                <tr><th scope="row">7. What remains unknown</th><td>Per-link bandwidth and direction, encoding, measured collective throughput, latency, and any switch in deployed systems</td><td><span class="tag tag-u">U</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="detail"><span class="tag tag-c">C</span><strong>Checking AMD's figures (medium confidence).</strong> If "32Gbps" is a per-lane rate, an x16 link carries 512 Gb/s, or 64 GB/s, each way: 128 GB/s counting both directions. Seven links give 896 GB/s, AMD's P2P figure. One more x16 link for the host, PCIe Gen 5 at 32 GT/s, adds 128 GB/s, for 1,024 GB/s, AMD's total. AMD's figures are therefore consistent with raw, both-direction sums for one GPU, before encoding overhead. The "8 GPUs" label then names the platform rather than multiplying the figure. AMD does not state this, so it remains an inference.</p>
+        </div></article>
+
+        <article class="reference-block" id="measurement"><div class="block-index">11</div><div>
+          <h2>Reading a bandwidth figure</h2>
+          <p class="detail">Before comparing two interconnect figures, check six things:</p>
+          <ol class="detail">
+            <li><strong>Bits or bytes.</strong> Gb/s and Tb/s count bits; GB/s and TB/s count bytes, eight times more.</li>
+            <li><strong>Transfers or payload.</strong> GT/s is a per-lane transfer rate. Payload bandwidth is lower once encoding, flits and error correction are counted.</li>
+            <li><strong>Direction.</strong> A bidirectional figure counts both directions and is twice the per-direction figure.</li>
+            <li><strong>Scope.</strong> Per lane, per link, per device, per switch or per system.</li>
+            <li><strong>Peak or sustained.</strong> Every figure on this page is a stated peak or our arithmetic from one.</li>
+            <li><strong>Who measured it, and how.</strong> No measured figure was reviewed. Latency claims without a stated workload and method are not comparable.</li>
+          </ol>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Interconnect figures and their measurement scope (scrollable table)">
+            <table class="data-table">
+              <caption>Every interconnect figure on this page, with its unit, direction, scope and basis.</caption>
+              <thead><tr><th scope="col">Figure</th><th scope="col">What it measures</th><th scope="col">Direction</th><th scope="col">Scope</th><th scope="col">Basis and date</th></tr></thead>
+              <tbody>
+                <tr><th scope="row" class="num">896 GB/s</th><td>MI300X P2P ring peak aggregate</td><td>Not stated</td><td>Not stated (labelled "8 GPUs")</td><td>AMD, revision 2025-04-07 <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row" class="num">1024 GB/s</th><td>MI300X total peak aggregate I/O</td><td>Not stated</td><td>Not stated</td><td>AMD <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row" class="num">32 Gbps</th><td>CDNA 3 communication link rate</td><td>Not stated</td><td>Not stated as per lane</td><td>AMD <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row" class="num">3.6 TB/s</th><td>NVLink 6 GPU-to-GPU</td><td>Bidirectional</td><td>Per GPU</td><td>NVIDIA, 2026-01-05 <a class="cite" href="#ref-3">[3]</a></td></tr>
+                <tr><th scope="row" class="num">3.0 TB/s</th><td>NVLink 6</td><td>Not stated</td><td>Per GPU</td><td>NVIDIA, 2026-11-05 <a class="cite" href="#ref-4">[4]</a></td></tr>
+                <tr><th scope="row" class="num">130 TB/s</th><td>GB200 NVL72 NVLink</td><td>Not stated</td><td>Aggregate, per system</td><td>NVIDIA, 2026-11-05 <a class="cite" href="#ref-4">[4]</a></td></tr>
+                <tr><th scope="row" class="num">1.8 TB/s</th><td>NVLink-C2C, coherent CPU-GPU</td><td>Not stated</td><td>Per link</td><td>NVIDIA, 2026-01-05 <a class="cite" href="#ref-3">[3]</a></td></tr>
+                <tr><th scope="row" class="num">256 GB/s</th><td>x16 PCIe Gen 6 host connectivity</td><td>Not stated</td><td>Per link</td><td>NVIDIA, 2026-07-21 <a class="cite" href="#ref-2">[2]</a></td></tr>
+                <tr><th scope="row" class="num">1.6 Tb/s</th><td>ConnectX-9 scale-out</td><td>Not stated</td><td>Per GPU</td><td>NVIDIA, 2026-01-05 <a class="cite" href="#ref-3">[3]</a></td></tr>
+                <tr><th scope="row" class="num">64 GT/s</th><td>CXL 3.0 transfer rate</td><td>Not applicable</td><td>Per lane</td><td>CXL Consortium, 2022-08-02 <a class="cite" href="#ref-5">[5]</a></td></tr>
+                <tr><th scope="row" class="num">256 GB/s</th><td>CXL 3.0 x16 "aggregate raw"</td><td>Both directions (by arithmetic)</td><td>Per link</td><td>CXL Consortium <a class="cite" href="#ref-5">[5]</a></td></tr>
+                <tr><th scope="row" class="num">128 GT/s</th><td>CXL 4.0 transfer rate</td><td>Not applicable</td><td>Per lane</td><td>CXL Consortium, 2025-11-18 <a class="cite" href="#ref-7">[7]</a></td></tr>
+                <tr><th scope="row" class="num">100 / 200 Gb/s</th><td>UE PHY signalling</td><td>Not stated</td><td>Per lane</td><td>UE Specification v1.1, 2026-10-12 <a class="cite" href="#ref-8">[8]</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="detail"><span class="tag tag-c">C</span><strong>Two conversions (arithmetic, not throughput).</strong> CXL 3.0 at 64 GT/s across 16 lanes is 1,024 Gb/s, or 128 GB/s each way before overhead. The consortium's 256 GB/s "aggregate raw" figure therefore counts both directions, as NVIDIA's 256 GB/s for x16 PCIe Gen 6 would if it uses the same basis. NVIDIA's 1.6 Tb/s ConnectX-9 figure is 200 GB/s. <a class="cite" href="#ref-5">[5]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a></p>
+        </div></article>
+
+        <article class="reference-block" id="matrix"><div class="block-index">12</div><div>
+          <h2>Data movement dependency matrix</h2>
+          <p class="detail">Each capability below is classified as inherent to multi-accelerator AI systems, specific to an architecture, specific to a product, or unknown on the reviewed evidence. A row states what a source documents. It does not state a supply or compatibility relationship.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Data movement dependency matrix (scrollable table)">
+            <table class="data-table">
+              <caption>Data movement dependency matrix.</caption>
+              <thead><tr><th scope="col">Capability</th><th scope="col">Classification</th><th scope="col">Documented in reviewed sources</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Local memory bandwidth</th><td>Inherent; figure is product-specific</td><td><span class="tag tag-a">A</span>MI300X 5.3 TB/s <a class="cite" href="#ref-1">[1]</a>; Rubin 22 TB/s or 19.2 TB/s <a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-4">[4]</a></td><td>Effective bandwidth for any workload</td></tr>
+                <tr><th scope="row">On-package fabric</th><td>Architecture-specific (multi-die packages)</td><td><span class="tag tag-a">A</span>Infinity Fabric inside the MI300 package <a class="cite" href="#ref-1">[1]</a></td><td>Fabric details for other products</td></tr>
+                <tr><th scope="row">GPU-to-GPU links</th><td>Inherent need; implementation product-specific</td><td><span class="tag tag-a">A</span>Infinity Fabric mesh <a class="cite" href="#ref-1">[1]</a>; NVLink 6 <a class="cite" href="#ref-3">[3]</a></td><td>Compatibility between vendors' links</td></tr>
+                <tr><th scope="row">Scale-up switch silicon</th><td>Architecture-specific: switched fabrics only</td><td><span class="tag tag-a">A</span>NVLink 6 switch chips in NVL72 <a class="cite" href="#ref-3">[3]</a>; none shown for MI300X <a class="cite" href="#ref-1">[1]</a></td><td>Switch supply or availability</td></tr>
+                <tr><th scope="row">Host link</th><td>Inherent for discrete accelerators; generation product-specific</td><td><span class="tag tag-a">A</span>PCIe Gen 5 (MI300X) <a class="cite" href="#ref-1">[1]</a>; PCIe Gen6 (Rubin) <a class="cite" href="#ref-3">[3]</a></td><td>Achieved host transfer rates</td></tr>
+                <tr><th scope="row">Coherent CPU-GPU link</th><td>Product-specific</td><td><span class="tag tag-a">A</span>NVLink-C2C between Vera and Rubin <a class="cite" href="#ref-3">[3]</a></td><td>Coherency with other vendors' CPUs</td></tr>
+                <tr><th scope="row">CXL memory pooling or sharing</th><td>Unknown for the documented accelerators</td><td><span class="tag tag-a">A</span>Specification capability <a class="cite" href="#ref-5">[5]</a>; CXL 3.1 listed for the Vera CPU <a class="cite" href="#ref-3">[3]</a></td><td>CXL support on MI300X or the Rubin GPU</td></tr>
+                <tr><th scope="row">Scale-out NICs and switches</th><td>Inherent beyond the scale-up domain; product-specific in practice</td><td><span class="tag tag-s">S</span>Backend network type <a class="cite" href="#ref-8">[8]</a>; <span class="tag tag-a">A</span>ConnectX-9 and Spectrum-X in NVIDIA's design <a class="cite" href="#ref-3">[3]</a></td><td>Which components are interchangeable</td></tr>
+                <tr><th scope="row">Optics</th><td>Architecture-specific</td><td><span class="tag tag-a">A</span>Co-packaged optics in Spectrum-6 <a class="cite" href="#ref-3">[3]</a></td><td>Link counts, reach, reliability or deployment</td></tr>
+                <tr><th scope="row">Measured bandwidth and latency</th><td>Unknown</td><td><span class="tag tag-u">U</span>None reviewed</td><td>Any performance conclusion</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="questions"><div class="block-index">13</div><div>
+          <h2>Questions this evidence can and cannot answer</h2>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Analyst questions and evidence status (scrollable table)">
+            <table class="data-table">
+              <caption>Practical questions, what the reviewed evidence supports, and the source that would strengthen the answer.</caption>
+              <thead><tr><th scope="col">Question</th><th scope="col">What the reviewed evidence supports</th><th scope="col">Source that would establish more</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">What limits data movement between MI300X GPUs?</th><td><span class="tag tag-c">C</span>Each pair shares one x16 link in AMD's mesh, about one forty-first of local memory bandwidth (calculated)</td><td>AMD per-link specification; measured collective results</td></tr>
+                <tr><th scope="row">Where does memory bandwidth end and fabric bandwidth begin?</th><td><span class="tag tag-c">C</span>At the package edge: HBM is local to each package, and every byte to a peer crosses a link at roughly a sixth of local memory bandwidth or less</td><td>Effective-bandwidth measurements</td></tr>
+                <tr><th scope="row">Which connections are direct and which are switched?</th><td><span class="tag tag-a">A</span>MI300X: direct mesh. NVL72: switched through NVLink 6 switch trays</td><td>Deployed-system topology disclosures</td></tr>
+                <tr><th scope="row">What changes beyond one server or rack?</th><td><span class="tag tag-c">C</span>A separate network adds NIC, switch and optics dependencies, at about a ninth to an eighteenth of per-GPU scale-up bandwidth in NVIDIA's design</td><td>Scale-out measurements with method</td></tr>
+                <tr><th scope="row">Which interfaces are publicly documented?</th><td><span class="tag tag-a">A</span>Infinity Fabric, PCIe Gen 5 and Gen6, NVLink 6, NVLink-C2C, CXL 3.0 and 4.0, UE 1.1</td><td>PCI-SIG documents (inaccessible here)</td></tr>
+                <tr><th scope="row">Where are performance claims not comparable?</th><td><span class="tag tag-c">C</span>Bits against bytes, both-direction against per-direction, per-device against per-system, and peak against effective figures (section 11)</td><td>Figures stated with direction and method</td></tr>
+                <tr><th scope="row">Which dependencies could limit substitution?</th><td><span class="tag tag-c">C</span>Proprietary GPU-to-GPU links and their boards; switch silicon in switched designs. No reviewed source shows cross-vendor substitution</td><td>Published interoperability results</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="unresolved"><div class="block-index">14</div><div>
+          <h2>Unresolved questions</h2>
+          <p class="detail">These are material questions the reviewed evidence cannot answer. They are recorded, not filled with general industry commentary.</p>
+          <ol class="unresolved-list">
+            <li><strong>NVLink 6 per-GPU figure.</strong> 3.6 TB/s bidirectional versus 3.0 TB/s, both from NVIDIA. <a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a></li>
+            <li><strong>MI300X link scope.</strong> Per-link bandwidth, direction and encoding, and whether 896 GB/s is per GPU.</li>
+            <li><strong>AMD L2 figures.</strong> 34.4 TB/s in the text versus 51.6 TB/s in a legend.</li>
+            <li><strong>Effective bandwidth.</strong> No measured collective or application bandwidth for either documented system.</li>
+            <li><strong>Latency.</strong> No measured latency with a stated method.</li>
+            <li><strong>PCIe primary sources.</strong> PCI-SIG documents could not be retrieved.</li>
+            <li><strong>CXL on accelerators.</strong> Whether MI300X or the Rubin GPU implement CXL, and with what behaviour.</li>
+            <li><strong>CXL normative text.</strong> The CXL 3.x and 4.0 specifications were not reviewed.</li>
+            <li><strong>Ultra Ethernet compliance.</strong> No named compliant product or published interoperability result.</li>
+            <li><strong>Co-packaged optics.</strong> No link counts, reach or field reliability for deployed switches.</li>
+          </ol>
+        </div></article>
+      </section>
+
+      <section class="evidence-posture" id="references" aria-labelledby="evidence-title">
+        <div class="section-label blue">Evidence posture · Registry-linked</div>
+        <h2 id="evidence-title">References</h2>
+        <p class="evidence-intro">Each reference maps to a stable ID in the <a href="/sources/">governed source registry</a>. Quoted passages belong to their publishers; the classification, unit normalisation, arithmetic, chart and analysis are original work of this project.</p>
+        <ol class="ref-list">
+          <li id="ref-1">AMD, "Introducing AMD CDNA 3 Architecture" (white paper), revision dated 2025-04-07. <code>amd-cdna3-white-paper-2025</code>. <a href="https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf">amd.com</a></li>
+          <li id="ref-2">NVIDIA, "Inside NVIDIA Rubin GPU Architecture: Powering the Era of Agentic AI", 2026-07-21. <code>nvidia-rubin-gpu-architecture-2026</code>. <a href="https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/">developer.nvidia.com</a></li>
+          <li id="ref-3">NVIDIA, "Inside the NVIDIA Rubin Platform: Six New Chips, One AI Supercomputer", 2026-01-05. <code>nvidia-rubin-platform-architecture-2026</code>. <a href="https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/">developer.nvidia.com</a></li>
+          <li id="ref-4">NVIDIA, "Five Ways NVIDIA Co-Design Maximizes the Value of Every Byte in the AI Factory", 2026-11-05. <code>nvidia-co-design-memory-2026</code>. <a href="https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory">developer.nvidia.com</a></li>
+          <li id="ref-5">CXL Consortium, "Compute Express Link 3.0" (white paper), published with the 2022-08-02 release. <code>cxl-3-0-white-paper-2022</code>. <a href="https://computeexpresslink.org/wp-content/uploads/2023/12/CXL_3.0_white-paper_FINAL.pdf">computeexpresslink.org</a></li>
+          <li id="ref-6">CXL Consortium, "CXL Consortium releases Compute Express Link 3.0 specification to expand fabric capabilities and management", 2022-08-02. <code>cxl-3-0-specification-release-2022</code>. <a href="https://computeexpresslink.org/wp-content/uploads/2024/01/CXL_3.0-Specification-Release_FINAL-1.pdf">computeexpresslink.org</a></li>
+          <li id="ref-7">CXL Consortium, "CXL Consortium Releases the Compute Express Link 4.0 Specification Increasing Speed and Bandwidth", 2025-11-18. <code>cxl-4-0-specification-release-2025</code>. <a href="https://computeexpresslink.org/wp-content/uploads/2025/11/CXL_4.0-Specification-Release_FINAL_Website-Copy.pdf">computeexpresslink.org</a></li>
+          <li id="ref-8">Ultra Ethernet Consortium, "Ultra Ethernet Specification v1.1", 2026-10-12 (introductory sections and contents read). <code>uec-specification-1-1-2026</code>. <a href="https://ultraethernet.org/wp-content/uploads/sites/20/2026/10/UE-Specification-1.1.pdf">ultraethernet.org</a></li>
+          <li id="ref-9">Ultra Ethernet Consortium, "Ultra Ethernet Consortium (UEC) Launches Specification 1.0 Transforming Ethernet for AI and HPC at Scale", 2025-06-11. <code>uec-specification-1-0-launch-2025</code>. <a href="https://ultraethernet.org/ultra-ethernet-consortium-uec-launches-specification-1-0-transforming-ethernet-for-ai-and-hpc-at-scale/">ultraethernet.org</a></li>
+        </ol>
+        <div class="posture-grid">
+          <article><h3>Can support</h3><p>Attributed statements of what AMD, NVIDIA and the CXL and Ultra Ethernet consortia disclosed about links, topologies, host interfaces and networks, with each figure's stated scope; and what the UE specification's text states.</p></article>
+          <article><h3>Cannot support</h3><p>Measured bandwidth or latency, cross-vendor comparison of figures from different measurement domains, product compliance, interoperability, deployment or supply.</p></article>
+          <article><h3>Freshness</h3><p>Evidence compiled: 2026-11-09 · Scientific review pending. The records listed below were registered earlier and were not re-reviewed for this release.</p></article>
+        </div>
+        <ul class="source-id-list" aria-label="Related registry records not re-reviewed in this release">
+          <li class="pending">ucie-2-specification-release-2024 · pending_review</li>
+          <li>nvidia-fiscal-2025-form-10-k</li>
+          <li>amd-instinct-mi300x-accelerator-2023</li>
+        </ul>
+        <a class="evidence-link" href="/sources/">Inspect the governed source registry →</a>
+      </section>
+
+      <section class="related" aria-labelledby="related-title">
+        <div class="section-label">Continue the reference path</div>
+        <h2 id="related-title">Related reference surfaces</h2>
+        <div class="related-grid">
+          <a class="related-card" href="/hbm-memory/"><strong>HBM Memory</strong><span>The local memory bandwidth that every fabric figure on this page should be read against.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/design-fabrication-packaging/"><strong>Design, Fabrication, and Packaging</strong><span>How dies are joined inside the package, and what UCIe covers.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/ai-chip-infrastructure/"><strong>AI Chip Infrastructure</strong><span>Why AI chips must be understood as infrastructure rather than isolated hardware.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/power-and-thermal-limits/"><strong>Power and Thermal Limits</strong><span>The physical constraints that denser fabrics and racks run into.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/methodology/"><strong>Methodology</strong><span>How evidence, analysis, confidence and unknowns are kept separate.</span><span class="text-link">Open reference →</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>AI<span>Electronic</span>Chips</span></a><p>A governed reference layer for AI chip systems intelligence.</p></div>
     <nav aria-label="Footer navigation"><a href="/compute-sovereignty/">Compute sovereignty</a><a href="/sovereignty-stack/">Sovereignty stack</a><a href="/methodology/">Methodology</a><a href="/strategic-availability/">Strategic availability</a></nav>
