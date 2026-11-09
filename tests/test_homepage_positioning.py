@@ -67,5 +67,35 @@ class HomepagePositioningTests(unittest.TestCase):
             self.assertIsNone(re.search(phrase, body, re.I), phrase)
 
 
+class PrimaryNavigationTests(unittest.TestCase):
+    """Every public route labels the homepage link "Overview" in its primary navigation."""
+
+    PAGES = [ROOT / "index.html"] + sorted(ROOT.glob("*/index.html"))
+
+    def nav(self, page: Path) -> str:
+        match = re.search(r'<nav class="primary-nav" aria-label="Primary navigation">(.*?)</nav>',
+                          page.read_text(encoding="utf-8"), re.S)
+        self.assertIsNotNone(match, page)
+        return match.group(1)
+
+    def test_thirteen_public_routes(self):
+        self.assertEqual(13, len(self.PAGES))
+
+    def test_overview_label_on_every_route(self):
+        for page in self.PAGES:
+            with self.subTest(page=page.relative_to(ROOT).as_posix()):
+                nav = self.nav(page)
+                self.assertNotIn("Thesis", nav)
+                first = re.match(r'\s*<a href="/"( aria-current="page")?>([^<]+)</a>', nav)
+                self.assertIsNotNone(first, nav)
+                self.assertEqual("Overview", first.group(2))
+
+    def test_aria_current_marks_overview_only_on_homepage(self):
+        for page in self.PAGES:
+            with self.subTest(page=page.relative_to(ROOT).as_posix()):
+                is_home = page == ROOT / "index.html"
+                self.assertEqual(is_home, '<a href="/" aria-current="page">Overview</a>' in self.nav(page))
+
+
 if __name__ == "__main__":
     unittest.main()
