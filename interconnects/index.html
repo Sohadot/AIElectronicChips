@@ -141,12 +141,12 @@
       <section class="reference-sections" aria-label="Interconnect and data movement reference">
         <article class="reference-block" id="hierarchy"><div class="block-index">04</div><div>
           <h2>The data-movement hierarchy</h2>
-          <p class="detail">Data in an accelerator moves through tiers. Each tier is a different physical path with its own bandwidth, and bandwidth falls at each step outward from the compute units. AMD's white paper gives figures for most of these tiers in a single document, which makes the MI300X a usable reference for the shape of the hierarchy. <a class="cite" href="#ref-1">[1]</a></p>
+          <p class="detail">Data in an accelerator moves through tiers. Each tier is a different physical path with its own bandwidth. In this illustrative selection the reported peak figures decrease outward from compute units, but their measurement domains are not directly comparable. AMD's white paper gives figures for most of these tiers in a single document, which makes the MI300X a usable reference for the shape of the hierarchy. <a class="cite" href="#ref-1">[1]</a></p>
           <figure class="ref-figure">
             <div class="figure-frame" tabindex="0" role="region" aria-label="Figure 1 chart; scrolls horizontally on narrow screens">
             <svg viewBox="0 0 820 330" role="img" aria-labelledby="bw-fig-title bw-fig-desc">
-              <title id="bw-fig-title">Peak bandwidth by data-movement tier for one AMD MI300X, logarithmic scale</title>
-              <desc id="bw-fig-desc">Horizontal bars on a logarithmic scale from 0.1 to 100 terabytes per second. L2 cache aggregate read: 34.4 TB/s. Infinity Cache peak: 17.2 TB/s. HBM3 peak memory: 5.3 TB/s. All seven Infinity Fabric GPU links together: 0.896 TB/s. One Infinity Fabric link to one peer GPU, calculated: 0.128 TB/s. One x16 PCIe Gen 5 host link, calculated: 0.128 TB/s. The first four are AMD-stated peaks; the last two are this project's arithmetic.</desc>
+              <title id="bw-fig-title">Illustrative MI300X bandwidth tiers: reported and inferred figures with differing scopes, logarithmic scale</title>
+              <desc id="bw-fig-desc">Horizontal bars on a logarithmic scale from 0.1 to 100 terabytes per second. L2 cache aggregate read: 34.4 TB/s. Infinity Cache peak: 17.2 TB/s. HBM3 peak memory: 5.3 TB/s. AMD-reported P2P ring peak aggregate: 0.896 TB/s (labelled 8 GPUs; per-GPU versus per-platform scope not established). One Infinity Fabric link to one peer GPU, calculated: 0.128 TB/s. One x16 PCIe Gen 5 host link, calculated: 0.128 TB/s. The first four are AMD-stated peaks; the last two are this project's arithmetic.</desc>
               <line class="f-grid" x1="250" y1="34" x2="250" y2="286"/>
               <line class="f-grid" x1="423" y1="34" x2="423" y2="286"/>
               <line class="f-grid" x1="597" y1="34" x2="597" y2="286"/>
@@ -175,7 +175,7 @@
                 <text class="f-val" x="557" y="142">5.3 TB/s</text>
               </g>
               <g>
-                <title>All seven Infinity Fabric GPU links: 896 GB/s (AMD-stated peak aggregate)</title>
+                <title>AMD P2P ring peak aggregate: 896 GB/s (8 GPUs; device-level scope and direction unconfirmed)</title>
                 <text class="f-lbl" x="240" y="183" text-anchor="end">7 GPU LINKS (TOTAL)</text>
                 <rect class="f-bar" x="250" y="168" width="165" height="22" rx="2"/>
                 <text class="f-val" x="423" y="184">0.896 TB/s</text>
@@ -194,7 +194,7 @@
               </g>
             </svg>
             </div>
-            <figcaption>Figure 1. Original chart by AIElectronicChips.com from AMD's stated peaks for MI300X. <a class="cite" href="#ref-1">[1]</a> Solid bars are AMD-stated; dashed bars are our arithmetic (section 10). The tiers measure different things: cache and memory figures are read or combined capability, while the link figures are both-direction sums on our reading of AMD's figures, since AMD states no direction. Each step on the scale is ten times the last. <span class="tag tag-c">C</span></figcaption>
+            <figcaption>Figure 1. Original chart by AIElectronicChips.com from AMD's stated peaks for MI300X. <a class="cite" href="#ref-1">[1]</a> Solid bars are AMD-stated; dashed bars are our arithmetic (section 10). These values have different physical and reporting scopes. AMD gives 896 GB/s with an '8 GPUs' label but does not confirm whether that figure applies per device or per platform, or whether it combines directions. The one-peer and host-link bars are conditional raw calculations, not measured performance. Each step on the scale is ten times the last. <span class="tag tag-c">C</span></figcaption>
           </figure>
           <div class="table-scroll" tabindex="0" role="region" aria-label="Data movement tiers (scrollable table)">
             <table class="data-table">
@@ -230,7 +230,7 @@
             <li><strong>Device-to-device bandwidth:</strong> traffic between accelerators over a fabric, a separate physical path with its own figure.</li>
           </ul>
           <p class="detail"><span class="tag tag-a">A</span>NVIDIA's 2026-07-21 post states, for one Rubin GPU, up to 22 TB/s of peak HBM4 bandwidth and 3,600 GB/s of NVLink 6 scale-up bandwidth. It also gives 1,800 GB/s of NVLink-C2C bandwidth to the CPU and up to 256 GB/s over x16 PCIe Gen 6. <a class="cite" href="#ref-2">[2]</a> These are four different paths and are not interchangeable figures. NVIDIA's 2026-11-05 post gives 19.2 TB/s for Rubin memory bandwidth instead; that conflict stays unresolved in the <a href="/hbm-memory/#accelerators">HBM reference</a>. <a class="cite" href="#ref-4">[4]</a></p>
-          <p class="detail"><span class="tag tag-c">C</span><strong>Where memory bandwidth ends and fabric bandwidth begins (medium confidence).</strong> On MI300X, peak HBM3 bandwidth (5.3 TB/s) is about 6× all seven GPU links together (896 GB/s), and about 41× the single link joining two GPUs (128 GB/s, calculated). On Rubin, peak HBM4 (22 TB/s, or the later 19.2 TB/s) is about 5× to 6× NVLink 6 (3.6 TB/s bidirectional), which NVIDIA's switches make available toward any peer. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> These ratios compare stated peaks from different measurement domains. Memory figures are combined read/write capability; link figures count both directions. They show the order of magnitude of the step from local to remote data, not achieved throughput.</p>
+          <p class="detail"><span class="tag tag-c">C</span><strong>Where memory bandwidth ends and fabric bandwidth begins (medium confidence).</strong> If AMD's ambiguous 896 GB/s P2P figure is a per-GPU, both-direction sum, MI300X's 5.3 TB/s peak HBM3 is numerically about 6× that figure; it is about 41× the inferred 128 GB/s single-peer-link figure under the same assumptions. On Rubin, peak HBM4 (22 TB/s, or the later 19.2 TB/s) is about 5× to 6× NVLink 6 (3.6 TB/s bidirectional), which NVIDIA's switches make available toward any peer. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> These ratios compare stated peaks from different measurement domains. Memory figures are combined read/write capability; link figures count both directions. They show numerical orders of magnitude under stated assumptions, not memory access speed, peer access latency, achieved throughput, or application performance.</p>
         </div></article>
 
         <article class="reference-block" id="host"><div class="block-index">07</div><div>
