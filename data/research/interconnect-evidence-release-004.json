@@ -772,7 +772,7 @@
       "id": "i-an-memory-vs-fabric",
       "claim_class": "bounded_analysis",
       "topic": "measurement_scope",
-      "statement": "Medium confidence. Memory bandwidth and fabric bandwidth are different quantities, but their ratio shows how much faster a GPU reaches its own memory than its peers. For MI300X, 5.3 TB/s peak HBM3 against 896 GB/s of total fabric bandwidth is about 6x. Against the 128 GB/s of the single link joining two GPUs in AMD's mesh, it is about 41x. For Rubin, 22 TB/s, or the later 19.2 TB/s, against 3.6 TB/s of bidirectional NVLink 6 is about 5x to 6x. Through NVIDIA's switches that NVLink bandwidth can reach any peer.",
+      "statement": "Medium confidence. Memory bandwidth and fabric bandwidth measure different physical paths, so comparing their vendor-stated peaks cannot establish how fast a GPU accesses local memory versus a peer. If AMD's ambiguous 896 GB/s P2P figure is a per-GPU, both-direction sum, MI300X's 5.3 TB/s peak HBM3 is about 6x that figure; against the separately inferred 128 GB/s single-peer link, it is about 41x. For Rubin, 22 TB/s (or the later 19.2 TB/s) relative to 3.6 TB/s bidirectional NVLink 6 is about 5x to 6x. These ratios describe numerical magnitudes across different measurement scopes, not latency, achieved throughput, or peer access speed.",
       "evidence": [
         {
           "source_id": "amd-cdna3-white-paper-2025",
@@ -792,11 +792,12 @@
         }
       ],
       "evidence_state": "cited_sources_active",
-      "scope": "Ratio of vendor-stated peak memory bandwidth to vendor-stated fabric bandwidth, per GPU",
+      "scope": "Numerical ratios of different vendor-stated peak bandwidth domains; AMD per-GPU P2P interpretation is conditional",
       "as_of": "2026-11-09",
       "limitations": [
         "HBM bandwidth is a combined read/write capability, not a both-direction sum; the ratios compare different measurement domains",
         "Peak figures only; no effective or application bandwidth was reviewed",
+        "AMD does not resolve whether the 896 GB/s figure applies per GPU or across the eight-GPU platform, nor whether it is bidirectional",
         "The 128 GB/s per-pair figure depends on the assumptions in i-an-mi300x-link-arithmetic"
       ],
       "quantities": [
@@ -814,8 +815,8 @@
           "value": "896",
           "unit": "GB/s",
           "quantity": "MI300X P2P aggregate fabric bandwidth",
-          "direction": "bidirectional",
-          "scope": "per_device",
+          "direction": "not_stated",
+          "scope": "not_stated",
           "peak_or_sustained": "peak",
           "basis": "vendor_stated",
           "source_id": "amd-cdna3-white-paper-2025"
