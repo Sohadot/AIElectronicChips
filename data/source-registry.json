@@ -627,6 +627,38 @@
       "confidence_use": "May support attributed statements of SK hynix's own definition of custom HBM; checked for, but did not yield, an HBM4 base-die manufacturer",
       "use_limitations": ["Only the first ~80,000 of ~295,000 characters were read verbatim; the Business section and MD&A were not read", "No HBM4 base-die manufacturer or process appears in the portion read"],
       "status": "active"
+    },
+    {
+      "id": "skhynix-full-stack-memory-2026",
+      "title": "From HBM to eSSD: How SK hynix is charting the future of full-stack memory",
+      "publisher": "SK hynix Inc.",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://news.skhynix.com/en/hbm-to-essd/",
+      "publication_date": "2026-07-08",
+      "accessed_at": "2026-11-09",
+      "ontology_layers": ["memory", "fabrication", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "base_die_process_context", "packaging_integration_context"],
+      "geographic_scope": "Company-reported technology and facility direction",
+      "temporal_scope": "Published 2026-07-08; HBM4E, custom HBM and facility statements are roadmap or plans",
+      "confidence_use": "May support attributed statements that SK hynix says it applies TSMC advanced logic process technology to its base die starting with HBM4, and its stated packaging facilities",
+      "use_limitations": ["Company statement; no process node is named and no independent production confirmation is given", "Reports HBM4 development completion and preparations for mass production, not shipments or customers", "Does not mention CoWoS or the package-level integration of its HBM4"],
+      "status": "active"
+    },
+    {
+      "id": "skhynix-tsmc-symposium-2026",
+      "title": "“Overcoming Technological Limits Requires the Integration of Memory and Logic”: SK hynix Presents Vision at TSMC Symposium",
+      "publisher": "SK hynix Inc.",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://news.skhynix.com/en/tsmc-technology-symposium-2026/",
+      "publication_date": "2026-04-23",
+      "accessed_at": "2026-11-09",
+      "ontology_layers": ["memory", "fabrication", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "base_die_process_context"],
+      "geographic_scope": "Company exhibition and keynote description",
+      "temporal_scope": "Published 2026-04-23; executive statements are partly forward-looking",
+      "confidence_use": "May support attributed statements of SK hynix's HBM4 exhibit description ('Powered by base die in TSMC advanced logic') and its executive's stated collaboration plans",
+      "use_limitations": ["The executive's base-die wording is framed as a collaboration to be strengthened ('we will strengthen...')", "No process node, production status or customer for HBM4 is given", "CoWoS is named only as one of TSMC's technologies, not as SK hynix's HBM4 packaging route"],
+      "status": "active"
     }
   ]
 }

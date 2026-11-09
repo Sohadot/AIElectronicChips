@@ -1,13 +1,13 @@
 {
   "release_id": "aec-hbm4-evidence-release-001",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "research_candidate",
   "publication_eligible": false,
   "as_of": "2026-11-09",
   "title": "HBM4 Evidence Release 001",
   "source_registry_reference": "data/source-registry.json",
   "atlas_reference": "data/dependency-atlas.json",
-  "description": "Research-candidate findings and proposed Atlas relationships for HBM3E, HBM4 and HBM4E. Nothing in this file is a published Atlas relationship; every candidate requires named human review against the cited passages before it may be moved into data/dependency-atlas.json.",
+  "description": "Research-candidate findings and proposed Atlas relationships for HBM3E, HBM4 and HBM4E, extended by Industrial Dependency Evidence Release 002 (HBM4 dependency chain: base die, manufacturing capability, packaging and accelerator integration). Nothing in this file is a published Atlas relationship; every candidate requires named human review against the cited passages before it may be moved into data/dependency-atlas.json.",
   "rights_note": "Classification, analysis and arithmetic are original project work by AIElectronicChips.com (Sohadot). Quoted passages are short excerpts (at most 20 words each, 40 per citation) reproduced for citation and verification; the underlying texts, specifications and standards remain the property of their publishers. No endorsement by JEDEC or any company is implied. This file is a research candidate: it is visible in the public repository but is excluded from the published website.",
   "findings": [
     {
@@ -106,6 +106,33 @@
         "Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable",
         "Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed",
         "The announcement gives no power figures; which levels any supplier uses is not stated"
+      ]
+    },
+    {
+      "id": "f-dram-core-process",
+      "claim_class": "attributed_statement",
+      "topic": "architecture",
+      "statement": "Each supplier names the DRAM process for its HBM4 core dies: SK hynix the \"1bnm\" (fifth-generation 10nm-class) process, Micron its 1-beta process for its 2025 samples, and Samsung its sixth-generation 10nm-class 1c process.",
+      "evidence": [
+        {
+          "source_id": "skhynix-hbm4-development-mass-production-2025",
+          "locator": "\"the 1bnm process, or the fifth-generation of the 10-nanometer technology\""
+        },
+        {
+          "source_id": "micron-hbm4-samples-2025",
+          "locator": "\"Built on its well-established 1ß (1-beta) DRAM process\""
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"most advanced 6th-generation 10 nanometer (nm)-class DRAM process (1c)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Core-die DRAM process as each supplier describes its HBM4",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company statements; process names are not comparable across suppliers",
+        "Micron's 2026 release does not restate its DRAM process"
       ]
     },
     {
@@ -376,7 +403,31 @@
       "scope": "SK hynix plans as described 2024-04-19",
       "as_of": "2026-11-09",
       "limitations": [
-        "MOU-stage plan; later reviewed SK hynix releases do not restate the base-die source"
+        "2024 MOU-stage plan; SK hynix's 2026 statements (f-skh-base-die-2026) describe the arrangement as being applied starting with HBM4"
+      ]
+    },
+    {
+      "id": "f-skh-base-die-2026",
+      "claim_class": "attributed_statement",
+      "topic": "base_die",
+      "statement": "SK hynix stated on 2026-07-08 that, through its collaboration with TSMC, it is applying advanced logic process technology to the base die starting with HBM4. Its April 2026 HBM4 exhibit carried the label \"Powered by base die in TSMC advanced logic\". Neither source names the process node or reports HBM4 shipments.",
+      "evidence": [
+        {
+          "source_id": "skhynix-full-stack-memory-2026",
+          "locator": "\"Through its collaboration with TSMC, SK hynix is applying advanced logic process technology to the base die starting with HBM4.\""
+        },
+        {
+          "source_id": "skhynix-tsmc-symposium-2026",
+          "locator": "\"Powered by base die in TSMC advanced logic\"; executive: \"the adoption of TSMC's advanced logic processes for the base die starting with HBM4\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SK hynix HBM4 base die as described by SK hynix in 2026",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company statements, not independent confirmation of the production arrangement",
+        "No TSMC node is named; TSMC's own reviewed release names no customers",
+        "The executive's wording is framed as a collaboration SK hynix 'will strengthen'"
       ]
     },
     {
@@ -462,7 +513,7 @@
       "id": "f-an-logic-coupling",
       "claim_class": "bounded_analysis",
       "topic": "base_die",
-      "statement": "Every HBM4 stack depends on fabricating both the DRAM core dies and the base logic die. The suppliers reviewed source the base die in three different ways: SK hynix planned to use TSMC's advanced logic process (2024 plan, not restated in later reviewed sources); Samsung states a 4nm logic process, which its HBM4E release attributes to Samsung Foundry; Micron states its base logic die is designed and manufactured in-house with advanced CMOS. These arrangements change who supplies the base die, not whether advanced semiconductor manufacturing capability is required: in-house manufacture still depends on Micron's own process capability and capacity, while an external foundry adds a dependency on that foundry. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new external dependency for SK hynix is our inference.",
+      "statement": "Every HBM4 stack depends on fabricating both the DRAM core dies and the base logic die. The suppliers reviewed source the base die in three different ways: SK hynix states it applies TSMC's advanced logic process technology starting with HBM4; Samsung states a 4nm logic process, which its HBM4E release attributes to Samsung Foundry; Micron states its base logic die is designed and manufactured in-house with advanced CMOS. These arrangements change who supplies the base die, not whether advanced semiconductor manufacturing capability is required: in-house manufacture still depends on Micron's own process capability and capacity, while an external foundry adds a dependency on that foundry. SK hynix states only that its base dies up to HBM3E used its own proprietary technology; that HBM4 marks a new external dependency for SK hynix is our inference.",
       "evidence": [
         {
           "source_id": "skhynix-tsmc-hbm4-mou-2024",
@@ -483,6 +534,10 @@
         {
           "source_id": "micron-fy2026-form-10-k",
           "locator": "\"on the base logic die and DRAM core dies, which are designed and manufactured in-house\""
+        },
+        {
+          "source_id": "skhynix-full-stack-memory-2026",
+          "locator": "\"applying advanced logic process technology to the base die starting with HBM4\""
         }
       ],
       "evidence_state": "cited_sources_active",
@@ -494,7 +549,7 @@
         "No supplier's relative manufacturing capability is assessed"
       ],
       "assumptions": [
-        "SK hynix's 2024 plan was carried into production; this is not confirmed in its later reviewed releases or the portion of its 2026 prospectus read"
+        "The suppliers' own statements of their base-die sourcing are accurate; no independent production confirmation was reviewed"
       ]
     },
     {
@@ -573,6 +628,29 @@
       "as_of": "2026-11-09",
       "limitations": [
         "Company-reported process benefits"
+      ]
+    },
+    {
+      "id": "f-packaging-stages",
+      "claim_class": "attributed_statement",
+      "topic": "packaging_integration",
+      "statement": "Suppliers describe HBM stack assembly as their own packaging capability: SK hynix says its Cheongju P&T7 is being established as an advanced packaging fab for AI memory including HBM, and Samsung cites extensive in-house expertise in advanced packaging. Neither statement describes how a finished HBM4 stack is integrated into an accelerator package.",
+      "evidence": [
+        {
+          "source_id": "skhynix-full-stack-memory-2026",
+          "locator": "\"is being established as an advanced packaging fab dedicated to AI memory products, including HBM\""
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"extensive in-house expertise in advanced packaging allows for streamlined production cycles and reduced lead times\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Supplier-side HBM packaging capability as described by SK hynix (2026-07-08) and Samsung (2026-02-12)",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "SK hynix's P&T7 statement describes a facility being established, not one in operation",
+        "Neither statement names a package-integration technology such as CoWoS"
       ]
     },
     {
@@ -812,6 +890,33 @@
       ]
     },
     {
+      "id": "f-nv-on-package",
+      "claim_class": "attributed_statement",
+      "topic": "accelerator_integration",
+      "statement": "NVIDIA states that Rubin's two compute dies are unified on a single package and that its up to 288 GB of HBM4 increases on-package capacity, so the HBM4 stacks sit in the GPU package. None of NVIDIA's three dated Rubin articles names the packaging technology, interposer or packaging provider.",
+      "evidence": [
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "\"These two dies are unified on a single package\"; \"up to 288 GB of HBM4 per GPU, increasing available on-package capacity\""
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "Full text searched 2026-11-09 for CoWoS, TSMC and interposer: none in connection with the Rubin GPU"
+        },
+        {
+          "source_id": "nvidia-co-design-memory-2026",
+          "locator": "Full text searched 2026-11-09 for CoWoS, TSMC and interposer: none"
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA Rubin GPU as described by NVIDIA in 2026",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "On-package placement does not identify the packaging technology or provider",
+        "The CES 2026 release could not be re-fetched for this search; its earlier full read found no HBM mention"
+      ]
+    },
+    {
       "id": "f-an-rubin-stacks",
       "claim_class": "bounded_analysis",
       "topic": "accelerator_integration",
@@ -887,6 +992,46 @@
         "'Designed for' states a supplier's design target, not a platform vendor's qualification",
         "Package-level and speed-grade differences could limit substitution; none is documented either way"
       ]
+    },
+    {
+      "id": "f-an-dependency-pathways",
+      "claim_class": "bounded_analysis",
+      "topic": "architecture",
+      "statement": "Medium confidence: an HBM4-equipped accelerator depends on four separable stages. DRAM core dies are made on each supplier's DRAM process. The base logic die is sourced differently by each supplier (external foundry, intra-company foundry or in-house). Stack assembly is described by SK hynix and Samsung as their own packaging capability. Package integration with the accelerator is platform-specific; for NVIDIA Rubin the reviewed sources establish on-package placement but not the packaging technology. The first and fourth stages are inherent to HBM4 as an on-package memory; the base-die source and the integration route are supplier- or platform-specific.",
+      "evidence": [
+        {
+          "source_id": "skhynix-tsmc-hbm4-mou-2024",
+          "locator": "\"stacking a core DRAM die on top of a base die that features TSV\""
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "locator": "\"on the base logic die and DRAM core dies, which are designed and manufactured in-house\""
+        },
+        {
+          "source_id": "skhynix-full-stack-memory-2026",
+          "locator": "\"applying advanced logic process technology to the base die starting with HBM4\""
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "locator": "\"adopted the most advanced nodes like the 1c DRAM and 4nm logic process for HBM4\""
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "\"increasing available on-package capacity\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Structural decomposition of disclosed HBM4 manufacturing and integration stages",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No capacity, yield, allocation or lead-time inference is made",
+        "Test and known-good-stack stages are not covered by any reviewed source",
+        "Micron does not describe its stack-assembly arrangement in the reviewed sources"
+      ],
+      "assumptions": [
+        "The stages are separable as described by the suppliers' own disclosures",
+        "Supplier statements of base-die sourcing are accurate"
+      ]
     }
   ],
   "unresolved": [
@@ -927,15 +1072,16 @@
     {
       "id": "u-skh-base-die-implementation",
       "topic": "base_die",
-      "question": "Does SK hynix's production HBM4 use a TSMC-made logic base die, and on which node?",
-      "why_unresolved": "The 2024 MOU states a plan. SK hynix's later reviewed releases do not restate it, the portion of its July 2026 prospectus read defines custom HBM by base-die integration but names no manufacturer or process, and TSMC does not name customers.",
+      "question": "Which TSMC process node is SK hynix's HBM4 base die built on, and can a party other than SK hynix confirm the arrangement in shipping HBM4?",
+      "why_unresolved": "SK hynix states (2026-07-08) that it applies TSMC advanced logic process technology to the base die starting with HBM4, and its April 2026 exhibit says 'Powered by base die in TSMC advanced logic'. Neither names a node. TSMC lists N12 and N3 HBM4 base-die offerings but names no customer, and its 2026 symposium release could not be retrieved.",
       "sources_checked": [
         "skhynix-tsmc-hbm4-mou-2024",
-        "skhynix-hbm4-development-mass-production-2025",
+        "skhynix-tsmc-symposium-2026",
+        "skhynix-full-stack-memory-2026",
         "tsmc-2025-na-technology-symposium",
         "skhynix-424b4-prospectus-2026"
       ],
-      "next_evidence_needed": "SK hynix or TSMC disclosure tying the production base die to a named node."
+      "next_evidence_needed": "A TSMC or SK hynix disclosure naming the node, or an independent teardown or filing tying the shipping HBM4 base die to it."
     },
     {
       "id": "u-capacity",
@@ -989,13 +1135,16 @@
     {
       "id": "u-interposer-substrate",
       "topic": "packaging_integration",
-      "question": "Which interposer or bridge technology, substrate and assembly providers do HBM4 accelerator packages depend on?",
-      "why_unresolved": "Reviewed sources describe CoWoS generally and do not identify per-product interposer type, substrate suppliers or assembly sites.",
+      "question": "Which packaging technology, interposer or bridge, substrate and assembly providers integrate HBM4 into specific accelerator packages such as Rubin?",
+      "why_unresolved": "NVIDIA states Rubin's HBM4 is on-package but names no packaging technology or provider. SK hynix and TSMC describe CoWoS only generally or as a collaboration aim, and TSMC's 2026 symposium release could not be retrieved. No reviewed source ties a specific HBM4 product to CoWoS or any other route.",
       "sources_checked": [
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-rubin-platform-architecture-2026",
         "tsmc-2025-na-technology-symposium",
-        "tsmc-2024-annual-report"
+        "skhynix-tsmc-symposium-2026",
+        "skhynix-full-stack-memory-2026"
       ],
-      "next_evidence_needed": "Foundry, OSAT and substrate-supplier disclosures tied to HBM4 products."
+      "next_evidence_needed": "A platform vendor, foundry or OSAT disclosure naming the packaging route for a specific HBM4 product."
     },
     {
       "id": "u-test",
@@ -1061,6 +1210,15 @@
         "memory"
       ],
       "description": "NVIDIA accelerator generation disclosed with up to 288 GB of HBM4."
+    },
+    {
+      "id": "cap-logic-cmos-fabrication",
+      "label": "Logic CMOS fabrication for HBM base dies",
+      "kind": "capability",
+      "layers": [
+        "fabrication"
+      ],
+      "description": "Fabrication of logic-class CMOS dies used as HBM base dies, whether by an external foundry, an intra-company foundry or the memory supplier in-house."
     }
   ],
   "candidate_relationships": [
@@ -1069,7 +1227,7 @@
       "from": "tech-hbm4",
       "to": "tech-hbm-logic-base-die",
       "relation_type": "requires",
-      "statement": "HBM stacks core DRAM dies on a TSV-bearing base die; for HBM4, SK hynix planned a logic-process base die, Samsung states a 4nm logic base die, and Micron states its base logic die is made in-house.",
+      "statement": "An HBM4 stack consists of DRAM core dies stacked on a base logic die, as SK hynix, Samsung and Micron each describe their own HBM4 or HBM architecture.",
       "claim_class": "attributed_statement",
       "evidence": [
         {
@@ -1081,25 +1239,29 @@
           "supported_claim_type": "base_die_process_context"
         },
         {
-          "source_id": "samsung-hbm4e-samples-2026",
-          "supported_claim_type": "base_die_process_context"
-        },
-        {
           "source_id": "micron-fy2026-form-10-k",
           "supported_claim_type": "base_die_process_context"
         }
       ],
-      "geographic_scope": "Disclosing suppliers (SK hynix, Samsung, Micron)",
+      "geographic_scope": "Architecture as described by SK hynix, Samsung and Micron",
       "temporal_scope": "Disclosures dated 2024-04-19 to 2026-09-03 (Micron fiscal year end)",
       "as_of": "2026-11-09",
       "reviewed_at": null,
       "review_owner": "unassigned",
-      "confidence": "medium",
+      "confidence": "high",
       "limitations": [
-        "SK hynix statement is an MOU-stage plan",
-        "Micron does not state its base die's process node"
+        "Supplier descriptions of their own products; the JEDEC announcement reviewed does not describe the base die",
+        "How each supplier sources the base die is a separate, supplier-specific question"
       ],
-      "review_status": "awaiting_human_review"
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "All three suppliers' primary disclosures describe DRAM core dies on a base (logic) die; the relationship is architectural and holds across the disclosing suppliers.",
+        "changes_in_release": "Statement narrowed to the architecture only; supplier-specific sourcing removed; Samsung HBM4E evidence replaced by Samsung's HBM4 release and Micron's FY2026 10-K; confidence raised to high.",
+        "evidence_gaps": [],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
     },
     {
       "id": "rel-hbm-base-die-requires-logic-foundry",
@@ -1129,7 +1291,17 @@
         "Micron's FY2026 10-K reports in-house manufacture of its HBM4 base logic die, so an external-foundry relationship is not industry-wide",
         "No capacity or allocation inference"
       ],
-      "review_status": "awaiting_human_review"
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "REJECT",
+        "rationale": "As a technology-level edge it asserts that every HBM base die requires a logic foundry. Micron's FY2026 10-K reports in-house design and manufacture, and the Atlas has no supplier-level node kind to express a supplier-specific foundry dependency.",
+        "changes_in_release": "Retained unchanged for audit; superseded by rel-hbm-base-die-requires-logic-cmos-fabrication, which states the sourcing-neutral capability dependency.",
+        "evidence_gaps": [
+          "A supplier-level node kind would be needed to record foundry dependencies per supplier"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
     },
     {
       "id": "rel-hbm4-integrates-with-cowos",
@@ -1155,17 +1327,30 @@
       "review_owner": "unassigned",
       "confidence": "medium",
       "limitations": [
-        "Other packaging providers and routes are not assessed",
+        "No reviewed primary source states that a specific HBM4 product is integrated on CoWoS",
+        "NVIDIA does not name Rubin's packaging technology",
+        "TSMC's statements concern HBM generally; its 2026 symposium release could not be retrieved",
         "The 2027 volume-production plan is not a verified outcome"
       ],
-      "review_status": "awaiting_human_review"
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "DEFER",
+        "rationale": "TSMC describes CoWoS as serving logic and HBM integration, and SK hynix aimed to optimise its HBM for CoWoS, but no reviewed source ties HBM4 specifically to CoWoS in a product.",
+        "changes_in_release": "Limitations updated with the IDE-002 packaging search; statement unchanged.",
+        "evidence_gaps": [
+          "A product-level disclosure naming CoWoS (or another route) for a specific HBM4 integration",
+          "TSMC's 2026 North America Technology Symposium release text"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
     },
     {
       "id": "rel-rubin-gpu-requires-hbm4",
       "from": "tech-nvidia-rubin-gpu",
       "to": "tech-hbm4",
       "relation_type": "requires",
-      "statement": "NVIDIA states Rubin integrates up to 288 GB of HBM4 on 12-Hi stacks; Micron and Samsung each state their HBM4 is designed for NVIDIA Vera Rubin.",
+      "statement": "NVIDIA states that the Rubin GPU integrates up to 288 GB of HBM4 on 12-Hi stacks, placed on the same package as its compute dies.",
       "claim_class": "attributed_statement",
       "evidence": [
         {
@@ -1173,25 +1358,79 @@
           "supported_claim_type": "product_integration_context"
         },
         {
-          "source_id": "micron-hbm4-volume-production-2026",
-          "supported_claim_type": "product_integration_context"
-        },
-        {
-          "source_id": "samsung-hbm4-gtc-2026",
+          "source_id": "nvidia-rubin-platform-architecture-2026",
           "supported_claim_type": "product_integration_context"
         }
       ],
       "geographic_scope": "Single accelerator product line",
-      "temporal_scope": "Disclosures dated 2026-03-16 to 2026-07-21",
+      "temporal_scope": "NVIDIA disclosures dated 2026-01-05 and 2026-07-21",
       "as_of": "2026-11-09",
       "reviewed_at": null,
       "review_owner": "unassigned",
       "confidence": "high",
       "limitations": [
         "Per-GPU bandwidth conflict between NVIDIA's own dated articles (22 vs 19.2 TB/s) is unresolved",
-        "Supplier statements that HBM4 is 'designed for' Vera Rubin do not establish NVIDIA qualification, interchangeable supply or multi-sourcing"
+        "NVIDIA does not name its memory suppliers; supplier 'designed for' statements do not establish qualification"
       ],
-      "review_status": "awaiting_human_review"
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "NVIDIA's own technical articles directly state Rubin's HBM4 capacity, stack height and on-package placement; the relationship does not depend on supplier claims.",
+        "changes_in_release": "Supplier 'designed for' evidence removed (it was unnecessary and invited a qualification inference); NVIDIA platform article added; statement adds on-package placement.",
+        "evidence_gaps": [
+          "The unresolved bandwidth figure does not affect this relationship but limits any bandwidth-based extension"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-hbm-base-die-requires-logic-cmos-fabrication",
+      "from": "tech-hbm-logic-base-die",
+      "to": "cap-logic-cmos-fabrication",
+      "relation_type": "requires",
+      "statement": "Each supplier reviewed makes its HBM4 base logic die with logic-class CMOS fabrication but sources it differently: SK hynix states it applies TSMC advanced logic process technology, Samsung states a 4nm logic process attributed to Samsung Foundry, and Micron states in-house design and manufacture with advanced CMOS.",
+      "claim_class": "bounded_analysis",
+      "evidence": [
+        {
+          "source_id": "skhynix-full-stack-memory-2026",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "samsung-hbm4-commercial-shipment-2026",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "micron-fy2026-form-10-k",
+          "supported_claim_type": "base_die_process_context"
+        },
+        {
+          "source_id": "tsmc-2025-na-technology-symposium",
+          "supported_claim_type": "base_die_process_context"
+        }
+      ],
+      "geographic_scope": "Disclosing suppliers (SK hynix, Samsung, Micron); sourcing model differs by supplier",
+      "temporal_scope": "Disclosures dated 2025-04-23 to 2026-09-03 (Micron fiscal year end)",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "Process nodes are not stated by SK hynix or Micron",
+        "Company statements; no independent production confirmation",
+        "Says nothing about capacity or allocation"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "Replaces the rejected foundry-specific edge with a sourcing-neutral capability dependency that every disclosing supplier's statement supports.",
+        "changes_in_release": "New candidate introduced in IDE-002.",
+        "evidence_gaps": [
+          "Nodes for SK hynix and Micron base dies"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
     }
   ]
 }
