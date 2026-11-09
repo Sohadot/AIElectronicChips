@@ -9,29 +9,30 @@
 
 This is the first production-grade evidence release for the memory layer. It covers HBM3E, HBM4 and HBM4E as a reference case for how the asset converts primary disclosures into classified, machine-readable findings without overstating them. It records:
 
-- **32 findings**, each with registered sources, a quoted locator, a scope, a date and limitations, classified as:
-  - `verified_fact` (A): established by a standard or other independent record within its scope. These currently rest on the JEDEC record, which is `pending_review`, so all four carry `evidence_state: includes_pending_source`.
+- **34 findings**, each with registered sources, a quoted locator, a scope, a date and limitations, classified as:
+  - `verified_fact` (A): established by a standard or other independent record within its scope. **None at present.** JEDEC's announcement is not the normative standard and has not been read directly, so its four findings are attributed statements with `evidence_state: includes_pending_source`. The validator rejects any `verified_fact` that cites a pending source.
   - `attributed_statement` (B): what a company disclosed. No independent verification is implied.
   - `bounded_analysis` (C): project derivations, with explicit `assumptions`.
-- **12 unresolved questions** (D), each with the sources checked and the evidence that would resolve it.
+- **11 unresolved questions** (D), each with the sources checked and the evidence that would resolve it.
 - **5 candidate nodes and 4 candidate relationships** in the exact Atlas edge shape, with `reviewed_at: null` and `review_owner: unassigned`.
 
 ## Method
 
-1. Candidate sources were checked against `data/source-registry.json` first; no parallel database was created. Fourteen records were added (registry v0.4.0).
+1. Candidate sources were checked against `data/source-registry.json` first; no parallel database was created. Fifteen records were added (registry v0.4.0).
 2. Each source page was read and the relevant passages were extracted verbatim, with the page's own date. Locators in the release file quote those passages.
 3. Every statement was classified by what its evidence can bear. Sample shipments, "mass production system readied", volume shipment and commercial shipment are recorded as distinct milestones. Forward-looking statements are labelled as such. Priority claims ("world's first", "industry-first") are permitted only inside attributed findings; the validator rejects them elsewhere.
-4. Where sources conflict (NVIDIA's 22 TB/s versus 19.2 TB/s per Rubin GPU) or are silent (Micron's base die), the gap is recorded as unresolved, not filled.
+4. Where sources conflict (NVIDIA's dated articles give 22 TB/s peak and 19.2 TB/s per Rubin GPU) or are silent (Micron's base die), the gap is recorded as unresolved, not filled.
+5. Quoted excerpts are capped at 20 words each and 40 per citation, enforced by the validator.
 
 ## Retrieval log: what could not be read
 
 | Source | Result on 2026-11-09 | Consequence |
 | --- | --- | --- |
-| JEDEC JESD270-4 press release and JESD270-4A page (jedec.org) | HTTP 403 (bot challenge) | Registry record `pending_review`; standard parameters shown on the page as `S`, awaiting direct confirmation |
-| Same release via Business Wire | HTTP 403 | As above |
-| Samsung HBM4 release, 2026-02-12 | Timed out; mirror redirected to a generic landing page | Registry record `pending_review`; its per-stack bandwidth figure is not used |
+| JEDEC JESD270-4 press release and JESD270-4A page (jedec.org) | HTTP 403 (bot challenge) | Registry record `pending_review`, typed as an announcement rather than a standard; figures shown on the page as `S` (announcement), awaiting direct confirmation |
+| Same release via Business Wire (ID 20250416843598) | HTTP 403, on two attempts | As above |
+| Samsung HBM4 release, 2026-02-12 | Read in full on the Samsung Semiconductor Newsroom (an earlier news.samsung.com attempt timed out) | Registry record now `active` |
 | Samsung Q1 2026 results | Timed out | Not registered |
-| NVIDIA Vera Rubin NVL72 product page | Read, but undated | Cited on the page only to document the bandwidth conflict; not registered, because the registry requires a publication or effective date |
+| NVIDIA HGX and Vera Rubin NVL72 product pages | Read, but undated | Cited only to document the bandwidth conflict; not registered, because the registry requires a publication or effective date |
 
 An archive.org fallback for the JEDEC pages was attempted but blocked by this session's permission policy, so it was not used.
 
@@ -54,12 +55,10 @@ None of this checks that a passage actually says what a finding states. **That i
 
 ## Reviewer checklist (owner and scientific review)
 
-- [ ] Read the JEDEC JESD270-4 announcement directly and confirm or correct `f-std-*`; then set `jedec-jesd270-4-hbm4-standard-2025` to `active` with a review date.
-- [ ] Read Samsung's 2026-02-12 HBM4 release; promote or revise `samsung-hbm4-commercial-shipment-2026`.
+- [ ] Read the JEDEC JESD270-4 announcement directly and confirm or correct `f-std-*`; then set `jedec-jesd270-4-hbm4-standard-2025` to `active` with a review date. That verifies the announcement only. Any normative statement needs the JESD270-4A document itself.
 - [ ] Spot-check every locator against its source, at minimum the base-die findings (`f-skh-base-die`, `f-tsmc-base-die`, `f-ss-base-die`) and the commercialization ledger.
-- [ ] Decide whether the interpretation in `f-ss-base-die` ("same combination of core and base die" as describing Samsung HBM4) is acceptable.
 - [ ] For each candidate relationship you accept: move it to `data/dependency-atlas.json` with a named `review_owner` and `reviewed_at`, add its nodes, set Atlas `status` to `evidence_backed`, and delete it from this release. Both validators enforce the move.
-- [ ] Decide whether `data/research/` should be excluded from the Pages artifact. The current workflow uploads the repository root, so once merged this file is publicly fetchable, although no page links to it.
+- [ ] Note the exposure model. This repository is public, so this file is readable on GitHub regardless. The Actions deploy job now stages the site without `data/research/`, and the validator fails if that exclusion is removed. Branch-mode Pages would still serve the file, so switch Pages to GitHub Actions before merging.
 
 ## Ownership
 

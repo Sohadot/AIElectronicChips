@@ -672,5 +672,6 @@ The asset's value is the separation of what a standard establishes, what a compa
 ### Consequences
 
 - The Atlas remains `foundation` with zero published relationships. Four candidates await review.
-- Two HBM4 registry records (JEDEC JESD270-4; Samsung 2026-02-12) are `pending_review` because their text could not be retrieved. Figures derived from them are visibly marked.
+- JEDEC's JESD270-4 announcement is registered as an announcement, not a standard, and stays `pending_review` because its text could not be retrieved. Figures from it are marked as announcement content. The normative standard has not been reviewed.
+- Unpublished research candidates are excluded from the Pages artifact, and the validator enforces the exclusion. The public repository still exposes them as labelled research files.
 - AEC-CS-001 is unchanged. No supplier capacity, availability or position conclusion is introduced.

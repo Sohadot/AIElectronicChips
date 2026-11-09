@@ -34,6 +34,13 @@ from validate_dependency_atlas import (  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 RESEARCH_DIR = ROOT / "data" / "research"
+WORKFLOW = ROOT / ".github" / "workflows" / "validate-and-deploy.yml"
+# Public pages that cite registry IDs in a numbered reference list.
+REFERENCE_PAGES = [ROOT / "hbm-memory" / "index.html"]
+# Quoted excerpts are for citation only: keep each short.
+MAX_QUOTE_WORDS = 20
+MAX_LOCATOR_QUOTED_WORDS = 40
+QUOTED = re.compile(r'"([^"]+)"')
 ATLAS = ROOT / "data" / "dependency-atlas.json"
 REGISTRY = ROOT / "data" / "source-registry.json"
 
@@ -150,8 +157,15 @@ def check_release(release: object, registry: dict, atlas: dict, today: date, lab
                 errors.append(f"{ewhere} must contain exactly source_id and locator")
                 continue
             sid = item.get("source_id")
-            if not nonempty(item.get("locator")):
+            locator = item.get("locator")
+            if not nonempty(locator):
                 errors.append(f"{ewhere} requires a locator (quoted passage or section)")
+            else:
+                quoted = [len(q.split()) for q in QUOTED.findall(locator)]
+                if any(n > MAX_QUOTE_WORDS for n in quoted):
+                    errors.append(f"{ewhere} quoted excerpt exceeds {MAX_QUOTE_WORDS} words")
+                if sum(quoted) > MAX_LOCATOR_QUOTED_WORDS:
+                    errors.append(f"{ewhere} quotes more than {MAX_LOCATOR_QUOTED_WORDS} words in one citation")
             if sid in cited_ids:
                 errors.append(f"{ewhere} duplicate source: {sid}")
             cited_ids.add(sid)
@@ -170,6 +184,8 @@ def check_release(release: object, registry: dict, atlas: dict, today: date, lab
             errors.append(f"{where} invalid evidence_state")
         elif cited_types and finding.get("evidence_state") != expected_state:
             errors.append(f"{where} evidence_state must be {expected_state} given the cited sources' registry status")
+        if cls == "verified_fact" and any_pending:
+            errors.append(f"{where} verified_fact cannot cite a pending_review source")
         if cls == "verified_fact" and cited_types and all(t in SELF_REPORTED_SOURCE_TYPES for t in cited_types):
             errors.append(f"{where} verified_fact cannot rest solely on self-reported company sources")
 
@@ -241,6 +257,37 @@ def check_release(release: object, registry: dict, atlas: dict, today: date, lab
     return errors
 
 
+def check_public_references(page: Path, registry: dict) -> list[str]:
+    """Each cited registry ID on a public page must exist and show its true review status."""
+    try:
+        html = page.read_text(encoding="utf-8")
+    except OSError as exc:
+        return [f"{page.name}: unreadable: {exc}"]
+    status = {s.get("id"): s.get("status") for s in registry.get("source_records", []) if isinstance(s, dict)}
+    rel = page.relative_to(ROOT)
+    errors = []
+    for item in re.findall(r'<li id="ref-\d+">(.*?)</li>', html, re.DOTALL):
+        for sid in re.findall(r"<code>([a-z0-9-]+)</code>", item):
+            if sid not in status:
+                errors.append(f"{rel}: cites unregistered source {sid}")
+            elif (status[sid] == "pending_review") != ("pending_review" in item):
+                errors.append(f"{rel}: reference to {sid} must show pending_review exactly when the registry does")
+    return errors
+
+
+def check_pages_exclusion(workflow: Path, research_dir: Path) -> list[str]:
+    """Unpublished research candidates must not ship in the Pages artifact."""
+    if not any(research_dir.glob("*.json")):
+        return []
+    try:
+        text = workflow.read_text(encoding="utf-8")
+    except OSError:
+        return ["Pages workflow not found; cannot confirm data/research is excluded from the site artifact"]
+    if "--exclude='data/research'" not in text or "path: .\n" in text:
+        return ["Pages workflow must stage the site with data/research/ excluded before upload"]
+    return []
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("releases", nargs="*", type=Path, help="release files (default: data/research/*.json)")
@@ -269,6 +316,9 @@ def main(argv: list[str] | None = None) -> None:
                 f"{len(release.get('unresolved', []))} unresolved, "
                 f"{len(release.get('candidate_relationships', []))} unpublished candidates"
             )
+    for page in REFERENCE_PAGES:
+        errors.extend(check_public_references(page, registry))
+    errors.extend(check_pages_exclusion(WORKFLOW, RESEARCH_DIR))
     if errors:
         for err in errors:
             print(f"FAIL: {err}", file=sys.stderr)

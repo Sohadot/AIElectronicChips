@@ -14,7 +14,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from validate_evidence_releases import check_release  # noqa: E402
+from validate_evidence_releases import (  # noqa: E402
+    check_pages_exclusion,
+    check_public_references,
+    check_release,
+)
 
 VALIDATOR = ROOT / "scripts" / "validate_evidence_releases.py"
 RELEASE = ROOT / "data" / "research" / "hbm4-evidence-release-001.json"
@@ -142,6 +146,53 @@ class EvidenceReleaseTests(unittest.TestCase):
         release, registry, atlas = load()
         release["findings"][0]["evidence"] = [{"source_id": "chip-dependency-map-response", "locator": "q1"}]
         self.assert_fails(release, registry, atlas, "unregistered source")
+
+    def test_pending_source_cannot_be_verified_fact(self):
+        release, registry, atlas = load()
+        pending = next(f for f in release["findings"] if f["evidence_state"] == "includes_pending_source")
+        pending["claim_class"] = "verified_fact"
+        self.assert_fails(release, registry, atlas, "verified_fact cannot cite a pending_review source")
+
+    def test_long_quote_rejected(self):
+        release, registry, atlas = load()
+        release["findings"][0]["evidence"][0]["locator"] = '"' + " ".join(["word"] * 21) + '"'
+        self.assert_fails(release, registry, atlas, "quoted excerpt exceeds 20 words")
+
+    def test_quote_total_per_citation_capped(self):
+        release, registry, atlas = load()
+        chunk = '"' + " ".join(["word"] * 15) + '"'
+        release["findings"][0]["evidence"][0]["locator"] = "; ".join([chunk] * 3)
+        self.assert_fails(release, registry, atlas, "quotes more than 40 words")
+
+
+class PublicExposureTests(unittest.TestCase):
+    def test_page_references_match_registry(self):
+        _, registry, _ = load()
+        self.assertEqual([], check_public_references(ROOT / "hbm-memory" / "index.html", registry))
+
+    def test_pending_status_must_be_visible(self):
+        _, registry, _ = load()
+        sid = "samsung-hbm4-commercial-shipment-2026"
+        next(s for s in registry["source_records"] if s["id"] == sid)["status"] = "pending_review"
+        errors = check_public_references(ROOT / "hbm-memory" / "index.html", registry)
+        self.assertTrue(any(sid in e for e in errors), errors)
+
+    def test_active_source_cannot_be_labelled_pending(self):
+        _, registry, _ = load()
+        sid = "jedec-jesd270-4-hbm4-standard-2025"
+        next(s for s in registry["source_records"] if s["id"] == sid)["status"] = "active"
+        errors = check_public_references(ROOT / "hbm-memory" / "index.html", registry)
+        self.assertTrue(any(sid in e for e in errors), errors)
+
+    def test_workflow_excludes_research(self):
+        self.assertEqual([], check_pages_exclusion(ROOT / ".github" / "workflows" / "validate-and-deploy.yml", ROOT / "data" / "research"))
+
+    def test_workflow_without_exclusion_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wf = Path(tmp) / "wf.yml"
+            wf.write_text("        with:\n          path: .\n", encoding="utf-8")
+            errors = check_pages_exclusion(wf, ROOT / "data" / "research")
+        self.assertTrue(errors)
 
 
 class EvidenceReleaseCliTests(unittest.TestCase):
