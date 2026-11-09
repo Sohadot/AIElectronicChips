@@ -34,10 +34,10 @@ EDGE_FIELDS = {
     "reviewed_at", "review_owner", "confidence", "limitations",
 }
 EVIDENCE_FIELDS = {"source_id", "supported_claim_type"}
-# A company's own announcement or product page records what the company said; it
-# cannot on its own establish a verified_fact. Such edges must be classified as
+# A company's own announcement, earnings release or product page records what the
+# company said; it cannot on its own establish a verified_fact. Such edges must be classified as
 # attributed_statement (or bounded_analysis), or cite an additional record type.
-SELF_REPORTED_SOURCE_TYPES = {"official_technical_disclosure"}
+SELF_REPORTED_SOURCE_TYPES = {"official_technical_disclosure", "company_announcement"}
 
 
 def nonempty(value: object) -> bool:

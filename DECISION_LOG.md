@@ -652,3 +652,25 @@ strategic buyer gets in email, chat, and social contexts.
 - No tracking, analytics, external requests, or executable script scope is
   added by this entry.
   
+## ADR-020: HBM4 Evidence Release 001 and Research-Candidate Evidence Releases
+
+- **Date:** 2026-11-09
+- **Status:** Proposed (awaiting owner and scientific review)
+
+### Decision
+
+1. **`/hbm-memory/` becomes the evidence-classified HBM reference.** It is not split into a separate HBM4 route. HBM4 is the substance of the memory layer, and a second page would duplicate it. Every material statement is tagged as Standard (S), Attributed (A), Bounded analysis (C) or Unresolved (U) and carries a numbered citation to a registry record.
+2. **Evidence releases are a new, non-published data class.** Files in `data/research/*.json` hold classified findings, explicit unknowns and candidate Atlas relationships. They are validated by `scripts/validate_evidence_releases.py`, can never declare themselves published, and are kept out of `data/dependency-atlas.json` until a named human reviewer moves each relationship across.
+3. **`company_announcement` source type.** Earnings and status press releases are neither filings nor technical disclosures. The registry accepts this narrow, backward-compatible type, and the Atlas gate treats it as self-reported, so it can never alone establish a `verified_fact`.
+4. **The registry and its public index stay in lockstep.** `validate_source_registry.py` now fails if `/sources/` omits a registry ID, lists an unregistered one, or mismarks pending status.
+5. **Undated pages are not registered.** NVIDIA's Vera Rubin NVL72 page is cited only to document a bandwidth conflict.
+
+### Rationale
+
+The asset's value is the separation of what a standard establishes, what a company says, what can be derived, and what is unknown. HBM4 is a good proving case because supplier disclosures move fast and compete. The base-die shift to logic processes is also a genuine dependency change that a generic summary would miss.
+
+### Consequences
+
+- The Atlas remains `foundation` with zero published relationships. Four candidates await review.
+- Two HBM4 registry records (JEDEC JESD270-4; Samsung 2026-02-12) are `pending_review` because their text could not be retrieved. Figures derived from them are visibly marked.
+- AEC-CS-001 is unchanged. No supplier capacity, availability or position conclusion is introduced.

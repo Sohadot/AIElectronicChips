@@ -1,0 +1,280 @@
+#!/usr/bin/env python3
+"""Fail-closed validation for research-candidate evidence releases.
+
+Each file in data/research/*.json is an evidence release: classified findings,
+explicit unknowns, and proposed Atlas relationships that are NOT published.
+This validator checks structure and registry cross-references only. It does
+not read the cited documents and cannot confirm that a passage says what a
+finding states; that remains a human review responsibility.
+
+A candidate relationship is also run through the Atlas validator in a
+simulated, reviewed state. That proves it would satisfy the publication
+contract once a named human reviewer signs it off, without publishing it.
+"""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import re
+import sys
+from datetime import date
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from validate_dependency_atlas import (  # noqa: E402
+    ID_PATTERN,
+    SELF_REPORTED_SOURCE_TYPES,
+    nonempty,
+    parse_date,
+    string_list,
+    validate as validate_atlas,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+RESEARCH_DIR = ROOT / "data" / "research"
+ATLAS = ROOT / "data" / "dependency-atlas.json"
+REGISTRY = ROOT / "data" / "source-registry.json"
+
+RELEASE_FIELDS = {
+    "release_id", "version", "status", "publication_eligible", "as_of", "title",
+    "source_registry_reference", "atlas_reference", "description", "rights_note",
+    "findings", "unresolved", "candidate_nodes", "candidate_relationships",
+}
+FINDING_FIELDS = {"id", "claim_class", "topic", "statement", "evidence", "evidence_state", "scope", "as_of", "limitations"}
+EVIDENCE_STATES = {"cited_sources_active", "includes_pending_source"}
+FINDING_CLASSES = {"verified_fact", "attributed_statement", "bounded_analysis"}
+TOPICS = {
+    "standard", "architecture", "interface_bandwidth", "stack_configuration",
+    "base_die", "stacking_process", "packaging_integration", "thermal_power",
+    "commercialization", "accelerator_integration", "substitution",
+}
+UNRESOLVED_FIELDS = {"id", "topic", "question", "why_unresolved", "sources_checked", "next_evidence_needed"}
+CANDIDATE_EXTRA_FIELDS = {"review_status"}
+# Priority and superiority language may only be reported as what a company said.
+ATTRIBUTION_ONLY = re.compile(
+    r"\b(?:world'?s first|world’s first|industry'?s first|industry-first|industry-leading|"
+    r"market leader|leadership|best-in-class|dominant|market share)\b",
+    re.IGNORECASE,
+)
+
+
+def check_release(release: object, registry: dict, atlas: dict, today: date, label: str) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(release, dict):
+        return [f"{label}: release root must be an object"]
+
+    missing, extra = RELEASE_FIELDS - set(release), set(release) - RELEASE_FIELDS
+    if missing:
+        errors.append(f"{label}: missing fields {sorted(missing)}")
+    if extra:
+        errors.append(f"{label}: unknown fields {sorted(extra)}")
+    if release.get("status") != "research_candidate":
+        errors.append(f"{label}: status must be research_candidate; publication happens only via the Atlas")
+    if release.get("publication_eligible") is not False:
+        errors.append(f"{label}: publication_eligible must be false")
+    if release.get("source_registry_reference") != "data/source-registry.json":
+        errors.append(f"{label}: source registry reference mismatch")
+    if release.get("atlas_reference") != "data/dependency-atlas.json":
+        errors.append(f"{label}: atlas reference mismatch")
+    for field in ("release_id", "version", "title", "description", "rights_note"):
+        if not nonempty(release.get(field)):
+            errors.append(f"{label}: {field} must be non-empty")
+    release_date = parse_date(release.get("as_of"), f"{label}.as_of", errors)
+    if release_date and release_date > today:
+        errors.append(f"{label}: as_of is in the future")
+
+    sources = {
+        s["id"]: s for s in registry.get("source_records", [])
+        if isinstance(s, dict) and nonempty(s.get("id"))
+    }
+
+    def source_date(sid: str) -> date | None:
+        record = sources[sid]
+        value = record.get("publication_date") or record.get("effective_date")
+        try:
+            return date.fromisoformat(value) if isinstance(value, str) else None
+        except ValueError:
+            return None
+
+    # --- findings -----------------------------------------------------------
+    findings = release.get("findings")
+    if not isinstance(findings, list) or not findings:
+        errors.append(f"{label}: findings must be a non-empty list")
+        findings = []
+    seen: set[str] = set()
+    for i, finding in enumerate(findings):
+        where = f"{label}.findings[{i}]"
+        if not isinstance(finding, dict):
+            errors.append(f"{where} must be an object")
+            continue
+        cls = finding.get("claim_class")
+        allowed = FINDING_FIELDS | ({"assumptions"} if cls == "bounded_analysis" else set())
+        if set(finding) - allowed or FINDING_FIELDS - set(finding):
+            errors.append(f"{where} fields mismatch: missing={sorted(FINDING_FIELDS - set(finding))}, extra={sorted(set(finding) - allowed)}")
+        fid = finding.get("id")
+        if not nonempty(fid) or not ID_PATTERN.fullmatch(fid):
+            errors.append(f"{where} invalid id")
+        elif fid in seen:
+            errors.append(f"{where} duplicate id: {fid}")
+        else:
+            seen.add(fid)
+        if cls not in FINDING_CLASSES:
+            errors.append(f"{where} invalid claim_class: {cls}")
+        if finding.get("topic") not in TOPICS:
+            errors.append(f"{where} invalid topic")
+        for field in ("statement", "scope"):
+            if not nonempty(finding.get(field)):
+                errors.append(f"{where}.{field} must be non-empty")
+        if not string_list(finding.get("limitations")):
+            errors.append(f"{where}.limitations must be a non-empty list")
+        if cls == "bounded_analysis" and not string_list(finding.get("assumptions")):
+            errors.append(f"{where} bounded_analysis requires stated assumptions")
+        if cls != "attributed_statement" and ATTRIBUTION_ONLY.search(str(finding.get("statement", ""))):
+            errors.append(f"{where} priority or superiority language may appear only in attributed_statement findings")
+        f_date = parse_date(finding.get("as_of"), f"{where}.as_of", errors)
+        if f_date and release_date and f_date > release_date:
+            errors.append(f"{where}.as_of exceeds release as_of")
+
+        evidence = finding.get("evidence")
+        if not isinstance(evidence, list) or not evidence:
+            errors.append(f"{where}.evidence must cite at least one registered source")
+            continue
+        cited_types = []
+        cited_ids: set[str] = set()
+        any_pending = False
+        for j, item in enumerate(evidence):
+            ewhere = f"{where}.evidence[{j}]"
+            if not isinstance(item, dict) or set(item) != {"source_id", "locator"}:
+                errors.append(f"{ewhere} must contain exactly source_id and locator")
+                continue
+            sid = item.get("source_id")
+            if not nonempty(item.get("locator")):
+                errors.append(f"{ewhere} requires a locator (quoted passage or section)")
+            if sid in cited_ids:
+                errors.append(f"{ewhere} duplicate source: {sid}")
+            cited_ids.add(sid)
+            if sid not in sources:
+                errors.append(f"{ewhere} unregistered source: {sid}")
+                continue
+            if sources[sid].get("status") == "retired":
+                errors.append(f"{ewhere} cites retired source: {sid}")
+            cited_types.append(sources[sid].get("source_type"))
+            any_pending = any_pending or sources[sid].get("status") == "pending_review"
+            published = source_date(sid)
+            if published and f_date and published > f_date:
+                errors.append(f"{ewhere} source {sid} postdates the finding as_of")
+        expected_state = "includes_pending_source" if any_pending else "cited_sources_active"
+        if finding.get("evidence_state") not in EVIDENCE_STATES:
+            errors.append(f"{where} invalid evidence_state")
+        elif cited_types and finding.get("evidence_state") != expected_state:
+            errors.append(f"{where} evidence_state must be {expected_state} given the cited sources' registry status")
+        if cls == "verified_fact" and cited_types and all(t in SELF_REPORTED_SOURCE_TYPES for t in cited_types):
+            errors.append(f"{where} verified_fact cannot rest solely on self-reported company sources")
+
+    # --- unresolved ---------------------------------------------------------
+    unresolved = release.get("unresolved")
+    if not isinstance(unresolved, list):
+        errors.append(f"{label}: unresolved must be a list")
+        unresolved = []
+    for i, item in enumerate(unresolved):
+        where = f"{label}.unresolved[{i}]"
+        if not isinstance(item, dict) or set(item) != UNRESOLVED_FIELDS:
+            errors.append(f"{where} must contain exactly {sorted(UNRESOLVED_FIELDS)}")
+            continue
+        uid = item["id"]
+        if not nonempty(uid) or not ID_PATTERN.fullmatch(uid):
+            errors.append(f"{where} invalid id")
+        elif uid in seen:
+            errors.append(f"{where} duplicate id: {uid}")
+        else:
+            seen.add(uid)
+        if item["topic"] not in TOPICS:
+            errors.append(f"{where} invalid topic")
+        for field in ("question", "why_unresolved", "next_evidence_needed"):
+            if not nonempty(item[field]):
+                errors.append(f"{where}.{field} must be non-empty")
+        checked = item["sources_checked"]
+        if not isinstance(checked, list) or any(s not in sources for s in checked):
+            errors.append(f"{where}.sources_checked must list registered source IDs")
+
+    # --- candidate graph ----------------------------------------------------
+    nodes = release.get("candidate_nodes")
+    edges = release.get("candidate_relationships")
+    if not isinstance(nodes, list) or not isinstance(edges, list):
+        errors.append(f"{label}: candidate_nodes and candidate_relationships must be lists")
+        return errors
+    atlas_node_ids = {n.get("id") for n in atlas.get("nodes", []) if isinstance(n, dict)}
+    atlas_edge_ids = {e.get("id") for e in atlas.get("relationships", []) if isinstance(e, dict)}
+    for node in nodes:
+        if isinstance(node, dict) and node.get("id") in atlas_node_ids:
+            errors.append(f"{label}: candidate node already in published Atlas: {node.get('id')}")
+
+    simulated_edges = []
+    for i, edge in enumerate(edges):
+        where = f"{label}.candidate_relationships[{i}]"
+        if not isinstance(edge, dict):
+            errors.append(f"{where} must be an object")
+            continue
+        if edge.get("id") in atlas_edge_ids:
+            errors.append(f"{where} already published in Atlas; remove it from the candidate release")
+        if edge.get("review_status") != "awaiting_human_review":
+            errors.append(f"{where} review_status must be awaiting_human_review")
+        if edge.get("reviewed_at") is not None:
+            errors.append(f"{where} reviewed_at must be null until a human review is recorded in the Atlas")
+        if edge.get("review_owner") != "unassigned":
+            errors.append(f"{where} review_owner must be 'unassigned' in a candidate release")
+        simulated = {k: v for k, v in edge.items() if k not in CANDIDATE_EXTRA_FIELDS}
+        simulated["reviewed_at"] = release.get("as_of")
+        simulated["review_owner"] = "simulated reviewer (structural precheck only)"
+        simulated_edges.append(simulated)
+
+    if simulated_edges:
+        candidate_atlas = copy.deepcopy(atlas)
+        candidate_atlas["status"] = "evidence_backed"
+        candidate_atlas["as_of"] = release.get("as_of")
+        candidate_atlas["nodes"] = list(candidate_atlas.get("nodes", [])) + copy.deepcopy(nodes)
+        candidate_atlas["relationships"] = list(candidate_atlas.get("relationships", [])) + simulated_edges
+        for err in validate_atlas(candidate_atlas, registry, today=today):
+            errors.append(f"{label}: candidate fails Atlas publication contract: {err}")
+    return errors
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("releases", nargs="*", type=Path, help="release files (default: data/research/*.json)")
+    parser.add_argument("--atlas", type=Path, default=ATLAS)
+    parser.add_argument("--registry", type=Path, default=REGISTRY)
+    args = parser.parse_args(argv)
+    paths = args.releases or sorted(RESEARCH_DIR.glob("*.json"))
+    try:
+        atlas = json.loads(args.atlas.read_text(encoding="utf-8"))
+        registry = json.loads(args.registry.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"FAIL: atlas or registry unreadable: {exc}", file=sys.stderr)
+        raise SystemExit(1)
+    errors: list[str] = []
+    summary = []
+    for path in paths:
+        try:
+            release = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{path.name}: unreadable: {exc}")
+            continue
+        errors.extend(check_release(release, registry, atlas, date.today(), path.name))
+        if isinstance(release, dict):
+            summary.append(
+                f"{path.name}: {len(release.get('findings', []))} findings, "
+                f"{len(release.get('unresolved', []))} unresolved, "
+                f"{len(release.get('candidate_relationships', []))} unpublished candidates"
+            )
+    if errors:
+        for err in errors:
+            print(f"FAIL: {err}", file=sys.stderr)
+        raise SystemExit(1)
+    print("PASS: Evidence releases valid (" + ("; ".join(summary) or "none present") + ").")
+
+
+if __name__ == "__main__":
+    main()
