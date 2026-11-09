@@ -101,6 +101,7 @@ h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
   color: var(--copper-ink); margin: 0 0 1.1rem; font-family: var(--sans);
 }
 .blue { color: var(--teal-ink); }
+.nowrap { white-space: nowrap; }
 .lead { font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.5; color: var(--ink); max-width: 760px; }
 .intro { color: var(--muted); max-width: 760px; font-size: 1.05rem; }
 
@@ -307,6 +308,27 @@ h3 { font-size: 1.2rem; line-height: 1.35; letter-spacing: -.005em; }
   .site-header { height: auto; min-height: 64px; flex-wrap: wrap; row-gap: .2rem; padding-top: .8rem; padding-bottom: .6rem; }
   .primary-nav { display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; width: 100%; }
   .primary-nav a { font-size: .9rem; padding: .35rem 0; }
+}
+/* Homepage first viewport. Tablet keeps the wafer as a compact side column;
+   phones show the essentials (eyebrow, heading, lead, both actions) above the fold. */
+@media (min-width: 601px) and (max-width: 900px) {
+  .home-hero { grid-template-columns: 1fr 250px; gap: 2rem; padding-top: 56px; padding-bottom: 56px; }
+  .home-hero .wafer { max-width: 250px; }
+  .home-hero .framing-note { display: block; }
+  .home-hero .framing-note strong { display: block; margin-bottom: .4rem; }
+}
+@media (max-width: 600px) {
+  .site-header { padding-top: .55rem; padding-bottom: .35rem; row-gap: 0; }
+  .primary-nav { gap: 0 1rem; }
+  .primary-nav a { padding: .45rem 0; }
+  .home-hero { padding-top: 32px; padding-bottom: 40px; gap: 0; }
+  .home-hero .wafer { display: none; } /* decorative (aria-hidden); the eight layers are listed below */
+  .home-hero h1 { font-size: 2.35rem; line-height: 1.08; margin-bottom: 1rem; }
+  .home-hero .eyebrow { margin-bottom: .8rem; }
+  .home-hero .lead { font-size: 1.08rem; margin-bottom: 0; }
+  .home-hero .hero-actions { margin: 1.4rem 0 1.6rem; gap: .6rem; }
+  .home-hero .button { min-height: 48px; display: flex; align-items: center; justify-content: center; }
+  .home-hero .framing-note { margin-top: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

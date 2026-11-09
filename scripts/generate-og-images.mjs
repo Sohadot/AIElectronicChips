@@ -13,7 +13,7 @@ const OUT = join(ROOT, 'assets', 'og');
 mkdirSync(OUT, { recursive: true });
 
 const PAGES = [
-  { file: 'home', id: '', eyebrow: 'AI CHIP SOVEREIGNTY INTELLIGENCE', title: 'AI chips are the physical substrate of compute sovereignty.', small: true },
+  { file: 'home', id: '', eyebrow: 'AI CHIP SYSTEMS INTELLIGENCE', title: 'AI Chips, from Silicon to Systems.' },
   { file: 'compute-sovereignty', id: '', eyebrow: 'CATEGORY DEFINITION', title: 'Compute Sovereignty' },
   { file: 'sovereignty-stack', id: '01–08', eyebrow: 'CORE ONTOLOGY', title: 'Silicon Sovereignty Stack' },
   { file: 'design-fabrication-packaging', id: '01–03', eyebrow: 'DEPENDENCY LAYERS', title: 'Design, Fabrication, Packaging' },
