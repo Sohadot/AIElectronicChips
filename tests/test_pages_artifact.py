@@ -109,5 +109,35 @@ class PagesArtifactTests(unittest.TestCase):
         self.assertEqual([], missing)
 
 
+@unittest.skipUnless(shutil.which("git") and shutil.which("tar"), "requires git and tar")
+class StagingGuardTests(unittest.TestCase):
+    """The staging step itself must stop the deploy when a required public file is absent."""
+
+    def run_staging_in_repo(self, files: dict[str, str]) -> subprocess.CompletedProcess:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo, runner = Path(tmp) / "repo", Path(tmp) / "runner"
+            repo.mkdir()
+            runner.mkdir()
+            for name, text in files.items():
+                (repo / name).write_text(text, encoding="utf-8")
+            env = dict(os.environ, GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@example.invalid",
+                       GIT_COMMITTER_NAME="t", GIT_COMMITTER_EMAIL="t@example.invalid")
+            for cmd in (["git", "init", "-q"], ["git", "add", "-A"], ["git", "commit", "-q", "-m", "fixture"]):
+                subprocess.run(cmd, cwd=repo, env=env, check=True, capture_output=True)
+            return subprocess.run(["bash", "-euo", "pipefail", "-c", staging_script()], cwd=repo,
+                                  env=dict(env, RUNNER_TEMP=str(runner)), capture_output=True, text=True, check=False)
+
+    def test_complete_fixture_stages(self):
+        files = {"index.html": "x", "CNAME": "aielectronicchips.com", "robots.txt": "x", "sitemap.xml": "x"}
+        self.assertEqual(0, self.run_staging_in_repo(files).returncode)
+
+    def test_missing_required_file_fails(self):
+        for missing in ("index.html", "CNAME", "robots.txt", "sitemap.xml"):
+            files = {"index.html": "x", "CNAME": "aielectronicchips.com", "robots.txt": "x", "sitemap.xml": "x"}
+            del files[missing]
+            with self.subTest(missing=missing):
+                self.assertNotEqual(0, self.run_staging_in_repo(files).returncode)
+
+
 if __name__ == "__main__":
     unittest.main()

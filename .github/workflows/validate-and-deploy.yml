@@ -52,7 +52,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/site"
           git archive HEAD | tar -x -C "$RUNNER_TEMP/site" --exclude='.github' --exclude='data/research' --exclude='scripts' --exclude='tests' --exclude='*.md'
           test ! -e "$RUNNER_TEMP/site/data/research"
-          test -f "$RUNNER_TEMP/site/index.html" && test -f "$RUNNER_TEMP/site/CNAME"
+          for f in index.html CNAME robots.txt sitemap.xml; do test -f "$RUNNER_TEMP/site/$f" || { echo "missing required public file: $f"; exit 1; }; done
       - name: Upload validated static site
         uses: actions/upload-pages-artifact@v3
         with:
