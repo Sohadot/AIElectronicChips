@@ -219,5 +219,17 @@ class StandardsAndInteropBoundaryTests(unittest.TestCase):
         self.assertTrue(any("implements a standard" in e for e in errs), errs)
 
 
+
+class BandwidthScopeIntegrityTests(unittest.TestCase):
+    def test_amd_896_scope_is_not_promoted_to_vendor_confirmed_per_gpu(self):
+        release, _, _ = load()
+        finding = next(f for f in release["findings"] if f["id"] == "i-an-memory-vs-fabric")
+        quantity = next(q for q in finding["quantities"] if q["value"] == "896")
+        self.assertEqual("not_stated", quantity["direction"])
+        self.assertEqual("not_stated", quantity["scope"])
+        page = PAGE.read_text(encoding="utf-8")
+        self.assertIn("per-GPU versus per-platform scope not established", page)
+        self.assertIn("not memory access speed", page)
+
 if __name__ == "__main__":
     unittest.main()
