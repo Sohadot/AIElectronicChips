@@ -27,7 +27,7 @@
 
 .posture-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 1.5rem; }
 .posture-grid article { background: var(--surface); padding: 1.3rem; }
-.posture-grid h3 { font-size: .76rem; text-transform: uppercase; letter-spacing: .1em; color: var(--copper-ink); margin-bottom: .6rem; }
+.posture-grid h3 { font-size: .875rem; text-transform: uppercase; letter-spacing: .1em; color: var(--copper-ink); margin-bottom: .6rem; }
 .posture-grid p { color: var(--ink); font-size: .92rem; margin: 0; }
 
 .evidence-link { display: inline-block; margin-top: 1.5rem; color: var(--teal-ink); font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; text-decoration: none; }
@@ -71,7 +71,7 @@
 .data-table { width: 100%; border-collapse: collapse; font-size: .9rem; min-width: 640px; line-height: 1.55; }
 .data-table caption { text-align: left; padding: .8rem 1rem; color: var(--muted); font-size: .86rem; border-bottom: 1px solid var(--line); caption-side: top; }
 .data-table th, .data-table td { border-bottom: 1px solid var(--line); padding: .7rem .85rem; text-align: left; vertical-align: top; }
-.data-table thead th { background: var(--surface-2); color: var(--copper-ink); font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; border-bottom: 2px solid var(--line-strong); }
+.data-table thead th { background: var(--surface-2); color: var(--copper-ink); font-size: .875rem; text-transform: uppercase; letter-spacing: .08em; border-bottom: 2px solid var(--line-strong); }
 .data-table tbody th { color: var(--ink-strong); font-weight: 600; width: 18%; background: #fafbfa; }
 .data-table td { color: var(--ink); }
 .data-table tbody tr:hover td, .data-table tbody tr:hover th { background: #f4f8f8; }
@@ -105,7 +105,7 @@
 
 @media (max-width: 700px) {
   .ref-toc ol { columns: 1; }
-  .data-table { font-size: .86rem; }
+  .data-table { font-size: .9rem; }
   /* Keep the diagram's labels legible: hold a minimum drawing width and scroll. */
   .hbm-figure svg { min-width: 620px; }
 }
