@@ -15,7 +15,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from validate_evidence_releases import (  # noqa: E402
+    check_inference_boundaries,
     check_pages_exclusion,
+    inference_boundary_errors,
     check_review_representation,
     check_public_references,
     check_release,
@@ -272,6 +274,53 @@ class ReviewRepresentationTests(unittest.TestCase):
     def test_validation_wording_alone_is_not_review(self):
         html = self.PAGE.read_text(encoding="utf-8") + "<p>Automated validation passed 2026-11-09.</p>"
         self.assertEqual([], self.check(html))
+
+
+class InferenceBoundaryTests(unittest.TestCase):
+    """Supplier self-descriptions are not platform facts; in-house is not capability-free."""
+
+    def errs(self, sentence):
+        return inference_boundary_errors(sentence, "fixture")
+
+    def test_repository_release_and_page_pass(self):
+        release, _, _ = load()
+        self.assertEqual([], check_inference_boundaries(release, ROOT / "hbm-memory" / "index.html"))
+
+    def test_multi_sourcing_assertion_rejected(self):
+        self.assertTrue(self.errs("Rubin is therefore multi-sourced across two HBM4 suppliers."))
+        self.assertTrue(self.errs("The platform is therefore designed to accept HBM4 from more than one supplier."))
+        self.assertTrue(self.errs("That establishes technical multi-sourcing intent only."))
+        self.assertTrue(self.errs("The two suppliers' parts are interchangeable."))
+
+    def test_negated_multi_sourcing_allowed(self):
+        self.assertEqual([], self.errs("The statements do not establish that Rubin is actually multi-sourced."))
+
+    def test_qualification_assertion_rejected(self):
+        self.assertTrue(self.errs("NVIDIA has qualified Samsung HBM4 for Vera Rubin."))
+        self.assertEqual([], self.errs("Which suppliers' parts are qualified for which platforms?"))
+
+    def test_in_house_cannot_remove_manufacturing_dependency(self):
+        self.assertTrue(self.errs("Micron's in-house base die eliminates its dependency on advanced manufacturing."))
+        self.assertTrue(self.errs("Because it is made in-house, the base die is independent of advanced process capacity."))
+        self.assertEqual([], self.errs("In-house manufacture still depends on Micron's own advanced process capability."))
+
+    def test_unscoped_logic_process_base_die_rejected(self):
+        self.assertTrue(self.errs("HBM4 moves the base die onto a logic process."))
+        self.assertEqual([], self.errs("Samsung states a 4nm logic process for its HBM4 base die."))
+
+    def test_finding_and_candidate_statements_are_checked(self):
+        release, _, _ = load()
+        release["findings"][0]["statement"] = "HBM4 is multi-sourced on every platform."
+        release["candidate_relationships"][0]["statement"] = "NVIDIA has qualified both suppliers."
+        errors = check_inference_boundaries(release, ROOT / "hbm-memory" / "index.html")
+        self.assertTrue(any("finding" in e for e in errors), errors)
+        self.assertTrue(any("candidate" in e for e in errors), errors)
+
+    def test_substitution_finding_is_not_an_inference(self):
+        release, _, _ = load()
+        f = next(x for x in release["findings"] if x["id"] == "f-an-substitution")
+        self.assertEqual("attributed_statement", f["claim_class"])
+        self.assertIn("do not establish", f["statement"])
 
 
 class EvidenceReleaseCliTests(unittest.TestCase):

@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HBM Memory: HBM3E, HBM4 and HBM4E Evidence Reference | AIElectronicChips.com</title>
-  <meta name="description" content="Evidence-classified reference to HBM4: the 2,048-bit interface, stack configurations, the shift to logic-process base dies, packaging integration, and supplier-reported status with conflicts and unknowns.">
+  <meta name="description" content="Evidence-classified reference to HBM4: the 2,048-bit interface, stack configurations, how suppliers source the base logic die, packaging integration, and supplier-reported status with conflicts and unknowns.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aielectronicchips.com/hbm-memory/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AIElectronicChips.com">
   <meta property="og:title" content="HBM Memory: HBM3E, HBM4 and HBM4E Evidence Reference">
-  <meta property="og:description" content="How HBM4 changes the memory layer: a 2,048-bit interface, logic-process base dies and new packaging dependencies, with every statement classed as standard, attributed, analysis or unresolved.">
+  <meta property="og:description" content="How HBM4 changes the memory layer: a 2,048-bit interface, base-die sourcing and new packaging dependencies, with every statement classed as standard, attributed, analysis or unresolved.">
   <meta property="og:url" content="https://aielectronicchips.com/hbm-memory/">
   <meta property="og:image" content="https://aielectronicchips.com/assets/og/hbm-memory.png">
   <meta property="og:image:width" content="1200">
@@ -102,7 +102,7 @@
       "@type": "DefinedTerm",
       "@id": "https://aielectronicchips.com/hbm-memory/#term-base-die",
       "name": "HBM logic base die",
-      "description": "The bottom die of an HBM stack that carries the interface to the processor. Suppliers that disclose it make the HBM4 base die on a logic process rather than a memory process.",
+      "description": "The bottom die of an HBM stack that carries the interface to the processor. SK hynix (as planned) and Samsung disclose a logic-process HBM4 base die; Micron discloses an in-house advanced CMOS base logic die.",
       "inDefinedTermSet": { "@id": "https://aielectronicchips.com/hbm-memory/#terms" }
     }
   ]
@@ -120,7 +120,7 @@
       <div class="trace" aria-hidden="true"></div>
       <p class="eyebrow">Reference layer · 04 Memory · Evidence release 001</p>
       <h1>HBM Memory</h1>
-      <p class="lead">HBM4 doubles the memory interface to 2,048 bits and moves the stack's base die onto logic processes. That second change ties the memory layer to advanced-logic fabrication.</p>
+      <p class="lead">HBM4 doubles the memory interface to 2,048 bits, and suppliers now describe its base die as an advanced-process part. That ties the memory layer more closely to advanced semiconductor manufacturing.</p>
       <p class="intro">This reference explains how High Bandwidth Memory works and what changes from HBM3E to HBM4 and HBM4E. It sets JEDEC's announcement of the standard against what suppliers and accelerator vendors have disclosed, and records where those disclosures conflict or stop.</p>
       <div class="framing-note"><strong>Evidence compiled: 2026-11-09 · Scientific review pending</strong><span>Every material statement carries one of four classes. Company statements remain attributed. Nothing here establishes market-wide availability, capacity, allocation or supplier position.</span></div>
       <ul class="class-legend" aria-label="Evidence classes used on this page">
@@ -143,7 +143,7 @@
           <li><a href="#thermal">Power and thermal disclosures</a></li>
           <li><a href="#status">Commercialization ledger</a></li>
           <li><a href="#accelerators">Accelerator integration</a></li>
-          <li><a href="#substitution">Substitution</a></li>
+          <li><a href="#substitution">Substitution and multi-sourcing</a></li>
           <li><a href="#unresolved">Unresolved questions</a></li>
           <li><a href="#references">References</a></li>
         </ol>
@@ -153,8 +153,8 @@
         <article class="reference-block" id="summary"><div class="block-index">00</div><div>
           <h2>Reference summary</h2>
           <p><strong>Definition.</strong> High Bandwidth Memory (HBM) is DRAM built as a vertical stack: several DRAM core dies sit on a base die and connect to it through through-silicon vias (TSVs). The stack is then placed inside the same package as a processor, beside it. <span class="tag tag-a">A</span>SK hynix describes HBM as "made by stacking a core DRAM die on top of a base die that features TSV". <a class="cite" href="#ref-2">[2]</a></p>
-          <p><strong>Why it is a dependency layer.</strong> An accelerator can only compute as fast as data reaches it. HBM supplies that data over a very wide, short connection, and it does so only after successful integration in an advanced package. A memory stack is therefore not usable on its own: it depends on DRAM fabrication, on logic fabrication (for HBM4 base dies), and on packaging capacity.</p>
-          <p><strong>What changed with HBM4.</strong> HBM4 brings three changes: twice the interface width, more channels, and taller permitted stacks. For the suppliers that disclose it, the base die now comes from a logic process instead of a memory process. The sections below separate each claim by evidence class.</p>
+          <p><strong>Why it is a dependency layer.</strong> An accelerator can only compute as fast as data reaches it. HBM supplies that data over a very wide, short connection, and it does so only after successful integration in an advanced package. A memory stack is therefore not usable on its own: it depends on DRAM fabrication, on base-die fabrication, and on packaging capacity.</p>
+          <p><strong>What changed with HBM4.</strong> HBM4 brings three changes: twice the interface width, more channels, and taller permitted stacks. SK hynix (as planned) and Samsung disclose a logic-process base die; Micron discloses an in-house advanced CMOS base logic die without naming its process. The sections below separate each claim by evidence class.</p>
           <p><strong>Boundary.</strong> This page reports what standards bodies and companies have published. It does not establish availability, allocation, yields, production capacity, qualification status or relative supplier position. Supplier efficiency figures use different baselines and cannot be compared with each other.</p>
         </div></article>
 
@@ -207,7 +207,7 @@
           <ul class="detail">
             <li><strong>Core dies</strong> hold the DRAM arrays. Capacity grows with layer count and per-die density. <span class="tag tag-s">S</span>JEDEC's HBM4 announcement lists 4-, 8-, 12- and 16-high DRAM stacks of 24 Gb or 32 Gb dies, and a 64GB cube (32 Gb, 16-high). <a class="cite" href="#ref-1">[1]</a></li>
             <li><strong>TSVs</strong> carry signals and power vertically through each core die to the base die. This removes the long wires a board-mounted memory would need.</li>
-            <li><strong>The base die</strong> carries the interface and control logic that faces the processor. With HBM4, suppliers that disclose it make this die on a logic process (see <a href="#base-die">section 04</a>).</li>
+            <li><strong>The base die</strong> carries the interface and control logic that faces the processor. For HBM4, SK hynix (as planned) and Samsung disclose a logic-process base die, and Micron an in-house advanced CMOS one (see <a href="#base-die">section 04</a>).</li>
             <li><strong>Channels.</strong> <span class="tag tag-s">S</span>JEDEC's announcement states that HBM4 has 32 independent channels per stack, each with two pseudo-channels, up from 16 channels in HBM3. <a class="cite" href="#ref-1">[1]</a> More independent channels let the controller keep more transfers in flight at once.</li>
           </ul>
         </div></article>
@@ -232,7 +232,7 @@
               </tbody>
             </table>
           </div>
-          <p class="detail"><strong>Reading the table.</strong> All three suppliers report HBM4 per-pin rates above the 8 Gb/s that JEDEC announced, and SK hynix and Samsung say so explicitly. <a class="cite" href="#ref-4">[4]</a><a class="cite" href="#ref-10">[10]</a> In practice, JEDEC's announced 8 Gb/s is a reference point that shipped speed grades exceed, not a description of them. Rates above it are company-reported and depend on what each customer qualifies.</p>
+          <p class="detail"><strong>Reading the table.</strong> All three suppliers report HBM4 per-pin rates above the 8 Gb/s that JEDEC announced, and SK hynix and Samsung say so explicitly. <a class="cite" href="#ref-4">[4]</a><a class="cite" href="#ref-10">[10]</a> In practice, JEDEC's announced 8 Gb/s is a reference point that the disclosed speed grades exceed, not a description of them. Rates above it are company-reported; which speed grades customers have qualified is not disclosed.</p>
         </div></article>
 
         <article class="reference-block" id="bandwidth"><div class="block-index">03</div><div>
@@ -264,10 +264,10 @@
             <li><span class="tag tag-a">A</span>SK hynix stated in April 2024 that it "has used a proprietary technology to make base dies up to HBM3E" and "plans to adopt TSMC’s advanced logic process for HBM4’s base die". <a class="cite" href="#ref-2">[2]</a></li>
             <li><span class="tag tag-a">A</span>TSMC listed "N12 and N3 logic base die for HBM4" among its offerings in April 2025. It did not name the customers or products using each node. <a class="cite" href="#ref-12">[12]</a></li>
             <li><span class="tag tag-a">A</span>Samsung states it "adopted the most advanced nodes like the 1c DRAM and 4nm logic process for HBM4". <a class="cite" href="#ref-9">[9]</a> That release does not name the unit that makes the die. Samsung's HBM4E release attributes the 4nm logic base die to Samsung Foundry. <a class="cite" href="#ref-11">[11]</a></li>
-            <li><span class="tag tag-a">A</span>Micron's FY2026 Form 10-K states its HBM4 uses advanced CMOS technology "on the base logic die and DRAM core dies, which are designed and manufactured in-house". <a class="cite" href="#ref-18">[18]</a> It does not state the base die's process node, and Micron's product releases do not mention the base die.</li>
+            <li><span class="tag tag-a">A</span>Micron's FY2026 Form 10-K states: "Our HBM4 uses advanced complementary metal-oxide-semiconductor" (CMOS) … "on the base logic die and DRAM core dies, which are designed and manufactured in-house". <a class="cite" href="#ref-18">[18]</a> It does not state the base die's process node, and Micron's product releases do not mention the base die.</li>
           </ul>
           <h3>Dependency implication <span class="tag tag-c">C</span></h3>
-          <p class="detail">For suppliers whose HBM4 base die comes from a logic process, HBM4 output depends on two separate fabrication flows: DRAM wafers for the core dies and logic wafers for the base die. Package integration then adds a third dependency. The three suppliers reviewed here describe three different arrangements. SK hynix's disclosed plan relies on an external foundry. Samsung's relies on its own foundry business, per its HBM4E release. Micron reports designing and manufacturing the base logic die in-house, without naming its process. So the base-die dependency is not uniform across the industry: it is external, intra-company or internal depending on the supplier. This analysis assumes SK hynix carried its 2024 plan into production, which neither its later releases nor the portion of its 2026 prospectus reviewed here restate. It makes no claim about capacity, allocation or constraint severity.</p>
+          <p class="detail">Every HBM4 stack depends on fabricating two kinds of die, the DRAM core dies and the base logic die, and then on package integration. The three suppliers reviewed here source the base die in three different ways. SK hynix's disclosed plan relies on an external logic foundry. Samsung's relies on its own foundry business, per its HBM4E release. Micron reports designing and manufacturing the base logic die in-house with advanced CMOS, without naming its process. These arrangements change <em>who</em> supplies the base die, not <em>whether</em> advanced semiconductor manufacturing capability is required. In-house manufacture still depends on Micron's own advanced process capability and capacity. An external foundry adds a dependency on that foundry's capacity and terms. This analysis assumes SK hynix carried its 2024 plan into production, which neither its later releases nor the portion of its 2026 prospectus reviewed here restate. It makes no claim about capacity, allocation or constraint severity.</p>
           <p class="detail"><span class="tag tag-a">A</span>The same SK hynix announcement refers to "customized HBM that meets a wide range of customer demand for performance and power efficiency". <a class="cite" href="#ref-2">[2]</a> <span class="tag tag-a">A</span>Its July 2026 prospectus defines custom HBM as "an HBM product that integrates certain functions of GPUs and ASICs into the HBM base die". <a class="cite" href="#ref-20">[20]</a> <span class="tag tag-c">C</span>Where custom HBM is used, it ties a memory supplier, its base-die source and one accelerator design more closely together.</p>
         </div></article>
 
@@ -323,7 +323,7 @@
                 <tr><th scope="row" class="num">2026-01-28</th><td>SK hynix</td><td>"large-scale production" of HBM4 underway; supplying HBM3E and HBM4 simultaneously <a class="cite" href="#ref-6">[6]</a></td><td>Quantity or share</td></tr>
                 <tr><th scope="row" class="num">2026-02-12</th><td>Samsung</td><td>"has begun mass production" of HBM4 and "shipped commercial products to customers" <a class="cite" href="#ref-9">[9]</a></td><td>Named customers; "stable yields" is unquantified</td></tr>
                 <tr><th scope="row" class="num">2026-03-16</th><td>Micron</td><td>"begun volume shipment" of 36GB 12H in calendar Q1 2026; 48GB 16H samples <a class="cite" href="#ref-8">[8]</a></td><td>Volume; qualification share</td></tr>
-                <tr><th scope="row" class="num">2026-03-17</th><td>Samsung</td><td>HBM4 "now in mass production", designed for NVIDIA Vera Rubin <a class="cite" href="#ref-10">[10]</a></td><td>Qualification share</td></tr>
+                <tr><th scope="row" class="num">2026-03-17</th><td>Samsung</td><td>HBM4 "now in mass production", designed for NVIDIA Vera Rubin <a class="cite" href="#ref-10">[10]</a></td><td>NVIDIA qualification; supply share</td></tr>
                 <tr><th scope="row" class="num">2026-05-29</th><td>Samsung</td><td>Shipping 12-layer HBM4E samples; mass production "aligned with customer schedules" <a class="cite" href="#ref-11">[11]</a></td><td>An HBM4E production date</td></tr>
                 <tr><th scope="row" class="num">2026-06-24</th><td>Micron</td><td>HBM4 "is in high-volume shipments for our lead customer's platform"; "qualification samples have been shipped to multiple end-customers" <a class="cite" href="#ref-19">[19]</a></td><td>Customer identity; completed qualification elsewhere</td></tr>
                 <tr><th scope="row" class="num">FY2026 10-K</th><td>Micron</td><td>"In 2026, we began volume production of our HBM4 36GB 12-high" (fiscal year ended 2026-09-03) <a class="cite" href="#ref-18">[18]</a></td><td>Volume; customer allocation</td></tr>
@@ -344,13 +344,13 @@
             <li>22 TB/s across eight stacks is about 2.75 TB/s per stack, or about <span class="num">10.7 Gb/s</span> per pin.</li>
             <li>19.2 TB/s (the 2026-11-05 figure) across eight stacks is about 2.4 TB/s per stack, or about <span class="num">9.4 Gb/s</span> per pin.</li>
           </ul>
-          <p class="detail">Either way, the platform depends on HBM4 speed grades above the 8 Gb/s that JEDEC announced. That is the practical meaning of the supplier pin-rate disclosures: the platform needs above-baseline parts that suppliers must qualify. Assumptions: equal 36GB stacks, a 2,048-bit interface per stack, and all stacks at the same rate.</p>
+          <p class="detail">Either way, NVIDIA's stated bandwidth implies HBM4 running above the 8 Gb/s that JEDEC announced, which is consistent with the above-baseline pin rates suppliers disclose. Which suppliers' parts meet it is not disclosed. Assumptions: equal 36GB stacks, a 2,048-bit interface per stack, and all stacks at the same rate.</p>
         </div></article>
 
         <article class="reference-block" id="substitution"><div class="block-index">09</div><div>
-          <h2>Substitution: technically indicated, commercially unverified</h2>
+          <h2>Substitution and multi-sourcing: not established</h2>
           <p class="detail"><span class="tag tag-a">A</span>Micron says its HBM4 is "designed for NVIDIA Vera Rubin" <a class="cite" href="#ref-8">[8]</a>, and Samsung says the same of its HBM4 <a class="cite" href="#ref-10">[10]</a>. SK hynix's reviewed releases name no platform.</p>
-          <p class="detail"><span class="tag tag-c">C</span>The platform is therefore designed to accept HBM4 from more than one supplier. That establishes technical multi-sourcing intent only. No reviewed source states whether supply can in practice shift between suppliers, or at what qualification status, speed grade, package variant or volume. "Designed for" is an interoperability target, not a disclosed qualification.</p>
+          <p class="detail"><span class="tag tag-u">U</span>These are suppliers describing their own products. The NVIDIA sources reviewed here do not name Rubin's memory suppliers or qualified parts. The two statements therefore do not establish that NVIDIA has qualified either supplier, that the two products are interchangeable, or that Rubin is actually multi-sourced. Whether supply could shift between suppliers, and at what speed grade, package variant or volume, is unknown. "Designed for" states a supplier's design target, not a platform vendor's qualification.</p>
           <p class="detail"><span class="tag tag-u">U</span>A second route, a reduced-pin-count HBM4 variant, has been reported but is not used here as evidence. Its JEDEC source could not be retrieved.</p>
         </div></article>
 
@@ -364,7 +364,7 @@
             <li><strong>Samsung HBM4 base-die manufacturer.</strong> Samsung's HBM4 release names a 4nm logic process but not the unit that makes it.</li>
             <li><strong>SK hynix base die in production.</strong> The 2024 TSMC plan is not restated in later reviewed releases.</li>
             <li><strong>Capacity, yield and allocation</strong> by supplier. No primary source quantifies them, and this project does not estimate them.</li>
-            <li><strong>Qualification.</strong> Which suppliers' parts are qualified for which platforms, at which speed grades.</li>
+            <li><strong>Qualification.</strong> Which suppliers' parts are qualified for which platforms, at which speed grades?</li>
             <li><strong>Rubin bandwidth.</strong> "Up to 22 TB/s" (2026-01-05, 2026-07-21) versus an unqualified 19.2 TB/s (2026-11-05), with NVIDIA's current product pages still split (section 08).</li>
             <li><strong>16-high thermal limits</strong> and whether hybrid bonding becomes necessary.</li>
             <li><strong>Interposer, substrate and assembly dependencies</strong> for specific HBM4 packages.</li>

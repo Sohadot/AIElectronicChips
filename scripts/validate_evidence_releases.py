@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import html
 import json
 import re
 import sys
@@ -319,6 +320,59 @@ def check_review_representation(page: Path, compiled_dates: set[str]) -> list[st
     return errors
 
 
+# Inference boundaries: wording that turns supplier self-descriptions into
+# platform facts, or company structure into capability claims.
+NEGATION = re.compile(r"\b(?:not|no|never|neither|nor|unknown|unresolved|cannot|without)\b|n't\b", re.I)
+MULTI_SOURCING = re.compile(r"multi-?sourc|interchangeab|dual[- ]sourc|second[- ]sourc|designed to accept", re.I)
+QUALIFIED = re.compile(r"\b(?:qualified (?:by|for|on)|has qualified|have qualified|completed qualification)\b", re.I)
+IN_HOUSE_OVERREACH = re.compile(r"in-house[^.]*\b(?:eliminat\w*|removes? the need|no longer (?:needs?|requires?|depends?)|independent of|no dependency|avoids? (?:the )?need)", re.I)
+LOGIC_BASE_DIE = re.compile(r"base[- ]die[^.]*logic[- ]process|logic[- ]process[^.]*base[- ]die", re.I)
+SUPPLIER_NAMED = re.compile(r"SK hynix|Samsung|Micron|TSMC|N12|N3|4nm", re.I)
+
+
+def inference_boundary_errors(sentence: str, where: str) -> list[str]:
+    errors = []
+    if sentence.rstrip().endswith("?"):
+        return errors  # an open question asserts nothing
+    negated = bool(NEGATION.search(sentence))
+    if MULTI_SOURCING.search(sentence) and not negated:
+        errors.append(f"{where}: asserts multi-sourcing or interchangeability without platform evidence: {sentence[:120]!r}")
+    if QUALIFIED.search(sentence) and not negated:
+        errors.append(f"{where}: asserts completed qualification without evidence: {sentence[:120]!r}")
+    if IN_HOUSE_OVERREACH.search(sentence):
+        errors.append(f"{where}: treats in-house manufacture as removing a manufacturing dependency: {sentence[:120]!r}")
+    if LOGIC_BASE_DIE.search(sentence) and not SUPPLIER_NAMED.search(sentence) and not negated:
+        errors.append(f"{where}: generalizes a logic-process base die beyond the suppliers that disclose it: {sentence[:120]!r}")
+    return errors
+
+
+def sentences(text: str) -> list[str]:
+    return [x.strip() for x in re.split(r"(?<=[.!?])\s+", re.sub(r"\s+", " ", text)) if x.strip()]
+
+
+def check_inference_boundaries(release: dict, page: Path) -> list[str]:
+    errors = []
+    for f in release.get("findings", []):
+        for sent in sentences(str(f.get("statement", ""))):
+            errors.extend(inference_boundary_errors(sent, f"finding {f.get('id')}"))
+    for e in release.get("candidate_relationships", []):
+        for sent in sentences(str(e.get("statement", ""))):
+            errors.extend(inference_boundary_errors(sent, f"candidate {e.get('id')}"))
+    for n in release.get("candidate_nodes", []):
+        for sent in sentences(str(n.get("description", ""))):
+            errors.extend(inference_boundary_errors(sent, f"node {n.get('id')}"))
+    try:
+        html_text = page.read_text(encoding="utf-8")
+    except OSError as exc:
+        return errors + [f"{page.name}: unreadable: {exc}"]
+    main = html_text.split("<main", 1)[-1]
+    text = html.unescape(re.sub(r"<[^>]+>", " ", main))
+    rel = page.relative_to(ROOT) if page.is_relative_to(ROOT) else page.name
+    for sent in sentences(text):
+        errors.extend(inference_boundary_errors(sent, str(rel)))
+    return errors
+
+
 def check_pages_exclusion(workflow: Path, research_dir: Path) -> list[str]:
     """Unpublished research candidates must not ship in the Pages artifact."""
     if not any(research_dir.glob("*.json")):
@@ -355,6 +409,9 @@ def main(argv: list[str] | None = None) -> None:
             errors.append(f"{path.name}: unreadable: {exc}")
             continue
         errors.extend(check_release(release, registry, atlas, date.today(), path.name))
+        if isinstance(release, dict):
+            for page in REFERENCE_PAGES:
+                errors.extend(check_inference_boundaries(release, page))
         if isinstance(release, dict):
             if release.get("status") == "research_candidate" and isinstance(release.get("as_of"), str):
                 compiled_dates.add(release["as_of"])
