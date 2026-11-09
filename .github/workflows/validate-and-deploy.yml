@@ -1,0 +1,62 @@
+name: Validate and Deploy
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aec-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify governed models, source registry, evidence atlas and trust language
+        run: python scripts/validate_all.py
+      - name: Verify all public routes, indexability, structured data, assets and links
+        run: python scripts/validate_public_launch.py
+      - name: Run negative-test regression suite
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+  deploy:
+    name: Deploy gated Pages
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Stage public site (research candidates and internal project files excluded)
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/site" --exclude='.github' --exclude='data/research' --exclude='scripts' --exclude='tests' --exclude='*.md'
+          test ! -e "$RUNNER_TEMP/site/data/research"
+          for f in index.html CNAME robots.txt sitemap.xml; do test -f "$RUNNER_TEMP/site/$f" || { echo "missing required public file: $f"; exit 1; }; done
+      - name: Upload validated static site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/site
+      - name: Deploy validated site
+        id: deployment
+        uses: actions/deploy-pages@v4
