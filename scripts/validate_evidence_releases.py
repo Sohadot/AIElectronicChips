@@ -36,7 +36,10 @@ from validate_dependency_atlas import (  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 RESEARCH_DIR = ROOT / "data" / "research"
 WORKFLOW = ROOT / ".github" / "workflows" / "validate-and-deploy.yml"
-# Public pages that cite registry IDs in a numbered reference list.
+# Each release names the public page that presents it ("reference_page"). Release 001
+# predates the field and keeps its original page. A release is checked only against
+# its own page, so unrelated reference pages are never compared with each other.
+LEGACY_REFERENCE_PAGES = {"aec-hbm4-evidence-release-001": "hbm-memory/index.html"}
 REFERENCE_PAGES = [ROOT / "hbm-memory" / "index.html"]
 # Quoted excerpts are for citation only: keep each short.
 MAX_QUOTE_WORDS = 20
@@ -50,6 +53,7 @@ RELEASE_FIELDS = {
     "source_registry_reference", "atlas_reference", "description", "rights_note",
     "findings", "unresolved", "candidate_nodes", "candidate_relationships",
 }
+OPTIONAL_RELEASE_FIELDS = {"reference_page"}
 FINDING_FIELDS = {"id", "claim_class", "topic", "statement", "evidence", "evidence_state", "scope", "as_of", "limitations"}
 EVIDENCE_STATES = {"cited_sources_active", "includes_pending_source"}
 FINDING_CLASSES = {"verified_fact", "attributed_statement", "bounded_analysis"}
@@ -57,6 +61,8 @@ TOPICS = {
     "standard", "architecture", "interface_bandwidth", "stack_configuration",
     "base_die", "stacking_process", "packaging_integration", "thermal_power",
     "commercialization", "accelerator_integration", "substitution",
+    # Advanced packaging and chiplet integration (IDE-003)
+    "interposer_bridge", "chiplet_interface", "assembly_test", "production_chain", "interoperability",
 }
 UNRESOLVED_FIELDS = {"id", "topic", "question", "why_unresolved", "sources_checked", "next_evidence_needed"}
 CANDIDATE_EXTRA_FIELDS = {"review_status", "research_recommendation"}
@@ -73,12 +79,21 @@ ATTRIBUTION_ONLY = re.compile(
 )
 
 
+def reference_page(release: dict) -> Path | None:
+    """The public page that presents this release, or None if it is missing or invalid."""
+    rel = release.get("reference_page", LEGACY_REFERENCE_PAGES.get(release.get("release_id")))
+    if not nonempty(rel) or rel.startswith(("/", "data/", "scripts/", "tests/", ".")) or ".." in rel or not rel.endswith("index.html"):
+        return None
+    page = ROOT / rel
+    return page if page.is_file() else None
+
+
 def check_release(release: object, registry: dict, atlas: dict, today: date, label: str) -> list[str]:
     errors: list[str] = []
     if not isinstance(release, dict):
         return [f"{label}: release root must be an object"]
 
-    missing, extra = RELEASE_FIELDS - set(release), set(release) - RELEASE_FIELDS
+    missing, extra = RELEASE_FIELDS - set(release), set(release) - RELEASE_FIELDS - OPTIONAL_RELEASE_FIELDS
     if missing:
         errors.append(f"{label}: missing fields {sorted(missing)}")
     if extra:
@@ -94,6 +109,8 @@ def check_release(release: object, registry: dict, atlas: dict, today: date, lab
     for field in ("release_id", "version", "title", "description", "rights_note"):
         if not nonempty(release.get(field)):
             errors.append(f"{label}: {field} must be non-empty")
+    if reference_page(release) is None:
+        errors.append(f"{label}: reference_page must name an existing public index.html outside data/, scripts/ and tests/")
     release_date = parse_date(release.get("as_of"), f"{label}.as_of", errors)
     if release_date and release_date > today:
         errors.append(f"{label}: as_of is in the future")
@@ -355,9 +372,43 @@ LOGIC_BASE_DIE = re.compile(r"base[- ]die[^.]*logic[- ]process|logic[- ]process[
 SUPPLIER_NAMED = re.compile(r"SK hynix|Samsung|Micron|TSMC|N12|N3|4nm", re.I)
 # CoWoS is one packaging platform: no product-level or universal integration claim without evidence.
 COWOS_PRODUCT_CLAIM = re.compile(r"CoWoS[^.]*\b(?:Rubin|Vera|Blackwell|MI\d{3}|GB\d{3}|every HBM4|all HBM4)|\b(?:Rubin|Vera|Blackwell|MI\d{3}|GB\d{3}|every HBM4|all HBM4)[^.]*CoWoS", re.I)
+COWOS_PRODUCT = re.compile(r"\b(?:Rubin|Vera|Blackwell|MI\d{3}[A-Z]?|GB\d{3})\b", re.I)
+COWOS_UNIVERSAL = re.compile(r"\b(?:every|all) HBM4\b", re.I)
+# Citation markers kept from a page so a sentence can be matched to the sources it cites.
+CITE_TOKEN = re.compile(r"⟦(\d+)⟧")
 
 
-def inference_boundary_errors(sentence: str, where: str) -> list[str]:
+def cowos_evidence(release: dict) -> dict[str, set[str]]:
+    """Products that an attributed finding of this release ties to CoWoS, with the sources it cites.
+
+    A product-level CoWoS statement is allowed elsewhere only for these products. An attributed
+    finding is a company's own statement, recorded as such; whether its passage says what the
+    finding states remains the human reviewer's check."""
+    found: dict[str, set[str]] = {}
+    for f in release.get("findings", []):
+        if not isinstance(f, dict) or f.get("claim_class") != "attributed_statement":
+            continue
+        sources = {e.get("source_id") for e in f.get("evidence", []) if isinstance(e, dict)}
+        for sent in sentences(str(f.get("statement", ""))):
+            if COWOS_PRODUCT_CLAIM.search(sent) and not NEGATION.search(sent) and not COWOS_UNIVERSAL.search(sent):
+                for product in COWOS_PRODUCT.findall(sent):
+                    found.setdefault(product.upper(), set()).update(sources)
+    return found
+
+
+def _cowos_claim_supported(sentence: str, evidence: dict[str, set[str]] | None, cited: set[str] | None) -> bool:
+    if not evidence or COWOS_UNIVERSAL.search(sentence):
+        return False
+    products = {p.upper() for p in COWOS_PRODUCT.findall(sentence)}
+    if not products or not products <= set(evidence):
+        return False
+    # Where citations are known (a public page or a candidate edge), each product must be
+    # cited to a source that its attributed finding rests on.
+    return cited is None or all(evidence[p] & cited for p in products)
+
+
+def inference_boundary_errors(sentence: str, where: str, evidence: dict[str, set[str]] | None = None,
+                              cited: set[str] | None = None) -> list[str]:
     errors = []
     if sentence.rstrip().endswith("?"):
         return errors  # an open question asserts nothing
@@ -368,7 +419,7 @@ def inference_boundary_errors(sentence: str, where: str) -> list[str]:
         errors.append(f"{where}: asserts completed qualification without evidence: {sentence[:120]!r}")
     if IN_HOUSE_OVERREACH.search(sentence):
         errors.append(f"{where}: treats in-house manufacture as removing a manufacturing dependency: {sentence[:120]!r}")
-    if COWOS_PRODUCT_CLAIM.search(sentence) and not negated:
+    if COWOS_PRODUCT_CLAIM.search(sentence) and not negated and not _cowos_claim_supported(sentence, evidence, cited):
         errors.append(f"{where}: ties CoWoS to a product or to all HBM4 without a product-level disclosure: {sentence[:120]!r}")
     if LOGIC_BASE_DIE.search(sentence) and not SUPPLIER_NAMED.search(sentence) and not negated:
         errors.append(f"{where}: generalizes a logic-process base die beyond the suppliers that disclose it: {sentence[:120]!r}")
@@ -376,10 +427,20 @@ def inference_boundary_errors(sentence: str, where: str) -> list[str]:
 
 
 def sentences(text: str) -> list[str]:
-    """Split on sentence punctuation and on line breaks (block boundaries)."""
-    out = []
+    """Split on sentence punctuation and on line breaks (block boundaries).
+
+    Citation markers that open a fragment belong to the sentence before them,
+    because pages place [n] after the full stop."""
+    out: list[str] = []
     for block in re.split(r"\n+", text):
-        out.extend(x.strip() for x in re.split(r"(?<=[.!?])\s+", re.sub(r"[ \t\r\f\v]+", " ", block)) if x.strip())
+        for part in re.split(r"(?<=[.!?])\s+", re.sub(r"[ \t\r\f\v]+", " ", block)):
+            part = part.strip()
+            lead = re.match(r"^((?:⟦\d+⟧\s*)+)(.*)$", part)
+            if lead and out:
+                out[-1] = f"{out[-1]} {lead.group(1).strip()}"
+                part = lead.group(2).strip()
+            if part:
+                out.append(part)
     return out
 
 
@@ -411,20 +472,28 @@ def _negation_columns(match: re.Match) -> str:
 
 def check_inference_boundaries(release: dict, page: Path) -> list[str]:
     errors = []
+    evidence = cowos_evidence(release)
     for f in release.get("findings", []):
         for sent in sentences(str(f.get("statement", ""))):
-            errors.extend(inference_boundary_errors(sent, f"finding {f.get('id')}"))
+            errors.extend(inference_boundary_errors(sent, f"finding {f.get('id')}", evidence))
     for e in release.get("candidate_relationships", []):
+        cited = {c.get("source_id") for c in e.get("evidence", []) if isinstance(c, dict)}
         for sent in sentences(str(e.get("statement", ""))):
-            errors.extend(inference_boundary_errors(sent, f"candidate {e.get('id')}"))
+            errors.extend(inference_boundary_errors(sent, f"candidate {e.get('id')}", evidence, cited))
     for n in release.get("candidate_nodes", []):
         for sent in sentences(str(n.get("description", ""))):
-            errors.extend(inference_boundary_errors(sent, f"node {n.get('id')}"))
+            errors.extend(inference_boundary_errors(sent, f"node {n.get('id')}", evidence))
     try:
         html_text = page.read_text(encoding="utf-8")
     except OSError as exc:
         return errors + [f"{page.name}: unreadable: {exc}"]
+    # Reference number -> registry IDs, so page sentences can be matched to their sources.
+    ref_sources = {
+        n: set(re.findall(r"<code>([a-z0-9-]+)</code>", body))
+        for n, body in re.findall(r'<li id="ref-(\d+)">(.*?)</li>', html_text, re.S)
+    }
     main = html_text.split("<main", 1)[-1]
+    main = re.sub(r'<a class="cite" href="#ref-(\d+)">\[\d+\]</a>', r" ⟦\1⟧ ", main)
     # The table of contents only repeats section headings, which are checked in place.
     main = re.sub(r'<nav class="ref-toc".*?</nav>', " ", main, flags=re.S)
     # Cells under a "Does not establish" column are read with that header as their context.
@@ -434,7 +503,25 @@ def check_inference_boundaries(release: dict, page: Path) -> list[str]:
     text = html.unescape(re.sub(r"<[^>]+>", " ", main))
     rel = page.relative_to(ROOT) if page.is_relative_to(ROOT) else page.name
     for sent in sentences(text):
-        errors.extend(inference_boundary_errors(sent, str(rel)))
+        cited = set().union(*(ref_sources.get(n, set()) for n in CITE_TOKEN.findall(sent)))
+        plain = re.sub(r"\s*⟦\d+⟧", "", sent).strip()
+        if plain:
+            errors.extend(inference_boundary_errors(plain, str(rel), evidence, cited))
+    return errors
+
+
+def check_shared_candidate_nodes(releases: dict[str, dict]) -> list[str]:
+    """A candidate node proposed by more than one release must be defined identically,
+    so that two releases cannot propose diverging versions of one Atlas node."""
+    seen: dict[str, tuple[str, dict]] = {}
+    errors = []
+    for label, release in releases.items():
+        for node in release.get("candidate_nodes", []):
+            if not isinstance(node, dict) or not nonempty(node.get("id")):
+                continue
+            first = seen.setdefault(node["id"], (label, node))
+            if first[1] != node:
+                errors.append(f"{label}: candidate node {node['id']} differs from its definition in {first[0]}")
     return errors
 
 
@@ -466,7 +553,9 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(1)
     errors: list[str] = []
     summary = []
-    compiled_dates: set[str] = set()
+    # Each page is checked against the releases that name it, never against another page's release.
+    compiled_dates: dict[Path, set[str]] = {page: set() for page in REFERENCE_PAGES}
+    loaded: dict[str, dict] = {}
     for path in paths:
         try:
             release = json.loads(path.read_text(encoding="utf-8"))
@@ -474,21 +563,25 @@ def main(argv: list[str] | None = None) -> None:
             errors.append(f"{path.name}: unreadable: {exc}")
             continue
         errors.extend(check_release(release, registry, atlas, date.today(), path.name))
-        if isinstance(release, dict):
-            for page in REFERENCE_PAGES:
-                errors.extend(check_inference_boundaries(release, page))
-        if isinstance(release, dict):
+        if not isinstance(release, dict):
+            continue
+        loaded[path.name] = release
+        page = reference_page(release)
+        if page is not None:
+            errors.extend(check_inference_boundaries(release, page))
+            dates = compiled_dates.setdefault(page, set())
             if release.get("status") == "research_candidate" and isinstance(release.get("as_of"), str):
-                compiled_dates.add(release["as_of"])
-            summary.append(
-                f"{path.name}: {len(release.get('findings', []))} findings, "
-                f"{len(release.get('unresolved', []))} unresolved, "
-                f"{len(release.get('candidate_relationships', []))} unpublished candidates"
-            )
-    for page in REFERENCE_PAGES:
+                dates.add(release["as_of"])
+        summary.append(
+            f"{path.name}: {len(release.get('findings', []))} findings, "
+            f"{len(release.get('unresolved', []))} unresolved, "
+            f"{len(release.get('candidate_relationships', []))} unpublished candidates"
+        )
+    errors.extend(check_shared_candidate_nodes(loaded))
+    for page, dates in compiled_dates.items():
         errors.extend(check_public_references(page, registry))
-        if compiled_dates:
-            errors.extend(check_review_representation(page, compiled_dates))
+        if dates:
+            errors.extend(check_review_representation(page, dates))
     errors.extend(check_pages_exclusion(WORKFLOW, RESEARCH_DIR))
     if errors:
         for err in errors:
