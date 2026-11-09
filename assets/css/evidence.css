@@ -78,21 +78,26 @@
 .data-table tr:last-child td, .data-table tr:last-child th { border-bottom: 0; }
 .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-/* HBM cross-section figure: copper for DRAM and TSVs, teal for silicon logic and interposer. */
-.hbm-figure { margin: 1.6rem 0; border: 1px solid var(--line); background: var(--surface); padding: 1rem; }
-.hbm-figure .figure-frame { overflow-x: auto; }
-.hbm-figure svg { display: block; width: 100%; height: auto; max-width: 860px; }
-.hbm-figure figcaption { color: var(--muted); font-size: .88rem; margin-top: .8rem; max-width: 820px; }
-.hbm-figure .f-sub { fill: #e7ece9; stroke: var(--line-strong); }
-.hbm-figure .f-int { fill: #dcebec; stroke: var(--teal); }
-.hbm-figure .f-xpu { fill: #ffffff; stroke: var(--teal-ink); stroke-width: 1.5; }
-.hbm-figure .f-dram { fill: #f6e9df; stroke: var(--copper); }
-.hbm-figure .f-base { fill: #e2f0f1; stroke: var(--teal-ink); stroke-width: 1.5; }
-.hbm-figure .f-tsv { stroke: var(--copper-ink); stroke-width: 1.4; }
-.hbm-figure .f-bump { fill: var(--muted); }
-.hbm-figure .f-lbl { fill: var(--ink-strong); font: 700 12px var(--mono); }
-.hbm-figure .f-note { fill: var(--muted); font: 500 11.5px var(--sans); }
-.hbm-figure .f-lead { stroke: var(--muted); stroke-width: 1; fill: none; }
+/* Cross-section figures (HBM stack, packaging architectures): copper for DRAM and TSVs,
+   teal for silicon logic, interposers and bridges, grey for organic RDL and substrate. */
+.hbm-figure, .ref-figure { margin: 1.6rem 0; border: 1px solid var(--line); background: var(--surface); padding: 1rem; }
+.hbm-figure .figure-frame, .ref-figure .figure-frame { overflow-x: auto; }
+.hbm-figure svg, .ref-figure svg { display: block; width: 100%; height: auto; max-width: 860px; }
+.hbm-figure figcaption, .ref-figure figcaption { color: var(--muted); font-size: .88rem; margin-top: .8rem; max-width: 820px; }
+.hbm-figure .f-sub, .ref-figure .f-sub { fill: #e7ece9; stroke: var(--line-strong); }
+.hbm-figure .f-int, .ref-figure .f-int { fill: #dcebec; stroke: var(--teal); }
+.hbm-figure .f-xpu, .ref-figure .f-xpu { fill: #ffffff; stroke: var(--teal-ink); stroke-width: 1.5; }
+.hbm-figure .f-dram, .ref-figure .f-dram { fill: #f6e9df; stroke: var(--copper); }
+.hbm-figure .f-base, .ref-figure .f-base { fill: #e2f0f1; stroke: var(--teal-ink); stroke-width: 1.5; }
+.hbm-figure .f-tsv, .ref-figure .f-tsv { stroke: var(--copper-ink); stroke-width: 1.4; }
+.hbm-figure .f-bump, .ref-figure .f-bump { fill: var(--muted); }
+.hbm-figure .f-lbl, .ref-figure .f-lbl { fill: var(--ink-strong); font: 700 12px var(--mono); }
+.hbm-figure .f-note, .ref-figure .f-note { fill: var(--muted); font: 500 11.5px var(--sans); }
+.hbm-figure .f-lead, .ref-figure .f-lead { stroke: var(--muted); stroke-width: 1; fill: none; }
+.ref-figure .f-rdl { fill: #f1f3f1; stroke: var(--line-strong); }
+.ref-figure .f-rdl-line { stroke: var(--muted); stroke-width: 1; }
+.ref-figure .f-lsi { fill: #cfe5e7; stroke: var(--teal-ink); stroke-width: 1.5; }
+.ref-figure .f-panel { fill: var(--ink-strong); font: 700 13px var(--sans); }
 
 .ref-list { padding-left: 1.6rem; font-size: .92rem; color: var(--ink); }
 .ref-list li { margin: .75rem 0; scroll-margin-top: 1rem; }
@@ -107,11 +112,11 @@
   .ref-toc ol { columns: 1; }
   .data-table { font-size: .9rem; }
   /* Keep the diagram's labels legible: hold a minimum drawing width and scroll. */
-  .hbm-figure svg { min-width: 620px; }
+  .hbm-figure svg, .ref-figure svg { min-width: 620px; }
 }
 
 /* Horizontal scrollers show an edge shadow while more content lies beyond the edge. */
-.table-scroll, .hbm-figure .figure-frame {
+.table-scroll, .hbm-figure .figure-frame, .ref-figure .figure-frame {
   background:
     linear-gradient(90deg, var(--surface) 30%, rgba(255, 255, 255, 0)) left / 32px 100% no-repeat local,
     linear-gradient(270deg, var(--surface) 30%, rgba(255, 255, 255, 0)) right / 32px 100% no-repeat local,
@@ -120,5 +125,5 @@
     var(--surface);
 }
 @media (max-width: 700px) {
-  .hbm-figure:before { content: "Scroll the drawing sideways to see the full cross-section."; display: block; font-size: .84rem; color: var(--muted); margin-bottom: .5rem; }
+  .hbm-figure:before, .ref-figure:before { content: "Scroll the drawing sideways to see the full cross-section."; display: block; font-size: .84rem; color: var(--muted); margin-bottom: .5rem; }
 }

@@ -1,0 +1,791 @@
+{
+  "release_id": "aec-ide-003-advanced-packaging",
+  "version": "1.0.0",
+  "status": "research_candidate",
+  "publication_eligible": false,
+  "as_of": "2026-11-09",
+  "title": "Industrial Dependency Evidence Release 003: Advanced Packaging and Chiplet Integration",
+  "reference_page": "design-fabrication-packaging/index.html",
+  "source_registry_reference": "data/source-registry.json",
+  "atlas_reference": "data/dependency-atlas.json",
+  "description": "Research-candidate findings on TSMC's CoWoS and SoIC technologies, the UCIe chiplet interface, the production chain from fabricated dies to a deployable accelerator, and AMD Instinct MI300X as a documented case. Nothing in this file is a published Atlas relationship; every candidate requires named human review against the cited passages before it may be moved into data/dependency-atlas.json.",
+  "rights_note": "Classification, comparison and analysis are original project work by AIElectronicChips.com (Sohadot). Quoted passages are short excerpts (at most 20 words each, 40 per citation) reproduced for citation and verification; the underlying texts and specifications remain the property of their publishers. No endorsement by TSMC, AMD or the UCIe Consortium is implied. This file is a research candidate: it is visible in the public repository but is excluded from the published website.",
+  "findings": [
+    {
+      "id": "p-tsmc-3dfabric-taxonomy",
+      "claim_class": "attributed_statement",
+      "topic": "packaging_integration",
+      "statement": "TSMC divides its 3DFabric portfolio into a wafer-level frontend technology, SoIC, for 3D silicon stacking, and backend technologies: CoWoS, in which chips are placed onto pre-made redistribution layers (RDLs), and SoW (system on wafer). TSMC states that SoIC-integrated chips can then be assembled in conventional packages or in CoWoS or SoW.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"Integrated Interconnect and Packaging\": \"consists of both wafer-level frontend and backend technologies\"; \"CoWoS® advanced packaging service with chips placed onto pre-made RDLs\"; \"SoIC integrated chips can be subsequently assembled by using conventional packages\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC's own classification of its advanced-packaging technologies, fiscal 2025",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Company taxonomy; it does not say which products use which combination",
+        "'Frontend' and 'backend' are TSMC's terms for wafer-level stacking versus packaging services"
+      ]
+    },
+    {
+      "id": "p-cowos-s",
+      "claim_class": "attributed_statement",
+      "topic": "interposer_bridge",
+      "statement": "TSMC describes CoWoS-S as CoWoS with a silicon interposer, featuring high interconnect routing density and an embedded deep trench capacitor (eDTC), in volume production for several years. Its 2024 report states that the silicon interposer advanced from 1.0- to 3.3-reticle size over the past decade, one reticle being approximately 830 mm².",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"features high interconnect routing density and embedded deep trench capacitor (eDTC)\"; \"has been in volume production for several years\""
+        },
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "locator": "Chapter 5, \"CoWoS\": \"has advanced from 1.0-reticle to 3.3-reticle size (1 reticle size is approximately 830mm2)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC CoWoS-S as described in its 2024 and 2025 annual reports",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No customers, products, capacity or yields are given",
+        "3.3 reticles is the size TSMC reports reaching, not a stated physical limit"
+      ]
+    },
+    {
+      "id": "p-cowos-r",
+      "claim_class": "attributed_statement",
+      "topic": "interposer_bridge",
+      "statement": "TSMC describes CoWoS-R as CoWoS with a redistribution layer (RDL) interposer, featuring multiple redistribution layers to enable product design simplicity and supporting larger HPC products. It reports CoWoS-R in its second year of volume production in 2024 and its third in 2025.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"featuring multiple redistribution layers (RDL) to enable product design simplicity, supports larger HPC products\"; \"This technology entered its third year of volume production in 2025.\""
+        },
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"This technology entered its second year of volume production in 2024.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC CoWoS-R as described in its 2024 and 2025 annual reports",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The reviewed reports do not state the interposer material or maximum size",
+        "No customers, products, capacity or yields are given"
+      ]
+    },
+    {
+      "id": "p-cowos-l",
+      "claim_class": "attributed_statement",
+      "topic": "interposer_bridge",
+      "statement": "TSMC describes CoWoS-L as combining Chip on Wafer on Substrate with an RDL-based interposer, higher-density embedded local silicon interconnect (LSI) chips, eDTC and other embedded chips. It states the first CoWoS-L, at 3.5-reticle size, entered production in 2024 and was in its second year of volume production in 2025. Multiple products with larger reticle interposer sizes are expected to start volume production in 2026, a forward-looking statement.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"combining Chip on Wafer on Substrate with RDL-based interposer, higher density embedded local silicon interconnect (LSI)\"; \"which are expected to start volume production in 2026\""
+        },
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "locator": "Chapter 5, \"CoWoS\": \"The first CoWoS®-L at 3.5-reticle size has been developed and entered production in 2024.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC CoWoS-L as described in its 2024 and 2025 annual reports",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "2026 volume production is a plan at the report date",
+        "The products adopting larger interposers are not named"
+      ]
+    },
+    {
+      "id": "p-cowos-l-large-reticle",
+      "claim_class": "attributed_statement",
+      "topic": "commercialization",
+      "statement": "TSMC's 2025 report makes two differing statements about 5.5-reticle CoWoS-L. Its CoWoS section says the 5.5-reticle size 'will finish the qualification in 2026'. Its quality and reliability section says TSMC's Q&R organisation certified CoWoS for 5.5x reticle interposers in 2025, with volume production to begin in 2026. A 9.5-reticle CoWoS-L is reported as still in development.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"CoWoS\": \"the 5.5-reticle size CoWoS®-L will finish the qualification in 2026\"; \"Quality and Reliability\": \"In 2025, Q&R completed the\"; \"of CoWoS® advanced packaging solution for 5.5x mask/reticle size interposers\"; \"development of the 9.5-reticle size CoWoS®-L is also making good progress\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Status of TSMC's larger CoWoS-L interposer sizes as stated in its 2025 annual report",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The two statements may describe different milestones (technology qualification versus a quality-organisation sign-off); this release does not reconcile them",
+        "No customer or product is named for 5.5- or 9.5-reticle packages"
+      ]
+    },
+    {
+      "id": "p-tsmc-interposer-shift",
+      "claim_class": "attributed_statement",
+      "topic": "interposer_bridge",
+      "statement": "TSMC states that its advanced-packaging development focus has shifted from the original silicon interposer to reconstituted or reconfigured interposers with multiple LSIs. It also states that LSI with higher routing density and eDTC facilitates the expansion of HPC products to larger sizes.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"Quality and Reliability\": \"The development focus has shifted from the original Si interposer technology to reconfigured interposers with multiple LSIs.\""
+        },
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"LSI with higher routing density and eDTC facilitates the expansion of HPC products to larger sizes\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC's stated direction for interposer technology, 2024–2025",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "A statement of development focus, not of the production mix between CoWoS-S, -R and -L"
+      ]
+    },
+    {
+      "id": "p-soic-status",
+      "claim_class": "attributed_statement",
+      "topic": "stacking_process",
+      "statement": "TSMC describes SoIC as a wafer-level frontend 3D chip-stacking platform. It reports N5 SoIC chip-on-wafer stacking in its second year of volume production for HPC products in 2024, and 3nm SoIC stacking entering volume production in 2025. Its 2024 report lists the face-to-face Gen-1 process as under qualification.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\" and \"3DIC and TSMC-SoIC\": \"N5 system on integrated chip (SoIC) stacking technology entered its second year of volume production for HPC products in 2024\"; \"The SoIC CoW Face-to-Face Gen-1 process is under qualification\""
+        },
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"3nm system on integrated chip (SoIC) stacking technology successfully entered volume production in 2025\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC SoIC chip-on-wafer stacking as described in its 2024 and 2025 annual reports",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Neither report names the bonding method (for example hybrid bonding) or the bond pitch",
+        "No customers or products are named"
+      ]
+    },
+    {
+      "id": "p-sow-status",
+      "claim_class": "attributed_statement",
+      "topic": "packaging_integration",
+      "statement": "TSMC reports that the first-generation, logic-only SoW (system on wafer) technology was in its second year of volume production in 2025. It reports the second generation, which integrates logic and HBM, as still in development.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"The first-generation (logic only) technology entered its second year of volume production in 2025.\"; \"The second generation, enabling the integration of logic and HBM, is currently on track in its development phase.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC SoW as described in its 2025 annual report",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No products, customers or volumes are named"
+      ]
+    },
+    {
+      "id": "p-flip-chip-bump",
+      "claim_class": "attributed_statement",
+      "topic": "assembly_test",
+      "statement": "TSMC reports that fine-pitch copper bump technology for flip-chip packaging on 2nm silicon entered volume production in 2025.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"TSMC 3DFabric\": \"Fine pitch copper (Cu) bump technology for flip chip packaging on 2nm silicon successfully entered volume production in 2025.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC die-level interconnect bumping, fiscal 2025",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No pitch is given",
+        "Does not say which packages use it"
+      ]
+    },
+    {
+      "id": "p-tsmc-backend-ecosystem",
+      "claim_class": "attributed_statement",
+      "topic": "assembly_test",
+      "statement": "TSMC states that it has integrated front-end wafer fabrication with back-end chip packaging. Its 3DFabric alliance includes partners in EDA, IP, test, design-center and value-chain services, memory, substrate, and outsourced semiconductor assembly and test (OSAT).",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, \"Quality and Reliability\": \"TSMC has integrated front-end wafer fabrication with back-end chip packaging\"; \"Open Innovation Platform\": \"partners across EDA, IP, test\"; \"memory, substrate and OSAT\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC's description of its packaging integration and partner ecosystem, fiscal 2025",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Partner categories only: no substrate or OSAT company is named",
+        "Does not describe which test or assembly steps partners perform for any product"
+      ]
+    },
+    {
+      "id": "p-thermal-electrical",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_power",
+      "statement": "TSMC states that intra-chip heat dissipation has become a critical issue for 3D integration, and reports an IEDM 2025 research demonstration of aluminium nitride films as a thermal material for 3D ICs. Its 2024 report describes the SoIC face-to-back Gen-2 process as having significant thermal performance improvement. Both CoWoS-S and CoWoS-L are described with an embedded deep trench capacitor (eDTC).",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "Chapter 5, research section: \"Intra-chip thermal dissipation has become a critical issue for 3D integration\"; \"TSMC demonstrated aluminum nitride (AlN) films as a promising and scalable thermal material for 3D ICs\""
+        },
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "locator": "Chapter 5, \"3DIC and TSMC-SoIC\": \"with significant thermal performance improvement\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "TSMC's statements on thermal and power-delivery features of 3D integration and CoWoS",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The AlN work is a research demonstration, not a production process",
+        "No thermal figures for any packaged product are given",
+        "TSMC does not state what eDTC is used for; its role in power delivery is not stated in the reviewed text"
+      ]
+    },
+    {
+      "id": "p-amd-mi300-partition",
+      "claim_class": "attributed_statement",
+      "topic": "accelerator_integration",
+      "statement": "AMD's CDNA 3 white paper states that MI300 Series products integrate up to 8 vertically stacked accelerator complex dies (XCDs) and 4 I/O dies (IODs), connected to 8 HBM stacks. The XCDs are fabricated on TSMC's 5nm process. The IODs are manufactured on TSMC's 6nm process and vertically stacked beneath a pair of XCDs, and each IOD connects through the package to two HBM stacks.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "Introduction and memory-architecture section: \"integrates up to 8 vertically stacked accelerator complex dies (XCD) and 4 I/O dies (IOD)\"; \"fabricated on TSMC’s 5nm process\"; \"manufactured on TSMC’s 6nm process and vertically stacked beneath a pair of XCDs\"; \"two stacks of memory\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "AMD Instinct MI300 Series architecture as described by AMD (white paper revision dated 2025-04-07)",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Does not name the die-stacking method, the interposer type or CoWoS",
+        "Does not name the HBM3 supplier or suppliers",
+        "MI300A replaces two XCDs with three CPU dies; this finding concerns the shared construction"
+      ]
+    },
+    {
+      "id": "p-amd-mi300x-cowos",
+      "claim_class": "attributed_statement",
+      "topic": "accelerator_integration",
+      "statement": "AMD states that MI300X connects 8 accelerator chiplets and 4 IO chiplets via an interposer using TSMC CoWoS packaging technology. In a separate post the same day, AMD describes MI300X as using '3.5D CoWoS packaging', with eight 5nm compute dies layered on top of four 6nm IO dies.",
+      "evidence": [
+        {
+          "source_id": "amd-synopsys-chiplet-packaging-2024",
+          "locator": "\"utilizes 8 accelerator chiplets plus 4 IO chiplets, connected via an interposer using TSMC Chip-on-Wafer-on-Substrate (CoWoS®) packaging technology\""
+        },
+        {
+          "source_id": "amd-energy-efficiency-30x25-2024",
+          "locator": "\"leverage advanced 3.5D CoWoS packaging to minimize communication energy and data movement overhead\"; \"eight 5nm compute die layered on top of four 6nm IO die\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "AMD Instinct MI300X packaging as described by AMD, 2024-12-10",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "AMD does not name the CoWoS variant (S, R or L) or the interposer size",
+        "'3.5D' is AMD's term and is not defined in the reviewed posts; reading it as 3D stacking plus 2.5D interposer integration is this project's interpretation",
+        "Company blog posts; no TSMC statement naming MI300X was reviewed"
+      ]
+    },
+    {
+      "id": "p-amd-mi300-availability",
+      "claim_class": "attributed_statement",
+      "topic": "commercialization",
+      "statement": "AMD announced the availability of MI300X accelerators on 2023-12-06. The same release describes MI300A APUs as using 3D packaging and AMD's 4th Gen Infinity Architecture.",
+      "evidence": [
+        {
+          "source_id": "amd-instinct-mi300-launch-2023",
+          "locator": "\"announced the availability of the AMD Instinct™ MI300X accelerators\"; \"leverage 3D packaging and the 4th Gen AMD Infinity Architecture\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "AMD Instinct MI300 Series commercial status at 2023-12-06",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Availability is not a volume, yield or customer-allocation disclosure"
+      ]
+    },
+    {
+      "id": "p-ucie-scope",
+      "claim_class": "attributed_statement",
+      "topic": "chiplet_interface",
+      "statement": "The UCIe consortium describes UCIe as an open specification that defines the interconnect between chiplets within a package. It says UCIe 1.0 covers the die-to-die I/O physical layer, die-to-die protocols and software stack, leveraging PCIe and CXL. Its stated aim is to let end users mix and match chiplet components from a multi-vendor ecosystem.",
+      "evidence": [
+        {
+          "source_id": "ucie-1-specification-launch-2022",
+          "locator": "\"an open specification that defines the interconnect between chiplets within a package\"; \"covers the die-to-die I/O physical layer, die-to-die protocols, and software stack\"; \"easily mix and match chiplet components from a multi-vendor ecosystem\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "UCIe 1.0 as announced on 2022-03-02",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Announcement, not the specification",
+        "A stated aim is not evidence of implementation or interoperability"
+      ]
+    },
+    {
+      "id": "p-ucie-2-3d-dfx",
+      "claim_class": "attributed_statement",
+      "topic": "chiplet_interface",
+      "statement": "The UCIe 2.0 announcement states that the specification adds UCIe-3D, 'optimized for hybrid bonding', with bump pitches from 10–25 microns down to 1 micron or less. It also adds a DFx architecture for testing, telemetry and debug across the system-in-package lifecycle, 'from sort to management in the field', and an initial framework for compliance testing.",
+      "evidence": [
+        {
+          "source_id": "ucie-2-specification-release-2024",
+          "locator": "\"UCIe-3D is optimized for hybrid bonding\"; \"bump pitches as big as 10-25 microns to as small as 1 micron or less\"; \"from sort to management in the field\"; \"establishes an initial framework for physical, adapter, and protocol compliance testing\""
+        }
+      ],
+      "evidence_state": "includes_pending_source",
+      "scope": "UCIe 2.0 as announced on 2024-08-06",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "The registry record for this announcement is pending owner review",
+        "Announcement, not the specification; the normative UCIe 2.0 text was not reviewed",
+        "An initial compliance framework is not a published compliance or interoperability result"
+      ]
+    },
+    {
+      "id": "p-ucie-3-rates",
+      "claim_class": "attributed_statement",
+      "topic": "chiplet_interface",
+      "statement": "UCIe 3.0, announced on 2025-08-05, adds 48 and 64 GT/s data rates for UCIe-S and UCIe-A and is backward compatible with earlier UCIe specifications. A consortium post associates UCIe-S with 2D chiplet designs and UCIe-A with 2.5D chiplet designs.",
+      "evidence": [
+        {
+          "source_id": "ucie-3-specification-release-2025",
+          "locator": "\"delivers 48/64 GT/s speeds for UCIe-S and UCIe-A\"; \"Fully backward compatible with all previous UCIe specifications\""
+        },
+        {
+          "source_id": "ucie-3-specification-blog-2025",
+          "locator": "\"for both 2D (UCIe-S) and 2.5D (UCIe-A) chiplet designs\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "UCIe 3.0 as announced on 2025-08-05 and described on 2025-09-03",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Announcement and blog, not the specification",
+        "Data rates are specification targets, not measured product results"
+      ]
+    },
+    {
+      "id": "p-ucie-adoption-claim",
+      "claim_class": "attributed_statement",
+      "topic": "interoperability",
+      "statement": "The UCIe consortium's 2025 review says members are already actively implementing UCIe chiplet solutions. It names no product, implementation or interoperability result.",
+      "evidence": [
+        {
+          "source_id": "ucie-2025-year-in-review",
+          "locator": "\"how our members are already actively implementing UCIe chiplet solutions\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "UCIe adoption as characterised by the consortium on 2025-12-17",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "A consortium characterisation; no product or test result is identified"
+      ]
+    },
+    {
+      "id": "p-an-cowos-comparison",
+      "claim_class": "bounded_analysis",
+      "topic": "interposer_bridge",
+      "statement": "Medium confidence. On TSMC's own descriptions, the three CoWoS variants differ chiefly in what carries die-to-die wiring. CoWoS-S uses a single silicon interposer, CoWoS-R an RDL interposer, and CoWoS-L an RDL interposer with embedded LSI silicon chips. The package sizes TSMC reports beyond the 3.3 reticles it gives for CoWoS-S (3.5-, 5.5- and 9.5-reticle) are all CoWoS-L. TSMC also credits LSI with enabling expansion to larger sizes. Within TSMC's portfolio, the largest interposer-class packages therefore depend on fabricating LSI silicon and embedding it in RDL, not on one silicon interposer. This does not explain why any customer chose a variant.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "\"higher density embedded local silicon interconnect (LSI)\"; \"the 5.5-reticle size CoWoS®-L will finish the qualification in 2026\""
+        },
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "locator": "\"has advanced from 1.0-reticle to 3.3-reticle size\"; \"LSI with higher routing density and eDTC facilitates the expansion of HPC products to larger sizes\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Structural comparison of TSMC CoWoS variants from TSMC's 2024 and 2025 annual reports",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No production mix, cost, yield or capacity comparison is possible from these sources",
+        "Size comparison rests on reticle multiples TSMC reports, not on product teardowns"
+      ],
+      "assumptions": [
+        "The annual reports list the size classes TSMC considers material for each variant",
+        "Reticle multiples describe interposer area"
+      ]
+    },
+    {
+      "id": "p-an-production-chain",
+      "claim_class": "bounded_analysis",
+      "topic": "production_chain",
+      "statement": "Medium confidence. The reviewed disclosures support an eight-stage pathway from fabricated dies to a deployable accelerator: (1) front-end wafer fabrication of each die; (2) die preparation, of which only fine-pitch flip-chip bumping is disclosed; (3) optional die-on-die 3D stacking; (4) interposer or bridge integration; (5) substrate attach and package assembly; (6) test; (7) thermal and electrical integration; (8) the deployable product. Stages 1, 3 and 4 are technology-specific: they need particular wafer processes, stacking and interposer capability. Stages 5 and 6 involve a wider set of substrate, OSAT and test partners that TSMC names only as categories. Thinning, dicing, known-good-die and final package test are not described for any product in the reviewed sources.",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "locator": "\"consists of both wafer-level frontend and backend technologies\"; \"partners across EDA, IP, test\"; \"memory, substrate and OSAT\""
+        },
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"vertically stacked beneath a pair of XCDs\""
+        },
+        {
+          "source_id": "ucie-2-specification-release-2024",
+          "locator": "\"from sort to management in the field\""
+        }
+      ],
+      "evidence_state": "includes_pending_source",
+      "scope": "Generic pathway for interposer-based AI accelerators, assembled from the reviewed disclosures",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Not every product passes every stage: stage 3 is optional, and SoW integrates at wafer level",
+        "Who performs stages 5 and 6 for any named product is not disclosed",
+        "No stage capacity is assessed"
+      ],
+      "assumptions": [
+        "TSMC's frontend/backend taxonomy reflects process order",
+        "The MI300X construction is representative of interposer-based accelerators that stack dies"
+      ]
+    },
+    {
+      "id": "p-an-mi300x-dependencies",
+      "claim_class": "bounded_analysis",
+      "topic": "accelerator_integration",
+      "statement": "Medium confidence. On AMD's disclosures, a deployable MI300X depends on four technology-specific capabilities. The first is two TSMC logic processes (5nm XCDs, 6nm IODs). The second is die-on-die vertical stacking of XCDs on IODs. The third is interposer-based integration, which AMD attributes to TSMC CoWoS. The fourth is eight HBM3 stacks on the package. The reviewed AMD sources do not name the stacking method, the CoWoS variant or the HBM suppliers. A TSMC frontend stacking technology such as SoIC therefore cannot be attributed to MI300X from these sources. The chiplets communicate over AMD Infinity Fabric. None of the reviewed AMD sources states that MI300X implements UCIe.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"fabricated on TSMC’s 5nm process\"; \"manufactured on TSMC’s 6nm process\"; \"all tied together with the AMD Infinity Fabric™ technology\""
+        },
+        {
+          "source_id": "amd-synopsys-chiplet-packaging-2024",
+          "locator": "\"connected via an interposer using TSMC Chip-on-Wafer-on-Substrate (CoWoS®) packaging technology\""
+        },
+        {
+          "source_id": "amd-energy-efficiency-30x25-2024",
+          "locator": "\"eight 5nm compute die layered on top of four 6nm IO die\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Dependency structure of AMD Instinct MI300X as disclosed by AMD",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "No capacity, allocation or supplier-share inference is made",
+        "HBM3 suppliers are not identified; this release does not infer them"
+      ],
+      "assumptions": [
+        "AMD's statements about its own product construction are accurate; no teardown was reviewed"
+      ]
+    },
+    {
+      "id": "p-an-interface-vs-integration",
+      "claim_class": "bounded_analysis",
+      "topic": "interoperability",
+      "statement": "Medium confidence. Three things are often conflated. An interface standard defines how dies talk: UCIe specifies die-to-die physical, protocol and software layers. An integration architecture defines how dies are physically joined: CoWoS-S, -R and -L, or SoIC stacking. Demonstrated interoperability means chiplets from different vendors shown to work together, with published compliance results. UCIe defines variants for 2D, 2.5D and 3D packaging, so it is designed to run over several integration architectures. A UCIe specification release therefore says nothing about whether a given product implements UCIe. The reviewed sources document an integration architecture for one named product (MI300X, via AMD's statements) and demonstrated cross-vendor interoperability for none.",
+      "evidence": [
+        {
+          "source_id": "ucie-1-specification-launch-2022",
+          "locator": "\"covers the die-to-die I/O physical layer, die-to-die protocols, and software stack\""
+        },
+        {
+          "source_id": "ucie-3-specification-blog-2025",
+          "locator": "\"for both 2D (UCIe-S) and 2.5D (UCIe-A) chiplet designs\""
+        },
+        {
+          "source_id": "ucie-2-specification-release-2024",
+          "locator": "\"UCIe-3D is optimized for hybrid bonding\""
+        },
+        {
+          "source_id": "ucie-2025-year-in-review",
+          "locator": "\"how our members are already actively implementing UCIe chiplet solutions\""
+        }
+      ],
+      "evidence_state": "includes_pending_source",
+      "scope": "Conceptual distinction applied to the reviewed sources",
+      "as_of": "2026-11-09",
+      "limitations": [
+        "Absence of interoperability evidence in the reviewed sources is not evidence that none exists"
+      ],
+      "assumptions": [
+        "Interoperability requires published compliance or cross-vendor test results"
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "u-p-soic-bonding",
+      "topic": "stacking_process",
+      "question": "Which bonding method and bond pitch does TSMC's SoIC use in volume production, and do face-to-back and face-to-face processes differ?",
+      "why_unresolved": "TSMC's 2024 and 2025 annual reports describe SoIC's 'bonding density' and production status but name no bonding method or pitch. TSMC's SoIC technology page returned HTTP 403.",
+      "sources_checked": [
+        "tsmc-2024-annual-report",
+        "tsmc-2025-annual-report"
+      ],
+      "next_evidence_needed": "An accessible TSMC technical publication or technology page stating the SoIC bonding method and pitch."
+    },
+    {
+      "id": "u-p-mi300x-stacking",
+      "topic": "stacking_process",
+      "question": "How are MI300X's XCDs bonded to its IODs, and which company performs the stacking?",
+      "why_unresolved": "AMD states the XCDs are vertically stacked on, or layered on top of, the IODs, but the reviewed AMD sources name no bonding method, no SoIC and no stacking provider.",
+      "sources_checked": [
+        "amd-cdna3-white-paper-2025",
+        "amd-energy-efficiency-30x25-2024",
+        "amd-synopsys-chiplet-packaging-2024",
+        "amd-instinct-mi300-launch-2023"
+      ],
+      "next_evidence_needed": "An AMD or TSMC technical disclosure (for example a conference paper on the MI300 package) naming the bonding technology and provider."
+    },
+    {
+      "id": "u-p-mi300x-cowos-variant",
+      "topic": "interposer_bridge",
+      "question": "Which CoWoS variant (S, R or L) and what interposer size does MI300X use?",
+      "why_unresolved": "AMD names TSMC CoWoS and an interposer but not the variant or size; TSMC's reports name no products.",
+      "sources_checked": [
+        "amd-synopsys-chiplet-packaging-2024",
+        "amd-energy-efficiency-30x25-2024",
+        "amd-cdna3-white-paper-2025",
+        "tsmc-2024-annual-report",
+        "tsmc-2025-annual-report"
+      ],
+      "next_evidence_needed": "An AMD or TSMC statement naming the MI300X CoWoS variant, or an independent teardown."
+    },
+    {
+      "id": "u-p-cowos-l-5p5-status",
+      "topic": "commercialization",
+      "question": "Has 5.5-reticle CoWoS-L completed qualification and entered volume production?",
+      "why_unresolved": "TSMC's 2025 annual report says it 'will finish the qualification in 2026' and, in another section, that its Q&R organisation certified it in 2025 with volume production to start in 2026.",
+      "sources_checked": [
+        "tsmc-2025-annual-report"
+      ],
+      "next_evidence_needed": "A later TSMC disclosure (quarterly results, symposium release or 2026 annual report) stating the outcome."
+    },
+    {
+      "id": "u-p-cowos-capacity",
+      "topic": "commercialization",
+      "question": "What is CoWoS capacity by variant, and how is it allocated among customers?",
+      "why_unresolved": "TSMC reports strong CoWoS growth since 2023 but no capacity, utilisation or allocation figures in the reviewed reports.",
+      "sources_checked": [
+        "tsmc-2024-annual-report",
+        "tsmc-2025-annual-report"
+      ],
+      "next_evidence_needed": "Audited TSMC disclosures with capacity figures; this project will not estimate them."
+    },
+    {
+      "id": "u-p-ucie-implementation",
+      "topic": "interoperability",
+      "question": "Which shipping products implement UCIe, and has cross-vendor chiplet interoperability been demonstrated with published compliance results?",
+      "why_unresolved": "The consortium's announcements describe the specification and an initial compliance framework, and its 2025 review says members are implementing UCIe, but no reviewed source names a product or a test result.",
+      "sources_checked": [
+        "ucie-1-specification-launch-2022",
+        "ucie-2-specification-release-2024",
+        "ucie-3-specification-release-2025",
+        "ucie-2025-year-in-review",
+        "amd-synopsys-chiplet-packaging-2024"
+      ],
+      "next_evidence_needed": "Product documentation naming UCIe support, and consortium or third-party compliance and interoperability results."
+    },
+    {
+      "id": "u-p-ucie-normative",
+      "topic": "standard",
+      "question": "What do the normative UCIe 2.0 and 3.0 specifications require for UCIe-3D and UCIe-A, including bump pitch, reach and compliance criteria?",
+      "why_unresolved": "Only announcements and a consortium blog were read; the specifications themselves are available by request and were not reviewed.",
+      "sources_checked": [
+        "ucie-2-specification-release-2024",
+        "ucie-3-specification-release-2025",
+        "ucie-3-specification-blog-2025"
+      ],
+      "next_evidence_needed": "A reviewer reads the UCIe 2.0 and 3.0 specifications before any normative statement is made."
+    },
+    {
+      "id": "u-p-test-flow",
+      "topic": "assembly_test",
+      "question": "Where are interposer-based accelerators tested (wafer sort, known-good die, post-stack, final package), and by whom?",
+      "why_unresolved": "TSMC lists test and OSAT partner categories and UCIe 2.0 describes a sort-to-field DFx architecture, but no reviewed source describes the test flow for a named product.",
+      "sources_checked": [
+        "tsmc-2025-annual-report",
+        "ucie-2-specification-release-2024",
+        "amd-cdna3-white-paper-2025"
+      ],
+      "next_evidence_needed": "Foundry, OSAT or product-vendor disclosure of the test flow for a named package."
+    },
+    {
+      "id": "u-p-substrate",
+      "topic": "packaging_integration",
+      "question": "Which organic substrates and suppliers are used under CoWoS-class packages, and do substrates limit package size?",
+      "why_unresolved": "TSMC names substrate partners only as a category; no reviewed source names a substrate supplier or a size limit set by substrates.",
+      "sources_checked": [
+        "tsmc-2025-annual-report",
+        "amd-cdna3-white-paper-2025"
+      ],
+      "next_evidence_needed": "Substrate-supplier filings or TSMC and product-vendor disclosures naming substrates for a specific package."
+    }
+  ],
+  "candidate_nodes": [
+    {
+      "id": "tech-amd-instinct-mi300x",
+      "label": "AMD Instinct MI300X",
+      "kind": "technology",
+      "layers": [
+        "design",
+        "packaging",
+        "memory"
+      ],
+      "description": "AMD accelerator built from 8 accelerator complex dies stacked on 4 I/O dies with 8 HBM3 stacks, as AMD describes it."
+    },
+    {
+      "id": "tech-cowos",
+      "label": "CoWoS",
+      "kind": "technology",
+      "layers": [
+        "packaging"
+      ],
+      "description": "TSMC's Chip on Wafer on Substrate advanced-packaging family, used to place logic dies and HBM stacks in one package."
+    },
+    {
+      "id": "tech-cowos-l",
+      "label": "CoWoS-L",
+      "kind": "technology",
+      "layers": [
+        "packaging"
+      ],
+      "description": "TSMC CoWoS variant combining an RDL-based interposer with embedded local silicon interconnect (LSI) chips."
+    },
+    {
+      "id": "tech-local-silicon-interconnect",
+      "label": "Local silicon interconnect (LSI)",
+      "kind": "technology",
+      "layers": [
+        "packaging",
+        "fabrication"
+      ],
+      "description": "Silicon bridge chips embedded in a CoWoS-L interposer to provide high-density die-to-die routing, as TSMC describes them."
+    },
+    {
+      "id": "cap-3d-die-stacking",
+      "label": "3D die-on-die stacking",
+      "kind": "capability",
+      "layers": [
+        "packaging",
+        "fabrication"
+      ],
+      "description": "Vertical stacking and bonding of one logic die on another inside a package; the bonding method is technology-specific."
+    }
+  ],
+  "candidate_relationships": [
+    {
+      "id": "rel-mi300x-integrates-with-cowos",
+      "from": "tech-amd-instinct-mi300x",
+      "to": "tech-cowos",
+      "relation_type": "integrates_with",
+      "statement": "AMD states that MI300X connects its accelerator and IO chiplets via an interposer using TSMC CoWoS packaging technology.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "amd-synopsys-chiplet-packaging-2024",
+          "supported_claim_type": "packaging_route_context"
+        },
+        {
+          "source_id": "amd-energy-efficiency-30x25-2024",
+          "supported_claim_type": "packaging_route_context"
+        }
+      ],
+      "geographic_scope": "AMD Instinct MI300X as described by AMD",
+      "temporal_scope": "AMD statements dated 2024-12-10, about a product available since 2023-12-06",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "Company statements; no TSMC confirmation naming MI300X was reviewed",
+        "The CoWoS variant and interposer size are not stated"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "Two AMD statements name TSMC CoWoS for MI300X. The edge is scoped to the CoWoS family, not to a variant.",
+        "changes_in_release": "New candidate introduced in IDE-003.",
+        "evidence_gaps": [
+          "The CoWoS variant used by MI300X"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-mi300x-requires-3d-die-stacking",
+      "from": "tech-amd-instinct-mi300x",
+      "to": "cap-3d-die-stacking",
+      "relation_type": "requires",
+      "statement": "AMD describes MI300X's accelerator complex dies as vertically stacked on, or layered on top of, its I/O dies.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "supported_claim_type": "die_stacking_context"
+        },
+        {
+          "source_id": "amd-energy-efficiency-30x25-2024",
+          "supported_claim_type": "die_stacking_context"
+        }
+      ],
+      "geographic_scope": "AMD Instinct MI300X as described by AMD",
+      "temporal_scope": "AMD disclosures dated 2024-12-10 and 2025-04-07",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "The bonding method and stacking provider are not named",
+        "Company statements; no teardown reviewed"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "The white paper and blog independently describe the vertical stacking; the edge claims only that stacking is required, not how it is done.",
+        "changes_in_release": "New candidate introduced in IDE-003.",
+        "evidence_gaps": [
+          "Bonding method and provider for the XCD-on-IOD stack"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-cowos-l-requires-local-silicon-interconnect",
+      "from": "tech-cowos-l",
+      "to": "tech-local-silicon-interconnect",
+      "relation_type": "requires",
+      "statement": "TSMC describes CoWoS-L as combining an RDL-based interposer with embedded local silicon interconnect (LSI) chips for high-density die-to-die routing.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "tsmc-2025-annual-report",
+          "supported_claim_type": "packaging_technology_status"
+        },
+        {
+          "source_id": "tsmc-2024-annual-report",
+          "supported_claim_type": "packaging_technology_status"
+        }
+      ],
+      "geographic_scope": "TSMC CoWoS-L as described by TSMC",
+      "temporal_scope": "Annual reports for fiscal 2024 and 2025",
+      "as_of": "2026-11-09",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "Company descriptions of its own technology",
+        "Says nothing about LSI capacity or who fabricates LSI chips"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "LSI is part of TSMC's definition of CoWoS-L in both annual reports.",
+        "changes_in_release": "New candidate introduced in IDE-003.",
+        "evidence_gaps": [
+          "Process technology and source of LSI chips"
+        ],
+        "assessed_at": "2026-11-09",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    }
+  ]
+}
