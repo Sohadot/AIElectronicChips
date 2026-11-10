@@ -65,17 +65,35 @@ TOPICS = {
     "interposer_bridge", "chiplet_interface", "assembly_test", "production_chain", "interoperability",
     # Interconnect and data movement (IDE-004)
     "host_interface", "scale_up_fabric", "scale_out_network", "measurement_scope",
+    # Power delivery and thermal infrastructure (IDE-005)
+    "power_delivery", "thermal_transport", "facility_infrastructure", "efficiency_metric",
 }
 # Bandwidth and rate figures must carry their measurement scope. In these topics every
 # figure in a finding's statement needs a matching entry in its "quantities" list.
-QUANTIFIED_TOPICS = {"host_interface", "scale_up_fabric", "scale_out_network", "measurement_scope"}
+QUANTIFIED_TOPICS = {"host_interface", "scale_up_fabric", "scale_out_network", "measurement_scope",
+                     "power_delivery", "thermal_transport", "facility_infrastructure", "efficiency_metric"}
+# In power and thermal topics, power, energy, current, voltage, temperature and flow figures
+# also need a quantities entry.
+POWER_TOPICS = {"power_delivery", "thermal_transport", "facility_infrastructure", "efficiency_metric"}
+POWER_UNITS = {"W", "kW", "MW", "GW"}
+ENERGY_UNITS = {"kWh", "MWh", "TWh"}
+ELECTRICAL_UNITS = {"A", "V"}
+TEMPERATURE_UNITS = {"°C", "K"}
+FLOW_UNITS = {"L/min", "kg/s"}
+RATIO_UNITS = {"L/kWh"}
+POWER_FIGURE = re.compile(r"(?<![\w.])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)\s?(TWh|MWh|kWh|L/kWh|L/min|kg/s|GW|MW|kW|W|°C|A|V|K)(?![A-Za-z0-9/])")
+TEMPERATURE_SCOPES = {"tcs_loop", "fws_loop", "per_component", "not_stated"}
 QUANTITY_FIELDS = {"value", "unit", "quantity", "direction", "scope", "peak_or_sustained", "basis", "source_id"}
-QUANTITY_UNITS = {"TB/s", "GB/s", "Tb/s", "Gb/s", "Gbps", "GT/s"}
+QUANTITY_UNITS = {"TB/s", "GB/s", "Tb/s", "Gb/s", "Gbps", "GT/s",
+                  "W", "kW", "MW", "GW", "kWh", "MWh", "TWh", "A", "V", "°C", "K", "L/min", "kg/s", "L/kWh"}
 QUANTITY_DIRECTIONS = {"bidirectional", "per_direction", "not_stated", "not_applicable"}
-QUANTITY_SCOPES = {"per_lane", "per_link", "per_port", "per_device", "per_stack", "per_switch", "per_system", "per_package", "not_stated"}
-QUANTITY_PEAK = {"peak", "sustained", "not_stated"}
+QUANTITY_SCOPES = {"per_lane", "per_link", "per_port", "per_device", "per_stack", "per_switch", "per_system", "per_package", "not_stated",
+                   "per_component", "per_rack", "per_cluster", "per_facility", "national", "tcs_loop", "fws_loop"}
+# For power: "rated" is an equipment rating, "design" a design capacity, "approximate" a stated
+# approximation, "estimated" an estimate of past use and "projected" a modelled future value.
+QUANTITY_PEAK = {"peak", "sustained", "not_stated", "rated", "design", "approximate", "typical", "estimated", "projected"}
 # "specified": stated by a published standard; "vendor_stated": by a company or consortium announcement.
-QUANTITY_BASES = {"vendor_stated", "specified", "calculated", "measured"}
+QUANTITY_BASES = {"vendor_stated", "specified", "calculated", "measured", "modelled", "assumed"}
 # A measured figure needs a measurement record, not a vendor or consortium statement.
 MEASUREMENT_SOURCE_TYPES = {"peer_reviewed_research", "official_dataset"}
 FIGURE = re.compile(r"(\d[\d,]*(?:\.\d+)?)\s?(TB/s|GB/s|Tb/s|Gb/s|Gbps|GT/s)")
@@ -109,6 +127,8 @@ def check_quantities(finding: dict, where: str, cited_ids: set[str], sources: di
     quantities = finding.get("quantities")
     statement = str(finding.get("statement", ""))
     figures = {(v.replace(",", ""), u) for v, u in FIGURE.findall(statement)}
+    if finding.get("topic") in POWER_TOPICS:
+        figures |= {(v.replace(",", ""), u) for v, u in POWER_FIGURE.findall(statement)}
     if quantities is None:
         if finding.get("topic") in QUANTIFIED_TOPICS and figures:
             errors.append(f"{where} states bandwidth or rate figures without a quantities list")
@@ -137,6 +157,18 @@ def check_quantities(finding: dict, where: str, cited_ids: set[str], sources: di
             errors.append(f"{qwhere} must name the quantity measured")
         if unit == "GT/s" and (q["scope"] != "per_lane" or q["direction"] != "not_applicable"):
             errors.append(f"{qwhere} GT/s is a per-lane transfer rate, not payload bandwidth: use scope per_lane and direction not_applicable")
+        if unit in POWER_UNITS | ENERGY_UNITS | ELECTRICAL_UNITS | TEMPERATURE_UNITS | FLOW_UNITS | RATIO_UNITS and q["direction"] != "not_applicable":
+            errors.append(f"{qwhere} {unit} has no direction: use direction not_applicable")
+        if unit in ENERGY_UNITS and q["peak_or_sustained"] in {"rated", "design", "peak"}:
+            errors.append(f"{qwhere} {unit} is an amount of energy, not a power rating or peak")
+        if unit in TEMPERATURE_UNITS and q["scope"] not in TEMPERATURE_SCOPES:
+            errors.append(f"{qwhere} a temperature must name its loop or component: scope one of {sorted(TEMPERATURE_SCOPES)}")
+        if q["peak_or_sustained"] == "projected" and q["basis"] != "modelled":
+            errors.append(f"{qwhere} a projected figure must have basis modelled")
+        if q["basis"] == "modelled" and q["peak_or_sustained"] not in {"projected", "estimated"}:
+            errors.append(f"{qwhere} a modelled figure must be marked projected or estimated")
+        if q["basis"] == "assumed" and finding.get("claim_class") != "bounded_analysis":
+            errors.append(f"{qwhere} an assumed input belongs in a bounded_analysis finding")
         if q["source_id"] not in cited_ids:
             errors.append(f"{qwhere} source_id must be one of the finding's cited sources")
         if q["basis"] == "calculated" and finding.get("claim_class") != "bounded_analysis":
@@ -454,6 +486,23 @@ ATTRIBUTED = re.compile(r"\b(?:states?|stated|lists?|listed|says?|said|describes
 
 def _names_a_product(sentence: str) -> bool:
     return any(not GENERIC_SUBJECT.search(sentence[:m.start()]) for m in STANDARD_IMPLEMENTATION.finditer(sentence))
+# Power and thermal boundaries (IDE-005). SPAN stays within a sentence but, unlike [^.]*,
+# continues past decimal points such as "1.2 MW".
+SPAN = r"(?:[^.]|\.(?=\d))*"
+FACILITY_METRIC_ON_PRODUCT = re.compile(
+    r"\b(?:PUE|WUE)\b" + SPAN + r"\b(?:GB200|GB300|NVL72|MI300X|server|GPU|chip|accelerator|cold plate)s?\b|"
+    r"\b(?:GB200|GB300|NVL72|MI300X|server|GPU|chip|accelerator)s?\b" + SPAN + r"\b(?:PUE|WUE)\b")
+TDP_AS_CONSUMPTION = re.compile(r"\bTDP\b" + SPAN + r"\b(?:consumes?|consumption|draws?)\b|\b(?:consumes?|consumption|draws?)\b" + SPAN + r"\bTDP\b")
+REFERENCE_AS_OPERATING = re.compile(
+    r"\b(?:reference (?:architecture|design)|blueprint)s?\b" + SPAN + r"\b(?:is|are|was|were|has been|have been)\s+"
+    r"(?:deployed|operating|in operation|built|operational)\b", re.I)
+FACILITY_READINESS = re.compile(
+    r"\b(?:site|facility|data cent(?:er|re))s?\b" + SPAN + r"\b(?:is|are|was|were)\s+(?:ready|capable of supporting|able to support|equipped to support)\b", re.I)
+COOLING_COMPATIBILITY = re.compile(
+    r"\b(?:compatible with|validated (?:for|with)|approved for)\b" + SPAN + r"\b(?:CDUs?|cold plates?|immersion|liquid[- ]cool\w*|W\d{2}|facility water|coolant)\b|"
+    r"\b(?:CDUs?|cold plates?|immersion|coolant)\b" + SPAN + r"\b(?:compatible with|validated (?:for|with)|approved for)\b", re.I)
+HEAT_EQUALS_CAPACITY = re.compile(
+    r"\b(?:heat load|cooling (?:load|capacity))\b" + SPAN + r"\b(?:equals?|is the same as|matches)\b" + SPAN + r"\b(?:rated|nameplate|installed|input)\s+(?:power|capacity)\b", re.I)
 COWOS_PRODUCT = re.compile(r"\b(?:Rubin|Vera|Blackwell|MI\d{3}[A-Z]?|GB\d{3})\b", re.I)
 COWOS_UNIVERSAL = re.compile(r"\b(?:every|all) HBM4\b", re.I)
 # Citation markers kept from a page so a sentence can be matched to the sources it cites.
@@ -503,6 +552,18 @@ def inference_boundary_errors(sentence: str, where: str, evidence: dict[str, set
         errors.append(f"{where}: treats in-house manufacture as removing a manufacturing dependency: {sentence[:120]!r}")
     if COWOS_PRODUCT_CLAIM.search(sentence) and not negated and not _cowos_claim_supported(sentence, evidence, cited):
         errors.append(f"{where}: ties CoWoS to a product or to all HBM4 without a product-level disclosure: {sentence[:120]!r}")
+    if FACILITY_METRIC_ON_PRODUCT.search(sentence) and not negated:
+        errors.append(f"{where}: applies PUE or WUE, facility metrics, to a product or component: {sentence[:120]!r}")
+    if TDP_AS_CONSUMPTION.search(sentence) and not negated:
+        errors.append(f"{where}: treats a design power (TDP) as measured consumption: {sentence[:120]!r}")
+    if REFERENCE_AS_OPERATING.search(sentence) and not negated:
+        errors.append(f"{where}: presents a reference design as operating infrastructure: {sentence[:120]!r}")
+    if FACILITY_READINESS.search(sentence) and not negated:
+        errors.append(f"{where}: asserts facility readiness without site evidence: {sentence[:120]!r}")
+    if COOLING_COMPATIBILITY.search(sentence) and not negated and not ATTRIBUTED.search(sentence):
+        errors.append(f"{where}: asserts, unattributed, cooling compatibility for a product: {sentence[:120]!r}")
+    if HEAT_EQUALS_CAPACITY.search(sentence) and not negated:
+        errors.append(f"{where}: equates heat load with a rated or installed capacity: {sentence[:120]!r}")
     if INTEROP_ASSERTION.search(sentence) and not negated:
         errors.append(f"{where}: asserts interoperability or compliance without a published test result: {sentence[:120]!r}")
     if STANDARD_IMPLEMENTATION.search(sentence) and not negated and _names_a_product(sentence) and not ATTRIBUTED.search(sentence):
