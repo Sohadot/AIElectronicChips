@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Power and Thermal Limits | AIElectronicChips.com</title>
-  <meta name="description" content="Why energy delivery and heat removal belong inside compute sovereignty analysis.">
+  <title>Power and Thermal Limits: Power Delivery and Cooling for AI Systems | AIElectronicChips.com</title>
+  <meta name="description" content="Evidence-classified reference to the electrical and thermal infrastructure AI systems need, from rack power shelves and DC bus bars to liquid-cooling loops, CDUs and facility water, with reproducible calculations and a GB200 NVL72 case.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://aielectronicchips.com/power-and-thermal-limits/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AIElectronicChips.com">
-  <meta property="og:title" content="Power and Thermal Limits">
-  <meta property="og:description" content="Why energy delivery and heat removal belong inside compute sovereignty analysis.">
+  <meta property="og:title" content="Power and Thermal Limits: Power Delivery and Cooling for AI Systems">
+  <meta property="og:description" content="What must be electrically and thermally available for an AI system to run, what primary sources establish, and what remains unverified, with reproducible engineering calculations.">
   <meta property="og:url" content="https://aielectronicchips.com/power-and-thermal-limits/">
   <meta property="og:image" content="https://aielectronicchips.com/assets/og/power-and-thermal-limits.png">
   <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
       "@id": "https://aielectronicchips.com/power-and-thermal-limits/#webpage",
       "url": "https://aielectronicchips.com/power-and-thermal-limits/",
       "name": "Power and Thermal Limits",
-      "description": "Ontology layer 06: whether infrastructure can energize and cool AI compute deployment, from grid access to heat rejection.",
+      "description": "Ontology layer 06: whether infrastructure can energize and cool AI compute deployment, from grid access and rack power distribution to liquid cooling and heat rejection.",
       "isPartOf": {
         "@id": "https://aielectronicchips.com/#website"
       },
@@ -36,6 +36,12 @@
       "mainEntity": {
         "@id": "https://aielectronicchips.com/power-and-thermal-limits/#power-thermal"
       },
+      "citation": [
+        { "@type": "CreativeWork", "name": "NVIDIA DGX GB Rack Scale Systems User Guide", "publisher": { "@type": "Organization", "name": "NVIDIA" }, "datePublished": "2026-09-17", "url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf" },
+        { "@type": "CreativeWork", "name": "NVIDIA DGX SuperPOD Reference Architecture Featuring NVIDIA DGX GB200", "publisher": { "@type": "Organization", "name": "NVIDIA" }, "datePublished": "2025-09-03", "url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf" },
+        { "@type": "CreativeWork", "name": "Liquid to Liquid CDU Test Methodology and Performance Rating", "publisher": { "@type": "Organization", "name": "Open Compute Project" }, "datePublished": "2024-08", "url": "https://www.opencompute.org/documents/ocp-wp-l-lcdu-test-methodology-performance-rating-r1-pdf/" },
+        { "@type": "CreativeWork", "name": "PUE: A Comprehensive Examination of the Metric", "publisher": { "@type": "Organization", "name": "The Green Grid" }, "url": "https://datacenters.lbl.gov/sites/default/files/WP49-PUE%20A%20Comprehensive%20Examination%20of%20the%20Metric_v6.pdf" }
+      ],
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -75,7 +81,346 @@
     <a class="brand" href="/" aria-label="AIElectronicChips.com home"><span class="brand-mark" aria-hidden="true"></span><span>AI<span>Electronic</span>Chips</span></a>
     <nav class="primary-nav" aria-label="Primary navigation"><a href="/">Overview</a><a href="/sovereignty-stack/">Stack</a><a href="/chip-dependency-map/">Dependency Map</a><a href="/methodology/">Methodology</a><a href="/strategic-availability/">Strategic Availability</a></nav>
   </header>
-  <main id="main"><header class="page-hero"><div class="trace" aria-hidden="true"></div><p class="eyebrow">Reference layer · 06 Power and Thermal</p><h1>Power and Thermal Limits</h1><p class="lead">Compute capacity is bounded by the ability to deliver power and remove heat.</p><p class="intro">A chip or system that cannot be reliably energized and cooled is not deployable capacity. Power and thermal conditions therefore belong inside the sovereignty stack.</p><div class="framing-note"><strong>Reference framing</strong><span>This page defines an analytical layer. It does not make a current operational claim about any entity.</span></div></header><div class="content-shell"><section class="reference-sections" aria-label="Reference authority summary"><article class="reference-block"><div class="block-index">00</div><div><h2>Reference summary</h2><p><strong>Definition.</strong> This page covers Ontology Layer 06: Power and Thermal as operating constraints on deployable AI compute.</p><p><strong>Compute sovereignty relationship.</strong> Power delivery and heat removal bound practical deployment even when chips and systems exist on paper.</p><p><strong>Boundary.</strong> This page does not guarantee site-level readiness, operating capacity, or current availability for any facility or geography.</p></div></article></section><section class="reference-sections" aria-label="Power and Thermal Limits reference sections"><article class="reference-block"><div class="block-index">01</div><div><h2>Power as an operating condition</h2><p>Assessment may include available capacity, density, connection timelines, redundancy, power quality, and the operating constraints of the intended deployment.</p></div></article><article class="reference-block"><div class="block-index">02</div><div><h2>Thermal as an operating condition</h2><p>Cooling method, heat rejection, facility design, environmental constraints, maintenance, and water requirements may affect practical deployment.</p></div></article><article class="reference-block"><div class="block-index">03</div><div><h2>Scope before conclusion</h2><p>Power and cooling conditions are location-, design-, and time-specific. Operational claims require current evidence and must distinguish planned capacity from available capacity.</p></div></article></section><section class="evidence-posture" aria-labelledby="evidence-title"><div class="section-label blue">Evidence posture · Registry-linked</div><h2 id="evidence-title">Source posture</h2><p class="evidence-intro">These registry records can support attributed infrastructure context, institutional recommendations, and modelled energy-demand analysis. They do not establish current site-level readiness or available capacity.</p><ul class="source-id-list" aria-label="Related source registry IDs"><li>doe-us-data-center-energy-use-2024</li><li>doe-powering-ai-data-centers-2024</li><li>iea-energy-and-ai-2025</li></ul><div class="posture-grid"><article><h3>Can support</h3><p>Attributed institutional context, recommendations, report references, and modelled projections within their stated geographic and temporal scope.</p></article><article><h3>Cannot support</h3><p>Site-level readiness, operating guarantees, current availability, or a deployment conclusion.</p></article><article><h3>Confidence and freshness</h3><p>Reviewed as of 2026-06-14. Projections and recommendations require current-condition review and do not inherit finding confidence.</p></article></div><a class="evidence-link" href="/sources/">Inspect the governed source registry →</a></section><section class="related" aria-labelledby="related-title"><div class="section-label">Continue the reference path</div><h2 id="related-title">Related reference surfaces</h2><div class="related-grid"><a class="related-card" href="/ai-chip-infrastructure/"><strong>AI Chip Infrastructure</strong><span>Why AI chips must be understood as infrastructure rather than isolated hardware.</span><span class="text-link">Open reference →</span></a><a class="related-card" href="/interconnects/"><strong>Interconnects</strong><span>A reference framing for the systems that move data within and between AI compute.</span><span class="text-link">Open reference →</span></a><a class="related-card" href="/chip-dependency-map/"><strong>Chip Dependency Map</strong><span>Preview the governed diagnostic model for mapping layered compute dependency exposure.</span><span class="text-link">Open reference →</span></a></div></section></div></main>
+  <main id="main">
+    <header class="page-hero">
+      <div class="trace" aria-hidden="true"></div>
+      <p class="eyebrow">Reference layer · 06 Power and Thermal · Evidence release 005</p>
+      <h1>Power and Thermal Limits</h1>
+      <p class="lead">Compute capacity is bounded by the ability to deliver power and remove heat.</p>
+      <p class="intro">A chip or system that cannot be reliably energized and cooled is not deployable capacity. This reference follows power from the grid to the accelerator package, and heat from the package back out to the atmosphere. At each stage it records what primary sources establish, what they leave unstated, and how to calculate what follows from the stated figures.</p>
+      <div class="framing-note"><strong>Evidence compiled: 2026-11-10 · Scientific review pending</strong><span>Vendor statements remain attributed. Worked examples use stated inputs and do not describe any real facility. Nothing here establishes site readiness, available capacity or measured efficiency.</span></div>
+      <ul class="class-legend" aria-label="Evidence classes used on this page">
+        <li><span class="tag tag-s">S</span>Metric definition: as stated by the body that defines it</li>
+        <li><span class="tag tag-a">A</span>Attributed: what a company or organisation disclosed, not independently verified</li>
+        <li><span class="tag tag-c">C</span>Bounded analysis: our arithmetic or derivation, with stated inputs and assumptions</li>
+        <li><span class="tag tag-u">U</span>Unresolved: evidence absent, blocked or conflicting</li>
+      </ul>
+    </header>
+    <div class="content-shell">
+      <section class="reference-sections" aria-label="Reference authority summary">
+        <article class="reference-block" id="summary"><div class="block-index">00</div><div>
+          <h2>Reference summary</h2>
+          <p><strong>Definition.</strong> This page covers Ontology Layer 06: Power and Thermal as operating constraints on deployable AI compute.</p>
+          <p><strong>Compute sovereignty relationship.</strong> Power delivery and heat removal bound practical deployment even when chips and systems exist on paper.</p>
+          <p><strong>Boundary.</strong> This page does not establish site-level readiness, operating capacity, or current availability for any facility or geography. Equipment ratings and reference designs describe what a system needs or what a design supports, not what any site has.</p>
+        </div></article>
+      </section>
+
+      <section class="reference-sections" aria-label="Power and thermal reference sections">
+        <article class="reference-block"><div class="block-index">01</div><div>
+          <h2>Power as an operating condition</h2>
+          <p>Assessment may include available capacity, density, connection timelines, redundancy, power quality, and the operating constraints of the intended deployment.</p>
+        </div></article>
+        <article class="reference-block"><div class="block-index">02</div><div>
+          <h2>Thermal as an operating condition</h2>
+          <p>Cooling method, heat rejection, facility design, environmental constraints, maintenance, and water requirements may affect practical deployment.</p>
+        </div></article>
+        <article class="reference-block"><div class="block-index">03</div><div>
+          <h2>Scope before conclusion</h2>
+          <p>Power and cooling conditions are location-, design-, and time-specific. Operational claims require current evidence and must distinguish planned capacity from available capacity.</p>
+        </div></article>
+      </section>
+
+      <nav class="ref-toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">Power and thermal reference</h2>
+        <ol start="4">
+          <li><a href="#terms">Power, energy and heat: terms that are not interchangeable</a></li>
+          <li><a href="#electrical-chain">The electrical delivery chain</a></li>
+          <li><a href="#thermal-chain">The thermal transport chain</a></li>
+          <li><a href="#cooling-architectures">Cooling architectures compared</a></li>
+          <li><a href="#case-gb200">Case study: the GB200 NVL72 rack</a></li>
+          <li><a href="#facility">Facility integration boundaries</a></li>
+          <li><a href="#calculations">Reproducible engineering calculations</a></li>
+          <li><a href="#metrics">Facility metrics: PUE and WUE</a></li>
+          <li><a href="#matrix">Power and thermal dependency matrix</a></li>
+          <li><a href="#questions">Questions for engineers and analysts</a></li>
+          <li><a href="#unresolved">Unresolved questions</a></li>
+        </ol>
+      </nav>
+
+      <section class="reference-sections" aria-label="Power delivery and thermal infrastructure reference">
+        <article class="reference-block" id="terms"><div class="block-index">04</div><div>
+          <h2>Power, energy and heat: terms that are not interchangeable</h2>
+          <p class="detail">Power is a rate, measured in watts (W, kW, MW). Energy is power over time, measured in watt-hours (kWh, MWh, TWh). A grid connection, a power shelf and a cooling unit are sized in power. An electricity bill and a national consumption estimate are measured in energy. In steady state, almost all electrical power a system draws leaves it as heat, so the heat to be removed tracks the power actually drawn, not the power the equipment is rated for.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Power terms distinguished (scrollable table)">
+            <table class="data-table">
+              <caption>Power figures that appear in primary sources, and what each one means.</caption>
+              <thead><tr><th scope="col">Term</th><th scope="col">What it describes</th><th scope="col">Example in the sources</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Equipment rating</th><td>The most a component is built to supply or carry</td><td><span class="tag tag-a">A</span>A 5.5 kW PSU; a 1,400 A bus bar <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-3">[3]</a></td><td>What the equipment actually delivers in use</td></tr>
+                <tr><th scope="row">Design power</th><td>A planning value for sizing infrastructure</td><td><span class="tag tag-a">A</span>1.2 MW "Thermal Design Power" for an eight-rack scalable unit <a class="cite" href="#ref-2">[2]</a></td><td>Measured consumption</td></tr>
+                <tr><th scope="row">Stated consumption</th><td>A vendor's figure for what a system draws</td><td><span class="tag tag-a">A</span>"approximately 120kW" per rack <a class="cite" href="#ref-1">[1]</a></td><td>Whether it is a maximum, a typical value or a measurement</td></tr>
+                <tr><th scope="row">Device power class</th><td>A label identifying a product variant</td><td><span class="tag tag-a">A</span>MI300X "750W" OAM accelerator <a class="cite" href="#ref-11">[11]</a></td><td>Board power, TDP or measured draw, which AMD does not distinguish</td></tr>
+                <tr><th scope="row">Measured consumption</th><td>Power or energy recorded on operating equipment</td><td><span class="tag tag-u">U</span>None reviewed for any product on this page</td><td>No measurement was reviewed</td></tr>
+                <tr><th scope="row">Annual energy</th><td>Energy used over a year</td><td><span class="tag tag-a">A</span>176 TWh for US data centers in 2023, a modelled estimate <a class="cite" href="#ref-9">[9]</a></td><td>Peak demand or grid capacity</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="electrical-chain"><div class="block-index">05</div><div>
+          <h2>The electrical delivery chain</h2>
+          <p class="detail">Power reaches an accelerator through a chain of conversions and distribution stages. Each stage has its own equipment, its own losses and its own redundancy, and is documented to a different degree.</p>
+          <figure class="ref-figure">
+            <div class="figure-frame" tabindex="0" role="region" aria-label="Figure 1 drawing; scrolls horizontally on narrow screens">
+            <svg viewBox="0 0 900 300" role="img" aria-labelledby="chain-fig-title chain-fig-desc">
+              <title id="chain-fig-title">The electrical and thermal chains of a liquid-cooled AI rack</title>
+              <desc id="chain-fig-desc">Two rows of stages. Electrical row, left to right: utility supply, facility switchgear and UPS, remote power panel, rack power shelves converting AC to 50 to 51 volt DC, DC bus bar, compute trays and boards, accelerator package. Thermal row, right to left: accelerator junction and package, cold plate, technology cooling system loop through rack manifolds, coolant distribution unit with a liquid-to-liquid heat exchanger, facility water system, heat rejection. Solid boxes are stages a reviewed source documents for the GB200 NVL72 rack; dashed boxes are stages whose specifications the sources do not give.</desc>
+              <text class="f-panel" x="20" y="26">Electrical delivery</text>
+              <g>
+                <rect class="f-bar-calc" x="20" y="44" width="110" height="56" rx="2"/><text class="f-lbl" x="75" y="68" text-anchor="middle">UTILITY</text><text class="f-note" x="75" y="86" text-anchor="middle">grid supply</text>
+                <rect class="f-bar-calc" x="146" y="44" width="110" height="56" rx="2"/><text class="f-lbl" x="201" y="68" text-anchor="middle">FACILITY</text><text class="f-note" x="201" y="86" text-anchor="middle">switchgear, UPS</text>
+                <rect class="f-base" x="272" y="44" width="110" height="56" rx="2"/><text class="f-lbl" x="327" y="68" text-anchor="middle">POWER PANEL</text><text class="f-note" x="327" y="86" text-anchor="middle">power whips</text>
+                <rect class="f-base" x="398" y="44" width="122" height="56" rx="2"/><text class="f-lbl" x="459" y="68" text-anchor="middle">POWER SHELVES</text><text class="f-note" x="459" y="86" text-anchor="middle">AC → 50–51 V DC</text>
+                <rect class="f-base" x="536" y="44" width="104" height="56" rx="2"/><text class="f-lbl" x="588" y="68" text-anchor="middle">BUS BAR</text><text class="f-note" x="588" y="86" text-anchor="middle">1,400 A rating</text>
+                <rect class="f-bar-calc" x="656" y="44" width="104" height="56" rx="2"/><text class="f-lbl" x="708" y="68" text-anchor="middle">TRAY, BOARD</text><text class="f-note" x="708" y="86" text-anchor="middle">regulation</text>
+                <rect class="f-xpu" x="776" y="44" width="104" height="56" rx="2"/><text class="f-lbl" x="828" y="68" text-anchor="middle">PACKAGE</text><text class="f-note" x="828" y="86" text-anchor="middle">GPU, CPU</text>
+                <path class="f-lead" d="M130 72 H146 M256 72 H272 M382 72 H398 M520 72 H536 M640 72 H656 M760 72 H776"/>
+              </g>
+              <text class="f-panel" x="20" y="162">Thermal transport</text>
+              <g>
+                <rect class="f-xpu" x="776" y="180" width="104" height="56" rx="2"/><text class="f-lbl" x="828" y="204" text-anchor="middle">JUNCTION</text><text class="f-note" x="828" y="222" text-anchor="middle">package heat</text>
+                <rect class="f-base" x="656" y="180" width="104" height="56" rx="2"/><text class="f-lbl" x="708" y="204" text-anchor="middle">COLD PLATE</text><text class="f-note" x="708" y="222" text-anchor="middle">on CPU, GPU</text>
+                <rect class="f-base" x="536" y="180" width="104" height="56" rx="2"/><text class="f-lbl" x="588" y="204" text-anchor="middle">TCS LOOP</text><text class="f-note" x="588" y="222" text-anchor="middle">rack manifolds</text>
+                <rect class="f-base" x="398" y="180" width="122" height="56" rx="2"/><text class="f-lbl" x="459" y="204" text-anchor="middle">CDU</text><text class="f-note" x="459" y="222" text-anchor="middle">liquid-to-liquid HX</text>
+                <rect class="f-bar-calc" x="272" y="180" width="110" height="56" rx="2"/><text class="f-lbl" x="327" y="204" text-anchor="middle">FWS LOOP</text><text class="f-note" x="327" y="222" text-anchor="middle">facility water</text>
+                <rect class="f-bar-calc" x="146" y="180" width="110" height="56" rx="2"/><text class="f-lbl" x="201" y="204" text-anchor="middle">REJECTION</text><text class="f-note" x="201" y="222" text-anchor="middle">tower, chiller, dry</text>
+                <path class="f-lead" d="M776 208 H760 M656 208 H640 M536 208 H520 M398 208 H382 M272 208 H256"/>
+              </g>
+              <text class="f-note" x="20" y="270">Solid: stage documented for the GB200 NVL72 rack by a reviewed source. Dashed: stage present but its specification is not given.</text>
+              <text class="f-note" x="20" y="288">Air-cooled parts (power shelves, networking, storage) reject heat to room air, outside the liquid chain shown.</text>
+            </svg>
+            </div>
+            <figcaption>Figure 1. Original schematic by AIElectronicChips.com. Stage names and the documented stages come from NVIDIA's rack documentation, NVIDIA's description of the liquid heat path and OCP's loop definitions. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a><a class="cite" href="#ref-5">[5]</a> The arrangement is illustrative; it does not describe a specific facility. <span class="tag tag-c">C</span></figcaption>
+          </figure>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Electrical delivery chain by stage (scrollable table)">
+            <table class="data-table">
+              <caption>The electrical chain, stage by stage, for a GB200 NVL72-class rack.</caption>
+              <thead><tr><th scope="col">Stage</th><th scope="col">What it does</th><th scope="col">Documented in reviewed sources</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Utility supply</th><td>Delivers power to the site</td><td><span class="tag tag-a">A</span>SEAB: connection requests of 300 MW to 1,000 MW with 1-3 year lead times are straining local grids <a class="cite" href="#ref-10">[10]</a></td><td>Any site's connection or capacity</td></tr>
+                <tr><th scope="row">Facility distribution</th><td>Switchgear, UPS, batteries, distribution to the hall</td><td><span class="tag tag-a">A</span>NVIDIA recommends Tier 3 or equivalent design with no single point of failure <a class="cite" href="#ref-2">[2]</a></td><td>Voltages, UPS topology or ratings for any site</td></tr>
+                <tr><th scope="row">Rack feed</th><td>Power whips from a remote power panel to the rack</td><td><span class="tag tag-a">A</span>Power whips energize the power shelves <a class="cite" href="#ref-1">[1]</a></td><td>AC input voltage, phase or circuit ratings</td></tr>
+                <tr><th scope="row">Power shelves</th><td>Convert AC to DC inside the rack</td><td><span class="tag tag-a">A</span>Eight shelves of six air-cooled 5.5 kW PSUs; nominal 50-51 V DC output; 33 kW input per shelf <a class="cite" href="#ref-1">[1]</a></td><td>Conversion efficiency; redundancy is stated two ways (section 08)</td></tr>
+                <tr><th scope="row">Bus bar</th><td>Distributes DC to the trays</td><td><span class="tag tag-a">A</span>Rated for 1,400 A; ORV3 width with a deeper profile <a class="cite" href="#ref-3">[3]</a></td><td>How many bus-bar paths a rack has</td></tr>
+                <tr><th scope="row">Tray and board regulation</th><td>Steps DC down to processor voltages</td><td><span class="tag tag-u">U</span>Not described in the reviewed sources</td><td>Regulator design, efficiency or voltages</td></tr>
+                <tr><th scope="row">Package</th><td>Draws power at the processor</td><td><span class="tag tag-u">U</span>No per-GPU or per-superchip power in the reviewed NVIDIA sources</td><td>Chip power or its definition</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="thermal-chain"><div class="block-index">06</div><div>
+          <h2>The thermal transport chain</h2>
+          <p class="detail">Heat leaves the processor junction through the package into a cold plate. A coolant carries it through the rack's technology cooling system (TCS) loop to a coolant distribution unit (CDU). There a heat exchanger passes it to the facility water system (FWS), which rejects it outdoors. <span class="tag tag-a">A</span>NVIDIA describes this path for direct-to-chip cooling, and OCP defines the TCS and FWS loops. <a class="cite" href="#ref-4">[4]</a><a class="cite" href="#ref-5">[5]</a></p>
+          <p class="detail"><strong>The governing relation.</strong> A liquid carries heat according to <em>Q</em> = <em>ṁ</em> × <em>c</em><sub>p</sub> × Δ<em>T</em>. Here <em>Q</em> is heat flow in kW, <em>ṁ</em> is mass flow in kg/s, <em>c</em><sub>p</sub> is specific heat capacity in kJ/kg·K and Δ<em>T</em> is the temperature rise of the coolant. For a fixed heat load, a smaller temperature rise needs proportionally more flow, and more flow needs more pumping pressure.</p>
+          <ul class="detail">
+            <li><span class="tag tag-a">A</span>OCP lists the CDU selection parameters as cooling capacity, FWS approach temperature, flow rate and pressure, TCS flow and coolant type. It gives an operating range of 17 °C to 65 °C. <a class="cite" href="#ref-5">[5]</a></li>
+            <li><span class="tag tag-a">A</span>OCP's example CDU curves, at 100 L/min of facility flow and 90 L/min of TCS flow, show approach temperature rising with heat load up to 200 kW. The approach temperature is the gap between the two loops. OCP says performance depends on heat-exchanger design and both loops' flows and temperatures. <a class="cite" href="#ref-5">[5]</a> These are example curves for a typical CDU, not a rating for any product.</li>
+            <li><span class="tag tag-a">A</span>OCP says facility water should be supplied above the dewpoint to prevent condensation, and that ASHRAE requires coolant to reach IT equipment at least 2 °C above the dewpoint. <a class="cite" href="#ref-5">[5]</a></li>
+            <li><span class="tag tag-u">U</span>Thermal resistance from junction to coolant, cold-plate pressure drop and coolant chemistry are not given for any named product in the reviewed sources.</li>
+          </ul>
+        </div></article>
+
+        <article class="reference-block" id="cooling-architectures"><div class="block-index">07</div><div>
+          <h2>Cooling architectures compared</h2>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Cooling architectures compared (scrollable table)">
+            <table class="data-table">
+              <caption>Cooling architectures by heat path and what the reviewed sources document about each.</caption>
+              <thead><tr><th scope="col">Architecture</th><th scope="col">Heat path</th><th scope="col">In the reviewed sources</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Air cooling</th><td>Heat sink to room air, then to room cooling and chilled water or outside air</td><td><span class="tag tag-a">A</span>Used in the GB200 NVL72 rack for networking, storage and the power-shelf PSUs <a class="cite" href="#ref-1">[1]</a></td><td>The air-side heat load of the rack</td></tr>
+                <tr><th scope="row">Direct-to-chip liquid</th><td>Cold plate to TCS loop to CDU to FWS</td><td><span class="tag tag-a">A</span>Used for GB200 NVL72 CPUs and GPUs <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a>; general heat path described by NVIDIA <a class="cite" href="#ref-4">[4]</a></td><td>Coolant flow, temperature or pressure for any product</td></tr>
+                <tr><th scope="row">Hybrid</th><td>Liquid for the hottest parts, air for the rest</td><td><span class="tag tag-a">A</span>How NVIDIA describes GB200 NVL72 <a class="cite" href="#ref-2">[2]</a></td><td>The liquid and air shares</td></tr>
+                <tr><th scope="row">Liquid-to-liquid CDU</th><td>TCS heat to FWS through a heat exchanger</td><td><span class="tag tag-a">A</span>OCP test methodology and example curves <a class="cite" href="#ref-5">[5]</a></td><td>That any named CDU suits any named rack</td></tr>
+                <tr><th scope="row">Immersion</th><td>Components submerged in a dielectric fluid</td><td><span class="tag tag-u">U</span>No primary source on immersion cooling for these products was reviewed</td><td>Any immersion use for the products on this page</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="detail"><span class="tag tag-c">C</span><strong>What the choice changes (medium confidence).</strong> Air cooling keeps the heat path within the room and its air handlers. Direct-to-chip cooling adds a liquid loop inside the rack, a CDU and a facility water connection, each a separate capability with its own interfaces. That moves part of the thermal dependency from room air handling to plumbing, pumps and water temperature control. A hybrid rack needs both at once.</p>
+        </div></article>
+
+        <article class="reference-block" id="case-gb200"><div class="block-index">08</div><div>
+          <h2>Case study: the GB200 NVL72 rack</h2>
+          <p class="detail">This case uses NVIDIA's own documentation: its DGX GB rack user guide (2026-09-17), its DGX GB200 SuperPOD reference architecture (2025-09-03) and its 2024 OCP contribution. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a> The user guide covers GB200 and GB300 racks together. Vera Rubin NVL72, a later generation, is a different system; its figures are on the <a href="/interconnects/#fabrics">interconnect reference</a> and are not mixed with these.</p>
+          <ul class="detail">
+            <li><span class="tag tag-a">A</span><strong>Configuration.</strong> 18 compute trays, each with two Grace CPUs and four Blackwell GPUs, nine NVLink switch trays, two management switches, power shelves, a bus bar and liquid-cooling manifolds. <a class="cite" href="#ref-1">[1]</a></li>
+            <li><span class="tag tag-a">A</span><strong>Power.</strong> Rack consumption is "approximately 120kW". Power whips from a remote panel feed eight power shelves, each of six air-cooled 5.5 kW PSUs. The shelves convert AC to a nominal 50-51 V DC on a bus bar, with 33 kW input needed per shelf. <a class="cite" href="#ref-1">[1]</a></li>
+            <li><span class="tag tag-a">A</span><strong>Bus bar.</strong> Rated for 1,400 A, the same width as ORV3 but deeper, which NVIDIA calls a 2x increase in amperage over current standards. <a class="cite" href="#ref-3">[3]</a></li>
+            <li><span class="tag tag-a">A</span><strong>Cooling.</strong> Liquid runs through rack manifolds and cold plates on the CPUs and GPUs; networking and storage are air-cooled; the liquid system has leak detection. <a class="cite" href="#ref-1">[1]</a> NVIDIA states a cooling capacity of 120 kW is required per rack. Blind-mate manifolds and floating tray connections distribute coolant to compute and switch trays. <a class="cite" href="#ref-3">[3]</a></li>
+            <li><span class="tag tag-a">A</span><strong>Facility.</strong> The reference architecture gives each eight-rack scalable unit a 1.2 MW "Thermal Design Power" and recommends Tier 3 or equivalent design. Because of the complex power and cooling, it connects the rack to the building management system. <a class="cite" href="#ref-2">[2]</a></li>
+          </ul>
+          <h3>Where NVIDIA's own figures disagree or do not close</h3>
+          <ul class="detail">
+            <li><span class="tag tag-u">U</span><strong>Redundancy.</strong> The user guide says the eight shelves "provide N+N redundancy". The reference architecture describes each shelf's six PSUs as "configured as N redundancy". <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a> This page does not choose between them.</li>
+            <li><span class="tag tag-u">U</span><strong>Bus bar versus load.</strong> 1,400 A at 50 V is 70 kW, well below about 120 kW (section 10), so one 1,400 A path cannot carry the whole rack at that voltage. The sources do not state how many paths there are or at what voltage the rating applies.</li>
+            <li><span class="tag tag-u">U</span><strong>What 120 kW means.</strong> NVIDIA does not say whether "approximately 120kW" is a maximum, a typical value or a measurement, or whether it differs between GB200 and GB300.</li>
+            <li><span class="tag tag-u">U</span><strong>Coolant.</strong> No coolant type, flow rate, supply temperature, pressure drop or ASHRAE liquid-cooling class is stated in the reviewed documents.</li>
+          </ul>
+        </div></article>
+
+        <article class="reference-block" id="facility"><div class="block-index">09</div><div>
+          <h2>Facility integration boundaries</h2>
+          <p class="detail">A rack's documentation describes what the rack needs. Whether a facility can supply it is a separate question, answered only by evidence about that facility.</p>
+          <ul class="detail">
+            <li><span class="tag tag-a">A</span><strong>Facility water classes.</strong> OCP reproduces the ASHRAE TC 9.9 liquid-cooling classes. W17, W27, W32, W40 and W45 have facility water supply temperatures of 17 °C, 27 °C, 32 °C, 40 °C and 45 °C, and W+ is above 45 °C. <a class="cite" href="#ref-5">[5]</a> <span class="tag tag-u">U</span>ASHRAE's own documents were not reviewed, and no reviewed source states which class GB200 NVL72 requires.</li>
+            <li><span class="tag tag-a">A</span><strong>Warm-water operation.</strong> NVIDIA says liquid cooling lets data centers use warmer water and reduce or eliminate mechanical chillers in many climates. <a class="cite" href="#ref-4">[4]</a> Which heat-rejection equipment a site needs depends on its climate and water temperature, which these sources do not set.</li>
+            <li><span class="tag tag-a">A</span><strong>Reference designs.</strong> Vertiv announced a 7 MW power and cooling reference architecture for GB200 NVL72 supporting up to 132 kW per rack. <a class="cite" href="#ref-6">[6]</a> A reference design states what a design supports; it is not evidence of any built facility.</li>
+            <li><span class="tag tag-a">A</span><strong>Grid connection.</strong> DOE's advisory board says connection requests for 300 MW to 1,000 MW hyperscale facilities, with lead times of 1 to 3 years, are stretching local grids. <a class="cite" href="#ref-10">[10]</a> A connection request is not energised capacity.</li>
+            <li><span class="tag tag-a">A</span><strong>National energy.</strong> DOE reports US data centers used an estimated 176 TWh in 2023 and projects 325 TWh to 580 TWh by 2028. <a class="cite" href="#ref-9">[9]</a> These are modelled estimates and projections, not observed demand at any site.</li>
+          </ul>
+        </div></article>
+
+        <article class="reference-block" id="calculations"><div class="block-index">10</div><div>
+          <h2>Reproducible engineering calculations</h2>
+          <p class="detail">Each example states its formula and its inputs, and labels each input as source-stated or assumed. Results are arithmetic from those inputs. They do not describe any real facility's capability. The same formulas are implemented and tested in this project's <code>scripts/engineering_calcs.py</code>. <span class="tag tag-c">C</span></p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Worked engineering examples (scrollable table)">
+            <table class="data-table">
+              <caption>Worked examples. "Stated" inputs come from the cited source; "assumed" inputs are ours.</caption>
+              <thead><tr><th scope="col">Example</th><th scope="col">Formula</th><th scope="col">Inputs</th><th scope="col">Result</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">1. PSU capacity</th><td>Installed = shelves × PSUs × rating; N+N keeps half in reserve</td><td>8 × 6 × 5.5 kW (stated) <a class="cite" href="#ref-1">[1]</a></td><td><span data-calc="psu_installed_kw">264 kW</span> installed; <span data-calc="psu_n_plus_n_kw">132 kW</span> with N+N, against about 120 kW stated</td></tr>
+                <tr><th scope="row">2. Bus-bar power</th><td>P = I × V</td><td>1,400 A (stated) <a class="cite" href="#ref-3">[3]</a>; 50 V or 51 V nominal (stated) <a class="cite" href="#ref-1">[1]</a></td><td><span data-calc="busbar_kw_at_50v">70 kW</span> at 50 V; <span data-calc="busbar_kw_at_51v">71.4 kW</span> at 51 V</td></tr>
+                <tr><th scope="row">3. Scalable unit</th><td>Racks × rack power, compared with the unit's design power</td><td>8 × 120 kW (stated) <a class="cite" href="#ref-1">[1]</a>; 1.2 MW design (stated) <a class="cite" href="#ref-2">[2]</a></td><td><span data-calc="su_rack_sum_mw">0.96 MW</span> from racks; 0.24 MW not itemised</td></tr>
+                <tr><th scope="row">4. Conversion loss</th><td>Input = output ÷ efficiency; loss = input − output</td><td>120 kW DC (stated); 97% efficiency (assumed)</td><td><span data-calc="rack_input_kw_at_97pct">123.7 kW</span> AC input; <span data-calc="rack_loss_kw_at_97pct">3.7 kW</span> of heat in the shelves</td></tr>
+                <tr><th scope="row">5. Coolant flow</th><td>ṁ = Q ÷ (c<sub>p</sub> × ΔT); volume flow = ṁ ÷ ρ</td><td>120 kW (assumed all to liquid); water, c<sub>p</sub> 4.18 kJ/kg·K and ρ 1.0 kg/L (assumed); ΔT 10 K or 15 K (assumed)</td><td><span data-calc="flow_lpm_dt10">172 L/min</span> at 10 K; <span data-calc="flow_lpm_dt15">115 L/min</span> at 15 K</td></tr>
+                <tr><th scope="row">6. Energy and power</th><td>Energy = power × time; average power = energy ÷ 8,760 h</td><td>120 kW for a year (assumed); 176 TWh (stated estimate) <a class="cite" href="#ref-9">[9]</a></td><td><span data-calc="rack_energy_mwh_per_year">1,051 MWh</span> per year; 176 TWh averages <span data-calc="us_2023_average_gw">20.1 GW</span></td></tr>
+                <tr><th scope="row">7. Projected average</th><td>Average power = energy ÷ 8,760 h</td><td>325 TWh to 580 TWh (stated projection) <a class="cite" href="#ref-9">[9]</a></td><td><span data-calc="us_2028_low_average_gw">37.1 GW</span> to <span data-calc="us_2028_high_average_gw">66.2 GW</span> average</td></tr>
+                <tr><th scope="row">8. Device to system</th><td>Sum of device power classes</td><td>8 × 750 W (stated) <a class="cite" href="#ref-11">[11]</a></td><td><span data-calc="accelerator_board_kw_8x750w">6 kW</span> of accelerator power class, not server power</td></tr>
+                <tr><th scope="row">9. PUE</th><td>PUE = total facility energy ÷ IT equipment energy</td><td>1,200 MWh total and 1,000 MWh IT over one period (assumed) <a class="cite" href="#ref-7">[7]</a></td><td>PUE <span data-calc="pue_example">1.2</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="detail">
+            <li><strong>Example 1</strong> shows that the stated installed PSU rating leaves margin over the stated consumption only if N+N redundancy holds. The reference architecture describes it differently (section 08).</li>
+            <li><strong>Example 2</strong> shows that the stated bus-bar rating and voltage do not by themselves account for the rack's stated power.</li>
+            <li><strong>Example 5</strong> overstates the liquid flow, because part of the rack's heat leaves by air. A glycol mixture, with lower heat capacity than water, would need more flow.</li>
+            <li><strong>Examples 6 and 7</strong> are averages. A grid connection is sized for peak demand, which annual energy figures do not reveal.</li>
+          </ul>
+        </div></article>
+
+        <article class="reference-block" id="metrics"><div class="block-index">11</div><div>
+          <h2>Facility metrics: PUE and WUE</h2>
+          <ul class="detail">
+            <li><span class="tag tag-s">S</span><strong>PUE.</strong> The Green Grid defines Power Usage Effectiveness as total facility energy divided by IT equipment energy. Total facility energy includes power delivery equipment such as switchgear, UPS and batteries, and cooling such as chillers. Only the data-center portion of a facility's utility meter should be measured. <a class="cite" href="#ref-7">[7]</a></li>
+            <li><span class="tag tag-s">S</span><strong>WUE.</strong> The Green Grid defines site Water Usage Effectiveness as annual site water use divided by IT equipment energy, in litres per kilowatt-hour, using the same denominator as PUE. A source-based WUE also counts water used to generate the energy. <a class="cite" href="#ref-8">[8]</a></li>
+          </ul>
+          <p class="detail"><span class="tag tag-c">C</span>Both metrics divide a facility's energy or water over a period by its IT energy over the same period. Neither can be stated for a server, GPU or rack on its own. A vendor's efficiency multiple is not a PUE or WUE unless it states that boundary and period. <span class="tag tag-a">A</span>NVIDIA states that GB200 NVL72 delivers "25x more energy efficiency and 300x more water efficiency than traditional air-cooled architectures". <a class="cite" href="#ref-4">[4]</a> <span class="tag tag-u">U</span>It gives no baseline, workload or method, so those multiples cannot be checked or converted into facility metrics.</p>
+        </div></article>
+
+        <article class="reference-block" id="matrix"><div class="block-index">12</div><div>
+          <h2>Power and thermal dependency matrix</h2>
+          <p class="detail">Each level is classified by where its dependency comes from. <em>Inherent</em> means any AI system has it. <em>Architecture-specific</em> means it follows from a design choice such as liquid cooling. <em>Product-specific</em> means it is set by one product's design. <em>Site-specific</em> means only evidence about a particular facility can settle it. The matrix states documentation, not risk, and ranks nothing.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Power and thermal requirements by level (scrollable table)">
+            <table class="data-table">
+              <caption>Requirements by level, with GB200 NVL72 as the documented example.</caption>
+              <thead><tr><th scope="col">Level</th><th scope="col">Electrical</th><th scope="col">Thermal</th><th scope="col">Physical interfaces</th><th scope="col">Classification</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">1. Chip</th><td>Core and memory supply rails</td><td>Junction temperature limits</td><td>Package power pins; die-to-lid path</td><td>Inherent; values product-specific</td></tr>
+                <tr><th scope="row">2. Package</th><td>Power delivered through the substrate</td><td>Heat spread to a lid or cold plate</td><td>Cold-plate contact</td><td>Product-specific</td></tr>
+                <tr><th scope="row">3. Board / tray</th><td>DC-to-DC regulation from the bus voltage</td><td>Cold plates on CPUs and GPUs; fans for other parts</td><td>Bus-bar clip; liquid quick disconnects</td><td>Product-specific</td></tr>
+                <tr><th scope="row">4. Server / compute tray</th><td>Tray power from the bus bar</td><td>Liquid loop through the tray</td><td>Blind-mate liquid and power connections</td><td>Product-specific</td></tr>
+                <tr><th scope="row">5. Rack</th><td>Power shelves converting AC to DC; bus bar; about 120 kW stated</td><td>Rack manifolds; leak detection; about 120 kW of cooling stated</td><td>Power whips; manifold inlets and outlets</td><td>Product-specific</td></tr>
+                <tr><th scope="row">6. Facility</th><td>Grid connection, switchgear, UPS, remote power panels</td><td>CDUs, facility water system, heat rejection</td><td>Facility water supply and return; building management system</td><td>Architecture-specific; values site-specific</td></tr>
+                <tr><th scope="row">7. Operating deployment</th><td>Energised capacity and its redundancy</td><td>Achieved water temperatures and flows</td><td>Commissioned connections</td><td>Site-specific</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Power and thermal evidence by level (scrollable table)">
+            <table class="data-table">
+              <caption>Evidence by level: what is documented, what is not, and what would establish readiness.</caption>
+              <thead><tr><th scope="col">Level</th><th scope="col">Primary evidence reviewed</th><th scope="col">Undisclosed</th><th scope="col">Substitution constraint</th><th scope="col">Evidence that would establish readiness</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">1. Chip</th><td><span class="tag tag-u">U</span>None for GB200; MI300X power class only <a class="cite" href="#ref-11">[11]</a></td><td>Per-GPU power and its definition</td><td>Set by the processor design</td><td>A product specification with defined power</td></tr>
+                <tr><th scope="row">2. Package</th><td><span class="tag tag-u">U</span>None reviewed</td><td>Junction-to-coolant thermal resistance</td><td>Cold plate fitted to one package</td><td>Thermal specifications from the vendor</td></tr>
+                <tr><th scope="row">3. Board / tray</th><td><span class="tag tag-a">A</span>Cold plates on CPUs and GPUs <a class="cite" href="#ref-1">[1]</a></td><td>Regulator design and efficiency</td><td>Tray built for one rack's bus bar and manifolds</td><td>Tray electrical and thermal interface specifications</td></tr>
+                <tr><th scope="row">4. Server / tray</th><td><span class="tag tag-a">A</span>1RU liquid-cooled trays <a class="cite" href="#ref-3">[3]</a></td><td>Tray power and flow</td><td>Blind-mate connectors set by the rack design</td><td>Tray power and flow specifications</td></tr>
+                <tr><th scope="row">5. Rack</th><td><span class="tag tag-a">A</span>Power shelves, bus bar, manifolds, 120 kW stated <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-3">[3]</a></td><td>Redundancy (two versions); bus-bar paths; coolant specification</td><td>Rack power and cooling interfaces follow one design</td><td>NVIDIA rack power and facility-interface specifications</td></tr>
+                <tr><th scope="row">6. Facility</th><td><span class="tag tag-a">A</span>Tier 3 recommendation <a class="cite" href="#ref-2">[2]</a>; W classes via OCP <a class="cite" href="#ref-5">[5]</a>; reference designs <a class="cite" href="#ref-6">[6]</a></td><td>Required W class, supply temperature, flow and pressure</td><td>Water temperature sets which heat-rejection plant works</td><td>Site design documents and commissioning records</td></tr>
+                <tr><th scope="row">7. Operating deployment</th><td><span class="tag tag-u">U</span>None reviewed</td><td>Measured power, PUE, WUE and uptime at any site</td><td>Site-specific by nature</td><td>Operator disclosures or independent audits</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="questions"><div class="block-index">13</div><div>
+          <h2>Questions for engineers and analysts</h2>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Analyst questions and evidence status (scrollable table)">
+            <table class="data-table">
+              <caption>Practical questions, what the reviewed evidence supports, and the source that would strengthen the answer.</caption>
+              <thead><tr><th scope="col">Question</th><th scope="col">What the reviewed evidence supports</th><th scope="col">Source that would establish more</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">How much power must a GB200 NVL72 rack position supply?</th><td><span class="tag tag-a">A</span>About 120 kW stated; eight 33 kW-input power shelves <a class="cite" href="#ref-1">[1]</a></td><td>NVIDIA rack power specification with a stated basis</td></tr>
+                <tr><th scope="row">How much redundancy does the rack's power provide?</th><td><span class="tag tag-u">U</span>N+N or N, depending on the NVIDIA document</td><td>A power-shelf specification</td></tr>
+                <tr><th scope="row">What does the cooling plant need to deliver?</th><td><span class="tag tag-c">C</span>About 120 kW of heat removal, part by liquid and part by air; flow follows Q = ṁ × c<sub>p</sub> × ΔT</td><td>NVIDIA coolant specifications and the liquid/air split</td></tr>
+                <tr><th scope="row">Which facility water temperature applies?</th><td><span class="tag tag-u">U</span>Not stated for GB200 NVL72; ASHRAE classes known only via OCP</td><td>NVIDIA facility-interface documents; ASHRAE TC 9.9 guidelines</td></tr>
+                <tr><th scope="row">Is a given site ready?</th><td><span class="tag tag-u">U</span>Not answerable from product or reference-design documents</td><td>Site design, commissioning and metering records</td></tr>
+                <tr><th scope="row">How efficient is the facility?</th><td><span class="tag tag-s">S</span>PUE and WUE definitions only <a class="cite" href="#ref-7">[7]</a><a class="cite" href="#ref-8">[8]</a></td><td>Metered facility energy and water over a stated period</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="unresolved"><div class="block-index">14</div><div>
+          <h2>Unresolved questions</h2>
+          <p class="detail">These are material questions the reviewed evidence cannot answer. They are recorded, not filled with general industry commentary.</p>
+          <ol class="unresolved-list">
+            <li><strong>Power-shelf redundancy.</strong> N+N (user guide) or N (reference architecture). <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a></li>
+            <li><strong>Bus-bar paths.</strong> How a 1,400 A rating at about 50 V carries about 120 kW.</li>
+            <li><strong>The 120 kW figure.</strong> Whether it is a maximum, a typical value or a measurement, and whether it differs between GB200 and GB300.</li>
+            <li><strong>Component power.</strong> Per-GPU, per-superchip and per-tray power for GB200.</li>
+            <li><strong>Coolant specification.</strong> Coolant, flow, supply temperature, pressure drop and W class for GB200 NVL72.</li>
+            <li><strong>Liquid and air shares</strong> of the rack's heat.</li>
+            <li><strong>ASHRAE primary text.</strong> The TC 9.9 guidelines themselves were not reviewed.</li>
+            <li><strong>Efficiency claims.</strong> The method behind NVIDIA's 25x and 300x figures.</li>
+            <li><strong>Scalable unit.</strong> What makes up the 1.2 MW beyond eight racks.</li>
+            <li><strong>Site evidence.</strong> No facility's operating power, cooling or metrics were reviewed.</li>
+            <li><strong>National estimates.</strong> The LBNL and IEA reports themselves could not be retrieved.</li>
+          </ol>
+        </div></article>
+      </section>
+
+      <section class="evidence-posture" id="references" aria-labelledby="evidence-title">
+        <div class="section-label blue">Evidence posture · Registry-linked</div>
+        <h2 id="evidence-title">References</h2>
+        <p class="evidence-intro">Each reference maps to a stable ID in the <a href="/sources/">governed source registry</a>. Quoted passages belong to their publishers; the classification, calculations, figure, matrix and analysis are original work of this project.</p>
+        <ol class="ref-list">
+          <li id="ref-1">NVIDIA, "NVIDIA DGX GB Rack Scale Systems User Guide", 2026-09-17. <code>nvidia-dgx-gb-rack-user-guide-2026</code>. <a href="https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf">docs.nvidia.com</a></li>
+          <li id="ref-2">NVIDIA, "NVIDIA DGX SuperPOD: Next Generation Scalable Infrastructure for AI Leadership — Reference Architecture Featuring NVIDIA DGX GB200", 2025-09-03. <code>nvidia-dgx-superpod-gb200-ra-2025</code>. <a href="https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf">docs.nvidia.com</a></li>
+          <li id="ref-3">NVIDIA, "NVIDIA Contributes NVIDIA GB200 NVL72 Designs to Open Compute Project", 2024-10-15. <code>nvidia-gb200-nvl72-ocp-contribution-2024</code>. <a href="https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/">developer.nvidia.com</a></li>
+          <li id="ref-4">NVIDIA, "Chill Factor: NVIDIA Blackwell Platform Boosts Water Efficiency by Over 300x", 2025-04-22. <code>nvidia-blackwell-water-efficiency-2025</code>. <a href="https://blogs.nvidia.com/blog/blackwell-platform-water-efficiency-liquid-cooling-data-centers-ai-factories/">blogs.nvidia.com</a></li>
+          <li id="ref-5">Open Compute Project, "Liquid to Liquid CDU Test Methodology and Performance Rating", Revision 1.0, August 2024. <code>ocp-liquid-to-liquid-cdu-test-methodology-2024</code>. <a href="https://www.opencompute.org/documents/ocp-wp-l-lcdu-test-methodology-performance-rating-r1-pdf/">opencompute.org</a></li>
+          <li id="ref-6">Vertiv, "Vertiv codevelops with NVIDIA complete power and cooling blueprint for NVIDIA GB200 NVL72 platform", 2024-10-17. <code>vertiv-gb200-nvl72-reference-architecture-2024</code>. <a href="https://www.vertiv.com/en-emea/about/news-and-events/news-releases/vertiv-codevelops-with-nvidia-complete-power-and-cooling-blueprint-for--nvidia-gb200-nvl72-platform/">vertiv.com</a></li>
+          <li id="ref-7">The Green Grid, "WP#49 PUE: A Comprehensive Examination of the Metric", publisher publication 2012-10-02 (accessible v6 PDF has later file metadata). <code>tgg-pue-comprehensive-examination-2013</code>. <a href="https://datacenters.lbl.gov/sites/default/files/WP49-PUE%20A%20Comprehensive%20Examination%20of%20the%20Metric_v6.pdf">datacenters.lbl.gov</a></li>
+          <li id="ref-8">The Green Grid, "White Paper #35: Water Usage Effectiveness (WUE)", version 1, 2011. <code>tgg-wue-white-paper-35-2011</code>. <a href="https://www.thegreengrid.org/system/files/store/WUE_v1.pdf">thegreengrid.org</a></li>
+          <li id="ref-9">U.S. Department of Energy, "DOE Releases New Report Evaluating Increase in Electricity Demand from Data Centers", 2024-12-20. <code>doe-us-data-center-energy-use-2024</code>. <a href="https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers">energy.gov</a></li>
+          <li id="ref-10">U.S. Department of Energy, Secretary of Energy Advisory Board, "Recommendations on Powering Artificial Intelligence and Data Center Infrastructure", 2024-07-30. <code>doe-powering-ai-data-centers-2024</code>. <a href="https://www.energy.gov/sites/default/files/2024-08/Powering%20AI%20and%20Data%20Center%20Infrastructure%20Recommendations%20July%202024.pdf">energy.gov</a></li>
+          <li id="ref-11">AMD, "Introducing AMD CDNA 3 Architecture" (white paper), revision dated 2025-04-07. <code>amd-cdna3-white-paper-2025</code>. <a href="https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf">amd.com</a></li>
+        </ol>
+        <div class="posture-grid">
+          <article><h3>Can support</h3><p>Attributed statements of NVIDIA's rack power and cooling design, OCP's cooling-loop terminology, The Green Grid's metric definitions, and DOE's national estimates and advice, each within its stated scope.</p></article>
+          <article><h3>Cannot support</h3><p>Site-level readiness, available or energised capacity, measured consumption, measured PUE or WUE, or that any cooling product suits any rack.</p></article>
+          <article><h3>Freshness</h3><p>Evidence compiled: 2026-11-10 · Scientific review pending. The IEA record listed below was registered earlier; its report could not be retrieved for this release.</p></article>
+        </div>
+        <ul class="source-id-list" aria-label="Related registry records not re-reviewed in this release">
+          <li>iea-energy-and-ai-2025</li>
+        </ul>
+        <a class="evidence-link" href="/sources/">Inspect the governed source registry →</a>
+      </section>
+
+      <section class="related" aria-labelledby="related-title">
+        <div class="section-label">Continue the reference path</div>
+        <h2 id="related-title">Related reference surfaces</h2>
+        <div class="related-grid">
+          <a class="related-card" href="/ai-chip-infrastructure/"><strong>AI Chip Infrastructure</strong><span>Why AI chips must be understood as infrastructure rather than isolated hardware.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/design-fabrication-packaging/"><strong>Design, Fabrication, and Packaging</strong><span>Where package-level heat begins, and why stacked dies make it harder to remove.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/hbm-memory/"><strong>HBM Memory</strong><span>The memory stacks whose power and heat sit inside the same package.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/interconnects/"><strong>Interconnects</strong><span>The rack-scale fabrics whose density drives these power and cooling loads.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/methodology/"><strong>Methodology</strong><span>How evidence, analysis, confidence and unknowns are kept separate.</span><span class="text-link">Open reference →</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>AI<span>Electronic</span>Chips</span></a><p>A governed reference layer for AI chip systems intelligence.</p></div>
     <nav aria-label="Footer navigation"><a href="/compute-sovereignty/">Compute sovereignty</a><a href="/sovereignty-stack/">Sovereignty stack</a><a href="/methodology/">Methodology</a><a href="/strategic-availability/">Strategic availability</a></nav>

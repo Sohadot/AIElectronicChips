@@ -1,0 +1,1575 @@
+{
+  "release_id": "aec-ide-005-power-thermal",
+  "version": "1.0.0",
+  "status": "research_candidate",
+  "publication_eligible": false,
+  "as_of": "2026-11-10",
+  "title": "Industrial Dependency Evidence Release 005: Power Delivery and Thermal Infrastructure",
+  "reference_page": "power-and-thermal-limits/index.html",
+  "source_registry_reference": "data/source-registry.json",
+  "atlas_reference": "data/dependency-atlas.json",
+  "description": "Research-candidate findings on the electrical and thermal infrastructure an AI system needs: rack power shelves and DC bus bars, hybrid liquid and air cooling, CDU and facility water loops, facility recommendations and national energy estimates, with GB200 NVL72 as the rack-scale case. Every power, energy, temperature and flow figure carries its unit, scope and basis. Nothing in this file is a published Atlas relationship.",
+  "rights_note": "Classification, arithmetic, the dependency matrix and analysis are original project work by AIElectronicChips.com (Sohadot). Quoted passages are short excerpts (at most 20 words each, 40 per citation) reproduced for citation and verification; the underlying texts remain the property of their publishers. No endorsement by NVIDIA, AMD, Vertiv, the Open Compute Project, The Green Grid or the US Department of Energy is implied. This file is a research candidate: it is visible in the public repository but is excluded from the published website.",
+  "findings": [
+    {
+      "id": "pt-gb-rack-configuration",
+      "claim_class": "attributed_statement",
+      "topic": "architecture",
+      "statement": "NVIDIA describes an NVL72 rack as 18 compute trays, each with two Grace CPUs and four Blackwell GPUs, nine NVLink switch trays, two top-of-rack management switches, power shelves, a power bus bar and liquid-cooling manifolds. Its user guide covers DGX GB200 and DGX GB300 rack systems together.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Section 1.1: \"18x 1RU compute trays, each with 2 Grace CPUs and 4 Blackwell GPUs\"; \"9x 1RU NVLink switch trays\"; Chapter 1: \"power shelves, a bus bar, and liquid cooling manifolds\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "DGX GB rack-scale system configuration as described by NVIDIA (guide dated 2026-09-17)",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The guide does not separate GB200 from GB300 figures"
+      ]
+    },
+    {
+      "id": "pt-gb-power-shelves",
+      "claim_class": "attributed_statement",
+      "topic": "power_delivery",
+      "statement": "NVIDIA states that power whips from a remote power panel feed the rack's power shelves. The shelves convert AC to a nominal 50 V to 51 V DC and distribute it over a bus bar. Rack power consumption is approximately 120 kW. Eight power shelves each hold six air-cooled 5.5 kW PSUs, provide N+N redundancy and need 33 kW of input power each.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Section 1.4: \"Power whips energize power shelves from a remote power panel\"; \"convert AC power into nominal 50V-51V DC output\"; \"The rack power consumption is approximately 120kW\"; \"provide N+N redundancy and the required input power of 33kW per power shelf\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "DGX GB rack power distribution as described by NVIDIA",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "'Approximately 120kW' is not stated as rated, typical or measured, and is not given separately for GB200 and GB300",
+        "PSU efficiency, AC input voltage and phase are not stated"
+      ],
+      "quantities": [
+        {
+          "value": "50",
+          "unit": "V",
+          "quantity": "nominal bus-bar DC voltage, lower bound",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "51",
+          "unit": "V",
+          "quantity": "nominal bus-bar DC voltage, upper bound",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "rack power consumption",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "5.5",
+          "unit": "kW",
+          "quantity": "PSU rating",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "33",
+          "unit": "kW",
+          "quantity": "required input power per power shelf",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        }
+      ]
+    },
+    {
+      "id": "pt-ra-power-shelves",
+      "claim_class": "attributed_statement",
+      "topic": "power_delivery",
+      "statement": "NVIDIA's SuperPOD reference architecture describes the DGX GB200 power shelf as six 5.5 kW PSUs configured as N redundancy, delivering up to 33 kW, with eight shelves per NVL72 rack. It gives each scalable unit of eight racks a thermal design power of 1.2 MW.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "Section 3.1.3: \"six 5.5kW PSUs configured as N redundancy and can deliver up to 33kW of power\"; \"eight total power shelves in a single DGX GB200 NVL72 rack system\"; Chapter 2: \"Each SU requires a Thermal Design Power (TDP) of 1.2 Megawatts (MW)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "DGX GB200 SuperPOD reference architecture (document dated 2025-09-03)",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The reference architecture says 'N redundancy'; the user guide says 'N+N redundancy'. This release does not reconcile them",
+        "'TDP' here is a design figure for a group of racks, not a chip's thermal design power or measured consumption"
+      ],
+      "quantities": [
+        {
+          "value": "5.5",
+          "unit": "kW",
+          "quantity": "PSU rating",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025"
+        },
+        {
+          "value": "33",
+          "unit": "kW",
+          "quantity": "power shelf output",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025"
+        },
+        {
+          "value": "1.2",
+          "unit": "MW",
+          "quantity": "scalable-unit thermal design power",
+          "direction": "not_applicable",
+          "scope": "per_cluster",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025"
+        }
+      ]
+    },
+    {
+      "id": "pt-ocp-bus-bar",
+      "claim_class": "attributed_statement",
+      "topic": "power_delivery",
+      "statement": "NVIDIA's OCP contribution describes a bus bar for GB200 NVL72 rated for 1,400 A, the same width as the ORV3 bus bar but deeper, which NVIDIA calls a 2x increase in amperage over current standards. It states the rack requires 120 kW of cooling capacity.",
+      "evidence": [
+        {
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+          "locator": "\"a high capacity bus bar supporting 1,400 amp current flow\"; \"maintains the same width as the existing ORV3 but features a deeper profile\"; \"To efficiently manage the 120 KW cooling capacity required for the rack\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "GB200 NVL72 rack design contributed to OCP, as described by NVIDIA on 2024-10-15",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The voltage at which the 1,400 A rating applies and the number of bus-bar paths are not stated",
+        "The OCP specification documents themselves were not reviewed"
+      ],
+      "quantities": [
+        {
+          "value": "1,400",
+          "unit": "A",
+          "quantity": "bus-bar current rating",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024"
+        },
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "rack cooling capacity required",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024"
+        }
+      ]
+    },
+    {
+      "id": "pt-amd-accelerator-power-class",
+      "claim_class": "attributed_statement",
+      "topic": "power_delivery",
+      "statement": "AMD's CDNA 3 white paper identifies MI300X as a 750 W OAM accelerator and MI325X as a 1000 W accelerator in its test footnotes, without defining the figure as board power, TDP or measured consumption.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "Footnote MI300-13: \"AMD Instinct™ MI300X OAM accelerator 750W (192 GB HBM3)\"; footnote MI325-019: \"AMD Instinct™ MI325X GPU (1000W)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Accelerator module power classes as labelled by AMD",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The figure's definition is not stated",
+        "Module power excludes host CPUs, memory, networking, fans and power conversion"
+      ],
+      "quantities": [
+        {
+          "value": "750",
+          "unit": "W",
+          "quantity": "MI300X OAM accelerator power class",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "1000",
+          "unit": "W",
+          "quantity": "MI325X accelerator power class",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ]
+    },
+    {
+      "id": "pt-gb-hybrid-cooling",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_transport",
+      "statement": "NVIDIA states that DGX GB compute trays are cooled by liquid running through rack manifolds and then cold plates attached to the CPUs and GPUs, while networking and storage devices are air-cooled by fans. The power-shelf PSUs are described as air-cooled. The rack's liquid system includes leak detection.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Section 1.2: \"cooled by liquid that runs up and down the rack through manifolds, then through the cold plates\"; \"networking and storage devices are air cooled\"; Section 1.4: \"six air-cooled 5.5kW PSUs\""
+        },
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "\"such as GPUs and CPUs, are liquid cooled. Other components are air cooled.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "DGX GB200 and GB300 rack cooling architecture as described by NVIDIA",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The share of rack heat removed by liquid versus air is not stated",
+        "Coolant type, flow, temperature and pressure are not stated"
+      ]
+    },
+    {
+      "id": "pt-ocp-liquid-manifold",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_transport",
+      "statement": "NVIDIA's OCP contribution describes a blind-mate liquid-cooling manifold and a floating blind-mate tray connection that distributes coolant to both compute and switch trays, so that liquid quick disconnects align and mate reliably. It describes 1RU liquid-cooled compute and switch tray form factors.",
+      "evidence": [
+        {
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+          "locator": "\"distributes coolant to both compute and switch trays\"; \"the liquid quick disconnects to align and reliably mate in the rack\"; \"1RU liquid-cooled compute and switch tray form factors\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "GB200 NVL72 liquid distribution design contributed to OCP",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The OCP design documents themselves were not reviewed"
+      ]
+    },
+    {
+      "id": "pt-nvidia-heat-path",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_transport",
+      "statement": "NVIDIA describes the direct-to-chip heat path as a technology cooling system loop. Heat passes through a coolant distribution unit's liquid-to-liquid heat exchanger to a facility cooling loop. NVIDIA states this lets data centers run warmer water and reduce or eliminate mechanical chillers in many climates.",
+      "evidence": [
+        {
+          "source_id": "nvidia-blackwell-water-efficiency-2025",
+          "locator": "\"direct-to-chip liquid cooling transfers heat in a technology cooling system loop\"; \"cycled through a coolant distribution unit via liquid-to-liquid heat exchanger\"; \"reducing or eliminating the need for mechanical chillers\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA's general description of liquid-cooling heat transport (2025-04-22)",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A general description, not a specification for any facility",
+        "No water temperatures are stated"
+      ]
+    },
+    {
+      "id": "pt-nvidia-efficiency-claims",
+      "claim_class": "attributed_statement",
+      "topic": "efficiency_metric",
+      "statement": "NVIDIA states that GB200 NVL72 delivers 25x more energy efficiency and 300x more water efficiency than traditional air-cooled architectures. It gives no baseline system, workload, measurement boundary or method.",
+      "evidence": [
+        {
+          "source_id": "nvidia-blackwell-water-efficiency-2025",
+          "locator": "\"25x more energy efficiency and 300x more water efficiency than traditional air-cooled architectures\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA efficiency claims as stated on 2025-04-22",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Stated without methodology; not comparable with PUE or WUE, which are facility metrics",
+        "No measurement was reviewed"
+      ]
+    },
+    {
+      "id": "pt-ocp-cdu-terms",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_transport",
+      "statement": "OCP's liquid-to-liquid CDU paper names the technology cooling system (TCS) and facility water system (FWS) loops. It lists the CDU selection parameters as cooling capacity, FWS approach temperature, flow rate and pressure, TCS flow and coolant type. It gives a CDU operating range of 17 °C to 65 °C and says coolant must reach IT equipment at least 2 °C above the dewpoint.",
+      "evidence": [
+        {
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+          "locator": "\"TCS: Technology Cooling System FWS: Facility Water System\"; \"FWS flow condition (approach temperature, flowrate and pressure)\"; Table 2: \"Operating Temperature 17 to 65 °C\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "CDU terminology and requirements from OCP's Revision 1.0 white paper (August 2024)",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Describes typical CDUs, not any named product",
+        "The 2 °C dewpoint margin is attributed by OCP to ASHRAE, which was not reviewed"
+      ],
+      "quantities": [
+        {
+          "value": "17",
+          "unit": "°C",
+          "quantity": "CDU operating temperature, lower bound",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "65",
+          "unit": "°C",
+          "quantity": "CDU operating temperature, upper bound",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "2",
+          "unit": "°C",
+          "quantity": "minimum margin of delivered coolant above dewpoint",
+          "direction": "not_applicable",
+          "scope": "tcs_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        }
+      ]
+    },
+    {
+      "id": "pt-ashrae-classes-via-ocp",
+      "claim_class": "attributed_statement",
+      "topic": "facility_infrastructure",
+      "statement": "OCP's CDU paper reproduces the ASHRAE TC 9.9 liquid-cooling classes W17, W27, W32, W40, W45 and W+. Their facility water supply temperatures are 17 °C, 27 °C, 32 °C, 40 °C and 45 °C respectively, and above 45 °C for W+.",
+      "evidence": [
+        {
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+          "locator": "Table 1: \"ASHRAE TC 9.9 [1] Liquid cooling class W17 W27 W32 W40 W45 W+\"; \"Facility water supply temperature °C (°F) 17 (62.6) 27 (80.6)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "ASHRAE TC 9.9 liquid-cooling classes as reproduced by OCP",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Secondhand: the ASHRAE TC 9.9 documents are sold or subscription-only and were not reviewed",
+        "No reviewed source states which class GB200 NVL72 requires"
+      ],
+      "quantities": [
+        {
+          "value": "17",
+          "unit": "°C",
+          "quantity": "W17 facility water supply temperature",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "27",
+          "unit": "°C",
+          "quantity": "W27 facility water supply temperature",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "32",
+          "unit": "°C",
+          "quantity": "W32 facility water supply temperature",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "40",
+          "unit": "°C",
+          "quantity": "W40 facility water supply temperature",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "45",
+          "unit": "°C",
+          "quantity": "W45 facility water supply temperature",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        }
+      ]
+    },
+    {
+      "id": "pt-ocp-cdu-example",
+      "claim_class": "attributed_statement",
+      "topic": "thermal_transport",
+      "statement": "OCP illustrates CDU thermal performance with example approach-temperature curves at 100 L/min of FWS flow and 90 L/min of TCS flow. The curves cover heat loads up to 200 kW at facility temperatures from 17 °C to 45 °C. It says performance depends on heat-exchanger design, materials, and the flow rates and temperatures of both loops.",
+      "evidence": [
+        {
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+          "locator": "Figure 6: \"Example of Approach Temperature at 100 LPM FWS and 90 LPM TCS\"; \"CDU thermal performance depends on several factors, such as heat exchanger design, material, FWS & TCS flowrate and temperature\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Example CDU performance curves in OCP's white paper",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "An example for a typical CDU, not a rating for any product"
+      ],
+      "quantities": [
+        {
+          "value": "100",
+          "unit": "L/min",
+          "quantity": "FWS flow in the example",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "90",
+          "unit": "L/min",
+          "quantity": "TCS flow in the example",
+          "direction": "not_applicable",
+          "scope": "tcs_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "200",
+          "unit": "kW",
+          "quantity": "largest heat load plotted",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "17",
+          "unit": "°C",
+          "quantity": "lowest facility temperature plotted",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "45",
+          "unit": "°C",
+          "quantity": "highest facility temperature plotted",
+          "direction": "not_applicable",
+          "scope": "fws_loop",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        }
+      ]
+    },
+    {
+      "id": "pt-ra-facility-tier",
+      "claim_class": "attributed_statement",
+      "topic": "facility_infrastructure",
+      "statement": "NVIDIA's SuperPOD reference architecture recommends that the data center meet or exceed Uptime Institute Tier 3 design standards, or TIA-942-B Rated 3 or EN 50600 Availability Class 3, including concurrent maintainability and no single point of failure. It introduces a connection to the building management system because of DGX GB200's complex cooling and power requirements.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "\"should meet or exceed Uptime Institute Tier 3 design standards\"; \"including concurrent maintainability and no single point of failure\"; \"because of its complex cooling and power requirement is the connection to the Building Management System\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Facility recommendations in NVIDIA's DGX GB200 SuperPOD reference architecture",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A recommendation, not evidence that any facility meets it"
+      ]
+    },
+    {
+      "id": "pt-vertiv-reference-design",
+      "claim_class": "attributed_statement",
+      "topic": "facility_infrastructure",
+      "statement": "Vertiv announced a 7 MW power and cooling reference architecture for GB200 NVL72 on 2024-10-17. It supports up to 132 kW per rack and combines UPS, lithium-ion batteries, chillers, chilled-water room cooling and coolant distribution units.",
+      "evidence": [
+        {
+          "source_id": "vertiv-gb200-nvl72-reference-architecture-2024",
+          "locator": "\"releasing a complete 7MW reference architecture of the NVIDIA GB200 NVL72\"; \"supports up to 132kW per rack\"; \"Vertiv™ XDU coolant distribution units\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Vertiv's announced reference architecture",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A reference design, not an operating facility",
+        "Cost and space claims are the vendor's own"
+      ],
+      "quantities": [
+        {
+          "value": "7",
+          "unit": "MW",
+          "quantity": "reference architecture scale",
+          "direction": "not_applicable",
+          "scope": "per_facility",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "vertiv-gb200-nvl72-reference-architecture-2024"
+        },
+        {
+          "value": "132",
+          "unit": "kW",
+          "quantity": "supported rack power",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "vertiv-gb200-nvl72-reference-architecture-2024"
+        }
+      ]
+    },
+    {
+      "id": "pt-doe-us-energy",
+      "claim_class": "attributed_statement",
+      "topic": "facility_infrastructure",
+      "statement": "DOE reports, from its 2024 data-center energy report, that US data centers used about 4.4% of US electricity in 2023, rising from 58 TWh in 2014 to 176 TWh in 2023. It projects 325 TWh to 580 TWh by 2028, 6.7% to 12% of US electricity.",
+      "evidence": [
+        {
+          "source_id": "doe-us-data-center-energy-use-2024",
+          "locator": "\"data centers consumed about 4.4% of total U.S. electricity in 2023\"; \"climbed from 58 TWh in 2014 to 176 TWh in 2023\"; \"estimates an increase between 325 to 580 TWh by 2028\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "United States data-center electricity use, DOE announcement of 2024-12-20",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Historical values are model-based estimates; 2028 values are projections, not observed demand",
+        "The underlying LBNL report could not be retrieved (empty response) and was not reviewed"
+      ],
+      "quantities": [
+        {
+          "value": "58",
+          "unit": "TWh",
+          "quantity": "US data-center electricity use, 2014",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "estimated",
+          "basis": "modelled",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "176",
+          "unit": "TWh",
+          "quantity": "US data-center electricity use, 2023",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "estimated",
+          "basis": "modelled",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "325",
+          "unit": "TWh",
+          "quantity": "projected 2028 use, low",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "projected",
+          "basis": "modelled",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "580",
+          "unit": "TWh",
+          "quantity": "projected 2028 use, high",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "projected",
+          "basis": "modelled",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        }
+      ]
+    },
+    {
+      "id": "pt-seab-grid-lead-times",
+      "claim_class": "attributed_statement",
+      "topic": "facility_infrastructure",
+      "statement": "DOE's Secretary of Energy Advisory Board states that connection requests for hyperscale facilities of 300 MW to 1,000 MW or larger, with lead times of 1 to 3 years, are stretching local grids' capacity to deliver power. It recommends assessing generation and storage for on-site backup power.",
+      "evidence": [
+        {
+          "source_id": "doe-powering-ai-data-centers-2024",
+          "locator": "\"with lead times of 1-3 years are stretching the capacity of local grids to deliver and supply power\"; \"commercially available for on-site backup power today\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "SEAB recommendations presented 2024-07-30",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Describes connection requests, not built or energised capacity"
+      ],
+      "quantities": [
+        {
+          "value": "300",
+          "unit": "MW",
+          "quantity": "hyperscale connection request size, lower bound",
+          "direction": "not_applicable",
+          "scope": "per_facility",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "doe-powering-ai-data-centers-2024"
+        },
+        {
+          "value": "1,000",
+          "unit": "MW",
+          "quantity": "hyperscale connection request size, upper bound",
+          "direction": "not_applicable",
+          "scope": "per_facility",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "doe-powering-ai-data-centers-2024"
+        }
+      ]
+    },
+    {
+      "id": "pt-tgg-pue-definition",
+      "claim_class": "verified_fact",
+      "topic": "efficiency_metric",
+      "statement": "The Green Grid defines PUE as total facility energy divided by IT equipment energy. Total facility energy includes power delivery such as switchgear, UPS and batteries, and cooling such as chillers. Only the data-center portion of a facility's utility meter should be measured.",
+      "evidence": [
+        {
+          "source_id": "tgg-pue-comprehensive-examination-2013",
+          "locator": "Figure 1: \"Total Facility Energy PUE = IT Equipment Energy\"; \"The data center–only portion of a facility’s utility meter should be measured\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "PUE as defined in The Green Grid WP#49",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "ISO/IEC 30134-2 was not reviewed",
+        "A facility metric over a period; it does not characterise any product"
+      ]
+    },
+    {
+      "id": "pt-tgg-wue-definition",
+      "claim_class": "verified_fact",
+      "topic": "efficiency_metric",
+      "statement": "The Green Grid defines site WUE as annual site water usage divided by IT equipment energy, in litres per kilowatt-hour, using the same IT energy denominator as PUE. A source-based WUE also counts water used in generating the energy.",
+      "evidence": [
+        {
+          "source_id": "tgg-wue-white-paper-35-2011",
+          "locator": "\"The units of WUE are liters/kilowatt-hour (L/kWh)\"; \"the WUE metric uses the familiar value of IT Equipment Energy as its denominator\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "WUE as defined in The Green Grid White Paper #35, version 1",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Later revisions were not reviewed",
+        "A facility metric over a year; it does not characterise any product"
+      ]
+    },
+    {
+      "id": "pt-an-psu-arithmetic",
+      "claim_class": "bounded_analysis",
+      "topic": "power_delivery",
+      "statement": "Medium confidence. Eight shelves of six 5.5 kW PSUs give 264 kW of installed PSU rating per rack. With N+N redundancy, half is held in reserve, leaving 132 kW, above the stated consumption of approximately 120 kW. Eight shelves needing 33 kW each also sum to 264 kW of input. Under the reference architecture's 'N redundancy' wording, no reserve would remain within a shelf, so the two NVIDIA documents describe different redundancy.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"six air-cooled 5.5kW PSUs in eight power shelves that provide N+N redundancy\"; \"approximately 120kW\""
+        },
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "\"six 5.5kW PSUs configured as N redundancy and can deliver up to 33kW of power\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Arithmetic on NVIDIA's stated power-shelf figures",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Installed rating is not delivered power; PSU derating and efficiency are not stated",
+        "The redundancy conflict is recorded, not resolved"
+      ],
+      "quantities": [
+        {
+          "value": "5.5",
+          "unit": "kW",
+          "quantity": "PSU rating",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "264",
+          "unit": "kW",
+          "quantity": "installed PSU rating per rack",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "rated",
+          "basis": "calculated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "132",
+          "unit": "kW",
+          "quantity": "capacity with N+N reserve",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "rated",
+          "basis": "calculated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "stated rack consumption",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "33",
+          "unit": "kW",
+          "quantity": "input power per shelf",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        }
+      ],
+      "assumptions": [
+        "All 48 PSUs are populated",
+        "N+N means half the PSU capacity is held in reserve"
+      ]
+    },
+    {
+      "id": "pt-an-bus-bar-capacity",
+      "claim_class": "bounded_analysis",
+      "topic": "power_delivery",
+      "statement": "Medium confidence. A 1,400 A bus bar at the stated nominal 50 V carries 70 kW, or 71.4 kW at 51 V. That is well below the approximately 120 kW rack load, so one 1,400 A path at that voltage cannot carry the whole rack. The reviewed sources do not state how many bus-bar paths a rack has, or at what voltage the 1,400 A rating applies.",
+      "evidence": [
+        {
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+          "locator": "\"a high capacity bus bar supporting 1,400 amp current flow\""
+        },
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"nominal 50V-51V DC output\"; \"approximately 120kW\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Consistency check between NVIDIA's bus-bar current rating, DC voltage and rack power",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A consistency check, not a design: the rack may use more than one bus-bar path",
+        "Combines a 2024 blog with a 2026 guide covering GB200 and GB300"
+      ],
+      "quantities": [
+        {
+          "value": "1,400",
+          "unit": "A",
+          "quantity": "bus-bar current rating",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024"
+        },
+        {
+          "value": "50",
+          "unit": "V",
+          "quantity": "nominal DC voltage, lower bound",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "70",
+          "unit": "kW",
+          "quantity": "power at 1,400 A and 50 V",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "calculated",
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024"
+        },
+        {
+          "value": "71.4",
+          "unit": "kW",
+          "quantity": "power at 1,400 A and 51 V",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "rated",
+          "basis": "calculated",
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024"
+        },
+        {
+          "value": "51",
+          "unit": "V",
+          "quantity": "nominal DC voltage, upper bound",
+          "direction": "not_applicable",
+          "scope": "per_component",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "stated rack consumption",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        }
+      ],
+      "assumptions": [
+        "P = I × V for DC distribution",
+        "The rating applies at the nominal 50 V to 51 V output"
+      ]
+    },
+    {
+      "id": "pt-an-scalable-unit",
+      "claim_class": "bounded_analysis",
+      "topic": "facility_infrastructure",
+      "statement": "Medium confidence. Eight racks at approximately 120 kW sum to 0.96 MW, while the reference architecture gives a scalable unit 1.2 MW of thermal design power. The remaining 0.24 MW is not itemised. It may cover networking, management and storage racks or design margin, but the source does not say. The 1.2 MW figure is a design value for facility planning, not measured consumption.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "\"Each SU requires a Thermal Design Power (TDP) of 1.2 Megawatts (MW)\""
+        },
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"The rack power consumption is approximately 120kW\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Comparison of NVIDIA's rack and scalable-unit power figures",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Combines two documents of different dates and scopes",
+        "No breakdown of the scalable unit's 1.2 MW was found"
+      ],
+      "quantities": [
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "stated rack consumption",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "0.96",
+          "unit": "MW",
+          "quantity": "eight racks at 120 kW",
+          "direction": "not_applicable",
+          "scope": "per_cluster",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "1.2",
+          "unit": "MW",
+          "quantity": "scalable-unit thermal design power",
+          "direction": "not_applicable",
+          "scope": "per_cluster",
+          "peak_or_sustained": "design",
+          "basis": "vendor_stated",
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025"
+        },
+        {
+          "value": "0.24",
+          "unit": "MW",
+          "quantity": "unitemised difference",
+          "direction": "not_applicable",
+          "scope": "per_cluster",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025"
+        }
+      ],
+      "assumptions": [
+        "A scalable unit is eight NVL72 racks, as the reference architecture states"
+      ]
+    },
+    {
+      "id": "pt-an-conversion-loss",
+      "claim_class": "bounded_analysis",
+      "topic": "power_delivery",
+      "statement": "Illustrative only. If the power shelves converted AC to DC at an assumed 97% efficiency, delivering 120 kW of DC would draw 123.7 kW of AC and release 3.7 kW as heat in the air-cooled power shelves. NVIDIA does not state the efficiency, so the loss figure illustrates the method, not the product.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"convert AC power into nominal 50V-51V DC output\"; \"six air-cooled 5.5kW PSUs\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Illustrative conversion-loss arithmetic",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The 97% efficiency is an assumption, not an NVIDIA figure"
+      ],
+      "quantities": [
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "DC load",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "assumed",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "123.7",
+          "unit": "kW",
+          "quantity": "AC input at the assumed efficiency",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "3.7",
+          "unit": "kW",
+          "quantity": "conversion loss as heat",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        }
+      ],
+      "assumptions": [
+        "Power-shelf efficiency of 97% (not disclosed)",
+        "Losses appear as heat in the shelves"
+      ]
+    },
+    {
+      "id": "pt-an-coolant-flow",
+      "claim_class": "bounded_analysis",
+      "topic": "thermal_transport",
+      "statement": "Illustrative only. Carrying heat in a liquid follows Q = m × cp × ΔT. Moving an assumed 120 kW in water (cp 4.18 kJ/kg·K, density 1.0 kg/L) needs 2.87 kg/s. That is about 172 L/min for a 10 K rise between supply and return, or 115 L/min for 15 K. These are not GB200 specifications. Part of the rack's heat leaves by air in an undisclosed share, and glycol mixtures have lower heat capacity than water.",
+      "evidence": [
+        {
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+          "locator": "\"FWS flow condition (approach temperature, flowrate and pressure)\"; \"Coolant type (Propylene glycol, treated water, etc.)\""
+        },
+        {
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+          "locator": "\"the 120 KW cooling capacity required for the rack\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Heat-transport arithmetic for a liquid loop",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Assumes all 120 kW enters the liquid, which overstates the liquid share",
+        "Water properties are approximate and vary with temperature"
+      ],
+      "quantities": [
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "heat load",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "assumed",
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024"
+        },
+        {
+          "value": "2.87",
+          "unit": "kg/s",
+          "quantity": "required mass flow",
+          "direction": "not_applicable",
+          "scope": "tcs_loop",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "10",
+          "unit": "K",
+          "quantity": "assumed supply-to-return temperature rise",
+          "direction": "not_applicable",
+          "scope": "tcs_loop",
+          "peak_or_sustained": "design",
+          "basis": "assumed",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "172",
+          "unit": "L/min",
+          "quantity": "volume flow at a 10 K rise",
+          "direction": "not_applicable",
+          "scope": "tcs_loop",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "15",
+          "unit": "K",
+          "quantity": "alternative temperature rise",
+          "direction": "not_applicable",
+          "scope": "tcs_loop",
+          "peak_or_sustained": "design",
+          "basis": "assumed",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        },
+        {
+          "value": "115",
+          "unit": "L/min",
+          "quantity": "volume flow at a 15 K rise",
+          "direction": "not_applicable",
+          "scope": "tcs_loop",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+        }
+      ],
+      "assumptions": [
+        "Water with cp 4.18 kJ/kg·K and density 1.0 kg/L",
+        "All 120 kW enters the liquid",
+        "Steady state"
+      ]
+    },
+    {
+      "id": "pt-an-energy-versus-power",
+      "claim_class": "bounded_analysis",
+      "topic": "efficiency_metric",
+      "statement": "Medium confidence. Energy and power are different quantities. DOE's 176 TWh for 2023 is an annual energy estimate; spread over 8,760 hours it averages 20.1 GW. The 325 TWh to 580 TWh projected for 2028 would average 37.1 GW to 66.2 GW. A load of 120 kW running all year uses 1,051 MWh. Averages say nothing about peak demand or grid connection capacity.",
+      "evidence": [
+        {
+          "source_id": "doe-us-data-center-energy-use-2024",
+          "locator": "\"176 TWh in 2023\"; \"between 325 to 580 TWh by 2028\""
+        },
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"approximately 120kW\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Converting annual energy to average power",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Averages hide peaks; grid connections are sized for peak, not average, demand",
+        "2028 values are projections"
+      ],
+      "quantities": [
+        {
+          "value": "176",
+          "unit": "TWh",
+          "quantity": "2023 estimate",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "estimated",
+          "basis": "modelled",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "20.1",
+          "unit": "GW",
+          "quantity": "average power implied by 176 TWh",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "325",
+          "unit": "TWh",
+          "quantity": "2028 projection, low",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "projected",
+          "basis": "modelled",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "580",
+          "unit": "TWh",
+          "quantity": "2028 projection, high",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "projected",
+          "basis": "modelled",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "37.1",
+          "unit": "GW",
+          "quantity": "average implied by 325 TWh",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "66.2",
+          "unit": "GW",
+          "quantity": "average implied by 580 TWh",
+          "direction": "not_applicable",
+          "scope": "national",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "doe-us-data-center-energy-use-2024"
+        },
+        {
+          "value": "120",
+          "unit": "kW",
+          "quantity": "illustrative continuous load",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "assumed",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        },
+        {
+          "value": "1,051",
+          "unit": "MWh",
+          "quantity": "energy at 120 kW for one year",
+          "direction": "not_applicable",
+          "scope": "per_rack",
+          "peak_or_sustained": "approximate",
+          "basis": "calculated",
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026"
+        }
+      ],
+      "assumptions": [
+        "A year of 8,760 hours",
+        "The 120 kW load is constant, which is illustrative only"
+      ]
+    },
+    {
+      "id": "pt-an-pue-boundary",
+      "claim_class": "bounded_analysis",
+      "topic": "efficiency_metric",
+      "statement": "Medium confidence. PUE needs energy over a period at a facility boundary. A facility using 1,200 MWh in total for 1,000 MWh of IT equipment energy over the same period has a PUE of 1.2. Because PUE divides facility energy by IT energy, it cannot be stated for a server, GPU or rack on its own. A vendor's efficiency multiple is not a PUE without that boundary.",
+      "evidence": [
+        {
+          "source_id": "tgg-pue-comprehensive-examination-2013",
+          "locator": "Figure 1: \"Total Facility Energy PUE = IT Equipment Energy\""
+        },
+        {
+          "source_id": "nvidia-blackwell-water-efficiency-2025",
+          "locator": "\"25x more energy efficiency\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Applying the PUE definition to an illustrative facility",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The example facility is hypothetical"
+      ],
+      "quantities": [
+        {
+          "value": "1,200",
+          "unit": "MWh",
+          "quantity": "total facility energy (illustrative)",
+          "direction": "not_applicable",
+          "scope": "per_facility",
+          "peak_or_sustained": "not_stated",
+          "basis": "assumed",
+          "source_id": "tgg-pue-comprehensive-examination-2013"
+        },
+        {
+          "value": "1,000",
+          "unit": "MWh",
+          "quantity": "IT equipment energy (illustrative)",
+          "direction": "not_applicable",
+          "scope": "per_facility",
+          "peak_or_sustained": "not_stated",
+          "basis": "assumed",
+          "source_id": "tgg-pue-comprehensive-examination-2013"
+        }
+      ],
+      "assumptions": [
+        "Both energies are measured over the same period and boundary"
+      ]
+    },
+    {
+      "id": "pt-an-chip-to-rack-levels",
+      "claim_class": "bounded_analysis",
+      "topic": "power_delivery",
+      "statement": "Medium confidence. Power figures belong to levels that must not be mixed. For MI300X, eight 750 W accelerator modules sum to 6 kW of accelerator power class in an 8-GPU platform. That excludes host CPUs, memory, networking, fans and conversion, so it is not server power. For GB200 NVL72, the reviewed NVIDIA sources give rack-level figures but no per-GPU or per-superchip power. Chip, tray and rack levels therefore cannot be linked from these sources.",
+      "evidence": [
+        {
+          "source_id": "amd-cdna3-white-paper-2025",
+          "locator": "\"MI300X OAM accelerator 750W\""
+        },
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"The rack power consumption is approximately 120kW\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Separating device, server and rack power levels",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The 6 kW sum is of power classes, not of measured draw"
+      ],
+      "quantities": [
+        {
+          "value": "750",
+          "unit": "W",
+          "quantity": "MI300X accelerator power class",
+          "direction": "not_applicable",
+          "scope": "per_device",
+          "peak_or_sustained": "not_stated",
+          "basis": "vendor_stated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        },
+        {
+          "value": "6",
+          "unit": "kW",
+          "quantity": "eight accelerators' power class",
+          "direction": "not_applicable",
+          "scope": "per_system",
+          "peak_or_sustained": "not_stated",
+          "basis": "calculated",
+          "source_id": "amd-cdna3-white-paper-2025"
+        }
+      ],
+      "assumptions": [
+        "The 750 W figure is comparable across the eight modules"
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "u-pt-redundancy-conflict",
+      "topic": "power_delivery",
+      "question": "Do GB200 NVL72 power shelves provide N+N redundancy or N redundancy?",
+      "why_unresolved": "NVIDIA's user guide states N+N redundancy across eight shelves; its SuperPOD reference architecture describes six 5.5 kW PSUs 'configured as N redundancy'.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025"
+      ],
+      "next_evidence_needed": "An NVIDIA power-shelf specification stating the redundancy scheme and usable capacity."
+    },
+    {
+      "id": "u-pt-bus-bar-paths",
+      "topic": "power_delivery",
+      "question": "How does a 1,400 A bus bar at a nominal 50 V to 51 V carry an approximately 120 kW rack?",
+      "why_unresolved": "1,400 A at 50 V is 70 kW. No reviewed source states the number of bus-bar paths or the voltage at which the rating applies.",
+      "sources_checked": [
+        "nvidia-gb200-nvl72-ocp-contribution-2024",
+        "nvidia-dgx-gb-rack-user-guide-2026"
+      ],
+      "next_evidence_needed": "The OCP GB200 NVL72 rack specification or an NVIDIA rack power-distribution document."
+    },
+    {
+      "id": "u-pt-120kw-basis",
+      "topic": "power_delivery",
+      "question": "Is 'approximately 120 kW' a rated, typical or measured figure, and does it differ between GB200 and GB300 racks?",
+      "why_unresolved": "The user guide covers both generations and does not define the figure.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-gb200-nvl72-ocp-contribution-2024",
+        "nvidia-dgx-superpod-gb200-ra-2025"
+      ],
+      "next_evidence_needed": "Separate GB200 and GB300 rack power specifications with their basis."
+    },
+    {
+      "id": "u-pt-component-power",
+      "topic": "power_delivery",
+      "question": "What are the GB200 superchip, Blackwell GPU and compute-tray power figures, and what do they measure?",
+      "why_unresolved": "The reviewed NVIDIA documents give rack, shelf and PSU figures but no per-GPU, per-superchip or per-tray power.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "nvidia-gb200-nvl72-ocp-contribution-2024"
+      ],
+      "next_evidence_needed": "An NVIDIA product specification giving component power and its definition."
+    },
+    {
+      "id": "u-pt-coolant-specification",
+      "topic": "thermal_transport",
+      "question": "What coolant, flow rate, supply temperature, pressure drop and ASHRAE liquid-cooling class does GB200 NVL72 require?",
+      "why_unresolved": "None of the reviewed NVIDIA documents states them. The OCP CDU paper gives only a typical example, not a GB200 requirement.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "nvidia-gb200-nvl72-ocp-contribution-2024",
+        "nvidia-blackwell-water-efficiency-2025",
+        "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+      ],
+      "next_evidence_needed": "NVIDIA site-preparation or facility-interface specifications for GB200 NVL72."
+    },
+    {
+      "id": "u-pt-liquid-air-split",
+      "topic": "thermal_transport",
+      "question": "What share of a GB200 NVL72 rack's heat goes to liquid and what share to air?",
+      "why_unresolved": "NVIDIA describes the rack as hybrid-cooled but gives no split. Air-side heat includes the power-shelf PSUs, networking and storage.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025"
+      ],
+      "next_evidence_needed": "An NVIDIA thermal specification giving liquid and air heat loads."
+    },
+    {
+      "id": "u-pt-ashrae-primary",
+      "topic": "facility_infrastructure",
+      "question": "What do the ASHRAE TC 9.9 guidelines themselves specify for W-classes and for coolant delivered to IT equipment?",
+      "why_unresolved": "ASHRAE's documents are sold or subscription-only. The classes here come secondhand from OCP.",
+      "sources_checked": [
+        "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+      ],
+      "next_evidence_needed": "A reviewer reads the ASHRAE TC 9.9 liquid-cooling guidelines."
+    },
+    {
+      "id": "u-pt-efficiency-claims",
+      "topic": "efficiency_metric",
+      "question": "What baseline, workload and measurement boundary support NVIDIA's 25x energy and 300x water efficiency claims?",
+      "why_unresolved": "The post gives the multiples without a method or baseline.",
+      "sources_checked": [
+        "nvidia-blackwell-water-efficiency-2025"
+      ],
+      "next_evidence_needed": "NVIDIA methodology documentation, or an independent measurement with a stated boundary."
+    },
+    {
+      "id": "u-pt-scalable-unit-remainder",
+      "topic": "facility_infrastructure",
+      "question": "What makes up the 1.2 MW scalable-unit figure beyond eight racks at about 120 kW?",
+      "why_unresolved": "The reference architecture does not break down the 1.2 MW.",
+      "sources_checked": [
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "nvidia-dgx-gb-rack-user-guide-2026"
+      ],
+      "next_evidence_needed": "An NVIDIA facility-planning breakdown of the scalable unit's power."
+    },
+    {
+      "id": "u-pt-site-evidence",
+      "topic": "facility_infrastructure",
+      "question": "Which facilities actually operate GB200 NVL72 racks, with what power and cooling, and at what measured PUE and WUE?",
+      "why_unresolved": "All reviewed facility material is reference designs, recommendations or national estimates. No site-level evidence was reviewed.",
+      "sources_checked": [
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "vertiv-gb200-nvl72-reference-architecture-2024",
+        "doe-us-data-center-energy-use-2024",
+        "doe-powering-ai-data-centers-2024"
+      ],
+      "next_evidence_needed": "Operator disclosures or audits of specific facilities."
+    },
+    {
+      "id": "u-pt-national-projections",
+      "topic": "facility_infrastructure",
+      "question": "What methods, scenarios and boundaries underlie the LBNL and IEA data-center electricity estimates?",
+      "why_unresolved": "The LBNL report returned an empty response and IEA returned HTTP 403; only DOE's announcement was read.",
+      "sources_checked": [
+        "doe-us-data-center-energy-use-2024"
+      ],
+      "next_evidence_needed": "Read the LBNL 2024 report and the IEA Energy and AI report directly."
+    }
+  ],
+  "candidate_nodes": [
+    {
+      "id": "tech-nvidia-gb200-nvl72",
+      "label": "NVIDIA GB200 NVL72",
+      "kind": "technology",
+      "layers": [
+        "design",
+        "power_thermal",
+        "deployment"
+      ],
+      "description": "NVIDIA rack-scale system of 72 Blackwell GPUs and 36 Grace CPUs in 18 compute trays, as NVIDIA describes it."
+    },
+    {
+      "id": "cap-direct-to-chip-liquid-cooling",
+      "label": "Direct-to-chip liquid cooling",
+      "kind": "capability",
+      "layers": [
+        "power_thermal"
+      ],
+      "description": "Removing heat through cold plates on processors and a liquid loop, with remaining components air-cooled."
+    },
+    {
+      "id": "tech-rack-dc-bus-bar-power-shelves",
+      "label": "Rack DC bus bar with power shelves",
+      "kind": "technology",
+      "layers": [
+        "power_thermal"
+      ],
+      "description": "In-rack AC-to-DC power shelves feeding a DC bus bar that distributes power to trays."
+    },
+    {
+      "id": "cap-facility-cooling-loop",
+      "label": "Facility cooling loop via CDU",
+      "kind": "capability",
+      "layers": [
+        "power_thermal",
+        "deployment"
+      ],
+      "description": "Transfer of heat from a technology cooling system loop through a coolant distribution unit to the facility water system."
+    }
+  ],
+  "candidate_relationships": [
+    {
+      "id": "rel-gb200-nvl72-requires-direct-liquid-cooling",
+      "from": "tech-nvidia-gb200-nvl72",
+      "to": "cap-direct-to-chip-liquid-cooling",
+      "relation_type": "requires",
+      "statement": "NVIDIA states that GB200 NVL72 compute trays are cooled by liquid through rack manifolds and cold plates on the CPUs and GPUs, with other components air-cooled.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "supported_claim_type": "cooling_architecture"
+        },
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "supported_claim_type": "cooling_architecture"
+        }
+      ],
+      "geographic_scope": "DGX GB200 rack systems as described by NVIDIA",
+      "temporal_scope": "NVIDIA documents dated 2025-09-03 and 2026-09-17",
+      "as_of": "2026-11-10",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "Company description; coolant specification and liquid share not stated",
+        "The user guide covers GB200 and GB300 together"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "Two NVIDIA documents describe the same liquid-cooled compute trays.",
+        "changes_in_release": "New candidate introduced in IDE-005.",
+        "evidence_gaps": [
+          "Coolant flow, temperature and class requirements"
+        ],
+        "assessed_at": "2026-11-10",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-gb200-nvl72-requires-rack-bus-bar-power-shelves",
+      "from": "tech-nvidia-gb200-nvl72",
+      "to": "tech-rack-dc-bus-bar-power-shelves",
+      "relation_type": "requires",
+      "statement": "NVIDIA states that GB200 NVL72 racks distribute power from AC-to-DC power shelves over a DC bus bar to the trays.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "supported_claim_type": "power_distribution_context"
+        },
+        {
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+          "supported_claim_type": "power_distribution_context"
+        }
+      ],
+      "geographic_scope": "DGX GB200 rack systems as described by NVIDIA",
+      "temporal_scope": "NVIDIA documents dated 2024-10-15 and 2026-09-17",
+      "as_of": "2026-11-10",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "Redundancy is stated differently across NVIDIA documents (u-pt-redundancy-conflict)",
+        "Bus-bar paths not stated (u-pt-bus-bar-paths)"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "The power shelves and bus bar are part of NVIDIA's rack description in both documents.",
+        "changes_in_release": "New candidate introduced in IDE-005.",
+        "evidence_gaps": [
+          "Redundancy scheme; bus-bar path count"
+        ],
+        "assessed_at": "2026-11-10",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-direct-liquid-cooling-requires-facility-cooling-loop",
+      "from": "cap-direct-to-chip-liquid-cooling",
+      "to": "cap-facility-cooling-loop",
+      "relation_type": "requires",
+      "statement": "NVIDIA describes direct-to-chip heat passing from a technology cooling system loop through a CDU's liquid-to-liquid heat exchanger to a facility cooling loop, and OCP defines those two loops.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-blackwell-water-efficiency-2025",
+          "supported_claim_type": "cooling_architecture"
+        },
+        {
+          "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+          "supported_claim_type": "cooling_architecture"
+        }
+      ],
+      "geographic_scope": "Liquid-to-liquid CDU architectures as described by NVIDIA and OCP",
+      "temporal_scope": "Documents dated August 2024 and 2025-04-22",
+      "as_of": "2026-11-10",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "Describes the liquid-to-liquid CDU architecture; liquid-to-air CDUs and other designs are not covered"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "Both sources describe the same TCS-to-FWS heat path through a CDU.",
+        "changes_in_release": "New candidate introduced in IDE-005.",
+        "evidence_gaps": [
+          "Alternatives such as liquid-to-air CDUs"
+        ],
+        "assessed_at": "2026-11-10",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    }
+  ]
+}
