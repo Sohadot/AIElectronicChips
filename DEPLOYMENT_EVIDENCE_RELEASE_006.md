@@ -18,6 +18,8 @@
 - facility operations;
 - access and compliance.
 
+**Software version boundary.** The 2025 GB200 administration guide states that Slurm is the only supported scheduler, while the newer Mission Control rack-setup guide version 2.5.0 explicitly includes Slurm and Kubernetes through RunAI. IDE-006 records both as dated vendor claims and does not assume a particular software stack has been deployed.
+
 **Primary case.** GB200 NVL72 with the DGX SuperPOD reference architecture. Where a source covers GB200 and GB300 together, the release says so. Vera Rubin is out of scope.
 
 **Evidence states.** Nine states classify the kind of record that exists for one requirement:
