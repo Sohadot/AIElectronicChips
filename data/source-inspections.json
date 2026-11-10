@@ -1,0 +1,2333 @@
+{
+  "log_id": "aec-source-inspections",
+  "schema_version": "1.0.0",
+  "status": "maintenance_record",
+  "registry_reference": "data/source-registry.json",
+  "boundary": "An inspection records what was observed about a source's metadata and its published document. Retrieving a document and finding a quoted passage show only that the passage is still published; they do not show that a claim is correct or current. This log never changes a source's status, access date or any claim, and no inspection here is a human scientific review.",
+  "state_definitions": {
+    "metadata_validated": "The local registry record passed the structural checks (dates, URL, scope fields)",
+    "source_retrieved": "The canonical document, or a listed page of it, was fetched with a 2xx response and a non-empty body",
+    "source_content_compared": "Every passage that release findings quote from the source was searched for in the retrieved text",
+    "source_changed": "A material change in the source was identified and documented",
+    "source_inaccessible": "Retrieval was attempted and failed or was refused",
+    "review_required": "A person must examine a specific recorded issue before the source supports an updated claim",
+    "not_checked": "No retrieval was attempted in this run"
+  },
+  "runs": [
+    {
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "tool": "scripts/inspect_sources.py",
+      "method": "Metadata checks on every registry record. Retrieval of each canonical URL (and listed pages of multi-page documents) with a declared, honest user agent; one attempt per URL, no browser impersonation. Text extracted from HTML, or from PDF in reading-order and layout modes, and searched for every passage quoted by release findings, with recorded fallbacks for hyphenation and typographic marks.",
+      "scope": "All 73 registry records"
+    }
+  ],
+  "records": [
+    {
+      "source_id": "bis-advanced-semiconductor-controls-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
+          "http_status": 200,
+          "final_url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
+          "content_type": "text/html",
+          "bytes": 73996,
+          "sha256": "3a3d21704b1a09453d23dfc6eebdbcbfecd9ce61aae12a8dd264bde30705f056",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 4,
+        "found": 4,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 4 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ecfr-15-cfr-742-6-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-742/section-742.6",
+          "http_status": 200,
+          "final_url": "https://unblock.federalregister.gov/",
+          "content_type": "text/html",
+          "bytes": 10596,
+          "sha256": "c2ea1b17a01a8cf116ae03f89a8f2c21875e41dfb40c6edfaa925fa9af883199",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=742&section=742.6",
+          "http_status": 200,
+          "final_url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?subtitle=B&chapter=VII&subchapter=C&part=742&section=742.6",
+          "content_type": "text/html",
+          "bytes": 66177,
+          "sha256": "c9cb8f5ecc4ff9d0bd83254b8b4fef585b695f838fe2bfa0408766373da06a50",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Registered in IDE-008. Current eCFR text of section 742.6 retrieved through the eCFR API; the version history lists 39 versions, the latest dated 2026-07-23."
+      ],
+      "next_action": "Quote only with its version date; recheck before any current-law statement."
+    },
+    {
+      "source_id": "ecfr-15-cfr-740-25-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-740/section-740.25",
+          "http_status": 200,
+          "final_url": "https://unblock.federalregister.gov/",
+          "content_type": "text/html",
+          "bytes": 10596,
+          "sha256": "bc3afebaa9da45b3626a299f2923aaaba8f0414a0001f0a653a274c539bc52ef",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=740&section=740.25",
+          "http_status": 200,
+          "final_url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?subtitle=B&chapter=VII&subchapter=C&part=740&section=740.25",
+          "content_type": "text/html",
+          "bytes": 11769,
+          "sha256": "fabd6c52dffe865a8691c9543702d845354aae29ad87a99ddb5088baf92d9f60",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Registered in IDE-008. Current eCFR text of section 740.25 retrieved; one version, dated 2024-12-05."
+      ],
+      "next_action": "Quote only with its version date; recheck before any current-law statement."
+    },
+    {
+      "source_id": "eu-chips-act-2023",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://eur-lex.europa.eu/eli/reg/2023/1781/oj/eng",
+          "http_status": 202,
+          "final_url": "https://eur-lex.europa.eu/eli/reg/2023/1781/oj/eng",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "EUR-Lex returned HTTP 202 with no document body, an automated-access response."
+      ],
+      "next_action": "Retrieve the Official Journal text by an accepted route; check for amendments."
+    },
+    {
+      "source_id": "nist-chips-rd-facilities-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.nist.gov/news-events/news/2024/07/biden-harris-administration-announces-first-chips-america-rd-facilities-and",
+          "http_status": 200,
+          "final_url": "https://www.nist.gov/news-events/news/2024/07/biden-harris-administration-announces-first-chips-america-rd-facilities-and",
+          "content_type": "text/html",
+          "bytes": 98103,
+          "sha256": "69c9681e1083f6d390c10a28b30a9c3157f6f9ed38a42dca1de36082e0bb2bfb",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieved; no release finding quotes this source, so no passage comparison was possible."
+      ],
+      "next_action": "Compare against specific passages before first use in a finding."
+    },
+    {
+      "source_id": "tsmc-2024-annual-report",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investor.tsmc.com/static/annualReports/2024/english/index.html",
+          "http_status": 403,
+          "final_url": "https://investor.tsmc.com/static/annualReports/2024/english/index.html",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "TSMC's investor site refused automated retrieval (HTTP 403)."
+      ],
+      "next_action": "Retrieve by an accepted route before the next reassessment."
+    },
+    {
+      "source_id": "asml-2024-annual-reports",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible",
+        "review_required"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.asml.com/en/news/press-releases/2025/asml-publishes-2024-annual-reports",
+          "http_status": 403,
+          "final_url": "https://www.asml.com/en/news/press-releases/2025/asml-publishes-2024-annual-reports",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Registry status pending_review. The record points to a publication notice, and the notice refused automated retrieval (HTTP 403).",
+        "No finding cites this source; the annual report itself has not been reviewed."
+      ],
+      "next_action": "Keep pending_review. Retrieve the 2024 Annual Report document itself, register its document URL and check it against any claim before use."
+    },
+    {
+      "source_id": "nvidia-fiscal-2025-form-10-k",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner."
+    },
+    {
+      "source_id": "doe-us-data-center-energy-use-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers",
+          "http_status": 200,
+          "final_url": "https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers",
+          "content_type": "text/html",
+          "bytes": 121536,
+          "sha256": "f3fcad4e2715fb3a5b9e0aaaa7763cc5790a41800fb53056465718817f49c91b",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 5,
+        "found": 5,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 5 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "doe-powering-ai-data-centers-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.energy.gov/sites/default/files/2024-08/Powering%20AI%20and%20Data%20Center%20Infrastructure%20Recommendations%20July%202024.pdf",
+          "http_status": 200,
+          "final_url": "https://www.energy.gov/sites/default/files/2024-08/Powering%20AI%20and%20Data%20Center%20Infrastructure%20Recommendations%20July%202024.pdf",
+          "content_type": "application/pdf",
+          "bytes": 296533,
+          "sha256": "8f5e9f3c3378a80c21f1dc7cf1899b065ecd4f0af75d849c645e820fa8379df8",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "iea-energy-and-ai-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.iea.org/reports/energy-and-ai",
+          "http_status": 403,
+          "final_url": "https://www.iea.org/reports/energy-and-ai",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "The IEA site refused automated retrieval (HTTP 403), as in IDE-005."
+      ],
+      "next_action": "Retrieve the report by an accepted route before any reuse."
+    },
+    {
+      "source_id": "ucie-2-specification-release-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared",
+        "review_required"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
+          "http_status": 200,
+          "final_url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
+          "content_type": "application/pdf",
+          "bytes": 92701,
+          "sha256": "dacaaa4158b6942ab61cea26691e6dd8fe8b3c39dce42428ce0adbc8f4d99a31",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
+          "http_status": 200,
+          "final_url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
+          "content_type": "application/pdf",
+          "bytes": 92701,
+          "sha256": "dacaaa4158b6942ab61cea26691e6dd8fe8b3c39dce42428ce0adbc8f4d99a31",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "Registry status pending_review. Its canonical URL pointed to the consortium's press-release listing, which does not contain the release text.",
+        "The release is a PDF linked from that listing; it was retrieved and all six passages quoted by IDE-003 findings were found in it.",
+        "Metadata correction: canonical_url changed to the release PDF on 2026-11-10; the listing URL is kept in the history of this log."
+      ],
+      "next_action": "Keep pending_review. Promotion to active needs human review of the corrected record; the specification itself has not been reviewed."
+    },
+    {
+      "source_id": "ucie-1-specification-launch-2022",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.uciexpress.org/_files/ugd/0c1418_e7fa0820a56042d192bfa4e7d3493742.pdf",
+          "http_status": 200,
+          "final_url": "https://www.uciexpress.org/_files/ugd/0c1418_e7fa0820a56042d192bfa4e7d3493742.pdf",
+          "content_type": "application/pdf",
+          "bytes": 154851,
+          "sha256": "b565898287e69c74dd43ad6027f3dc8bd300205e8cae5962aad145815ec1ac6e",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 4,
+        "found": 4,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 4 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ucie-3-specification-release-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.uciexpress.org/_files/ugd/8dc731_ae67289d0ec646cdba5c1aee245538b3.pdf",
+          "http_status": 200,
+          "final_url": "https://4411c8cd-caac-4ca9-ac0b-296b5d36075d.filesusr.com/ugd/8dc731_ae67289d0ec646cdba5c1aee245538b3.pdf",
+          "content_type": "application/pdf",
+          "bytes": 100294,
+          "sha256": "fa2c680be7e0f1b3a3bf607b40f3c49c1671d5318bf6aec063eb078e20771a72",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ucie-3-specification-blog-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.uciexpress.org/post/ucie-3-0-specification-redefining-chiplet-interconnects",
+          "http_status": 200,
+          "final_url": "https://www.uciexpress.org/post/ucie-3-0-specification-redefining-chiplet-interconnects",
+          "content_type": "text/html",
+          "bytes": 725137,
+          "sha256": "1b476f5e060179023a41545efe62b26ef0166be081e2d3a69e04439eb89e4f2f",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ucie-2025-year-in-review",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.uciexpress.org/post/ucie-consortium-s-2025-year-in-review",
+          "http_status": 200,
+          "final_url": "https://www.uciexpress.org/post/ucie-consortium-s-2025-year-in-review",
+          "content_type": "text/html",
+          "bytes": 737503,
+          "sha256": "9b010749942b80901521463b791461761ccabd0c7cc15fe9e7e0c05f9127e73f",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "cxl-3-0-specification-release-2022",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://computeexpresslink.org/wp-content/uploads/2024/01/CXL_3.0-Specification-Release_FINAL-1.pdf",
+          "http_status": 200,
+          "final_url": "https://computeexpresslink.org/wp-content/uploads/2024/01/CXL_3.0-Specification-Release_FINAL-1.pdf",
+          "content_type": "application/pdf",
+          "bytes": 158651,
+          "sha256": "ce98ef846a279da4a427d10fa1d1027f2ad986e4a1b4e0a9237caf42c9ed2195",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieved; no release finding quotes this source, so no passage comparison was possible."
+      ],
+      "next_action": "Compare against specific passages before first use in a finding."
+    },
+    {
+      "source_id": "cxl-3-0-white-paper-2022",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://computeexpresslink.org/wp-content/uploads/2023/12/CXL_3.0_white-paper_FINAL.pdf",
+          "http_status": 200,
+          "final_url": "https://computeexpresslink.org/wp-content/uploads/2023/12/CXL_3.0_white-paper_FINAL.pdf",
+          "content_type": "application/pdf",
+          "bytes": 732680,
+          "sha256": "d8d8ba0e7cb27833ef0e718d8628ccd2693ffda2d44884da24e4fe25a560a2b6",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 10,
+        "found": 10,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 10 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "cxl-4-0-specification-release-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://computeexpresslink.org/wp-content/uploads/2025/11/CXL_4.0-Specification-Release_FINAL_Website-Copy.pdf",
+          "http_status": 200,
+          "final_url": "https://computeexpresslink.org/wp-content/uploads/2025/11/CXL_4.0-Specification-Release_FINAL_Website-Copy.pdf",
+          "content_type": "application/pdf",
+          "bytes": 164935,
+          "sha256": "29d8b87a09b5e309a66372cf233646c906768abb8d4920e858cc8f2d65dd7b73",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 3,
+        "found": 3,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 3 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "uec-specification-1-0-launch-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://ultraethernet.org/ultra-ethernet-consortium-uec-launches-specification-1-0-transforming-ethernet-for-ai-and-hpc-at-scale/",
+          "http_status": 200,
+          "final_url": "https://ultraethernet.org/ultra-ethernet-consortium-uec-launches-specification-1-0-transforming-ethernet-for-ai-and-hpc-at-scale/",
+          "content_type": "text/html",
+          "bytes": 173132,
+          "sha256": "3a4b3d9b09742326523bdf8027b95bfce09eca824301622076c662763f453d28",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 3,
+        "found": 3,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 3 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "uec-specification-1-1-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://ultraethernet.org/wp-content/uploads/sites/20/2026/10/UE-Specification-1.1.pdf",
+          "http_status": 200,
+          "final_url": "https://ultraethernet.org/wp-content/uploads/sites/20/2026/10/UE-Specification-1.1.pdf",
+          "content_type": "application/pdf",
+          "bytes": 17613842,
+          "sha256": "4c8436ec7daa627ad6cce0680bea66cfac496dfe4e217631064e68acafe04531",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 7,
+        "found": 7,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 7 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf",
+          "content_type": "application/pdf",
+          "bytes": 14567212,
+          "sha256": "b248c2d2198da22f0160c9fdea71a9bba7f86551c0715903b98f0c5525690578",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 27,
+        "found": 27,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 27 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf",
+          "content_type": "application/pdf",
+          "bytes": 4732505,
+          "sha256": "9976935adfc1b343a89d250f0be8881a092f9d459f554b58f67aad29a0d6861a",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 14,
+        "found": 14,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 14 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/",
+          "content_type": "text/html",
+          "bytes": 250032,
+          "sha256": "4524711006920d3721c8b433be6f13da8babc63ed95309163003348e4cdd7c71",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 8,
+        "found": 8,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 8 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-blackwell-water-efficiency-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://blogs.nvidia.com/blog/blackwell-platform-water-efficiency-liquid-cooling-data-centers-ai-factories/",
+          "http_status": 200,
+          "final_url": "https://blogs.nvidia.com/blog/blackwell-platform-water-efficiency-liquid-cooling-data-centers-ai-factories/",
+          "content_type": "text/html",
+          "bytes": 122399,
+          "sha256": "7c79c1d6f0aaf747e16d99419cb73ab8579cf876b17d157c64fc2feb6c182d2c",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 5,
+        "found": 5,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 5 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "vertiv-gb200-nvl72-reference-architecture-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.vertiv.com/en-emea/about/news-and-events/news-releases/vertiv-codevelops-with-nvidia-complete-power-and-cooling-blueprint-for--nvidia-gb200-nvl72-platform/",
+          "http_status": 200,
+          "final_url": "https://www.vertiv.com/en-emea/about/news-and-events/news-releases/vertiv-codevelops-with-nvidia-complete-power-and-cooling-blueprint-for--nvidia-gb200-nvl72-platform/",
+          "content_type": "text/html",
+          "bytes": 441086,
+          "sha256": "db3e75cff347728259fd5e51e22ec874b6bef6b37ca1552a7d1021a084179306",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 3,
+        "found": 3,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 3 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.opencompute.org/documents/ocp-wp-l-lcdu-test-methodology-performance-rating-r1-pdf/",
+          "http_status": 200,
+          "final_url": "https://www.opencompute.org/documents/ocp-wp-l-lcdu-test-methodology-performance-rating-r1-pdf/",
+          "content_type": "application/pdf",
+          "bytes": 732511,
+          "sha256": "d275179e3e3c8e837d39d268e9b8017a8e1ab7053ae2fd1438a9a9fb44d1ba6c",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 9,
+        "found": 9,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 9 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "tgg-pue-comprehensive-examination-2013",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://datacenters.lbl.gov/sites/default/files/WP49-PUE%20A%20Comprehensive%20Examination%20of%20the%20Metric_v6.pdf",
+          "http_status": 200,
+          "final_url": "https://datacenters.lbl.gov/sites/default/files/WP49-PUE%20A%20Comprehensive%20Examination%20of%20the%20Metric_v6.pdf",
+          "content_type": "application/pdf",
+          "bytes": 2200202,
+          "sha256": "06e6bdf895194d9287e86815158612393423e6e2561f1487e3739d331364b8a9",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 3,
+        "found": 3,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 3 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "tgg-wue-white-paper-35-2011",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.thegreengrid.org/system/files/store/WUE_v1.pdf",
+          "http_status": 200,
+          "final_url": "https://www.thegreengrid.org/system/files/store/WUE_v1.pdf",
+          "content_type": "application/pdf",
+          "bytes": 333876,
+          "sha256": "737871d9fc5c8585f27f513e58d2cf44d4c255e33a9149cb54fa7f52223eec62",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/index.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/index.html",
+          "content_type": "text/html",
+          "bytes": 40016,
+          "sha256": "b4e7487232fd35c97fc799218e0851b834929ca6484e44bf5fb66cbf28344874",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/introduction.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/introduction.html",
+          "content_type": "text/html",
+          "bytes": 22240,
+          "sha256": "de854adb6d439fe1f29e8aa87b8bfea2b99a68858fb187c763f9bd3904be9a60",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/pre-deployment-checklist.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/pre-deployment-checklist.html",
+          "content_type": "text/html",
+          "bytes": 24847,
+          "sha256": "900c8b63189f1dd34f42ae57e7cf20b952e0cce49f571fd0160e11481dab1442",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-bring-up.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-bring-up.html",
+          "content_type": "text/html",
+          "bytes": 64983,
+          "sha256": "55d9bf1d0bb53b593172ef65db2a1b15930ed4a779513d94ae7c1b465849d3c9",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-firmware-update.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-firmware-update.html",
+          "content_type": "text/html",
+          "bytes": 20408,
+          "sha256": "09eda2c92d2f5d8293d910f1c95df42f5bf257aecda56ac3e211080456753a6b",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/deployment-summary-validation-checklist.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/deployment-summary-validation-checklist.html",
+          "content_type": "text/html",
+          "bytes": 113203,
+          "sha256": "191ebc7f3468dc76fb5c4cf2487f2ffe5298ac9bed21c4d002f447751a5940a3",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 23,
+        "found": 23,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "The guide's version index lists 2.5.0 as the latest and preferred edition, with 2.3.1, 2.3.0, 2.2.0, 2.1.0 and 2.0.0 before it."
+      ],
+      "next_action": "Recheck the version index before citing a newer edition."
+    },
+    {
+      "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/pdf/nvidia-mission-control-software-with-nvidia-gb200-nvl72-systems-administration-guide.pdf",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/pdf/nvidia-mission-control-software-with-nvidia-gb200-nvl72-systems-administration-guide.pdf",
+          "content_type": "application/pdf",
+          "bytes": 6474090,
+          "sha256": "5c43bd54bac4482a0fce554e1aa0adde1c95d60c419d08827263c6bf63be46cb",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 9,
+        "found": 9,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 9 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-mission-control-north-south-network-guide-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/ext-north-south-network-gb200-deploy-guide/2.5.0/ext-north-south-network-gb200-intro.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/ext-north-south-network-gb200-deploy-guide/2.5.0/ext-north-south-network-gb200-intro.html",
+          "content_type": "text/html",
+          "bytes": 27477,
+          "sha256": "0306a4f2581c56a36e5d562137d72b59cb19ff1ad1480868ca5dc1e7fe98e747",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 1,
+        "found": 1,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 1 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-accelerator-2023",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+          "content_type": "text/html",
+          "bytes": 227153,
+          "sha256": "e372dea4eabe076fa3a98c21899a451184ed5cf50b5f84ca8c24a8cdb480f568",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Product page states 8 Infinity Fabric links and 128 GB/s peak Infinity Fabric link bandwidth; the data sheet states seven scale-up links."
+      ],
+      "next_action": "Record the 8-versus-7 link count as an open detail; do not resolve it by arithmetic."
+    },
+    {
+      "source_id": "amd-cdna3-white-paper-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf",
+          "content_type": "application/pdf",
+          "bytes": 8096236,
+          "sha256": "a0811d04f101f9127bd183d6e228f462b6fd988b0e0e6d263a25e4bed712f593",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 32,
+        "found": 32,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 32 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "amd-energy-efficiency-30x25-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/en/blogs/2024/accelerating-energy-efficiency-our-latest-30x25-u.html",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/en/blogs/2024/accelerating-energy-efficiency-our-latest-30x25-u.html",
+          "content_type": "text/html",
+          "bytes": 187372,
+          "sha256": "36825580c106e1497a89532d41ea18433f15d2e84078d3538b69bbae1d371545",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 3,
+        "found": 3,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 3 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "amd-synopsys-chiplet-packaging-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/en/blogs/2024/amd-and-synopsys-collaborate-on-the-development-of.html",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/en/blogs/2024/amd-and-synopsys-collaborate-on-the-development-of.html",
+          "content_type": "text/html",
+          "bytes": 186698,
+          "sha256": "a3713e877b1716e8661d1e5461638d144fdfec1c1b5a6ad7e9de3f32f5a81c38",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 2,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document; 2 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "amd-instinct-mi300-launch-2023",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1173/amd-delivers-leadership-portfolio-of-data-center-ai-solutions-with-amd-instinct-mi300-series",
+          "http_status": 200,
+          "final_url": "https://ir.amd.com/news-events/press-releases/detail/1173/amd-delivers-leadership-portfolio-of-data-center-ai-solutions-with-amd-instinct-mi300-series",
+          "content_type": "text/html",
+          "bytes": 57874,
+          "sha256": "c2d34f8d98235ef44264ab65ec96ed1fe7844f45d4569bb23611ffc9f9987137",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document; 1 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm3e-12h-technical-disclosure-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-develops-industry-first-36gb-hbm3e-12h-dram",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-develops-industry-first-36gb-hbm3e-12h-dram",
+          "content_type": "text/html",
+          "bytes": 132963,
+          "sha256": "d3bedf5403ac6339f0fc498a926df332125e5a70765e71ed3826f2aa18983f71",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieved; no release finding quotes this source, so no passage comparison was possible."
+      ],
+      "next_action": "Compare against specific passages before first use in a finding."
+    },
+    {
+      "source_id": "micron-hbm3e-technical-disclosure-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investors.micron.com/news-releases/news-release-details/micron-commences-volume-production-industry-leading-hbm3e",
+          "http_status": 200,
+          "final_url": "https://investors.micron.com/news/press-release/2024/Micron-Commences-Volume-Production-of-Industry-Leading-HBM3E-Solution-to-Accelerate-the-Growth-of-AI-02-26-2024/default.aspx",
+          "content_type": "text/html",
+          "bytes": 510357,
+          "sha256": "9f153b10f6409a20288f0f38d2c0a0300b8f2a04a0534a013687a2755d00d059",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieved; no release finding quotes this source, so no passage comparison was possible."
+      ],
+      "next_action": "Compare against specific passages before first use in a finding."
+    },
+    {
+      "source_id": "us-chips-and-science-act-2022",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.congress.gov/bill/117th-congress/house-bill/4346/text",
+          "http_status": 403,
+          "final_url": "https://www.congress.gov/bill/117th-congress/house-bill/4346/text",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieval failed; see the recorded attempt."
+      ],
+      "next_action": "Retry by an accepted route before reuse."
+    },
+    {
+      "source_id": "bis-semiconductor-manufacturing-controls-2023",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible",
+        "review_required"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.bis.gov/press-release/commerce-implements-new-export-controls-advanced-computing-and-semiconductor-manufacturing-items-october-17-2023",
+          "http_status": 404,
+          "final_url": "https://www.bis.gov/press-release/commerce-implements-new-export-controls-advanced-computing-and-semiconductor-manufacturing-items-october-17-2023",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "The canonical URL returned HTTP 404; the press release may have moved within bis.gov.",
+        "No finding cites this source."
+      ],
+      "next_action": "Locate the current URL of the 2023-10-17 release and correct the record; do not retire it on one failed request."
+    },
+    {
+      "source_id": "uk-national-semiconductor-strategy-2023",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.gov.uk/government/publications/national-semiconductor-strategy/national-semiconductor-strategy",
+          "http_status": 200,
+          "final_url": "https://www.gov.uk/government/publications/national-semiconductor-strategy/national-semiconductor-strategy",
+          "content_type": "text/html",
+          "bytes": 468813,
+          "sha256": "3f5a96ef5c35275d38d6fd2d37c5d2436a90251fc3e6d4108d6c60ed5ac36c32",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieved; no release finding quotes this source, so no passage comparison was possible."
+      ],
+      "next_action": "Compare against specific passages before first use in a finding."
+    },
+    {
+      "source_id": "japan-economic-security-promotion-act-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.meti.go.jp/english/policy/economy/economicsecurity/index.html",
+          "http_status": 403,
+          "final_url": "https://www.meti.go.jp/english/policy/economy/economicsecurity/index.html",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieval failed; see the recorded attempt."
+      ],
+      "next_action": "Retry by an accepted route before reuse."
+    },
+    {
+      "source_id": "intel-fiscal-2024-form-10-k",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086300000124/intc-20241228.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086300000124/intc-20241228.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner."
+    },
+    {
+      "source_id": "globalfoundries-fiscal-2024-form-10-k",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1709048/000170904825000023/gfs-20241231.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/1709048/000170904825000023/gfs-20241231.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner."
+    },
+    {
+      "source_id": "oecd-semiconductor-policy-landscape-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.oecd.org/en/publications/government-policies-targeting-the-semiconductor-industry_9ag68604-en.html",
+          "http_status": 403,
+          "final_url": "https://www.oecd.org/en/publications/government-policies-targeting-the-semiconductor-industry_9ag68604-en.html",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Retrieval failed; see the recorded attempt."
+      ],
+      "next_action": "Retry by an accepted route before reuse."
+    },
+    {
+      "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.jedec.org/news/pressreleases/jedec%C2%AE-and-industry-leaders-collaborate-release-jesd270-4-hbm4-standard-advancing",
+          "http_status": 200,
+          "final_url": "https://www.jedec.org/news/pressreleases/jedec%C2%AE-and-industry-leaders-collaborate-release-jesd270-4-hbm4-standard-advancing",
+          "content_type": "text/html",
+          "bytes": 45181,
+          "sha256": "b2d0ba1a3afc8e1bd0ccdf6a4eae80d5b98bb3069004ca182685a7a18f0969e0",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 12,
+        "found": 12,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 12 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-hbm4-12h-samples-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-ships-world-first-12-layer-hbm4-samples-to-customers/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-ships-world-first-12-layer-hbm4-samples-to-customers/",
+          "content_type": "text/html",
+          "bytes": 144077,
+          "sha256": "6dc57737c732de5a81956b1d293c28b65de24a1390e8fbb58d00f34784f8e437",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 10,
+        "found": 10,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 10 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-hbm4-development-mass-production-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production/",
+          "content_type": "text/html",
+          "bytes": 145758,
+          "sha256": "6ab2c7d625e884c44b8727c4ed6d822017ca9ace316d40157cb68a4e1b90e750",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 8,
+        "found": 8,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 2,
+        "not_found": []
+      },
+      "notes": [
+        "All 8 quoted passages were found in the retrieved document; 2 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-tsmc-hbm4-mou-2024",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-partners-with-tsmc-to-strengthen-hbm-technological-leadership/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-partners-with-tsmc-to-strengthen-hbm-technological-leadership/",
+          "content_type": "text/html",
+          "bytes": 145439,
+          "sha256": "4127fdbbaa9ff0a0a139521012a9fe7cfced4537e26d74524a34ff619bc91e2f",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 6 quoted passages were found in the retrieved document; 1 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-3q25-results-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+          "content_type": "text/html",
+          "bytes": 149386,
+          "sha256": "b636cb14dafd8f967988f898343c513c7ea5cae7fdb2cc5de33bda7809fbe910",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-fy25-results-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+          "content_type": "text/html",
+          "bytes": 156815,
+          "sha256": "049036e8541ba9fb3ed3b858420410279aac84e4b8f05620134fdca61ff87dc4",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "micron-hbm4-samples-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investors.micron.com/news-releases/news-release-details/micron-ships-hbm4-key-customers-power-next-gen-ai-platforms",
+          "http_status": 200,
+          "final_url": "https://investors.micron.com/news/press-release/2025/Micron-Ships-HBM4-to-Key-Customers-to-Power-Next-Gen-AI-Platforms-06-10-2025/default.aspx",
+          "content_type": "text/html",
+          "bytes": 511098,
+          "sha256": "53f09910008524a6f10f98b91f7feb1f44743f1b11c2258adad5ba60d7f64d6e",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 6 quoted passages were found in the retrieved document; 1 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "micron-hbm4-volume-production-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investors.micron.com/news/press-release/2026/Micron-in-High-Volume-Production-of-HBM4-Designed-for-NVIDIA-Vera-Rubin-PCIe-Gen6-SSD-and-SOCAMM2-03-16-2026/default.aspx",
+          "http_status": 200,
+          "final_url": "https://investors.micron.com/news/press-release/2026/Micron-in-High-Volume-Production-of-HBM4-Designed-for-NVIDIA-Vera-Rubin-PCIe-Gen6-SSD-and-SOCAMM2-03-16-2026/default.aspx",
+          "content_type": "text/html",
+          "bytes": 513475,
+          "sha256": "28a79939b052387e4b158ddfc3b99904fb35499b8902fe8deef2dc4e166a0992",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 11,
+        "found": 11,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 11 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "tsmc-2025-na-technology-symposium",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://pr.tsmc.com/english/news/3228",
+          "http_status": 403,
+          "final_url": "https://pr.tsmc.com/english/news/3228",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "TSMC's press site refused automated retrieval (HTTP 403)."
+      ],
+      "next_action": "Retrieve by an accepted route before the next reassessment."
+    },
+    {
+      "source_id": "tsmc-2025-annual-report",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investor.tsmc.com/static/annualReports/2025/english/pdf/2025_tsmc_ar_e_ch5.pdf",
+          "http_status": 403,
+          "final_url": "https://investor.tsmc.com/static/annualReports/2025/english/pdf/2025_tsmc_ar_e_ch5.pdf",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "TSMC's investor site refused automated retrieval (HTTP 403). The 5.5-reticle CoWoS-L passages could not be rechecked."
+      ],
+      "next_action": "Retrieve the 2025 annual report by an accepted route and recheck the CoWoS-L passages; keep the existing locators."
+    },
+    {
+      "source_id": "nvidia-rubin-gpu-architecture-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
+          "content_type": "text/html",
+          "bytes": 347538,
+          "sha256": "43ab474cc02c441ee347011f63fcf650804fe15ca47889c19e2c378de197c210",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 15,
+        "found": 15,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 15 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-rubin-ces-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Kicks-Off-the-Next-Generation-of-AI-With-Rubin--Six-New-Chips-One-Incredible-AI-Supercomputer/default.aspx",
+          "http_status": 200,
+          "final_url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Kicks-Off-the-Next-Generation-of-AI-With-Rubin--Six-New-Chips-One-Incredible-AI-Supercomputer/default.aspx",
+          "content_type": "text/html",
+          "bytes": 139028,
+          "sha256": "d602ec57fcbff87373dd95c2cabf01d7e1fa2ab887f84fc3a823b35dcd5d144d",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4-commercial-shipment-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsungsemiconductor.com/global/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing/",
+          "http_status": 200,
+          "final_url": "https://news.samsungsemiconductor.com/global/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing/",
+          "content_type": "text/html",
+          "bytes": 48910,
+          "sha256": "a8ac56b71efaebf8a02e2fc2cd91463613edd191e1dc1a9241497a872363e480",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 19,
+        "found": 19,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 19 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4-gtc-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026",
+          "content_type": "text/html",
+          "bytes": 156173,
+          "sha256": "0efaa4245e41657d5b0394c6dcb2922fc163def3e1cb4b65d6bbd4a588c33dd8",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 8,
+        "found": 8,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 8 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4e-samples-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-electronics-begins-shipment-of-industry-first-hbm4e-samples",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-electronics-begins-shipment-of-industry-first-hbm4e-samples",
+          "content_type": "text/html",
+          "bytes": 136613,
+          "sha256": "44cdf779f98f07b0e7628fc143e8362fc99bedaf400582c6620e0c2d01a76762",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 17,
+        "found": 17,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 5,
+        "not_found": []
+      },
+      "notes": [
+        "All 17 quoted passages were found in the retrieved document; 5 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-q3-2025-results-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2025-results",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2025-results",
+          "content_type": "text/html",
+          "bytes": 141992,
+          "sha256": "9dfbea28ceecef302d0d187acc69dc816a8c2e544f95389a3971e6a9036a0140",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 3,
+        "found": 3,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 3 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-q3-2026-results-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results",
+          "content_type": "text/html",
+          "bytes": 152209,
+          "sha256": "fa087757bf787bce3d492a3202f48784526530cd24baa8aa1b4418b33baa2bd2",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4-product-page-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://semiconductor.samsung.com/dram/hbm/hbm4/",
+          "http_status": 200,
+          "final_url": "https://semiconductor.samsung.com/dram/hbm/hbm4/",
+          "content_type": "text/html",
+          "bytes": 419509,
+          "sha256": "c21bbf0ff7aa92e11f2109bf6e74139f4f7325e46e10ced980e9c6688d551a4d",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-co-design-memory-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory",
+          "content_type": "text/html",
+          "bytes": 317326,
+          "sha256": "3d19d083582d7cf316b1197d4797b8dd1a14af9014da8ce80ccd523c6bb2ceb5",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 7,
+        "found": 7,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 7 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/",
+          "http_status": 200,
+          "final_url": "https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/",
+          "content_type": "text/html",
+          "bytes": 293230,
+          "sha256": "b995fd7f9669d33c814b544b2567a7c75e58b8586506217cab5331c3322b8a97",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Registered in IDE-008. Its specification table lists, per Rubin GPU, 288 GB HBM4 at 19.2 TB/s and 3 TB/s of NVLink bandwidth; per rack 216 TB/s of NVLink."
+      ],
+      "next_action": "Use only with its page-metadata date; reassess the Rubin memory and NVLink issues against it."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-data-sheet-2025",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf",
+          "content_type": "application/pdf",
+          "bytes": 1855742,
+          "sha256": "60d78bc2849cd7c3a34aa17fdbcd263c44c0447d597895ab41d2832ab740c7ab",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "Registered in IDE-008. States seven Infinity Fabric links per GPU and 128 GB/s bidirectional between each GPU."
+      ],
+      "next_action": "Reassess the MI300X public statements against it; it does not state encoding or effective bandwidth."
+    },
+    {
+      "source_id": "nvidia-rubin-platform-architecture-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "content_type": "text/html",
+          "bytes": 663731,
+          "sha256": "755a4e6f534c78067601209a8bad49f1145beccb90574f1dbdc732a0fa53fd9d",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 21,
+        "found": 21,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 21 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "micron-fy2026-form-10-k",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000023/mu-20260903.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000023/mu-20260903.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner, and recheck the base-die passage."
+    },
+    {
+      "source_id": "micron-q3-fy2026-results-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000013/a2026q3ex991-pressrelease.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000013/a2026q3ex991-pressrelease.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner."
+    },
+    {
+      "source_id": "skhynix-424b4-prospectus-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0002120882/000119312526299963/d32785d424b4.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/0002120882/000119312526299963/d32785d424b4.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner, and recheck the custom-HBM passage."
+    },
+    {
+      "source_id": "skhynix-full-stack-memory-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/hbm-to-essd/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/hbm-to-essd/",
+          "content_type": "text/html",
+          "bytes": 167964,
+          "sha256": "84150b6be96b4040144cd00199332755ffffe62f1569abc790ea2f097e4baee8",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 4,
+        "found": 4,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 3,
+        "not_found": []
+      },
+      "notes": [
+        "All 4 quoted passages were found in the retrieved document; 3 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-tsmc-symposium-2026",
+      "run_id": "ide-008-2026-11-10",
+      "inspected_at": "2026-11-10",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/tsmc-technology-symposium-2026/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/tsmc-technology-symposium-2026/",
+          "content_type": "text/html",
+          "bytes": 164735,
+          "sha256": "383ae84c45c2621ed4e5a6946651aecfb83785c53242447c95a27e896c6e545d",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document; 1 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    }
+  ]
+}
