@@ -43,6 +43,10 @@ SHORT = {"pathway-hbm-to-advanced-packaging": "HBM to packaging", "pathway-memor
          "pathway-rack-to-deployable-compute": "Rack to deployment"}
 
 e = html.escape
+MAINTENANCE: dict[str, list[dict]] = {}
+ISSUE_STATE = {"open_conflict": "open conflict", "missing_primary_evidence": "missing primary evidence",
+               "version_scope_difference": "version-scope difference", "source_access_blocked": "source access blocked",
+               "requires_reassessment": "requires reassessment", "resolved_with_evidence": "resolved with evidence; public wording under review"}
 
 
 def ranges(nums: list[int]) -> str:
@@ -66,6 +70,12 @@ def load():
         releases[r["release_id"]] = r
         for u in r["unresolved"]:
             unresolved[u["id"]] = u
+    MAINTENANCE.clear()
+    conflicts_path = ROOT / "data" / "evidence-conflicts.json"
+    if conflicts_path.is_file():  # IDE-008: steps affected by a register issue carry a maintenance note
+        for issue in json.loads(conflicts_path.read_text(encoding="utf-8"))["issues"]:
+            for sid in issue["affected_pathway_steps"]:
+                MAINTENANCE.setdefault(sid, []).append(issue)
     return model, registry, unresolved, releases
 
 
@@ -200,6 +210,10 @@ def render(model, registry, unresolved, releases) -> str:
                 out.append(f"<dt>Open questions</dt><dd><ul>{qs}</ul></dd>")
             if st["next_evidence"]:
                 out.append(f'<dt>Next evidence</dt><dd>{e(st["next_evidence"])}</dd>')
+            if MAINTENANCE.get(st["id"]):
+                notes = "".join(f'<li><a href="/sources/#{i["id"]}">{e(i["title"])}</a>: {ISSUE_STATE[i["state"]]}</li>'
+                                for i in MAINTENANCE[st["id"]])
+                out.append(f"<dt>Evidence maintenance</dt><dd><ul>{notes}</ul></dd>")
             out.append("</dl></details></li>")
         out.append("</ol>")
         if pw.get("comparisons"):

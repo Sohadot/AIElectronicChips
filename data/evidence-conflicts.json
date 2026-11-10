@@ -1,0 +1,768 @@
+{
+  "register_id": "aec-evidence-conflicts",
+  "schema_version": "1.0.0",
+  "status": "maintenance_record",
+  "scientific_review": "pending",
+  "as_of": "2026-11-10",
+  "boundary": "A register of material contradictions and open evidence questions, not an Atlas: it records no dependency relationship and approves no claim. A resolution narrows a conclusion only where retrieved primary evidence justifies it; earlier releases are kept unchanged as historical records, and the public statements to revise are listed for editorial review.",
+  "state_definitions": {
+    "open_conflict": "Two or more sources state the same quantity or fact differently and nothing reviewed explains why",
+    "missing_primary_evidence": "The quantity or fact is not stated in any reviewed primary source",
+    "version_scope_difference": "Statements differ because they belong to different versions or editions; not a contradiction",
+    "source_access_blocked": "The source needed to recheck the issue could not be retrieved",
+    "requires_reassessment": "New evidence changes how existing statements should be presented, without resolving the issue",
+    "resolved_with_evidence": "Retrieved primary evidence justifies a narrower, corrected conclusion; remaining uncertainty is stated"
+  },
+  "issues": [
+    {
+      "id": "ec-rubin-memory-bandwidth",
+      "title": "Rubin GPU memory bandwidth: 22 TB/s or 19.2 TB/s",
+      "question": "Is the peak HBM4 bandwidth of one NVIDIA Rubin GPU 22 TB/s or 19.2 TB/s, and do the two figures describe different configurations or bases?",
+      "state": "requires_reassessment",
+      "ontology_layers": [
+        "memory",
+        "design"
+      ],
+      "scope": {
+        "product": "NVIDIA Rubin GPU, per GPU",
+        "temporal": "NVIDIA statements dated 2026-01-05 to 2026-11-05"
+      },
+      "source_ids": [
+        "nvidia-rubin-platform-architecture-2026",
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-co-design-memory-2026",
+        "nvidia-vera-rubin-nvl72-product-page-2026"
+      ],
+      "finding_ids": [
+        "f-nv-rubin",
+        "f-nv-rubin-192",
+        "f-an-rubin-stacks",
+        "i-nvidia-rubin-io-ledger"
+      ],
+      "unresolved_ids": [
+        "u-rubin-bandwidth"
+      ],
+      "affected_references": [
+        "/hbm-memory/#accelerators",
+        "/interconnects/#memory-vs-fabric",
+        "/interconnects/#measurement"
+      ],
+      "affected_pathway_steps": [
+        "b2-device-memory",
+        "b4-memory-vs-fabric"
+      ],
+      "affected_comparisons": [
+        "cmp-rubin-22-vs-19",
+        "cmp-mi300x-vs-rubin-memory",
+        "cmp-memory-vs-scale-up"
+      ],
+      "evidence": [
+        {
+          "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+          "locator": "Specification table, Rubin GPU column: \"288 GB HBM4 | 19.2 TB/s\"",
+          "observation": "NVIDIA's product specification page (metadata date 2026-10-21) gives 19.2 TB/s per GPU."
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "Article of 2026-01-05: \"aggregate bandwidth of up to 22 TB/s\"",
+          "observation": "Still published unchanged on 2026-11-10; the passage was found."
+        },
+        {
+          "source_id": "nvidia-rubin-gpu-architecture-2026",
+          "locator": "Article of 2026-07-21: \"22 TB/s\"",
+          "observation": "Still published unchanged on 2026-11-10; the passage was found."
+        }
+      ],
+      "posture": "NVIDIA's product specification page and its 2026-11-05 article both give 19.2 TB/s per Rubin GPU; its January and July articles, still published, give 22 TB/s. No NVIDIA source explains the difference, so neither figure is withdrawn here. Public statements should present 19.2 TB/s as the figure on NVIDIA's current specification page and 22 TB/s as an earlier stated figure, each with its date.",
+      "unknown": [
+        "Whether 22 TB/s described a different memory configuration, speed grade or basis",
+        "Whether NVIDIA will correct either article"
+      ],
+      "next_evidence": "An NVIDIA statement reconciling the two figures, or a versioned Rubin specification document",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-09",
+          "event": "registered",
+          "detail": "Recorded as unresolved question u-rubin-bandwidth in Evidence Release 001."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "evidence_added",
+          "detail": "Vera Rubin NVL72 specification page retrieved; it lists 19.2 TB/s per GPU."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "State set to requires_reassessment: new evidence changes how the figures should be presented, but the conflict is not explained."
+        }
+      ],
+      "downstream_review": [
+        "/hbm-memory/#accelerators: present 19.2 TB/s as the current specification-page figure, keeping 22 TB/s with its dates",
+        "Pathway B step b2-device-memory and comparison cmp-rubin-22-vs-19: reassess wording; the verdict stays conditional until NVIDIA explains the difference"
+      ]
+    },
+    {
+      "id": "ec-nvlink6-per-gpu",
+      "title": "NVLink 6 bandwidth per Rubin GPU: 3.6 TB/s or 3.0 TB/s",
+      "question": "Is NVLink 6 bandwidth per Rubin GPU 3.6 TB/s or 3.0 TB/s, and do the figures differ in direction or measurement basis?",
+      "state": "requires_reassessment",
+      "ontology_layers": [
+        "interconnect"
+      ],
+      "scope": {
+        "product": "NVIDIA Rubin GPU and Vera Rubin NVL72, per GPU and per rack",
+        "temporal": "NVIDIA statements dated 2026-01-05 to 2026-11-05"
+      },
+      "source_ids": [
+        "nvidia-rubin-platform-architecture-2026",
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-co-design-memory-2026",
+        "nvidia-vera-rubin-nvl72-product-page-2026"
+      ],
+      "finding_ids": [
+        "i-nvidia-nvlink6-figures",
+        "i-nvidia-rubin-io-ledger",
+        "i-an-units-and-directions",
+        "i-nvidia-gb200-aggregate"
+      ],
+      "unresolved_ids": [
+        "u-i-nvlink6-figure"
+      ],
+      "affected_references": [
+        "/interconnects/#fabrics",
+        "/interconnects/#measurement"
+      ],
+      "affected_pathway_steps": [
+        "b5-scale-up",
+        "b8-reading-figures"
+      ],
+      "affected_comparisons": [
+        "cmp-mi300x-p2p-vs-nvlink6",
+        "cmp-rack-vs-gpu",
+        "cmp-scale-up-vs-scale-out"
+      ],
+      "evidence": [
+        {
+          "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+          "locator": "Specification table, NVLink row for rack, superchip and GPU: \"NVLink Bandwidth 216 TB/s 6 TB/s 3 TB/s\"",
+          "observation": "NVIDIA's specification page gives 3 TB/s per GPU and 216 TB/s per 72-GPU rack (72 × 3), with no direction stated."
+        },
+        {
+          "source_id": "nvidia-rubin-platform-architecture-2026",
+          "locator": "Article of 2026-01-05: \"3.6 TB/s\"",
+          "observation": "Still published on 2026-11-10 as a bidirectional per-GPU figure."
+        }
+      ],
+      "posture": "NVIDIA's specification page (metadata date 2026-10-21) and its 2026-11-05 article give 3 TB/s per Rubin GPU; its January article, still published, gives 3.6 TB/s bidirectional. Neither states the other's basis, so the difference is not attributed to direction. Public comparisons should cite the figure and date they use.",
+      "unknown": [
+        "Whether 3 TB/s and 3.6 TB/s use the same direction convention",
+        "Whether NVIDIA revised the per-GPU figure"
+      ],
+      "next_evidence": "An NVIDIA NVLink 6 specification stating per-GPU bandwidth with its direction and basis",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-09",
+          "event": "registered",
+          "detail": "Recorded as unresolved question u-i-nvlink6-figure in Evidence Release 004."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "evidence_added",
+          "detail": "Vera Rubin NVL72 specification page retrieved; it lists 3 TB/s per GPU and 216 TB/s per rack."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "State set to requires_reassessment; the conflict is narrowed, not explained."
+        }
+      ],
+      "downstream_review": [
+        "/interconnects/#measurement: add the specification-page figure and date beside the existing entries",
+        "Pathway B comparisons cmp-rack-vs-gpu and cmp-scale-up-vs-scale-out: recheck the 3.6 TB/s figure they use"
+      ]
+    },
+    {
+      "id": "ec-mi300x-infinity-fabric-scope",
+      "title": "MI300X Infinity Fabric: scope and direction of 896 GB/s",
+      "question": "Is AMD's 896 GB/s 'P2P ring peak aggregate' figure per GPU or per platform, and in which direction?",
+      "state": "resolved_with_evidence",
+      "ontology_layers": [
+        "interconnect"
+      ],
+      "scope": {
+        "product": "AMD Instinct MI300X, 8-GPU platform",
+        "temporal": "AMD documents dated 2025-04-07 (white paper) and 2025-06-16 (data sheet)"
+      },
+      "source_ids": [
+        "amd-cdna3-white-paper-2025",
+        "amd-instinct-mi300x-data-sheet-2025",
+        "amd-instinct-mi300x-accelerator-2023"
+      ],
+      "finding_ids": [
+        "i-amd-mi300x-topology",
+        "i-an-mi300x-link-arithmetic",
+        "i-amd-mi300x-links",
+        "i-an-memory-vs-fabric"
+      ],
+      "unresolved_ids": [
+        "u-i-amd-link-scope"
+      ],
+      "affected_references": [
+        "/interconnects/#case-mi300x",
+        "/interconnects/#fabrics",
+        "/interconnects/#measurement",
+        "/interconnects/#memory-vs-fabric"
+      ],
+      "affected_pathway_steps": [
+        "b4-memory-vs-fabric",
+        "b5-scale-up"
+      ],
+      "affected_comparisons": [
+        "cmp-mi300x-p2p-vs-nvlink6"
+      ],
+      "evidence": [
+        {
+          "source_id": "amd-instinct-mi300x-data-sheet-2025",
+          "locator": "Data sheet: \"direct connectivity of 128 GB/s bidirectional bandwidth between each GPU\"",
+          "observation": "AMD states a per-peer, bidirectional link figure."
+        },
+        {
+          "source_id": "amd-instinct-mi300x-data-sheet-2025",
+          "locator": "Data sheet: \"seven AMD Infinity Fabric links for full connectivity between eight GPUs in a ring\"; table: \"7x 128 GB/s\"",
+          "observation": "AMD states seven scale-up links per GPU at 128 GB/s each."
+        },
+        {
+          "source_id": "amd-instinct-mi300x-accelerator-2023",
+          "locator": "Product page: \"Peak Infinity Fabric™ Link Bandwidth 128 GB/s\"",
+          "observation": "The product page gives the same per-link figure but lists 8 Infinity Fabric links."
+        }
+      ],
+      "posture": "AMD's data sheet states seven Infinity Fabric links per GPU at 128 GB/s bidirectional each. Seven times 128 GB/s is 896 GB/s, so AMD's own documents now support reading the white paper's 896 GB/s as a per-GPU, both-direction aggregate, which Release 004 had derived only as an assumption. The data sheet does not itself state 896 GB/s, and encoding and effective bandwidth remain undisclosed.",
+      "unknown": [
+        "Encoding and effective link bandwidth",
+        "Why the product page lists 8 Infinity Fabric links where the data sheet lists seven scale-up links"
+      ],
+      "next_evidence": "AMD documentation of link encoding, and of the eighth link the product page counts",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-09",
+          "event": "registered",
+          "detail": "Recorded as unresolved question u-i-amd-link-scope in Evidence Release 004."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "evidence_added",
+          "detail": "MI300X data sheet and product page retrieved; both give 128 GB/s per link, the data sheet bidirectional."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "resolved",
+          "detail": "Scope and direction resolved from AMD's data sheet: seven links at 128 GB/s bidirectional per GPU make 896 GB/s a per-GPU, both-direction aggregate. Release 004 is unchanged as a historical record; public statements are listed for revision."
+        }
+      ],
+      "downstream_review": [
+        "/interconnects/#case-mi300x and #measurement: replace 'scope and direction not stated' with AMD's data-sheet statement, citing it",
+        "Pathway B comparison cmp-mi300x-p2p-vs-nvlink6: reassess; the scope reason no longer holds, but the comparison still crosses vendors and NVLink figures stay in conflict"
+      ]
+    },
+    {
+      "id": "ec-cowos-l-5p5-reticle",
+      "title": "5.5-reticle CoWoS-L: qualified or in volume production",
+      "question": "Has 5.5-reticle CoWoS-L completed qualification and entered volume production, given TSMC's two differing statements?",
+      "state": "source_access_blocked",
+      "ontology_layers": [
+        "packaging"
+      ],
+      "scope": {
+        "product": "TSMC CoWoS-L at 5.5 reticles",
+        "temporal": "TSMC 2025 annual report (published 2026-04-16)"
+      },
+      "source_ids": [
+        "tsmc-2025-annual-report"
+      ],
+      "finding_ids": [
+        "p-cowos-l-large-reticle"
+      ],
+      "unresolved_ids": [
+        "u-p-cowos-l-5p5-status"
+      ],
+      "affected_references": [
+        "/design-fabrication-packaging/#interposer-scaling"
+      ],
+      "affected_pathway_steps": [
+        "a5-integration-platforms"
+      ],
+      "affected_comparisons": [],
+      "evidence": [],
+      "posture": "The two statements in TSMC's 2025 report could not be rechecked: TSMC's investor site refused automated retrieval on 2026-11-10. The conflict recorded in Release 003 stands; no newer TSMC statement was reviewed. A roadmap or qualification statement does not establish production deployment for any named product.",
+      "unknown": [
+        "Whether 5.5-reticle CoWoS-L is qualified, in volume production, or both",
+        "Which products use it"
+      ],
+      "next_evidence": "The TSMC 2025 annual report retrieved by an accepted route, and any later TSMC statement on 5.5-reticle CoWoS-L",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-09",
+          "event": "registered",
+          "detail": "Recorded as unresolved question u-p-cowos-l-5p5-status in Evidence Release 003."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "Retrieval refused (HTTP 403); state set to source_access_blocked."
+        }
+      ],
+      "downstream_review": []
+    },
+    {
+      "id": "ec-hbm4-package-qualification",
+      "title": "HBM4 package integration and qualification",
+      "question": "Which interposer, substrate, assembly and qualification records tie named HBM4 stacks to named accelerator packages?",
+      "state": "missing_primary_evidence",
+      "ontology_layers": [
+        "memory",
+        "packaging"
+      ],
+      "scope": {
+        "product": "HBM4 stacks in named accelerator packages",
+        "temporal": "Statements dated 2024-04-18 to 2026-11-05"
+      },
+      "source_ids": [
+        "skhynix-tsmc-hbm4-mou-2024",
+        "tsmc-2025-na-technology-symposium",
+        "amd-synopsys-chiplet-packaging-2024",
+        "micron-hbm4-volume-production-2026",
+        "samsung-hbm4-gtc-2026"
+      ],
+      "finding_ids": [
+        "f-tsmc-cowos",
+        "f-skh-cowos",
+        "f-an-substitution",
+        "p-amd-mi300x-cowos"
+      ],
+      "unresolved_ids": [
+        "u-interposer-substrate",
+        "u-qualification",
+        "u-p-mi300x-cowos-variant"
+      ],
+      "affected_references": [
+        "/hbm-memory/#packaging",
+        "/hbm-memory/#substitution",
+        "/design-fabrication-packaging/#case-mi300x"
+      ],
+      "affected_pathway_steps": [
+        "a4-stack-to-package",
+        "a6-product-case",
+        "a8-qualification-gap"
+      ],
+      "affected_comparisons": [],
+      "evidence": [],
+      "posture": "No reviewed source names the package technology, substrate, assembly site or qualification of any named HBM4 accelerator. Supplier design-target statements and foundry roadmaps do not establish qualification or production integration. MI300X, the one product with a disclosed package, uses HBM3.",
+      "unknown": [
+        "Package technology and substrate of any named HBM4 accelerator",
+        "Accelerator-maker qualification of named HBM4 suppliers and speed grades"
+      ],
+      "next_evidence": "Accelerator-maker or foundry disclosures naming the package and qualified HBM4 parts for a specific product",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-09",
+          "event": "registered",
+          "detail": "Recorded as u-interposer-substrate and u-qualification in Evidence Release 001."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "All cited supplier and AMD pages that could be retrieved still carry the quoted passages; none adds package or qualification records."
+        }
+      ],
+      "downstream_review": []
+    },
+    {
+      "id": "ec-gb200-power-redundancy",
+      "title": "GB200 NVL72 power-shelf redundancy: N+N or N",
+      "question": "Do GB200 NVL72 power shelves provide N+N redundancy, as the user guide says, or N redundancy, as the reference architecture says?",
+      "state": "open_conflict",
+      "ontology_layers": [
+        "power_thermal"
+      ],
+      "scope": {
+        "product": "DGX GB200 NVL72 rack power shelves",
+        "temporal": "User guide 2026-09-17; reference architecture 2025-09-03"
+      },
+      "source_ids": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025"
+      ],
+      "finding_ids": [
+        "pt-gb-power-shelves",
+        "pt-ra-power-shelves",
+        "pt-an-psu-arithmetic"
+      ],
+      "unresolved_ids": [
+        "u-pt-redundancy-conflict"
+      ],
+      "affected_references": [
+        "/power-and-thermal-limits/#electrical-chain",
+        "/power-and-thermal-limits/#case-gb200",
+        "/ai-chip-infrastructure/#electrical-cooling"
+      ],
+      "affected_pathway_steps": [
+        "c3-electrical"
+      ],
+      "affected_comparisons": [],
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "User guide: \"provide N+N redundancy\"",
+          "observation": "Retrieved 2026-11-10; the passage is unchanged."
+        },
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "Reference architecture: \"configured as N redundancy\"",
+          "observation": "Retrieved 2026-11-10; the passage is unchanged."
+        }
+      ],
+      "posture": "Both NVIDIA documents, retrieved on 2026-11-10, still state the redundancy differently, and neither explains the intended configuration. Redundancy is not inferred from installed PSU capacity.",
+      "unknown": [
+        "The intended redundancy scheme and the usable capacity under it"
+      ],
+      "next_evidence": "An NVIDIA power-shelf specification stating the redundancy scheme",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-10",
+          "event": "registered",
+          "detail": "Recorded as u-pt-redundancy-conflict in Evidence Release 005."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "Both documents retrieved; both passages unchanged; conflict stands."
+        }
+      ],
+      "downstream_review": []
+    },
+    {
+      "id": "ec-gb200-busbar-rack-power",
+      "title": "GB200 NVL72 bus bar rating versus rack power",
+      "question": "How does a 1,400 A bus bar at a nominal 50 to 51 V carry an approximately 120 kW rack, and how many bus-bar paths are there?",
+      "state": "missing_primary_evidence",
+      "ontology_layers": [
+        "power_thermal"
+      ],
+      "scope": {
+        "product": "GB200 NVL72 rack DC distribution",
+        "temporal": "OCP contribution 2024-10-15; user guide 2026-09-17"
+      },
+      "source_ids": [
+        "nvidia-gb200-nvl72-ocp-contribution-2024",
+        "nvidia-dgx-gb-rack-user-guide-2026"
+      ],
+      "finding_ids": [
+        "pt-ocp-bus-bar",
+        "pt-an-bus-bar-capacity",
+        "pt-gb-power-shelves"
+      ],
+      "unresolved_ids": [
+        "u-pt-bus-bar-paths",
+        "u-pt-120kw-basis"
+      ],
+      "affected_references": [
+        "/power-and-thermal-limits/#electrical-chain",
+        "/power-and-thermal-limits/#calculations"
+      ],
+      "affected_pathway_steps": [
+        "c3-electrical"
+      ],
+      "affected_comparisons": [],
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "User guide: \"The rack power consumption is approximately 120kW\"",
+          "observation": "Retrieved 2026-11-10; the user guide contains no bus-bar current or path count."
+        }
+      ],
+      "posture": "No retrieved document states the number of bus-bar paths or the voltage at which the 1,400 A rating applies, and the basis of 'approximately 120kW' is not defined. The path count is not inferred from arithmetic.",
+      "unknown": [
+        "Bus-bar path count and rating voltage",
+        "Whether 120 kW is rated, typical or measured"
+      ],
+      "next_evidence": "The OCP GB200 NVL72 rack specification files, or an NVIDIA rack power-distribution document",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-10",
+          "event": "registered",
+          "detail": "Recorded as u-pt-bus-bar-paths and u-pt-120kw-basis in Evidence Release 005."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "User guide searched for bus-bar current, path count and rating voltage; none found."
+        }
+      ],
+      "downstream_review": []
+    },
+    {
+      "id": "ec-scalable-unit-power",
+      "title": "Scalable-unit power: 1.2 MW design figure versus eight racks",
+      "question": "What does NVIDIA's 1.2 MW scalable-unit design figure include beyond eight racks at about 120 kW?",
+      "state": "missing_primary_evidence",
+      "ontology_layers": [
+        "power_thermal",
+        "deployment"
+      ],
+      "scope": {
+        "product": "DGX SuperPOD GB200 scalable unit of eight racks",
+        "temporal": "Reference architecture 2025-09-03"
+      },
+      "source_ids": [
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "nvidia-dgx-gb-rack-user-guide-2026"
+      ],
+      "finding_ids": [
+        "pt-ra-power-shelves",
+        "pt-an-scalable-unit"
+      ],
+      "unresolved_ids": [
+        "u-pt-scalable-unit-remainder"
+      ],
+      "affected_references": [
+        "/power-and-thermal-limits/#facility"
+      ],
+      "affected_pathway_steps": [
+        "c4-facility-power"
+      ],
+      "affected_comparisons": [],
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "Reference architecture: \"Each SU requires a Thermal Design Power (TDP) of 1.2 Megawatts (MW)\"",
+          "observation": "Retrieved 2026-11-10; no breakdown is given."
+        }
+      ],
+      "posture": "The 1.2 MW figure is a design value for facility planning; eight times about 120 kW is an arithmetic sum of a stated approximate figure. The 0.24 MW difference is not measured consumption and is not itemised in any retrieved source.",
+      "unknown": [
+        "What the 1.2 MW covers: networking, storage, management racks or margin"
+      ],
+      "next_evidence": "An NVIDIA facility-planning breakdown of the scalable unit's power",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-10",
+          "event": "registered",
+          "detail": "Recorded as u-pt-scalable-unit-remainder in Evidence Release 005."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "Reference architecture retrieved; the passage is unchanged and gives no breakdown."
+        }
+      ],
+      "downstream_review": []
+    },
+    {
+      "id": "ec-gb200-coolant-specification",
+      "title": "GB200 NVL72 coolant and facility interface",
+      "question": "What coolant, flow, supply temperature, pressure and liquid-cooling class does GB200 NVL72 require, and how is heat split between liquid and air?",
+      "state": "missing_primary_evidence",
+      "ontology_layers": [
+        "power_thermal",
+        "deployment"
+      ],
+      "scope": {
+        "product": "GB200 NVL72 rack cooling",
+        "temporal": "User guide 2026-09-17; reference architecture 2025-09-03"
+      },
+      "source_ids": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+      ],
+      "finding_ids": [
+        "pt-gb-hybrid-cooling",
+        "pt-an-coolant-flow",
+        "pt-ocp-cdu-terms"
+      ],
+      "unresolved_ids": [
+        "u-pt-coolant-specification",
+        "u-pt-liquid-air-split"
+      ],
+      "affected_references": [
+        "/power-and-thermal-limits/#thermal-chain",
+        "/power-and-thermal-limits/#cooling-architectures"
+      ],
+      "affected_pathway_steps": [
+        "c5-thermal"
+      ],
+      "affected_comparisons": [],
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "User guide: \"cooled by liquid that runs up and down the rack through manifolds, then through the cold plates\"",
+          "observation": "Retrieved 2026-11-10; searched for coolant, temperature, flow, pressure and glycol terms: none found in the user guide or the reference architecture."
+        }
+      ],
+      "posture": "Neither retrieved NVIDIA document states coolant type, flow, supply temperature, pressure, liquid-cooling class or the liquid and air heat split. The Release 005 flow arithmetic remains illustrative and is not a product requirement.",
+      "unknown": [
+        "Coolant parameters and class",
+        "The liquid and air shares of rack heat"
+      ],
+      "next_evidence": "NVIDIA site-preparation or facility-interface specifications for GB200 NVL72",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-10",
+          "event": "registered",
+          "detail": "Recorded as u-pt-coolant-specification and u-pt-liquid-air-split in Evidence Release 005."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "Both NVIDIA documents searched on 2026-11-10; no coolant specification found."
+        }
+      ],
+      "downstream_review": []
+    },
+    {
+      "id": "ec-mission-control-orchestration-versions",
+      "title": "Mission Control orchestration support by version",
+      "question": "Which workload managers does NVIDIA document for DGX SuperPOD with GB200, by documentation version?",
+      "state": "version_scope_difference",
+      "ontology_layers": [
+        "deployment"
+      ],
+      "scope": {
+        "product": "NVIDIA Mission Control with DGX GB200 NVL72",
+        "temporal": "Administration guide 2025-06-11; rack setup guide 2.5.0 (2026-11-09)"
+      },
+      "source_ids": [
+        "nvidia-mission-control-gb200-admin-guide-2025",
+        "nvidia-mission-control-rack-setup-guide-2026"
+      ],
+      "finding_ids": [
+        "d-sw-stack"
+      ],
+      "unresolved_ids": [
+        "u-d-software-versions",
+        "u-d-firmware-guide"
+      ],
+      "affected_references": [
+        "/ai-chip-infrastructure/#integration"
+      ],
+      "affected_pathway_steps": [
+        "c6-software"
+      ],
+      "affected_comparisons": [],
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Rack setup guide 2.5.0: \"NVIDIA DGX SuperPOD supports workload orchestration with Slurm and with Kubernetes (K8s) through RunAI.\"",
+          "observation": "Retrieved 2026-11-10; the guide's version index lists 2.5.0 as the latest and preferred edition."
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "Administration guide 2025-06-11: \"NVIDIA DGX SuperPOD only supports Slurm for scheduling workloads.\"",
+          "observation": "Retrieved 2026-11-10; the passage is unchanged."
+        }
+      ],
+      "posture": "The two statements belong to different documentation editions and are not a scientific contradiction: support is version-scoped. No newer edition than 2.5.0 is listed. Neither document establishes what any site has deployed.",
+      "unknown": [
+        "Component versions required together for a given edition"
+      ],
+      "next_evidence": "Mission Control release notes and a published software bill of materials for 2.5.0",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-10",
+          "event": "registered",
+          "detail": "Recorded in Release 006 after the owner's correction scoping orchestration support by version."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "Version index checked: 2.5.0 is latest; state set to version_scope_difference."
+        }
+      ],
+      "downstream_review": []
+    },
+    {
+      "id": "ec-hbm-export-control-currency",
+      "title": "HBM export controls: announcement versus current rule text",
+      "question": "What does the current consolidated rule text say about HBM, as distinct from BIS's 2024 announcement?",
+      "state": "requires_reassessment",
+      "ontology_layers": [
+        "controls",
+        "memory"
+      ],
+      "scope": {
+        "product": "US Export Administration Regulations provisions on HBM",
+        "temporal": "Announcement 2024-12-02; eCFR versions to 2026-07-23, up to date as of 2026-11-06"
+      },
+      "source_ids": [
+        "bis-advanced-semiconductor-controls-2024",
+        "ecfr-15-cfr-742-6-2026",
+        "ecfr-15-cfr-740-25-2024"
+      ],
+      "finding_ids": [
+        "d-bis-access",
+        "d-an-access-layer"
+      ],
+      "unresolved_ids": [
+        "u-d-access-current-rules"
+      ],
+      "affected_references": [
+        "/ai-chip-infrastructure/#network-operations"
+      ],
+      "affected_pathway_steps": [
+        "c8-access"
+      ],
+      "affected_comparisons": [],
+      "evidence": [
+        {
+          "source_id": "ecfr-15-cfr-742-6-2026",
+          "locator": "15 CFR 742.6(a)(6)(i)(B): \"A license is required for items specified in ECCNs 3A090.c, 3D001 (for 3A090.c), and 3E001 (for 3A090.c)\"",
+          "observation": "Current eCFR text retrieved 2026-11-10; section version history runs to 2026-07-23."
+        },
+        {
+          "source_id": "ecfr-15-cfr-740-25-2024",
+          "locator": "15 CFR 740.25(a): \"This License Exception High Bandwidth Memory (HBM) authorizes the export, reexport, or transfer (in-country) of items\"",
+          "observation": "Current eCFR text retrieved 2026-11-10; one version, dated 2024-12-05."
+        }
+      ],
+      "posture": "Current consolidated rule text, retrieved from the eCFR on 2026-11-10, contains an HBM licence requirement in section 742.6 and a licence exception for HBM in section 740.25. The 2024 press release remains a historical announcement. This register gives no legal or compliance conclusion and does not classify any transaction.",
+      "unknown": [
+        "How any named item or transaction is classified",
+        "Amendments after the eCFR's 2026-11-06 currency date"
+      ],
+      "next_evidence": "Transaction-specific classification by qualified counsel; the official Federal Register text of each amendment",
+      "inspected_at": "2026-11-10",
+      "history": [
+        {
+          "date": "2026-11-10",
+          "event": "registered",
+          "detail": "Recorded as u-d-access-current-rules in Release 006."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "evidence_added",
+          "detail": "Current eCFR text of sections 742.6 and 740.25 retrieved and registered."
+        },
+        {
+          "date": "2026-11-10",
+          "event": "reassessed",
+          "detail": "State set to requires_reassessment: public text should cite current rule text alongside the 2024 announcement."
+        }
+      ],
+      "downstream_review": [
+        "/ai-chip-infrastructure/#network-operations: cite the current eCFR sections with their version dates beside the 2024 announcement",
+        "Pathway C step c8-access: the limitation 'current rule text not reviewed' no longer holds for these two sections"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3594 @@
+{
+  "index_id": "aec-evidence-impact-index",
+  "schema_version": "1.0.0",
+  "status": "generated",
+  "generated_from": [
+    "data/source-registry.json",
+    "data/research/*.json (findings and unresolved questions only)",
+    "data/research/dossiers/*.json",
+    "data/reference-pathways.json",
+    "data/source-inspections.json",
+    "data/evidence-conflicts.json",
+    "public reference pages"
+  ],
+  "boundary": "Reference-impact index, not a dependency graph. Each entry names review targets if a source changes; candidate Atlas relationships are excluded and nothing here approves or updates a claim.",
+  "priority_reason_definitions": {
+    "in_open_conflict": "Cited in an unresolved conflict-register issue",
+    "multiple_versions_known": "A newer or differing version or edition is recorded",
+    "product_architecture": "Product architecture statement whose figures may be revised",
+    "regulatory_current_law": "Regulatory source; current-law text must be checked",
+    "pending_review": "Registry status is pending_review",
+    "used_across_releases": "Cited by findings in more than one evidence release",
+    "used_in_pathways": "Cited by a public research-pathway step"
+  },
+  "sources": [
+    {
+      "source_id": "amd-cdna3-white-paper-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "multiple_versions_known",
+        "product_architecture",
+        "used_across_releases",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "i-amd-hbm-arithmetic",
+          "i-amd-mi300x-links",
+          "i-amd-mi300x-topology",
+          "i-amd-on-package-fabric",
+          "i-amd-on-package-tiers",
+          "i-an-direct-vs-switched",
+          "i-an-memory-vs-fabric",
+          "i-an-mi300x-link-arithmetic",
+          "p-amd-mi300-partition",
+          "p-an-mi300x-dependencies",
+          "p-an-production-chain",
+          "pt-amd-accelerator-power-class",
+          "pt-an-chip-to-rack-levels"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging",
+          "aec-ide-004-interconnect",
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/",
+          "/interconnects/",
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [
+          "a6-product-case",
+          "b3-on-package",
+          "b4-memory-vs-fabric",
+          "b5-scale-up"
+        ],
+        "comparisons": [
+          "cmp-mi300x-p2p-vs-nvlink6",
+          "cmp-mi300x-vs-rubin-memory"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-amd-link-scope",
+          "u-i-cxl-on-accelerators",
+          "u-i-effective-bandwidth",
+          "u-i-l2-figures",
+          "u-i-latency",
+          "u-i-pcie-primary",
+          "u-p-mi300x-cowos-variant",
+          "u-p-mi300x-stacking",
+          "u-p-substrate",
+          "u-p-test-flow"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-mi300x-infinity-fabric-scope"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "amd-energy-efficiency-30x25-2024",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-amd-mi300x-cowos",
+          "p-an-mi300x-dependencies"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-mi300x-cowos-variant",
+          "u-p-mi300x-stacking"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "amd-instinct-mi300-launch-2023",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-amd-mi300-availability"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-mi300x-stacking"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-accelerator-2023",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "multiple_versions_known"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/hbm-memory/",
+          "/interconnects/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-mi300x-infinity-fabric-scope"
+      ],
+      "revalidate": [
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-data-sheet-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "multiple_versions_known"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-mi300x-infinity-fabric-scope"
+      ],
+      "revalidate": [
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "amd-synopsys-chiplet-packaging-2024",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-amd-mi300x-cowos",
+          "p-an-mi300x-dependencies"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [
+          "a6-product-case"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-mi300x-cowos-variant",
+          "u-p-mi300x-stacking",
+          "u-p-ucie-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm4-package-qualification"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "asml-2024-annual-reports",
+      "status": "pending_review",
+      "freshness_basis": "Period-bound report: historically valid for its period; a later report may supersede it for current use",
+      "priority_reasons": [
+        "pending_review"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible",
+          "review_required"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/design-fabrication-packaging/",
+          "/export-control-layer/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "bis-advanced-semiconductor-controls-2024",
+      "status": "active",
+      "freshness_basis": "Regulatory announcement: check the current consolidated rule text before any current-law statement",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "regulatory_current_law",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "d-an-access-layer",
+          "d-bis-access"
+        ],
+        "releases": [
+          "aec-ide-006-deployment-readiness"
+        ],
+        "reference_pages": [
+          "/ai-chip-infrastructure/"
+        ],
+        "pathway_steps": [
+          "c8-access"
+        ],
+        "comparisons": [],
+        "dossier_requirements": [
+          "req-ac-export-controls"
+        ]
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-d-access-current-rules"
+        ],
+        "listed_on_pages": [
+          "/export-control-layer/",
+          "/hbm-memory/",
+          "/methodology/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm-export-control-currency"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "bis-semiconductor-manufacturing-controls-2023",
+      "status": "active",
+      "freshness_basis": "Regulatory announcement: check the current consolidated rule text before any current-law statement",
+      "priority_reasons": [
+        "regulatory_current_law"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible",
+          "review_required"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/export-control-layer/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "cxl-3-0-specification-release-2022",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [
+          "/interconnects/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-cxl-normative"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "cxl-3-0-white-paper-2022",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "i-an-units-and-directions",
+          "i-cxl-3-rate",
+          "i-cxl-pooling-sharing",
+          "i-cxl-protocols"
+        ],
+        "releases": [
+          "aec-ide-004-interconnect"
+        ],
+        "reference_pages": [
+          "/interconnects/"
+        ],
+        "pathway_steps": [
+          "b6-host",
+          "b8-reading-figures"
+        ],
+        "comparisons": [
+          "cmp-cxl-vs-pcie6",
+          "cmp-scale-up-vs-scale-out"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-cxl-normative",
+          "u-i-cxl-on-accelerators",
+          "u-i-pcie-primary"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "cxl-4-0-specification-release-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "i-cxl-4-release"
+        ],
+        "releases": [
+          "aec-ide-004-interconnect"
+        ],
+        "reference_pages": [
+          "/interconnects/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-cxl-normative"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "doe-powering-ai-data-centers-2024",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-seab-grid-lead-times"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-pt-site-evidence"
+        ],
+        "listed_on_pages": [
+          "/ai-chip-infrastructure/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "doe-us-data-center-energy-use-2024",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-an-energy-versus-power",
+          "pt-doe-us-energy"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-pt-national-projections",
+          "u-pt-site-evidence"
+        ],
+        "listed_on_pages": [
+          "/ai-chip-infrastructure/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ecfr-15-cfr-740-25-2024",
+      "status": "active",
+      "freshness_basis": "Legal text: check for amendments and the version in force before any current-law statement",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "regulatory_current_law"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm-export-control-currency"
+      ],
+      "revalidate": [
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ecfr-15-cfr-742-6-2026",
+      "status": "active",
+      "freshness_basis": "Legal text: check for amendments and the version in force before any current-law statement",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "regulatory_current_law"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm-export-control-currency"
+      ],
+      "revalidate": [
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "eu-chips-act-2023",
+      "status": "active",
+      "freshness_basis": "Legal text: check for amendments and the version in force before any current-law statement",
+      "priority_reasons": [
+        "regulatory_current_law"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/design-fabrication-packaging/",
+          "/export-control-layer/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "globalfoundries-fiscal-2024-form-10-k",
+      "status": "active",
+      "freshness_basis": "Period-bound filing: historically valid for its period; a later filing may supersede it for current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/design-fabrication-packaging/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "iea-energy-and-ai-2025",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/ai-chip-infrastructure/",
+          "/methodology/",
+          "/power-and-thermal-limits/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "intel-fiscal-2024-form-10-k",
+      "status": "active",
+      "freshness_basis": "Period-bound filing: historically valid for its period; a later filing may supersede it for current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/design-fabrication-packaging/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "japan-economic-security-promotion-act-2024",
+      "status": "active",
+      "freshness_basis": "Regulatory announcement: check the current consolidated rule text before any current-law statement",
+      "priority_reasons": [
+        "regulatory_current_law"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/export-control-layer/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-bandwidth",
+          "f-an-die-density",
+          "f-an-rubin-stacks",
+          "f-std-channels",
+          "f-std-compat",
+          "f-std-interface",
+          "f-std-stacks",
+          "f-std-voltage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a1-interface-standard",
+          "a2-speed-grades",
+          "b1-stack-bandwidth"
+        ],
+        "comparisons": [
+          "cmp-stack-vs-stack"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-jedec-text"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "micron-fy2026-form-10-k",
+      "status": "active",
+      "freshness_basis": "Period-bound filing: historically valid for its period; a later filing may supersede it for current use",
+      "priority_reasons": [
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-dependency-pathways",
+          "f-an-logic-coupling",
+          "f-mu-base-die",
+          "f-mu-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a3-base-die"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-micron-base-die"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "micron-hbm3e-technical-disclosure-2024",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/hbm-memory/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "micron-hbm4-samples-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-bandwidth",
+          "f-dram-core-process",
+          "f-mu-2025",
+          "f-mu-stage",
+          "f-power-claims"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [
+          "cmp-stack-vs-stack"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-micron-base-die"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed comparison verdicts and their figures"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "micron-hbm4-volume-production-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-bandwidth",
+          "f-an-die-density",
+          "f-an-rubin-stacks",
+          "f-an-substitution",
+          "f-mu-16h",
+          "f-mu-2026",
+          "f-mu-stage",
+          "f-power-claims"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a2-speed-grades",
+          "a8-qualification-gap",
+          "b1-stack-bandwidth"
+        ],
+        "comparisons": [
+          "cmp-stack-vs-stack"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-16h-thermal",
+          "u-capacity",
+          "u-micron-base-die",
+          "u-qualification"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm4-package-qualification"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "micron-q3-fy2026-results-2026",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-mu-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-micron-base-die",
+          "u-qualification"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nist-chips-rd-facilities-2024",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/design-fabrication-packaging/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-blackwell-water-efficiency-2025",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-an-pue-boundary",
+          "pt-nvidia-efficiency-claims",
+          "pt-nvidia-heat-path"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-pt-coolant-specification",
+          "u-pt-efficiency-claims"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-co-design-memory-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "product_architecture",
+        "used_across_releases",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-rubin-stacks",
+          "f-an-substitution",
+          "f-nv-on-package",
+          "f-nv-rubin-192",
+          "i-an-memory-vs-fabric",
+          "i-an-units-and-directions",
+          "i-nvidia-gb200-aggregate",
+          "i-nvidia-host-links",
+          "i-nvidia-nvlink6-figures"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001",
+          "aec-ide-004-interconnect"
+        ],
+        "reference_pages": [
+          "/hbm-memory/",
+          "/interconnects/"
+        ],
+        "pathway_steps": [
+          "b2-device-memory",
+          "b5-scale-up",
+          "c2-rack-fabric"
+        ],
+        "comparisons": [
+          "cmp-mi300x-p2p-vs-nvlink6",
+          "cmp-rack-vs-gpu",
+          "cmp-rubin-22-vs-19",
+          "cmp-scale-up-vs-scale-out"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-effective-bandwidth",
+          "u-i-nvlink6-figure",
+          "u-i-pcie-primary",
+          "u-rubin-bandwidth"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-nvlink6-per-gpu",
+        "ec-rubin-memory-bandwidth"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_across_releases",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "d-an-ide005-carryover",
+          "d-def-evidence-states",
+          "d-int-bringup-couples-domains",
+          "d-int-leak-path-spans-domains",
+          "d-leak-ops",
+          "d-power-isolation",
+          "d-sw-stack",
+          "pt-an-bus-bar-capacity",
+          "pt-an-chip-to-rack-levels",
+          "pt-an-conversion-loss",
+          "pt-an-energy-versus-power",
+          "pt-an-psu-arithmetic",
+          "pt-an-scalable-unit",
+          "pt-gb-hybrid-cooling",
+          "pt-gb-power-shelves",
+          "pt-gb-rack-configuration"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal",
+          "aec-ide-006-deployment-readiness"
+        ],
+        "reference_pages": [
+          "/ai-chip-infrastructure/",
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [
+          "c1-rack-architecture",
+          "c3-electrical",
+          "c4-facility-power",
+          "c5-thermal",
+          "c6-software",
+          "c7-operations"
+        ],
+        "comparisons": [],
+        "dossier_requirements": [
+          "req-ch-rack-configuration",
+          "req-el-rack-power",
+          "req-fo-leak-response",
+          "req-sw-firmware-baseline",
+          "req-th-liquid-cooling"
+        ]
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-d-bms-interface",
+          "u-d-gb300-difference",
+          "u-d-ide005-carryover",
+          "u-d-site-records",
+          "u-d-software-versions",
+          "u-pt-120kw-basis",
+          "u-pt-bus-bar-paths",
+          "u-pt-component-power",
+          "u-pt-coolant-specification",
+          "u-pt-liquid-air-split",
+          "u-pt-redundancy-conflict",
+          "u-pt-scalable-unit-remainder"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-gb200-busbar-rack-power",
+        "ec-gb200-coolant-specification",
+        "ec-gb200-power-redundancy",
+        "ec-scalable-unit-power"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_across_releases",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "d-an-design-vs-deployment",
+          "d-an-ide005-carryover",
+          "d-def-capability-versus-readiness",
+          "d-ra-tested-scope",
+          "pt-an-psu-arithmetic",
+          "pt-an-scalable-unit",
+          "pt-gb-hybrid-cooling",
+          "pt-ra-facility-tier",
+          "pt-ra-power-shelves"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal",
+          "aec-ide-006-deployment-readiness"
+        ],
+        "reference_pages": [
+          "/ai-chip-infrastructure/",
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [
+          "c3-electrical",
+          "c4-facility-power",
+          "c7-operations",
+          "c9-evidence-states"
+        ],
+        "comparisons": [],
+        "dossier_requirements": [
+          "req-el-scalable-unit-power",
+          "req-nw-tested-scale"
+        ]
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-d-ide005-carryover",
+          "u-d-site-records",
+          "u-d-tested-scale",
+          "u-pt-120kw-basis",
+          "u-pt-component-power",
+          "u-pt-coolant-specification",
+          "u-pt-liquid-air-split",
+          "u-pt-redundancy-conflict",
+          "u-pt-scalable-unit-remainder",
+          "u-pt-site-evidence"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-gb200-coolant-specification",
+        "ec-gb200-power-redundancy",
+        "ec-scalable-unit-power"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-fiscal-2025-form-10-k",
+      "status": "active",
+      "freshness_basis": "Period-bound filing: historically valid for its period; a later filing may supersede it for current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/interconnects/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-an-bus-bar-capacity",
+          "pt-an-coolant-flow",
+          "pt-ocp-bus-bar",
+          "pt-ocp-liquid-manifold"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/ai-chip-infrastructure/",
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [
+          "c3-electrical"
+        ],
+        "comparisons": [],
+        "dossier_requirements": [
+          "req-el-rack-power"
+        ]
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-pt-120kw-basis",
+          "u-pt-bus-bar-paths",
+          "u-pt-component-power",
+          "u-pt-coolant-specification"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-gb200-busbar-rack-power"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "d-an-software-not-performance",
+          "d-cluster-validation-tooling",
+          "d-int-leak-path-spans-domains",
+          "d-leak-ops",
+          "d-sw-stack"
+        ],
+        "releases": [
+          "aec-ide-006-deployment-readiness"
+        ],
+        "reference_pages": [
+          "/ai-chip-infrastructure/"
+        ],
+        "pathway_steps": [
+          "c6-software",
+          "c7-operations"
+        ],
+        "comparisons": [],
+        "dossier_requirements": [
+          "req-fo-leak-response",
+          "req-sw-management-stack"
+        ]
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-d-bms-interface",
+          "u-d-site-records",
+          "u-d-software-versions"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-mission-control-orchestration-versions"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-mission-control-north-south-network-guide-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "d-ns-network-prereq"
+        ],
+        "releases": [
+          "aec-ide-006-deployment-readiness"
+        ],
+        "reference_pages": [
+          "/ai-chip-infrastructure/"
+        ],
+        "pathway_steps": [
+          "c7-operations"
+        ],
+        "comparisons": [],
+        "dossier_requirements": [
+          "req-nw-north-south"
+        ]
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-d-gb300-difference",
+          "u-d-site-records"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "d-an-checklist-not-record",
+          "d-an-design-vs-deployment",
+          "d-bringup-sequence",
+          "d-def-capability-versus-readiness",
+          "d-def-evidence-states",
+          "d-firmware-procedure",
+          "d-int-airgap-shapes-operations",
+          "d-int-bringup-couples-domains",
+          "d-mc-guide-purpose",
+          "d-predeploy-airgap",
+          "d-sw-stack",
+          "d-validation-checklist"
+        ],
+        "releases": [
+          "aec-ide-006-deployment-readiness"
+        ],
+        "reference_pages": [
+          "/ai-chip-infrastructure/"
+        ],
+        "pathway_steps": [
+          "c6-software",
+          "c9-evidence-states"
+        ],
+        "comparisons": [],
+        "dossier_requirements": [
+          "req-fo-offline-artifacts",
+          "req-nw-nvlink-bring-up",
+          "req-sw-firmware-baseline",
+          "req-sw-management-stack"
+        ]
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-d-acceptance-criteria",
+          "u-d-firmware-guide",
+          "u-d-gb300-difference",
+          "u-d-ide005-carryover",
+          "u-d-site-records",
+          "u-d-software-versions"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-mission-control-orchestration-versions"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-rubin-ces-2026",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-nv-production"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-rubin-gpu-architecture-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "product_architecture",
+        "used_across_releases",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-dependency-pathways",
+          "f-an-rubin-stacks",
+          "f-an-substitution",
+          "f-nv-on-package",
+          "f-nv-rubin",
+          "i-an-memory-vs-fabric",
+          "i-nvidia-nvlink6-figures",
+          "i-nvidia-rubin-io-ledger"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001",
+          "aec-ide-004-interconnect"
+        ],
+        "reference_pages": [
+          "/hbm-memory/",
+          "/interconnects/"
+        ],
+        "pathway_steps": [
+          "b2-device-memory",
+          "b4-memory-vs-fabric",
+          "b6-host"
+        ],
+        "comparisons": [
+          "cmp-cxl-vs-pcie6",
+          "cmp-memory-vs-scale-up",
+          "cmp-mi300x-p2p-vs-nvlink6",
+          "cmp-mi300x-vs-rubin-memory",
+          "cmp-rack-vs-gpu",
+          "cmp-rubin-22-vs-19"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-effective-bandwidth",
+          "u-i-nvlink6-figure",
+          "u-i-pcie-primary",
+          "u-interposer-substrate",
+          "u-qualification",
+          "u-rubin-bandwidth"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-nvlink6-per-gpu",
+        "ec-rubin-memory-bandwidth"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-rubin-platform-architecture-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known",
+        "product_architecture",
+        "used_across_releases",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-substitution",
+          "f-nv-on-package",
+          "f-nv-rubin",
+          "i-an-direct-vs-switched",
+          "i-an-memory-vs-fabric",
+          "i-an-scale-up-to-out",
+          "i-an-units-and-directions",
+          "i-nvidia-gb200-aggregate",
+          "i-nvidia-host-links",
+          "i-nvidia-nvl72-switching",
+          "i-nvidia-nvlink6-figures",
+          "i-nvidia-scale-out"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001",
+          "aec-ide-004-interconnect"
+        ],
+        "reference_pages": [
+          "/hbm-memory/",
+          "/interconnects/"
+        ],
+        "pathway_steps": [
+          "a8-qualification-gap",
+          "b2-device-memory",
+          "b5-scale-up",
+          "b6-host",
+          "b7-scale-out",
+          "b8-reading-figures"
+        ],
+        "comparisons": [
+          "cmp-mi300x-p2p-vs-nvlink6",
+          "cmp-mi300x-vs-rubin-memory",
+          "cmp-rack-vs-gpu",
+          "cmp-rubin-22-vs-19",
+          "cmp-scale-up-vs-scale-out"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-cxl-on-accelerators",
+          "u-i-effective-bandwidth",
+          "u-i-latency",
+          "u-i-nvlink6-figure",
+          "u-i-optics",
+          "u-i-uec-compliance",
+          "u-interposer-substrate",
+          "u-rubin-bandwidth"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-nvlink6-per-gpu",
+        "ec-rubin-memory-bandwidth"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-nvlink6-per-gpu",
+        "ec-rubin-memory-bandwidth"
+      ],
+      "revalidate": [
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [
+        "in_open_conflict",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-an-coolant-flow",
+          "pt-ashrae-classes-via-ocp",
+          "pt-ocp-cdu-example",
+          "pt-ocp-cdu-terms"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [
+          "c5-thermal"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-pt-ashrae-primary",
+          "u-pt-coolant-specification"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-gb200-coolant-specification"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "oecd-semiconductor-policy-landscape-2024",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/ai-chip-infrastructure/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "samsung-hbm3e-12h-technical-disclosure-2024",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/hbm-memory/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "samsung-hbm4-commercial-shipment-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-bandwidth",
+          "f-an-dependency-pathways",
+          "f-an-logic-coupling",
+          "f-dram-core-process",
+          "f-packaging-stages",
+          "f-power-claims",
+          "f-priority-conflict",
+          "f-ss-base-die",
+          "f-ss-hbm4-config",
+          "f-ss-hbm4-speed",
+          "f-ss-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a3-base-die"
+        ],
+        "comparisons": [
+          "cmp-stack-vs-stack"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "samsung-hbm4-gtc-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-bandwidth",
+          "f-an-substitution",
+          "f-ss-hbm4-speed",
+          "f-ss-hcb",
+          "f-ss-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a4-stack-to-package",
+          "a8-qualification-gap"
+        ],
+        "comparisons": [
+          "cmp-stack-vs-stack"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-16h-thermal",
+          "u-capacity",
+          "u-hbm4e-standard",
+          "u-qualification"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm4-package-qualification"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Recheck the listed comparison verdicts and their figures",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "samsung-hbm4-product-page-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-ss-base-die-foundry"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "samsung-hbm4e-samples-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-bandwidth",
+          "f-an-die-density",
+          "f-an-logic-coupling",
+          "f-power-claims",
+          "f-priority-conflict",
+          "f-ss-base-die",
+          "f-ss-hbm4e",
+          "f-ss-hbm4e-configs",
+          "f-ss-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [
+          "cmp-stack-vs-stack"
+        ],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-hbm4e-standard"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed comparison verdicts and their figures"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "samsung-q3-2025-results-2025",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-dependency-pathways",
+          "f-an-logic-coupling",
+          "f-ss-base-die-foundry"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "samsung-q3-2026-results-2026",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-logic-coupling",
+          "f-ss-base-die-foundry"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-3q25-results-2025",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-skh-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-capacity"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-424b4-prospectus-2026",
+      "status": "active",
+      "freshness_basis": "Period-bound filing: historically valid for its period; a later filing may supersede it for current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-skh-custom-hbm"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-skh-base-die-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-full-stack-memory-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-dependency-pathways",
+          "f-an-logic-coupling",
+          "f-packaging-stages",
+          "f-skh-base-die-2026"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-interposer-substrate",
+          "u-skh-base-die-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-fy25-results-2026",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-skh-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-capacity"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-hbm4-12h-samples-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-die-density",
+          "f-an-rubin-stacks",
+          "f-priority-conflict",
+          "f-skh-12h",
+          "f-skh-mrmuf",
+          "f-skh-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a4-stack-to-package"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-hbm4-development-mass-production-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-dram-core-process",
+          "f-power-claims",
+          "f-priority-conflict",
+          "f-skh-io-speed",
+          "f-skh-mrmuf",
+          "f-skh-stage"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a2-speed-grades"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-tsmc-hbm4-mou-2024",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-dependency-pathways",
+          "f-an-logic-coupling",
+          "f-skh-base-die",
+          "f-skh-cowos"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a3-base-die",
+          "a4-stack-to-package"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-skh-base-die-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm4-package-qualification"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "skhynix-tsmc-symposium-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-skh-base-die-2026"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-interposer-substrate",
+          "u-skh-base-die-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "tgg-pue-comprehensive-examination-2013",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-an-pue-boundary",
+          "pt-tgg-pue-definition"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "tgg-wue-white-paper-35-2011",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-tgg-wue-definition"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "tsmc-2024-annual-report",
+      "status": "active",
+      "freshness_basis": "Period-bound report: historically valid for its period; a later report may supersede it for current use",
+      "priority_reasons": [
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-an-cowos-comparison",
+          "p-cowos-l",
+          "p-cowos-r",
+          "p-cowos-s",
+          "p-soic-status",
+          "p-thermal-electrical",
+          "p-tsmc-interposer-shift"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [
+          "a5-integration-platforms"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-cowos-capacity",
+          "u-p-mi300x-cowos-variant",
+          "u-p-soic-bonding"
+        ],
+        "listed_on_pages": [
+          "/methodology/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "tsmc-2025-annual-report",
+      "status": "active",
+      "freshness_basis": "Period-bound report: historically valid for its period; a later report may supersede it for current use",
+      "priority_reasons": [
+        "in_open_conflict",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-an-cowos-comparison",
+          "p-an-production-chain",
+          "p-cowos-l",
+          "p-cowos-l-large-reticle",
+          "p-cowos-r",
+          "p-cowos-s",
+          "p-flip-chip-bump",
+          "p-soic-status",
+          "p-sow-status",
+          "p-thermal-electrical",
+          "p-tsmc-3dfabric-taxonomy",
+          "p-tsmc-backend-ecosystem",
+          "p-tsmc-interposer-shift"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [
+          "a5-integration-platforms"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-cowos-capacity",
+          "u-p-cowos-l-5p5-status",
+          "u-p-mi300x-cowos-variant",
+          "u-p-soic-bonding",
+          "u-p-substrate",
+          "u-p-test-flow"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-cowos-l-5p5-reticle"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "tsmc-2025-na-technology-symposium",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "f-an-logic-coupling",
+          "f-tsmc-base-die",
+          "f-tsmc-cowos",
+          "f-tsmc-ivr"
+        ],
+        "releases": [
+          "aec-hbm4-evidence-release-001"
+        ],
+        "reference_pages": [
+          "/hbm-memory/"
+        ],
+        "pathway_steps": [
+          "a3-base-die",
+          "a4-stack-to-package"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-interposer-substrate",
+          "u-skh-base-die-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-hbm4-package-qualification"
+      ],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class",
+        "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ucie-1-specification-launch-2022",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture",
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-an-interface-vs-integration",
+          "p-ucie-scope"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [
+          "a7-interface-vs-interoperability"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-ucie-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ucie-2-specification-release-2024",
+      "status": "pending_review",
+      "freshness_basis": "Standard or specification release: check for later revisions and the normative text",
+      "priority_reasons": [
+        "pending_review"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared",
+          "review_required"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-an-interface-vs-integration",
+          "p-an-production-chain",
+          "p-ucie-2-3d-dfx"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-test-flow",
+          "u-p-ucie-implementation",
+          "u-p-ucie-normative"
+        ],
+        "listed_on_pages": [
+          "/interconnects/",
+          "/methodology/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ucie-2025-year-in-review",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-an-interface-vs-integration",
+          "p-ucie-adoption-claim"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [
+          "a7-interface-vs-interoperability"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-ucie-implementation"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ucie-3-specification-blog-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-an-interface-vs-integration",
+          "p-ucie-3-rates"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-ucie-normative"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "ucie-3-specification-release-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "p-ucie-3-rates"
+        ],
+        "releases": [
+          "aec-ide-003-advanced-packaging"
+        ],
+        "reference_pages": [
+          "/design-fabrication-packaging/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-p-ucie-implementation",
+          "u-p-ucie-normative"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "uec-specification-1-0-launch-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "product_architecture"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "i-uec-launch-claims"
+        ],
+        "releases": [
+          "aec-ide-004-interconnect"
+        ],
+        "reference_pages": [
+          "/interconnects/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-uec-compliance"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "uec-specification-1-1-2026",
+      "status": "active",
+      "freshness_basis": "Standard or specification release: check for later revisions and the normative text",
+      "priority_reasons": [
+        "used_in_pathways"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "i-an-scale-up-to-out",
+          "i-uec-network-types",
+          "i-uec-scope"
+        ],
+        "releases": [
+          "aec-ide-004-interconnect"
+        ],
+        "reference_pages": [
+          "/interconnects/"
+        ],
+        "pathway_steps": [
+          "b7-scale-out"
+        ],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-i-latency",
+          "u-i-uec-compliance"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Recheck the listed pathway steps' scope, limitations and evidence class"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "uk-national-semiconductor-strategy-2023",
+      "status": "active",
+      "freshness_basis": "Dated estimate or recommendation: recheck for updated editions before current use",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/design-fabrication-packaging/",
+          "/export-control-layer/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "us-chips-and-science-act-2022",
+      "status": "active",
+      "freshness_basis": "Legal text: check for amendments and the version in force before any current-law statement",
+      "priority_reasons": [
+        "regulatory_current_law"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_inaccessible"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/design-fabrication-packaging/",
+          "/export-control-layer/",
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "vertiv-gb200-nvl72-reference-architecture-2024",
+      "status": "active",
+      "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
+      "priority_reasons": [],
+      "latest_inspection": {
+        "inspected_at": "2026-11-10",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [
+          "pt-vertiv-reference-design"
+        ],
+        "releases": [
+          "aec-ide-005-power-thermal"
+        ],
+        "reference_pages": [
+          "/power-and-thermal-limits/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [
+          "u-pt-site-evidence"
+        ],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [],
+      "revalidate": [
+        "Re-read the quoted passages behind each direct finding against the changed source",
+        "Recheck every statement on the listed reference pages that cites this source"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    }
+  ]
+}

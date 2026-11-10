@@ -310,6 +310,7 @@
 <dt>Does not establish</dt><dd><ul><li>Hybrid bonding is not stated as used in HBM4 or HBM4E</li><li>TSMC&#x27;s 9.5-reticle CoWoS for 12 or more stacks is a 2027 plan</li><li>The 2024 SK hynix and TSMC memorandum states an aim, not a shipped integration</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-interposer-substrate</code>: Which packaging technology, interposer or bridge, substrate and assembly providers integrate HBM4 into specific accelerator packages such as Rubin?</li><li><code>u-test</code>: How are HBM4 stacks tested before integration (known-good-stack), and who performs that testing?</li><li><code>u-16h-thermal</code>: What are the thermal limits of 16-high HBM4 stacks, and does reaching them require hybrid bonding?</li></ul></dd>
 <dt>Next evidence</dt><dd>Per-product interposer, substrate, assembly-site and stack-test disclosures</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-hbm4-package-qualification">HBM4 package integration and qualification</a>: missing primary evidence</li></ul></dd>
 </dl></details></li>
 <li id="step-a5-integration-platforms"><div class="step-head"><span class="step-no">A5</span><h4>Compare the interposer and bridge platforms</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>Interposer size bounds how many HBM stacks fit beside the logic dies; TSMC reports every size above 3.3 reticles as CoWoS-L.</p>
@@ -321,6 +322,7 @@
 <dt>Does not establish</dt><dd><ul><li>TSMC&#x27;s 2025 report states the 5.5-reticle CoWoS-L status two different ways</li><li>Capacity and customer allocation are not disclosed</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-p-cowos-l-5p5-status</code>: Has 5.5-reticle CoWoS-L completed qualification and entered volume production?</li><li><code>u-p-substrate</code>: Which organic substrates and suppliers are used under CoWoS-class packages, and do substrates limit package size?</li><li><code>u-p-cowos-capacity</code>: What is CoWoS capacity by variant, and how is it allocated among customers?</li></ul></dd>
 <dt>Next evidence</dt><dd>TSMC confirmation of 5.5-reticle CoWoS-L qualification and volume status</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-cowos-l-5p5-reticle">5.5-reticle CoWoS-L: qualified or in volume production</a>: source access blocked</li></ul></dd>
 </dl></details></li>
 <li id="step-a6-product-case"><div class="step-head"><span class="step-no">A6</span><h4>Read one product-level disclosure, and its generation</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>MI300X is the reviewed product whose maker names its package technology and memory connections, which shows the kind of disclosure an HBM4 integration claim would need. It uses HBM3, so it is not HBM4 evidence.</p>
@@ -332,6 +334,7 @@
 <dt>Does not establish</dt><dd><ul><li>The CoWoS variant and interposer size of MI300X are not stated</li><li>HBM3 generation; does not transfer to HBM4 products</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-p-mi300x-cowos-variant</code>: Which CoWoS variant (S, R or L) and what interposer size does MI300X use?</li><li><code>u-p-mi300x-stacking</code>: How are MI300X&#x27;s XCDs bonded to its IODs, and which company performs the stacking?</li></ul></dd>
 <dt>Next evidence</dt><dd>An equivalent disclosure for a named HBM4 accelerator</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-hbm4-package-qualification">HBM4 package integration and qualification</a>: missing primary evidence</li></ul></dd>
 </dl></details></li>
 <li id="step-a7-interface-vs-interoperability"><div class="step-head"><span class="step-no">A7</span><h4>Separate interface standards from integration and interoperability</h4><span class="tag tag-c" title="Bounded analysis">C</span><span class="visually-hidden">Bounded analysis: </span></div>
 <p>Interface standards (JEDEC HBM4, UCIe) define how dies talk; they do not establish that a given stack and package work together, which needs product-level test results.</p>
@@ -354,6 +357,7 @@
 <dt>Does not establish</dt><dd><ul><li>Does not establish NVIDIA qualification, interchangeable supply or multi-sourcing</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-qualification</code>: Which suppliers&#x27; HBM4 is qualified for which accelerator platforms, and at what speed grade?</li><li><code>u-capacity</code>: What is each supplier&#x27;s HBM4 production capacity, yield and customer allocation?</li></ul></dd>
 <dt>Next evidence</dt><dd>Accelerator-maker qualification disclosures naming memory suppliers and speed grades</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-hbm4-package-qualification">HBM4 package integration and qualification</a>: missing primary evidence</li></ul></dd>
 </dl></details></li>
 </ol>
 <h3>What the pathway supports</h3><div class="table-scroll" tabindex="0" role="region" aria-label="Pathway A statements (scrollable table)"><table class="data-table"><caption>Statements the pathway supports, by evidence class, with the findings or questions they rest on.</caption><thead><tr><th scope="col">Statement</th><th scope="col">Class</th><th scope="col">Basis</th></tr></thead><tbody>
@@ -392,6 +396,7 @@
 <dt>Does not establish</dt><dd><ul><li>22 TB/s and 19.2 TB/s are both NVIDIA statements; the conflict is unresolved</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-rubin-bandwidth</code>: Is Rubin&#x27;s per-GPU HBM4 bandwidth 22 TB/s or 19.2 TB/s?</li></ul></dd>
 <dt>Next evidence</dt><dd>An NVIDIA specification stating which figure applies and on what basis</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-rubin-memory-bandwidth">Rubin GPU memory bandwidth: 22 TB/s or 19.2 TB/s</a>: requires reassessment</li></ul></dd>
 </dl></details></li>
 <li id="step-b3-on-package"><div class="step-head"><span class="step-no">B3</span><h4>On-package movement inside one accelerator</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>Cache, die-to-die and memory paths inside a package carry their own figures, which are larger than and distinct from off-package links.</p>
@@ -414,6 +419,7 @@
 <dt>Does not establish</dt><dd><ul><li>Ratios depend on the unresolved scope of AMD&#x27;s 896 GB/s figure</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-i-amd-link-scope</code>: What are the per-link bandwidth, direction and encoding of MI300X&#x27;s Infinity Fabric links, and is the 896 GB/s figure per GPU?</li></ul></dd>
 <dt>Next evidence</dt><dd>AMD confirmation of whether 896 GB/s is a per-GPU, both-direction sum</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-rubin-memory-bandwidth">Rubin GPU memory bandwidth: 22 TB/s or 19.2 TB/s</a>: requires reassessment</li><li><a href="/sources/#ec-mi300x-infinity-fabric-scope">MI300X Infinity Fabric: scope and direction of 896 GB/s</a>: resolved with evidence; public wording under review</li></ul></dd>
 </dl></details></li>
 <li id="step-b5-scale-up"><div class="step-head"><span class="step-no">B5</span><h4>Accelerator-to-accelerator scale-up fabrics</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>Scale-up figures are stated per GPU, per link or per rack, in bytes, sometimes bidirectional and sometimes with no direction stated.</p>
@@ -425,6 +431,7 @@
 <dt>Does not establish</dt><dd><ul><li>AMD does not state whether 896 GB/s is per GPU or per platform, or its direction</li><li>NVIDIA gives 3.6 TB/s and 3.0 TB/s for NVLink 6 per Rubin GPU</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-i-amd-link-scope</code>: What are the per-link bandwidth, direction and encoding of MI300X&#x27;s Infinity Fabric links, and is the 896 GB/s figure per GPU?</li><li><code>u-i-nvlink6-figure</code>: Is Rubin&#x27;s per-GPU NVLink 6 bandwidth 3.6 TB/s bidirectional or 3.0 TB/s, and what does the 3.0 TB/s figure measure?</li></ul></dd>
 <dt>Next evidence</dt><dd>Per-link bandwidth, direction and encoding disclosures from AMD and NVIDIA</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-nvlink6-per-gpu">NVLink 6 bandwidth per Rubin GPU: 3.6 TB/s or 3.0 TB/s</a>: requires reassessment</li><li><a href="/sources/#ec-mi300x-infinity-fabric-scope">MI300X Infinity Fabric: scope and direction of 896 GB/s</a>: resolved with evidence; public wording under review</li></ul></dd>
 </dl></details></li>
 <li id="step-b6-host"><div class="step-head"><span class="step-no">B6</span><h4>Host and CPU connections</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>Host links (PCIe, CXL, NVLink-C2C) use per-link figures whose raw totals count both directions unless stated otherwise.</p>
@@ -458,6 +465,7 @@
 <dt>Does not establish</dt><dd><ul><li>No measured figure was reviewed</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-i-effective-bandwidth</code>: What collective or application bandwidth do the MI300X 8-GPU platform and Vera Rubin NVL72 achieve in practice?</li><li><code>u-i-latency</code>: What latencies do these fabrics achieve, under what workloads and measurement methods?</li></ul></dd>
 <dt>Next evidence</dt><dd>Published collective or application bandwidth with a stated workload and method</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-nvlink6-per-gpu">NVLink 6 bandwidth per Rubin GPU: 3.6 TB/s or 3.0 TB/s</a>: requires reassessment</li></ul></dd>
 </dl></details></li>
 </ol>
 <h3>Which comparisons hold</h3><div class="table-scroll" tabindex="0" role="region" aria-label="Bandwidth comparisons and their validity (scrollable table)"><table class="data-table"><caption>Pairs of published figures, and whether comparing them is valid, conditional or unsupported.</caption><thead><tr><th scope="col">Figures compared</th><th scope="col">Verdict</th><th scope="col">Why</th><th scope="col">Findings</th></tr></thead><tbody>
@@ -516,6 +524,7 @@
 <dt>Does not establish</dt><dd><ul><li>N+N in the user guide, N in the reference architecture</li><li>1,400 A at about 50 V is about 70 kW against about 120 kW</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-pt-redundancy-conflict</code>: Do GB200 NVL72 power shelves provide N+N redundancy or N redundancy?</li><li><code>u-pt-bus-bar-paths</code>: How does a 1,400 A bus bar at a nominal 50 V to 51 V carry an approximately 120 kW rack?</li><li><code>u-pt-120kw-basis</code>: Is &#x27;approximately 120 kW&#x27; a rated, typical or measured figure, and does it differ between GB200 and GB300 racks?</li></ul></dd>
 <dt>Next evidence</dt><dd>An NVIDIA power specification stating redundancy, bus-bar paths and figure basis</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-gb200-power-redundancy">GB200 NVL72 power-shelf redundancy: N+N or N</a>: open conflict</li><li><a href="/sources/#ec-gb200-busbar-rack-power">GB200 NVL72 bus bar rating versus rack power</a>: missing primary evidence</li></ul></dd>
 </dl></details></li>
 <li id="step-c4-facility-power"><div class="step-head"><span class="step-no">C4</span><h4>From rack to scalable unit</h4><span class="tag tag-c" title="Bounded analysis">C</span><span class="visually-hidden">Bounded analysis: </span></div>
 <p>Facility planning uses the 1.2 MW scalable-unit design figure, which exceeds eight racks at about 120 kW by an unitemised 0.24 MW.</p>
@@ -527,6 +536,7 @@
 <dt>Does not establish</dt><dd><ul><li>A design value, not measured consumption</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-pt-scalable-unit-remainder</code>: What makes up the 1.2 MW scalable-unit figure beyond eight racks at about 120 kW?</li></ul></dd>
 <dt>Next evidence</dt><dd>An NVIDIA breakdown of the scalable-unit figure</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-scalable-unit-power">Scalable-unit power: 1.2 MW design figure versus eight racks</a>: missing primary evidence</li></ul></dd>
 </dl></details></li>
 <li id="step-c5-thermal"><div class="step-head"><span class="step-no">C5</span><h4>Heat removal and the facility loop</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>Liquid cooling through cold plates hands heat to a facility loop via a CDU; the coolant parameters a site must supply are not stated.</p>
@@ -538,6 +548,7 @@
 <dt>Does not establish</dt><dd><ul><li>No coolant type, flow, supply temperature, pressure or class is stated</li><li>The liquid and air shares are not stated</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-pt-coolant-specification</code>: What coolant, flow rate, supply temperature, pressure drop and ASHRAE liquid-cooling class does GB200 NVL72 require?</li><li><code>u-pt-liquid-air-split</code>: What share of a GB200 NVL72 rack&#x27;s heat goes to liquid and what share to air?</li></ul></dd>
 <dt>Next evidence</dt><dd>NVIDIA site-preparation or facility-interface specifications</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-gb200-coolant-specification">GB200 NVL72 coolant and facility interface</a>: missing primary evidence</li></ul></dd>
 </dl></details></li>
 <li id="step-c6-software"><div class="step-head"><span class="step-no">C6</span><h4>Software, firmware and orchestration</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>The stack spans compute, switch and power-shelf firmware, with orchestration support stated differently by guide version.</p>
@@ -549,6 +560,7 @@
 <dt>Does not establish</dt><dd><ul><li>The 2025 guide describes Slurm only; the 2.5.0 rack-setup guide adds Kubernetes through RunAI</li><li>Required firmware and software versions are not in the reviewed documents</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-d-firmware-guide</code>: What firmware versions and update order does the NVIDIA DGX GB200/GB300 Firmware Update Guide require?</li><li><code>u-d-software-versions</code>: Which driver, DCGM, DOCA OFED, NVOS and Base Command Manager versions are required together for a GB200 NVL72 rack?</li></ul></dd>
 <dt>Next evidence</dt><dd>The DGX GB200/GB300 Firmware Update Guide and Mission Control release notes</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-mission-control-orchestration-versions">Mission Control orchestration support by version</a>: version-scope difference</li></ul></dd>
 </dl></details></li>
 <li id="step-c7-operations"><div class="step-head"><span class="step-no">C7</span><h4>Operations: network, leak response, tested scale</h4><span class="tag tag-a" title="Attributed">A</span><span class="visually-hidden">Attributed: </span></div>
 <p>Operating the rack couples cluster software to building management and the facility network; NVIDIA&#x27;s tested scale is stated two ways.</p>
@@ -571,6 +583,7 @@
 <dt>Does not establish</dt><dd><ul><li>The current rule text and later amendments were not reviewed</li><li>Not legal advice</li></ul></dd>
 <dt>Open questions</dt><dd><ul><li><code>u-d-access-current-rules</code>: What export-control requirements currently apply to GB200 NVL72 systems for a given destination and end user?</li></ul></dd>
 <dt>Next evidence</dt><dd>The current regulations and a determination for a named transaction</dd>
+<dt>Evidence maintenance</dt><dd><ul><li><a href="/sources/#ec-hbm-export-control-currency">HBM export controls: announcement versus current rule text</a>: requires reassessment</li></ul></dd>
 </dl></details></li>
 <li id="step-c9-evidence-states"><div class="step-head"><span class="step-no">C9</span><h4>From documented to operational: the evidence states</h4><span class="tag tag-c" title="Bounded analysis">C</span><span class="visually-hidden">Bounded analysis: </span></div>
 <p>Each stronger operational statement needs a different kind of record; vendor documents reach only the first two states.</p>
