@@ -356,6 +356,23 @@ class PageTests(unittest.TestCase):
         term = next(n for n in data["@graph"] if n["@type"] == "DefinedTerm")
         self.assertEqual("08", term["termCode"])
 
+    def test_workload_orchestration_claim_is_version_scoped(self):
+        release = read(RELEASE)
+        finding = next(f for f in release["findings"] if f["id"] == "d-sw-stack")
+        self.assertIn("2025", finding["statement"])
+        self.assertIn("Kubernetes (K8s) through RunAI", finding["statement"])
+        self.assertIn("nvidia-mission-control-rack-setup-guide-2026",
+                      {e["source_id"] for e in finding["evidence"]})
+        candidate = next(c for c in release["candidate_relationships"]
+                         if c["id"] == "rel-dgx-superpod-gb200-requires-cluster-management")
+        self.assertIn("version", candidate["statement"])
+        dossier_req = requirement(read(DOSSIER), "req-sw-management-stack")
+        self.assertIn("Kubernetes", dossier_req["required_capability"])
+        page = PAGE.read_text(encoding="utf-8")
+        self.assertIn("newer rack-setup guide", page)
+        self.assertIn("RunAI", page)
+        self.assertNotIn("DGX SuperPOD only supports Slurm", page)
+
     def test_no_scores_percentages_or_approvals_on_the_page(self):
         text = re.sub(r"<[^>]+>", " ", PAGE.read_text(encoding="utf-8").split("<main", 1)[1])
         self.assertNotRegex(text, r"\d+\s?%")
