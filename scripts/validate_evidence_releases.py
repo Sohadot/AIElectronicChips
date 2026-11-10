@@ -831,6 +831,47 @@ def check_dossier(dossier: object, registry: dict, releases: dict[str, dict], la
     return errors
 
 
+def check_cross_release_consistency(releases: dict[str, dict], sitemap: Path | None = None) -> list[str]:
+    """Checks across releases (IDE-007 audit): identifiers stay unique, a candidate edge is proposed
+    once, and each reference page's sitemap lastmod is not older than the evidence it presents."""
+    errors: list[str] = []
+    seen_ids: dict[str, str] = {}
+    seen_edges: dict[tuple, str] = {}
+    for label, release in releases.items():
+        items = list(release.get("findings", [])) + list(release.get("unresolved", [])) + list(release.get("candidate_relationships", []))
+        for item in items:
+            iid = item.get("id") if isinstance(item, dict) else None
+            if not iid:
+                continue
+            if iid in seen_ids and seen_ids[iid] != label:
+                errors.append(f"{label}: id {iid} is already used in {seen_ids[iid]}")
+            seen_ids.setdefault(iid, label)
+        for edge in release.get("candidate_relationships", []):
+            if not isinstance(edge, dict):
+                continue
+            key = (edge.get("from"), edge.get("to"), edge.get("relation_type"))
+            if key in seen_edges and seen_edges[key] != label:
+                errors.append(f"{label}: candidate {key} duplicates one proposed in {seen_edges[key]}")
+            seen_edges.setdefault(key, label)
+    sitemap = sitemap or ROOT / "sitemap.xml"
+    try:
+        lastmod = dict(re.findall(r"<loc>https://aielectronicchips\.com/([^<]*)</loc><lastmod>([0-9-]+)</lastmod>",
+                                  sitemap.read_text(encoding="utf-8")))
+    except OSError:
+        return errors + ["sitemap.xml unreadable; cannot compare lastmod with release dates"]
+    for label, release in releases.items():
+        page = reference_page(release)
+        if page is None or not isinstance(release.get("as_of"), str):
+            continue
+        route = str(page.relative_to(ROOT).parent).replace(".", "") + "/" if page.parent != ROOT else ""
+        stated = lastmod.get(route)
+        if stated is None:
+            errors.append(f"{label}: reference page /{route} has no sitemap lastmod")
+        elif stated < release["as_of"]:
+            errors.append(f"{label}: sitemap lastmod {stated} for /{route} predates the release it presents ({release['as_of']})")
+    return errors
+
+
 def check_pages_exclusion(workflow: Path, research_dir: Path) -> list[str]:
     """Unpublished research candidates must not ship in the Pages artifact."""
     if not any(research_dir.glob("*.json")):
@@ -884,6 +925,7 @@ def main(argv: list[str] | None = None) -> None:
             f"{len(release.get('candidate_relationships', []))} unpublished candidates"
         )
     errors.extend(check_shared_candidate_nodes(loaded))
+    errors.extend(check_cross_release_consistency(loaded))
     for path in sorted(DOSSIER_DIR.glob("*.json")):
         try:
             dossier = json.loads(path.read_text(encoding="utf-8"))

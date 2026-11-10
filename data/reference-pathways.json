@@ -1,0 +1,1235 @@
+{
+  "model_id": "aec-reference-pathways",
+  "schema_version": "1.0.0",
+  "release": "IDE-007",
+  "status": "reference_navigation",
+  "compiled_at": "2026-11-10",
+  "scientific_review": "pending",
+  "boundary": "Reference navigation only. A pathway links public reference sections and the registered sources and release findings behind them. A pathway step is not an Atlas relationship and asserts no industrial dependency; the Dependency Evidence Atlas is the only place a dependency is approved. No pathway carries a score, a ranking, a readiness verdict or an approval.",
+  "atlas_reference": "data/dependency-atlas.json",
+  "source_registry_reference": "data/source-registry.json",
+  "workflow": [
+    "research_question",
+    "ontology_layers",
+    "ordered_steps",
+    "sources",
+    "statements",
+    "limitations",
+    "unresolved",
+    "next_evidence"
+  ],
+  "evidence_classes": {
+    "verified_fact": "Stated by the body that defines it, or independently established",
+    "attributed_statement": "What a company, consortium or agency published, not independently verified",
+    "bounded_analysis": "The project's arithmetic or classification, with stated assumptions",
+    "unresolved": "Evidence absent, blocked or conflicting",
+    "not_supported": "A claim the reviewed evidence does not support"
+  },
+  "comparison_verdicts": {
+    "valid": "Same quantity, unit, direction, scope and basis",
+    "conditional": "Comparable only with a stated condition or an unresolved conflict recorded",
+    "unsupported": "Different quantities, scopes or generations; no comparison should be drawn"
+  },
+  "pathways": [
+    {
+      "id": "pathway-hbm-to-advanced-packaging",
+      "title": "HBM to advanced packaging",
+      "research_question": "How do high-bandwidth memory architecture and advanced packaging interact in AI accelerator integration, and which industrial dependencies are actually documented?",
+      "technical_purpose": "Take a researcher from the HBM4 interface specification to the specific packaging evidence an integration claim would need, separating technology architecture from product-level qualification.",
+      "ontology_layers": [
+        "memory",
+        "fabrication",
+        "packaging",
+        "design"
+      ],
+      "evidence_release_ids": [
+        "aec-hbm4-evidence-release-001",
+        "aec-ide-003-advanced-packaging"
+      ],
+      "scope": {
+        "technical": "HBM4 and HBM4E stacks and interposer-class packaging as disclosed by JEDEC, memory suppliers, TSMC and AMD",
+        "temporal": "Sources dated 2022-03-02 to 2026-11-05; releases compiled 2026-11-09",
+        "geographic": "Not geographically specific"
+      },
+      "assumptions": [
+        "Supplier and foundry statements describe their own products and plans, not third-party integration",
+        "The MI300X case is used because it is the only accelerator in the reviewed evidence with a disclosed package technology"
+      ],
+      "limitations": [
+        "MI300X uses HBM3, not HBM4; no reviewed source names the package technology of a specific HBM4 accelerator",
+        "The JEDEC and UCIe normative texts were not reviewed; only announcements were",
+        "No qualification record linking a named HBM4 stack to a named accelerator package was reviewed"
+      ],
+      "steps": [
+        {
+          "id": "a1-interface-standard",
+          "title": "Start from the HBM4 interface definition",
+          "route": "/hbm-memory/",
+          "anchor": "generations",
+          "ontology_layer": "memory",
+          "evidence_class": "attributed_statement",
+          "relevance": "The 2,048-bit interface and 32 channels per stack fix how many signal paths each stack presents to the package, which is the first physical constraint on integration.",
+          "release_id": "aec-hbm4-evidence-release-001",
+          "finding_ids": [
+            "f-std-interface",
+            "f-std-channels",
+            "f-std-compat"
+          ],
+          "source_ids": [
+            "jedec-jesd270-4-hbm4-standard-2025"
+          ],
+          "scope": {
+            "technical": "Per stack, as announced for JESD270-4",
+            "temporal": "JEDEC announcement of 2025-04-16",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "An announcement, not the normative standard",
+            "Defines the interface, not any product's speed grade"
+          ],
+          "unresolved_ids": [
+            "u-jedec-text"
+          ],
+          "next_evidence": "The normative JESD270-4 text, including timing and any speed bins above 8 Gb/s"
+        },
+        {
+          "id": "a2-speed-grades",
+          "title": "Check stated speeds against the interface arithmetic",
+          "route": "/hbm-memory/",
+          "anchor": "bandwidth",
+          "ontology_layer": "memory",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Supplier pin rates above JEDEC's announced 8 Gb/s mean that conforming to the interface does not fix the speed a package must carry; the speed grade is a product-level property.",
+          "release_id": "aec-hbm4-evidence-release-001",
+          "finding_ids": [
+            "f-an-bandwidth",
+            "f-mu-2026",
+            "f-skh-io-speed"
+          ],
+          "source_ids": [
+            "jedec-jesd270-4-hbm4-standard-2025",
+            "micron-hbm4-volume-production-2026",
+            "skhynix-hbm4-development-mass-production-2025"
+          ],
+          "scope": {
+            "technical": "Per-stack peak bandwidth from width × pin rate",
+            "temporal": "Supplier statements 2025-09-12 to 2026-05-29",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Peak arithmetic, not sustained or application bandwidth",
+            "Speed grades above 8 Gb/s are supplier statements"
+          ],
+          "unresolved_ids": [
+            "u-qualification"
+          ],
+          "next_evidence": "Qualified speed grades for named stacks on named accelerator platforms"
+        },
+        {
+          "id": "a3-base-die",
+          "title": "Trace the base logic die to its fabrication route",
+          "route": "/hbm-memory/",
+          "anchor": "base-die",
+          "ontology_layer": "fabrication",
+          "evidence_class": "bounded_analysis",
+          "relevance": "An HBM4 stack sits on a logic base die, so memory integration also depends on a logic fabrication process that differs by supplier.",
+          "release_id": "aec-hbm4-evidence-release-001",
+          "finding_ids": [
+            "f-an-logic-coupling",
+            "f-tsmc-base-die",
+            "f-ss-base-die",
+            "f-mu-base-die"
+          ],
+          "source_ids": [
+            "skhynix-tsmc-hbm4-mou-2024",
+            "tsmc-2025-na-technology-symposium",
+            "samsung-hbm4-commercial-shipment-2026",
+            "micron-fy2026-form-10-k"
+          ],
+          "scope": {
+            "technical": "Base-die sourcing as each supplier states it",
+            "temporal": "Statements dated 2024-04-18 to 2026-07-08",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Process nodes are unstated for SK hynix and Micron HBM4 base dies",
+            "That HBM4 adds an external dependency for SK hynix is the release's inference"
+          ],
+          "unresolved_ids": [
+            "u-micron-base-die",
+            "u-skh-base-die-implementation"
+          ],
+          "next_evidence": "Process-node disclosures for each supplier's HBM4 base die"
+        },
+        {
+          "id": "a4-stack-to-package",
+          "title": "Follow the stack into the package",
+          "route": "/hbm-memory/",
+          "anchor": "packaging",
+          "ontology_layer": "packaging",
+          "evidence_class": "attributed_statement",
+          "relevance": "Stacking methods (MR-MUF, hybrid bonding) and foundry packaging plans are where memory meets packaging; they are disclosed as capabilities, not as the package of any named HBM4 accelerator.",
+          "release_id": "aec-hbm4-evidence-release-001",
+          "finding_ids": [
+            "f-skh-mrmuf",
+            "f-ss-hcb",
+            "f-tsmc-cowos",
+            "f-skh-cowos"
+          ],
+          "source_ids": [
+            "skhynix-hbm4-12h-samples-2025",
+            "samsung-hbm4-gtc-2026",
+            "tsmc-2025-na-technology-symposium",
+            "skhynix-tsmc-hbm4-mou-2024"
+          ],
+          "scope": {
+            "technical": "Stack assembly and HBM-to-CoWoS statements",
+            "temporal": "Statements dated 2024-04-18 to 2026-03-17",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Hybrid bonding is not stated as used in HBM4 or HBM4E",
+            "TSMC's 9.5-reticle CoWoS for 12 or more stacks is a 2027 plan",
+            "The 2024 SK hynix and TSMC memorandum states an aim, not a shipped integration"
+          ],
+          "unresolved_ids": [
+            "u-interposer-substrate",
+            "u-test",
+            "u-16h-thermal"
+          ],
+          "next_evidence": "Per-product interposer, substrate, assembly-site and stack-test disclosures"
+        },
+        {
+          "id": "a5-integration-platforms",
+          "title": "Compare the interposer and bridge platforms",
+          "route": "/design-fabrication-packaging/",
+          "anchor": "interposer-scaling",
+          "ontology_layer": "packaging",
+          "evidence_class": "attributed_statement",
+          "relevance": "Interposer size bounds how many HBM stacks fit beside the logic dies; TSMC reports every size above 3.3 reticles as CoWoS-L.",
+          "release_id": "aec-ide-003-advanced-packaging",
+          "finding_ids": [
+            "p-cowos-s",
+            "p-cowos-l",
+            "p-tsmc-interposer-shift",
+            "p-cowos-l-large-reticle"
+          ],
+          "source_ids": [
+            "tsmc-2025-annual-report",
+            "tsmc-2024-annual-report"
+          ],
+          "scope": {
+            "technical": "TSMC CoWoS variants and interposer sizes",
+            "temporal": "TSMC annual reports for 2024 and 2025",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "TSMC's 2025 report states the 5.5-reticle CoWoS-L status two different ways",
+            "Capacity and customer allocation are not disclosed"
+          ],
+          "unresolved_ids": [
+            "u-p-cowos-l-5p5-status",
+            "u-p-substrate",
+            "u-p-cowos-capacity"
+          ],
+          "next_evidence": "TSMC confirmation of 5.5-reticle CoWoS-L qualification and volume status"
+        },
+        {
+          "id": "a6-product-case",
+          "title": "Read one product-level disclosure, and its generation",
+          "route": "/design-fabrication-packaging/",
+          "anchor": "case-mi300x",
+          "ontology_layer": "packaging",
+          "evidence_class": "attributed_statement",
+          "relevance": "MI300X is the reviewed product whose maker names its package technology and memory connections, which shows the kind of disclosure an HBM4 integration claim would need. It uses HBM3, so it is not HBM4 evidence.",
+          "release_id": "aec-ide-003-advanced-packaging",
+          "finding_ids": [
+            "p-amd-mi300-partition",
+            "p-amd-mi300x-cowos",
+            "p-an-mi300x-dependencies"
+          ],
+          "source_ids": [
+            "amd-cdna3-white-paper-2025",
+            "amd-synopsys-chiplet-packaging-2024"
+          ],
+          "scope": {
+            "technical": "AMD Instinct MI300X as AMD describes it",
+            "temporal": "AMD documents dated 2024-06-04 to 2025-04-07",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "The CoWoS variant and interposer size of MI300X are not stated",
+            "HBM3 generation; does not transfer to HBM4 products"
+          ],
+          "unresolved_ids": [
+            "u-p-mi300x-cowos-variant",
+            "u-p-mi300x-stacking"
+          ],
+          "next_evidence": "An equivalent disclosure for a named HBM4 accelerator"
+        },
+        {
+          "id": "a7-interface-vs-interoperability",
+          "title": "Separate interface standards from integration and interoperability",
+          "route": "/design-fabrication-packaging/",
+          "anchor": "chiplet-interfaces",
+          "ontology_layer": "design",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Interface standards (JEDEC HBM4, UCIe) define how dies talk; they do not establish that a given stack and package work together, which needs product-level test results.",
+          "release_id": "aec-ide-003-advanced-packaging",
+          "finding_ids": [
+            "p-an-interface-vs-integration",
+            "p-ucie-scope",
+            "p-ucie-adoption-claim"
+          ],
+          "source_ids": [
+            "ucie-1-specification-launch-2022",
+            "ucie-2025-year-in-review"
+          ],
+          "scope": {
+            "technical": "UCIe scope and the distinction between standard, integration and interoperability",
+            "temporal": "UCIe statements 2022-03-02 to 2025",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "No published cross-vendor interoperability result was reviewed"
+          ],
+          "unresolved_ids": [
+            "u-p-ucie-implementation",
+            "u-p-ucie-normative"
+          ],
+          "next_evidence": "Published compliance or interoperability results for named products"
+        },
+        {
+          "id": "a8-qualification-gap",
+          "title": "Record what is not established: qualification and substitution",
+          "route": "/hbm-memory/",
+          "anchor": "substitution",
+          "ontology_layer": "memory",
+          "evidence_class": "attributed_statement",
+          "relevance": "Supplier statements that a stack is designed for a platform are the closest evidence to qualification, and they stop short of it.",
+          "release_id": "aec-hbm4-evidence-release-001",
+          "finding_ids": [
+            "f-an-substitution"
+          ],
+          "source_ids": [
+            "micron-hbm4-volume-production-2026",
+            "samsung-hbm4-gtc-2026",
+            "nvidia-rubin-platform-architecture-2026"
+          ],
+          "scope": {
+            "technical": "Supplier design-target statements for NVIDIA Vera Rubin",
+            "temporal": "Statements dated 2026-01-05 to 2026-11-05",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Does not establish NVIDIA qualification, interchangeable supply or multi-sourcing"
+          ],
+          "unresolved_ids": [
+            "u-qualification",
+            "u-capacity"
+          ],
+          "next_evidence": "Accelerator-maker qualification disclosures naming memory suppliers and speed grades"
+        }
+      ],
+      "statements": [
+        {
+          "text": "JEDEC's HBM4 announcement defines a 2,048-bit interface with 32 channels per stack.",
+          "classification": "attributed_statement",
+          "basis": [
+            "f-std-interface",
+            "f-std-channels"
+          ]
+        },
+        {
+          "text": "Every HBM4 stack depends on two manufacturing capabilities, a DRAM process and a logic base-die process, before any packaging.",
+          "classification": "bounded_analysis",
+          "basis": [
+            "f-an-logic-coupling"
+          ]
+        },
+        {
+          "text": "Interface conformance and package integration are separate claims; neither establishes that a named stack is qualified in a named package.",
+          "classification": "bounded_analysis",
+          "basis": [
+            "p-an-interface-vs-integration",
+            "f-an-substitution"
+          ]
+        },
+        {
+          "text": "No reviewed source names the interposer, substrate or assembly provider for any named HBM4 accelerator.",
+          "classification": "unresolved",
+          "basis": [
+            "u-interposer-substrate",
+            "u-p-substrate"
+          ]
+        },
+        {
+          "text": "MI300X packaging evidence cannot be carried over to HBM4 products, because MI300X uses HBM3.",
+          "classification": "not_supported",
+          "basis": [
+            "p-amd-mi300-partition"
+          ]
+        }
+      ],
+      "next_evidence": [
+        "Per-product package disclosures for a named HBM4 accelerator: interposer or bridge, substrate, assembly site",
+        "Accelerator-maker qualification records naming HBM4 suppliers and speed grades",
+        "The normative JESD270-4 and UCIe specification texts"
+      ]
+    },
+    {
+      "id": "pathway-memory-bandwidth-to-data-movement",
+      "title": "Memory bandwidth to system data movement",
+      "research_question": "How do memory bandwidth, accelerator interconnects, and scale-out networking differ, and why are their published performance figures not automatically comparable?",
+      "technical_purpose": "Show which bandwidth comparisons are technically valid, which hold only under stated conditions, and which are unsupported, by keeping each figure's unit, direction, scope and basis attached to it.",
+      "ontology_layers": [
+        "memory",
+        "packaging",
+        "interconnect"
+      ],
+      "evidence_release_ids": [
+        "aec-hbm4-evidence-release-001",
+        "aec-ide-004-interconnect"
+      ],
+      "scope": {
+        "technical": "Peak bandwidth figures for HBM stacks, accelerator memory, on-package fabric, scale-up, host links and scale-out",
+        "temporal": "Sources dated 2022-08-02 to 2026-11-05; releases compiled 2026-11-09",
+        "geographic": "Not geographically specific"
+      },
+      "assumptions": [
+        "All figures are vendor-stated peaks or arithmetic from them",
+        "A comparison is valid only when unit, direction, scope and basis match"
+      ],
+      "limitations": [
+        "No measured, effective or workload-level bandwidth was reviewed for any system",
+        "MI300X (HBM3) and Rubin (HBM4) are different generations; GB200 NVL72 figures are rack-level"
+      ],
+      "steps": [
+        {
+          "id": "b1-stack-bandwidth",
+          "title": "Per-stack memory bandwidth",
+          "route": "/hbm-memory/",
+          "anchor": "bandwidth",
+          "ontology_layer": "memory",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Per-stack peak bandwidth is width × pin rate ÷ 8; it is the smallest memory quantity and the base of every per-device figure.",
+          "release_id": "aec-hbm4-evidence-release-001",
+          "finding_ids": [
+            "f-an-bandwidth",
+            "f-mu-2026"
+          ],
+          "source_ids": [
+            "jedec-jesd270-4-hbm4-standard-2025",
+            "micron-hbm4-volume-production-2026"
+          ],
+          "scope": {
+            "technical": "Per stack, peak",
+            "temporal": "Statements 2025-04-16 to 2026-03-17",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Peak, not sustained",
+            "A combined read and write capability, not a sum of two directions"
+          ],
+          "unresolved_ids": [],
+          "next_evidence": ""
+        },
+        {
+          "id": "b2-device-memory",
+          "title": "Per-accelerator memory bandwidth",
+          "route": "/hbm-memory/",
+          "anchor": "accelerators",
+          "ontology_layer": "memory",
+          "evidence_class": "attributed_statement",
+          "relevance": "Device memory bandwidth sums all stacks on one package; NVIDIA gives two different figures for Rubin.",
+          "release_id": "aec-hbm4-evidence-release-001",
+          "finding_ids": [
+            "f-nv-rubin",
+            "f-nv-rubin-192",
+            "f-an-rubin-stacks"
+          ],
+          "source_ids": [
+            "nvidia-rubin-platform-architecture-2026",
+            "nvidia-rubin-gpu-architecture-2026",
+            "nvidia-co-design-memory-2026"
+          ],
+          "scope": {
+            "technical": "Per Rubin GPU, peak",
+            "temporal": "NVIDIA posts dated 2026-01-05, 2026-07-21 and 2026-11-05",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "22 TB/s and 19.2 TB/s are both NVIDIA statements; the conflict is unresolved"
+          ],
+          "unresolved_ids": [
+            "u-rubin-bandwidth"
+          ],
+          "next_evidence": "An NVIDIA specification stating which figure applies and on what basis"
+        },
+        {
+          "id": "b3-on-package",
+          "title": "On-package movement inside one accelerator",
+          "route": "/interconnects/",
+          "anchor": "on-package",
+          "ontology_layer": "packaging",
+          "evidence_class": "attributed_statement",
+          "relevance": "Cache, die-to-die and memory paths inside a package carry their own figures, which are larger than and distinct from off-package links.",
+          "release_id": "aec-ide-004-interconnect",
+          "finding_ids": [
+            "i-amd-on-package-tiers",
+            "i-amd-hbm-arithmetic",
+            "i-amd-on-package-fabric"
+          ],
+          "source_ids": [
+            "amd-cdna3-white-paper-2025"
+          ],
+          "scope": {
+            "technical": "AMD MI300 Series on-package tiers",
+            "temporal": "AMD white paper revision of 2025-04-07",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Two AMD L2 figures (34.4 TB/s and 51.6 TB/s) are not reconciled"
+          ],
+          "unresolved_ids": [
+            "u-i-l2-figures"
+          ],
+          "next_evidence": "AMD clarification of its L2 bandwidth figures"
+        },
+        {
+          "id": "b4-memory-vs-fabric",
+          "title": "Where memory bandwidth ends and fabric bandwidth begins",
+          "route": "/interconnects/",
+          "anchor": "memory-vs-fabric",
+          "ontology_layer": "interconnect",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Memory and fabric figures measure different physical paths; their ratio is a magnitude, not a statement of how fast a GPU reaches a peer.",
+          "release_id": "aec-ide-004-interconnect",
+          "finding_ids": [
+            "i-an-memory-vs-fabric"
+          ],
+          "source_ids": [
+            "amd-cdna3-white-paper-2025",
+            "nvidia-rubin-gpu-architecture-2026"
+          ],
+          "scope": {
+            "technical": "Ratios of stated peaks across measurement domains",
+            "temporal": "Sources dated 2025-04-07 to 2026-11-05",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Ratios depend on the unresolved scope of AMD's 896 GB/s figure"
+          ],
+          "unresolved_ids": [
+            "u-i-amd-link-scope"
+          ],
+          "next_evidence": "AMD confirmation of whether 896 GB/s is a per-GPU, both-direction sum"
+        },
+        {
+          "id": "b5-scale-up",
+          "title": "Accelerator-to-accelerator scale-up fabrics",
+          "route": "/interconnects/",
+          "anchor": "fabrics",
+          "ontology_layer": "interconnect",
+          "evidence_class": "attributed_statement",
+          "relevance": "Scale-up figures are stated per GPU, per link or per rack, in bytes, sometimes bidirectional and sometimes with no direction stated.",
+          "release_id": "aec-ide-004-interconnect",
+          "finding_ids": [
+            "i-amd-mi300x-topology",
+            "i-an-mi300x-link-arithmetic",
+            "i-nvidia-nvlink6-figures",
+            "i-nvidia-gb200-aggregate"
+          ],
+          "source_ids": [
+            "amd-cdna3-white-paper-2025",
+            "nvidia-rubin-platform-architecture-2026",
+            "nvidia-co-design-memory-2026"
+          ],
+          "scope": {
+            "technical": "MI300X 8-GPU platform, Vera Rubin NVL72 and GB200 NVL72 scale-up figures",
+            "temporal": "Sources dated 2025-04-07 to 2026-11-05",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "AMD does not state whether 896 GB/s is per GPU or per platform, or its direction",
+            "NVIDIA gives 3.6 TB/s and 3.0 TB/s for NVLink 6 per Rubin GPU"
+          ],
+          "unresolved_ids": [
+            "u-i-amd-link-scope",
+            "u-i-nvlink6-figure"
+          ],
+          "next_evidence": "Per-link bandwidth, direction and encoding disclosures from AMD and NVIDIA"
+        },
+        {
+          "id": "b6-host",
+          "title": "Host and CPU connections",
+          "route": "/interconnects/",
+          "anchor": "host",
+          "ontology_layer": "interconnect",
+          "evidence_class": "attributed_statement",
+          "relevance": "Host links (PCIe, CXL, NVLink-C2C) use per-link figures whose raw totals count both directions unless stated otherwise.",
+          "release_id": "aec-ide-004-interconnect",
+          "finding_ids": [
+            "i-cxl-3-rate",
+            "i-nvidia-host-links",
+            "i-nvidia-rubin-io-ledger"
+          ],
+          "source_ids": [
+            "cxl-3-0-white-paper-2022",
+            "nvidia-rubin-platform-architecture-2026",
+            "nvidia-rubin-gpu-architecture-2026"
+          ],
+          "scope": {
+            "technical": "x16 host links and coherent CPU-GPU links",
+            "temporal": "Sources dated 2022-08-02 to 2026-07-21",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "Raw rates exclude encoding and protocol overhead",
+            "Whether MI300X or Rubin implement CXL is not established"
+          ],
+          "unresolved_ids": [
+            "u-i-cxl-on-accelerators",
+            "u-i-pcie-primary"
+          ],
+          "next_evidence": "PCI-SIG specification statements on payload efficiency"
+        },
+        {
+          "id": "b7-scale-out",
+          "title": "Leaving the scale-up domain",
+          "route": "/interconnects/",
+          "anchor": "scale-out",
+          "ontology_layer": "interconnect",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Scale-out networking changes the dependency model as well as the bandwidth: NICs and switches replace the scale-up fabric.",
+          "release_id": "aec-ide-004-interconnect",
+          "finding_ids": [
+            "i-an-scale-up-to-out",
+            "i-nvidia-scale-out",
+            "i-uec-network-types"
+          ],
+          "source_ids": [
+            "nvidia-rubin-platform-architecture-2026",
+            "uec-specification-1-1-2026"
+          ],
+          "scope": {
+            "technical": "Vera Rubin NVL72 scale-out and the Ultra Ethernet network types",
+            "temporal": "Sources dated 2026-01-05 to 2026",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "The 1.6 Tb/s per-GPU figure has no stated direction"
+          ],
+          "unresolved_ids": [
+            "u-i-uec-compliance",
+            "u-i-optics"
+          ],
+          "next_evidence": "Direction and measurement basis of per-GPU scale-out figures"
+        },
+        {
+          "id": "b8-reading-figures",
+          "title": "Apply the six checks before any comparison",
+          "route": "/interconnects/",
+          "anchor": "measurement",
+          "ontology_layer": "interconnect",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Bits or bytes, transfers or payload, direction, scope, peak or sustained, and who measured it decide whether two figures can be compared.",
+          "release_id": "aec-ide-004-interconnect",
+          "finding_ids": [
+            "i-an-units-and-directions"
+          ],
+          "source_ids": [
+            "nvidia-rubin-platform-architecture-2026",
+            "cxl-3-0-white-paper-2022"
+          ],
+          "scope": {
+            "technical": "Unit and direction alignment for stated figures",
+            "temporal": "Sources dated 2022-08-02 to 2026-11-05",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "No measured figure was reviewed"
+          ],
+          "unresolved_ids": [
+            "u-i-effective-bandwidth",
+            "u-i-latency"
+          ],
+          "next_evidence": "Published collective or application bandwidth with a stated workload and method"
+        }
+      ],
+      "comparisons": [
+        {
+          "id": "cmp-stack-vs-stack",
+          "verdict": "valid",
+          "figures": [
+            {
+              "value": "2.05 TB/s",
+              "finding_id": "f-an-bandwidth"
+            },
+            {
+              "value": "2.8 TB/s",
+              "finding_id": "f-mu-2026"
+            }
+          ],
+          "reason": "Both are per-stack peak bandwidths for a 2,048-bit HBM4 interface, differing only in pin rate."
+        },
+        {
+          "id": "cmp-rubin-22-vs-19",
+          "verdict": "conditional",
+          "figures": [
+            {
+              "value": "22 TB/s",
+              "finding_id": "f-nv-rubin"
+            },
+            {
+              "value": "19.2 TB/s",
+              "finding_id": "f-nv-rubin-192"
+            }
+          ],
+          "reason": "Both are NVIDIA per-GPU memory figures for Rubin, but they conflict; either can be used only with its date and source until NVIDIA resolves which applies."
+        },
+        {
+          "id": "cmp-mi300x-vs-rubin-memory",
+          "verdict": "conditional",
+          "figures": [
+            {
+              "value": "5.325 TB/s",
+              "finding_id": "i-amd-hbm-arithmetic"
+            },
+            {
+              "value": "22 TB/s",
+              "finding_id": "f-nv-rubin"
+            }
+          ],
+          "reason": "Both are per-accelerator peak memory bandwidth, but across HBM3 and HBM4 generations; they compare stated peaks, not delivered throughput."
+        },
+        {
+          "id": "cmp-mi300x-p2p-vs-nvlink6",
+          "verdict": "unsupported",
+          "figures": [
+            {
+              "value": "896 GB/s",
+              "finding_id": "i-amd-mi300x-topology"
+            },
+            {
+              "value": "3.6 TB/s",
+              "finding_id": "i-nvidia-nvlink6-figures"
+            }
+          ],
+          "reason": "AMD does not state whether 896 GB/s is per GPU or per platform, or its direction, so it cannot be set against NVIDIA's per-GPU bidirectional figure."
+        },
+        {
+          "id": "cmp-memory-vs-scale-up",
+          "verdict": "unsupported",
+          "figures": [
+            {
+              "value": "22 TB/s",
+              "finding_id": "i-nvidia-rubin-io-ledger"
+            },
+            {
+              "value": "3,600 GB/s",
+              "finding_id": "i-nvidia-rubin-io-ledger"
+            }
+          ],
+          "reason": "Memory and NVLink figures describe different physical paths; their ratio does not show how fast a GPU reaches local versus peer memory."
+        },
+        {
+          "id": "cmp-rack-vs-gpu",
+          "verdict": "unsupported",
+          "figures": [
+            {
+              "value": "130 TB/s",
+              "finding_id": "i-nvidia-gb200-aggregate"
+            },
+            {
+              "value": "3.6 TB/s",
+              "finding_id": "i-nvidia-nvlink6-figures"
+            }
+          ],
+          "reason": "One is a GB200 NVL72 rack aggregate and the other a per-GPU Rubin figure: different scopes and different generations."
+        },
+        {
+          "id": "cmp-scale-up-vs-scale-out",
+          "verdict": "conditional",
+          "figures": [
+            {
+              "value": "3.6 TB/s",
+              "finding_id": "i-an-units-and-directions"
+            },
+            {
+              "value": "1.6 Tb/s",
+              "finding_id": "i-an-units-and-directions"
+            }
+          ],
+          "reason": "Comparable only after converting bits to bytes; the ratio is about 9x or 18x depending on the unstated direction of the 1.6 Tb/s figure."
+        },
+        {
+          "id": "cmp-cxl-vs-pcie6",
+          "verdict": "conditional",
+          "figures": [
+            {
+              "value": "256 GB/s",
+              "finding_id": "i-cxl-3-rate"
+            },
+            {
+              "value": "256 GB/s",
+              "finding_id": "i-nvidia-rubin-io-ledger"
+            }
+          ],
+          "reason": "Both describe x16 links at the PCIe 6.0 rate, but NVIDIA does not state that its figure uses the same both-direction raw basis."
+        }
+      ],
+      "statements": [
+        {
+          "text": "Per-stack HBM4 bandwidth follows from interface width and pin rate, and every disclosed figure is consistent with a 2,048-bit interface.",
+          "classification": "bounded_analysis",
+          "basis": [
+            "f-an-bandwidth"
+          ]
+        },
+        {
+          "text": "NVIDIA states 22 TB/s and, later, 19.2 TB/s for Rubin memory bandwidth.",
+          "classification": "attributed_statement",
+          "basis": [
+            "f-nv-rubin",
+            "f-nv-rubin-192"
+          ]
+        },
+        {
+          "text": "Whether AMD's 896 GB/s figure is per GPU or per platform, and in which direction, remains unresolved.",
+          "classification": "unresolved",
+          "basis": [
+            "u-i-amd-link-scope"
+          ]
+        },
+        {
+          "text": "No reviewed source reports measured collective or application bandwidth, so no workload-level comparison is supported.",
+          "classification": "not_supported",
+          "basis": [
+            "u-i-effective-bandwidth"
+          ]
+        }
+      ],
+      "next_evidence": [
+        "Measured collective bandwidth with a stated workload, configuration and method",
+        "AMD per-link bandwidth and direction for MI300X Infinity Fabric",
+        "NVIDIA resolution of the Rubin memory and NVLink 6 figure conflicts"
+      ]
+    },
+    {
+      "id": "pathway-rack-to-deployable-compute",
+      "title": "AI accelerator rack to deployable compute",
+      "research_question": "What separates a documented AI accelerator rack architecture from evidence of installed, commissioned, and operational computing infrastructure?",
+      "technical_purpose": "Follow one documented rack, GB200 NVL72, through hardware, fabric, power, cooling, software, operations and access, and show what evidence would support each stronger operational statement.",
+      "ontology_layers": [
+        "design",
+        "interconnect",
+        "power_thermal",
+        "controls",
+        "deployment"
+      ],
+      "evidence_release_ids": [
+        "aec-ide-004-interconnect",
+        "aec-ide-005-power-thermal",
+        "aec-ide-006-deployment-readiness"
+      ],
+      "scope": {
+        "technical": "NVIDIA GB200 NVL72 racks and the DGX SuperPOD reference architecture",
+        "temporal": "Sources dated 2024-10-15 to 2026-11-09; releases compiled 2026-11-09 to 2026-11-10",
+        "geographic": "Not geographically specific"
+      },
+      "assumptions": [
+        "GB200 only; where NVIDIA covers GB200 and GB300 together that is recorded",
+        "Vera Rubin figures are not used in this pathway"
+      ],
+      "limitations": [
+        "Every reviewed source is a product description, reference architecture or procedure; none is a site record",
+        "Power, cooling, firmware and acceptance criteria are partly undefined in the reviewed sources"
+      ],
+      "steps": [
+        {
+          "id": "c1-rack-architecture",
+          "title": "The documented rack",
+          "route": "/power-and-thermal-limits/",
+          "anchor": "case-gb200",
+          "ontology_layer": "design",
+          "evidence_class": "attributed_statement",
+          "relevance": "The rack's composition (18 compute trays, 9 NVLink switch trays, power shelves, bus bar, manifolds) is the product specification every later requirement refers to.",
+          "release_id": "aec-ide-005-power-thermal",
+          "finding_ids": [
+            "pt-gb-rack-configuration"
+          ],
+          "source_ids": [
+            "nvidia-dgx-gb-rack-user-guide-2026"
+          ],
+          "scope": {
+            "technical": "DGX GB rack systems as NVIDIA describes them",
+            "temporal": "User guide dated 2026-09-17",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "The user guide covers GB200 and GB300 together"
+          ],
+          "unresolved_ids": [
+            "u-d-gb300-difference"
+          ],
+          "next_evidence": "Separate GB200 and GB300 specifications"
+        },
+        {
+          "id": "c2-rack-fabric",
+          "title": "The rack's scale-up fabric",
+          "route": "/interconnects/",
+          "anchor": "fabrics",
+          "ontology_layer": "interconnect",
+          "evidence_class": "attributed_statement",
+          "relevance": "The NVLink domain spans the rack, so its configuration is a rack-level requirement, stated by NVIDIA as a rack aggregate.",
+          "release_id": "aec-ide-004-interconnect",
+          "finding_ids": [
+            "i-nvidia-gb200-aggregate"
+          ],
+          "source_ids": [
+            "nvidia-co-design-memory-2026"
+          ],
+          "scope": {
+            "technical": "GB200 NVL72 aggregate NVLink bandwidth",
+            "temporal": "NVIDIA post dated 2026-11-05",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "A rack aggregate, not a per-GPU or measured figure"
+          ],
+          "unresolved_ids": [],
+          "next_evidence": ""
+        },
+        {
+          "id": "c3-electrical",
+          "title": "Electrical delivery to the rack",
+          "route": "/power-and-thermal-limits/",
+          "anchor": "electrical-chain",
+          "ontology_layer": "power_thermal",
+          "evidence_class": "attributed_statement",
+          "relevance": "Power shelves and a DC bus bar define what the facility must feed; NVIDIA's documents disagree on redundancy and leave the rack figure's basis undefined.",
+          "release_id": "aec-ide-005-power-thermal",
+          "finding_ids": [
+            "pt-gb-power-shelves",
+            "pt-ra-power-shelves",
+            "pt-ocp-bus-bar",
+            "pt-an-bus-bar-capacity"
+          ],
+          "source_ids": [
+            "nvidia-dgx-gb-rack-user-guide-2026",
+            "nvidia-dgx-superpod-gb200-ra-2025",
+            "nvidia-gb200-nvl72-ocp-contribution-2024"
+          ],
+          "scope": {
+            "technical": "Rack power distribution as NVIDIA describes it",
+            "temporal": "Documents dated 2024-10-15 to 2026-09-17",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "N+N in the user guide, N in the reference architecture",
+            "1,400 A at about 50 V is about 70 kW against about 120 kW"
+          ],
+          "unresolved_ids": [
+            "u-pt-redundancy-conflict",
+            "u-pt-bus-bar-paths",
+            "u-pt-120kw-basis"
+          ],
+          "next_evidence": "An NVIDIA power specification stating redundancy, bus-bar paths and figure basis"
+        },
+        {
+          "id": "c4-facility-power",
+          "title": "From rack to scalable unit",
+          "route": "/power-and-thermal-limits/",
+          "anchor": "facility",
+          "ontology_layer": "power_thermal",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Facility planning uses the 1.2 MW scalable-unit design figure, which exceeds eight racks at about 120 kW by an unitemised 0.24 MW.",
+          "release_id": "aec-ide-005-power-thermal",
+          "finding_ids": [
+            "pt-an-scalable-unit"
+          ],
+          "source_ids": [
+            "nvidia-dgx-superpod-gb200-ra-2025",
+            "nvidia-dgx-gb-rack-user-guide-2026"
+          ],
+          "scope": {
+            "technical": "Eight-rack scalable unit",
+            "temporal": "Documents dated 2025-09-03 and 2026-09-17",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "A design value, not measured consumption"
+          ],
+          "unresolved_ids": [
+            "u-pt-scalable-unit-remainder"
+          ],
+          "next_evidence": "An NVIDIA breakdown of the scalable-unit figure"
+        },
+        {
+          "id": "c5-thermal",
+          "title": "Heat removal and the facility loop",
+          "route": "/power-and-thermal-limits/",
+          "anchor": "thermal-chain",
+          "ontology_layer": "power_thermal",
+          "evidence_class": "attributed_statement",
+          "relevance": "Liquid cooling through cold plates hands heat to a facility loop via a CDU; the coolant parameters a site must supply are not stated.",
+          "release_id": "aec-ide-005-power-thermal",
+          "finding_ids": [
+            "pt-gb-hybrid-cooling",
+            "pt-ocp-cdu-terms"
+          ],
+          "source_ids": [
+            "nvidia-dgx-gb-rack-user-guide-2026",
+            "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+          ],
+          "scope": {
+            "technical": "Hybrid liquid and air cooling; CDU terminology",
+            "temporal": "Documents dated 2024-08 to 2026-09-17",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "No coolant type, flow, supply temperature, pressure or class is stated",
+            "The liquid and air shares are not stated"
+          ],
+          "unresolved_ids": [
+            "u-pt-coolant-specification",
+            "u-pt-liquid-air-split"
+          ],
+          "next_evidence": "NVIDIA site-preparation or facility-interface specifications"
+        },
+        {
+          "id": "c6-software",
+          "title": "Software, firmware and orchestration",
+          "route": "/ai-chip-infrastructure/",
+          "anchor": "integration",
+          "ontology_layer": "deployment",
+          "evidence_class": "attributed_statement",
+          "relevance": "The stack spans compute, switch and power-shelf firmware, with orchestration support stated differently by guide version.",
+          "release_id": "aec-ide-006-deployment-readiness",
+          "finding_ids": [
+            "d-sw-stack",
+            "d-bringup-sequence",
+            "d-firmware-procedure"
+          ],
+          "source_ids": [
+            "nvidia-dgx-gb-rack-user-guide-2026",
+            "nvidia-mission-control-gb200-admin-guide-2025",
+            "nvidia-mission-control-rack-setup-guide-2026"
+          ],
+          "scope": {
+            "technical": "Mission Control and DGX software as documented",
+            "temporal": "Guides dated 2025-06-11 to 2026-11-09",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "The 2025 guide describes Slurm only; the 2.5.0 rack-setup guide adds Kubernetes through RunAI",
+            "Required firmware and software versions are not in the reviewed documents"
+          ],
+          "unresolved_ids": [
+            "u-d-firmware-guide",
+            "u-d-software-versions"
+          ],
+          "next_evidence": "The DGX GB200/GB300 Firmware Update Guide and Mission Control release notes"
+        },
+        {
+          "id": "c7-operations",
+          "title": "Operations: network, leak response, tested scale",
+          "route": "/ai-chip-infrastructure/",
+          "anchor": "network-operations",
+          "ontology_layer": "deployment",
+          "evidence_class": "attributed_statement",
+          "relevance": "Operating the rack couples cluster software to building management and the facility network; NVIDIA's tested scale is stated two ways.",
+          "release_id": "aec-ide-006-deployment-readiness",
+          "finding_ids": [
+            "d-leak-ops",
+            "d-ns-network-prereq",
+            "d-ra-tested-scope"
+          ],
+          "source_ids": [
+            "nvidia-dgx-gb-rack-user-guide-2026",
+            "nvidia-mission-control-gb200-admin-guide-2025",
+            "nvidia-mission-control-north-south-network-guide-2026",
+            "nvidia-dgx-superpod-gb200-ra-2025"
+          ],
+          "scope": {
+            "technical": "Operations as documented by NVIDIA",
+            "temporal": "Documents dated 2025-06-11 to 2026-11-09",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "The building-management interface is not specified",
+            "Two SUs or one: the reference architecture says both"
+          ],
+          "unresolved_ids": [
+            "u-d-bms-interface",
+            "u-d-tested-scale"
+          ],
+          "next_evidence": "An NVIDIA building-management interface specification; a corrected reference architecture"
+        },
+        {
+          "id": "c8-access",
+          "title": "Access and compliance",
+          "route": "/ai-chip-infrastructure/",
+          "anchor": "network-operations",
+          "ontology_layer": "controls",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Export controls attach to items, destinations, end uses and parties, so they govern who may receive and use the rack.",
+          "release_id": "aec-ide-006-deployment-readiness",
+          "finding_ids": [
+            "d-bis-access",
+            "d-an-access-layer"
+          ],
+          "source_ids": [
+            "bis-advanced-semiconductor-controls-2024"
+          ],
+          "scope": {
+            "technical": "US export controls as announced on 2024-12-02",
+            "temporal": "Announcement of 2024-12-02",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "The current rule text and later amendments were not reviewed",
+            "Not legal advice"
+          ],
+          "unresolved_ids": [
+            "u-d-access-current-rules"
+          ],
+          "next_evidence": "The current regulations and a determination for a named transaction"
+        },
+        {
+          "id": "c9-evidence-states",
+          "title": "From documented to operational: the evidence states",
+          "route": "/ai-chip-infrastructure/",
+          "anchor": "states",
+          "ontology_layer": "deployment",
+          "evidence_class": "bounded_analysis",
+          "relevance": "Each stronger operational statement needs a different kind of record; vendor documents reach only the first two states.",
+          "release_id": "aec-ide-006-deployment-readiness",
+          "finding_ids": [
+            "d-def-evidence-states",
+            "d-an-design-vs-deployment",
+            "d-an-checklist-not-record",
+            "d-validation-checklist"
+          ],
+          "source_ids": [
+            "nvidia-mission-control-rack-setup-guide-2026",
+            "nvidia-dgx-superpod-gb200-ra-2025"
+          ],
+          "scope": {
+            "technical": "Evidence states for GB200 NVL72 requirements",
+            "temporal": "Classification compiled 2026-11-10",
+            "geographic": "Not geographically specific"
+          },
+          "limitations": [
+            "No site record was reviewed",
+            "NVIDIA's checklist states no acceptance thresholds"
+          ],
+          "unresolved_ids": [
+            "u-d-site-records",
+            "u-d-acceptance-criteria"
+          ],
+          "next_evidence": "Installation, commissioning and operating records for a named site"
+        }
+      ],
+      "evidence_ladder": [
+        {
+          "state": "product_specification_documented",
+          "supported_statement": "NVIDIA documents the rack's configuration and requirements.",
+          "record_required": "A vendor product description or specification",
+          "reviewed": true
+        },
+        {
+          "state": "infrastructure_proposed",
+          "supported_statement": "A reference architecture proposes how racks are combined and supplied.",
+          "record_required": "A reference architecture or a site design",
+          "reviewed": true
+        },
+        {
+          "state": "capability_contracted",
+          "supported_statement": "A named site has contracted the capacity or service.",
+          "record_required": "A contract or service agreement for a named site",
+          "reviewed": false
+        },
+        {
+          "state": "equipment_procured",
+          "supported_statement": "Racks were delivered to a named site.",
+          "record_required": "A purchase or delivery record",
+          "reviewed": false
+        },
+        {
+          "state": "equipment_installed",
+          "supported_statement": "Racks are installed at a named site; this does not establish commissioning.",
+          "record_required": "An installation record",
+          "reviewed": false
+        },
+        {
+          "state": "subsystem_commissioned",
+          "supported_statement": "A subsystem passed its commissioning tests.",
+          "record_required": "A commissioning test result for one subsystem",
+          "reviewed": false
+        },
+        {
+          "state": "integrated_configuration_verified",
+          "supported_statement": "Subsystems were tested together under stated conditions.",
+          "record_required": "An integrated test across subsystems",
+          "reviewed": false
+        },
+        {
+          "state": "operational_performance_observed",
+          "supported_statement": "Measured operation over a stated period.",
+          "record_required": "Measurements from operation over a stated period",
+          "reviewed": false
+        },
+        {
+          "state": "not_established",
+          "supported_statement": "No record of the kind needed was found; the requirement is unshown, not unmet.",
+          "record_required": "None found",
+          "reviewed": true
+        }
+      ],
+      "statements": [
+        {
+          "text": "NVIDIA documents the GB200 NVL72 rack configuration, power distribution and cooling architecture.",
+          "classification": "attributed_statement",
+          "basis": [
+            "pt-gb-rack-configuration",
+            "pt-gb-power-shelves",
+            "pt-gb-hybrid-cooling"
+          ]
+        },
+        {
+          "text": "Vendor documents reach the product-specification and proposed-infrastructure states only; later states need site records.",
+          "classification": "bounded_analysis",
+          "basis": [
+            "d-an-design-vs-deployment"
+          ]
+        },
+        {
+          "text": "Redundancy, bus-bar paths, the basis of 120 kW, coolant parameters and acceptance criteria remain undefined.",
+          "classification": "unresolved",
+          "basis": [
+            "u-pt-redundancy-conflict",
+            "u-pt-bus-bar-paths",
+            "u-pt-120kw-basis",
+            "u-pt-coolant-specification",
+            "u-d-acceptance-criteria"
+          ]
+        },
+        {
+          "text": "A reference architecture or a vendor checklist does not establish that any rack is installed, commissioned or operating.",
+          "classification": "not_supported",
+          "basis": [
+            "d-an-checklist-not-record",
+            "u-d-site-records"
+          ]
+        }
+      ],
+      "next_evidence": [
+        "Installation, commissioning and operating records for a named site",
+        "NVIDIA power, coolant and acceptance specifications for GB200 NVL72",
+        "The GB200/GB300 firmware update guide and version-specific software support"
+      ]
+    }
+  ]
+}

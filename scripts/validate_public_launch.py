@@ -244,7 +244,10 @@ def resolve_internal_href(href: str, source_file: Path) -> Path | None:
         return source_file
     parsed = urlparse(href)
     path = parsed.path
-    if path.startswith("/"):
+    if path.startswith("/") and Path(path).suffix in {".json", ".css", ".js", ".png", ".svg", ".xml", ".txt"}:
+        # A published file (e.g. /data/reference-pathways.json), not a route directory: it must exist as-is.
+        target = ROOT / path.lstrip("/")
+    elif path.startswith("/"):
         target = route_to_file(f"{DOMAIN}{path}")
     else:
         target = (source_file.parent / path).resolve()
