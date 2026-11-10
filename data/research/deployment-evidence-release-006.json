@@ -199,7 +199,7 @@
       "id": "d-sw-stack",
       "claim_class": "attributed_statement",
       "topic": "software_stack",
-      "statement": "NVIDIA states that the DGX Grace Blackwell rack software stack consists of software and firmware running on compute nodes, switch nodes and power shelves. Its GB200 administration guide lists the DCGM, GPU driver, NVSM and DOCA OFED components and states that DGX SuperPOD only supports Slurm for scheduling workloads.",
+      "statement": "NVIDIA's 2025 GB200 administration guide lists DCGM, the GPU driver, NVSM and DOCA OFED and says DGX SuperPOD only supported Slurm for scheduling in that guide. By contrast, the newer rack-setup guide version 2.5.0 documents DGX SuperPOD workload orchestration with Slurm or Kubernetes (K8s) through RunAI, with GB200/GB300 racks assigned to the relevant workload manager. Neither guide establishes which stack has been installed or validated at any site.",
       "evidence": [
         {
           "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
@@ -208,6 +208,10 @@
         {
           "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
           "locator": "\"NVIDIA DGX SuperPOD only supports Slurm for scheduling workloads.\"; \"Datacenter GPU Manager (DCGM)\"; \"NVIDIA System Management (NVSM)\""
+        },
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Introduction: \"NVIDIA DGX SuperPOD supports workload orchestration with Slurm and with Kubernetes (K8s) through RunAI.\"; \"GB200/GB300 racks must be assigned to each respective workload manager.\""
         }
       ],
       "evidence_state": "cited_sources_active",
@@ -215,7 +219,7 @@
       "as_of": "2026-11-10",
       "limitations": [
         "Lists components without the versions required for a given rack",
-        "The Slurm statement concerns the DGX SuperPOD product, not every GB200 NVL72 deployment"
+        "The 2025 Slurm-only statement differs from the later 2.5.0 rack-setup guide, which documents Slurm and Kubernetes through RunAI; version-specific configuration and actual deployment are not established"
       ]
     },
     {
@@ -644,7 +648,7 @@
       "from": "tech-nvidia-dgx-superpod-gb200",
       "to": "cap-cluster-management-software",
       "relation_type": "requires",
-      "statement": "NVIDIA's deployment and administration guides describe DGX SuperPOD with GB200 as provisioned and managed through Base Command Manager, and state that it only supports Slurm for scheduling.",
+      "statement": "NVIDIA's documentation describes DGX SuperPOD GB200 clusters as provisioned and managed with Base Command Manager. Scheduling/orchestration depends on the documented software version: the 2025 GB200 administration guide discusses Slurm only, while the newer rack-setup guide also describes Kubernetes through RunAI.",
       "claim_class": "attributed_statement",
       "evidence": [
         {
@@ -663,16 +667,16 @@
       "review_owner": "unassigned",
       "confidence": "high",
       "limitations": [
-        "Applies to NVIDIA's DGX SuperPOD product, not to every GB200 NVL72 deployment",
+        "Applies to DGX SuperPOD with the documented software versions, not every GB200 NVL72 deployment; Slurm-only wording in the 2025 guide is not a universal support limit",
         "Required software versions are not stated"
       ],
       "review_status": "awaiting_human_review",
       "research_recommendation": {
         "decision": "ACCEPT",
-        "rationale": "Two NVIDIA guides describe the same management stack for the same product.",
+        "rationale": "NVIDIA guides document Base Command Manager for provisioning and management; workload orchestration support must be version-scoped because the 2025 and 2.5.0 guides differ.",
         "changes_in_release": "New candidate introduced in IDE-006.",
         "evidence_gaps": [
-          "Required component versions"
+          "Required component versions and version-specific orchestration configuration"
         ],
         "assessed_at": "2026-11-10",
         "assessment_method": "ai_assisted_source_check"
