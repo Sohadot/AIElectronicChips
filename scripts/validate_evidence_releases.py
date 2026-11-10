@@ -67,6 +67,8 @@ TOPICS = {
     "host_interface", "scale_up_fabric", "scale_out_network", "measurement_scope",
     # Power delivery and thermal infrastructure (IDE-005)
     "power_delivery", "thermal_transport", "facility_infrastructure", "efficiency_metric",
+    # Deployment readiness (IDE-006)
+    "deployment_procedure", "software_stack", "operations", "access_compliance", "evidence_state",
 }
 # Bandwidth and rate figures must carry their measurement scope. In these topics every
 # figure in a finding's statement needs a matching entry in its "quantities" list.
@@ -503,6 +505,25 @@ COOLING_COMPATIBILITY = re.compile(
     r"\b(?:CDUs?|cold plates?|immersion|coolant)\b" + SPAN + r"\b(?:compatible with|validated (?:for|with)|approved for)\b", re.I)
 HEAT_EQUALS_CAPACITY = re.compile(
     r"\b(?:heat load|cooling (?:load|capacity))\b" + SPAN + r"\b(?:equals?|is the same as|matches)\b" + SPAN + r"\b(?:rated|nameplate|installed|input)\s+(?:power|capacity)\b", re.I)
+# Deployment-readiness boundaries (IDE-006): evidence at one level must not be promoted to another.
+INSTALL_AS_COMMISSIONED = re.compile(
+    r"\b(?:installed|installation)\b" + SPAN + r"\b(?:proves?|establish(?:es)?|means|confirms?|demonstrates?)\b" + SPAN +
+    r"\b(?:commission\w*|operational|operating|in service)\b", re.I)
+SOFTWARE_AS_PERFORMANCE = re.compile(
+    r"\b(?:driver|software|firmware|runtime|library)\b" + SPAN + r"\b(?:compatib\w*|support\w*)\b" + SPAN +
+    r"\b(?:proves?|establish(?:es)?|guarantees?|ensures?|demonstrates?)\b" + SPAN + r"\bperformance\b", re.I)
+AVAILABILITY_AS_DELIVERY = re.compile(
+    r"\b(?:available|availability|announced)\b" + SPAN + r"\b(?:proves?|means|establish(?:es)?)\b" + SPAN +
+    r"\b(?:delivered|shipped|installed|deployed)\b", re.I)
+STANDARD_CONFORMANCE = re.compile(
+    r"\b(?:conforms? to|complies with|meets|is rated)\s+(?:the\s+)?(?:Uptime Institute\s+)?(?:Tier\s*(?:III|3|IV|4)|TIA-?942|EN\s?50600|ASHRAE|ISO\s?\d+|IEC\s?\d+)", re.I)
+PLANNED_AS_OPERATIONAL = re.compile(
+    r"\b(?:planned|proposed|announced|under construction)\b" + SPAN + r"\b(?:is|are)\s+(?:now\s+)?(?:operational|operating|online|in service|running)\b", re.I)
+RATED_AS_AVAILABLE = re.compile(
+    r"\b(?:rated|nameplate|installed)\s+(?:power|capacity)\b" + SPAN + r"\b(?:is|are|equals?)\s+(?:the\s+)?available\b", re.I)
+CHECKLIST_AS_APPROVAL = re.compile(
+    r"\b(?:checklist|dossier|matrix|assessment)s?\b" + SPAN + r"\b(?:is|are|constitutes?|serves? as|represents?)\s+(?:an?\s+)?(?:engineering\s+)?"
+    r"(?:approval|sign-off|acceptance|certification|readiness verdict)\b", re.I)
 COWOS_PRODUCT = re.compile(r"\b(?:Rubin|Vera|Blackwell|MI\d{3}[A-Z]?|GB\d{3})\b", re.I)
 COWOS_UNIVERSAL = re.compile(r"\b(?:every|all) HBM4\b", re.I)
 # Citation markers kept from a page so a sentence can be matched to the sources it cites.
@@ -564,6 +585,20 @@ def inference_boundary_errors(sentence: str, where: str, evidence: dict[str, set
         errors.append(f"{where}: asserts, unattributed, cooling compatibility for a product: {sentence[:120]!r}")
     if HEAT_EQUALS_CAPACITY.search(sentence) and not negated:
         errors.append(f"{where}: equates heat load with a rated or installed capacity: {sentence[:120]!r}")
+    if INSTALL_AS_COMMISSIONED.search(sentence) and not negated:
+        errors.append(f"{where}: treats installation as evidence of commissioning or operation: {sentence[:120]!r}")
+    if SOFTWARE_AS_PERFORMANCE.search(sentence) and not negated:
+        errors.append(f"{where}: treats software or driver compatibility as evidence of performance: {sentence[:120]!r}")
+    if AVAILABILITY_AS_DELIVERY.search(sentence) and not negated:
+        errors.append(f"{where}: treats product availability as delivery or installation: {sentence[:120]!r}")
+    if STANDARD_CONFORMANCE.search(sentence) and not negated and not ATTRIBUTED.search(sentence):
+        errors.append(f"{where}: asserts, unattributed, conformance to a facility or technical standard: {sentence[:120]!r}")
+    if PLANNED_AS_OPERATIONAL.search(sentence) and not negated:
+        errors.append(f"{where}: presents planned infrastructure as operational: {sentence[:120]!r}")
+    if RATED_AS_AVAILABLE.search(sentence) and not negated:
+        errors.append(f"{where}: treats rated or installed capacity as available capacity: {sentence[:120]!r}")
+    if CHECKLIST_AS_APPROVAL.search(sentence) and not negated:
+        errors.append(f"{where}: presents a checklist or assessment as an approval: {sentence[:120]!r}")
     if INTEROP_ASSERTION.search(sentence) and not negated:
         errors.append(f"{where}: asserts interoperability or compliance without a published test result: {sentence[:120]!r}")
     if STANDARD_IMPLEMENTATION.search(sentence) and not negated and _names_a_product(sentence) and not ATTRIBUTED.search(sentence):
@@ -672,6 +707,130 @@ def check_shared_candidate_nodes(releases: dict[str, dict]) -> list[str]:
     return errors
 
 
+# --- Deployment evidence dossiers (IDE-006) ---------------------------------------------------
+# A dossier lists what must be evidenced before a deployment claim for one declared subject and
+# scope. It is a research artefact: it never approves, scores or certifies anything.
+DOSSIER_DIR = RESEARCH_DIR / "dossiers"
+DOSSIER_FIELDS = {"dossier_id", "schema_version", "status", "review_status", "assessment_method", "as_of", "evidence_release",
+                  "subject", "assessment_scope", "evidence_states", "requirements"}
+DOSSIER_STATUSES = {"demonstration", "assessment_draft"}
+DOSSIER_DOMAINS = {"compute_hardware", "electrical", "thermal", "network_interconnect", "software", "facility_operations", "access_compliance"}
+EVIDENCE_STATES_ORDERED = [
+    "product_specification_documented", "infrastructure_proposed", "capability_contracted", "equipment_procured",
+    "equipment_installed", "subsystem_commissioned", "integrated_configuration_verified", "operational_performance_observed",
+    "not_established",
+]
+# States that describe a particular site or contract need a source registered as a site record.
+SITE_EVIDENCE_STATES = {"capability_contracted", "equipment_procured", "equipment_installed", "subsystem_commissioned",
+                        "integrated_configuration_verified", "operational_performance_observed"}
+SITE_RECORD_CLAIM = "site_record"
+REQUIREMENT_FIELDS = {"id", "domain", "required_capability", "dependency", "evidence_requirement", "evidence",
+                      "evidence_classification", "current_state", "contradictions", "missing_information", "next_verification_action"}
+EVIDENCE_CLASSIFICATIONS = {"product_specification", "reference_design", "documented_procedure", "regulatory_announcement",
+                            "site_record", "none"}
+FORBIDDEN_DOSSIER_KEYS = re.compile(r"(?i)^(?:reviewer|reviewed_by|reviewed_at|approved\w*|approval\w*|sign_?off\w*|score|readiness_(?:score|percent\w*)|certif\w*)$")
+
+
+def _walk_keys(obj, path=""):
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            yield k, f"{path}.{k}"
+            yield from _walk_keys(v, f"{path}.{k}")
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            yield from _walk_keys(v, f"{path}[{i}]")
+
+
+def check_dossier(dossier: object, registry: dict, releases: dict[str, dict], label: str) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(dossier, dict):
+        return [f"{label}: dossier root must be an object"]
+    if set(dossier) != DOSSIER_FIELDS:
+        errors.append(f"{label}: fields mismatch: missing={sorted(DOSSIER_FIELDS - set(dossier))}, extra={sorted(set(dossier) - DOSSIER_FIELDS)}")
+    for key, where in _walk_keys(dossier):
+        if FORBIDDEN_DOSSIER_KEYS.match(str(key)):
+            errors.append(f"{label}{where}: a dossier cannot carry approvals, scores, certifications or reviewer identities")
+    if dossier.get("status") not in DOSSIER_STATUSES:
+        errors.append(f"{label}: status must be one of {sorted(DOSSIER_STATUSES)}")
+    if dossier.get("review_status") != "not_reviewed":
+        errors.append(f"{label}: review_status must be 'not_reviewed'; a dossier is not an engineering approval")
+    if dossier.get("assessment_method") != RECOMMENDATION_METHOD:
+        errors.append(f"{label}: assessment_method must be '{RECOMMENDATION_METHOD}'")
+    if dossier.get("evidence_states") != EVIDENCE_STATES_ORDERED:
+        errors.append(f"{label}: evidence_states must list the governed states exactly")
+    release_ids = {r.get("release_id") for r in releases.values() if isinstance(r, dict)}
+    if dossier.get("evidence_release") not in release_ids:
+        errors.append(f"{label}: evidence_release must name an existing evidence release")
+    unresolved_ids = {u.get("id") for r in releases.values() if isinstance(r, dict) for u in r.get("unresolved", []) if isinstance(u, dict)}
+    for field in ("subject", "assessment_scope"):
+        if not isinstance(dossier.get(field), dict) or not dossier.get(field):
+            errors.append(f"{label}: {field} must be a non-empty object")
+    sources = {s.get("id"): s for s in registry.get("source_records", []) if isinstance(s, dict)}
+    requirements = dossier.get("requirements")
+    if not isinstance(requirements, list) or not requirements:
+        return errors + [f"{label}: requirements must be a non-empty list"]
+    seen, domains = set(), set()
+    for i, req in enumerate(requirements):
+        where = f"{label}.requirements[{i}]"
+        if not isinstance(req, dict) or set(req) != REQUIREMENT_FIELDS:
+            errors.append(f"{where} must contain exactly {sorted(REQUIREMENT_FIELDS)}")
+            continue
+        if req["id"] in seen or not ID_PATTERN.fullmatch(str(req["id"])):
+            errors.append(f"{where} invalid or duplicate id")
+        seen.add(req["id"])
+        if req["domain"] not in DOSSIER_DOMAINS:
+            errors.append(f"{where} invalid domain")
+        domains.add(req["domain"])
+        state = req["current_state"]
+        if state not in EVIDENCE_STATES_ORDERED:
+            errors.append(f"{where} invalid current_state")
+        if req["evidence_classification"] not in EVIDENCE_CLASSIFICATIONS:
+            errors.append(f"{where} invalid evidence_classification")
+        for field in ("required_capability", "dependency", "evidence_requirement", "next_verification_action"):
+            if not nonempty(req[field]):
+                errors.append(f"{where}.{field} must be non-empty")
+            for sent in sentences(str(req[field])):
+                errors.extend(inference_boundary_errors(sent, f"{where}.{field}"))
+        for item in req["missing_information"] if isinstance(req["missing_information"], list) else []:
+            for sent in sentences(str(item)):
+                errors.extend(inference_boundary_errors(sent, f"{where}.missing_information"))
+        evidence = req["evidence"]
+        if not isinstance(evidence, list):
+            errors.append(f"{where}.evidence must be a list")
+            evidence = []
+        cited = []
+        for j, item in enumerate(evidence):
+            ewhere = f"{where}.evidence[{j}]"
+            if not isinstance(item, dict) or set(item) != {"source_id", "locator"} or not nonempty(item.get("locator")):
+                errors.append(f"{ewhere} must contain source_id and a non-empty locator")
+                continue
+            src = sources.get(item["source_id"])
+            if src is None or src.get("status") != "active":
+                errors.append(f"{ewhere} must cite an active registered source")
+                continue
+            if any(len(q.split()) > MAX_QUOTE_WORDS for q in QUOTED.findall(item["locator"])):
+                errors.append(f"{ewhere} quoted excerpt exceeds {MAX_QUOTE_WORDS} words")
+            cited.append(src)
+        if state in SITE_EVIDENCE_STATES and not any(SITE_RECORD_CLAIM in s.get("supported_claim_types", []) for s in cited):
+            errors.append(f"{where} state {state} needs evidence from a source registered as a site record; vendor documents cannot establish it")
+        if state == "not_established":
+            if not string_list(req["missing_information"]):
+                errors.append(f"{where} not_established must say what information is missing")
+        elif not cited:
+            errors.append(f"{where} state {state} must cite evidence")
+        if state in {"product_specification_documented", "infrastructure_proposed"} and req["evidence_classification"] in {"none", "site_record"}:
+            errors.append(f"{where} evidence_classification does not match state {state}")
+        if req["evidence_classification"] == "none" and cited:
+            errors.append(f"{where} cites evidence but is classified 'none'")
+        if not isinstance(req["contradictions"], list) or any(c not in unresolved_ids for c in req["contradictions"]):
+            errors.append(f"{where}.contradictions must list IDs of unresolved questions in an evidence release")
+        if not isinstance(req["missing_information"], list):
+            errors.append(f"{where}.missing_information must be a list")
+    if domains != DOSSIER_DOMAINS:
+        errors.append(f"{label}: requirements must cover all seven domains; missing {sorted(DOSSIER_DOMAINS - domains)}")
+    return errors
+
+
 def check_pages_exclusion(workflow: Path, research_dir: Path) -> list[str]:
     """Unpublished research candidates must not ship in the Pages artifact."""
     if not any(research_dir.glob("*.json")):
@@ -725,6 +884,14 @@ def main(argv: list[str] | None = None) -> None:
             f"{len(release.get('candidate_relationships', []))} unpublished candidates"
         )
     errors.extend(check_shared_candidate_nodes(loaded))
+    for path in sorted(DOSSIER_DIR.glob("*.json")):
+        try:
+            dossier = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{path.name}: unreadable: {exc}")
+            continue
+        errors.extend(check_dossier(dossier, registry, loaded, path.name))
+        summary.append(f"{path.name}: {len(dossier.get('requirements', []))} dossier requirements")
     for page, dates in compiled_dates.items():
         errors.extend(check_public_references(page, registry))
         if dates:

@@ -36,6 +36,13 @@
       "mainEntity": {
         "@id": "https://aielectronicchips.com/ai-chip-infrastructure/#deployment"
       },
+      "citation": [
+        { "@type": "CreativeWork", "name": "NVIDIA DGX GB Rack Scale Systems User Guide", "publisher": { "@type": "Organization", "name": "NVIDIA" }, "datePublished": "2026-09-17", "url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf" },
+        { "@type": "CreativeWork", "name": "NVIDIA DGX SuperPOD Reference Architecture Featuring NVIDIA DGX GB200", "publisher": { "@type": "Organization", "name": "NVIDIA" }, "datePublished": "2025-09-03", "url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf" },
+        { "@type": "CreativeWork", "name": "NVIDIA Mission Control Management Plane and Rack Setup with NVIDIA DGX GB200/GB300 NVL72 Systems Installation Guide", "version": "2.5.0", "publisher": { "@type": "Organization", "name": "NVIDIA" }, "dateModified": "2026-11-09", "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/index.html" },
+        { "@type": "CreativeWork", "name": "NVIDIA Mission Control Software with NVIDIA GB200 NVL72 Systems Administration Guide", "publisher": { "@type": "Organization", "name": "NVIDIA" }, "datePublished": "2025-06-11", "url": "https://docs.nvidia.com/pdf/nvidia-mission-control-software-with-nvidia-gb200-nvl72-systems-administration-guide.pdf" },
+        { "@type": "CreativeWork", "name": "Commerce Strengthens Export Controls to Restrict China's Capability to Produce Advanced Semiconductors for Military Applications", "publisher": { "@type": "GovernmentOrganization", "name": "U.S. Department of Commerce, Bureau of Industry and Security" }, "datePublished": "2024-12-02", "url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military" }
+      ],
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -75,7 +82,428 @@
     <a class="brand" href="/" aria-label="AIElectronicChips.com home"><span class="brand-mark" aria-hidden="true"></span><span>AI<span>Electronic</span>Chips</span></a>
     <nav class="primary-nav" aria-label="Primary navigation"><a href="/">Overview</a><a href="/sovereignty-stack/">Stack</a><a href="/chip-dependency-map/">Dependency Map</a><a href="/methodology/">Methodology</a><a href="/strategic-availability/">Strategic Availability</a></nav>
   </header>
-  <main id="main"><header class="page-hero"><div class="trace" aria-hidden="true"></div><p class="eyebrow">Reference layer · Deployment</p><h1>AI Chip Infrastructure</h1><p class="lead">An AI chip becomes useful compute only as part of an operating infrastructure.</p><p class="intro">Architectures and devices matter, but deployment also requires memory, interconnect, power, cooling, facilities, software, operations, and continuing access. Infrastructure analysis keeps those conditions visible.</p><div class="framing-note"><strong>Reference framing</strong><span>This page defines an analytical layer. It does not make a current operational claim about any entity.</span></div></header><div class="content-shell"><section class="reference-sections" aria-label="Reference authority summary"><article class="reference-block"><div class="block-index">00</div><div><h2>Reference summary</h2><p><strong>Definition.</strong> This page covers Ontology Layer 08: Deployment as the operating infrastructure required to install, run, and sustain AI compute.</p><p><strong>Compute sovereignty relationship.</strong> A chip is not deployable compute until facilities, power, cooling, operations, and access conditions align in a declared scope.</p><p><strong>Boundary.</strong> This page does not establish current site readiness, operating guarantees, or entity-level deployment conclusions.</p></div></article></section><section class="reference-sections" aria-label="AI Chip Infrastructure reference sections"><article class="reference-block"><div class="block-index">01</div><div><h2>Beyond the component</h2><p>A component-level view can describe technical characteristics. An infrastructure view asks whether the surrounding system can install, energize, connect, operate, maintain, and replace it.</p></div></article><article class="reference-block"><div class="block-index">02</div><div><h2>Deployment is a dependency layer</h2><p>Deployment includes facilities, cloud or on-premises access, operational expertise, geographic distribution, maintenance, and recovery options. These are assessed separately rather than assumed.</p></div></article><article class="reference-block"><div class="block-index">03</div><div><h2>Bounded interpretation</h2><p>Infrastructure readiness is time-sensitive and entity-specific. A reference model can define the evidence needed, but operational conclusions require current sources and a declared scope.</p></div></article></section><section class="evidence-posture" aria-labelledby="evidence-title"><div class="section-label blue">Evidence posture · Registry-linked</div><h2 id="evidence-title">Source posture</h2><p class="evidence-intro">These registry records can support attributed infrastructure context, institutional recommendations, and modelled energy-demand analysis. They do not establish current site-level readiness or available capacity.</p><ul class="source-id-list" aria-label="Related source registry IDs"><li>doe-us-data-center-energy-use-2024</li><li>doe-powering-ai-data-centers-2024</li><li>iea-energy-and-ai-2025</li><li>oecd-semiconductor-policy-landscape-2024</li></ul><div class="posture-grid"><article><h3>Can support</h3><p>Attributed institutional context, recommendations, and modelled projections within stated geographic and temporal scope.</p></article><article><h3>Cannot support</h3><p>Site-level readiness, operating guarantees, current availability, or a deployment conclusion.</p></article><article><h3>Confidence and freshness</h3><p>Reviewed as of 2026-06-14. Projections and recommendations require current-condition review and do not inherit finding confidence.</p></article></div><a class="evidence-link" href="/sources/">Inspect the governed source registry →</a></section><section class="related" aria-labelledby="related-title"><div class="section-label">Continue the reference path</div><h2 id="related-title">Related reference surfaces</h2><div class="related-grid"><a class="related-card" href="/power-and-thermal-limits/"><strong>Power and Thermal Limits</strong><span>Why energy delivery and heat removal belong inside compute sovereignty analysis.</span><span class="text-link">Open reference →</span></a><a class="related-card" href="/interconnects/"><strong>Interconnects</strong><span>A reference framing for the systems that move data within and between AI compute.</span><span class="text-link">Open reference →</span></a><a class="related-card" href="/chip-dependency-map/"><strong>Chip Dependency Map</strong><span>Preview the governed diagnostic model for mapping layered compute dependency exposure.</span><span class="text-link">Open reference →</span></a></div></section></div></main>
+  <main id="main">
+    <header class="page-hero">
+      <div class="trace" aria-hidden="true"></div>
+      <p class="eyebrow">Reference layer · 08 Deployment · Evidence release 006</p>
+      <h1>AI Chip Infrastructure</h1>
+      <p class="lead">An AI chip becomes useful compute only as part of an operating infrastructure.</p>
+      <p class="intro">Architectures and devices matter, but deployment also requires memory, interconnect, power, cooling, facilities, software, operations, and continuing access. This reference sets out what evidence would show that each of those conditions is met at a site, and how far the published record for one rack-scale system, NVIDIA GB200 NVL72, actually goes.</p>
+      <div class="framing-note"><strong>Evidence compiled: 2026-11-10 · Scientific review pending</strong><span>Vendor documents remain attributed. The evidence states and the example dossier are an analytical model, not an approval or a score. Nothing here establishes that any site, customer or deployment exists or is ready.</span></div>
+      <ul class="class-legend" aria-label="Evidence classes used on this page">
+        <li><span class="tag tag-a">A</span>Attributed: what a company or agency published, not independently verified</li>
+        <li><span class="tag tag-c">C</span>Bounded analysis: our classification or derivation, with stated assumptions</li>
+        <li><span class="tag tag-u">U</span>Unresolved: evidence absent, blocked or conflicting</li>
+      </ul>
+    </header>
+    <div class="content-shell">
+      <section class="reference-sections" aria-label="Reference authority summary">
+        <article class="reference-block" id="summary"><div class="block-index">00</div><div>
+          <h2>Reference summary</h2>
+          <p><strong>Definition.</strong> This page covers Ontology Layer 08: Deployment as the operating infrastructure required to install, run, and sustain AI compute.</p>
+          <p><strong>Compute sovereignty relationship.</strong> A chip is not deployable compute until facilities, power, cooling, operations, and access conditions align in a declared scope.</p>
+          <p><strong>Boundary.</strong> This page does not establish current site readiness, operating guarantees, or entity-level deployment conclusions. Product documents and reference architectures describe what a deployment needs, not what any site has done.</p>
+        </div></article>
+      </section>
+
+      <section class="reference-sections" aria-label="AI Chip Infrastructure reference sections">
+        <article class="reference-block"><div class="block-index">01</div><div><h2>Beyond the component</h2><p>A component-level view can describe technical characteristics. An infrastructure view asks whether the surrounding system can install, energize, connect, operate, maintain, and replace it.</p></div></article>
+        <article class="reference-block"><div class="block-index">02</div><div><h2>Deployment is a dependency layer</h2><p>Deployment includes facilities, cloud or on-premises access, operational expertise, geographic distribution, maintenance, and recovery options. These are assessed separately rather than assumed.</p></div></article>
+        <article class="reference-block"><div class="block-index">03</div><div><h2>Bounded interpretation</h2><p>Infrastructure readiness is time-sensitive and entity-specific. A reference model can define the evidence needed, but operational conclusions require current sources and a declared scope.</p></div></article>
+      </section>
+
+      <nav class="ref-toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">Deployment evidence reference</h2>
+        <ol start="4">
+          <li><a href="#deployable">What makes AI compute deployable</a></li>
+          <li><a href="#domains">Seven evidence domains</a></li>
+          <li><a href="#states">Documented capability versus deployment readiness</a></li>
+          <li><a href="#integration">Hardware and software integration</a></li>
+          <li><a href="#electrical-cooling">Electrical and cooling evidence</a></li>
+          <li><a href="#network-operations">Network, operations and access evidence</a></li>
+          <li><a href="#matrix">AI compute deployment evidence matrix</a></li>
+          <li><a href="#case-gb200">Case study: GB200 NVL72 from design to operation</a></li>
+          <li><a href="#dossier">Example evidence dossier</a></li>
+          <li><a href="#questions">Questions for engineers and analysts</a></li>
+          <li><a href="#unresolved">Gaps and unresolved questions</a></li>
+        </ol>
+      </nav>
+
+      <section class="reference-sections" aria-label="Deployment evidence reference">
+        <article class="reference-block" id="deployable"><div class="block-index">04</div><div>
+          <h2>What makes AI compute deployable</h2>
+          <p class="detail">An accelerator is deployable compute only when several conditions hold at once, at one site, for one configuration, on one date: the hardware is present, it is energised and cooled, its fabrics are configured, its software and firmware are at a known baseline, the facility can operate and recover it, and the operator may lawfully receive and use it. Each condition has its own evidence, and evidence for one does not carry over to another.</p>
+          <p class="detail">Most of what is published about AI systems describes the first step only: what a product contains and what it needs. NVIDIA's documentation for GB200 NVL72 goes further than most, with installation procedures, bring-up steps and a validation checklist <a class="cite" href="#ref-3">[3]</a>. Even so, these are instructions for a deployment engineer, not records of a deployment. A procedure says what should be checked; only a record from a site says what was found.</p>
+          <p class="detail">This page therefore separates two questions that are often merged. <em>Is the capability documented?</em> can be answered from vendor sources. <em>Is the capability present and working at a site?</em> cannot, and on the evidence reviewed here it remains unanswered for every site.</p>
+        </div></article>
+
+        <article class="reference-block" id="domains"><div class="block-index">05</div><div>
+          <h2>Seven evidence domains</h2>
+          <p class="detail">Deployment evidence is organised in seven domains. They are separated because each is documented by different parties and verified by different records, not because they are independent: Section 07 shows where they couple.</p>
+          <ul class="detail">
+            <li><strong>Compute hardware.</strong> The trays, accelerators, switches and enclosures, and the records that they were delivered and installed.</li>
+            <li><strong>Electrical.</strong> The supply chain from utility to rack, its capacity and redundancy. Figures and conflicts are on <a href="/power-and-thermal-limits/">Power and Thermal Limits</a>.</li>
+            <li><strong>Thermal.</strong> Liquid and air heat removal and the facility loops behind them, also covered there.</li>
+            <li><strong>Network and interconnect.</strong> Scale-up fabrics inside the rack and scale-out and management networks between racks; the fabrics themselves are described on <a href="/interconnects/">Interconnects</a>.</li>
+            <li><strong>Software.</strong> Cluster management, scheduling, drivers and firmware, and the versions that must agree.</li>
+            <li><strong>Facility operations.</strong> Building management, leak response, remote access, acceptance and handover.</li>
+            <li><strong>Access and compliance.</strong> Export controls and the conditions under which a system may be supplied and used.</li>
+          </ul>
+          <figure class="ref-figure">
+            <div class="figure-frame" tabindex="0" role="region" aria-label="Figure 1 drawing; scrolls horizontally on narrow screens">
+              <svg viewBox="0 0 900 430" role="img" aria-labelledby="domain-fig-title domain-fig-desc">
+              <title id="domain-fig-title">Deployment evidence for GB200 NVL72 by domain and evidence state</title>
+              <desc id="domain-fig-desc">A grid with seven rows, one per deployment domain: compute hardware, electrical, thermal, network and interconnect, software, facility operations, and access and compliance. Its nine columns are evidence states. The first two, specification documented and infrastructure proposed, are records the reviewed vendor documents can supply. The next six, from capability contracted to performance observed, need a record from a site or contract. The last is not established. Each cell gives how many of the 18 requirements in the demonstration dossier are recorded in that state. All six site-record columns are empty: no site record was reviewed. Eight requirements are at specification documented, three at infrastructure proposed and seven are not established.</desc>
+              <text class="f-panel" x="20" y="24">Evidence state of 18 dossier requirements</text>
+              <text class="f-axis" x="214" y="46">IN VENDOR SOURCES</text>
+              <text class="f-axis" x="366" y="46">NEEDS A SITE OR CONTRACT RECORD</text>
+              <text class="f-axis" x="806" y="46">GAP</text>
+              <line class="f-grid" x1="359" y1="34" x2="359" y2="362"/>
+              <line class="f-grid" x1="803" y1="34" x2="803" y2="362"/>
+              <text class="f-note" x="249" y="66" text-anchor="middle">Spec</text>
+              <text class="f-note" x="249" y="80" text-anchor="middle">documented</text>
+              <text class="f-note" x="323" y="66" text-anchor="middle">Design</text>
+              <text class="f-note" x="323" y="80" text-anchor="middle">proposed</text>
+              <text class="f-note" x="397" y="66" text-anchor="middle">Capability</text>
+              <text class="f-note" x="397" y="80" text-anchor="middle">contracted</text>
+              <text class="f-note" x="471" y="66" text-anchor="middle">Equipment</text>
+              <text class="f-note" x="471" y="80" text-anchor="middle">procured</text>
+              <text class="f-note" x="545" y="66" text-anchor="middle">Equipment</text>
+              <text class="f-note" x="545" y="80" text-anchor="middle">installed</text>
+              <text class="f-note" x="619" y="66" text-anchor="middle">Subsystem</text>
+              <text class="f-note" x="619" y="80" text-anchor="middle">commissioned</text>
+              <text class="f-note" x="693" y="66" text-anchor="middle">Integration</text>
+              <text class="f-note" x="693" y="80" text-anchor="middle">verified</text>
+              <text class="f-note" x="767" y="66" text-anchor="middle">Performance</text>
+              <text class="f-note" x="767" y="80" text-anchor="middle">observed</text>
+              <text class="f-note" x="841" y="66" text-anchor="middle">Not</text>
+              <text class="f-note" x="841" y="80" text-anchor="middle">established</text>
+              <text class="f-lbl" x="20" y="115">COMPUTE HARDWARE</text>
+              <rect class="f-base" x="214" y="92" width="70" height="34" rx="2"/>
+              <text class="f-val" x="249" y="114" text-anchor="middle">1</text>
+              <rect class="f-base" x="288" y="92" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="362" y="92" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="436" y="92" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="510" y="92" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="584" y="92" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="658" y="92" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="732" y="92" width="70" height="34" rx="2"/>
+              <rect class="f-rdl" x="806" y="92" width="70" height="34" rx="2"/>
+              <text class="f-val" x="841" y="114" text-anchor="middle">1</text>
+              <text class="f-lbl" x="20" y="153">ELECTRICAL</text>
+              <rect class="f-base" x="214" y="130" width="70" height="34" rx="2"/>
+              <text class="f-val" x="249" y="152" text-anchor="middle">1</text>
+              <rect class="f-base" x="288" y="130" width="70" height="34" rx="2"/>
+              <text class="f-val" x="323" y="152" text-anchor="middle">1</text>
+              <rect class="f-bar-calc" x="362" y="130" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="436" y="130" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="510" y="130" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="584" y="130" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="658" y="130" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="732" y="130" width="70" height="34" rx="2"/>
+              <rect class="f-rdl" x="806" y="130" width="70" height="34" rx="2"/>
+              <text class="f-val" x="841" y="152" text-anchor="middle">1</text>
+              <text class="f-lbl" x="20" y="191">THERMAL</text>
+              <rect class="f-base" x="214" y="168" width="70" height="34" rx="2"/>
+              <text class="f-val" x="249" y="190" text-anchor="middle">1</text>
+              <rect class="f-base" x="288" y="168" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="362" y="168" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="436" y="168" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="510" y="168" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="584" y="168" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="658" y="168" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="732" y="168" width="70" height="34" rx="2"/>
+              <rect class="f-rdl" x="806" y="168" width="70" height="34" rx="2"/>
+              <text class="f-val" x="841" y="190" text-anchor="middle">2</text>
+              <text class="f-lbl" x="20" y="229">NETWORK AND INTERCONNECT</text>
+              <rect class="f-base" x="214" y="206" width="70" height="34" rx="2"/>
+              <text class="f-val" x="249" y="228" text-anchor="middle">1</text>
+              <rect class="f-base" x="288" y="206" width="70" height="34" rx="2"/>
+              <text class="f-val" x="323" y="228" text-anchor="middle">2</text>
+              <rect class="f-bar-calc" x="362" y="206" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="436" y="206" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="510" y="206" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="584" y="206" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="658" y="206" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="732" y="206" width="70" height="34" rx="2"/>
+              <rect class="f-rdl" x="806" y="206" width="70" height="34" rx="2"/>
+              <text class="f-lbl" x="20" y="267">SOFTWARE</text>
+              <rect class="f-base" x="214" y="244" width="70" height="34" rx="2"/>
+              <text class="f-val" x="249" y="266" text-anchor="middle">2</text>
+              <rect class="f-base" x="288" y="244" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="362" y="244" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="436" y="244" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="510" y="244" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="584" y="244" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="658" y="244" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="732" y="244" width="70" height="34" rx="2"/>
+              <rect class="f-rdl" x="806" y="244" width="70" height="34" rx="2"/>
+              <text class="f-val" x="841" y="266" text-anchor="middle">1</text>
+              <text class="f-lbl" x="20" y="305">FACILITY OPERATIONS</text>
+              <rect class="f-base" x="214" y="282" width="70" height="34" rx="2"/>
+              <text class="f-val" x="249" y="304" text-anchor="middle">2</text>
+              <rect class="f-base" x="288" y="282" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="362" y="282" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="436" y="282" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="510" y="282" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="584" y="282" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="658" y="282" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="732" y="282" width="70" height="34" rx="2"/>
+              <rect class="f-rdl" x="806" y="282" width="70" height="34" rx="2"/>
+              <text class="f-val" x="841" y="304" text-anchor="middle">1</text>
+              <text class="f-lbl" x="20" y="343">ACCESS AND COMPLIANCE</text>
+              <rect class="f-base" x="214" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-base" x="288" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="362" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="436" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="510" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="584" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="658" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-bar-calc" x="732" y="320" width="70" height="34" rx="2"/>
+              <rect class="f-rdl" x="806" y="320" width="70" height="34" rx="2"/>
+              <text class="f-val" x="841" y="342" text-anchor="middle">1</text>
+              <text class="f-note" x="20" y="384">Numbers: dossier requirements recorded in each state. Dashed cells: states that need a record from a site or a contract.</text>
+              <text class="f-note" x="20" y="402">They are empty because no such record was reviewed, not because the requirements were found unmet.</text>
+              </svg>
+            </div>
+            <figcaption>Figure 1. Original analysis of the 18 requirements in this project's GB200 NVL72 demonstration dossier (Section 12), by domain and evidence state. The figure shows what kind of evidence exists, not whether any requirement is met. Counts are generated from the dossier file.</figcaption>
+          </figure>
+        </div></article>
+
+        <article class="reference-block" id="states"><div class="block-index">06</div><div>
+          <h2>Documented capability versus deployment readiness</h2>
+          <p class="detail">The nine evidence states below describe the kind of record that exists for one requirement. <span class="tag tag-c">C</span>They are a project classification, not an industry standard. They are not a sequence every requirement must pass through, not a percentage, and not an approval: a requirement can be installed without having been contracted on any public record, and a later state is recorded only when a record of that kind is cited.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Evidence states (scrollable table)">
+            <table class="data-table">
+              <caption>Evidence states, the record each needs, and what each does not establish.</caption>
+              <thead><tr><th scope="col">State</th><th scope="col">Record that supports it</th><th scope="col">Electrical example</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Product specification documented</th><td>A vendor product description or specification</td><td>"approximately 120kW" per rack <a class="cite" href="#ref-1">[1]</a></td><td>That any unit exists at a site, or how the figure was obtained</td></tr>
+                <tr><th scope="row">Infrastructure proposed</th><td>A reference architecture or a site design</td><td>1.2 MW design figure per eight-rack scalable unit <a class="cite" href="#ref-2">[2]</a></td><td>That any facility was built to the design</td></tr>
+                <tr><th scope="row">Capability contracted</th><td>A contract or service agreement for a named site</td><td>A utility supply agreement</td><td>That the equipment was delivered</td></tr>
+                <tr><th scope="row">Equipment procured</th><td>A purchase or delivery record</td><td>Delivered power shelves</td><td>That the equipment was installed</td></tr>
+                <tr><th scope="row">Equipment installed</th><td>An installation record</td><td>Shelves mounted and cabled</td><td>That the equipment was commissioned</td></tr>
+                <tr><th scope="row">Subsystem commissioned</th><td>A commissioning test result for one subsystem</td><td>Shelves energised and reporting</td><td>That subsystems work together</td></tr>
+                <tr><th scope="row">Integrated configuration verified</th><td>An integrated test across subsystems</td><td>Rack under load with cooling running</td><td>Sustained operation</td></tr>
+                <tr><th scope="row">Operational performance observed</th><td>Measurements from operation over a stated period</td><td>Metered rack power over a month</td><td>Future performance or other sites</td></tr>
+                <tr><th scope="row">Not established</th><td>No record of the kind needed was found</td><td>Site power capacity for any named GB200 deployment</td><td>That the requirement is unmet; only that it is unshown</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="detail">Any product specification, reference architecture or procedure can reach the first two states. The other six need a source registered as a site record, and the repository's validator rejects a dossier entry that claims them without one. No such source has been registered.</p>
+        </div></article>
+
+        <article class="reference-block" id="integration"><div class="block-index">07</div><div>
+          <h2>Hardware and software integration</h2>
+          <p class="detail"><span class="tag tag-a">A</span>NVIDIA states that the software stack for its Grace Blackwell rack systems is composed of software and firmware running on compute nodes, switch nodes and power shelves <a class="cite" href="#ref-1">[1]</a>. Its bring-up procedure advises bringing up the NVLink switches first, so that the NVLink domain is already configured when the GB200 compute trays power on, and asks the engineer to check that firmware levels match those in the software bill of materials <a class="cite" href="#ref-3">[3]</a>. Its administration guide states that DGX SuperPOD only supports Slurm for scheduling and lists the GPU driver, DCGM, NVSM and DOCA OFED among the base components <a class="cite" href="#ref-4">[4]</a>.</p>
+          <p class="detail"><span class="tag tag-c">C</span>Three consequences follow for evidence. First, a firmware baseline spans electrical equipment: the power shelves run firmware that belongs to the same bill of materials as the GPUs. Second, the advised bring-up order makes the scale-up network a precondition for compute, so a compute record without a fabric record is incomplete. Third, an installed software stack shows that components are present, not that the cluster performs; that would need recorded results of the validation tests NVIDIA names, with configuration and thresholds <a class="cite" href="#ref-4">[4]</a>.</p>
+          <p class="detail"><span class="tag tag-u">U</span>The versions that must agree are not in the reviewed documents. The rack setup guide refers firmware updates to a standalone NVIDIA DGX GB200/GB300 Firmware Update Guide, which was not reviewed, and the bill of materials is supplied per customer <a class="cite" href="#ref-3">[3]</a>.</p>
+        </div></article>
+
+        <article class="reference-block" id="electrical-cooling"><div class="block-index">08</div><div>
+          <h2>Electrical and cooling evidence</h2>
+          <p class="detail">The rack's power and cooling figures, the arithmetic behind them and their conflicts are set out on <a href="/power-and-thermal-limits/">Power and Thermal Limits</a> and are not repeated here. For deployment evidence, five of them matter because a site cannot be shown to meet requirements that are not defined:</p>
+          <ul class="detail">
+            <li><span class="tag tag-u">U</span><strong>Redundancy.</strong> One NVIDIA document says the power shelves provide N+N redundancy; another says they are configured as N <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a>.</li>
+            <li><span class="tag tag-u">U</span><strong>Bus bar.</strong> A 1,400 A bus bar <a class="cite" href="#ref-6">[6]</a> at about 50 V carries about 70 kW, against an approximately 120 kW rack; no source states the number of paths.</li>
+            <li><span class="tag tag-u">U</span><strong>The 120 kW figure.</strong> Not defined as rated, typical or measured, and not separated between GB200 and GB300.</li>
+            <li><span class="tag tag-u">U</span><strong>The scalable unit.</strong> The 1.2 MW design figure for eight racks is not itemised.</li>
+            <li><span class="tag tag-u">U</span><strong>Coolant.</strong> No coolant type, flow, supply temperature, pressure or liquid-cooling class is stated.</li>
+          </ul>
+          <p class="detail"><span class="tag tag-a">A</span>NVIDIA's deployment checklist contains the items "Power infrastructure correctly configured (sufficient power capacity)", "Cooling infrastructure adequate for GB200/GB300 NVL72 systems" and "Thermal management validated under load" <a class="cite" href="#ref-3">[3]</a>. <span class="tag tag-c">C</span>The checklist names these items without thresholds, so a ticked box would record an engineer's judgement against undefined criteria. Electrical and cooling evidence for a site would be its utility agreement, single-line diagram, commissioning results and a recorded thermal test under stated load, none of which was reviewed.</p>
+          <p class="detail"><span class="tag tag-a">A</span>NVIDIA's power-off procedure turns off all power shelves at AC and waits three to five minutes for the PSU capacitors to discharge <a class="cite" href="#ref-1">[1]</a>. It is a vendor procedure, not a site electrical-safety assessment.</p>
+        </div></article>
+
+        <article class="reference-block" id="network-operations"><div class="block-index">09</div><div>
+          <h2>Network, operations and access evidence</h2>
+          <p class="detail"><span class="tag tag-a">A</span><strong>Network.</strong> NVIDIA's north-south networking guide asks for the SN5600 and SN2201 switches to be physically installed before they are deployed <a class="cite" href="#ref-5">[5]</a>. Its administration guide describes a check_nvlink_health test that confirms links are active for each GPU, at the correct speed, with fabric registration complete <a class="cite" href="#ref-4">[4]</a>. The output of such a test for a named rack would be integration evidence; the test's description is not.</p>
+          <p class="detail"><span class="tag tag-a">A</span><strong>Tested scale.</strong> The SuperPOD reference architecture states that "A fully tested system scales to two SUs", then, in a visibly garbled line, that a fully tested system "scales for a single SU" <a class="cite" href="#ref-2">[2]</a>. <span class="tag tag-u">U</span>This release records the conflict and does not choose between them.</p>
+          <p class="detail"><span class="tag tag-a">A</span><strong>Operations.</strong> NVIDIA describes building-management integration that coordinates power and cooling events, including rapid leakage detection <a class="cite" href="#ref-1">[1]</a>; its administration guide says leak events are collated in Base Command Manager <a class="cite" href="#ref-4">[4]</a>. Its pre-deployment checklist says most Mission Control sites are air-gapped, so every software, firmware and licence artifact is prepared in advance <a class="cite" href="#ref-3">[3]</a>. <span class="tag tag-c">C</span>Leak response therefore crosses rack, cluster software and facility systems, and evidence for one part does not show that the chain works. On an air-gapped site, the bill of materials becomes part of operating evidence, since every later update follows the same path.</p>
+          <p class="detail"><span class="tag tag-a">A</span><strong>Access.</strong> On 2024-12-02 the US Bureau of Industry and Security announced new controls on high-bandwidth memory, red-flag guidance on diversion, and a clarification that controls apply to software keys that allow access to specific hardware or software <a class="cite" href="#ref-7">[7]</a>. <span class="tag tag-c">C</span>Export controls attach to items, destinations, end uses and parties, so evidence here is a classification or licence determination for a named transaction under the current rules. This page reviewed only the 2024 announcement and gives no legal view.</p>
+        </div></article>
+
+        <article class="reference-block" id="matrix"><div class="block-index">10</div><div>
+          <h2>AI compute deployment evidence matrix</h2>
+          <p class="detail">The matrix applies the seven domains to GB200 NVL72. Part A sets what each domain needs against the primary evidence reviewed; Part B sets out what is missing and how it would be verified. A cell under "Does not establish" is a boundary, not a finding against the product.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Deployment evidence matrix, part A (scrollable table)">
+            <table class="data-table">
+              <caption>Part A. Required capability, dependency, and what the reviewed evidence does and does not establish.</caption>
+              <thead><tr><th scope="col">Domain</th><th scope="col">Required capability</th><th scope="col">Dependency</th><th scope="col">Evidence type</th><th scope="col">Existing primary evidence</th><th scope="col">What it establishes</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Compute hardware</th><td>A rack of 18 compute trays and 9 NVLink switch trays</td><td>Supply of trays, switches, power shelves and manifolds</td><td><span class="tag tag-a">A</span>Product specification</td><td>NVIDIA rack configuration <a class="cite" href="#ref-1">[1]</a></td><td>What NVIDIA says a rack contains</td><td>That any rack was delivered or installed, or its component power</td></tr>
+                <tr><th scope="row">Electrical</th><td>Power for each rack and each scalable unit</td><td>Utility supply, switchgear, power panels, power shelves, bus bar</td><td><span class="tag tag-a">A</span>Product specification; reference design</td><td>About 120 kW per rack and eight power shelves <a class="cite" href="#ref-1">[1]</a>; 1,400 A bus bar <a class="cite" href="#ref-6">[6]</a>; 1.2 MW per scalable unit <a class="cite" href="#ref-2">[2]</a></td><td>NVIDIA's stated sizing figures</td><td>Available capacity at any site, the redundancy scheme, or measured draw</td></tr>
+                <tr><th scope="row">Thermal</th><td>Heat removal by liquid through cold plates, with the rest by air</td><td>CDU, facility water system, air handling</td><td><span class="tag tag-a">A</span>Product specification; checklist item</td><td>Hybrid cooling architecture <a class="cite" href="#ref-1">[1]</a>; "Thermal management validated under load" as an unchecked item <a class="cite" href="#ref-3">[3]</a></td><td>The cooling architecture</td><td>The coolant specification, the liquid and air shares, or any site's cooling</td></tr>
+                <tr><th scope="row">Network and interconnect</th><td>NVLink domain configured; north-south network installed</td><td>NVLink switch trays; SN5600 and SN2201 switches</td><td><span class="tag tag-a">A</span>Procedure; reference design</td><td>Switch-first bring-up <a class="cite" href="#ref-3">[3]</a>; installation prerequisite <a class="cite" href="#ref-5">[5]</a>; tested scale <a class="cite" href="#ref-2">[2]</a></td><td>The order and checks NVIDIA advises</td><td>That any fabric was configured, passed its checks or performs</td></tr>
+                <tr><th scope="row">Software</th><td>Cluster management, Slurm scheduling and a firmware baseline</td><td>Head node, NFS share, bill of materials, firmware guide</td><td><span class="tag tag-a">A</span>Procedure; product specification</td><td>Base Command Manager installation <a class="cite" href="#ref-3">[3]</a>; components and Slurm <a class="cite" href="#ref-4">[4]</a>; stack across trays and shelves <a class="cite" href="#ref-1">[1]</a></td><td>The components and checks NVIDIA requires</td><td>The required versions, or that an installed stack performs</td></tr>
+                <tr><th scope="row">Facility operations</th><td>Leak response, air-gapped artifact handling, acceptance and handover</td><td>Building management, operations staff, remote access</td><td><span class="tag tag-a">A</span>Product specification; procedure</td><td>Building-management coordination <a class="cite" href="#ref-1">[1]</a>; leak events in Base Command Manager <a class="cite" href="#ref-4">[4]</a>; checklist items <a class="cite" href="#ref-3">[3]</a></td><td>That NVIDIA describes the integration and the items to check</td><td>The interface, any test, or that any acceptance took place</td></tr>
+                <tr><th scope="row">Access and compliance</th><td>Lawful supply of, and access to, the system</td><td>Destination, end user, end use, parties, software keys</td><td><span class="tag tag-a">A</span>Regulatory announcement</td><td>BIS announcement of 2024-12-02 <a class="cite" href="#ref-7">[7]</a></td><td>That controls on HBM and software keys were announced</td><td>Whether any transaction needs a licence, or the rules now in force</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Deployment evidence matrix, part B (scrollable table)">
+            <table class="data-table">
+              <caption>Part B. Missing evidence, recorded contradictions, verification method and next action.</caption>
+              <thead><tr><th scope="col">Domain</th><th scope="col">Missing evidence</th><th scope="col">Contradictions or gaps recorded</th><th scope="col">Verification method</th><th scope="col">Next action</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Compute hardware</th><td>Delivery and installation records; per-GPU and per-tray power</td><td><span class="tag tag-u">U</span>GB200 and GB300 covered together</td><td>Serial-number inventory against a delivery record</td><td>Find an NVIDIA component power specification</td></tr>
+                <tr><th scope="row">Electrical</th><td>Site electrical records; basis of the 120 kW figure</td><td><span class="tag tag-u">U</span>N+N versus N; 1,400 A versus 120 kW; unitemised 1.2 MW</td><td>Utility agreement, single-line diagram, commissioning results</td><td>Obtain an NVIDIA power specification</td></tr>
+                <tr><th scope="row">Thermal</th><td>Coolant specification; thermal test record under load</td><td><span class="tag tag-u">U</span>Coolant and liquid and air shares not stated</td><td>Recorded thermal test with stated conditions</td><td>Obtain NVIDIA site-preparation documents</td></tr>
+                <tr><th scope="row">Network and interconnect</th><td>Bring-up logs; link-health output</td><td><span class="tag tag-u">U</span>Tested scale: two scalable units or one</td><td>check_nvlink_health output for a named rack <a class="cite" href="#ref-4">[4]</a></td><td>Seek a corrected reference architecture</td></tr>
+                <tr><th scope="row">Software</th><td>Required versions; firmware guide; validation output</td><td><span class="tag tag-u">U</span>Slurm-only applies to DGX SuperPOD, not every GB200 NVL72</td><td>Installed inventory against the bill of materials; recorded test results</td><td>Read the GB200/GB300 Firmware Update Guide</td></tr>
+                <tr><th scope="row">Facility operations</th><td>Building-management interface; completed acceptance record</td><td><span class="tag tag-u">U</span>Checklist states no acceptance criteria</td><td>Integrated leak-response test; completed acceptance record naming site, date and parties</td><td>Obtain an NVIDIA building-management interface specification</td></tr>
+                <tr><th scope="row">Access and compliance</th><td>Current rule text; transaction-specific determination</td><td><span class="tag tag-u">U</span>Only a 2024 announcement reviewed</td><td>Classification or licence record for a named transaction</td><td>Review the current Export Administration Regulations</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="case-gb200"><div class="block-index">11</div><div>
+          <h2>Case study: GB200 NVL72 from design to operation</h2>
+          <p class="detail">The case follows one system through five stages using only reviewed NVIDIA and government material. It is limited to GB200: where a source covers GB200 and GB300 together, that is stated, and no Vera Rubin figures are used.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="GB200 NVL72 deployment stages (scrollable table)">
+            <table class="data-table">
+              <caption>What the reviewed sources contain at each stage, the evidence state that follows, and what remains unestablished.</caption>
+              <thead><tr><th scope="col">Stage</th><th scope="col">What the reviewed sources contain</th><th scope="col">Evidence state</th><th scope="col">Does not establish</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Design</th><td><span class="tag tag-a">A</span>Rack configuration, liquid and air cooling, power shelves and bus bar <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-6">[6]</a></td><td>Product specification documented</td><td>That any rack exists at any site</td></tr>
+                <tr><th scope="row">Equipment requirements</th><td><span class="tag tag-a">A</span>About 120 kW per rack; 1.2 MW per eight-rack unit; SN5600 and SN2201 switches; Base Command Manager and Slurm <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-5">[5]</a><a class="cite" href="#ref-4">[4]</a></td><td>Product specification documented; infrastructure proposed</td><td>That the requirements are complete: redundancy, bus-bar paths and coolant remain open</td></tr>
+                <tr><th scope="row">Installation evidence</th><td><span class="tag tag-a">A</span>A checklist item "All GB200/GB300 racks properly installed and positioned" <a class="cite" href="#ref-3">[3]</a></td><td>Not established</td><td>That any rack was installed: a checklist item is not an installation record</td></tr>
+                <tr><th scope="row">Commissioning evidence</th><td><span class="tag tag-a">A</span>Bring-up checks for firmware, power shelves and NICs <a class="cite" href="#ref-3">[3]</a>; validation tests described <a class="cite" href="#ref-4">[4]</a></td><td>Not established</td><td>That any check was run or passed</td></tr>
+                <tr><th scope="row">Operational evidence</th><td><span class="tag tag-a">A</span>Checklist items "Power consumption measurements recorded" and "System stability verified over extended periods" <a class="cite" href="#ref-3">[3]</a></td><td>Not established</td><td>Any measurement, any period of operation, or any site</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="detail"><span class="tag tag-c">C</span>The published record for GB200 NVL72 is unusually detailed at the first two stages and empty at the last three. That pattern is expected: installation, commissioning and operating records belong to operators, who rarely publish them. It means the case can show what a deployment requires, but not that one has succeeded.</p>
+        </div></article>
+
+        <article class="reference-block" id="dossier"><div class="block-index">12</div><div>
+          <h2>Example evidence dossier</h2>
+          <p class="detail">The repository holds a machine-readable demonstration dossier for GB200 NVL72 at <code>data/research/dossiers/gb200-nvl72-reference-demo.json</code>. It is research material, not part of the published site. It lists 18 requirements across the seven domains, each with its capability, dependency, evidence requirement, cited evidence, evidence class, current state, recorded contradictions, missing information and next verification action. Its status is "demonstration", its review status is "not_reviewed" and its assessment method is an AI-assisted source check; it names no reviewer and carries no approval or score.</p>
+          <p class="detail">The dossier represents no site, customer, contract or deployment. Of its 18 requirements, 8 are at product specification documented, 3 at infrastructure proposed and 7 are not established. The same structure can describe a real site by citing that site's records; until such records are registered, the validator rejects any later state.</p>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Example dossier entry (scrollable table)">
+            <table class="data-table">
+              <caption>One entry from the demonstration dossier, field by field.</caption>
+              <thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><code>id</code></th><td>req-th-coolant-specification</td></tr>
+                <tr><th scope="row"><code>domain</code></th><td>thermal</td></tr>
+                <tr><th scope="row"><code>required_capability</code></th><td>Coolant type, flow, supply temperature, pressure and liquid-cooling class</td></tr>
+                <tr><th scope="row"><code>dependency</code></th><td>CDU and facility water system design</td></tr>
+                <tr><th scope="row"><code>evidence_requirement</code></th><td>An NVIDIA facility-interface specification for GB200 NVL72 coolant</td></tr>
+                <tr><th scope="row"><code>evidence</code></th><td>[] (empty list)</td></tr>
+                <tr><th scope="row"><code>evidence_classification</code></th><td>none</td></tr>
+                <tr><th scope="row"><code>current_state</code></th><td>not_established</td></tr>
+                <tr><th scope="row"><code>contradictions</code></th><td>u-pt-coolant-specification</td></tr>
+                <tr><th scope="row"><code>missing_information</code></th><td>Coolant type; Flow rate; Supply temperature; Pressure drop; ASHRAE liquid-cooling class</td></tr>
+                <tr><th scope="row"><code>next_verification_action</code></th><td>Request NVIDIA site-preparation documentation for GB200 NVL72</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="All demonstration dossier requirements (scrollable table)">
+            <table class="data-table">
+              <caption>All demonstration dossier requirements, with their recorded state and linked unresolved questions.</caption>
+              <thead><tr><th scope="col">Requirement</th><th scope="col">Domain</th><th scope="col">Required capability</th><th scope="col">Current state</th><th scope="col">Linked unresolved questions</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><code>req-ch-rack-configuration</code></th><td>Compute hardware</td><td>Rack of 18 compute trays and 9 NVLink switch trays as NVIDIA describes GB200 NVL72</td><td><span class="tag tag-a">A</span>Product specification documented</td><td>None recorded</td></tr>
+                <tr><th scope="row"><code>req-ch-component-power</code></th><td>Compute hardware</td><td>Per-GPU, per-superchip and per-tray power figures with their definition</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-pt-component-power</code></td></tr>
+                <tr><th scope="row"><code>req-el-rack-power</code></th><td>Electrical</td><td>Power delivery for one rack through power shelves and a DC bus bar</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-pt-120kw-basis</code>, <code>u-pt-redundancy-conflict</code>, <code>u-pt-bus-bar-paths</code></td></tr>
+                <tr><th scope="row"><code>req-el-scalable-unit-power</code></th><td>Electrical</td><td>Facility power for one scalable unit of eight racks</td><td><span class="tag tag-a">A</span>Infrastructure proposed</td><td><code>u-pt-scalable-unit-remainder</code></td></tr>
+                <tr><th scope="row"><code>req-el-site-capacity</code></th><td>Electrical</td><td>Available electrical capacity at a site for the declared configuration</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-d-site-records</code>, <code>u-d-acceptance-criteria</code></td></tr>
+                <tr><th scope="row"><code>req-th-liquid-cooling</code></th><td>Thermal</td><td>Liquid cooling of compute trays through rack manifolds and cold plates, with other components air-cooled</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-pt-liquid-air-split</code></td></tr>
+                <tr><th scope="row"><code>req-th-coolant-specification</code></th><td>Thermal</td><td>Coolant type, flow, supply temperature, pressure and liquid-cooling class</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-pt-coolant-specification</code></td></tr>
+                <tr><th scope="row"><code>req-th-validated-under-load</code></th><td>Thermal</td><td>Thermal behaviour of an installed rack under load</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-d-acceptance-criteria</code>, <code>u-d-site-records</code></td></tr>
+                <tr><th scope="row"><code>req-nw-nvlink-bring-up</code></th><td>Network and interconnect</td><td>NVLink domain configured before compute trays are powered on</td><td><span class="tag tag-a">A</span>Product specification documented</td><td>None recorded</td></tr>
+                <tr><th scope="row"><code>req-nw-north-south</code></th><td>Network and interconnect</td><td>North-south network switches physically installed before deployment</td><td><span class="tag tag-a">A</span>Infrastructure proposed</td><td><code>u-d-gb300-difference</code></td></tr>
+                <tr><th scope="row"><code>req-nw-tested-scale</code></th><td>Network and interconnect</td><td>The cluster size NVIDIA describes as fully tested</td><td><span class="tag tag-a">A</span>Infrastructure proposed</td><td><code>u-d-tested-scale</code></td></tr>
+                <tr><th scope="row"><code>req-sw-management-stack</code></th><td>Software</td><td>Cluster management through Base Command Manager and scheduling through Slurm</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-d-software-versions</code></td></tr>
+                <tr><th scope="row"><code>req-sw-firmware-baseline</code></th><td>Software</td><td>Firmware across compute trays, switches, power shelves and NICs matching a recorded baseline</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-d-firmware-guide</code>, <code>u-d-software-versions</code></td></tr>
+                <tr><th scope="row"><code>req-sw-validation-results</code></th><td>Software</td><td>Recorded results of cluster validation tests</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-d-acceptance-criteria</code></td></tr>
+                <tr><th scope="row"><code>req-fo-leak-response</code></th><td>Facility operations</td><td>Leak detection with events collated in cluster management and coordinated with building management</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-d-bms-interface</code></td></tr>
+                <tr><th scope="row"><code>req-fo-offline-artifacts</code></th><td>Facility operations</td><td>Software, firmware and licences prepared for an air-gapped site</td><td><span class="tag tag-a">A</span>Product specification documented</td><td>None recorded</td></tr>
+                <tr><th scope="row"><code>req-fo-handover</code></th><td>Facility operations</td><td>Acceptance and handover of the system for production use</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-d-acceptance-criteria</code>, <code>u-d-site-records</code></td></tr>
+                <tr><th scope="row"><code>req-ac-export-controls</code></th><td>Access and compliance</td><td>Export-control status for supplying and accessing the system</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-d-access-current-rules</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="questions"><div class="block-index">13</div><div>
+          <h2>Questions for engineers and analysts</h2>
+          <div class="table-scroll" tabindex="0" role="region" aria-label="Analyst questions and evidence status (scrollable table)">
+            <table class="data-table">
+              <caption>Practical questions, what the reviewed evidence supports, and the source that would establish more.</caption>
+              <thead><tr><th scope="col">Question</th><th scope="col">What the reviewed evidence supports</th><th scope="col">Source that would establish more</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Can a named site host GB200 NVL72 racks?</th><td><span class="tag tag-u">U</span>Not answerable from vendor documents</td><td>That site's electrical, cooling and commissioning records</td></tr>
+                <tr><th scope="row">Has any rack passed acceptance?</th><td><span class="tag tag-u">U</span>Only a blank checklist was reviewed <a class="cite" href="#ref-3">[3]</a></td><td>A completed acceptance record naming site, date and parties</td></tr>
+                <tr><th scope="row">Which firmware set must a rack run?</th><td><span class="tag tag-u">U</span>Referred to a standalone guide that was not reviewed <a class="cite" href="#ref-3">[3]</a></td><td>The NVIDIA DGX GB200/GB300 Firmware Update Guide</td></tr>
+                <tr><th scope="row">Does an installed software stack show cluster performance?</th><td><span class="tag tag-c">C</span>No; it shows components are present</td><td>Recorded validation results with configuration and thresholds</td></tr>
+                <tr><th scope="row">How large a system has NVIDIA fully tested?</th><td><span class="tag tag-u">U</span>Two scalable units or one, depending on the line <a class="cite" href="#ref-2">[2]</a></td><td>A corrected reference architecture</td></tr>
+                <tr><th scope="row">What must building management provide?</th><td><span class="tag tag-a">A</span>Coordination of power, cooling and leak events is described; the interface is not <a class="cite" href="#ref-1">[1]</a></td><td>An NVIDIA building-management interface specification</td></tr>
+                <tr><th scope="row">Which export controls apply to a given supply?</th><td><span class="tag tag-a">A</span>The 2024 announcement only <a class="cite" href="#ref-7">[7]</a></td><td>The current regulations and a determination for the transaction</td></tr>
+                <tr><th scope="row">Do GB200 and GB300 racks differ in deployment needs?</th><td><span class="tag tag-u">U</span>The reviewed guides cover both together</td><td>Separate specifications for each generation</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div></article>
+
+        <article class="reference-block" id="unresolved"><div class="block-index">14</div><div>
+          <h2>Gaps and unresolved questions</h2>
+          <p class="detail">These are material questions the reviewed evidence cannot answer. They are recorded, not filled with general industry commentary.</p>
+          <ol class="unresolved-list">
+            <li><strong>Site records.</strong> No installation, commissioning or operating record for any named GB200 NVL72 site was reviewed.</li>
+            <li><strong>Acceptance criteria.</strong> NVIDIA's checklist names "sufficient power capacity" and cooling "adequate" for the racks without thresholds. <a class="cite" href="#ref-3">[3]</a></li>
+            <li><strong>Firmware guide.</strong> The standalone GB200/GB300 firmware update guide was not reviewed.</li>
+            <li><strong>Power and cooling carried from Release 005.</strong> Redundancy, bus-bar paths, the basis of 120 kW, the scalable-unit figure and the coolant specification remain open; see <a href="/power-and-thermal-limits/#unresolved">Power and Thermal Limits</a>.</li>
+            <li><strong>Tested scale.</strong> Two scalable units or one. <a class="cite" href="#ref-2">[2]</a></li>
+            <li><strong>Software versions.</strong> The driver, DCGM, DOCA OFED, NVOS and Base Command Manager versions required together.</li>
+            <li><strong>Current access rules.</strong> Only the 2024 announcement was reviewed, not the rule text or later amendments.</li>
+            <li><strong>GB300 differences.</strong> Which deployment requirements differ between GB200 and GB300.</li>
+            <li><strong>Building-management interface.</strong> Signals, protocol and the facility's responsibilities.</li>
+          </ol>
+        </div></article>
+      </section>
+
+      <section class="evidence-posture" id="references" aria-labelledby="evidence-title">
+        <div class="section-label blue">Evidence posture · Registry-linked</div>
+        <h2 id="evidence-title">References</h2>
+        <p class="evidence-intro">Each reference maps to a stable ID in the <a href="/sources/">governed source registry</a>. Quoted passages belong to their publishers; the evidence-state model, Figure 1, the matrix, the dossier and the analysis are original work of this project.</p>
+        <ol class="ref-list">
+          <li id="ref-1">NVIDIA, "NVIDIA DGX GB Rack Scale Systems User Guide", 2026-09-17. <code>nvidia-dgx-gb-rack-user-guide-2026</code>. <a href="https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf">docs.nvidia.com</a></li>
+          <li id="ref-2">NVIDIA, "NVIDIA DGX SuperPOD: Next Generation Scalable Infrastructure for AI Leadership — Reference Architecture Featuring NVIDIA DGX GB200", 2025-09-03. <code>nvidia-dgx-superpod-gb200-ra-2025</code>. <a href="https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf">docs.nvidia.com</a></li>
+          <li id="ref-3">NVIDIA, "NVIDIA Mission Control Management Plane and Rack Setup with NVIDIA DGX GB200/GB300 NVL72 Systems Installation Guide", version 2.5.0, page last updated 2026-11-09. <code>nvidia-mission-control-rack-setup-guide-2026</code>. <a href="https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/index.html">docs.nvidia.com</a></li>
+          <li id="ref-4">NVIDIA, "NVIDIA Mission Control Software with NVIDIA GB200 NVL72 Systems Administration Guide", 2025-06-11. <code>nvidia-mission-control-gb200-admin-guide-2025</code>. <a href="https://docs.nvidia.com/pdf/nvidia-mission-control-software-with-nvidia-gb200-nvl72-systems-administration-guide.pdf">docs.nvidia.com</a></li>
+          <li id="ref-5">NVIDIA, "NVIDIA Mission Control North-South Network GB200/GB300 NVL72 Deployment Guide", version 2.5.0, 2026-11-09. <code>nvidia-mission-control-north-south-network-guide-2026</code>. <a href="https://docs.nvidia.com/mission-control/docs/ext-north-south-network-gb200-deploy-guide/2.5.0/ext-north-south-network-gb200-intro.html">docs.nvidia.com</a></li>
+          <li id="ref-6">NVIDIA, "NVIDIA Contributes NVIDIA GB200 NVL72 Designs to Open Compute Project", 2024-10-15. <code>nvidia-gb200-nvl72-ocp-contribution-2024</code>. <a href="https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/">developer.nvidia.com</a></li>
+          <li id="ref-7">U.S. Department of Commerce, Bureau of Industry and Security, "Commerce Strengthens Export Controls to Restrict China's Capability to Produce Advanced Semiconductors for Military Applications", 2024-12-02. <code>bis-advanced-semiconductor-controls-2024</code>. <a href="https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military">bis.gov</a></li>
+        </ol>
+        <div class="posture-grid">
+          <article><h3>Can support</h3><p>Attributed statements of what NVIDIA documents for GB200 NVL72 installation, bring-up, software and operations, and what BIS announced in 2024, each within its stated scope.</p></article>
+          <article><h3>Cannot support</h3><p>That any site, customer or deployment exists, that any requirement is met at a site, available capacity, measured performance, or a legal determination.</p></article>
+          <article><h3>Freshness</h3><p>Evidence compiled: 2026-11-10 · Scientific review pending. NVIDIA's online guides are revised over time; versions read are stated. The records listed below were registered earlier and were not re-reviewed for this release.</p></article>
+        </div>
+        <ul class="source-id-list" aria-label="Related registry records not re-reviewed in this release">
+          <li>doe-us-data-center-energy-use-2024</li>
+          <li>doe-powering-ai-data-centers-2024</li>
+          <li>iea-energy-and-ai-2025</li>
+          <li>oecd-semiconductor-policy-landscape-2024</li>
+        </ul>
+        <a class="evidence-link" href="/sources/">Inspect the governed source registry →</a>
+      </section>
+
+      <section class="related" aria-labelledby="related-title">
+        <div class="section-label">Continue the reference path</div>
+        <h2 id="related-title">Related reference surfaces</h2>
+        <div class="related-grid">
+          <a class="related-card" href="/power-and-thermal-limits/"><strong>Power and Thermal Limits</strong><span>The rack power and cooling figures, and their conflicts, that deployment evidence must resolve.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/interconnects/"><strong>Interconnects</strong><span>The scale-up and scale-out fabrics whose configuration a deployment must evidence.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/design-fabrication-packaging/"><strong>Design, Fabrication, and Packaging</strong><span>Where the accelerator packages in each compute tray come from.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/hbm-memory/"><strong>HBM Memory</strong><span>The memory stacks inside each package, and the export controls that now cover them.</span><span class="text-link">Open reference →</span></a>
+          <a class="related-card" href="/chip-dependency-map/"><strong>Chip Dependency Map</strong><span>Preview the governed diagnostic model for mapping layered compute dependency exposure.</span><span class="text-link">Open reference →</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
   <footer class="site-footer">
     <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>AI<span>Electronic</span>Chips</span></a><p>A governed reference layer for AI chip systems intelligence.</p></div>
     <nav aria-label="Footer navigation"><a href="/compute-sovereignty/">Compute sovereignty</a><a href="/sovereignty-stack/">Sovereignty stack</a><a href="/methodology/">Methodology</a><a href="/strategic-availability/">Strategic availability</a></nav>

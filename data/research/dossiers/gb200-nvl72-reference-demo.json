@@ -1,0 +1,448 @@
+{
+  "dossier_id": "aec-dossier-gb200-nvl72-reference-demo",
+  "schema_version": "1.0.0",
+  "status": "demonstration",
+  "review_status": "not_reviewed",
+  "assessment_method": "ai_assisted_source_check",
+  "as_of": "2026-11-10",
+  "evidence_release": "aec-ide-006-deployment-readiness",
+  "subject": {
+    "system": "NVIDIA GB200 NVL72",
+    "configuration": "DGX SuperPOD reference architecture: scalable units of eight GB200 NVL72 racks",
+    "generation_boundary": "GB200 only. Where a source covers GB200 and GB300 together, that is recorded. Vera Rubin is out of scope.",
+    "site": "None. This demonstration represents no site, customer, contract or deployment."
+  },
+  "assessment_scope": {
+    "purpose": "Show how deployment evidence for one declared configuration is recorded, using reference material only",
+    "sources_reviewed": [
+      "nvidia-dgx-gb-rack-user-guide-2026",
+      "nvidia-dgx-superpod-gb200-ra-2025",
+      "nvidia-gb200-nvl72-ocp-contribution-2024",
+      "nvidia-mission-control-rack-setup-guide-2026",
+      "nvidia-mission-control-gb200-admin-guide-2025",
+      "nvidia-mission-control-north-south-network-guide-2026",
+      "bis-advanced-semiconductor-controls-2024"
+    ],
+    "carried_from_release": "aec-ide-005-power-thermal",
+    "not_in_scope": [
+      "Any named site or operator",
+      "Commercial terms, supply or delivery dates",
+      "Performance results"
+    ],
+    "reading_rule": "A state records the kind of evidence cited. It is not a score, a ranking or an approval, and states do not form a required sequence."
+  },
+  "evidence_states": [
+    "product_specification_documented",
+    "infrastructure_proposed",
+    "capability_contracted",
+    "equipment_procured",
+    "equipment_installed",
+    "subsystem_commissioned",
+    "integrated_configuration_verified",
+    "operational_performance_observed",
+    "not_established"
+  ],
+  "requirements": [
+    {
+      "id": "req-ch-rack-configuration",
+      "domain": "compute_hardware",
+      "required_capability": "Rack of 18 compute trays and 9 NVLink switch trays as NVIDIA describes GB200 NVL72",
+      "dependency": "Delivery of the trays, switches, power shelves and manifolds that make up one rack",
+      "evidence_requirement": "Delivery and installation records listing tray serial numbers for a named rack",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Section 1.1: \"18x 1RU compute trays, each with 2 Grace CPUs and 4 Blackwell GPUs\"; \"9x 1RU NVLink switch trays\""
+        }
+      ],
+      "evidence_classification": "product_specification",
+      "current_state": "product_specification_documented",
+      "contradictions": [],
+      "missing_information": [
+        "No delivery or installation record for any rack",
+        "The user guide covers GB200 and GB300 together"
+      ],
+      "next_verification_action": "Obtain a delivery and installation record for a named rack, or record that none is available"
+    },
+    {
+      "id": "req-ch-component-power",
+      "domain": "compute_hardware",
+      "required_capability": "Per-GPU, per-superchip and per-tray power figures with their definition",
+      "dependency": "Electrical and thermal sizing below rack level",
+      "evidence_requirement": "An NVIDIA product specification stating component power and what it measures",
+      "evidence": [],
+      "evidence_classification": "none",
+      "current_state": "not_established",
+      "contradictions": [
+        "u-pt-component-power"
+      ],
+      "missing_information": [
+        "Per-GPU, per-superchip and per-tray power figures",
+        "Whether any figure is rated, typical or measured"
+      ],
+      "next_verification_action": "Search NVIDIA product specifications for component power and its basis"
+    },
+    {
+      "id": "req-el-rack-power",
+      "domain": "electrical",
+      "required_capability": "Power delivery for one rack through power shelves and a DC bus bar",
+      "dependency": "Facility power panels feeding eight power shelves",
+      "evidence_requirement": "A rack power specification with its basis, redundancy scheme and bus-bar arrangement",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Section 1.4: \"The rack power consumption is approximately 120kW\"; \"provide N+N redundancy\""
+        },
+        {
+          "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+          "locator": "\"a high capacity bus bar supporting 1,400 amp current flow\""
+        }
+      ],
+      "evidence_classification": "product_specification",
+      "current_state": "product_specification_documented",
+      "contradictions": [
+        "u-pt-120kw-basis",
+        "u-pt-redundancy-conflict",
+        "u-pt-bus-bar-paths"
+      ],
+      "missing_information": [
+        "Whether about 120 kW is rated, typical or measured",
+        "The redundancy scheme",
+        "The number of bus-bar paths"
+      ],
+      "next_verification_action": "Resolve the IDE-005 power questions from an NVIDIA power specification"
+    },
+    {
+      "id": "req-el-scalable-unit-power",
+      "domain": "electrical",
+      "required_capability": "Facility power for one scalable unit of eight racks",
+      "dependency": "Facility electrical distribution sized for the scalable unit",
+      "evidence_requirement": "A facility power plan for a named site, with the scalable-unit figure itemised",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "Chapter 2: \"Each SU requires a Thermal Design Power (TDP) of 1.2 Megawatts (MW)\""
+        }
+      ],
+      "evidence_classification": "reference_design",
+      "current_state": "infrastructure_proposed",
+      "contradictions": [
+        "u-pt-scalable-unit-remainder"
+      ],
+      "missing_information": [
+        "What the 1.2 MW covers beyond eight racks",
+        "Any site's available capacity"
+      ],
+      "next_verification_action": "Obtain an NVIDIA breakdown of the scalable-unit figure"
+    },
+    {
+      "id": "req-el-site-capacity",
+      "domain": "electrical",
+      "required_capability": "Available electrical capacity at a site for the declared configuration",
+      "dependency": "Utility connection, switchgear, distribution and redundancy at the site",
+      "evidence_requirement": "Site electrical records: utility agreement, single-line diagram and commissioning results",
+      "evidence": [],
+      "evidence_classification": "none",
+      "current_state": "not_established",
+      "contradictions": [
+        "u-d-site-records",
+        "u-d-acceptance-criteria"
+      ],
+      "missing_information": [
+        "No site is in scope; a demonstration dossier represents none",
+        "NVIDIA's checklist states no capacity criterion"
+      ],
+      "next_verification_action": "For a real assessment, request the site's electrical commissioning records"
+    },
+    {
+      "id": "req-th-liquid-cooling",
+      "domain": "thermal",
+      "required_capability": "Liquid cooling of compute trays through rack manifolds and cold plates, with other components air-cooled",
+      "dependency": "A facility cooling loop and air handling for the air-cooled share",
+      "evidence_requirement": "A thermal specification giving liquid and air heat loads",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Section 1.2: \"cooled by liquid that runs up and down the rack through manifolds, then through the cold plates\""
+        }
+      ],
+      "evidence_classification": "product_specification",
+      "current_state": "product_specification_documented",
+      "contradictions": [
+        "u-pt-liquid-air-split"
+      ],
+      "missing_information": [
+        "The share of rack heat carried by liquid and by air"
+      ],
+      "next_verification_action": "Obtain an NVIDIA thermal specification with the liquid and air split"
+    },
+    {
+      "id": "req-th-coolant-specification",
+      "domain": "thermal",
+      "required_capability": "Coolant type, flow, supply temperature, pressure and liquid-cooling class",
+      "dependency": "CDU and facility water system design",
+      "evidence_requirement": "An NVIDIA facility-interface specification for GB200 NVL72 coolant",
+      "evidence": [],
+      "evidence_classification": "none",
+      "current_state": "not_established",
+      "contradictions": [
+        "u-pt-coolant-specification"
+      ],
+      "missing_information": [
+        "Coolant type",
+        "Flow rate",
+        "Supply temperature",
+        "Pressure drop",
+        "ASHRAE liquid-cooling class"
+      ],
+      "next_verification_action": "Request NVIDIA site-preparation documentation for GB200 NVL72"
+    },
+    {
+      "id": "req-th-validated-under-load",
+      "domain": "thermal",
+      "required_capability": "Thermal behaviour of an installed rack under load",
+      "dependency": "Installed racks, facility cooling and a load test",
+      "evidence_requirement": "A recorded thermal test under load at a named site, with conditions and thresholds",
+      "evidence": [],
+      "evidence_classification": "none",
+      "current_state": "not_established",
+      "contradictions": [
+        "u-d-acceptance-criteria",
+        "u-d-site-records"
+      ],
+      "missing_information": [
+        "NVIDIA's checklist names the item but gives no threshold",
+        "No test record was reviewed"
+      ],
+      "next_verification_action": "Obtain NVIDIA acceptance criteria and a site test record"
+    },
+    {
+      "id": "req-nw-nvlink-bring-up",
+      "domain": "network_interconnect",
+      "required_capability": "NVLink domain configured before compute trays are powered on",
+      "dependency": "NVLink switch trays and their operating system",
+      "evidence_requirement": "A bring-up log for a named rack showing the NVLink domain configured",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Rack Bring-Up: \"it is advised that the NVLink Switches be brought up first\""
+        }
+      ],
+      "evidence_classification": "documented_procedure",
+      "current_state": "product_specification_documented",
+      "contradictions": [],
+      "missing_information": [
+        "No bring-up log was reviewed",
+        "NVIDIA says the order is advised, not required"
+      ],
+      "next_verification_action": "Record the bring-up order used at a site, if a site is assessed"
+    },
+    {
+      "id": "req-nw-north-south",
+      "domain": "network_interconnect",
+      "required_capability": "North-south network switches physically installed before deployment",
+      "dependency": "SN5600 and SN2201 switches and cabling",
+      "evidence_requirement": "A network installation record for a named site",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-north-south-network-guide-2026",
+          "locator": "Introduction: \"Complete the physical installation of the network switches (SN5600 and SN2201) before deploying the switches\""
+        }
+      ],
+      "evidence_classification": "documented_procedure",
+      "current_state": "infrastructure_proposed",
+      "contradictions": [
+        "u-d-gb300-difference"
+      ],
+      "missing_information": [
+        "No installation record was reviewed",
+        "Only the guide's introduction was reviewed"
+      ],
+      "next_verification_action": "Review the remainder of the north-south networking guide"
+    },
+    {
+      "id": "req-nw-tested-scale",
+      "domain": "network_interconnect",
+      "required_capability": "The cluster size NVIDIA describes as fully tested",
+      "dependency": "Reference architecture testing by NVIDIA",
+      "evidence_requirement": "An unambiguous NVIDIA statement of tested scale, and its test record",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "Chapter 2: \"A fully tested system scales to two SUs\"; \"Rack-A fully tested system scales for a single SU, seamlessly.\""
+        }
+      ],
+      "evidence_classification": "reference_design",
+      "current_state": "infrastructure_proposed",
+      "contradictions": [
+        "u-d-tested-scale"
+      ],
+      "missing_information": [
+        "Whether two scalable units or one is meant",
+        "What 'fully tested' covers"
+      ],
+      "next_verification_action": "Seek a corrected reference architecture or NVIDIA clarification"
+    },
+    {
+      "id": "req-sw-management-stack",
+      "domain": "software",
+      "required_capability": "Cluster management through Base Command Manager and scheduling through Slurm",
+      "dependency": "A head node, an NFS share and the Mission Control software",
+      "evidence_requirement": "An installed software inventory for a named cluster",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Introduction: \"complete the software installation of Base Command Manager (BCM) 11\""
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "\"NVIDIA DGX SuperPOD only supports Slurm for scheduling workloads.\""
+        }
+      ],
+      "evidence_classification": "documented_procedure",
+      "current_state": "product_specification_documented",
+      "contradictions": [
+        "u-d-software-versions"
+      ],
+      "missing_information": [
+        "Required versions of each component"
+      ],
+      "next_verification_action": "Obtain Mission Control release notes and a published SBOM"
+    },
+    {
+      "id": "req-sw-firmware-baseline",
+      "domain": "software",
+      "required_capability": "Firmware across compute trays, switches, power shelves and NICs matching a recorded baseline",
+      "dependency": "The customer SBOM and the NVIDIA firmware update guide",
+      "evidence_requirement": "A firmware inventory for a named rack compared with its SBOM",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Rack Bring-Up: \"Check if the firmware levels match those reported in the SBOM.\""
+        },
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Chapter 4: \"runs on the various compute nodes, switch nodes, and the power shelves\""
+        }
+      ],
+      "evidence_classification": "documented_procedure",
+      "current_state": "product_specification_documented",
+      "contradictions": [
+        "u-d-firmware-guide",
+        "u-d-software-versions"
+      ],
+      "missing_information": [
+        "The baseline versions themselves",
+        "The standalone firmware update guide"
+      ],
+      "next_verification_action": "Read the NVIDIA DGX GB200/GB300 Firmware Update Guide"
+    },
+    {
+      "id": "req-sw-validation-results",
+      "domain": "software",
+      "required_capability": "Recorded results of cluster validation tests",
+      "dependency": "Installed racks, the management stack and test tools",
+      "evidence_requirement": "Test output with configuration, thresholds and date for a named cluster",
+      "evidence": [],
+      "evidence_classification": "none",
+      "current_state": "not_established",
+      "contradictions": [
+        "u-d-acceptance-criteria"
+      ],
+      "missing_information": [
+        "No validation output was reviewed",
+        "Pass criteria are not stated in the reviewed guides"
+      ],
+      "next_verification_action": "Obtain a validation report for a named cluster, if one is disclosed"
+    },
+    {
+      "id": "req-fo-leak-response",
+      "domain": "facility_operations",
+      "required_capability": "Leak detection with events collated in cluster management and coordinated with building management",
+      "dependency": "Rack leak sensors, Base Command Manager and the facility's building management system",
+      "evidence_requirement": "An integrated leak-response test record for a named site",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Chapter 4: \"Provides enhanced coordination with building management systems\""
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "\"these events will be collated within BCM\""
+        }
+      ],
+      "evidence_classification": "product_specification",
+      "current_state": "product_specification_documented",
+      "contradictions": [
+        "u-d-bms-interface"
+      ],
+      "missing_information": [
+        "The building-management interface and responsibilities",
+        "Any test record"
+      ],
+      "next_verification_action": "Obtain an NVIDIA building-management interface specification"
+    },
+    {
+      "id": "req-fo-offline-artifacts",
+      "domain": "facility_operations",
+      "required_capability": "Software, firmware and licences prepared for an air-gapped site",
+      "dependency": "Site network policy and remote access arrangements",
+      "evidence_requirement": "A site's artifact inventory and access arrangements",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Pre-Deployment Checklist: \"Most NVIDIA Mission Control deployment sites are air-gapped and have no outbound internet access.\""
+        }
+      ],
+      "evidence_classification": "documented_procedure",
+      "current_state": "product_specification_documented",
+      "contradictions": [],
+      "missing_information": [
+        "Whether any given site is air-gapped"
+      ],
+      "next_verification_action": "Record the network policy of an assessed site"
+    },
+    {
+      "id": "req-fo-handover",
+      "domain": "facility_operations",
+      "required_capability": "Acceptance and handover of the system for production use",
+      "dependency": "Completion of every deployment phase and the site's own acceptance process",
+      "evidence_requirement": "A completed acceptance record naming the site, date and responsible parties",
+      "evidence": [],
+      "evidence_classification": "none",
+      "current_state": "not_established",
+      "contradictions": [
+        "u-d-acceptance-criteria",
+        "u-d-site-records"
+      ],
+      "missing_information": [
+        "NVIDIA's checklist is a blank template",
+        "No completed acceptance record was reviewed"
+      ],
+      "next_verification_action": "Treat handover as not established unless a completed record is disclosed"
+    },
+    {
+      "id": "req-ac-export-controls",
+      "domain": "access_compliance",
+      "required_capability": "Export-control status for supplying and accessing the system",
+      "dependency": "Destination, end user, end use and parties to the transaction",
+      "evidence_requirement": "A licence determination or classification for a named transaction under the current rules",
+      "evidence": [
+        {
+          "source_id": "bis-advanced-semiconductor-controls-2024",
+          "locator": "\"software keys that allow access to the use of specific hardware or software\""
+        }
+      ],
+      "evidence_classification": "regulatory_announcement",
+      "current_state": "not_established",
+      "contradictions": [
+        "u-d-access-current-rules"
+      ],
+      "missing_information": [
+        "The current rule text",
+        "Any transaction-specific determination"
+      ],
+      "next_verification_action": "Review the current Export Administration Regulations text"
+    }
+  ]
+}

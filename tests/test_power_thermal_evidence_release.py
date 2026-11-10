@@ -134,7 +134,7 @@ class PowerThermalReleaseTests(unittest.TestCase):
 
     def test_all_releases_share_consistent_nodes(self):
         releases = {p.name: json.loads(p.read_text(encoding="utf-8")) for p in sorted(RESEARCH.glob("*.json"))}
-        self.assertEqual(4, len(releases))
+        self.assertGreaterEqual(len(releases), 4)  # releases 001-005 at least; later releases add to the set
         self.assertEqual([], check_shared_candidate_nodes(releases))
 
     def test_conflicts_recorded_as_unresolved(self):
