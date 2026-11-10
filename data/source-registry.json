@@ -12,23 +12,12 @@
       "canonical_url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
       "publication_date": "2024-12-02",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "controls",
-        "fabrication",
-        "memory"
-      ],
-      "supported_claim_types": [
-        "rule_announcement",
-        "control_scope",
-        "effective_condition_reference"
-      ],
+      "ontology_layers": ["controls", "fabrication", "memory"],
+      "supported_claim_types": ["rule_announcement", "control_scope", "effective_condition_reference"],
       "geographic_scope": "United States export controls and stated covered destinations",
       "temporal_scope": "Published 2024-12-02; must be reviewed against current rules before use",
       "confidence_use": "May support attributed statements about the announced control package after rule-text review",
-      "use_limitations": [
-        "Press release is not a substitute for the controlling rule text",
-        "Does not establish entity-level access or compliance"
-      ],
+      "use_limitations": ["Press release is not a substitute for the controlling rule text", "Does not establish entity-level access or compliance"],
       "status": "active"
     },
     {
@@ -39,24 +28,12 @@
       "canonical_url": "https://eur-lex.europa.eu/eli/reg/2023/1781/oj/eng",
       "effective_date": "2023-09-21",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "controls",
-        "fabrication",
-        "packaging",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "legal_scope",
-        "policy_framework",
-        "defined_term"
-      ],
+      "ontology_layers": ["controls", "fabrication", "packaging", "deployment"],
+      "supported_claim_types": ["legal_scope", "policy_framework", "defined_term"],
       "geographic_scope": "European Union",
       "temporal_scope": "In force from 2023-09-21; amendments and implementation measures require review",
       "confidence_use": "May support verified facts about the regulation's text and legal framework",
-      "use_limitations": [
-        "Does not establish implementation outcomes",
-        "Must be checked for amendments and applicable delegated acts"
-      ],
+      "use_limitations": ["Does not establish implementation outcomes", "Must be checked for amendments and applicable delegated acts"],
       "status": "active"
     },
     {
@@ -67,23 +44,12 @@
       "canonical_url": "https://www.nist.gov/news-events/news/2024/07/biden-harris-administration-announces-first-chips-america-rd-facilities-and",
       "publication_date": "2024-07-12",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "design",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "program_announcement",
-        "facility_scope",
-        "policy_framework"
-      ],
+      "ontology_layers": ["design", "fabrication", "packaging"],
+      "supported_claim_types": ["program_announcement", "facility_scope", "policy_framework"],
       "geographic_scope": "United States",
       "temporal_scope": "Released 2024-07-12; page updated 2025-10-06",
       "confidence_use": "May support attributed statements about announced CHIPS R&D facility processes",
-      "use_limitations": [
-        "Announcement does not prove completed facilities or operating capacity",
-        "Current program status requires review"
-      ],
+      "use_limitations": ["Announcement does not prove completed facilities or operating capacity", "Current program status requires review"],
       "status": "active"
     },
     {
@@ -94,24 +60,12 @@
       "canonical_url": "https://investor.tsmc.com/static/annualReports/2024/english/index.html",
       "publication_date": "2025-04-17",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "fabrication",
-        "packaging",
-        "controls"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "reported_risk",
-        "reported_capacity_context",
-        "packaging_technology_status"
-      ],
+      "ontology_layers": ["fabrication", "packaging", "controls"],
+      "supported_claim_types": ["company_disclosure", "reported_risk", "reported_capacity_context", "packaging_technology_status"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and report-date disclosures",
       "confidence_use": "May support attributed company-reported facts within the report's scope; chapter 5 also supports attributed statements of TSMC's reported CoWoS and SoIC technology and production status for 2024",
-      "use_limitations": [
-        "Company disclosure must remain attributed",
-        "Does not independently verify capacity, access, or future plans"
-      ],
+      "use_limitations": ["Company disclosure must remain attributed", "Does not independently verify capacity, access, or future plans"],
       "status": "active"
     },
     {
@@ -122,22 +76,12 @@
       "canonical_url": "https://www.asml.com/en/news/press-releases/2025/asml-publishes-2024-annual-reports",
       "publication_date": "2025-03-05",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "fabrication",
-        "controls"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "reported_risk",
-        "business_model_context"
-      ],
+      "ontology_layers": ["fabrication", "controls"],
+      "supported_claim_types": ["company_disclosure", "reported_risk", "business_model_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and publication-date disclosures",
       "confidence_use": "May identify the official annual reports and support attributed company disclosures",
-      "use_limitations": [
-        "Registry entry points to the publication notice; underlying reports must support detailed claims",
-        "No independent verification of company statements"
-      ],
+      "use_limitations": ["Registry entry points to the publication notice; underlying reports must support detailed claims", "No independent verification of company statements"],
       "status": "pending_review"
     },
     {
@@ -148,22 +92,12 @@
       "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
       "publication_date": "2025-02-26",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "design",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "reported_financial_result",
-        "reported_business_context"
-      ],
+      "ontology_layers": ["design", "deployment"],
+      "supported_claim_types": ["company_disclosure", "reported_financial_result", "reported_business_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2025 and publication-date disclosures",
       "confidence_use": "May support attributed company-reported financial, risk, and business statements within the filing's scope",
-      "use_limitations": [
-        "Company filing must remain attributed",
-        "Does not establish dependency exposure without separate evidence"
-      ],
+      "use_limitations": ["Company filing must remain attributed", "Does not establish dependency exposure without separate evidence"],
       "status": "active"
     },
     {
@@ -174,23 +108,12 @@
       "canonical_url": "https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers",
       "publication_date": "2024-12-20",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "institutional_summary",
-        "energy_demand_context",
-        "report_reference",
-        "energy_consumption_estimate"
-      ],
+      "ontology_layers": ["power_thermal", "deployment"],
+      "supported_claim_types": ["institutional_summary", "energy_demand_context", "report_reference", "energy_consumption_estimate"],
       "geographic_scope": "United States",
       "temporal_scope": "Report covers 2014-2028 estimates; publication-date context",
       "confidence_use": "May support attributed statements and locate the underlying LBNL report",
-      "use_limitations": [
-        "Detailed quantitative claims should cite and review the underlying report",
-        "Projections are not operating guarantees"
-      ],
+      "use_limitations": ["Detailed quantitative claims should cite and review the underlying report", "Projections are not operating guarantees"],
       "status": "active"
     },
     {
@@ -201,22 +124,12 @@
       "canonical_url": "https://www.energy.gov/sites/default/files/2024-08/Powering%20AI%20and%20Data%20Center%20Infrastructure%20Recommendations%20July%202024.pdf",
       "publication_date": "2024-07-30",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "institutional_recommendation",
-        "infrastructure_constraint_context",
-        "grid_connection_context"
-      ],
+      "ontology_layers": ["power_thermal", "deployment"],
+      "supported_claim_types": ["institutional_recommendation", "infrastructure_constraint_context", "grid_connection_context"],
       "geographic_scope": "United States",
       "temporal_scope": "Published 2024-07-30; recommendations require current-condition review",
       "confidence_use": "May support attributed institutional recommendations and scoped infrastructure context",
-      "use_limitations": [
-        "Recommendations are not findings of current availability",
-        "Does not establish site-level readiness"
-      ],
+      "use_limitations": ["Recommendations are not findings of current availability", "Does not establish site-level readiness"],
       "status": "active"
     },
     {
@@ -227,22 +140,12 @@
       "canonical_url": "https://www.iea.org/reports/energy-and-ai",
       "publication_date": "2025-04-10",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "modelled_projection",
-        "energy_demand_context",
-        "institutional_analysis"
-      ],
+      "ontology_layers": ["power_thermal", "deployment"],
+      "supported_claim_types": ["modelled_projection", "energy_demand_context", "institutional_analysis"],
       "geographic_scope": "Global and regional",
       "temporal_scope": "Published 2025-04-10; includes modelled outlooks with stated horizons",
       "confidence_use": "May support attributed modelled projections and institutional analysis with methodology disclosed",
-      "use_limitations": [
-        "Modelled projections are not verified future conditions",
-        "Regional findings must not be applied to an entity without scoped evidence"
-      ],
+      "use_limitations": ["Modelled projections are not verified future conditions", "Regional findings must not be applied to an entity without scoped evidence"],
       "status": "active"
     },
     {
@@ -253,21 +156,12 @@
       "canonical_url": "https://www.uciexpress.org/press-releases",
       "publication_date": "2024-08-06",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "interconnect",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "standard_release",
-        "technical_scope"
-      ],
+      "ontology_layers": ["interconnect", "packaging"],
+      "supported_claim_types": ["standard_release", "technical_scope"],
       "geographic_scope": "Technical standard with international applicability",
       "temporal_scope": "UCIe 2.0 release dated 2024-08-06",
       "confidence_use": "May support attributed statements about the released specification's stated scope",
-      "use_limitations": [
-        "Press-release listing is not a substitute for reviewing the specification",
-        "Does not establish adoption or interoperability for a specific deployment"
-      ],
+      "use_limitations": ["Press-release listing is not a substitute for reviewing the specification", "Does not establish adoption or interoperability for a specific deployment"],
       "status": "pending_review"
     },
     {
@@ -278,21 +172,12 @@
       "canonical_url": "https://www.uciexpress.org/_files/ugd/0c1418_e7fa0820a56042d192bfa4e7d3493742.pdf",
       "publication_date": "2022-03-02",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "standard_release",
-        "technical_scope"
-      ],
+      "ontology_layers": ["interconnect", "packaging"],
+      "supported_claim_types": ["standard_release", "technical_scope"],
       "geographic_scope": "Industry consortium announcement",
       "temporal_scope": "Published 2022-03-02",
       "confidence_use": "May support attributed statements of what the consortium said UCIe 1.0 covers",
-      "use_limitations": [
-        "Announcement, not the specification",
-        "Does not establish implementation, compliance or interoperability for any product"
-      ],
+      "use_limitations": ["Announcement, not the specification", "Does not establish implementation, compliance or interoperability for any product"],
       "status": "active"
     },
     {
@@ -303,21 +188,12 @@
       "canonical_url": "https://www.uciexpress.org/_files/ugd/8dc731_ae67289d0ec646cdba5c1aee245538b3.pdf",
       "publication_date": "2025-08-05",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "standard_release",
-        "technical_scope"
-      ],
+      "ontology_layers": ["interconnect", "packaging"],
+      "supported_claim_types": ["standard_release", "technical_scope"],
       "geographic_scope": "Industry consortium announcement",
       "temporal_scope": "Published 2025-08-05",
       "confidence_use": "May support attributed statements of the UCIe 3.0 data rates and features as announced",
-      "use_limitations": [
-        "Announcement, not the specification",
-        "Does not establish implementation, compliance or interoperability for any product"
-      ],
+      "use_limitations": ["Announcement, not the specification", "Does not establish implementation, compliance or interoperability for any product"],
       "status": "active"
     },
     {
@@ -328,20 +204,12 @@
       "canonical_url": "https://www.uciexpress.org/post/ucie-3-0-specification-redefining-chiplet-interconnects",
       "publication_date": "2025-09-03",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "technical_scope"
-      ],
+      "ontology_layers": ["interconnect", "packaging"],
+      "supported_claim_types": ["technical_scope"],
       "geographic_scope": "Industry consortium blog",
       "temporal_scope": "Published 2025-09-03 (page metadata)",
       "confidence_use": "May support attributed statements that the consortium associates UCIe-S with 2D and UCIe-A with 2.5D chiplet designs",
-      "use_limitations": [
-        "Consortium blog, not the specification",
-        "Does not establish implementation or interoperability for any product"
-      ],
+      "use_limitations": ["Consortium blog, not the specification", "Does not establish implementation or interoperability for any product"],
       "status": "active"
     },
     {
@@ -352,20 +220,12 @@
       "canonical_url": "https://www.uciexpress.org/post/ucie-consortium-s-2025-year-in-review",
       "publication_date": "2025-12-17",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "adoption_claim_context"
-      ],
+      "ontology_layers": ["interconnect", "packaging"],
+      "supported_claim_types": ["adoption_claim_context"],
       "geographic_scope": "Industry consortium blog",
       "temporal_scope": "Published 2025-12-17",
       "confidence_use": "May support attributed statements of what the consortium said about member implementation activity in 2025",
-      "use_limitations": [
-        "Names no products, implementations or interoperability results",
-        "Promotional consortium summary"
-      ],
+      "use_limitations": ["Names no products, implementations or interoperability results", "Promotional consortium summary"],
       "status": "active"
     },
     {
@@ -376,21 +236,12 @@
       "canonical_url": "https://computeexpresslink.org/wp-content/uploads/2024/01/CXL_3.0-Specification-Release_FINAL-1.pdf",
       "publication_date": "2022-08-02",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "memory"
-      ],
-      "supported_claim_types": [
-        "standard_release",
-        "technical_scope"
-      ],
+      "ontology_layers": ["interconnect", "memory"],
+      "supported_claim_types": ["standard_release", "technical_scope"],
       "geographic_scope": "Industry consortium announcement",
       "temporal_scope": "Published 2022-08-02",
       "confidence_use": "May support attributed statements of the features the consortium announced for CXL 3.0",
-      "use_limitations": [
-        "Announcement, not the specification",
-        "Does not establish that any named product implements CXL 3.0 or interoperates with another"
-      ],
+      "use_limitations": ["Announcement, not the specification", "Does not establish that any named product implements CXL 3.0 or interoperates with another"],
       "status": "active"
     },
     {
@@ -401,21 +252,12 @@
       "canonical_url": "https://computeexpresslink.org/wp-content/uploads/2023/12/CXL_3.0_white-paper_FINAL.pdf",
       "publication_date": "2022-08-02",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "memory"
-      ],
-      "supported_claim_types": [
-        "technical_scope",
-        "interconnect_specification"
-      ],
+      "ontology_layers": ["interconnect", "memory"],
+      "supported_claim_types": ["technical_scope", "interconnect_specification"],
       "geographic_scope": "Industry consortium technical overview",
       "temporal_scope": "Listed as a resource of the 2022-08-02 CXL 3.0 release; the PDF itself is undated (created 2022-07-29)",
       "confidence_use": "May support attributed statements of CXL's protocol layering, its PCIe 6.0 basis, the stated x16 raw bandwidth and the consortium's definitions of memory pooling and sharing",
-      "use_limitations": [
-        "Consortium overview written by specification authors, not the normative specification",
-        "Describes specification capabilities, not product behaviour"
-      ],
+      "use_limitations": ["Consortium overview written by specification authors, not the normative specification", "Describes specification capabilities, not product behaviour"],
       "status": "active"
     },
     {
@@ -426,21 +268,12 @@
       "canonical_url": "https://computeexpresslink.org/wp-content/uploads/2025/11/CXL_4.0-Specification-Release_FINAL_Website-Copy.pdf",
       "publication_date": "2025-11-18",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "memory"
-      ],
-      "supported_claim_types": [
-        "standard_release",
-        "technical_scope"
-      ],
+      "ontology_layers": ["interconnect", "memory"],
+      "supported_claim_types": ["standard_release", "technical_scope"],
       "geographic_scope": "Industry consortium announcement",
       "temporal_scope": "Published 2025-11-18",
       "confidence_use": "May support attributed statements of the CXL 4.0 transfer rate and features as announced",
-      "use_limitations": [
-        "Announcement, not the specification; the CXL 4.0 text is offered under an evaluation agreement and was not reviewed",
-        "Demonstrations at a trade show are not compliance or interoperability results"
-      ],
+      "use_limitations": ["Announcement, not the specification; the CXL 4.0 text is offered under an evaluation agreement and was not reviewed", "Demonstrations at a trade show are not compliance or interoperability results"],
       "status": "active"
     },
     {
@@ -451,21 +284,12 @@
       "canonical_url": "https://ultraethernet.org/ultra-ethernet-consortium-uec-launches-specification-1-0-transforming-ethernet-for-ai-and-hpc-at-scale/",
       "publication_date": "2025-06-11",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "standard_release",
-        "adoption_claim_context"
-      ],
+      "ontology_layers": ["interconnect", "deployment"],
+      "supported_claim_types": ["standard_release", "adoption_claim_context"],
       "geographic_scope": "Industry consortium announcement",
       "temporal_scope": "Published 2025-06-11",
       "confidence_use": "May support attributed statements of what the consortium announced for UEC 1.0 and its stated compliance-program status",
-      "use_limitations": [
-        "Announcement; interoperability and adoption statements are the consortium's own",
-        "Compliance programs are described as in progress or upcoming, not completed"
-      ],
+      "use_limitations": ["Announcement; interoperability and adoption statements are the consortium's own", "Compliance programs are described as in progress or upcoming, not completed"],
       "status": "active"
     },
     {
@@ -476,22 +300,12 @@
       "canonical_url": "https://ultraethernet.org/wp-content/uploads/sites/20/2026/10/UE-Specification-1.1.pdf",
       "publication_date": "2026-10-12",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "interconnect",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "technical_scope",
-        "network_architecture_context"
-      ],
+      "ontology_layers": ["interconnect", "deployment"],
+      "supported_claim_types": ["technical_scope", "network_architecture_context"],
       "geographic_scope": "Published networking specification",
       "temporal_scope": "Release date 2026-10-12 per its release notes; supersedes v1.0.3 (2026-07-16)",
       "confidence_use": "May support statements of what the specification's text says, including its informative description of frontend, backend scale-out and local scale-up networks and its stated scope",
-      "use_limitations": [
-        "Only the introductory and informative sections (about pages 20–80 of 764) and the table of contents were read",
-        "Informative background is the consortium's characterisation, not a normative requirement",
-        "A specification does not establish product compliance, interoperability or deployment"
-      ],
+      "use_limitations": ["Only the introductory and informative sections (about pages 20–80 of 764) and the table of contents were read", "Informative background is the consortium's characterisation, not a normative requirement", "A specification does not establish product compliance, interoperability or deployment"],
       "status": "active"
     },
     {
@@ -502,24 +316,12 @@
       "canonical_url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf",
       "publication_date": "2026-09-17",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "packaging",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "rack_power_specification",
-        "power_distribution_context",
-        "cooling_architecture"
-      ],
+      "ontology_layers": ["power_thermal", "packaging", "deployment"],
+      "supported_claim_types": ["rack_power_specification", "power_distribution_context", "cooling_architecture"],
       "geographic_scope": "Product documentation for DGX GB rack-scale systems",
       "temporal_scope": "Guide dated 2026-09-17; covers DGX GB200 and DGX GB300 rack systems together",
       "confidence_use": "May support attributed statements of the DGX GB rack configuration, power-shelf and bus-bar power distribution, approximate rack power consumption, hybrid liquid and air cooling and leak detection",
-      "use_limitations": [
-        "Covers GB200 and GB300 together; figures are not stated separately for each generation",
-        "'Approximately 120kW' is not stated as rated, typical or measured",
-        "No coolant flow, temperature or pressure figures"
-      ],
+      "use_limitations": ["Covers GB200 and GB300 together; figures are not stated separately for each generation", "'Approximately 120kW' is not stated as rated, typical or measured", "No coolant flow, temperature or pressure figures"],
       "status": "active"
     },
     {
@@ -530,24 +332,12 @@
       "canonical_url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf",
       "publication_date": "2025-09-03",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment",
-        "interconnect"
-      ],
-      "supported_claim_types": [
-        "rack_power_specification",
-        "cooling_architecture",
-        "facility_requirement_context"
-      ],
+      "ontology_layers": ["power_thermal", "deployment", "interconnect"],
+      "supported_claim_types": ["rack_power_specification", "cooling_architecture", "facility_requirement_context"],
       "geographic_scope": "NVIDIA reference architecture for DGX SuperPOD with DGX GB200",
       "temporal_scope": "Document dated 2025-09-03; its history lists a publication date of 2025-06-16",
       "confidence_use": "May support attributed statements of the scalable-unit power figure, power-shelf configuration, hybrid cooling and recommended facility design tier",
-      "use_limitations": [
-        "A reference architecture, not evidence of any built facility",
-        "Describes the power shelf as 'N redundancy', unlike the user guide's 'N+N'",
-        "'TDP' is used for a scalable unit of racks, not for a chip"
-      ],
+      "use_limitations": ["A reference architecture, not evidence of any built facility", "Describes the power shelf as 'N redundancy', unlike the user guide's 'N+N'", "'TDP' is used for a scalable unit of racks, not for a chip"],
       "status": "active"
     },
     {
@@ -558,21 +348,12 @@
       "canonical_url": "https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/",
       "publication_date": "2024-10-15",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "power_distribution_context",
-        "cooling_architecture"
-      ],
+      "ontology_layers": ["power_thermal", "packaging"],
+      "supported_claim_types": ["power_distribution_context", "cooling_architecture"],
       "geographic_scope": "NVIDIA design contribution to the Open Compute Project",
       "temporal_scope": "Published 2024-10-15",
       "confidence_use": "May support attributed statements of the GB200 NVL72 bus-bar current rating, the rack cooling capacity NVIDIA states and its liquid-cooling manifold design",
-      "use_limitations": [
-        "Company blog; the OCP specification documents themselves were not reviewed",
-        "Does not state the bus-bar voltage or how many bus-bar segments carry the rack load"
-      ],
+      "use_limitations": ["Company blog; the OCP specification documents themselves were not reviewed", "Does not state the bus-bar voltage or how many bus-bar segments carry the rack load"],
       "status": "active"
     },
     {
@@ -583,21 +364,12 @@
       "canonical_url": "https://blogs.nvidia.com/blog/blackwell-platform-water-efficiency-liquid-cooling-data-centers-ai-factories/",
       "publication_date": "2025-04-22",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "cooling_architecture",
-        "efficiency_claim_context"
-      ],
+      "ontology_layers": ["power_thermal", "deployment"],
+      "supported_claim_types": ["cooling_architecture", "efficiency_claim_context"],
       "geographic_scope": "Company blog",
       "temporal_scope": "Published 2025-04-22",
       "confidence_use": "May support attributed statements of NVIDIA's description of the direct-to-chip liquid-cooling heat path and of its stated efficiency claims",
-      "use_limitations": [
-        "Efficiency multiples are stated without methodology, baseline or measurement boundary",
-        "Partner product figures are the partners' claims as relayed by NVIDIA"
-      ],
+      "use_limitations": ["Efficiency multiples are stated without methodology, baseline or measurement boundary", "Partner product figures are the partners' claims as relayed by NVIDIA"],
       "status": "active"
     },
     {
@@ -608,21 +380,12 @@
       "canonical_url": "https://www.vertiv.com/en-emea/about/news-and-events/news-releases/vertiv-codevelops-with-nvidia-complete-power-and-cooling-blueprint-for--nvidia-gb200-nvl72-platform/",
       "publication_date": "2024-10-17",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "facility_requirement_context",
-        "reference_design_context"
-      ],
+      "ontology_layers": ["power_thermal", "deployment"],
+      "supported_claim_types": ["facility_requirement_context", "reference_design_context"],
       "geographic_scope": "Vendor announcement of a reference design",
       "temporal_scope": "Published 2024-10-17",
       "confidence_use": "May support attributed statements of the scope and stated rack power of Vertiv's GB200 NVL72 reference architecture",
-      "use_limitations": [
-        "A reference design, not an operating facility",
-        "Efficiency and space claims are the vendor's own"
-      ],
+      "use_limitations": ["A reference design, not an operating facility", "Efficiency and space claims are the vendor's own"],
       "status": "active"
     },
     {
@@ -633,21 +396,12 @@
       "canonical_url": "https://www.opencompute.org/documents/ocp-wp-l-lcdu-test-methodology-performance-rating-r1-pdf/",
       "publication_date": "2024-08-01",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal"
-      ],
-      "supported_claim_types": [
-        "cooling_architecture",
-        "thermal_terminology",
-        "facility_water_class_context"
-      ],
+      "ontology_layers": ["power_thermal"],
+      "supported_claim_types": ["cooling_architecture", "thermal_terminology", "facility_water_class_context"],
       "geographic_scope": "Open Compute Project white paper",
       "temporal_scope": "Dated August 2024 in the document (recorded here as 2024-08-01); PDF created 2024-11-20",
       "confidence_use": "May support statements of OCP's definitions of TCS, FWS and CDU performance parameters, and its reproduction of the ASHRAE TC 9.9 liquid-cooling classes",
-      "use_limitations": [
-        "Reproduces ASHRAE TC 9.9 classes secondhand; the ASHRAE source was not reviewed",
-        "Example curves describe a typical CDU, not any named product"
-      ],
+      "use_limitations": ["Reproduces ASHRAE TC 9.9 classes secondhand; the ASHRAE source was not reviewed", "Example curves describe a typical CDU, not any named product"],
       "status": "active"
     },
     {
@@ -658,21 +412,12 @@
       "canonical_url": "https://datacenters.lbl.gov/sites/default/files/WP49-PUE%20A%20Comprehensive%20Examination%20of%20the%20Metric_v6.pdf",
       "publication_date": "2012-10-02",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "metric_definition"
-      ],
+      "ontology_layers": ["power_thermal", "deployment"],
+      "supported_claim_types": ["metric_definition"],
       "geographic_scope": "Industry metric definition",
-      "temporal_scope": "The Green Grid publisher dates WP#49 to 2012-10-02; the accessed LBNL-hosted PDF is a later v6 copy whose creation metadata is 2013-02-04. The registry records the publisher's original WP#49 publication date, not the PDF file creation timestamp.",
+      "temporal_scope": "The Green Grid publisher dates WP#49 to 2012-10-02; the accessed LBNL-hosted PDF is a later v6 copy whose creation metadata is 2013-02-04. The registry records the publisher publication date, not the PDF timestamp.",
       "confidence_use": "May support statements of how The Green Grid defines and bounds PUE",
-      "use_limitations": [
-        "ISO/IEC 30134-2 was not reviewed",
-        "A facility metric; it says nothing about any product",
-        "Edition provenance: publisher's original publication date differs from the creation timestamp of the accessible v6 PDF; revision date is not independently established. Official publisher record: https://www.thegreengrid.org/en/resources/library-and-tools/237-WP%2349---PUE%3A-A-Comprehensive-Examination-of-the-Metric"
-      ],
+      "use_limitations": ["ISO/IEC 30134-2 was not reviewed", "A facility metric; it says nothing about any product", "Edition provenance: publisher lists original WP#49 as 2012-10-02, while accessible v6 PDF creation metadata is 2013-02-04. See https://www.thegreengrid.org/en/resources/library-and-tools/237-WP%2349---PUE%3A-A-Comprehensive-Examination-of-the-Metric"],
       "status": "active"
     },
     {
@@ -683,20 +428,12 @@
       "canonical_url": "https://www.thegreengrid.org/system/files/store/WUE_v1.pdf",
       "publication_date": "2011-05-03",
       "accessed_at": "2026-11-10",
-      "ontology_layers": [
-        "power_thermal",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "metric_definition"
-      ],
+      "ontology_layers": ["power_thermal", "deployment"],
+      "supported_claim_types": ["metric_definition"],
       "geographic_scope": "Industry metric definition",
       "temporal_scope": "Version 1; date taken from the PDF (2011-05-03)",
       "confidence_use": "May support statements of how The Green Grid defines site and source WUE",
-      "use_limitations": [
-        "Version 1 of the paper; later revisions were not reviewed",
-        "A facility metric; it says nothing about any product"
-      ],
+      "use_limitations": ["Version 1 of the paper; later revisions were not reviewed", "A facility metric; it says nothing about any product"],
       "status": "active"
     },
     {
@@ -707,24 +444,12 @@
       "canonical_url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
       "effective_date": "2023-12-06",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "design",
-        "memory",
-        "packaging",
-        "interconnect"
-      ],
-      "supported_claim_types": [
-        "technical_specification",
-        "product_integration_context",
-        "memory_bandwidth_context"
-      ],
+      "ontology_layers": ["design", "memory", "packaging", "interconnect"],
+      "supported_claim_types": ["technical_specification", "product_integration_context", "memory_bandwidth_context"],
       "geographic_scope": "Product-level technical disclosure",
       "temporal_scope": "Launch-date and currently published product specifications; must be reviewed before reuse",
       "confidence_use": "May support attributed product-level statements about disclosed HBM integration, memory capacity, and bandwidth",
-      "use_limitations": [
-        "Product specifications do not establish wider HBM availability or supply",
-        "Does not support vendor comparison, deployment performance, or capacity findings"
-      ],
+      "use_limitations": ["Product specifications do not establish wider HBM availability or supply", "Does not support vendor comparison, deployment performance, or capacity findings"],
       "status": "active"
     },
     {
@@ -735,29 +460,12 @@
       "canonical_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf",
       "publication_date": "2025-04-07",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "design",
-        "packaging",
-        "memory",
-        "interconnect",
-        "power_thermal"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "die_stacking_context",
-        "product_integration_context",
-        "interconnect_specification",
-        "memory_bandwidth_context",
-        "device_power_class"
-      ],
+      "ontology_layers": ["design", "packaging", "memory", "interconnect", "power_thermal"],
+      "supported_claim_types": ["company_technical_disclosure", "die_stacking_context", "product_integration_context", "interconnect_specification", "memory_bandwidth_context", "device_power_class"],
       "geographic_scope": "Product-architecture disclosure for AMD Instinct MI300 Series and MI325X",
       "temporal_scope": "Revision dated 2025-04-07 in PDF metadata; covers MI300X, MI300A and MI325X",
       "confidence_use": "May support attributed statements of the MI300 Series chiplet partition, the stated process nodes of the XCDs and IODs, their vertical stacking and HBM3 stack count",
-      "use_limitations": [
-        "Does not name CoWoS, SoIC, hybrid bonding or the interposer type for MI300",
-        "Does not name HBM suppliers",
-        "Company technical disclosure, not independent verification"
-      ],
+      "use_limitations": ["Does not name CoWoS, SoIC, hybrid bonding or the interposer type for MI300", "Does not name HBM suppliers", "Company technical disclosure, not independent verification"],
       "status": "active"
     },
     {
@@ -768,24 +476,12 @@
       "canonical_url": "https://www.amd.com/en/blogs/2024/accelerating-energy-efficiency-our-latest-30x25-u.html",
       "publication_date": "2024-12-10",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "design",
-        "packaging",
-        "power_thermal"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "die_stacking_context",
-        "packaging_route_context"
-      ],
+      "ontology_layers": ["design", "packaging", "power_thermal"],
+      "supported_claim_types": ["company_technical_disclosure", "die_stacking_context", "packaging_route_context"],
       "geographic_scope": "Company blog on AMD product energy efficiency",
       "temporal_scope": "Published 2024-12-10",
       "confidence_use": "May support attributed statements that AMD describes MI300X as using '3.5D CoWoS packaging' with 5nm compute dies on 6nm IO dies",
-      "use_limitations": [
-        "Company blog; '3.5D' is AMD's own term",
-        "Does not name the CoWoS variant or the die-stacking bonding method",
-        "Energy-efficiency claims are company-reported"
-      ],
+      "use_limitations": ["Company blog; '3.5D' is AMD's own term", "Does not name the CoWoS variant or the die-stacking bonding method", "Energy-efficiency claims are company-reported"],
       "status": "active"
     },
     {
@@ -796,23 +492,12 @@
       "canonical_url": "https://www.amd.com/en/blogs/2024/amd-and-synopsys-collaborate-on-the-development-of.html",
       "publication_date": "2024-12-10",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "design",
-        "packaging",
-        "interconnect"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "packaging_route_context"
-      ],
+      "ontology_layers": ["design", "packaging", "interconnect"],
+      "supported_claim_types": ["company_technical_disclosure", "packaging_route_context"],
       "geographic_scope": "Company blog on chip design and packaging complexity",
       "temporal_scope": "Published 2024-12-10",
       "confidence_use": "May support attributed statements that AMD says MI300X connects 8 accelerator and 4 IO chiplets via an interposer using TSMC CoWoS packaging technology",
-      "use_limitations": [
-        "Company blog; does not name the CoWoS variant",
-        "Mentions UCIe only as an industry standard; does not state that MI300X implements UCIe",
-        "Partner statements in the blog are attributed to their speakers"
-      ],
+      "use_limitations": ["Company blog; does not name the CoWoS variant", "Mentions UCIe only as an industry standard; does not state that MI300X implements UCIe", "Partner statements in the blog are attributed to their speakers"],
       "status": "active"
     },
     {
@@ -823,22 +508,12 @@
       "canonical_url": "https://ir.amd.com/news-events/press-releases/detail/1173/amd-delivers-leadership-portfolio-of-data-center-ai-solutions-with-amd-instinct-mi300-series",
       "publication_date": "2023-12-06",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "design",
-        "packaging",
-        "memory"
-      ],
-      "supported_claim_types": [
-        "commercialization_status",
-        "product_integration_context"
-      ],
+      "ontology_layers": ["design", "packaging", "memory"],
+      "supported_claim_types": ["commercialization_status", "product_integration_context"],
       "geographic_scope": "Company product announcement",
       "temporal_scope": "Published 2023-12-06",
       "confidence_use": "May support attributed statements that AMD announced MI300X availability on 2023-12-06 and describes MI300A as using 3D packaging",
-      "use_limitations": [
-        "Availability announcement; no volume, yield or customer allocation",
-        "Leadership and performance claims are the company's own"
-      ],
+      "use_limitations": ["Availability announcement; no volume, yield or customer allocation", "Leadership and performance claims are the company's own"],
       "status": "active"
     },
     {
@@ -849,22 +524,12 @@
       "canonical_url": "https://news.samsung.com/global/samsung-develops-industry-first-36gb-hbm3e-12h-dram",
       "publication_date": "2024-02-27",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "memory",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "stacking_integration_context",
-        "memory_bandwidth_context"
-      ],
+      "ontology_layers": ["memory", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "stacking_integration_context", "memory_bandwidth_context"],
       "geographic_scope": "Company-reported product development",
       "temporal_scope": "Published 2024-02-27; technical statements remain attributable to the company disclosure",
       "confidence_use": "May support attributed statements about the disclosed HBM3E 12H design, stacking approach, bandwidth, and capacity",
-      "use_limitations": [
-        "Company technical disclosure is not independent verification",
-        "Does not establish availability, allocation, production capacity, supplier position, or future supply"
-      ],
+      "use_limitations": ["Company technical disclosure is not independent verification", "Does not establish availability, allocation, production capacity, supplier position, or future supply"],
       "status": "active"
     },
     {
@@ -875,22 +540,12 @@
       "canonical_url": "https://investors.micron.com/news-releases/news-release-details/micron-commences-volume-production-industry-leading-hbm3e",
       "publication_date": "2024-02-26",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "memory",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "packaging_integration_context",
-        "memory_bandwidth_context"
-      ],
+      "ontology_layers": ["memory", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "packaging_integration_context", "memory_bandwidth_context"],
       "geographic_scope": "Company-reported product and production announcement",
       "temporal_scope": "Published 2024-02-26; statements remain attributable and require current-condition review",
       "confidence_use": "May support attributed statements about disclosed HBM3E design, TSV and packaging context, and stated technical characteristics",
-      "use_limitations": [
-        "Announcement does not independently verify availability, allocation, or production capacity",
-        "Does not support supplier ranking, future supply, or entity-level access findings"
-      ],
+      "use_limitations": ["Announcement does not independently verify availability, allocation, or production capacity", "Does not support supplier ranking, future supply, or entity-level access findings"],
       "status": "active"
     },
     {
@@ -901,24 +556,12 @@
       "canonical_url": "https://www.congress.gov/bill/117th-congress/house-bill/4346/text",
       "effective_date": "2022-08-09",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "controls",
-        "fabrication",
-        "design",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "legal_scope",
-        "policy_framework",
-        "program_authorization"
-      ],
+      "ontology_layers": ["controls", "fabrication", "design", "packaging"],
+      "supported_claim_types": ["legal_scope", "policy_framework", "program_authorization"],
       "geographic_scope": "United States",
       "temporal_scope": "Enacted 2022-08-09; implementation and appropriations require review",
       "confidence_use": "May support verified facts about the enacted statute's text and authorized programs after text review",
-      "use_limitations": [
-        "Statute text does not prove facility completion or operating outcomes",
-        "Appropriations and implementation measures require separate review"
-      ],
+      "use_limitations": ["Statute text does not prove facility completion or operating outcomes", "Appropriations and implementation measures require separate review"],
       "status": "active"
     },
     {
@@ -929,23 +572,12 @@
       "canonical_url": "https://www.bis.gov/press-release/commerce-implements-new-export-controls-advanced-computing-and-semiconductor-manufacturing-items-october-17-2023",
       "publication_date": "2023-10-17",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "controls",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "rule_announcement",
-        "control_scope",
-        "equipment_control_reference"
-      ],
+      "ontology_layers": ["controls", "fabrication", "packaging"],
+      "supported_claim_types": ["rule_announcement", "control_scope", "equipment_control_reference"],
       "geographic_scope": "United States export controls and stated covered destinations",
       "temporal_scope": "Published 2023-10-17; must be reviewed against current rules and amendments",
       "confidence_use": "May support attributed statements about the announced manufacturing and advanced-computing control package after rule-text review",
-      "use_limitations": [
-        "Press release is not a substitute for the controlling rule text",
-        "Does not establish entity-level compliance or access"
-      ],
+      "use_limitations": ["Press release is not a substitute for the controlling rule text", "Does not establish entity-level compliance or access"],
       "status": "active"
     },
     {
@@ -956,24 +588,12 @@
       "canonical_url": "https://www.gov.uk/government/publications/national-semiconductor-strategy/national-semiconductor-strategy",
       "publication_date": "2023-05-19",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "controls",
-        "fabrication",
-        "design",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "policy_framework",
-        "program_announcement",
-        "defined_scope"
-      ],
+      "ontology_layers": ["controls", "fabrication", "design", "packaging"],
+      "supported_claim_types": ["policy_framework", "program_announcement", "defined_scope"],
       "geographic_scope": "United Kingdom",
       "temporal_scope": "Published 2023-05-19; implementation and funding decisions require review",
       "confidence_use": "May support attributed statements about the published strategy scope and stated policy aims",
-      "use_limitations": [
-        "Strategy publication does not prove completed facilities or outcomes",
-        "Does not establish current operating capacity or access"
-      ],
+      "use_limitations": ["Strategy publication does not prove completed facilities or outcomes", "Does not establish current operating capacity or access"],
       "status": "active"
     },
     {
@@ -984,23 +604,12 @@
       "canonical_url": "https://www.meti.go.jp/english/policy/economy/economicsecurity/index.html",
       "publication_date": "2024-05-01",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "controls",
-        "fabrication",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "policy_framework",
-        "legal_scope",
-        "program_reference"
-      ],
+      "ontology_layers": ["controls", "fabrication", "deployment"],
+      "supported_claim_types": ["policy_framework", "legal_scope", "program_reference"],
       "geographic_scope": "Japan",
       "temporal_scope": "Portal and published measures require review against current statutes and implementation",
       "confidence_use": "May support attributed statements about published economic-security policy framing after primary-law review",
-      "use_limitations": [
-        "Portal summary is not a substitute for controlling legal text",
-        "Does not establish entity-level access or compliance outcomes"
-      ],
+      "use_limitations": ["Portal summary is not a substitute for controlling legal text", "Does not establish entity-level access or compliance outcomes"],
       "status": "active"
     },
     {
@@ -1011,23 +620,12 @@
       "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086300000124/intc-20241228.htm",
       "publication_date": "2025-01-31",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "design",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "reported_risk",
-        "reported_business_context"
-      ],
+      "ontology_layers": ["design", "fabrication", "packaging"],
+      "supported_claim_types": ["company_disclosure", "reported_risk", "reported_business_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and publication-date disclosures",
       "confidence_use": "May support attributed company-reported business, risk, and capability statements within the filing's scope",
-      "use_limitations": [
-        "Company filing must remain attributed",
-        "Does not establish independent verification of capacity, access, or foundry outcomes"
-      ],
+      "use_limitations": ["Company filing must remain attributed", "Does not establish independent verification of capacity, access, or foundry outcomes"],
       "status": "active"
     },
     {
@@ -1038,22 +636,12 @@
       "canonical_url": "https://www.sec.gov/Archives/edgar/data/1709048/000170904825000023/gfs-20241231.htm",
       "publication_date": "2025-02-27",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "fabrication",
-        "controls"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "reported_risk",
-        "reported_capacity_context"
-      ],
+      "ontology_layers": ["fabrication", "controls"],
+      "supported_claim_types": ["company_disclosure", "reported_risk", "reported_capacity_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and publication-date disclosures",
       "confidence_use": "May support attributed company-reported fabrication and business statements within the filing's scope",
-      "use_limitations": [
-        "Company filing must remain attributed",
-        "Does not establish market-wide fabrication access or supplier position"
-      ],
+      "use_limitations": ["Company filing must remain attributed", "Does not establish market-wide fabrication access or supplier position"],
       "status": "active"
     },
     {
@@ -1064,23 +652,12 @@
       "canonical_url": "https://www.oecd.org/en/publications/government-policies-targeting-the-semiconductor-industry_9ag68604-en.html",
       "publication_date": "2024-11-12",
       "accessed_at": "2026-06-14",
-      "ontology_layers": [
-        "controls",
-        "fabrication",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "policy_landscape",
-        "institutional_analysis",
-        "program_reference"
-      ],
+      "ontology_layers": ["controls", "fabrication", "deployment"],
+      "supported_claim_types": ["policy_landscape", "institutional_analysis", "program_reference"],
       "geographic_scope": "OECD member and partner economies covered in the report",
       "temporal_scope": "Published 2024-11-12; policy landscape requires current-condition review",
       "confidence_use": "May support attributed institutional analysis of published government semiconductor policy measures within stated scope",
-      "use_limitations": [
-        "Institutional landscape analysis is not entity-level verification",
-        "Does not establish current implementation outcomes or rankings"
-      ],
+      "use_limitations": ["Institutional landscape analysis is not entity-level verification", "Does not establish current implementation outcomes or rankings"],
       "status": "active"
     },
     {
@@ -1090,23 +667,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://www.jedec.org/news/pressreleases/jedec%C2%AE-and-industry-leaders-collaborate-release-jesd270-4-hbm4-standard-advancing",
       "publication_date": "2025-04-16",
-      "ontology_layers": [
-        "memory",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "standard_announcement",
-        "technical_specification"
-      ],
+      "ontology_layers": ["memory", "packaging"],
+      "supported_claim_types": ["standard_announcement", "technical_specification"],
       "geographic_scope": "Standards-body announcement; not the normative standard and not a statement about any supplier's products",
       "temporal_scope": "Announcement dated 2025-04-16 11:00 AM EDT (Business Wire ID 20250416843598); JEDEC lists a later JESD270-4A revision (Dec 2025) that has not been reviewed",
       "confidence_use": "May support attributed statements of what JEDEC's announcement says about JESD270-4. It cannot by itself establish the normative content of the JESD270-4 or JESD270-4A documents",
-      "use_limitations": [
-        "Text read on 2026-11-09 from the MarketsFinancialContent syndication of the Business Wire distribution (page SHA-256 1cc133aabfbc2a75); jedec.org and businesswire.com refused automated retrieval",
-        "The syndicating host labels the article third-party content and makes no guarantee of its accuracy or completeness",
-        "An announcement summarises the standard; normative requirements must be checked against JESD270-4 / JESD270-4A, which has not been reviewed",
-        "Standard parameters do not establish what any supplier ships, qualifies or produces"
-      ],
+      "use_limitations": ["Text read on 2026-11-09 from the MarketsFinancialContent syndication of the Business Wire distribution (page SHA-256 1cc133aabfbc2a75); jedec.org and businesswire.com refused automated retrieval", "The syndicating host labels the article third-party content and makes no guarantee of its accuracy or completeness", "An announcement summarises the standard; normative requirements must be checked against JESD270-4 / JESD270-4A, which has not been reviewed", "Standard parameters do not establish what any supplier ships, qualifies or produces"],
       "status": "active",
       "accessed_at": "2026-11-09"
     },
@@ -1117,24 +683,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://news.skhynix.com/en/sk-hynix-ships-world-first-12-layer-hbm4-samples-to-customers/",
       "publication_date": "2025-03-19",
-      "ontology_layers": [
-        "memory",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "commercialization_status",
-        "stacking_integration_context",
-        "memory_bandwidth_context"
-      ],
+      "ontology_layers": ["memory", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "commercialization_status", "stacking_integration_context", "memory_bandwidth_context"],
       "geographic_scope": "Company-reported product sampling",
       "temporal_scope": "Published 2025-03-19; sample-stage disclosure superseded by later status statements",
       "confidence_use": "May support attributed statements that SK hynix reported shipping 12-layer, 36GB HBM4 samples and its stated bandwidth and packaging process",
-      "use_limitations": [
-        "Sample shipment is not volume production or customer qualification",
-        "'World's first' is the company's own characterisation and is not independently verified",
-        "Customers are not named"
-      ],
+      "use_limitations": ["Sample shipment is not volume production or customer qualification", "'World's first' is the company's own characterisation and is not independently verified", "Customers are not named"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1145,25 +699,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://news.skhynix.com/en/sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production/",
       "publication_date": "2025-09-12",
-      "ontology_layers": [
-        "memory",
-        "packaging",
-        "fabrication"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "commercialization_status",
-        "memory_bandwidth_context",
-        "stacking_integration_context"
-      ],
+      "ontology_layers": ["memory", "packaging", "fabrication"],
+      "supported_claim_types": ["company_technical_disclosure", "commercialization_status", "memory_bandwidth_context", "stacking_integration_context"],
       "geographic_scope": "Company-reported product development",
       "temporal_scope": "Published 2025-09-12",
       "confidence_use": "May support attributed statements about SK hynix's reported HBM4 I/O count, operating speed, DRAM process, packaging process and development status",
-      "use_limitations": [
-        "'Readied mass production' describes a production system, not shipped volume",
-        "Speed and efficiency figures are company-reported",
-        "No capacity, yield or customer allocation information"
-      ],
+      "use_limitations": ["'Readied mass production' describes a production system, not shipped volume", "Speed and efficiency figures are company-reported", "No capacity, yield or customer allocation information"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1174,25 +715,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://news.skhynix.com/en/sk-hynix-partners-with-tsmc-to-strengthen-hbm-technological-leadership/",
       "publication_date": "2024-04-19",
-      "ontology_layers": [
-        "memory",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "partnership_announcement",
-        "base_die_process_context",
-        "packaging_integration_context"
-      ],
+      "ontology_layers": ["memory", "fabrication", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "partnership_announcement", "base_die_process_context", "packaging_integration_context"],
       "geographic_scope": "Bilateral company memorandum of understanding as described by SK hynix",
       "temporal_scope": "Published 2024-04-19; describes plans, not completed outcomes",
       "confidence_use": "May support attributed statements that SK hynix planned to adopt TSMC's logic process for the HBM4 base die and to optimise HBM integration with CoWoS",
-      "use_limitations": [
-        "An MOU is a statement of intent, not evidence of a production arrangement",
-        "Does not describe other HBM suppliers' base-die sourcing",
-        "Commercial terms are not disclosed"
-      ],
+      "use_limitations": ["An MOU is a statement of intent, not evidence of a production arrangement", "Does not describe other HBM suppliers' base-die sourcing", "Commercial terms are not disclosed"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1203,21 +731,12 @@
       "source_type": "company_announcement",
       "canonical_url": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
       "publication_date": "2025-10-29",
-      "ontology_layers": [
-        "memory"
-      ],
-      "supported_claim_types": [
-        "commercialization_status",
-        "reported_business_context"
-      ],
+      "ontology_layers": ["memory"],
+      "supported_claim_types": ["commercialization_status", "reported_business_context"],
       "geographic_scope": "Company-reported results and outlook",
       "temporal_scope": "Published 2025-10-29; includes forward-looking shipment statements",
       "confidence_use": "May support attributed statements about SK hynix's reported HBM4 production status and stated shipment timing",
-      "use_limitations": [
-        "Earnings press release, not the regulatory filing",
-        "Forward-looking statements are not verified outcomes",
-        "No HBM4 volume, share or allocation figures"
-      ],
+      "use_limitations": ["Earnings press release, not the regulatory filing", "Forward-looking statements are not verified outcomes", "No HBM4 volume, share or allocation figures"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1228,21 +747,12 @@
       "source_type": "company_announcement",
       "canonical_url": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
       "publication_date": "2026-01-28",
-      "ontology_layers": [
-        "memory"
-      ],
-      "supported_claim_types": [
-        "commercialization_status",
-        "reported_business_context"
-      ],
+      "ontology_layers": ["memory"],
+      "supported_claim_types": ["commercialization_status", "reported_business_context"],
       "geographic_scope": "Company-reported results and outlook",
       "temporal_scope": "Published 2026-01-28",
       "confidence_use": "May support attributed statements that SK hynix reported supplying HBM3E and HBM4 and large-scale HBM4 production",
-      "use_limitations": [
-        "Earnings press release, not the regulatory filing",
-        "'Large-scale production' is not quantified",
-        "Does not establish market-wide supply conditions"
-      ],
+      "use_limitations": ["Earnings press release, not the regulatory filing", "'Large-scale production' is not quantified", "Does not establish market-wide supply conditions"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1253,24 +763,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://investors.micron.com/news-releases/news-release-details/micron-ships-hbm4-key-customers-power-next-gen-ai-platforms",
       "publication_date": "2025-06-10",
-      "ontology_layers": [
-        "memory",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "commercialization_status",
-        "memory_bandwidth_context",
-        "stacking_integration_context"
-      ],
+      "ontology_layers": ["memory", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "commercialization_status", "memory_bandwidth_context", "stacking_integration_context"],
       "geographic_scope": "Company-reported product sampling",
       "temporal_scope": "Published 2025-06-10; sample-stage disclosure",
       "confidence_use": "May support attributed statements that Micron reported shipping 36GB 12-high HBM4 samples with a 2048-bit interface, stated bandwidth and DRAM process",
-      "use_limitations": [
-        "Sample shipment is not volume production",
-        "Efficiency figure is based on internal simulation per the release footnote",
-        "Customers are not named"
-      ],
+      "use_limitations": ["Sample shipment is not volume production", "Efficiency figure is based on internal simulation per the release footnote", "Customers are not named"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1281,26 +779,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://investors.micron.com/news/press-release/2026/Micron-in-High-Volume-Production-of-HBM4-Designed-for-NVIDIA-Vera-Rubin-PCIe-Gen6-SSD-and-SOCAMM2-03-16-2026/default.aspx",
       "publication_date": "2026-03-16",
-      "ontology_layers": [
-        "memory",
-        "packaging",
-        "design"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "commercialization_status",
-        "memory_bandwidth_context",
-        "stacking_integration_context",
-        "product_integration_context"
-      ],
+      "ontology_layers": ["memory", "packaging", "design"],
+      "supported_claim_types": ["company_technical_disclosure", "commercialization_status", "memory_bandwidth_context", "stacking_integration_context", "product_integration_context"],
       "geographic_scope": "Company-reported production and product status",
       "temporal_scope": "Published 2026-03-16",
       "confidence_use": "May support attributed statements about Micron's reported HBM4 volume-shipment status, pin speed, bandwidth, 16-high sampling and stated target platform",
-      "use_limitations": [
-        "'High-volume production' is not quantified",
-        "Pin-speed figure is based on internal testing and customer test-vehicle validation per the release footnote",
-        "'Designed for' a platform is not evidence of qualification share or allocation"
-      ],
+      "use_limitations": ["'High-volume production' is not quantified", "Pin-speed figure is based on internal testing and customer test-vehicle validation per the release footnote", "'Designed for' a platform is not evidence of qualification share or allocation"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1311,26 +795,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://pr.tsmc.com/english/news/3228",
       "publication_date": "2025-04-23",
-      "ontology_layers": [
-        "fabrication",
-        "packaging",
-        "memory",
-        "power_thermal"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "base_die_process_context",
-        "packaging_roadmap",
-        "power_delivery_context"
-      ],
+      "ontology_layers": ["fabrication", "packaging", "memory", "power_thermal"],
+      "supported_claim_types": ["company_technical_disclosure", "base_die_process_context", "packaging_roadmap", "power_delivery_context"],
       "geographic_scope": "Company-reported technology offerings and roadmap",
       "temporal_scope": "Dateline 2025-04-23 (page lists issue date 2025-04-24); roadmap items are forward-looking",
       "confidence_use": "May support attributed statements that TSMC listed N12 and N3 logic base dies for HBM4 and its stated CoWoS and integrated-voltage-regulator plans",
-      "use_limitations": [
-        "Does not name which HBM suppliers or products use which base-die node",
-        "2027 volume-production plans are forward-looking",
-        "No capacity or allocation information"
-      ],
+      "use_limitations": ["Does not name which HBM suppliers or products use which base-die node", "2027 volume-production plans are forward-looking", "No capacity or allocation information"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1342,25 +812,12 @@
       "canonical_url": "https://investor.tsmc.com/static/annualReports/2025/english/pdf/2025_tsmc_ar_e_ch5.pdf",
       "publication_date": "2026-04-16",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "fabrication",
-        "packaging",
-        "power_thermal"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "packaging_technology_status",
-        "packaging_route_context"
-      ],
+      "ontology_layers": ["fabrication", "packaging", "power_thermal"],
+      "supported_claim_types": ["company_disclosure", "packaging_technology_status", "packaging_route_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2025; date from the chapter PDF's creation metadata (2026-04-16). Statements about 2026 are forward-looking",
       "confidence_use": "May support attributed statements of TSMC's reported 3DFabric (SoIC, CoWoS-S, CoWoS-R, CoWoS-L, SoW) technology descriptions and production status for 2025",
-      "use_limitations": [
-        "Company disclosure; production status is self-reported and unquantified",
-        "Names no customers or products for any packaging technology",
-        "Gives no capacity, yield or allocation figures",
-        "Contains two differing statements on 5.5-reticle CoWoS-L qualification timing"
-      ],
+      "use_limitations": ["Company disclosure; production status is self-reported and unquantified", "Names no customers or products for any packaging technology", "Gives no capacity, yield or allocation figures", "Contains two differing statements on 5.5-reticle CoWoS-L qualification timing"],
       "status": "active"
     },
     {
@@ -1370,26 +827,12 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
       "publication_date": "2026-07-21",
-      "ontology_layers": [
-        "design",
-        "memory",
-        "packaging",
-        "interconnect"
-      ],
-      "supported_claim_types": [
-        "technical_specification",
-        "memory_bandwidth_context",
-        "product_integration_context",
-        "interconnect_specification"
-      ],
+      "ontology_layers": ["design", "memory", "packaging", "interconnect"],
+      "supported_claim_types": ["technical_specification", "memory_bandwidth_context", "product_integration_context", "interconnect_specification"],
       "geographic_scope": "Product-level technical disclosure",
       "temporal_scope": "Published 2026-07-21",
       "confidence_use": "May support attributed product-level statements about Rubin's stated HBM4 capacity, stack height and peak bandwidth",
-      "use_limitations": [
-        "Does not state the number of HBM4 stacks or the memory suppliers",
-        "Its 'up to 22 TB/s of peak bandwidth' differs from the unqualified 19.2 TB/s in NVIDIA's 2026-11-05 article and current Vera Rubin NVL72 product page; NVIDIA gives no explanation and labels neither figure preliminary",
-        "Does not establish availability or deployment volumes"
-      ],
+      "use_limitations": ["Does not state the number of HBM4 stacks or the memory suppliers", "Its 'up to 22 TB/s of peak bandwidth' differs from the unqualified 19.2 TB/s in NVIDIA's 2026-11-05 article and current Vera Rubin NVL72 product page; NVIDIA gives no explanation and labels neither figure preliminary", "Does not establish availability or deployment volumes"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1400,22 +843,12 @@
       "source_type": "company_announcement",
       "canonical_url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Kicks-Off-the-Next-Generation-of-AI-With-Rubin--Six-New-Chips-One-Incredible-AI-Supercomputer/default.aspx",
       "publication_date": "2026-01-05",
-      "ontology_layers": [
-        "design",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "commercialization_status",
-        "product_integration_context"
-      ],
+      "ontology_layers": ["design", "deployment"],
+      "supported_claim_types": ["commercialization_status", "product_integration_context"],
       "geographic_scope": "Company-reported product status and partner plans",
       "temporal_scope": "Published 2026-01-05; partner availability statements are forward-looking",
       "confidence_use": "May support attributed statements of NVIDIA's reported Rubin production status and stated partner availability timing",
-      "use_limitations": [
-        "The release does not mention HBM or HBM4",
-        "'Full production' is not quantified",
-        "Partner deployment plans are forward-looking"
-      ],
+      "use_limitations": ["The release does not mention HBM or HBM4", "'Full production' is not quantified", "Partner deployment plans are forward-looking"],
       "accessed_at": "2026-11-09",
       "status": "active"
     },
@@ -1427,27 +860,12 @@
       "canonical_url": "https://news.samsungsemiconductor.com/global/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing/",
       "publication_date": "2026-02-12",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "packaging",
-        "fabrication"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "commercialization_status",
-        "memory_bandwidth_context",
-        "base_die_process_context",
-        "stacking_integration_context"
-      ],
+      "ontology_layers": ["memory", "packaging", "fabrication"],
+      "supported_claim_types": ["company_technical_disclosure", "commercialization_status", "memory_bandwidth_context", "base_die_process_context", "stacking_integration_context"],
       "geographic_scope": "Company-reported product status",
       "temporal_scope": "Published 2026-02-12 (Samsung Semiconductor Newsroom); HBM4E, custom HBM and sales statements are forward-looking",
       "confidence_use": "May support attributed statements that Samsung reported HBM4 mass production and commercial shipment, and its stated pin speeds, per-stack bandwidth, I/O count, capacities, DRAM and base-die processes",
-      "use_limitations": [
-        "No footnotes or test conditions are given for any figure, including the 3.3 TB/s maximum and the 40% efficiency claim",
-        "'A first in the industry' and 'stable yields' are the company's own unquantified characterisations",
-        "Customers and platforms are not named",
-        "Does not state that Samsung Foundry manufactures the 4nm base die"
-      ],
+      "use_limitations": ["No footnotes or test conditions are given for any figure, including the 3.3 TB/s maximum and the 40% efficiency claim", "'A first in the industry' and 'stable yields' are the company's own unquantified characterisations", "Customers and platforms are not named", "Does not state that Samsung Foundry manufactures the 4nm base die"],
       "status": "active"
     },
     {
@@ -1458,26 +876,12 @@
       "canonical_url": "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026",
       "publication_date": "2026-03-17",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "packaging",
-        "design"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "commercialization_status",
-        "memory_bandwidth_context",
-        "stacking_integration_context",
-        "product_integration_context"
-      ],
+      "ontology_layers": ["memory", "packaging", "design"],
+      "supported_claim_types": ["company_technical_disclosure", "commercialization_status", "memory_bandwidth_context", "stacking_integration_context", "product_integration_context"],
       "geographic_scope": "Company-reported product status and technology roadmap",
       "temporal_scope": "Published 2026-03-17; hybrid copper bonding statements are forward-looking",
       "confidence_use": "May support attributed statements that Samsung reported HBM4 in mass production designed for NVIDIA Vera Rubin, its stated pin speeds and DRAM process, and its stated hybrid-bonding direction",
-      "use_limitations": [
-        "'Designed for' a platform is not evidence of qualification share or allocation",
-        "HBM4E figures are announced characteristics, not shipped-product verification",
-        "Hybrid copper bonding is described for next-generation HBM, not stated as used in HBM4"
-      ],
+      "use_limitations": ["'Designed for' a platform is not evidence of qualification share or allocation", "HBM4E figures are announced characteristics, not shipped-product verification", "Hybrid copper bonding is described for next-generation HBM, not stated as used in HBM4"],
       "status": "active"
     },
     {
@@ -1488,26 +892,12 @@
       "canonical_url": "https://news.samsung.com/global/samsung-electronics-begins-shipment-of-industry-first-hbm4e-samples",
       "publication_date": "2026-05-29",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "packaging",
-        "fabrication"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "commercialization_status",
-        "memory_bandwidth_context",
-        "base_die_process_context",
-        "stacking_integration_context"
-      ],
+      "ontology_layers": ["memory", "packaging", "fabrication"],
+      "supported_claim_types": ["company_technical_disclosure", "commercialization_status", "memory_bandwidth_context", "base_die_process_context", "stacking_integration_context"],
       "geographic_scope": "Company-reported product sampling",
       "temporal_scope": "Published 2026-05-29; HBM4E mass production is stated as a future plan",
       "confidence_use": "May support attributed statements that Samsung reported shipping 12-layer 48GB HBM4E samples, its stated pin speed, bandwidth, DRAM process and Samsung Foundry 4nm logic base die",
-      "use_limitations": [
-        "Sample shipment is not mass production",
-        "Efficiency and thermal-resistance improvements are company-reported against an unspecified previous-generation baseline",
-        "No JEDEC HBM4E standard is cited by the release"
-      ],
+      "use_limitations": ["Sample shipment is not mass production", "Efficiency and thermal-resistance improvements are company-reported against an unspecified previous-generation baseline", "No JEDEC HBM4E standard is cited by the release"],
       "status": "active"
     },
     {
@@ -1518,23 +908,12 @@
       "canonical_url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2025-results",
       "publication_date": "2025-10-30",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "fabrication"
-      ],
-      "supported_claim_types": [
-        "commercialization_status",
-        "reported_business_context",
-        "base_die_sourcing_context"
-      ],
+      "ontology_layers": ["memory", "fabrication"],
+      "supported_claim_types": ["commercialization_status", "reported_business_context", "base_die_sourcing_context"],
       "geographic_scope": "Company-reported results and outlook",
       "temporal_scope": "Published 2025-10-30; the 2026 Foundry Business plan, including HBM4 base-die supply, is forward-looking at that date",
       "confidence_use": "May support attributed statements that Samsung reported HBM4 sample shipments and stated a 2026 plan for its Foundry Business to supply the HBM4 base-die",
-      "use_limitations": [
-        "Earnings press release, not the regulatory filing",
-        "Forward-looking statements are not verified outcomes",
-        "Names no base-die process node, fab, volume or customer; the 2nm GAA products and the Taylor fab in the same sentence are not attributed to the base die"
-      ],
+      "use_limitations": ["Earnings press release, not the regulatory filing", "Forward-looking statements are not verified outcomes", "Names no base-die process node, fab, volume or customer; the 2nm GAA products and the Taylor fab in the same sentence are not attributed to the base die"],
       "status": "active"
     },
     {
@@ -1545,23 +924,12 @@
       "canonical_url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results",
       "publication_date": "2026-10-29",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "fabrication"
-      ],
-      "supported_claim_types": [
-        "commercialization_status",
-        "reported_business_context",
-        "base_die_sourcing_context"
-      ],
+      "ontology_layers": ["memory", "fabrication"],
+      "supported_claim_types": ["commercialization_status", "reported_business_context", "base_die_sourcing_context"],
       "geographic_scope": "Company-reported results and outlook",
       "temporal_scope": "Published 2026-10-29; Q4 2026 and 2027 statements are forward-looking",
       "confidence_use": "May support attributed statements that Samsung reported scaled-up HBM4 sales and Foundry Business improvement on HBM base-die sales growth",
-      "use_limitations": [
-        "Earnings press release, not the regulatory filing",
-        "'HBM base-die' sales are not broken down by generation, so the HBM4 share is not identified",
-        "No base-die revenue, volume, fab or customer figures"
-      ],
+      "use_limitations": ["Earnings press release, not the regulatory filing", "'HBM base-die' sales are not broken down by generation, so the HBM4 share is not identified", "No base-die revenue, volume, fab or customer figures"],
       "status": "active"
     },
     {
@@ -1572,24 +940,12 @@
       "canonical_url": "https://semiconductor.samsung.com/dram/hbm/hbm4/",
       "publication_date": "2026-04-16",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "base_die_process_context",
-        "memory_bandwidth_context"
-      ],
+      "ontology_layers": ["memory", "fabrication", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "base_die_process_context", "memory_bandwidth_context"],
       "geographic_scope": "Company product page",
       "temporal_scope": "Page metadata datePublished 2026-04-16; server last-modified 2026-11-04; content may change without notice",
       "confidence_use": "May support attributed statements that Samsung describes HBM4 as incorporating 1c DRAM and built on 1c DRAM and 4nm foundry technologies",
-      "use_limitations": [
-        "Undated in its visible text; the date is taken from page metadata",
-        "The 4nm sentence's subject, 'MAX', is not defined on the page, and the page does not say which die uses 4nm or which unit manufactures it",
-        "Page disclaims accuracy and states data come from internal testing"
-      ],
+      "use_limitations": ["Undated in its visible text; the date is taken from page metadata", "The 4nm sentence's subject, 'MAX', is not defined on the page, and the page does not say which die uses 4nm or which unit manufactures it", "Page disclaims accuracy and states data come from internal testing"],
       "status": "active"
     },
     {
@@ -1600,24 +956,12 @@
       "canonical_url": "https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory",
       "publication_date": "2026-11-05",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "design",
-        "memory",
-        "deployment",
-        "interconnect"
-      ],
-      "supported_claim_types": [
-        "memory_bandwidth_context",
-        "product_integration_context",
-        "interconnect_specification"
-      ],
+      "ontology_layers": ["design", "memory", "deployment", "interconnect"],
+      "supported_claim_types": ["memory_bandwidth_context", "product_integration_context", "interconnect_specification"],
       "geographic_scope": "Product-level technical article",
       "temporal_scope": "Published 2026-11-05",
       "confidence_use": "May support attributed statements that NVIDIA described Rubin as holding 288 GB with bandwidth rising to 19.2 TB/s versus GB300",
-      "use_limitations": [
-        "The unqualified 19.2 TB/s differs from the 'up to 22 TB/s' in NVIDIA's 2026-01-05 and 2026-07-21 articles; no explanation or revision note is given",
-        "Does not state stack count or memory suppliers"
-      ],
+      "use_limitations": ["The unqualified 19.2 TB/s differs from the 'up to 22 TB/s' in NVIDIA's 2026-01-05 and 2026-07-21 articles; no explanation or revision note is given", "Does not state stack count or memory suppliers"],
       "status": "active"
     },
     {
@@ -1628,26 +972,12 @@
       "canonical_url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
       "publication_date": "2026-01-05",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "design",
-        "memory",
-        "packaging",
-        "interconnect",
-        "deployment"
-      ],
-      "supported_claim_types": [
-        "technical_specification",
-        "memory_bandwidth_context",
-        "product_integration_context",
-        "interconnect_specification"
-      ],
+      "ontology_layers": ["design", "memory", "packaging", "interconnect", "deployment"],
+      "supported_claim_types": ["technical_specification", "memory_bandwidth_context", "product_integration_context", "interconnect_specification"],
       "geographic_scope": "Product-level technical disclosure",
       "temporal_scope": "Published 2026-01-05; page carries an update note dated 2026-03-16 about a seventh chip",
       "confidence_use": "May support attributed statements of NVIDIA's earliest dated Rubin HBM4 capacity and bandwidth figures",
-      "use_limitations": [
-        "'Aggregate bandwidth of up to 22 TB/s' differs from the unqualified 19.2 TB/s in NVIDIA's 2026-11-05 article; no explanation is given",
-        "Only the first ~80,000 characters of this long page were read verbatim"
-      ],
+      "use_limitations": ["'Aggregate bandwidth of up to 22 TB/s' differs from the unqualified 19.2 TB/s in NVIDIA's 2026-11-05 article; no explanation is given", "Only the first ~80,000 characters of this long page were read verbatim"],
       "status": "active"
     },
     {
@@ -1658,25 +988,12 @@
       "canonical_url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000023/mu-20260903.htm",
       "effective_date": "2026-09-03",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "base_die_process_context",
-        "commercialization_status",
-        "reported_business_context"
-      ],
+      "ontology_layers": ["memory", "fabrication", "packaging"],
+      "supported_claim_types": ["company_disclosure", "base_die_process_context", "commercialization_status", "reported_business_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year ended 2026-09-03; share count as of 2026-10-02; exact filing date not read",
       "confidence_use": "May support attributed statements of what Micron reported in its annual filing about HBM4 base logic die manufacture and HBM4/HBM4E status",
-      "use_limitations": [
-        "Only the first ~80,000 of ~298,000 characters were read verbatim; the HBM passages are in Item 1 Business",
-        "A regulatory filing remains the company's own statement, not independent verification",
-        "Does not state the base logic die's process node"
-      ],
+      "use_limitations": ["Only the first ~80,000 of ~298,000 characters were read verbatim; the HBM passages are in Item 1 Business", "A regulatory filing remains the company's own statement, not independent verification", "Does not state the base logic die's process node"],
       "status": "active"
     },
     {
@@ -1687,20 +1004,12 @@
       "canonical_url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000013/a2026q3ex991-pressrelease.htm",
       "publication_date": "2026-06-24",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory"
-      ],
-      "supported_claim_types": [
-        "commercialization_status",
-        "reported_business_context"
-      ],
+      "ontology_layers": ["memory"],
+      "supported_claim_types": ["commercialization_status", "reported_business_context"],
       "geographic_scope": "Company-reported product status",
       "temporal_scope": "Dated 2026-06-24; quarter ended 2026-05-28; HBM4E timing is forward-looking",
       "confidence_use": "May support attributed statements of Micron's reported HBM4 shipment and qualification-sample status and HBM4E timing",
-      "use_limitations": [
-        "Earnings press release furnished as an exhibit; the lead customer is not named",
-        "'Qualification samples shipped' is not completed qualification"
-      ],
+      "use_limitations": ["Earnings press release furnished as an exhibit; the lead customer is not named", "'Qualification samples shipped' is not completed qualification"],
       "status": "active"
     },
     {
@@ -1711,22 +1020,12 @@
       "canonical_url": "https://www.sec.gov/Archives/edgar/data/0002120882/000119312526299963/d32785d424b4.htm",
       "publication_date": "2026-07-09",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "fabrication"
-      ],
-      "supported_claim_types": [
-        "company_disclosure",
-        "base_die_process_context",
-        "reported_business_context"
-      ],
+      "ontology_layers": ["memory", "fabrication"],
+      "supported_claim_types": ["company_disclosure", "base_die_process_context", "reported_business_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Prospectus dated 2026-07-09",
       "confidence_use": "May support attributed statements of SK hynix's own definition of custom HBM; checked for, but did not yield, an HBM4 base-die manufacturer",
-      "use_limitations": [
-        "Only the first ~80,000 of ~295,000 characters were read verbatim; the Business section and MD&A were not read",
-        "No HBM4 base-die manufacturer or process appears in the portion read"
-      ],
+      "use_limitations": ["Only the first ~80,000 of ~295,000 characters were read verbatim; the Business section and MD&A were not read", "No HBM4 base-die manufacturer or process appears in the portion read"],
       "status": "active"
     },
     {
@@ -1737,24 +1036,12 @@
       "canonical_url": "https://news.skhynix.com/en/hbm-to-essd/",
       "publication_date": "2026-07-08",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "base_die_process_context",
-        "packaging_integration_context"
-      ],
+      "ontology_layers": ["memory", "fabrication", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "base_die_process_context", "packaging_integration_context"],
       "geographic_scope": "Company-reported technology and facility direction",
       "temporal_scope": "Published 2026-07-08; HBM4E, custom HBM and facility statements are roadmap or plans",
       "confidence_use": "May support attributed statements that SK hynix says it applies TSMC advanced logic process technology to its base die starting with HBM4, and its stated packaging facilities",
-      "use_limitations": [
-        "Company statement; no process node is named and no independent production confirmation is given",
-        "Reports HBM4 development completion and preparations for mass production, not shipments or customers",
-        "Does not mention CoWoS or the package-level integration of its HBM4"
-      ],
+      "use_limitations": ["Company statement; no process node is named and no independent production confirmation is given", "Reports HBM4 development completion and preparations for mass production, not shipments or customers", "Does not mention CoWoS or the package-level integration of its HBM4"],
       "status": "active"
     },
     {
@@ -1765,23 +1052,12 @@
       "canonical_url": "https://news.skhynix.com/en/tsmc-technology-symposium-2026/",
       "publication_date": "2026-04-23",
       "accessed_at": "2026-11-09",
-      "ontology_layers": [
-        "memory",
-        "fabrication",
-        "packaging"
-      ],
-      "supported_claim_types": [
-        "company_technical_disclosure",
-        "base_die_process_context"
-      ],
+      "ontology_layers": ["memory", "fabrication", "packaging"],
+      "supported_claim_types": ["company_technical_disclosure", "base_die_process_context"],
       "geographic_scope": "Company exhibition and keynote description",
       "temporal_scope": "Published 2026-04-23; executive statements are partly forward-looking",
       "confidence_use": "May support attributed statements of SK hynix's HBM4 exhibit description ('Powered by base die in TSMC advanced logic') and its executive's stated collaboration plans",
-      "use_limitations": [
-        "The executive's base-die wording is framed as a collaboration to be strengthened ('we will strengthen...')",
-        "No process node, production status or customer for HBM4 is given",
-        "CoWoS is named only as one of TSMC's technologies, not as SK hynix's HBM4 packaging route"
-      ],
+      "use_limitations": ["The executive's base-die wording is framed as a collaboration to be strengthened ('we will strengthen...')", "No process node, production status or customer for HBM4 is given", "CoWoS is named only as one of TSMC's technologies, not as SK hynix's HBM4 packaging route"],
       "status": "active"
     }
   ]
