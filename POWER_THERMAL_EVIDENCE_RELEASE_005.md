@@ -74,7 +74,7 @@ The new tests are in `tests/test_power_thermal_evidence_release.py`.
   - `pt-gb-power-shelves` and `pt-ra-power-shelves` (the redundancy conflict);
   - `pt-ocp-bus-bar`;
   - `pt-ashrae-classes-via-ocp`.
-- [ ] **PUE paper date.** Confirm whether the PUE paper's PDF date (2013-02-04) is acceptable as its publication date.
+- [x] **PUE paper date.** The Green Grid's official WP#49 listing dates original publication to 2012-10-02. The accessible LBNL-hosted v6 PDF was created 2013-02-04; a PDF creation timestamp is not the paper's publication date. The registry now uses the publisher date and separately discloses the edition provenance. The stable legacy source ID is retained to avoid unnecessary reference churn.
 - [ ] **Accepted candidates.** For each candidate you accept: move it to the Atlas with a named reviewer and date, add its nodes, and delete it from this release.
 
 ## Ownership
