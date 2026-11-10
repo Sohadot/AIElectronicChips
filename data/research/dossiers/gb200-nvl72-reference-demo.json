@@ -286,13 +286,13 @@
     {
       "id": "req-sw-management-stack",
       "domain": "software",
-      "required_capability": "Cluster management through Base Command Manager and scheduling through Slurm",
+      "required_capability": "Cluster management through Base Command Manager and workload orchestration using a version-supported scheduler (Slurm or Kubernetes through RunAI as documented in the 2.5.0 guide)",
       "dependency": "A head node, an NFS share and the Mission Control software",
       "evidence_requirement": "An installed software inventory for a named cluster",
       "evidence": [
         {
           "source_id": "nvidia-mission-control-rack-setup-guide-2026",
-          "locator": "Introduction: \"complete the software installation of Base Command Manager (BCM) 11\""
+          "locator": "Introduction: \"complete the software installation of Base Command Manager (BCM) 11\"; \"NVIDIA DGX SuperPOD supports workload orchestration with Slurm and with Kubernetes (K8s) through RunAI.\""
         },
         {
           "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
@@ -305,7 +305,7 @@
         "u-d-software-versions"
       ],
       "missing_information": [
-        "Required versions of each component"
+        "Required versions of each component and the supported workload-manager assignment for a named cluster"
       ],
       "next_verification_action": "Obtain Mission Control release notes and a published SBOM"
     },
