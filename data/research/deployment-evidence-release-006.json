@@ -215,7 +215,7 @@
         }
       ],
       "evidence_state": "cited_sources_active",
-      "scope": "NVIDIA DGX GB rack user guide (2026-09-17) and Mission Control GB200 administration guide (2025-06-11)",
+      "scope": "NVIDIA DGX GB rack user guide (2026-09-17), Mission Control GB200 administration guide (2025-06-11), and Mission Control rack-setup guide 2.5.0 (2026-11-09)",
       "as_of": "2026-11-10",
       "limitations": [
         "Lists components without the versions required for a given rack",
