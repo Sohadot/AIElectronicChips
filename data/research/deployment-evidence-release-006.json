@@ -1,0 +1,765 @@
+{
+  "release_id": "aec-ide-006-deployment-readiness",
+  "version": "1.0.0",
+  "status": "research_candidate",
+  "publication_eligible": false,
+  "as_of": "2026-11-10",
+  "title": "Industrial Dependency Evidence Release 006: AI Compute Infrastructure and Deployment Readiness Evidence",
+  "reference_page": "ai-chip-infrastructure/index.html",
+  "source_registry_reference": "data/source-registry.json",
+  "atlas_reference": "data/dependency-atlas.json",
+  "description": "Research-candidate findings on the evidence that distinguishes a documented AI compute capability from a deployed one, across seven domains: compute hardware, electrical, thermal, networking and interconnect, software, facility operations, and access and compliance. GB200 NVL72 with the DGX SuperPOD reference architecture is the case. Definitions and integration insights are classed as bounded analyses. Power and thermal evidence is referenced from Evidence Release 005, not repeated. No site record was reviewed, so no requirement is recorded beyond documented or proposed. Nothing in this file is a published Atlas relationship.",
+  "rights_note": "Classification, the evidence-state model, the deployment evidence matrix, the demonstration dossier and analysis are original project work by AIElectronicChips.com (Sohadot). Quoted passages are short excerpts (at most 20 words each, 40 per citation) reproduced for citation and verification; the underlying texts remain the property of their publishers. No endorsement by NVIDIA or the US Bureau of Industry and Security is implied. This file is a research candidate: it is visible in the public repository but is excluded from the published website.",
+  "findings": [
+    {
+      "id": "d-def-evidence-states",
+      "claim_class": "bounded_analysis",
+      "topic": "evidence_state",
+      "statement": "Definition. This release records deployment evidence in nine states: product specification documented, infrastructure proposed, capability contracted, equipment procured, equipment installed, subsystem commissioned, integrated configuration verified, operational performance observed, and not established. The states describe what kind of record exists for one requirement. They are not a sequence that every requirement passes through, not a score and not a certification. A later state is recorded only when a record of that kind is cited.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Deployment Summary Validation Checklist: \"Use this checklist after completing all deployment phases\""
+        },
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Chapter 4: \"The software stack for DGX Grace Blackwell rack scale systems is composed of software and firmware\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Project definition used by this release and its demonstration dossier",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A project definition, not an industry standard",
+        "No reviewed source uses these nine states"
+      ],
+      "assumptions": [
+        "The kind of record cited, not its author's intent, sets the state",
+        "States from capability contracted onward need a site-level record; none was reviewed"
+      ]
+    },
+    {
+      "id": "d-def-capability-versus-readiness",
+      "claim_class": "bounded_analysis",
+      "topic": "evidence_state",
+      "statement": "Definition. A documented capability is what a product or reference design is described as able to do. Deployment readiness is a property of one site, one configuration and one date, shown only by records from that site: contracts, delivery and installation records, commissioning results and operating measurements. A vendor document can establish the first and cannot establish the second.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "Chapter 2: \"A fully tested system scales to two SUs, but larger deployments can be built based on customer requirements\""
+        },
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Validation checklist: \"Power infrastructure correctly configured (sufficient power capacity)\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Project definition used by this release",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A project definition, not an industry standard"
+      ],
+      "assumptions": [
+        "Readiness is site-specific and time-specific"
+      ]
+    },
+    {
+      "id": "d-mc-guide-purpose",
+      "claim_class": "attributed_statement",
+      "topic": "deployment_procedure",
+      "statement": "NVIDIA's Mission Control rack setup guide is written for a deployment engineer installing Base Command Manager 11 on a head node and then powering on, provisioning and managing GB200 NVL72 racks. NVIDIA says the guide is designed to be followed in order, each section building on the previous one.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Introduction: \"This guide will help a deployment engineer complete the software installation of Base Command Manager (BCM) 11\"; \"The guide is designed to be followed in order\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA Mission Control rack setup guide, version 2.5.0, page last updated 2026-11-09",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A procedure for people performing a deployment; it records no deployment",
+        "Online documentation that NVIDIA may revise; the version read is 2.5.0"
+      ]
+    },
+    {
+      "id": "d-predeploy-airgap",
+      "claim_class": "attributed_statement",
+      "topic": "deployment_procedure",
+      "statement": "NVIDIA's pre-deployment checklist states that most Mission Control deployment sites are air-gapped with no outbound internet access, so all software, firmware and license artifacts must be downloaded beforehand. It asks for the customer's software bill of materials to be reviewed, an NFS solution to be confirmed and remote access to be confirmed and tested before travel.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Pre-Deployment Checklist: \"Most NVIDIA Mission Control deployment sites are air-gapped and have no outbound internet access.\"; \"NFS solution confirmed for /home and /cm/shared\"; \"Remote access to cluster (VPN credentials, jump host, or crash cart\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA pre-deployment checklist, Mission Control 2.5.0",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "NVIDIA's generalisation about its deployment sites; no site list or count is given",
+        "A checklist of items to complete, not a record that any item was completed"
+      ]
+    },
+    {
+      "id": "d-bringup-sequence",
+      "claim_class": "attributed_statement",
+      "topic": "deployment_procedure",
+      "statement": "NVIDIA's bring-up procedure advises bringing up the NVLink switches first, so the NVLink domain is configured when the GB200 compute trays are powered on. After provisioning, it asks the engineer to check that firmware levels match those reported in the software bill of materials, to confirm that power shelves are reporting as on, and to verify NIC firmware versions.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Rack Bring-Up: \"it is advised that the NVLink Switches be brought up first\"; \"Check if the firmware levels match those reported in the SBOM.\"; \"Power shelves are reporting as on.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA rack bring-up procedure for GB200 NVL72, Mission Control 2.5.0",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "NVIDIA says the steps can be done in any order and only advises the switch-first order",
+        "Describes checks to perform; reports no results"
+      ]
+    },
+    {
+      "id": "d-firmware-procedure",
+      "claim_class": "attributed_statement",
+      "topic": "deployment_procedure",
+      "statement": "NVIDIA's rack setup guide does not itself describe the firmware update process for GB200 and GB300 racks. It refers the engineer to a standalone NVIDIA DGX GB200/GB300 Firmware Update Guide.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "GB200/GB300 Rack Firmware Update: \"Please refer to the standalone documentation for the firmware update process.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA Mission Control rack setup guide, version 2.5.0",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The standalone firmware update guide was not reviewed for this release"
+      ]
+    },
+    {
+      "id": "d-validation-checklist",
+      "claim_class": "attributed_statement",
+      "topic": "deployment_procedure",
+      "statement": "NVIDIA's deployment summary checklist is to be used after all deployment phases. Its unchecked items include power infrastructure correctly configured with sufficient capacity, cooling infrastructure adequate for GB200/GB300 NVL72, thermal management validated under load, power consumption measurements recorded, system administrator sign-off obtained and management approval received.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Deployment Summary Validation Checklist: \"Cooling infrastructure adequate for GB200/GB300 NVL72 systems\"; \"Thermal management validated under load\"; \"Power consumption measurements recorded\"; \"Management approval received\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA deployment summary validation checklist, Mission Control 2.5.0",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The checklist is a blank template; it states no acceptance criteria, thresholds or results",
+        "A ticked copy for a named site would be a site record; none was reviewed"
+      ]
+    },
+    {
+      "id": "d-ns-network-prereq",
+      "claim_class": "attributed_statement",
+      "topic": "deployment_procedure",
+      "statement": "NVIDIA's north-south networking guide for DGX GB200 and GB300 NVL72 SuperPOD deployments asks for the physical installation of the SN5600 and SN2201 network switches to be completed before the switches are deployed.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-north-south-network-guide-2026",
+          "locator": "Introduction: \"Complete the physical installation of the network switches (SN5600 and SN2201) before deploying the switches\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA north-south networking deployment guide, Mission Control 2.5.0",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Only the guide's introduction was reviewed",
+        "Covers GB200 and GB300 together"
+      ]
+    },
+    {
+      "id": "d-ra-tested-scope",
+      "claim_class": "attributed_statement",
+      "topic": "deployment_procedure",
+      "statement": "NVIDIA's DGX SuperPOD reference architecture for GB200 states that a fully tested system scales to two scalable units and that larger deployments can be built to customer requirements. The same list then contains a garbled line saying a fully tested system scales for a single scalable unit.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "Chapter 2: \"A fully tested system scales to two SUs, but larger deployments can be built based on customer requirements\"; \"Rack-A fully tested system scales for a single SU, seamlessly.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "DGX SuperPOD GB200 reference architecture (document dated 2025-09-03)",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The two lines conflict; the release does not decide which is meant",
+        "'Fully tested' is not defined, and no test record was reviewed"
+      ]
+    },
+    {
+      "id": "d-sw-stack",
+      "claim_class": "attributed_statement",
+      "topic": "software_stack",
+      "statement": "NVIDIA's 2025 GB200 administration guide lists DCGM, the GPU driver, NVSM and DOCA OFED and says DGX SuperPOD only supported Slurm for scheduling in that guide. By contrast, the newer rack-setup guide version 2.5.0 documents DGX SuperPOD workload orchestration with Slurm or Kubernetes (K8s) through RunAI, with GB200/GB300 racks assigned to the relevant workload manager. Neither guide establishes which stack has been installed or validated at any site.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Chapter 4: \"composed of software and firmware that runs on the various compute nodes, switch nodes, and the power shelves\""
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "\"NVIDIA DGX SuperPOD only supports Slurm for scheduling workloads.\"; \"Datacenter GPU Manager (DCGM)\"; \"NVIDIA System Management (NVSM)\""
+        },
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "Introduction: \"NVIDIA DGX SuperPOD supports workload orchestration with Slurm and with Kubernetes (K8s) through RunAI.\"; \"GB200/GB300 racks must be assigned to each respective workload manager.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA DGX GB rack user guide (2026-09-17), Mission Control GB200 administration guide (2025-06-11), and Mission Control rack-setup guide 2.5.0 (2026-11-09)",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Lists components without the versions required for a given rack",
+        "The 2025 Slurm-only statement differs from the later 2.5.0 rack-setup guide, which documents Slurm and Kubernetes through RunAI; version-specific configuration and actual deployment are not established"
+      ]
+    },
+    {
+      "id": "d-cluster-validation-tooling",
+      "claim_class": "attributed_statement",
+      "topic": "operations",
+      "statement": "NVIDIA's GB200 administration guide describes cluster validation as a suite of baseline tests of health and readiness, and names HPL, NCCL and Nemotron among the tools used to assess system capabilities. One check, check_nvlink_health, confirms that links are active for each GPU, the speed is correct and fabric registration has completed.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "\"executing a suite of baseline tests to assess the current health and readiness of the environment\"; \"check_nvlink_health - Checks that links are active for each GPU, the speed is correct\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA Mission Control GB200 administration guide (2025-06-11)",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Describes tools and checks; no test output, threshold or pass criterion was reviewed",
+        "Running a test tool is not evidence of the result it would produce at a site"
+      ]
+    },
+    {
+      "id": "d-leak-ops",
+      "claim_class": "attributed_statement",
+      "topic": "operations",
+      "statement": "NVIDIA describes building-management integration for DGX GB racks that coordinates power and cooling events, including rapid leakage detection. Its administration guide says the GB200 system implements several fail-safes for leaks and that leak events are collated within Base Command Manager.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "Chapter 4: \"Provides enhanced coordination with building management systems to provide more control for power and cooling events\""
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "\"the GB200 system implements several fail-safes\"; \"these events will be collated within BCM\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA DGX GB rack user guide and Mission Control GB200 administration guide",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The building-management interface, protocol and responsibilities are not specified in the reviewed text",
+        "Describes a capability; no leak-detection test or event record was reviewed"
+      ]
+    },
+    {
+      "id": "d-power-isolation",
+      "claim_class": "attributed_statement",
+      "topic": "operations",
+      "statement": "NVIDIA's user guide instructs that all power shelves be turned off at AC and that engineers wait three to five minutes for the PSU capacitors to discharge, before confirming that trays no longer respond.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"AC power off all the power shelves in the rack that will turn off all PSUs.\"; \"Wait three to five minutes for the capacitors to discharge from all the PSUs.\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "NVIDIA DGX GB rack user guide (2026-09-17), rack power-off procedure",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A vendor procedure, not a site safety procedure or electrical-safety assessment"
+      ]
+    },
+    {
+      "id": "d-bis-access",
+      "claim_class": "attributed_statement",
+      "topic": "access_compliance",
+      "statement": "The US Bureau of Industry and Security announced on 2024-12-02 new controls on high-bandwidth memory, new red-flag guidance on compliance and diversion, and a clarification that export controls apply to software keys that allow access to specific hardware or software.",
+      "evidence": [
+        {
+          "source_id": "bis-advanced-semiconductor-controls-2024",
+          "locator": "\"new controls on high-bandwidth memory (HBM)\"; \"new red flag guidance to address compliance and diversion concerns\"; \"software keys that allow access to the use of specific hardware or software\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "US export-control announcement of 2024-12-02",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "A press release, not the rule text; later amendments were not reviewed",
+        "Does not state whether any named system, buyer or site needs a licence"
+      ]
+    },
+    {
+      "id": "d-an-design-vs-deployment",
+      "claim_class": "bounded_analysis",
+      "topic": "evidence_state",
+      "statement": "Medium confidence. Every reviewed GB200 NVL72 source is a product description, a reference architecture or a procedure. Together they say what a site must provide and check. None of them is a record from a site. Each requirement in the demonstration dossier is therefore at product specification documented, infrastructure proposed or not established; no requirement reaches a site-level state.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "\"A fully tested system scales to two SUs\""
+        },
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "\"Use this checklist after completing all deployment phases\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Classification of the reviewed GB200 NVL72 evidence",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Limited to the sources reviewed for this release"
+      ],
+      "assumptions": [
+        "A site-level state needs a record from a named site; vendor documents are not such records"
+      ]
+    },
+    {
+      "id": "d-an-checklist-not-record",
+      "claim_class": "bounded_analysis",
+      "topic": "evidence_state",
+      "statement": "Medium confidence. NVIDIA's checklist contains items for administrator sign-off and management approval, but a template with unchecked boxes records that someone should approve, not that anyone did. The same applies to this release's dossier, which is an AI-assisted source check and not an approval.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "\"System administrator sign-off obtained\"; \"Management approval received\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "How checklist and dossier content may be read",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Applies to the published template, not to completed copies held by operators"
+      ],
+      "assumptions": [
+        "A completed checklist would be a site record if it named the site, date and signatory"
+      ]
+    },
+    {
+      "id": "d-an-software-not-performance",
+      "claim_class": "bounded_analysis",
+      "topic": "software_stack",
+      "statement": "Medium confidence. Installing a documented software stack shows that its components are present; it does not show that the cluster performs as intended. Performance would be shown by recorded results of the validation tests NVIDIA names, with their configuration and thresholds, and no such results were reviewed.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "\"HPL, NCCL, and Nemotron(Large Language Model) to assess system capabilities\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Software evidence versus performance evidence",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Concerns evidence classes, not any particular cluster"
+      ],
+      "assumptions": [
+        "Performance is a measured property of a configuration at a date"
+      ]
+    },
+    {
+      "id": "d-an-ide005-carryover",
+      "claim_class": "bounded_analysis",
+      "topic": "evidence_state",
+      "statement": "Medium confidence. The electrical and thermal requirements a site must meet for GB200 NVL72 remain undefined in the reviewed sources, as Evidence Release 005 records: redundancy is stated as N+N and as N, a 1,400 A bus bar at about 50 V does not reconcile with about 120 kW without a path count, the basis of the rack figure is undefined, the 8-rack unit figure is not itemised and no coolant specification is stated. A site cannot be shown to meet requirements that are not defined.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"provide N+N redundancy\""
+        },
+        {
+          "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+          "locator": "\"configured as N redundancy\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Carry-over of Evidence Release 005 unresolved questions into deployment evidence",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "References IDE-005 findings and questions rather than restating their evidence"
+      ],
+      "assumptions": [
+        "The IDE-005 unresolved questions are still unresolved as of this release"
+      ]
+    },
+    {
+      "id": "d-an-access-layer",
+      "claim_class": "bounded_analysis",
+      "topic": "access_compliance",
+      "statement": "Medium confidence. Export controls attach to items, destinations, end uses and parties, so they shape who may receive and use a system rather than whether a facility can run it. A deployment record for access and compliance would be a licence determination or classification for a named transaction, and none was reviewed.",
+      "evidence": [
+        {
+          "source_id": "bis-advanced-semiconductor-controls-2024",
+          "locator": "\"new red flag guidance to address compliance and diversion concerns\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Placing export controls in the deployment evidence model",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Not legal advice",
+        "The current rule text and later amendments were not reviewed"
+      ],
+      "assumptions": [
+        "Export-control status depends on the transaction, not on the hardware alone"
+      ]
+    },
+    {
+      "id": "d-int-bringup-couples-domains",
+      "claim_class": "bounded_analysis",
+      "topic": "deployment_procedure",
+      "statement": "Integration insight. NVIDIA's advised bring-up order makes the scale-up network a precondition for compute trays, and its firmware checks span compute trays, NVLink switches, power shelves and NICs. Network, electrical and software evidence for one rack are therefore linked: a firmware baseline cannot be shown for compute alone.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "\"it is advised that the NVLink Switches be brought up first\"; \"Verify NIC firmware versions and update them if needed.\""
+        },
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"runs on the various compute nodes, switch nodes, and the power shelves\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Cross-domain coupling in GB200 NVL72 bring-up",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Based on NVIDIA procedures, not on observed deployments"
+      ],
+      "assumptions": [
+        "The advised order reflects a technical dependency, which NVIDIA does not fully explain"
+      ]
+    },
+    {
+      "id": "d-int-leak-path-spans-domains",
+      "claim_class": "bounded_analysis",
+      "topic": "operations",
+      "statement": "Integration insight. Leak handling crosses three domains: the rack's liquid system detects a leak, Base Command Manager collates the event, and building management coordinates the power and cooling response. Evidence that one part works does not show that the chain works; that needs an integrated test record from the site.",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "locator": "\"including rapid leakage detection\""
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "locator": "\"these events will be collated within BCM\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Cross-domain coupling in leak detection and response",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "The facility side of the interface is not specified in the reviewed sources"
+      ],
+      "assumptions": [
+        "Leak response depends on all three parts acting together"
+      ]
+    },
+    {
+      "id": "d-int-airgap-shapes-operations",
+      "claim_class": "bounded_analysis",
+      "topic": "operations",
+      "statement": "Integration insight. If a site is air-gapped, as NVIDIA says most Mission Control sites are, firmware and software updates depend on artifacts carried in, so the software bill of materials becomes part of operating evidence and not only of installation.",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "locator": "\"All required software, firmware, and license artifacts must be downloaded and\""
+        }
+      ],
+      "evidence_state": "cited_sources_active",
+      "scope": "Effect of air-gapped operation on evidence",
+      "as_of": "2026-11-10",
+      "limitations": [
+        "Applies only to air-gapped sites"
+      ],
+      "assumptions": [
+        "Updates after installation follow the same artifact path as the initial deployment"
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "u-d-site-records",
+      "topic": "evidence_state",
+      "question": "Which named sites operate GB200 NVL72 racks, and what installation, commissioning and operating records exist for them?",
+      "why_unresolved": "Every reviewed source is a product description, reference architecture or procedure. No site record was reviewed.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "nvidia-mission-control-rack-setup-guide-2026",
+        "nvidia-mission-control-gb200-admin-guide-2025",
+        "nvidia-mission-control-north-south-network-guide-2026"
+      ],
+      "next_evidence_needed": "Operator disclosures, commissioning reports or audits for named facilities."
+    },
+    {
+      "id": "u-d-acceptance-criteria",
+      "topic": "deployment_procedure",
+      "question": "What thresholds define 'sufficient power capacity', 'cooling infrastructure adequate' and 'thermal management validated under load'?",
+      "why_unresolved": "NVIDIA's checklist names the items but states no criteria, values or test conditions.",
+      "sources_checked": [
+        "nvidia-mission-control-rack-setup-guide-2026"
+      ],
+      "next_evidence_needed": "NVIDIA acceptance-test documentation with pass criteria."
+    },
+    {
+      "id": "u-d-firmware-guide",
+      "topic": "software_stack",
+      "question": "What firmware versions and update order does the NVIDIA DGX GB200/GB300 Firmware Update Guide require?",
+      "why_unresolved": "The rack setup guide refers to the standalone guide, which was not reviewed.",
+      "sources_checked": [
+        "nvidia-mission-control-rack-setup-guide-2026"
+      ],
+      "next_evidence_needed": "Read the NVIDIA DGX GB200/GB300 Firmware Update Guide."
+    },
+    {
+      "id": "u-d-ide005-carryover",
+      "topic": "evidence_state",
+      "question": "Have the IDE-005 questions on redundancy, bus-bar paths, the 120 kW basis, the scalable-unit figure and coolant specification been answered?",
+      "why_unresolved": "No source reviewed for this release addresses them; they remain open as u-pt-redundancy-conflict, u-pt-bus-bar-paths, u-pt-120kw-basis, u-pt-scalable-unit-remainder and u-pt-coolant-specification.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025",
+        "nvidia-mission-control-rack-setup-guide-2026"
+      ],
+      "next_evidence_needed": "NVIDIA facility-interface and power specifications for GB200 NVL72."
+    },
+    {
+      "id": "u-d-tested-scale",
+      "topic": "deployment_procedure",
+      "question": "Does NVIDIA's reference architecture mean that a fully tested system scales to two scalable units or to one?",
+      "why_unresolved": "Two adjacent lines of the same document say both; one line is visibly garbled.",
+      "sources_checked": [
+        "nvidia-dgx-superpod-gb200-ra-2025"
+      ],
+      "next_evidence_needed": "A corrected edition of the reference architecture or an NVIDIA clarification."
+    },
+    {
+      "id": "u-d-software-versions",
+      "topic": "software_stack",
+      "question": "Which driver, DCGM, DOCA OFED, NVOS and Base Command Manager versions are required together for a GB200 NVL72 rack?",
+      "why_unresolved": "The reviewed guides name components and refer to a customer-provided SBOM and release notes, which were not reviewed.",
+      "sources_checked": [
+        "nvidia-mission-control-rack-setup-guide-2026",
+        "nvidia-mission-control-gb200-admin-guide-2025",
+        "nvidia-dgx-gb-rack-user-guide-2026"
+      ],
+      "next_evidence_needed": "NVIDIA Mission Control release notes and a published SBOM."
+    },
+    {
+      "id": "u-d-access-current-rules",
+      "topic": "access_compliance",
+      "question": "What export-control requirements currently apply to GB200 NVL72 systems for a given destination and end user?",
+      "why_unresolved": "Only BIS's 2024-12-02 announcement was reviewed, not the rule text or later amendments.",
+      "sources_checked": [
+        "bis-advanced-semiconductor-controls-2024"
+      ],
+      "next_evidence_needed": "The current Export Administration Regulations text and any licence determination for a named transaction."
+    },
+    {
+      "id": "u-d-gb300-difference",
+      "topic": "deployment_procedure",
+      "question": "Which deployment requirements differ between GB200 and GB300 racks?",
+      "why_unresolved": "The user guide, validation checklist and networking guide cover GB200 and GB300 together without separating them.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-mission-control-rack-setup-guide-2026",
+        "nvidia-mission-control-north-south-network-guide-2026"
+      ],
+      "next_evidence_needed": "Separate NVIDIA deployment specifications for each generation."
+    },
+    {
+      "id": "u-d-bms-interface",
+      "topic": "operations",
+      "question": "What interface, signals and responsibilities define the building-management integration for leak, power and cooling events?",
+      "why_unresolved": "NVIDIA describes the integration's purpose but not its protocol or the facility's obligations.",
+      "sources_checked": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-mission-control-gb200-admin-guide-2025"
+      ],
+      "next_evidence_needed": "An NVIDIA building-management interface specification."
+    }
+  ],
+  "candidate_nodes": [
+    {
+      "id": "tech-nvidia-gb200-nvl72",
+      "label": "NVIDIA GB200 NVL72",
+      "kind": "technology",
+      "layers": [
+        "design",
+        "power_thermal",
+        "deployment"
+      ],
+      "description": "NVIDIA rack-scale system of 72 Blackwell GPUs and 36 Grace CPUs in 18 compute trays, as NVIDIA describes it."
+    },
+    {
+      "id": "tech-nvidia-dgx-superpod-gb200",
+      "label": "NVIDIA DGX SuperPOD with DGX GB200",
+      "kind": "technology",
+      "layers": [
+        "deployment",
+        "interconnect"
+      ],
+      "description": "NVIDIA's reference architecture for clusters built from scalable units of eight GB200 NVL72 racks."
+    },
+    {
+      "id": "cap-cluster-management-software",
+      "label": "Cluster management and scheduling software",
+      "kind": "capability",
+      "layers": [
+        "deployment"
+      ],
+      "description": "Software that provisions, monitors and schedules work across the nodes of a cluster."
+    },
+    {
+      "id": "cap-rack-firmware-baseline",
+      "label": "Rack firmware baseline",
+      "kind": "capability",
+      "layers": [
+        "deployment",
+        "design"
+      ],
+      "description": "A recorded set of firmware versions across a rack's compute trays, switches, power shelves and NICs."
+    },
+    {
+      "id": "cap-building-management-integration",
+      "label": "Building management integration",
+      "kind": "capability",
+      "layers": [
+        "deployment",
+        "power_thermal"
+      ],
+      "description": "Coordination between rack systems and a facility's building management for power, cooling and leak events."
+    }
+  ],
+  "candidate_relationships": [
+    {
+      "id": "rel-dgx-superpod-gb200-requires-cluster-management",
+      "from": "tech-nvidia-dgx-superpod-gb200",
+      "to": "cap-cluster-management-software",
+      "relation_type": "requires",
+      "statement": "NVIDIA's documentation describes DGX SuperPOD GB200 clusters as provisioned and managed with Base Command Manager. Scheduling/orchestration depends on the documented software version: the 2025 GB200 administration guide discusses Slurm only, while the newer rack-setup guide also describes Kubernetes through RunAI.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "supported_claim_type": "software_stack_context"
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "supported_claim_type": "software_stack_context"
+        }
+      ],
+      "geographic_scope": "NVIDIA DGX SuperPOD with DGX GB200 as documented by NVIDIA",
+      "temporal_scope": "NVIDIA documents dated 2025-06-11 and 2026-11-09",
+      "as_of": "2026-11-10",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "high",
+      "limitations": [
+        "Applies to DGX SuperPOD with the documented software versions, not every GB200 NVL72 deployment; Slurm-only wording in the 2025 guide is not a universal support limit",
+        "Required software versions are not stated"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "NVIDIA guides document Base Command Manager for provisioning and management; workload orchestration support must be version-scoped because the 2025 and 2.5.0 guides differ.",
+        "changes_in_release": "New candidate introduced in IDE-006.",
+        "evidence_gaps": [
+          "Required component versions and version-specific orchestration configuration"
+        ],
+        "assessed_at": "2026-11-10",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-gb200-nvl72-requires-rack-firmware-baseline",
+      "from": "tech-nvidia-gb200-nvl72",
+      "to": "cap-rack-firmware-baseline",
+      "relation_type": "requires",
+      "statement": "NVIDIA describes the GB200 NVL72 rack software stack as running on compute nodes, switch nodes and power shelves, and its bring-up procedure checks that firmware levels match the software bill of materials.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "supported_claim_type": "software_stack_context"
+        },
+        {
+          "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+          "supported_claim_type": "validation_procedure"
+        }
+      ],
+      "geographic_scope": "GB200 NVL72 racks as documented by NVIDIA",
+      "temporal_scope": "NVIDIA documents dated 2026-09-17 and 2026-11-09",
+      "as_of": "2026-11-10",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "The required versions are in a customer SBOM and a firmware guide that were not reviewed",
+        "The user guide covers GB200 and GB300 together"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "DEFER",
+        "rationale": "The procedure shows a firmware match is checked, but the baseline itself is not published in the reviewed sources.",
+        "changes_in_release": "New candidate introduced in IDE-006.",
+        "evidence_gaps": [
+          "NVIDIA DGX GB200/GB300 Firmware Update Guide",
+          "A published firmware compatibility matrix"
+        ],
+        "assessed_at": "2026-11-10",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    },
+    {
+      "id": "rel-gb200-nvl72-integrates-with-building-management",
+      "from": "tech-nvidia-gb200-nvl72",
+      "to": "cap-building-management-integration",
+      "relation_type": "integrates_with",
+      "statement": "NVIDIA describes building-management integration for DGX GB racks that coordinates power and cooling events, including rapid leakage detection, with leak events collated in Base Command Manager.",
+      "claim_class": "attributed_statement",
+      "evidence": [
+        {
+          "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+          "supported_claim_type": "operations_context"
+        },
+        {
+          "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+          "supported_claim_type": "operations_context"
+        }
+      ],
+      "geographic_scope": "DGX GB200 rack systems as documented by NVIDIA",
+      "temporal_scope": "NVIDIA documents dated 2025-06-11 and 2026-09-17",
+      "as_of": "2026-11-10",
+      "reviewed_at": null,
+      "review_owner": "unassigned",
+      "confidence": "medium",
+      "limitations": [
+        "The interface, protocol and facility responsibilities are not specified (u-d-bms-interface)",
+        "Describes a capability, not any installed integration"
+      ],
+      "review_status": "awaiting_human_review",
+      "research_recommendation": {
+        "decision": "ACCEPT",
+        "rationale": "Two NVIDIA documents describe the same integration for the same rack family.",
+        "changes_in_release": "New candidate introduced in IDE-006.",
+        "evidence_gaps": [
+          "Building-management interface specification"
+        ],
+        "assessed_at": "2026-11-10",
+        "assessment_method": "ai_assisted_source_check"
+      }
+    }
+  ]
+}
