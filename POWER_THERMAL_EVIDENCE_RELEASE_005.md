@@ -14,7 +14,7 @@
 
 **What the release contains:**
 
-- **26 findings:** 2 `verified_fact` (The Green Grid's PUE and WUE definitions), 15 `attributed_statement` and 9 `bounded_analysis`. Every power, energy, current, voltage, temperature and flow figure carries a structured `quantities` entry.
+- **26 findings:** 2 `verified_fact` (The Green Grid's PUE and WUE definitions), 16 `attributed_statement` and 8 `bounded_analysis`. Every power, energy, current, voltage, temperature and flow figure carries a structured `quantities` entry.
 - **11 unresolved questions.**
 - **3 unpublished candidate relationships.**
 
