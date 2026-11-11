@@ -35,7 +35,9 @@ jobs:
       - name: Install pinned Playwright and headless Chromium (outside the repository)
         run: |
           npm install --prefix "$RUNNER_TEMP/pw" --no-save --no-audit --no-fund playwright@1.63.0
-          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --with-deps chromium
+          # Headless Chromium shell only, from Playwright's download host. No apt step: hosted runners already carry
+          # Chrome's system libraries, and a missing one makes the required browser test fail rather than skip.
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --only-shell chromium
       - name: Run negative-test regression suite (browser test required, never skipped)
         env:
           AEC_REQUIRE_BROWSER: '1'
