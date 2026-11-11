@@ -1,0 +1,341 @@
+"""Regression tests for IDE-010: the Industrial Evidence Request & Research Workbench."""
+
+from __future__ import annotations
+
+import copy
+import functools
+import http.server
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import threading
+import unittest
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+import render_research_workbench as render  # noqa: E402
+import validate_evidence_requests as v  # noqa: E402
+
+NODE = shutil.which("node")
+PLAYWRIGHT = next((p for p in (os.environ.get("PLAYWRIGHT_MODULE", ""), "/opt/node22/lib/node_modules/playwright")
+                   if p and Path(p).is_dir()), None)
+
+
+@functools.lru_cache(maxsize=1)
+def context():
+    return v.load_context()
+
+
+def model():
+    return json.loads(v.MODEL.read_text(encoding="utf-8"))
+
+
+def req(m, rid):
+    return next(r for w in m["workflows"] for r in w["requirements"] if r["id"] == rid)
+
+
+def errors_for(m):
+    return v.check_model(m, *context())
+
+
+def page():
+    return v.PAGE.read_text(encoding="utf-8")
+
+
+def script():
+    return v.SCRIPT.read_text(encoding="utf-8")
+
+
+class ModelTests(unittest.TestCase):
+    def test_everything_validates(self):
+        self.assertEqual(v.check_all(), [])
+
+    def test_exactly_three_workflows_of_ten_to_fifteen(self):
+        m = model()
+        self.assertEqual([w["id"] for w in m["workflows"]], v.EXPECTED)
+        self.assertEqual([w["letter"] for w in m["workflows"]], ["A", "B", "C"])
+        for w in m["workflows"]:
+            self.assertTrue(10 <= len(w["requirements"]) <= 15, w["id"])
+
+    def test_bandwidth_workflow_keeps_every_published_figure(self):
+        text = json.dumps(model()["workflows"][1])
+        for fig in ("896 GB/s", "22 TB/s", "19.2 TB/s", "3.6 TB/s", "3 TB/s"):
+            self.assertIn(fig, text)
+        self.assertIn("ec-mi300x-infinity-fabric-scope", text)
+        self.assertIn("ec-rubin-memory-bandwidth", text)
+        self.assertIn("ec-nvlink6-per-gpu", text)
+
+    def test_rack_workflow_keeps_stages_distinct_and_ordered(self):
+        m = model()
+        stages = [r["deployment_stage"] for r in m["workflows"][2]["requirements"]]
+        order = [s for s in m["deployment_stages"] if s in stages]
+        self.assertEqual(order, m["deployment_stages"])
+        self.assertEqual(stages, sorted(stages, key=m["deployment_stages"].index), "requirements follow the stage order")
+
+    def test_statuses_never_mean_verified(self):
+        m = model()
+        self.assertEqual(list(m["session_statuses"]), ["not_requested", "requested", "received", "needs_expert_review"])
+        self.assertIn("not reviewed", m["session_statuses"]["received"])
+        self.assertNotRegex(json.dumps(m["session_statuses"]), r"(?i)verified|approved|valid")
+
+    def test_unverified_cdna4_edition_not_used_as_evidence(self):
+        text = json.dumps(model())
+        for marker in ("MI350-007", "PID#2258402"):
+            for m in re.finditer(re.escape(marker), text):
+                self.fail(f"unverified edition marker {marker} appears in the model")
+
+    def test_does_not_create_atlas_relationships(self):
+        atlas = json.loads((ROOT / "data" / "dependency-atlas.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(atlas.get("relationships", [])), 0)
+
+
+class NegativeModelTests(unittest.TestCase):
+    def assertFlags(self, m, pattern):
+        errs = errors_for(m)
+        self.assertTrue(any(re.search(pattern, e) for e in errs), f"expected /{pattern}/ in {errs}")
+
+    def test_unknown_finding(self):
+        m = model(); req(m, "ra-01-interface-revision")["finding_ids"].append("hbm-not-a-finding")
+        self.assertFlags(m, r"finding hbm-not-a-finding does not exist")
+
+    def test_unregistered_source(self):
+        m = model(); req(m, "ra-01-interface-revision")["source_ids"].append("made-up-source-2026")
+        self.assertFlags(m, r"made-up-source-2026 is not registered")
+
+    def test_source_not_backed_by_findings(self):
+        m = model(); r = req(m, "rc-04-busbar")
+        r["source_ids"].append("tgg-pue-comprehensive-examination-2013")
+        self.assertFlags(m, r"not cited by the requirement's findings")
+
+    def test_pending_review_source(self):
+        registry = context()[0]
+        pending = next(s for s, rec in registry.items() if rec["status"] == "pending_review")
+        m = model(); req(m, "ra-01-interface-revision")["source_ids"].append(pending)
+        self.assertFlags(m, r"not active evidence")
+
+    def test_unknown_conflict_and_broken_reference(self):
+        m = model(); r = req(m, "rb-03-stack-bandwidth")
+        r["conflict_ids"].append("ec-does-not-exist"); r["reference"] = "/hbm-memory/#no-such-anchor"
+        self.assertFlags(m, r"register issue ec-does-not-exist does not exist")
+        self.assertFlags(m, r"does not resolve")
+
+    def test_readiness_and_approval_claims(self):
+        for text in ("The HBM4 stack is qualified for Rubin", "The rack is ready for production",
+                     "Interconnect is certified", "Integration is approved"):
+            m = model(); req(m, "ra-12-production-integration")["why_it_matters"] = text
+            self.assertFlags(m, r"readiness or verdict language")
+
+    def test_comparative_claim(self):
+        m = model(); req(m, "rb-04-device-memory-bandwidth")["why_it_matters"] = "Rubin outperforms MI355X on memory bandwidth"
+        self.assertFlags(m, r"verdict language")
+
+    def test_analytical_recommendation_cannot_cite_sources(self):
+        m = model(); w = m["workflows"][2]
+        r = req(m, "rb-11-software-configuration")
+        r["finding_ids"] = ["pt-ocp-bus-bar"]
+        self.assertFlags(m, r"analytical recommendation cannot cite")
+
+    def test_published_without_sources(self):
+        m = model(); r = req(m, "rc-04-busbar"); r["source_ids"] = []
+        self.assertFlags(m, r"needs the reviewed sources")
+
+    def test_unverified_edition_as_evidence(self):
+        m = model(); req(m, "rb-05-link-bandwidth-direction")["why_it_matters"] += " AMD endnote MI350-007 settles it."
+        self.assertFlags(m, r"unverified 2025 CDNA 4 edition")
+
+    def test_dropped_published_figure(self):
+        m = model()
+        for r in m["workflows"][1]["requirements"]:
+            for k, val in r.items():
+                if isinstance(val, str):
+                    r[k] = val.replace("19.2 TB/s", "a second figure")
+                elif isinstance(val, list):
+                    r[k] = [x.replace("19.2 TB/s", "a second figure") if isinstance(x, str) else x for x in val]
+        self.assertFlags(m, r"published figure '19.2 TB/s'")
+
+    def test_missing_requirements_and_workflow(self):
+        m = model(); m["workflows"][0]["requirements"] = m["workflows"][0]["requirements"][:5]
+        self.assertFlags(m, r"at least ten requirements")
+        m = model(); m["workflows"].pop()
+        self.assertFlags(m, r"workflows must be exactly")
+
+    def test_missing_stage(self):
+        m = model(); w = m["workflows"][2]
+        w["requirements"] = [r for r in w["requirements"] if r["deployment_stage"] != "commissioned"]
+        self.assertFlags(m, r"'commissioned'")
+
+    def test_review_status_cannot_be_promoted(self):
+        m = model(); m["scientific_review"] = "approved"
+        self.assertFlags(m, r"scientific_review 'pending'")
+
+
+class ScriptAndPageTests(unittest.TestCase):
+    def test_script_has_no_transmission_storage_or_html_injection(self):
+        self.assertEqual(v.check_script(script()), [])
+        for bad in ("fetch('/x')", "navigator.sendBeacon(u)", "localStorage.setItem('a', b)", "sessionStorage.x = 1",
+                    "el.innerHTML = note", "document.cookie = 'a'", "history.pushState({}, '', '?s=1')",
+                    "location.hash = 'x'", "new XMLHttpRequest()", "indexedDB.open('x')"):
+            errs = v.check_script(script() + "\n" + bad + ";\n")
+            self.assertTrue(any("forbidden API" in e for e in errs), bad)
+
+    def test_script_safeguards_required(self):
+        self.assertTrue(v.check_script(script().replace("not been independently validated", "x")))
+        self.assertTrue(v.check_script(script().replace("csvCell", "cell")))
+        self.assertTrue(any("status vocabulary" in e for e in v.check_script(script() + '\n["verified", "Verified"];\n')))
+
+    def test_page_static_catalog(self):
+        text = page()
+        self.assertEqual(v.check_page(text, model()), [])
+        for w in model()["workflows"]:
+            for r in w["requirements"]:
+                self.assertIn(f'id="{r["id"]}"', text)
+                for c in r["conflict_ids"]:
+                    self.assertIn(f'href="/sources/#{c}"', text)
+        # No inputs, forms or visible toolbar without JavaScript.
+        self.assertNotRegex(text, r"<(?:input|textarea|form|select)\b")
+        self.assertEqual(text.count('class="wb-toolbar"'), 3)
+        self.assertEqual(len(re.findall(r'class="wb-toolbar"[^>]*\bhidden\b', text)), 3)
+        self.assertIn("<noscript>", text)
+
+    def test_page_negative(self):
+        m = model(); text = page()
+        self.assertTrue(v.check_page(text.replace('id="rb-03-stack-bandwidth"', 'id="x"'), m))
+        self.assertTrue(v.check_page(text.replace("</head>", '<script src="https://cdn.example.com/a.js"></script></head>'), m))
+        self.assertTrue(v.check_page(text.replace("<noscript>", "<div>").replace("</noscript>", "</div>"), m))
+        self.assertTrue(v.check_page(text.replace('href="/data/industrial-evidence-requests.json"', 'href="/data/"'), m))
+
+    def test_render_in_sync(self):
+        self.assertTrue(render.in_sync())
+
+    def test_fails_closed_when_files_missing(self):
+        for attr in ("MODEL", "PAGE", "SCRIPT"):
+            original = getattr(v, attr)
+            try:
+                setattr(v, attr, ROOT / "does-not-exist" / original.name)
+                errs = v.check_all()
+                self.assertTrue(errs and "required workbench file missing" in errs[0], attr)
+            finally:
+                setattr(v, attr, original)
+
+    def test_wired_into_gates(self):
+        self.assertIn("validate_evidence_requests.py", (ROOT / "scripts" / "validate_all.py").read_text(encoding="utf-8"))
+        launch = (ROOT / "scripts" / "validate_public_launch.py").read_text(encoding="utf-8")
+        self.assertIn('"research-workbench/index.html"', launch)
+        self.assertIn("/research-workbench/</loc>", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+
+    def test_contextual_links(self):
+        for route, anchor in (("sovereignty-stack", ""), ("hbm-memory", "#workflow-hbm4-integration"),
+                              ("interconnects", "#workflow-bandwidth-comparison"),
+                              ("ai-chip-infrastructure", "#workflow-rack-deployment")):
+            self.assertIn(f'href="/research-workbench/{anchor}"', (ROOT / route / "index.html").read_text(encoding="utf-8"))
+
+
+@unittest.skipUnless(NODE, "node is not installed")
+class CsvEscapeTests(unittest.TestCase):
+    def run_node(self, code):
+        prog = "var window = {};\n" + script() + "\n" + code
+        out = subprocess.run([NODE, "-e", prog], capture_output=True, text=True, timeout=30)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        return json.loads(out.stdout)
+
+    def test_formula_injection_neutralised(self):
+        cases = ["=HYPERLINK(\"http://x\")", "+1", "-2+3", "@SUM(A1)", "\tcmd", "\rcmd", 'say "hi"', "plain", "", "a,b\nc"]
+        got = self.run_node("console.log(JSON.stringify(%s.map(window.AECWorkbench.csvCell)))" % json.dumps(cases))
+        self.assertEqual(got[0], '"\'=HYPERLINK(""http://x"")"')
+        self.assertEqual(got[1:6], ['"\'+1"', '"\'-2+3"', '"\'@SUM(A1)"', '"\'\tcmd"', '"\'\rcmd"'])
+        self.assertEqual(got[6:], ['"say ""hi"""', '"plain"', '""', '"a,b\nc"'])
+
+    def test_build_csv_rows(self):
+        got = self.run_node('console.log(JSON.stringify(window.AECWorkbench.buildCsv([["a", "=b"], ["c", null]])))')
+        self.assertEqual(got, '"a","\'=b"\r\n"c",""\r\n')
+
+
+@unittest.skipUnless(NODE and PLAYWRIGHT, "node and Playwright are not available")
+class BrowserTests(unittest.TestCase):
+    """Drive the page in headless Chromium: controls, JSON/CSV export, network silence and no storage."""
+
+    @classmethod
+    def setUpClass(cls):
+        class Quiet(http.server.SimpleHTTPRequestHandler):
+            def log_message(self, *args):
+                pass
+        handler = functools.partial(Quiet, directory=str(ROOT))
+        cls.server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+        threading.Thread(target=cls.server.serve_forever, daemon=True).start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.server.shutdown()
+
+    def test_interaction_and_export(self):
+        port = self.server.server_address[1]
+        with tempfile.TemporaryDirectory() as tmp:
+            js = Path(tmp) / "drive.js"
+            js.write_text(BROWSER_SCRIPT, encoding="utf-8")
+            out = subprocess.run([NODE, str(js), f"http://127.0.0.1:{port}/research-workbench/", tmp],
+                                 capture_output=True, text=True, timeout=120, env={**os.environ, "NODE_PATH": str(Path(PLAYWRIGHT).parent)})
+            self.assertEqual(out.returncode, 0, out.stderr + out.stdout)
+            r = json.loads(out.stdout.strip().splitlines()[-1])
+        self.assertEqual(r["radios"], 41 * 4)
+        self.assertEqual(r["textareas"], 41)
+        self.assertEqual(r["toolbars_visible"], 3)
+        self.assertEqual(r["external_or_post_requests"], [])
+        self.assertEqual(r["storage"], {"local": 0, "session": 0, "cookie": ""})
+        self.assertEqual(r["url_after"], f"http://127.0.0.1:{port}/research-workbench/")
+        data = r["json"]
+        self.assertEqual(data["format"], "aec-evidence-request-checklist")
+        self.assertIn("not been independently validated", data["disclaimer"])
+        self.assertEqual(data["workflow"]["id"], "workflow-hbm4-integration")
+        self.assertEqual(len(data["requirements"]), 13)
+        first = data["requirements"][0]
+        self.assertEqual(first["user_status"], "received")
+        self.assertEqual(first["user_note"], "=cmd|' /C calc'!A0")
+        self.assertTrue(first["reference"].startswith("/hbm-memory/#"))
+        self.assertNotIn("score", json.dumps(data).lower())
+        self.assertIn("\"'=cmd|' /C calc'!A0\"", r["csv"])
+        self.assertIn("not been independently validated", r["csv"])
+        self.assertEqual(r["after_clear"], {"status": "not_requested", "note": ""})
+
+
+BROWSER_SCRIPT = r"""
+const { chromium } = require('playwright');
+const fs = require('fs');
+(async () => {
+  const [url, dir] = process.argv.slice(2);
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ acceptDownloads: true });
+  const flagged = [];
+  page.on('request', (req) => {
+    const u = new URL(req.url());
+    if (u.origin !== new URL(url).origin || req.method() !== 'GET') flagged.push(req.method() + ' ' + req.url());
+  });
+  await page.goto(url, { waitUntil: 'load' });
+  const radios = await page.locator('input[type=radio]').count();
+  const textareas = await page.locator('textarea').count();
+  const toolbars = await page.locator('.wb-toolbar:visible').count();
+  const wf = page.locator('#workflow-hbm4-integration');
+  await wf.locator('li.wb-req').first().locator('input[value=received]').check();
+  await wf.locator('li.wb-req').first().locator('textarea').fill("=cmd|' /C calc'!A0");
+  const [dj] = await Promise.all([page.waitForEvent('download'), wf.getByRole('button', { name: 'Export JSON' }).click()]);
+  await dj.saveAs(dir + '/out.json');
+  const [dc] = await Promise.all([page.waitForEvent('download'), wf.getByRole('button', { name: 'Export CSV' }).click()]);
+  await dc.saveAs(dir + '/out.csv');
+  const storage = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length, cookie: document.cookie }));
+  await wf.getByRole('button', { name: 'Clear this session' }).click();
+  const afterClear = await wf.locator('li.wb-req').first().evaluate((li) => ({
+    status: li.querySelector('input[type=radio]:checked').value, note: li.querySelector('textarea').value }));
+  console.log(JSON.stringify({ radios, textareas, toolbars_visible: toolbars, external_or_post_requests: flagged, storage,
+    url_after: page.url(), json: JSON.parse(fs.readFileSync(dir + '/out.json', 'utf8')),
+    csv: fs.readFileSync(dir + '/out.csv', 'utf8'), after_clear: afterClear }));
+  await browser.close();
+})().catch((e) => { console.error(e); process.exit(1); });
+"""
+
+
+if __name__ == "__main__":
+    unittest.main()

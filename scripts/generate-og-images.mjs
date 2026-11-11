@@ -25,6 +25,7 @@ const PAGES = [
   { file: 'chip-dependency-map', id: '', eyebrow: 'GOVERNED DIAGNOSTIC ENGINE', title: 'Chip Dependency Map' },
   { file: 'methodology', id: '', eyebrow: 'EVIDENCE GOVERNANCE', title: 'Methodology' },
   { file: 'sources', id: '', eyebrow: 'GOVERNED EVIDENCE', title: 'Source Registry' },
+  { file: 'research-workbench', id: '', eyebrow: 'EVIDENCE REQUESTS', title: 'Research Workbench' },
   { file: 'strategic-availability', id: '', eyebrow: 'GOVERNED ENGAGEMENT', title: 'Strategic Availability' },
 ];
 

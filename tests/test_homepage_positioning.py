@@ -78,8 +78,10 @@ class PrimaryNavigationTests(unittest.TestCase):
         self.assertIsNotNone(match, page)
         return match.group(1)
 
-    def test_thirteen_public_routes(self):
-        self.assertEqual(13, len(self.PAGES))
+    def test_fourteen_public_routes(self):
+        # IDE-010 added /research-workbench/, a route justified by its interactive collection and export functions.
+        self.assertEqual(14, len(self.PAGES))
+        self.assertIn(ROOT / "research-workbench" / "index.html", self.PAGES)
 
     def test_overview_label_on_every_route(self):
         for page in self.PAGES:
