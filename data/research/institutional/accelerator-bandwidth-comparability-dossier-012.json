@@ -1,0 +1,1403 @@
+{
+  "dossier_id": "aec-dossier-accelerator-bandwidth-comparability-012",
+  "schema_version": "1.0.0",
+  "release": "IDE-012",
+  "status": "research_candidate",
+  "review_status": "not_reviewed",
+  "scientific_review": "pending",
+  "review_owner": "unassigned",
+  "assessment_method": "ai_assisted_source_check",
+  "as_of": "2026-11-11",
+  "interpretation_standard": "AEC-CS-001",
+  "research_question": "What do published AI accelerator bandwidth figures establish, what do they not establish, and under which documented conditions can two of them be compared?",
+  "scope": {
+    "technical": "Memory, GPU-to-GPU fabric, host-link and scale-out bandwidth figures for AMD MI300X and NVIDIA Rubin, with the HBM4 stack and CXL/PCIe figures used by reference pathway B",
+    "temporal": "Sources dated 2022 to 2026-11-05; figures as recorded in releases 001 and 004 and the conflict register, with the IDE-009 reconciliations",
+    "excluded": [
+      "Measured application or collective throughput, which no reviewed source publishes",
+      "Any statement that one product is faster or better",
+      "Availability, supply and commercial terms"
+    ]
+  },
+  "boundary": "A research candidate on metric compatibility, not an assessment of products. A comparability class says whether two published figures measure the same thing on documented terms; it never says which product is better. It records no human or scientific review and does not promote any Atlas relationship.",
+  "inputs": {
+    "release_ids": [
+      "aec-ide-004-interconnect",
+      "aec-hbm4-evidence-release-001"
+    ],
+    "reconciliation_ids": [
+      "rc-009-mi300x-infinity-fabric",
+      "rc-009-rubin-memory-bandwidth",
+      "rc-009-nvlink6-per-gpu"
+    ],
+    "conflict_ids": [
+      "ec-mi300x-infinity-fabric-scope",
+      "ec-rubin-memory-bandwidth",
+      "ec-nvlink6-per-gpu"
+    ],
+    "workflow_id": "workflow-bandwidth-comparison",
+    "pathway_id": "pathway-memory-bandwidth-to-data-movement"
+  },
+  "method": {
+    "comparability_classes": {
+      "comparable_on_documented_terms": "Same hierarchy level, unit dimension, direction convention and status, all stated by the sources",
+      "conditionally_comparable": "Comparable only after a stated rule-based normalization or with stated conditions attached to every use",
+      "not_comparable": "The figures measure different things: different hierarchy level, aggregation scope or metric",
+      "indeterminate": "A descriptor needed to decide (direction, scope or counting convention) is not stated"
+    },
+    "normalization_rules": [
+      {
+        "id": "nr-bits-to-bytes",
+        "operation": "divide",
+        "factor": 8,
+        "from_units": [
+          "Tb/s",
+          "Gb/s"
+        ],
+        "description": "Convert a bit rate to bytes by dividing by eight. Line encoding and protocol overhead are not removed.",
+        "requires": [],
+        "rejects_when": []
+      },
+      {
+        "id": "nr-halve-bidirectional",
+        "operation": "divide",
+        "factor": 2,
+        "from_units": [],
+        "description": "Halve a figure to a per-direction value. Assumes the two directions are equal.",
+        "requires": [
+          "direction=bidirectional",
+          "direction_basis=source_stated"
+        ],
+        "rejects_when": [
+          "direction=not_stated"
+        ]
+      },
+      {
+        "id": "nr-equal-share",
+        "operation": "divide",
+        "factor": null,
+        "from_units": [],
+        "description": "Divide a stated aggregate evenly by a stated member count. Gives arithmetic consistency only, never a per-member figure the publisher states.",
+        "requires": [
+          "aggregation_scope in per_system, per_superchip"
+        ],
+        "rejects_when": [
+          "aggregation_scope=unresolved"
+        ]
+      },
+      {
+        "id": "nr-sum-links",
+        "operation": "multiply",
+        "factor": null,
+        "from_units": [],
+        "description": "Multiply a stated per-link figure by a stated link count in the same direction convention.",
+        "requires": [
+          "aggregation_scope=per_link",
+          "direction_basis=source_stated"
+        ],
+        "rejects_when": [
+          "direction=not_stated"
+        ]
+      }
+    ]
+  },
+  "figures": [
+    {
+      "id": "fg-a-896-platform",
+      "ref": "register:ec-mi300x-infinity-fabric-scope:3",
+      "source_id": "amd-instinct-mi300x-platform-data-sheet-2023",
+      "value": "896",
+      "unit": "GB/s",
+      "product": "AMD Instinct MI300X platform",
+      "configuration": "8-GPU platform",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "Peak aggregate Infinity Fabric bandwidth",
+      "counting_convention": "unknown",
+      "direction": "bidirectional",
+      "direction_basis": "source_stated",
+      "aggregation_scope": "unresolved",
+      "topology": "Seven Infinity Fabric links per GPU for full connectivity between eight GPUs (AMD)",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "AMD labels the figure a ring-of-8 aggregate and never calls it per GPU in the retrieved documents"
+      ],
+      "restrictions": [
+        "Not a per-GPU figure until AMD states that scope",
+        "Not measured throughput"
+      ]
+    },
+    {
+      "id": "fg-a-896-white-paper",
+      "ref": "quantity:aec-ide-004-interconnect:i-amd-mi300x-topology:0",
+      "source_id": "amd-cdna3-white-paper-2025",
+      "value": "896",
+      "unit": "GB/s",
+      "product": "AMD Instinct MI300X",
+      "configuration": "8-GPU system",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "P2P ring peak aggregate I/O bandwidth",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "unresolved",
+      "topology": "Seven Infinity Fabric links per GPU for full connectivity between eight GPUs (AMD)",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "The CDNA 3 table labels it '(8 GPUs)'; direction is stated only in the platform data sheet"
+      ],
+      "restrictions": [
+        "Read with the platform data sheet for direction"
+      ]
+    },
+    {
+      "id": "fg-a-128-link",
+      "ref": "register:ec-mi300x-infinity-fabric-scope:0",
+      "source_id": "amd-instinct-mi300x-data-sheet-2025",
+      "value": "128",
+      "unit": "GB/s",
+      "product": "AMD Instinct MI300X",
+      "configuration": "unknown",
+      "hierarchy_level": "device_fabric_link",
+      "metric": "Peak bandwidth of one GPU-to-GPU Infinity Fabric link",
+      "counting_convention": "unknown",
+      "direction": "bidirectional",
+      "direction_basis": "source_stated",
+      "aggregation_scope": "per_link",
+      "topology": "Seven Infinity Fabric links per GPU for full connectivity between eight GPUs (AMD)",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Encoding and effective bandwidth are not stated"
+      ],
+      "restrictions": [
+        "Raw link peak, not delivered bandwidth"
+      ]
+    },
+    {
+      "id": "fg-a-7x128",
+      "ref": "register:ec-mi300x-infinity-fabric-scope:4",
+      "source_id": "amd-instinct-mi300x-platform-data-sheet-2023",
+      "value": "128",
+      "unit": "GB/s",
+      "product": "AMD Instinct MI300X platform",
+      "configuration": "Seven links per GPU",
+      "hierarchy_level": "device_fabric_link",
+      "metric": "Per-GPU link set: seven links at 128 GB/s",
+      "counting_convention": "unknown",
+      "direction": "bidirectional",
+      "direction_basis": "source_stated",
+      "aggregation_scope": "per_link",
+      "topology": "Seven Infinity Fabric links per GPU for full connectivity between eight GPUs (AMD)",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "The table states the link set per GPU; the sum of the set is not stated as a per-GPU figure"
+      ],
+      "restrictions": [
+        "Summing the links is arithmetic, not an AMD statement"
+      ]
+    },
+    {
+      "id": "fg-a-1024-white-paper",
+      "ref": "quantity:aec-ide-004-interconnect:i-amd-mi300x-topology:1",
+      "source_id": "amd-cdna3-white-paper-2025",
+      "value": "1024",
+      "unit": "GB/s",
+      "product": "AMD Instinct MI300X",
+      "configuration": "unknown",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "Total peak aggregate I/O bandwidth",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "unresolved",
+      "topology": "Seven Infinity Fabric links per GPU for full connectivity between eight GPUs (AMD)",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Whether it adds the PCIe-capable eighth link to the seven peer links is not stated"
+      ],
+      "restrictions": [
+        "Different metric from the P2P ring figure"
+      ]
+    },
+    {
+      "id": "fg-a-hbm3",
+      "ref": "quantity:aec-ide-004-interconnect:i-amd-hbm-arithmetic:1",
+      "source_id": "amd-cdna3-white-paper-2025",
+      "value": "5.325",
+      "unit": "TB/s",
+      "product": "AMD Instinct MI300X",
+      "configuration": "Eight HBM3 stacks, 8,192-bit bus",
+      "hierarchy_level": "device_memory",
+      "metric": "Total peak HBM3 memory bandwidth",
+      "counting_convention": "Bus width times data rate",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "calculated_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Computed by AMD from an 8,192-bit bus at 5.2 Gbps; not measured"
+      ],
+      "restrictions": [
+        "Local memory, not fabric"
+      ]
+    },
+    {
+      "id": "fg-b-22-platform",
+      "ref": "finding:aec-hbm4-evidence-release-001:f-nv-rubin:0",
+      "source_id": "nvidia-rubin-platform-architecture-2026",
+      "value": "22",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU",
+      "configuration": "Up to 288 GB HBM4",
+      "hierarchy_level": "device_memory",
+      "metric": "Aggregate HBM4 bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "NVIDIA does not explain why later sources give 19.2 TB/s"
+      ],
+      "restrictions": [
+        "Cite with its date and source; do not select over 19.2 TB/s"
+      ]
+    },
+    {
+      "id": "fg-b-22-gpu",
+      "ref": "quantity:aec-ide-004-interconnect:i-nvidia-rubin-io-ledger:0",
+      "source_id": "nvidia-rubin-gpu-architecture-2026",
+      "value": "22",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU",
+      "configuration": "Up to 288 GB HBM4, 12-Hi stacks",
+      "hierarchy_level": "device_memory",
+      "metric": "Peak HBM4 memory bandwidth",
+      "counting_convention": "unknown",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Same as above"
+      ],
+      "restrictions": [
+        "Cite with its date and source"
+      ]
+    },
+    {
+      "id": "fg-b-22-hgx",
+      "ref": "register:ec-rubin-memory-bandwidth:3",
+      "source_id": "nvidia-hgx-platform-product-page-2026",
+      "value": "22",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU (HGX individual-GPU row)",
+      "configuration": "288 GB HBM4",
+      "hierarchy_level": "device_memory",
+      "metric": "HBM4 bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "The row does not say whether the figure is peak"
+      ],
+      "restrictions": [
+        "Cite with its date and source"
+      ]
+    },
+    {
+      "id": "fg-b-192-blog",
+      "ref": "finding:aec-hbm4-evidence-release-001:f-nv-rubin-192:0",
+      "source_id": "nvidia-co-design-memory-2026",
+      "value": "19.2",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU",
+      "configuration": "288 GB HBM4",
+      "hierarchy_level": "device_memory",
+      "metric": "Memory bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Unqualified; the article does not mention 22 TB/s"
+      ],
+      "restrictions": [
+        "Cite with its date and source; do not select over 22 TB/s"
+      ]
+    },
+    {
+      "id": "fg-b-192-nvl72",
+      "ref": "register:ec-rubin-memory-bandwidth:0",
+      "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+      "value": "19.2",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU (Vera Rubin NVL72 GPU column)",
+      "configuration": "288 GB HBM4",
+      "hierarchy_level": "device_memory",
+      "metric": "HBM4 bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "The column does not say whether the figure is peak"
+      ],
+      "restrictions": [
+        "Cite with its date and source"
+      ]
+    },
+    {
+      "id": "fg-b-130-nvl8",
+      "ref": "register:ec-rubin-memory-bandwidth:4",
+      "source_id": "nvidia-hgx-platform-product-page-2026",
+      "value": "130",
+      "unit": "TB/s",
+      "product": "NVIDIA HGX Rubin NVL8",
+      "configuration": "Eight Rubin GPUs, 2 TB HBM4",
+      "hierarchy_level": "system_memory_aggregate",
+      "metric": "Aggregate HBM4 bandwidth of an eight-GPU system",
+      "counting_convention": "unknown",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_system",
+      "topology": "unknown",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "The same row gives 2 TB of HBM4, which is also not eight times 288 GB"
+      ],
+      "restrictions": [
+        "A system aggregate; not a per-GPU figure"
+      ]
+    },
+    {
+      "id": "fg-c-36-platform",
+      "ref": "quantity:aec-ide-004-interconnect:i-nvidia-nvlink6-figures:0",
+      "source_id": "nvidia-rubin-platform-architecture-2026",
+      "value": "3.6",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU",
+      "configuration": "unknown",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "NVLink 6 GPU-to-GPU bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "bidirectional",
+      "direction_basis": "source_stated",
+      "aggregation_scope": "per_device",
+      "topology": "NVLink Switch",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "The only source that states a direction for a per-GPU NVLink 6 figure"
+      ],
+      "restrictions": [
+        "Not comparable with 3 TB/s until NVIDIA states that figure's direction"
+      ]
+    },
+    {
+      "id": "fg-c-3600-gpu",
+      "ref": "quantity:aec-ide-004-interconnect:i-nvidia-nvlink6-figures:1",
+      "source_id": "nvidia-rubin-gpu-architecture-2026",
+      "value": "3,600",
+      "unit": "GB/s",
+      "product": "NVIDIA Rubin GPU",
+      "configuration": "unknown",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "NVLink 6 scale-up bandwidth to the NVLink Switch",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_device",
+      "topology": "NVLink Switch",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Equal in value to 3.6 TB/s but stated without a direction"
+      ],
+      "restrictions": [
+        "Same restrictions as fg-c-36-platform"
+      ]
+    },
+    {
+      "id": "fg-c-36-hgx",
+      "ref": "register:ec-nvlink6-per-gpu:2",
+      "source_id": "nvidia-hgx-platform-product-page-2026",
+      "value": "3.6",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU (HGX individual-GPU row)",
+      "configuration": "unknown",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "NVLink bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_device",
+      "topology": "NVLink Switch",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "No direction marked in the row"
+      ],
+      "restrictions": [
+        "Cite with its date and source"
+      ]
+    },
+    {
+      "id": "fg-c-3-blog",
+      "ref": "quantity:aec-ide-004-interconnect:i-nvidia-nvlink6-figures:2",
+      "source_id": "nvidia-co-design-memory-2026",
+      "value": "3.0",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU",
+      "configuration": "unknown",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "NVLink 6 bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "What the figure measures is not stated"
+      ],
+      "restrictions": [
+        "Not comparable with 3.6 TB/s until its direction is stated"
+      ]
+    },
+    {
+      "id": "fg-c-3-nvl72",
+      "ref": "register:ec-nvlink6-per-gpu:0",
+      "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+      "value": "3",
+      "unit": "TB/s",
+      "product": "NVIDIA Rubin GPU (Vera Rubin NVL72 GPU column)",
+      "configuration": "unknown",
+      "hierarchy_level": "device_fabric_aggregate",
+      "metric": "NVLink bandwidth per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_device",
+      "topology": "72-GPU NVLink domain",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "No direction stated on the page"
+      ],
+      "restrictions": [
+        "Cite with its date and source"
+      ]
+    },
+    {
+      "id": "fg-c-6-nvl72",
+      "ref": "register:ec-nvlink6-per-gpu:0",
+      "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+      "value": "6",
+      "unit": "TB/s",
+      "product": "NVIDIA Vera Rubin superchip (NVL72 page)",
+      "configuration": "Superchip column",
+      "hierarchy_level": "superchip_fabric_aggregate",
+      "metric": "NVLink bandwidth per superchip",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_superchip",
+      "topology": "72-GPU NVLink domain",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Members per superchip are not stated in the row; two GPUs per superchip is NVIDIA's platform description, not this row"
+      ],
+      "restrictions": [
+        "A superchip aggregate"
+      ]
+    },
+    {
+      "id": "fg-c-216-nvl72",
+      "ref": "register:ec-nvlink6-per-gpu:0",
+      "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+      "value": "216",
+      "unit": "TB/s",
+      "product": "NVIDIA Vera Rubin NVL72",
+      "configuration": "72 GPUs",
+      "hierarchy_level": "system_fabric_aggregate",
+      "metric": "NVLink bandwidth per rack",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_system",
+      "topology": "72-GPU NVLink domain",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Counting convention (per GPU summed, per switch, per direction) is not stated"
+      ],
+      "restrictions": [
+        "A rack aggregate; not a per-GPU figure"
+      ]
+    },
+    {
+      "id": "fg-c-24-nvl8",
+      "ref": "register:ec-nvlink6-per-gpu:3",
+      "source_id": "nvidia-hgx-platform-product-page-2026",
+      "value": "24",
+      "unit": "TB/s",
+      "product": "NVIDIA HGX Rubin NVL8",
+      "configuration": "Eight Rubin GPUs",
+      "hierarchy_level": "system_fabric_aggregate",
+      "metric": "NVLink Switch bandwidth of an eight-GPU system",
+      "counting_convention": "unknown",
+      "direction": "bidirectional",
+      "direction_basis": "source_stated",
+      "aggregation_scope": "per_system",
+      "topology": "NVLink Switch",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Marked bidirectional by the page's footnote, as recorded in rc-009-nvlink6-per-gpu"
+      ],
+      "restrictions": [
+        "A system aggregate"
+      ]
+    },
+    {
+      "id": "fg-c-130-gb200",
+      "ref": "quantity:aec-ide-004-interconnect:i-nvidia-gb200-aggregate:0",
+      "source_id": "nvidia-co-design-memory-2026",
+      "value": "130",
+      "unit": "TB/s",
+      "product": "NVIDIA GB200 NVL72",
+      "configuration": "72 Blackwell GPUs",
+      "hierarchy_level": "system_fabric_aggregate",
+      "metric": "Aggregate NVLink bandwidth",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_system",
+      "topology": "unknown",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Prior generation; counting convention not stated"
+      ],
+      "restrictions": [
+        "Not a Rubin figure and not per GPU"
+      ]
+    },
+    {
+      "id": "fg-x-stack-jedec",
+      "ref": "statement:aec-hbm4-evidence-release-001:f-an-bandwidth",
+      "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+      "value": "2.05",
+      "unit": "TB/s",
+      "product": "HBM4 stack at the JEDEC announced rate",
+      "configuration": "unknown",
+      "hierarchy_level": "memory_stack",
+      "metric": "Per-stack peak bandwidth",
+      "counting_convention": "Interface width times pin rate",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_stack",
+      "topology": "unknown",
+      "status": "calculated_peak",
+      "conditions": "unknown",
+      "evidence_class": "bounded_analysis",
+      "uncertainty": [
+        "Arithmetic from 2,048 bits at 8 Gb/s"
+      ],
+      "restrictions": [
+        "A standard rate, not a shipped part"
+      ]
+    },
+    {
+      "id": "fg-x-stack-micron",
+      "ref": "finding:aec-hbm4-evidence-release-001:f-mu-2026:0",
+      "source_id": "micron-hbm4-volume-production-2026",
+      "value": "2.8",
+      "unit": "TB/s",
+      "product": "Micron HBM4",
+      "configuration": "unknown",
+      "hierarchy_level": "memory_stack",
+      "metric": "Per-stack bandwidth",
+      "counting_convention": "unknown",
+      "direction": "not_applicable",
+      "direction_basis": "not_applicable",
+      "aggregation_scope": "per_stack",
+      "topology": "unknown",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "'Greater than' 2.8 TB/s; no accelerator operating point"
+      ],
+      "restrictions": [
+        "A supplier figure, not an accelerator operating point"
+      ]
+    },
+    {
+      "id": "fg-x-scaleout",
+      "ref": "quantity:aec-ide-004-interconnect:i-nvidia-scale-out:0",
+      "source_id": "nvidia-rubin-platform-architecture-2026",
+      "value": "1.6",
+      "unit": "Tb/s",
+      "product": "NVIDIA ConnectX-9 SuperNIC per Rubin GPU",
+      "configuration": "unknown",
+      "hierarchy_level": "scale_out_port",
+      "metric": "Scale-out connectivity per GPU",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_device",
+      "topology": "unknown",
+      "status": "not_stated",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "Direction not stated; stated in bits"
+      ],
+      "restrictions": [
+        "Different network tier from NVLink"
+      ]
+    },
+    {
+      "id": "fg-x-cxl",
+      "ref": "quantity:aec-ide-004-interconnect:i-cxl-3-rate:1",
+      "source_id": "cxl-3-0-white-paper-2022",
+      "value": "256",
+      "unit": "GB/s",
+      "product": "CXL 3.0 x16 link",
+      "configuration": "unknown",
+      "hierarchy_level": "host_link",
+      "metric": "Aggregate raw bandwidth of an x16 link",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_link",
+      "topology": "unknown",
+      "status": "specified_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "The white paper's 'aggregate raw' is read as both directions in release 004 analysis; the white paper does not say so in the quoted passage"
+      ],
+      "restrictions": [
+        "Raw, before protocol overhead"
+      ]
+    },
+    {
+      "id": "fg-x-pcie6-rubin",
+      "ref": "quantity:aec-ide-004-interconnect:i-nvidia-rubin-io-ledger:3",
+      "source_id": "nvidia-rubin-gpu-architecture-2026",
+      "value": "256",
+      "unit": "GB/s",
+      "product": "NVIDIA Rubin GPU host link (x16 PCIe Gen 6)",
+      "configuration": "unknown",
+      "hierarchy_level": "host_link",
+      "metric": "Host connectivity",
+      "counting_convention": "unknown",
+      "direction": "not_stated",
+      "direction_basis": "unknown",
+      "aggregation_scope": "per_link",
+      "topology": "unknown",
+      "status": "advertised_peak",
+      "conditions": "unknown",
+      "evidence_class": "attributed_statement",
+      "uncertainty": [
+        "NVIDIA does not state whether the figure is raw both-direction"
+      ],
+      "restrictions": [
+        "Host link, not GPU-to-GPU"
+      ]
+    }
+  ],
+  "normalizations": [
+    {
+      "id": "nm-a-7-links",
+      "figure_id": "fg-a-7x128",
+      "rule_id": "nr-sum-links",
+      "factor": 7,
+      "result_value": "896",
+      "result_unit": "GB/s",
+      "result_level": "device_fabric_aggregate",
+      "basis": [
+        "register:ec-mi300x-infinity-fabric-scope:4"
+      ],
+      "note": "Seven links at 128 GB/s sum to exactly 896 GB/s. Arithmetic; not a publisher statement; it is consistent with a per-GPU reading but does not establish it."
+    },
+    {
+      "id": "nm-a-28-links",
+      "figure_id": "fg-a-128-link",
+      "rule_id": "nr-sum-links",
+      "factor": 28,
+      "result_value": "3584",
+      "result_unit": "GB/s",
+      "result_level": "system_fabric_aggregate",
+      "basis": [
+        "register:ec-mi300x-infinity-fabric-scope:1"
+      ],
+      "note": "A fully connected eight-GPU system has 28 distinct links; at 128 GB/s that totals 3,584 GB/s. Arithmetic; not a publisher statement; it shows what a platform-wide sum would be under that topology."
+    },
+    {
+      "id": "nm-b-nvl8-share",
+      "figure_id": "fg-b-130-nvl8",
+      "rule_id": "nr-equal-share",
+      "factor": 8,
+      "result_value": "16.25",
+      "result_unit": "TB/s",
+      "result_level": "device_memory",
+      "basis": [
+        "register:ec-rubin-memory-bandwidth:4"
+      ],
+      "note": "130 TB/s over eight GPUs is 16.25 TB/s, matching neither 22 nor 19.2 TB/s. Arithmetic; not a publisher statement."
+    },
+    {
+      "id": "nm-c-nvl72-share",
+      "figure_id": "fg-c-216-nvl72",
+      "rule_id": "nr-equal-share",
+      "factor": 72,
+      "result_value": "3",
+      "result_unit": "TB/s",
+      "result_level": "device_fabric_aggregate",
+      "basis": [
+        "register:ec-nvlink6-per-gpu:0"
+      ],
+      "note": "216 TB/s over 72 GPUs is 3 TB/s, the same as the page's GPU column. Arithmetic; not a publisher statement."
+    },
+    {
+      "id": "nm-c-nvl8-share",
+      "figure_id": "fg-c-24-nvl8",
+      "rule_id": "nr-equal-share",
+      "factor": 8,
+      "result_value": "3",
+      "result_unit": "TB/s",
+      "result_level": "device_fabric_aggregate",
+      "basis": [
+        "register:ec-nvlink6-per-gpu:3"
+      ],
+      "note": "24 TB/s, marked bidirectional, over eight GPUs is 3 TB/s per GPU, while the same page's individual-GPU row gives 3.6 TB/s. Arithmetic; not a publisher statement."
+    },
+    {
+      "id": "nm-c-36-halve",
+      "figure_id": "fg-c-36-platform",
+      "rule_id": "nr-halve-bidirectional",
+      "factor": 2,
+      "result_value": "1.8",
+      "result_unit": "TB/s",
+      "result_level": "device_fabric_aggregate",
+      "basis": [
+        "quantity:aec-ide-004-interconnect:i-nvidia-nvlink6-figures:0"
+      ],
+      "note": "3.6 TB/s stated bidirectional is 1.8 TB/s per direction if the directions are equal. Arithmetic; not a publisher statement."
+    },
+    {
+      "id": "nm-x-scaleout-bytes",
+      "figure_id": "fg-x-scaleout",
+      "rule_id": "nr-bits-to-bytes",
+      "factor": 8,
+      "result_value": "200",
+      "result_unit": "GB/s",
+      "result_level": "scale_out_port",
+      "basis": [
+        "quantity:aec-ide-004-interconnect:i-nvidia-scale-out:0"
+      ],
+      "note": "1.6 Tb/s is 200 GB/s before encoding and protocol overhead. Arithmetic; not a publisher statement."
+    }
+  ],
+  "rejected_normalizations": [
+    {
+      "id": "rj-c-3-halve",
+      "figure_id": "fg-c-3-blog",
+      "rule_id": "nr-halve-bidirectional",
+      "why": "NVIDIA does not state the direction of 3.0 TB/s, so treating it as bidirectional (or as per direction) to reconcile it with 3.6 TB/s is unsupported."
+    },
+    {
+      "id": "rj-a-896-share",
+      "figure_id": "fg-a-896-platform",
+      "rule_id": "nr-equal-share",
+      "why": "The scope of 896 GB/s is unresolved, so dividing it across eight GPUs, or treating it as already per GPU, assumes the answer to the open question."
+    },
+    {
+      "id": "rj-c-3600-halve",
+      "figure_id": "fg-c-3600-gpu",
+      "rule_id": "nr-halve-bidirectional",
+      "why": "The July article states 3,600 GB/s without a direction; the January article's 'bidirectional' cannot be transferred to it."
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "cp-stack-vs-stack",
+      "figure_ids": [
+        "fg-x-stack-jedec",
+        "fg-x-stack-micron"
+      ],
+      "classification": "comparable_on_documented_terms",
+      "normalization_ids": [],
+      "conditions": [],
+      "reason": "Both are per-stack peak bandwidths of a 2,048-bit HBM4 interface; they differ only in pin rate.",
+      "pathway_comparison_id": "cmp-stack-vs-stack"
+    },
+    {
+      "id": "cp-rubin-22-vs-19",
+      "figure_ids": [
+        "fg-b-22-gpu",
+        "fg-b-192-blog"
+      ],
+      "classification": "conditionally_comparable",
+      "normalization_ids": [],
+      "conditions": [
+        "Cite each figure with its date and source",
+        "Do not select one figure or average the two",
+        "Two of the figures do not state that they are peaks"
+      ],
+      "reason": "The same metric for the same product from the same publisher, but the values conflict and no source explains why.",
+      "pathway_comparison_id": "cmp-rubin-22-vs-19"
+    },
+    {
+      "id": "cp-mi300x-vs-rubin-memory",
+      "figure_ids": [
+        "fg-a-hbm3",
+        "fg-b-22-gpu"
+      ],
+      "classification": "conditionally_comparable",
+      "normalization_ids": [],
+      "conditions": [
+        "State that both are stated peaks, not delivered throughput",
+        "State the memory generation of each",
+        "Carry the open 22 versus 19.2 TB/s conflict"
+      ],
+      "reason": "Both are per-accelerator peak memory bandwidth, across HBM3 and HBM4 generations.",
+      "pathway_comparison_id": "cmp-mi300x-vs-rubin-memory"
+    },
+    {
+      "id": "cp-mi300x-p2p-vs-nvlink6",
+      "figure_ids": [
+        "fg-a-896-platform",
+        "fg-c-36-platform"
+      ],
+      "classification": "indeterminate",
+      "normalization_ids": [],
+      "conditions": [],
+      "reason": "The scope of 896 GB/s is unresolved, and NVIDIA publishes the per-GPU NVLink 6 figure two ways.",
+      "pathway_comparison_id": "cmp-mi300x-p2p-vs-nvlink6"
+    },
+    {
+      "id": "cp-memory-vs-scale-up",
+      "figure_ids": [
+        "fg-b-22-gpu",
+        "fg-c-3600-gpu"
+      ],
+      "classification": "not_comparable",
+      "normalization_ids": [],
+      "conditions": [],
+      "reason": "Local memory bandwidth and GPU-to-GPU fabric bandwidth describe different physical paths.",
+      "pathway_comparison_id": "cmp-memory-vs-scale-up"
+    },
+    {
+      "id": "cp-rack-vs-gpu",
+      "figure_ids": [
+        "fg-c-130-gb200",
+        "fg-c-36-platform"
+      ],
+      "classification": "not_comparable",
+      "normalization_ids": [],
+      "conditions": [],
+      "reason": "A prior-generation rack aggregate and a per-GPU figure differ in scope and generation.",
+      "pathway_comparison_id": "cmp-rack-vs-gpu"
+    },
+    {
+      "id": "cp-scale-up-vs-scale-out",
+      "figure_ids": [
+        "fg-c-36-platform",
+        "fg-x-scaleout"
+      ],
+      "classification": "conditionally_comparable",
+      "normalization_ids": [
+        "nm-x-scaleout-bytes"
+      ],
+      "conditions": [
+        "Convert bits to bytes",
+        "Give both ratios for the two possible directions of 1.6 Tb/s",
+        "Carry the 3 TB/s alternative for NVLink 6",
+        "Neither figure states whether it is a peak"
+      ],
+      "reason": "Comparable in bytes after conversion; the ratio depends on the unstated direction of 1.6 Tb/s.",
+      "pathway_comparison_id": "cmp-scale-up-vs-scale-out"
+    },
+    {
+      "id": "cp-cxl-vs-pcie6",
+      "figure_ids": [
+        "fg-x-cxl",
+        "fg-x-pcie6-rubin"
+      ],
+      "classification": "conditionally_comparable",
+      "normalization_ids": [],
+      "conditions": [
+        "State that neither source's passage gives a direction and that the counting basis of NVIDIA's figure is not published"
+      ],
+      "reason": "Both describe x16 links at the PCIe 6.0 rate, but NVIDIA does not state that its figure uses the same raw both-direction basis.",
+      "pathway_comparison_id": "cmp-cxl-vs-pcie6"
+    },
+    {
+      "id": "cp-nvlink-36-vs-3",
+      "figure_ids": [
+        "fg-c-36-platform",
+        "fg-c-3-blog"
+      ],
+      "classification": "indeterminate",
+      "normalization_ids": [],
+      "conditions": [],
+      "reason": "The same product and nominal metric, but only 3.6 TB/s carries a stated direction, so whether the two use one counting convention is unknown.",
+      "pathway_comparison_id": null
+    },
+    {
+      "id": "cp-nvl72-share-vs-column",
+      "figure_ids": [
+        "fg-c-216-nvl72",
+        "fg-c-3-nvl72"
+      ],
+      "classification": "conditionally_comparable",
+      "normalization_ids": [
+        "nm-c-nvl72-share"
+      ],
+      "conditions": [
+        "Even division is an assumption",
+        "Neither figure states a direction or whether it is a peak",
+        "The result shows the page is internally consistent, not which per-GPU figure is right"
+      ],
+      "reason": "The rack aggregate divided evenly over 72 GPUs equals the page's per-GPU column.",
+      "pathway_comparison_id": null
+    },
+    {
+      "id": "cp-nvl8-share-vs-row",
+      "figure_ids": [
+        "fg-c-24-nvl8",
+        "fg-c-36-hgx"
+      ],
+      "classification": "conditionally_comparable",
+      "normalization_ids": [
+        "nm-c-nvl8-share"
+      ],
+      "conditions": [
+        "Even division is an assumption",
+        "The individual-GPU row states no direction while the switch figure is marked bidirectional",
+        "Neither figure states whether it is a peak",
+        "The two figures may count different things; neither is corrected"
+      ],
+      "reason": "On one HGX page, the eight-GPU switch figure divided evenly gives 3 TB/s per GPU while the individual-GPU row gives 3.6 TB/s.",
+      "pathway_comparison_id": null
+    },
+    {
+      "id": "cp-nvl8-memory-share-vs-gpu",
+      "figure_ids": [
+        "fg-b-130-nvl8",
+        "fg-b-22-hgx"
+      ],
+      "classification": "conditionally_comparable",
+      "normalization_ids": [
+        "nm-b-nvl8-share"
+      ],
+      "conditions": [
+        "Even division is an assumption",
+        "Neither figure states whether it is a peak",
+        "The row's 2 TB capacity is also not eight times 288 GB"
+      ],
+      "reason": "On one HGX page, the eight-GPU memory figure divided evenly gives 16.25 TB/s per GPU against 22 TB/s in the individual-GPU row.",
+      "pathway_comparison_id": null
+    },
+    {
+      "id": "cp-mi300x-896-vs-link-sum",
+      "figure_ids": [
+        "fg-a-896-platform",
+        "fg-a-7x128"
+      ],
+      "classification": "indeterminate",
+      "normalization_ids": [
+        "nm-a-7-links"
+      ],
+      "conditions": [],
+      "reason": "AMD's 896 GB/s equals the sum of the seven 128 GB/s links AMD lists per GPU, but whether the two quantities share a scope is the open question: AMD labels 896 GB/s a ring-of-8 aggregate and does not call it per GPU.",
+      "pathway_comparison_id": null
+    },
+    {
+      "id": "cp-mi300x-896-vs-1024",
+      "figure_ids": [
+        "fg-a-896-white-paper",
+        "fg-a-1024-white-paper"
+      ],
+      "classification": "not_comparable",
+      "normalization_ids": [],
+      "conditions": [],
+      "reason": "Two different metrics in one table: P2P ring aggregate and total aggregate I/O, which AMD's text suggests adds the host-capable link.",
+      "pathway_comparison_id": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "case-a-mi300x",
+      "title": "AMD MI300X Infinity Fabric",
+      "conflict_id": "ec-mi300x-infinity-fabric-scope",
+      "reconciliation_id": "rc-009-mi300x-infinity-fabric",
+      "question": "What does AMD's 896 GB/s figure describe, and how does it relate to the 128 GB/s links?",
+      "figure_ids": [
+        "fg-a-896-platform",
+        "fg-a-896-white-paper",
+        "fg-a-128-link",
+        "fg-a-7x128",
+        "fg-a-1024-white-paper",
+        "fg-a-hbm3"
+      ],
+      "comparison_ids": [
+        "cp-mi300x-896-vs-link-sum",
+        "cp-mi300x-896-vs-1024",
+        "cp-mi300x-p2p-vs-nvlink6"
+      ],
+      "established": [
+        "AMD states the direction: 896 GB/s is a peak aggregate bidirectional figure, and each link is 128 GB/s bidirectional (IDE-009)",
+        "AMD lists seven 128 GB/s links per GPU and calls the platform eight GPUs in a ring with full connectivity"
+      ],
+      "analysis": [
+        "Seven links at 128 GB/s sum to exactly 896 GB/s; a platform-wide sum of the 28 links in a fully connected eight-GPU system would be 3,584 GB/s",
+        "The arithmetic is consistent with a per-GPU reading, but AMD's retrieved documents label the figure a ring-of-8 aggregate and never call it per GPU; arithmetic consistency is not a documentary statement",
+        "AMD's CDNA 4 paper uses the same '(8 GPUs)' label for a later figure it calls per GPU; a labelling convention in a later document does not state the scope of the MI300X figure"
+      ],
+      "unresolved_ids": [
+        "u-i-amd-link-scope"
+      ],
+      "preserved": [
+        "Direction is AMD-stated and is not reopened",
+        "The 2025 CDNA 4 edition with endnote MI350-007 is pending version verification and is not used as evidence"
+      ]
+    },
+    {
+      "id": "case-b-rubin-memory",
+      "title": "NVIDIA Rubin HBM bandwidth",
+      "conflict_id": "ec-rubin-memory-bandwidth",
+      "reconciliation_id": "rc-009-rubin-memory-bandwidth",
+      "question": "What do NVIDIA's 22 TB/s and 19.2 TB/s figures for one Rubin GPU describe?",
+      "figure_ids": [
+        "fg-b-22-platform",
+        "fg-b-22-gpu",
+        "fg-b-22-hgx",
+        "fg-b-192-blog",
+        "fg-b-192-nvl72",
+        "fg-b-130-nvl8"
+      ],
+      "comparison_ids": [
+        "cp-rubin-22-vs-19",
+        "cp-nvl8-memory-share-vs-gpu",
+        "cp-mi300x-vs-rubin-memory"
+      ],
+      "established": [
+        "NVIDIA gives 22 TB/s in posts dated 2026-01-05 and 2026-07-21 and on its HGX page, and 19.2 TB/s in a post dated 2026-11-05 and on its Vera Rubin NVL72 page",
+        "Every source gives 288 GB of HBM4 per GPU; none withdraws either bandwidth figure"
+      ],
+      "analysis": [
+        "On NVIDIA's product pages the split follows the platform (HGX 22 TB/s, Vera Rubin NVL72 19.2 TB/s), and in its dated posts it follows the date (January and July 22 TB/s, November 19.2 TB/s); whether either pattern reflects different configurations is not stated",
+        "The HGX NVL8 row's 130 TB/s is 16.25 TB/s per GPU on even division, matching neither figure, and its 2 TB is less than eight times 288 GB, so the row is not a simple multiple of the individual-GPU row"
+      ],
+      "unresolved_ids": [
+        "u-rubin-bandwidth"
+      ],
+      "preserved": [
+        "Neither figure is selected",
+        "No explanation (product revision, preliminary figure, operating condition) is offered without a primary source"
+      ]
+    },
+    {
+      "id": "case-c-nvlink6",
+      "title": "NVLink 6 bandwidth",
+      "conflict_id": "ec-nvlink6-per-gpu",
+      "reconciliation_id": "rc-009-nvlink6-per-gpu",
+      "question": "What do NVIDIA's 3.6 TB/s and 3 TB/s NVLink 6 figures per Rubin GPU describe?",
+      "figure_ids": [
+        "fg-c-36-platform",
+        "fg-c-3600-gpu",
+        "fg-c-36-hgx",
+        "fg-c-3-blog",
+        "fg-c-3-nvl72",
+        "fg-c-6-nvl72",
+        "fg-c-216-nvl72",
+        "fg-c-24-nvl8"
+      ],
+      "comparison_ids": [
+        "cp-nvlink-36-vs-3",
+        "cp-nvl72-share-vs-column",
+        "cp-nvl8-share-vs-row",
+        "cp-memory-vs-scale-up",
+        "cp-rack-vs-gpu"
+      ],
+      "established": [
+        "NVIDIA gives 3.6 TB/s (January post, marked bidirectional; HGX individual-GPU row) and 3,600 GB/s (July post), and 3 TB/s (November post; NVL72 GPU column)",
+        "Only the January post states a direction for a per-GPU figure"
+      ],
+      "analysis": [
+        "Every Rubin NVLink system aggregate reviewed divides evenly to 3 TB/s per GPU: 216 TB/s over 72 GPUs, and 24 TB/s (marked bidirectional) over 8 GPUs; 6 TB/s per superchip is consistent with 3 TB/s if a superchip has two GPUs",
+        "No reviewed aggregate divides to 3.6 TB/s; this shows NVIDIA's aggregates are consistent with each other, not which per-GPU figure is correct or what the 0.6 TB/s difference counts",
+        "Fabric bandwidth is kept apart from local memory bandwidth and from any measured collective throughput, none of which is published"
+      ],
+      "unresolved_ids": [
+        "u-i-nvlink6-figure"
+      ],
+      "preserved": [
+        "The difference is not explained by assuming a direction convention for 3 TB/s"
+      ]
+    }
+  ],
+  "workflow_b_mapping": [
+    {
+      "requirement_id": "rb-01-system-identity",
+      "coverage": "addressed",
+      "note": "Every figure names its product and, where stated, its configuration",
+      "figure_ids": [
+        "fg-a-896-platform",
+        "fg-b-130-nvl8",
+        "fg-c-216-nvl72"
+      ]
+    },
+    {
+      "requirement_id": "rb-02-memory-configuration",
+      "coverage": "partially_addressed",
+      "note": "Capacity and stack height are recorded where NVIDIA states them; the configuration behind each bandwidth figure is not stated",
+      "figure_ids": [
+        "fg-b-22-gpu",
+        "fg-b-192-nvl72"
+      ]
+    },
+    {
+      "requirement_id": "rb-03-stack-bandwidth",
+      "coverage": "addressed",
+      "note": "Per-stack peak bandwidth is compared on documented terms",
+      "figure_ids": [
+        "fg-x-stack-jedec",
+        "fg-x-stack-micron"
+      ]
+    },
+    {
+      "requirement_id": "rb-04-device-memory-bandwidth",
+      "coverage": "open",
+      "note": "Both per-GPU Rubin figures are recorded with dates; the conflict stays open",
+      "figure_ids": [
+        "fg-b-22-platform",
+        "fg-b-192-blog"
+      ]
+    },
+    {
+      "requirement_id": "rb-05-link-bandwidth-direction",
+      "coverage": "partially_addressed",
+      "note": "AMD states link bandwidth and direction; NVIDIA states a direction only once",
+      "figure_ids": [
+        "fg-a-128-link",
+        "fg-c-36-platform"
+      ]
+    },
+    {
+      "requirement_id": "rb-06-scale-up-aggregate",
+      "coverage": "open",
+      "note": "The scope of 896 GB/s and the basis of 3 TB/s versus 3.6 TB/s are unresolved",
+      "figure_ids": [
+        "fg-a-896-platform",
+        "fg-c-3-blog"
+      ]
+    },
+    {
+      "requirement_id": "rb-07-topology",
+      "coverage": "addressed",
+      "note": "Topology is recorded per figure where the publisher states it",
+      "figure_ids": [
+        "fg-a-128-link",
+        "fg-c-216-nvl72"
+      ]
+    },
+    {
+      "requirement_id": "rb-08-host-link",
+      "coverage": "partially_addressed",
+      "note": "Host-link figures are recorded; NVIDIA's counting basis is not stated",
+      "figure_ids": [
+        "fg-x-pcie6-rubin",
+        "fg-x-cxl"
+      ]
+    },
+    {
+      "requirement_id": "rb-09-scale-out",
+      "coverage": "partially_addressed",
+      "note": "Converted to bytes under a stated rule; direction not stated",
+      "figure_ids": [
+        "fg-x-scaleout"
+      ]
+    },
+    {
+      "requirement_id": "rb-10-measurement-method",
+      "coverage": "not_available",
+      "note": "No figure in the dossier is measured; every one is a stated, specified or calculated peak",
+      "figure_ids": []
+    },
+    {
+      "requirement_id": "rb-11-software-configuration",
+      "coverage": "not_available",
+      "note": "No workload or software configuration accompanies any figure",
+      "figure_ids": []
+    },
+    {
+      "requirement_id": "rb-12-reproducibility",
+      "coverage": "not_available",
+      "note": "No reproducible measurement is published for any figure",
+      "figure_ids": []
+    },
+    {
+      "requirement_id": "rb-13-rack-versus-gpu",
+      "coverage": "addressed",
+      "note": "Rack and superchip aggregates are separated from per-GPU figures, and even division is labelled as arithmetic",
+      "figure_ids": [
+        "fg-c-216-nvl72",
+        "fg-c-24-nvl8",
+        "fg-c-130-gb200"
+      ]
+    }
+  ],
+  "review_questions": [
+    {
+      "id": "rq-mi300x-scope",
+      "question": "In AMD's MI300X documentation, does 'P2P ring peak aggregate' bandwidth (896 GB/s) describe one GPU's seven links or a platform-level quantity?",
+      "why_it_matters": "It decides whether the figure can sit beside any per-GPU fabric figure.",
+      "case_id": "case-a-mi300x",
+      "materials": [
+        "amd-instinct-mi300x-platform-data-sheet-2023",
+        "amd-instinct-mi300x-data-sheet-2025",
+        "amd-cdna3-white-paper-2025"
+      ],
+      "would_settle": "An AMD statement of the figure's scope, or a version-identified copy of the 2025 CDNA 4 edition with endnote MI350-007"
+    },
+    {
+      "id": "rq-rubin-memory",
+      "question": "Do NVIDIA's 22 TB/s and 19.2 TB/s per-GPU memory figures describe different Rubin configurations, and if so which?",
+      "why_it_matters": "Every per-GPU Rubin memory comparison depends on which figure applies to which product.",
+      "case_id": "case-b-rubin-memory",
+      "materials": [
+        "nvidia-hgx-platform-product-page-2026",
+        "nvidia-vera-rubin-nvl72-product-page-2026",
+        "nvidia-rubin-gpu-architecture-2026",
+        "nvidia-co-design-memory-2026"
+      ],
+      "would_settle": "An NVIDIA specification that ties each figure to a configuration or memory operating point"
+    },
+    {
+      "id": "rq-nvlink-counting",
+      "question": "What counting convention gives 3.6 TB/s and what gives 3 TB/s per Rubin GPU for NVLink 6, given that NVIDIA's system aggregates divide evenly to 3 TB/s?",
+      "why_it_matters": "Scale-up comparisons and rack-to-GPU conversions depend on one consistent convention.",
+      "case_id": "case-c-nvlink6",
+      "materials": [
+        "nvidia-rubin-platform-architecture-2026",
+        "nvidia-hgx-platform-product-page-2026",
+        "nvidia-vera-rubin-nvl72-product-page-2026"
+      ],
+      "would_settle": "An NVIDIA statement of direction and counting for both figures"
+    },
+    {
+      "id": "rq-raw-versus-effective",
+      "question": "For the x16 PCIe Gen 6 and CXL 3.0 figures of 256 GB/s, what share remains after encoding, FEC and protocol overhead?",
+      "why_it_matters": "Raw link figures are often compared with delivered throughput; the overhead decides how far they differ.",
+      "case_id": null,
+      "materials": [
+        "cxl-3-0-white-paper-2022",
+        "nvidia-rubin-gpu-architecture-2026"
+      ],
+      "would_settle": "The normative PCIe 6.0 and CXL 3.x specifications, or a published measurement with its method"
+    },
+    {
+      "id": "rq-measurement",
+      "question": "Which published, reproducible measurements of collective bandwidth exist for the MI300X eight-GPU platform or Vera Rubin NVL72, and with what methods?",
+      "why_it_matters": "No figure in the dossier is measured; measured throughput is the evidence most comparisons actually need.",
+      "case_id": null,
+      "materials": [],
+      "would_settle": "A measurement with workload, message sizes, software versions and topology stated"
+    }
+  ],
+  "applications": [
+    "Checking a draft comparison of accelerator bandwidth figures against the classification rules before it is published",
+    "Tracing any figure in this dossier to its publisher, date, exact passage and latest inspection",
+    "Converting rack or system aggregates to per-device values only where the rules allow, with the assumption stated",
+    "Listing the documents to request from a vendor before a bandwidth comparison can be defended (IDE-010 workflow B)",
+    "Giving a specialist a single, bounded question to review against public material"
+  ],
+  "principal_findings": [
+    {
+      "text": "NVIDIA's Rubin NVLink system aggregates (216 TB/s over 72 GPUs, 24 TB/s over 8) divide evenly to 3 TB/s per GPU, never to 3.6 TB/s. This is an arithmetic consistency check, not an explanation of the difference.",
+      "basis": [
+        "nm-c-nvl72-share",
+        "nm-c-nvl8-share",
+        "cp-nvlink-36-vs-3"
+      ]
+    },
+    {
+      "text": "NVIDIA's eight-GPU HGX memory figure (130 TB/s) divides to 16.25 TB/s, matching neither per-GPU memory figure, and its 2 TB capacity is less than eight times 288 GB.",
+      "basis": [
+        "nm-b-nvl8-share",
+        "cp-nvl8-memory-share-vs-gpu"
+      ]
+    },
+    {
+      "text": "AMD's 896 GB/s equals seven 128 GB/s links exactly, but AMD labels it a ring-of-8 aggregate and never calls it per GPU; arithmetic agreement does not settle its scope, so any comparison that relies on a per-GPU reading is indeterminate.",
+      "basis": [
+        "nm-a-7-links",
+        "cp-mi300x-896-vs-link-sum",
+        "rj-a-896-share"
+      ]
+    },
+    {
+      "text": "Halving a figure to a per-direction value is permitted only where the source states the direction; for NVLink 6 that is the January 3.6 TB/s figure alone.",
+      "basis": [
+        "nm-c-36-halve",
+        "rj-c-3-halve",
+        "rj-c-3600-halve"
+      ]
+    }
+  ],
+  "public_reference_decision": {
+    "change_made": false,
+    "reason": "The /interconnects/ reference already presents each figure with its date and source, the 24 TB/s even-division arithmetic and the open conflicts. The dossier's additions (the classification method, rule-checked normalizations and cross-figure consistency) are unreviewed research and are kept out of the public reference until reviewed."
+  }
+}
