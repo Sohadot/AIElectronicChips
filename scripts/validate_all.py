@@ -176,6 +176,7 @@ def main() -> None:
         "validate_evidence_reconciliations.py",
         "validate_evidence_requests.py",
         "validate_hbm4_dossier.py",
+        "validate_bandwidth_dossier.py",
         "validate_strategic_offerings.py",
         "validate_compute_sovereignty_standard.py",
     ]
