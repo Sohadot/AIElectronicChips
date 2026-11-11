@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import copy
+import csv
+import io
 import functools
 import http.server
 import json
@@ -308,6 +310,28 @@ class BrowserTests(unittest.TestCase):
                                  capture_output=True, text=True, timeout=120, env={**os.environ, "NODE_PATH": str(Path(PLAYWRIGHT).parent)})
             self.assertEqual(out.returncode, 0, out.stderr + out.stdout)
             r = json.loads(out.stdout.strip().splitlines()[-1])
+        # Proof of a real browser run, printed into the CI log.
+        print(f"\nBrowser under test: {r['browser']['name']} {r['browser']['version']}", file=sys.stderr)
+        self.assertEqual(r["browser"]["name"], "chromium")
+        self.assertRegex(r["browser"]["version"], r"^\d+\.")
+        m = model()
+        # Three workflows and 41 requirements, each with a visible reference link.
+        self.assertEqual([w["id"] for w in r["reqs"]], v.EXPECTED)
+        for got, w in zip(r["reqs"], m["workflows"]):
+            self.assertEqual(got["ids"], [x["id"] for x in w["requirements"]])
+            self.assertEqual(got["refs"], len(w["requirements"]))
+        self.assertEqual(sum(len(w["ids"]) for w in r["reqs"]), 41)
+        # Export is user-initiated: nothing downloads until a button is clicked; each click yields one file.
+        self.assertEqual(r["downloads_before_click"], 0)
+        self.assertEqual(r["downloads_total"], 4)
+        for w in m["workflows"][1:]:
+            got = r["other_exports"][w["id"]]
+            self.assertEqual(got["workflow"]["id"], w["id"])
+            self.assertEqual([x["id"] for x in got["requirements"]], [x["id"] for x in w["requirements"]])
+            self.assertTrue(all(x["user_status"] == "not_requested" and x["user_note"] == "" for x in got["requirements"]))
+            self.assertIn("not been independently validated", got["disclaimer"])
+        # No-JavaScript fallback, in the same real browser.
+        self.assertEqual(r["no_js"], {"reqs": 41, "controls": 0, "toolbars_visible": 0, "noscript_visible": True, "data_link": True})
         self.assertEqual(r["radios"], 41 * 4)
         self.assertEqual(r["textareas"], 41)
         self.assertEqual(r["toolbars_visible"], 3)
@@ -325,6 +349,14 @@ class BrowserTests(unittest.TestCase):
         self.assertTrue(first["reference"].startswith("/hbm-memory/#"))
         self.assertNotIn("score", json.dumps(data).lower())
         self.assertIn("\"'=cmd|' /C calc'!A0\"", r["csv"])
+        # CSV is a well-formed table: header, one row per requirement, then disclaimer and timestamp rows.
+        rows = list(csv.reader(io.StringIO(r["csv"], newline="")))
+        self.assertEqual(rows[0][:2], ["workflow", "requirement_id"])
+        self.assertEqual(len(rows), 1 + 13 + 2)
+        self.assertTrue(all(len(row) == len(rows[0]) for row in rows[1:14]))
+        self.assertEqual([row[1] for row in rows[1:14]], [x["id"] for x in m["workflows"][0]["requirements"]])
+        self.assertEqual(rows[1][-2:], ["received", "'=cmd|' /C calc'!A0"])
+        self.assertEqual(rows[14][0], "disclaimer")
         self.assertIn("not been independently validated", r["csv"])
         self.assertEqual(r["after_clear"], {"status": "not_requested", "note": ""})
         # Note field: browser spelling and autocorrect services off on every note.
@@ -349,21 +381,34 @@ const fs = require('fs');
   const context = await browser.newContext({ acceptDownloads: true });
   const page = await context.newPage();
   const flagged = [];
+  let downloads = 0;
   context.on('request', (req) => {
     const u = new URL(req.url());
     if (u.origin !== new URL(url).origin || req.method() !== 'GET') flagged.push(req.method() + ' ' + req.url());
   });
+  page.on('download', () => { downloads += 1; });
   await page.goto(url, { waitUntil: 'load' });
+  const reqs = await page.evaluate(() => [...document.querySelectorAll('article.wb-workflow')].map((w) => ({
+    id: w.id, ids: [...w.querySelectorAll('li.wb-req')].map((li) => li.id),
+    refs: [...w.querySelectorAll('li.wb-req .step-link a')].filter((a) => a.offsetParent !== null).length })));
   const radios = await page.locator('input[type=radio]').count();
   const textareas = await page.locator('textarea').count();
   const toolbars = await page.locator('.wb-toolbar:visible').count();
   const wf = page.locator('#workflow-hbm4-integration');
   await wf.locator('li.wb-req').first().locator('input[value=received]').check();
   await wf.locator('li.wb-req').first().locator('textarea').fill("=cmd|' /C calc'!A0");
+  const downloadsBeforeClick = downloads;
   const [dj] = await Promise.all([page.waitForEvent('download'), wf.getByRole('button', { name: 'Export JSON' }).click()]);
   await dj.saveAs(dir + '/out.json');
   const [dc] = await Promise.all([page.waitForEvent('download'), wf.getByRole('button', { name: 'Export CSV' }).click()]);
   await dc.saveAs(dir + '/out.csv');
+  const otherExports = {};
+  for (const id of ['workflow-bandwidth-comparison', 'workflow-rack-deployment']) {
+    const w = page.locator('#' + id);
+    const [d] = await Promise.all([page.waitForEvent('download'), w.getByRole('button', { name: 'Export JSON' }).click()]);
+    await d.saveAs(dir + '/' + id + '.json');
+    otherExports[id] = JSON.parse(fs.readFileSync(dir + '/' + id + '.json', 'utf8'));
+  }
   const storage = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length, cookie: document.cookie }));
   const first = (p) => p.locator('#ra-01-interface-revision').evaluate((li) => ({
     status: li.querySelector('input[type=radio]:checked').value, note: li.querySelector('textarea').value }));
@@ -396,7 +441,17 @@ const fs = require('fs');
   await wf.locator('li.wb-req').first().locator('input[value=requested]').check();
   await page.reload({ waitUntil: 'load' });
   const afterReload = await first(page);
-  console.log(JSON.stringify({ radios, textareas, toolbars_visible: toolbars, external_or_post_requests: flagged, storage,
+  const nj = await browser.newContext({ javaScriptEnabled: false });
+  const pj = await nj.newPage();
+  await pj.goto(url, { waitUntil: 'load' });
+  const noJs = await pj.evaluate(() => ({ reqs: document.querySelectorAll('li.wb-req').length,
+    controls: document.querySelectorAll('input, textarea, button').length,
+    toolbars_visible: [...document.querySelectorAll('.wb-toolbar')].filter((e) => getComputedStyle(e).display !== 'none').length,
+    noscript_visible: !!document.querySelector('.wb-noscript') && document.querySelector('.wb-noscript').offsetParent !== null,
+    data_link: !!document.querySelector('a[href="/data/industrial-evidence-requests.json"]') }));
+  await nj.close();
+  console.log(JSON.stringify({ browser: { name: browser.browserType().name(), version: browser.version() },
+    reqs, downloads_before_click: downloadsBeforeClick, downloads_total: downloads, other_exports: otherExports, no_js: noJs, radios, textareas, toolbars_visible: toolbars, external_or_post_requests: flagged, storage,
     url_after: page.url(), json: JSON.parse(fs.readFileSync(dir + '/out.json', 'utf8')),
     csv: fs.readFileSync(dir + '/out.csv', 'utf8'), after_clear: afterClear, note_attrs: noteAttrs, print,
     after_print: afterPrint, other_tab: otherTab, after_reload: afterReload }));
