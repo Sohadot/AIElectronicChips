@@ -134,7 +134,7 @@ def render(dossier, registry, releases, log, issues, workbench) -> str:
         "### How to read this dossier",
         "",
         "- **Evidence class.** *A* is an attributed statement: what a named party says, with its date. *C* is bounded analysis: this project's derivation, "
-        "with its assumptions stated. *U* marks an open question. No statement here is a verified fact in the Atlas sense; that would need an independent record type and a named reviewer.",
+        "with its assumptions stated. Open questions are not matrix rows; they are cited by their `u-` identifiers in sections 2 and 7. No statement here is a verified fact in the Atlas sense; that would need an independent record type and a named reviewer.",
         "- **Passage status.** For each cited source, whether the finding's quoted passage was found in the document on the latest inspection run. "
         "A found passage shows the text is still published, not that the claim is correct.",
         "- **Review requirement.** The kind of human review the row needs before it can support a published statement: "
@@ -252,7 +252,7 @@ def render(dossier, registry, releases, log, issues, workbench) -> str:
     out += ["", "## 9. Limitations", "",
             "- The evidence is what the three HBM suppliers, TSMC, JEDEC and NVIDIA chose to publish. No accelerator maker's qualification record, contract or test report was available.",
             "- The JEDEC standard was read as an announcement; the normative documents were not reviewed.",
-            "- Three company filings on SEC EDGAR could not be retrieved by automated inspection, which EDGAR refuses without a declared contact identity. Their passages are carried from the release and have not been rechecked.",
+            "- Three documents hosted on SEC EDGAR could not be retrieved by automated inspection, which EDGAR refuses without a declared contact identity: two company filings (Micron's FY2026 Form 10-K and SK hynix's 424B4 prospectus) and Micron's Q3 FY2026 results release. The registry classifies the results release as a company announcement; on EDGAR it is filed as an exhibit. Their passages are carried from the release and have not been rechecked.",
             "- Passage checks confirm that quoted text is still published. They do not confirm that a claim is correct, current or complete, or that no newer edition exists.",
             "- Every recommendation and reading in this dossier is AI-assisted and has not been reviewed by a person.", "",
             "## 10. Prohibited inferences", "", "Statements the evidence does not support, and why. Each cites the findings or issues it rests on.", ""]

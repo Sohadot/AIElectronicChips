@@ -12,7 +12,7 @@
   "research_question": "What does the public record establish, and fail to establish, about the integration and qualification of named HBM4 memory in a specific AI accelerator package?",
   "scope": {
     "technical": "HBM4 from interface standard to accelerator-maker qualification and volume supply; NVIDIA Rubin is the one accelerator whose maker states HBM4 integration in the reviewed sources",
-    "temporal": "Sources dated 2024-04-19 to 2026-11-05; passages rechecked on 2026-11-11",
+    "temporal": "Sources dated 2024-04-19 to 2026-11-05; on 2026-11-11, passages were rechecked for 21 of the 24 cited sources, and the other three could not be retrieved",
     "geographic": "Disclosures by the three HBM suppliers, TSMC, JEDEC and NVIDIA; no national or regional finding",
     "excluded": [
       "Supplier capacity, pricing and market share",
@@ -212,7 +212,7 @@
       "finding_id": "f-std-interface",
       "stage_id": "st-interface-standard",
       "review_requirement": "normative_text_review",
-      "interpretation": "Defines the reference rate (8 Gb/s, 2048 bits) against which supplier pin speeds are described; it is an announced ceiling, not a shipped-part figure."
+      "interpretation": "Defines the reference rate (8 Gb/s, 2048 bits) against which supplier pin speeds are described; it is an announced ceiling, not a shipped-part figure. The release's access note is kept as recorded: on 2026-11-09 the text was read from a syndicated copy because jedec.org refused retrieval. The inspection runs of 2026-11-10 and 2026-11-11 then retrieved the jedec.org page itself and found all 12 quoted passages there."
     },
     {
       "finding_id": "f-std-channels",
@@ -446,7 +446,7 @@
       "finding_id": "f-mu-stage",
       "stage_id": "st-production-supply",
       "review_requirement": "documentary_verification",
-      "interpretation": "Micron's dated stages; 'qualification samples' are not completed qualification, and the 10-K passage was not retrievable."
+      "interpretation": "Micron's dated stages; 'qualification samples' are not completed qualification. Two of the four Micron sources, the Q3 FY2026 results release and the FY2026 10-K, could not be retrieved, so their passages were not rechecked."
     },
     {
       "finding_id": "f-ss-stage",
@@ -508,7 +508,7 @@
       "dossier_recommendation": "REJECT",
       "reasons": [
         {
-          "reason": "As a technology-level edge it would state that every HBM base die requires an external logic foundry, which generalises two suppliers' own sourcing statements.",
+          "reason": "As a technology-level edge it would state that every HBM base die requires an advanced logic foundry process, as offered by logic foundries, which generalises two suppliers' own sourcing statements.",
           "basis": [
             "f-skh-base-die-2026",
             "f-ss-base-die"

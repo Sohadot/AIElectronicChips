@@ -14,13 +14,13 @@
 **Question.** What does the public record establish, and fail to establish, about the integration and qualification of named HBM4 memory in a specific AI accelerator package?
 
 - **Technical scope:** HBM4 from interface standard to accelerator-maker qualification and volume supply; NVIDIA Rubin is the one accelerator whose maker states HBM4 integration in the reviewed sources.
-- **Time:** Sources dated 2024-04-19 to 2026-11-05; passages rechecked on 2026-11-11.
+- **Time:** Sources dated 2024-04-19 to 2026-11-05; on 2026-11-11, passages were rechecked for 21 of the 24 cited sources, and the other three could not be retrieved.
 - **Geography:** Disclosures by the three HBM suppliers, TSMC, JEDEC and NVIDIA; no national or regional finding.
 - **Excluded:** Supplier capacity, pricing and market share; Any national or company sovereignty position; HBM4E except where it informs HBM4 statements; Export-control classification of any item or transaction.
 
 ### How to read this dossier
 
-- **Evidence class.** *A* is an attributed statement: what a named party says, with its date. *C* is bounded analysis: this project's derivation, with its assumptions stated. *U* marks an open question. No statement here is a verified fact in the Atlas sense; that would need an independent record type and a named reviewer.
+- **Evidence class.** *A* is an attributed statement: what a named party says, with its date. *C* is bounded analysis: this project's derivation, with its assumptions stated. Open questions are not matrix rows; they are cited by their `u-` identifiers in sections 2 and 7. No statement here is a verified fact in the Atlas sense; that would need an independent record type and a named reviewer.
 - **Passage status.** For each cited source, whether the finding's quoted passage was found in the document on the latest inspection run. A found passage shows the text is still published, not that the claim is correct.
 - **Review requirement.** The kind of human review the row needs before it can support a published statement: *Documentary verification*; *Technical review*; *Normative text review*. See section 11.
 
@@ -55,7 +55,7 @@ JEDEC's 2025-04-16 announcement of JESD270-4 (HBM4) states transfer speeds up to
 - **Passage status:** `jedec-jesd270-4-hbm4-standard-2025`: passage found on 2026-11-11.
 - **Scope:** Industry standard as announced; not a statement about shipped products.
 - **Limitations:** Read from a syndicated copy of JEDEC's Business Wire release; jedec.org itself was not reachable; Announcement only: the normative JESD270-4 / JESD270-4A document has not been reviewed.
-- **Reading:** Defines the reference rate (8 Gb/s, 2048 bits) against which supplier pin speeds are described; it is an announced ceiling, not a shipped-part figure.
+- **Reading:** Defines the reference rate (8 Gb/s, 2048 bits) against which supplier pin speeds are described; it is an announced ceiling, not a shipped-part figure. The release's access note is kept as recorded: on 2026-11-09 the text was read from a syndicated copy because jedec.org refused retrieval. The inspection runs of 2026-11-10 and 2026-11-11 then retrieved the jedec.org page itself and found all 12 quoted passages there.
 
 **`f-std-channels`** — A — attributed statement · Normative text review
 
@@ -515,7 +515,7 @@ Micron's reported HBM4 stages: 36GB 12-high samples shipped (2025-06-10); volume
 - **Passage status:** `micron-hbm4-samples-2025`: passage found on 2026-11-11; `micron-hbm4-volume-production-2026`: passage found on 2026-11-11; `micron-q3-fy2026-results-2026`: not retrievable on 2026-11-11; passage not rechecked; `micron-fy2026-form-10-k`: not retrievable on 2026-11-11; passage not rechecked.
 - **Scope:** Micron self-reported status sequence.
 - **Limitations:** 'High-volume' is not quantified, and the lead customer is not named; Qualification samples are not completed qualification; 'Designed for' is not a qualification or allocation disclosure.
-- **Reading:** Micron's dated stages; 'qualification samples' are not completed qualification, and the 10-K passage was not retrievable.
+- **Reading:** Micron's dated stages; 'qualification samples' are not completed qualification. Two of the four Micron sources, the Q3 FY2026 results release and the FY2026 10-K, could not be retrieved, so their passages were not rechecked.
 
 **`f-ss-stage`** — A — attributed statement · Documentary verification
 
@@ -621,7 +621,7 @@ Each of the release's five candidate edges, reassessed against the current corpu
 
 *Candidate statement (attributed statement):* TSMC lists N12 and N3 logic base dies for HBM4, and SK hynix planned to use TSMC's advanced logic process for its HBM4 base die.
 
-- As a technology-level edge it would state that every HBM base die requires an external logic foundry, which generalises two suppliers' own sourcing statements. Basis: `f-skh-base-die-2026`, `f-ss-base-die`.
+- As a technology-level edge it would state that every HBM base die requires an advanced logic foundry process, as offered by logic foundries, which generalises two suppliers' own sourcing statements. Basis: `f-skh-base-die-2026`, `f-ss-base-die`.
 - Micron reports in-house design and manufacture of its base logic die, which contradicts an industry-wide foundry dependency once the filing passage is confirmed. Basis: `f-mu-base-die`.
 - The Atlas has no supplier-level node kind, so the supplier-specific dependency cannot be expressed as this edge. Basis: `atlas:node_types`.
 
@@ -692,7 +692,7 @@ From IDE-010 workflow A (HBM4 integration evidence request), mapped to the stage
 
 - The evidence is what the three HBM suppliers, TSMC, JEDEC and NVIDIA chose to publish. No accelerator maker's qualification record, contract or test report was available.
 - The JEDEC standard was read as an announcement; the normative documents were not reviewed.
-- Three company filings on SEC EDGAR could not be retrieved by automated inspection, which EDGAR refuses without a declared contact identity. Their passages are carried from the release and have not been rechecked.
+- Three documents hosted on SEC EDGAR could not be retrieved by automated inspection, which EDGAR refuses without a declared contact identity: two company filings (Micron's FY2026 Form 10-K and SK hynix's 424B4 prospectus) and Micron's Q3 FY2026 results release. The registry classifies the results release as a company announcement; on EDGAR it is filed as an exhibit. Their passages are carried from the release and have not been rechecked.
 - Passage checks confirm that quoted text is still published. They do not confirm that a claim is correct, current or complete, or that no newer edition exists.
 - Every recommendation and reading in this dossier is AI-assisted and has not been reviewed by a person.
 
