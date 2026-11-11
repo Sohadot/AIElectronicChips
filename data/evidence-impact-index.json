@@ -1081,7 +1081,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -1141,7 +1141,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_inaccessible"
@@ -1225,7 +1225,7 @@
         "product_architecture"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -1279,7 +1279,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -1343,7 +1343,7 @@
       "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
       "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_inaccessible"
@@ -2056,7 +2056,7 @@
       "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
       "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2439,7 +2439,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2500,7 +2500,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2562,7 +2562,7 @@
         "product_architecture"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2605,7 +2605,7 @@
         "product_architecture"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2659,7 +2659,7 @@
       "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
       "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2702,7 +2702,7 @@
       "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
       "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2744,7 +2744,7 @@
       "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
       "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2787,7 +2787,7 @@
       "freshness_basis": "Period-bound filing: historically valid for its period; a later filing may supersede it for current use",
       "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_inaccessible"
@@ -2831,7 +2831,7 @@
         "product_architecture"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2878,7 +2878,7 @@
       "freshness_basis": "Dated company statement: historically attributable; recheck before treating as current",
       "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2924,7 +2924,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2976,7 +2976,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -3029,7 +3029,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -3084,7 +3084,7 @@
         "product_architecture"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -3339,10 +3339,11 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
-          "source_inaccessible"
+          "source_retrieved",
+          "source_content_compared"
         ]
       },
       "direct": {
