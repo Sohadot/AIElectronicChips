@@ -9,6 +9,7 @@
     "data/reference-pathways.json",
     "data/source-inspections.json",
     "data/evidence-conflicts.json",
+    "data/evidence-reconciliations-*.json",
     "public reference pages"
   ],
   "boundary": "Reference-impact index, not a dependency graph. Each entry names review targets if a source changes; candidate Atlas relationships are excluded and nothing here approves or updates a claim.",
@@ -27,13 +28,14 @@
       "status": "active",
       "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
       "priority_reasons": [
+        "in_open_conflict",
         "multiple_versions_known",
         "product_architecture",
         "used_across_releases",
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -98,12 +100,61 @@
       "conflicts": [
         "ec-mi300x-infinity-fabric-scope"
       ],
+      "reconciliations": [
+        "rc-009-mi300x-infinity-fabric"
+      ],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
         "Recheck the listed pathway steps' scope, limitations and evidence class",
         "Recheck the listed comparison verdicts and their figures",
-        "Reassess the listed conflict-register issues"
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "amd-cdna4-white-paper-2025",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-11",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [
+          "/interconnects/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-mi300x-infinity-fabric-scope"
+      ],
+      "reconciliations": [
+        "rc-009-mi300x-infinity-fabric"
+      ],
+      "revalidate": [
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
       ],
       "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
     },
@@ -147,6 +198,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -189,6 +241,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -200,13 +253,15 @@
       "status": "active",
       "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
       "priority_reasons": [
+        "in_open_conflict",
         "multiple_versions_known"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
-          "source_retrieved"
+          "source_retrieved",
+          "source_content_compared"
         ]
       },
       "direct": {
@@ -228,6 +283,7 @@
       "conflicts": [
         "ec-mi300x-infinity-fabric-scope"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Reassess the listed conflict-register issues"
       ],
@@ -238,19 +294,23 @@
       "status": "active",
       "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
       "priority_reasons": [
+        "in_open_conflict",
         "multiple_versions_known"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
-          "source_retrieved"
+          "source_retrieved",
+          "source_content_compared"
         ]
       },
       "direct": {
         "findings": [],
         "releases": [],
-        "reference_pages": [],
+        "reference_pages": [
+          "/interconnects/"
+        ],
         "pathway_steps": [],
         "comparisons": [],
         "dossier_requirements": []
@@ -264,8 +324,58 @@
       "conflicts": [
         "ec-mi300x-infinity-fabric-scope"
       ],
+      "reconciliations": [
+        "rc-009-mi300x-infinity-fabric"
+      ],
       "revalidate": [
-        "Reassess the listed conflict-register issues"
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-platform-data-sheet-2023",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-11",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [
+          "/interconnects/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-mi300x-infinity-fabric-scope"
+      ],
+      "reconciliations": [
+        "rc-009-mi300x-infinity-fabric"
+      ],
+      "revalidate": [
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
       ],
       "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
     },
@@ -316,6 +426,7 @@
       "conflicts": [
         "ec-hbm4-package-qualification"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -356,6 +467,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -367,12 +479,11 @@
       "freshness_basis": "Regulatory announcement: check the current consolidated rule text before any current-law statement",
       "priority_reasons": [
         "in_open_conflict",
-        "multiple_versions_known",
         "regulatory_current_law",
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -412,11 +523,15 @@
       "conflicts": [
         "ec-hbm-export-control-currency"
       ],
+      "reconciliations": [
+        "rc-009-hbm-export-control-currency"
+      ],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
         "Recheck the listed pathway steps' scope, limitations and evidence class",
-        "Reassess the listed conflict-register issues"
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
       ],
       "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
     },
@@ -451,6 +566,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -487,6 +603,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Recheck every statement on the listed reference pages that cites this source"
       ],
@@ -542,6 +659,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -588,6 +706,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -631,6 +750,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -676,6 +796,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -688,20 +809,22 @@
       "freshness_basis": "Legal text: check for amendments and the version in force before any current-law statement",
       "priority_reasons": [
         "in_open_conflict",
-        "multiple_versions_known",
         "regulatory_current_law"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
-          "source_retrieved"
+          "source_retrieved",
+          "source_content_compared"
         ]
       },
       "direct": {
         "findings": [],
         "releases": [],
-        "reference_pages": [],
+        "reference_pages": [
+          "/ai-chip-infrastructure/"
+        ],
         "pathway_steps": [],
         "comparisons": [],
         "dossier_requirements": []
@@ -709,14 +832,20 @@
       "contextual": {
         "unresolved_checked": [],
         "listed_on_pages": [
+          "/export-control-layer/",
           "/sources/"
         ]
       },
       "conflicts": [
         "ec-hbm-export-control-currency"
       ],
+      "reconciliations": [
+        "rc-009-hbm-export-control-currency"
+      ],
       "revalidate": [
-        "Reassess the listed conflict-register issues"
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
       ],
       "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
     },
@@ -726,20 +855,22 @@
       "freshness_basis": "Legal text: check for amendments and the version in force before any current-law statement",
       "priority_reasons": [
         "in_open_conflict",
-        "multiple_versions_known",
         "regulatory_current_law"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
-          "source_retrieved"
+          "source_retrieved",
+          "source_content_compared"
         ]
       },
       "direct": {
         "findings": [],
         "releases": [],
-        "reference_pages": [],
+        "reference_pages": [
+          "/ai-chip-infrastructure/"
+        ],
         "pathway_steps": [],
         "comparisons": [],
         "dossier_requirements": []
@@ -747,14 +878,20 @@
       "contextual": {
         "unresolved_checked": [],
         "listed_on_pages": [
+          "/export-control-layer/",
           "/sources/"
         ]
       },
       "conflicts": [
         "ec-hbm-export-control-currency"
       ],
+      "reconciliations": [
+        "rc-009-hbm-export-control-currency"
+      ],
       "revalidate": [
-        "Reassess the listed conflict-register issues"
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
       ],
       "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
     },
@@ -789,6 +926,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -822,6 +960,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -857,6 +996,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -890,6 +1030,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -925,6 +1066,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -982,6 +1124,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1032,6 +1175,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1067,6 +1211,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -1116,6 +1261,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1181,6 +1327,7 @@
       "conflicts": [
         "ec-hbm4-package-qualification"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1226,6 +1373,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -1260,6 +1408,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -1304,6 +1453,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -1322,7 +1472,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -1377,6 +1527,7 @@
         "ec-nvlink6-per-gpu",
         "ec-rubin-memory-bandwidth"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1473,6 +1624,7 @@
         "ec-gb200-power-redundancy",
         "ec-scalable-unit-power"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1553,6 +1705,7 @@
         "ec-gb200-power-redundancy",
         "ec-scalable-unit-power"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1589,6 +1742,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -1647,11 +1801,60 @@
       "conflicts": [
         "ec-gb200-busbar-rack-power"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
         "Recheck the listed pathway steps' scope, limitations and evidence class",
         "Reassess the listed conflict-register issues"
+      ],
+      "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
+    },
+    {
+      "source_id": "nvidia-hgx-platform-product-page-2026",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
+      "priority_reasons": [
+        "in_open_conflict",
+        "multiple_versions_known"
+      ],
+      "latest_inspection": {
+        "inspected_at": "2026-11-11",
+        "states": [
+          "metadata_validated",
+          "source_retrieved",
+          "source_content_compared"
+        ]
+      },
+      "direct": {
+        "findings": [],
+        "releases": [],
+        "reference_pages": [
+          "/hbm-memory/",
+          "/interconnects/"
+        ],
+        "pathway_steps": [],
+        "comparisons": [],
+        "dossier_requirements": []
+      },
+      "contextual": {
+        "unresolved_checked": [],
+        "listed_on_pages": [
+          "/sources/"
+        ]
+      },
+      "conflicts": [
+        "ec-nvlink6-per-gpu",
+        "ec-rubin-memory-bandwidth"
+      ],
+      "reconciliations": [
+        "rc-009-nvlink6-per-gpu",
+        "rc-009-rubin-memory-bandwidth"
+      ],
+      "revalidate": [
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
       ],
       "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
     },
@@ -1710,6 +1913,7 @@
       "conflicts": [
         "ec-mission-control-orchestration-versions"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1762,6 +1966,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1836,6 +2041,7 @@
       "conflicts": [
         "ec-mission-control-orchestration-versions"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1878,6 +2084,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -1896,7 +2103,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -1954,6 +2161,7 @@
         "ec-nvlink6-per-gpu",
         "ec-rubin-memory-bandwidth"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -1975,7 +2183,7 @@
         "used_in_pathways"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
           "source_retrieved",
@@ -2041,6 +2249,7 @@
         "ec-nvlink6-per-gpu",
         "ec-rubin-memory-bandwidth"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2059,16 +2268,19 @@
         "multiple_versions_known"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-11",
         "states": [
           "metadata_validated",
-          "source_retrieved"
+          "source_retrieved",
+          "source_content_compared"
         ]
       },
       "direct": {
         "findings": [],
         "releases": [],
-        "reference_pages": [],
+        "reference_pages": [
+          "/interconnects/"
+        ],
         "pathway_steps": [],
         "comparisons": [],
         "dossier_requirements": []
@@ -2083,8 +2295,14 @@
         "ec-nvlink6-per-gpu",
         "ec-rubin-memory-bandwidth"
       ],
+      "reconciliations": [
+        "rc-009-nvlink6-per-gpu",
+        "rc-009-rubin-memory-bandwidth"
+      ],
       "revalidate": [
-        "Reassess the listed conflict-register issues"
+        "Recheck every statement on the listed reference pages that cites this source",
+        "Reassess the listed conflict-register issues",
+        "Recheck the public text and pathway values set by the listed reconciliations"
       ],
       "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined."
     },
@@ -2135,6 +2353,7 @@
       "conflicts": [
         "ec-gb200-coolant-specification"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2171,6 +2390,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -2204,6 +2424,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -2260,6 +2481,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2322,6 +2544,7 @@
       "conflicts": [
         "ec-hbm4-package-qualification"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2367,6 +2590,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2421,6 +2645,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2464,6 +2689,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2505,6 +2731,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2547,6 +2774,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2588,6 +2816,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2636,6 +2865,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2678,6 +2908,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2728,6 +2959,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2779,6 +3011,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2834,6 +3067,7 @@
       "conflicts": [
         "ec-hbm4-package-qualification"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -2881,6 +3115,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2922,6 +3157,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -2962,6 +3198,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -3016,6 +3253,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -3082,6 +3320,7 @@
       "conflicts": [
         "ec-cowos-l-5p5-reticle"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -3138,6 +3377,7 @@
       "conflicts": [
         "ec-hbm4-package-qualification"
       ],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -3188,6 +3428,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -3240,6 +3481,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -3287,6 +3529,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -3333,6 +3576,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -3378,6 +3622,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -3422,6 +3667,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"
@@ -3471,6 +3717,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source",
@@ -3507,6 +3754,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -3543,6 +3791,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "No finding, page citation or pathway step rests on this source; record the change in the inspection log"
       ],
@@ -3584,6 +3833,7 @@
         ]
       },
       "conflicts": [],
+      "reconciliations": [],
       "revalidate": [
         "Re-read the quoted passages behind each direct finding against the changed source",
         "Recheck every statement on the listed reference pages that cites this source"

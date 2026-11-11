@@ -102,7 +102,7 @@ def extract_text(content_type: str, body: bytes) -> str:
 
 
 def quoted_passages(source_id: str) -> list[dict]:
-    """Every passage a release finding quotes from this source, with where it is quoted."""
+    """Every passage quoted from this source by a release finding, the conflict register or a reconciliation record."""
     out = []
     for path in sorted(RESEARCH_DIR.glob("*.json")):
         release = json.loads(path.read_text(encoding="utf-8"))
@@ -110,7 +110,16 @@ def quoted_passages(source_id: str) -> list[dict]:
             for ev in finding.get("evidence", []):
                 if ev.get("source_id") == source_id:
                     for quote in QUOTED.findall(ev.get("locator", "")):
-                        out.append({"finding_id": finding["id"], "passage": quote})
+                        out.append({"cited_in": finding["id"], "passage": quote})
+    for path in [ROOT / "data" / "evidence-conflicts.json", *sorted((ROOT / "data").glob("evidence-reconciliations-*.json"))]:
+        if not path.is_file():
+            continue
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for item in data.get("issues", []) + data.get("reconciliations", []):
+            for ev in item.get("evidence", []) + item.get("new_evidence", []):
+                if ev.get("source_id") == source_id:
+                    for quote in QUOTED.findall(ev.get("locator", "")):
+                        out.append({"cited_in": item["id"], "passage": quote})
     return out
 
 
@@ -155,7 +164,7 @@ def inspect(source: dict, date: str, fetcher: Fetcher = fetch) -> dict:
         "retrievals": retrievals,
         "passage_check": {"quoted_passages": len(passages), "found": len(found), "found_after_hyphenation_fallback": len(loose),
                           "found_after_character_fallback": len(chars),
-                          "not_found": [{"finding_id": p["finding_id"], "passage": p["passage"]} for p in missing]}
+                          "not_found": [{"cited_in": p["cited_in"], "passage": p["passage"]} for p in missing]}
         if retrieved and passages else None,
     }
 

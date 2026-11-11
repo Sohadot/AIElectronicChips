@@ -210,6 +210,9 @@ def render(model, registry, unresolved, releases) -> str:
                 out.append(f"<dt>Open questions</dt><dd><ul>{qs}</ul></dd>")
             if st["next_evidence"]:
                 out.append(f'<dt>Next evidence</dt><dd>{e(st["next_evidence"])}</dd>')
+            if st.get("reconciliations"):
+                links = ", ".join(f'<a href="/sources/#{r}">{e(r)}</a>' for r in st["reconciliations"])
+                out.append(f"<dt>Reconciled 2026-11-11</dt><dd>Wording updated against newly retrieved primary evidence: {links}</dd>")
             if MAINTENANCE.get(st["id"]):
                 notes = "".join(f'<li><a href="/sources/#{i["id"]}">{e(i["title"])}</a>: {ISSUE_STATE[i["state"]]}</li>'
                                 for i in MAINTENANCE[st["id"]])
@@ -226,8 +229,10 @@ def render(model, registry, unresolved, releases) -> str:
                 figs = " vs ".join(e(f["value"]) for f in cmp["figures"])
                 fids = ", ".join(sorted({f"<code>{f['finding_id']}</code>" for f in cmp["figures"]}))
                 css = {"valid": "tag-s", "conditional": "tag-c", "unsupported": "tag-u"}[cmp["verdict"]]
-                out.append(f'<tr><th scope="row">{figs}</th><td><span class="tag {css}">{VERDICT_LABEL[cmp["verdict"]]}</span></td>'
-                           f'<td>{e(cmp["reason"])}</td><td>{fids}</td></tr>')
+                note = ("".join(f' <a href="/sources/#{r}">Reconciled: {e(r)}</a>' for r in cmp["reconciliations"])
+                        if cmp.get("reconciliations") else "")
+                out.append(f'<tr id="{cmp["id"]}"><th scope="row">{figs}</th><td><span class="tag {css}">{VERDICT_LABEL[cmp["verdict"]]}</span></td>'
+                           f'<td>{e(cmp["reason"])}{note}</td><td>{fids}</td></tr>')
             out.append("</tbody></table></div>")
         if pw.get("evidence_ladder"):
             out.append('<h3>What each stronger statement would need</h3><div class="table-scroll" tabindex="0" role="region" '

@@ -54,6 +54,8 @@ MODEL_FIELDS = {"model_id", "schema_version", "release", "status", "compiled_at"
 PATHWAY_FIELDS = {"id", "title", "research_question", "technical_purpose", "ontology_layers", "evidence_release_ids", "scope",
                   "assumptions", "limitations", "steps", "statements", "next_evidence"}
 OPTIONAL_PATHWAY_FIELDS = {"comparisons", "evidence_ladder"}
+# IDE-009: a step or comparison changed by a post-release reconciliation names it; its sources stay the original ones.
+OPTIONAL_STEP_FIELDS = {"reconciliations"}
 STEP_FIELDS = {"id", "title", "route", "anchor", "ontology_layer", "evidence_class", "relevance", "release_id", "finding_ids",
                "source_ids", "scope", "limitations", "unresolved_ids", "next_evidence"}
 SCOPE_FIELDS = {"technical", "temporal", "geographic"}
@@ -223,7 +225,7 @@ def check_model(model: object, registry: dict, atlas: dict, releases: dict[str, 
         used_layers, used_releases = set(), set()
         for j, st in enumerate(steps):
             swhere = f"{where}.steps[{j}]"
-            if not isinstance(st, dict) or set(st) != STEP_FIELDS:
+            if not isinstance(st, dict) or not STEP_FIELDS <= set(st) or set(st) - STEP_FIELDS - OPTIONAL_STEP_FIELDS:
                 errors.append(f"{swhere} must contain exactly {sorted(STEP_FIELDS)}")
                 continue
             swhere = f"{where}.{st['id']}"
@@ -327,7 +329,7 @@ def check_model(model: object, registry: dict, atlas: dict, releases: dict[str, 
         # Comparisons: each figure appears in the finding it cites.
         for k, cmp in enumerate(pw.get("comparisons", [])):
             cwhere = f"{where}.comparisons[{k}]"
-            if not isinstance(cmp, dict) or set(cmp) != {"id", "verdict", "figures", "reason"}:
+            if not isinstance(cmp, dict) or not {"id", "verdict", "figures", "reason"} <= set(cmp) or set(cmp) - {"id", "verdict", "figures", "reason", "reconciliations"}:
                 errors.append(f"{cwhere} must contain id, verdict, figures and reason")
                 continue
             if cmp["verdict"] not in VERDICTS or not nonempty(cmp["reason"]):

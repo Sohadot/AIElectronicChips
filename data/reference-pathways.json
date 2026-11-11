@@ -464,7 +464,10 @@
           "unresolved_ids": [
             "u-rubin-bandwidth"
           ],
-          "next_evidence": "An NVIDIA specification stating which figure applies and on what basis"
+          "next_evidence": "An NVIDIA specification stating which figure applies and on what basis",
+          "reconciliations": [
+            "rc-009-rubin-memory-bandwidth"
+          ]
         },
         {
           "id": "b3-on-package",
@@ -518,12 +521,15 @@
             "geographic": "Not geographically specific"
           },
           "limitations": [
-            "Ratios depend on the unresolved scope of AMD's 896 GB/s figure"
+            "Ratios depend on whether AMD's bidirectional 896 GB/s figure is per GPU, which AMD does not state"
           ],
           "unresolved_ids": [
             "u-i-amd-link-scope"
           ],
-          "next_evidence": "AMD confirmation of whether 896 GB/s is a per-GPU, both-direction sum"
+          "next_evidence": "AMD confirmation of whether 896 GB/s is a per-GPU, both-direction sum",
+          "reconciliations": [
+            "rc-009-mi300x-infinity-fabric"
+          ]
         },
         {
           "id": "b5-scale-up",
@@ -551,14 +557,18 @@
             "geographic": "Not geographically specific"
           },
           "limitations": [
-            "AMD does not state whether 896 GB/s is per GPU or per platform, or its direction",
-            "NVIDIA gives 3.6 TB/s and 3.0 TB/s for NVLink 6 per Rubin GPU"
+            "AMD states that 896 GB/s is bidirectional but not whether it is per GPU or per platform",
+            "NVIDIA gives 3.6 TB/s and 3.0 TB/s for NVLink 6 per Rubin GPU, and its current product pages split the same way"
           ],
           "unresolved_ids": [
             "u-i-amd-link-scope",
             "u-i-nvlink6-figure"
           ],
-          "next_evidence": "Per-link bandwidth, direction and encoding disclosures from AMD and NVIDIA"
+          "next_evidence": "Per-link bandwidth, direction and encoding disclosures from AMD and NVIDIA",
+          "reconciliations": [
+            "rc-009-mi300x-infinity-fabric",
+            "rc-009-nvlink6-per-gpu"
+          ]
         },
         {
           "id": "b6-host",
@@ -686,7 +696,10 @@
               "finding_id": "f-nv-rubin-192"
             }
           ],
-          "reason": "Both are NVIDIA per-GPU memory figures for Rubin, but they conflict; either can be used only with its date and source until NVIDIA resolves which applies."
+          "reason": "Both are NVIDIA per-GPU memory figures for Rubin, but they conflict, and NVIDIA's current product pages split the same way (22 TB/s on HGX, 19.2 TB/s on Vera Rubin NVL72); either can be used only with its date and source until NVIDIA explains the difference.",
+          "reconciliations": [
+            "rc-009-rubin-memory-bandwidth"
+          ]
         },
         {
           "id": "cmp-mi300x-vs-rubin-memory",
@@ -716,7 +729,11 @@
               "finding_id": "i-nvidia-nvlink6-figures"
             }
           ],
-          "reason": "AMD does not state whether 896 GB/s is per GPU or per platform, or its direction, so it cannot be set against NVIDIA's per-GPU bidirectional figure."
+          "reason": "AMD states that 896 GB/s is bidirectional but not whether it is per GPU or per platform, and NVIDIA publishes NVLink 6 per Rubin GPU as both 3.6 TB/s and 3 TB/s; across two vendors and two generations, the pair shows neither relative fabric capability nor achieved bandwidth.",
+          "reconciliations": [
+            "rc-009-mi300x-infinity-fabric",
+            "rc-009-nvlink6-per-gpu"
+          ]
         },
         {
           "id": "cmp-memory-vs-scale-up",
@@ -746,7 +763,10 @@
               "finding_id": "i-nvidia-nvlink6-figures"
             }
           ],
-          "reason": "One is a GB200 NVL72 rack aggregate and the other a per-GPU Rubin figure: different scopes and different generations."
+          "reason": "One is a GB200 NVL72 rack aggregate and the other a per-GPU Rubin figure that NVIDIA also publishes as 3 TB/s: different scopes and different generations.",
+          "reconciliations": [
+            "rc-009-nvlink6-per-gpu"
+          ]
         },
         {
           "id": "cmp-scale-up-vs-scale-out",
@@ -761,7 +781,10 @@
               "finding_id": "i-an-units-and-directions"
             }
           ],
-          "reason": "Comparable only after converting bits to bytes; the ratio is about 9x or 18x depending on the unstated direction of the 1.6 Tb/s figure."
+          "reason": "Comparable only after converting bits to bytes; the ratio is about 9x or 18x depending on the unstated direction of the 1.6 Tb/s figure, and it uses the 3.6 TB/s NVLink 6 figure, which NVIDIA also publishes as 3 TB/s.",
+          "reconciliations": [
+            "rc-009-nvlink6-per-gpu"
+          ]
         },
         {
           "id": "cmp-cxl-vs-pcie6",
@@ -796,7 +819,7 @@
           ]
         },
         {
-          "text": "Whether AMD's 896 GB/s figure is per GPU or per platform, and in which direction, remains unresolved.",
+          "text": "Whether AMD's 896 GB/s figure is per GPU or per platform remains unresolved; AMD states that it is bidirectional.",
           "classification": "unresolved",
           "basis": [
             "u-i-amd-link-scope"
@@ -1089,13 +1112,16 @@
             "geographic": "Not geographically specific"
           },
           "limitations": [
-            "The current rule text and later amendments were not reviewed",
+            "Beyond the 2024 announcement, only two current sections, 15 CFR 742.6 and 740.25, were reviewed (2026-11-11); other applicable provisions were not",
             "Not legal advice"
           ],
           "unresolved_ids": [
             "u-d-access-current-rules"
           ],
-          "next_evidence": "The current regulations and a determination for a named transaction"
+          "next_evidence": "The other provisions that apply to a named item, such as its ECCN entry, and a determination for a named transaction",
+          "reconciliations": [
+            "rc-009-hbm-export-control-currency"
+          ]
         },
         {
           "id": "c9-evidence-states",

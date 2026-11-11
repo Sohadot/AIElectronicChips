@@ -20,6 +20,13 @@
       "tool": "scripts/inspect_sources.py",
       "method": "Metadata checks on every registry record. Retrieval of each canonical URL (and listed pages of multi-page documents) with a declared, honest user agent; one attempt per URL, no browser impersonation. Text extracted from HTML, or from PDF in reading-order and layout modes, and searched for every passage quoted by release findings, with recorded fallbacks for hyphenation and typographic marks.",
       "scope": "All 73 registry records"
+    },
+    {
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "tool": "scripts/inspect_sources.py",
+      "method": "Same method as the 2026-11-10 run. Passages are now also taken from the conflict register and the IDE-009 reconciliation record, so register and reconciliation quotes are checked against the retrieved documents.",
+      "scope": "The 13 sources cited by the four IDE-009 reconciliations, including three AMD and NVIDIA documents registered in IDE-009"
     }
   ],
   "records": [
@@ -2328,6 +2335,458 @@
         "All 2 quoted passages were found in the retrieved document; 1 matched only after ignoring typographic marks. This shows the passages are still published, not that the claims are still correct."
       ],
       "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "amd-cdna3-white-paper-2025",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf",
+          "content_type": "application/pdf",
+          "bytes": 8096236,
+          "sha256": "a0811d04f101f9127bd183d6e228f462b6fd988b0e0e6d263a25e4bed712f593",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 33,
+        "found": 33,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 33 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-data-sheet-2025",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf",
+          "content_type": "application/pdf",
+          "bytes": 1855742,
+          "sha256": "60d78bc2849cd7c3a34aa17fdbcd263c44c0447d597895ab41d2832ab740c7ab",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 4,
+        "found": 4,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 4 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-platform-data-sheet-2023",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-platform-data-sheet.pdf",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-platform-data-sheet.pdf",
+          "content_type": "application/pdf",
+          "bytes": 1885331,
+          "sha256": "a0697897123278ae905114466464db359e9f875a1f1ae535c4c7e365fbe89481",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 6 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record.",
+        "Registered in IDE-009. Calls 896 GB/s a peak aggregate bidirectional figure for the ring of eight and lists 7x 128 GB/s per GPU."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "amd-cdna4-white-paper-2025",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf",
+          "content_type": "application/pdf",
+          "bytes": 2561194,
+          "sha256": "613e3418d2d1aa0b9cda417fe1e6798f69d0da0f7c8614531b160b66cbb716ac",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record.",
+        "Registered in IDE-009. The retrieved edition (revision dated 9/28/2026) contains endnotes MI350-002, -005, -051, -052 and -053; endnote MI350-007 and any 896 GB/s statement are absent."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "amd-instinct-mi300x-accelerator-2023",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+          "http_status": 200,
+          "final_url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+          "content_type": "text/html",
+          "bytes": 227158,
+          "sha256": "528cc36eead66af9122802a7bab13cf7a7d4c41e72caf65d2081890f2d284d61",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 1,
+        "found": 1,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 1 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "nvidia-rubin-platform-architecture-2026",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "content_type": "text/html",
+          "bytes": 663733,
+          "sha256": "397ce3976fa3363e2943c6fb369ef07fc8b580bbb3dc03d93528489fb6c98ab7",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 23,
+        "found": 23,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 23 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "nvidia-rubin-gpu-architecture-2026",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
+          "content_type": "text/html",
+          "bytes": 347538,
+          "sha256": "5017f634554a2539ef19db204e062a69ad8a764ccb4d1f2720d77f2cf511c7a3",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 16,
+        "found": 16,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 16 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "nvidia-co-design-memory-2026",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory",
+          "content_type": "text/html",
+          "bytes": 321714,
+          "sha256": "795392af50bc8cca21013e085d54d79a06325300a2bc797741ac325327b41c0b",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 7,
+        "found": 7,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 7 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "nvidia-vera-rubin-nvl72-product-page-2026",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/",
+          "http_status": 200,
+          "final_url": "https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/",
+          "content_type": "text/html",
+          "bytes": 293237,
+          "sha256": "2b53497ec0f39b51b1070519fab4990eaa5a09c43050cf7810ac19482ac939cb",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 4,
+        "found": 4,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 4 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "nvidia-hgx-platform-product-page-2026",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.nvidia.com/en-us/data-center/hgx/",
+          "http_status": 200,
+          "final_url": "https://www.nvidia.com/en-us/data-center/hgx/",
+          "content_type": "text/html",
+          "bytes": 331233,
+          "sha256": "6a31aa1e457781c82ee177f7074fcd2f90d312c6591b7bda6052506aa8cd64b2",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 8,
+        "found": 8,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 8 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record.",
+        "Registered in IDE-009. Individual Rubin GPU: 288 GB HBM4 at 22 TB/s and 3.6 TB/s NVLink; HGX Rubin NVL8: 2 TB HBM4 at 130 TB/s and 24 TB/s NVLink switch bandwidth."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "ecfr-15-cfr-742-6-2026",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-742/section-742.6",
+          "http_status": 200,
+          "final_url": "https://unblock.federalregister.gov/",
+          "content_type": "text/html",
+          "bytes": 10596,
+          "sha256": "59bbddfd8c81ce8a6bd669e561406d6cc693a6238dc6c750d29458a97563de7a",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=742&section=742.6",
+          "http_status": 200,
+          "final_url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?subtitle=B&chapter=VII&subchapter=C&part=742&section=742.6",
+          "content_type": "text/html",
+          "bytes": 66177,
+          "sha256": "c9cb8f5ecc4ff9d0bd83254b8b4fef585b695f838fe2bfa0408766373da06a50",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record.",
+        "Version history unchanged: latest amendment still 2026-07-23; eCFR Title 15 up to date as of 2026-11-09."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "ecfr-15-cfr-740-25-2024",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-740/section-740.25",
+          "http_status": 200,
+          "final_url": "https://unblock.federalregister.gov/",
+          "content_type": "text/html",
+          "bytes": 10596,
+          "sha256": "51cbeb41ec126874b175387de8e435a71045d3926ec54da2b6c3c7d47ca38e51",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=740&section=740.25",
+          "http_status": 200,
+          "final_url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?subtitle=B&chapter=VII&subchapter=C&part=740&section=740.25",
+          "content_type": "text/html",
+          "bytes": 11769,
+          "sha256": "fabd6c52dffe865a8691c9543702d845354aae29ad87a99ddb5088baf92d9f60",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record.",
+        "Version history unchanged: single version dated 2024-12-05."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "bis-advanced-semiconductor-controls-2024",
+      "run_id": "ide-009-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
+          "http_status": 200,
+          "final_url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
+          "content_type": "text/html",
+          "bytes": 73996,
+          "sha256": "18da1048edb1b6a4d09053365f3bb2147b08c3035c17b646218fe62a9fb76bb9",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 5,
+        "found": 5,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 5 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
+      ],
+      "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
     }
   ]
 }

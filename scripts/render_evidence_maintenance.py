@@ -18,6 +18,7 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
 PAGE = ROOT / "sources" / "index.html"
 START, END = "<!-- evidence-maintenance:start -->", "<!-- evidence-maintenance:end -->"
 e = html.escape
@@ -46,11 +47,16 @@ def ref_link(ref: str) -> str:
 def render() -> str:
     log, register, impact = load("source-inspections.json"), load("evidence-conflicts.json"), load("evidence-impact-index.json")
     registry = {s["id"]: s for s in load("source-registry.json")["source_records"]}
-    run = log["runs"][-1]
+    runs = log["runs"]
+    run = runs[-1]
     records = log["records"]
-    counts = Counter(s for r in records for s in r["states"])
-    passages = sum(r["passage_check"]["quoted_passages"] for r in records if r["passage_check"])
-    found = sum(r["passage_check"]["found"] for r in records if r["passage_check"])
+    by_run = {r["run_id"]: [x for x in records if x["run_id"] == r["run_id"]] for r in runs}
+    counts = {rid: Counter(s for r in recs for s in r["states"]) for rid, recs in by_run.items()}
+    full = runs[0]
+    passages = sum(r["passage_check"]["quoted_passages"] for r in by_run[full["run_id"]] if r["passage_check"])
+    found = sum(r["passage_check"]["found"] for r in by_run[full["run_id"]] if r["passage_check"])
+    recon_path = ROOT / "data" / "evidence-reconciliations-009.json"
+    recon = json.loads(recon_path.read_text(encoding="utf-8")) if recon_path.is_file() else None
     out = [START]
     out.append('<section class="reference-sections" id="evidence-maintenance" aria-labelledby="maintenance-title">')
     # 08: method and states
@@ -59,23 +65,27 @@ def render() -> str:
     out.append(f'<div class="framing-note"><strong>Inspected: {e(run["inspected_at"])}</strong><span>An inspection checks a source record and '
                'whether its quoted passages are still published. It is not a review of the claims those passages support, and no human '
                'scientific review is recorded for any source. Access dates in the registry are not changed by an inspection.</span></div>')
-    out.append(f'<p class="detail">{e(run["method"])}</p>')
+    for r in runs:
+        out.append(f'<p class="detail"><strong>Run {e(r["inspected_at"])}.</strong> {e(r["scope"])}. {e(r["method"])}</p>')
     out.append('<p class="detail">Dates are kept apart. A source has a publication or effective date, the date it was accessed for the '
                'claims it supports, and the date of each inspection. A claim is assessed in its own release, and scientific review would '
                'be a further date that no record yet carries. An old publication date does not make a historical claim wrong. A recent one '
                'does not make a figure suitable for a current comparison.</p>')
+    heads = "".join(f'<th scope="col">{e(r["inspected_at"])} ({len(by_run[r["run_id"]])} records)</th>' for r in runs)
     out.append('<div class="table-scroll" tabindex="0" role="region" aria-label="Inspection states (scrollable table)"><table class="data-table">'
-               f'<caption>Inspection states recorded on {e(run["inspected_at"])} for the {len(records)} registry records. A record can carry several states.</caption>'
-               '<thead><tr><th scope="col">State</th><th scope="col">Meaning</th><th scope="col">Records</th></tr></thead><tbody>')
+               '<caption>Inspection states recorded in each run. Each run keeps its own records; a record can carry several states.</caption>'
+               f'<thead><tr><th scope="col">State</th><th scope="col">Meaning</th>{heads}</tr></thead><tbody>')
     for key, meaning in log["state_definitions"].items():
-        out.append(f'<tr><th scope="row">{STATE_LABEL[key]}</th><td>{e(meaning)}</td><td>{counts.get(key, 0)}</td></tr>')
+        cells = "".join(f"<td>{counts[r['run_id']].get(key, 0)}</td>" for r in runs)
+        out.append(f'<tr><th scope="row">{STATE_LABEL[key]}</th><td>{e(meaning)}</td>{cells}</tr>')
     out.append("</tbody></table></div>")
-    out.append(f'<p class="detail">Of {passages} passages that release findings quote from retrieved sources, {found} were found in the '
+    out.append(f'<p class="detail">In the {e(full["inspected_at"])} run over the whole registry, {found} of {passages} passages that release findings quote from retrieved sources were found in the '
                'documents as published on the inspection date. That shows the passages are still there. It does not show the claims are '
                'still correct, or that no newer edition exists. Machine-readable files: '
                '<a href="/data/source-inspections.json">source-inspections.json</a>, '
-               '<a href="/data/evidence-conflicts.json">evidence-conflicts.json</a> and '
-               '<a href="/data/evidence-impact-index.json">evidence-impact-index.json</a>.</p>')
+               '<a href="/data/evidence-conflicts.json">evidence-conflicts.json</a>, '
+               '<a href="/data/evidence-impact-index.json">evidence-impact-index.json</a> and '
+               '<a href="/data/evidence-reconciliations-009.json">evidence-reconciliations-009.json</a>.</p>')
     out.append("</div></article>")
     # 09: conflict register
     out.append('<article class="reference-block" id="conflict-register"><div class="block-index">09</div><div>')
@@ -113,6 +123,10 @@ def render() -> str:
         out.append(f'<dt>Next evidence</dt><dd>{e(c["next_evidence"])}</dd>')
         if c["downstream_review"]:
             out.append(f'<dt>To revise after editorial review</dt><dd><ul>{"".join(f"<li>{e(d)}</li>" for d in c["downstream_review"])}</ul></dd>')
+        if recon:
+            rc = next((x for x in recon["reconciliations"] if x["conflict_id"] == c["id"]), None)
+            if rc:
+                out.append(f'<dt>Reconciliation</dt><dd><a href="#{rc["id"]}">{e(rc["id"])}</a>: {e(rc["decision"])}</dd>')
         hist = "".join(f'<li>{e(h["date"])}, {e(h["event"].replace("_", " "))}: {e(h["detail"])}</li>' for h in c["history"])
         out.append(f"<dt>History</dt><dd><ul>{hist}</ul></dd>")
         out.append("</dl></details></li>")
@@ -128,7 +142,8 @@ def render() -> str:
                '<thead><tr><th scope="col">Source</th><th scope="col">Inspection</th><th scope="col">Passages</th>'
                '<th scope="col">Findings</th><th scope="col">Reference pages</th><th scope="col">Pathway steps</th>'
                '<th scope="col">Register issues</th><th scope="col">Next action</th></tr></thead><tbody>')
-    log_by = {r["source_id"]: r for r in records}
+    from validate_evidence_maintenance import latest_records
+    log_by = latest_records(log)
     for entry in impact["sources"]:
         sid = entry["source_id"]
         rec = log_by[sid]
@@ -142,9 +157,64 @@ def render() -> str:
                    f'<td>{len(entry["direct"]["findings"])}</td><td>{pages}</td><td>{len(entry["direct"]["pathway_steps"])}</td>'
                    f'<td>{issues}</td><td>{e(rec["next_action"])}</td></tr>')
     out.append("</tbody></table></div></div></article>")
+    if recon:
+        out.extend(render_reconciliations(recon, register, registry))
     out.append("</section>")
     out.append(END)
     return "\n".join(out)
+
+
+YES = {True: "Yes", False: "No", "not_required": "Not required"}
+
+
+def render_reconciliations(recon, register, registry) -> list[str]:
+    titles = {c["id"]: c["title"] for c in register["issues"]}
+    out = ['<article class="reference-block" id="reconciliation"><div class="block-index">11</div><div>',
+           f'<h2>Reconciliation, {e(recon["as_of"])}</h2>',
+           f'<p class="detail">{e(recon["boundary"])} Each entry keeps five states apart: whether new evidence was reviewed, whether it '
+           'changed the interpretation, whether the public pages and the pathway model were brought into line, and whether the issue stays open.</p>',
+           '<div class="table-scroll" tabindex="0" role="region" aria-label="Reconciliation states (scrollable table)"><table class="data-table">'
+           '<caption>Reconciliation decisions and states for every register issue.</caption><thead><tr><th scope="col">Issue</th>'
+           '<th scope="col">Decision</th><th scope="col">Evidence reviewed</th><th scope="col">Interpretation changed</th>'
+           '<th scope="col">Public pages</th><th scope="col">Pathway model</th><th scope="col">Still open</th></tr></thead><tbody>']
+    for r in recon["reconciliations"]:
+        s = r["states"]
+        out.append(f'<tr><th scope="row"><a href="#{r["id"]}">{e(titles[r["conflict_id"]])}</a></th><td>{e(r["decision"])}</td>'
+                   f'<td>{YES[s["evidence_reviewed"]]}</td><td>{YES[s["interpretation_changed"]]}</td><td>{YES[s["public_reference_synchronized"]]}</td>'
+                   f'<td>{YES[s["pathway_synchronized"]]}</td><td>{YES[s["conflict_remains_open"]]}</td></tr>')
+    out.append("</tbody></table></div><ol class=\"conflict-list\">")
+    for r in recon["reconciliations"]:
+        if r["decision"] != "applied":
+            continue
+        out.append(f'<li id="{r["id"]}" class="conflict-item"><div class="step-head"><h3>{e(titles[r["conflict_id"]])}</h3>'
+                   f'<span class="tag tag-c">{e(r["decision"])}</span></div>')
+        out.append(f'<p><strong>Reconciled interpretation.</strong> {e(r["reconciled_interpretation"])}</p>')
+        out.append(f'<p>{e(r["reason"])}</p>')
+        out.append('<details class="evidence-trace"><summary>Evidence and exact changes</summary><dl>')
+        out.append(f'<dt>Earlier interpretation</dt><dd>{e(r["original_interpretation"])}</dd>')
+        items = "".join(f'<li><code>{x["source_id"]}</code>: {e(x["locator"])}. {e(x["observation"])} '
+                        f'<a href="{e(registry[x["source_id"]]["canonical_url"])}">Original source</a></li>' for x in r["new_evidence"])
+        out.append(f"<dt>Evidence reviewed</dt><dd><ul>{items}</ul></dd>")
+        if r["sources_examined_not_supporting"]:
+            items = "".join(f'<li>{e(x["observation"])} <a href="{e(x["url"])}">Document</a></li>' for x in r["sources_examined_not_supporting"])
+            out.append(f"<dt>Examined, not supporting</dt><dd><ul>{items}</ul></dd>")
+        if r["publication_changes"]:
+            items = "".join(f'<li><a href="{e(x["route"])}">{e(x["route"])}</a>: '
+                            + (f'"{e(x["old_text"])}" became ' if x["old_text"] else "added ") + f'"{e(x["new_text"])}"</li>'
+                            for x in r["publication_changes"])
+            out.append(f"<dt>Public text changed</dt><dd><ul>{items}</ul></dd>")
+        if r["pathway_changes"]:
+            def anchor(target):
+                if target.startswith("cmp-"):
+                    return target
+                return target.split(".")[0] if target.startswith("pathway-") else "step-" + target
+            items = "".join(f'<li><a href="/sovereignty-stack/#{e(anchor(x["target"]))}">'
+                            f'{e(x["target"])}</a> {e(x["field"])}: "{e(x["old"])}" became "{e(x["new"])}"</li>' for x in r["pathway_changes"])
+            out.append(f"<dt>Pathway model changed</dt><dd><ul>{items}</ul></dd>")
+        out.append(f'<dt>Still uncertain</dt><dd><ul>{"".join(f"<li>{e(u)}</li>" for u in r["uncertainty_remaining"])}</ul></dd>')
+        out.append("</dl></details></li>")
+    out.append("</ol></div></article>")
+    return out
 
 
 def apply(text: str, block: str) -> str:

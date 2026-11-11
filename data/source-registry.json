@@ -1,6 +1,6 @@
 {
   "registry_version": "0.4.0",
-  "updated_at": "2026-11-10",
+  "updated_at": "2026-11-11",
   "source_policy_reference": "SOURCE_POLICY.md",
   "claim_boundary_reference": "CLAIM_BOUNDARY_MATRIX.md",
   "source_records": [
@@ -1061,6 +1061,22 @@
       "status": "active"
     },
     {
+      "id": "nvidia-hgx-platform-product-page-2026",
+      "title": "NVIDIA HGX Platform",
+      "publisher": "NVIDIA",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://www.nvidia.com/en-us/data-center/hgx/",
+      "publication_date": "2026-09-30",
+      "accessed_at": "2026-11-11",
+      "ontology_layers": ["design", "memory", "interconnect"],
+      "supported_claim_types": ["technical_specification", "memory_bandwidth_context", "interconnect_specification"],
+      "geographic_scope": "Company product page",
+      "temporal_scope": "Page metadata nv-pub-date 2026-09-30; server last-modified 2026-11-08; content may change without notice",
+      "confidence_use": "May support attributed statements of the HGX Rubin NVL8 and individual Rubin GPU figures in NVIDIA's specification tables",
+      "use_limitations": ["Undated in its visible text; the date is taken from page metadata", "Its individual-GPU figures differ from those on NVIDIA's Vera Rubin NVL72 page, and the page does not explain the difference", "Footnotes mark some rows bidirectional; others carry no direction"],
+      "status": "active"
+    },
+    {
       "id": "amd-instinct-mi300x-data-sheet-2025",
       "title": "AMD Instinct MI300X Accelerator (data sheet)",
       "publisher": "Advanced Micro Devices, Inc.",
@@ -1074,6 +1090,38 @@
       "temporal_scope": "PDF creation date 2025-06-16; server last-modified 2026-09-11",
       "confidence_use": "May support attributed statements of MI300X link count and per-link bandwidth as AMD states them",
       "use_limitations": ["Undated in its visible text; the date is taken from PDF metadata", "Does not state encoding or effective bandwidth", "Its seven scale-up links differ from the product page's eight Infinity Fabric links"],
+      "status": "active"
+    },
+    {
+      "id": "amd-instinct-mi300x-platform-data-sheet-2023",
+      "title": "AMD Instinct MI300X Platform (data sheet)",
+      "publisher": "Advanced Micro Devices, Inc.",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-platform-data-sheet.pdf",
+      "publication_date": "2023-12-04",
+      "accessed_at": "2026-11-11",
+      "ontology_layers": ["design", "interconnect"],
+      "supported_claim_types": ["technical_specification", "interconnect_specification", "platform_configuration"],
+      "geographic_scope": "Product-level technical disclosure",
+      "temporal_scope": "PDF created 2023-12-02, modified 2023-12-04; server last-modified 2026-09-11",
+      "confidence_use": "May support attributed statements of MI300X platform link counts, per-link bandwidth and the labelled ring aggregate as AMD states them",
+      "use_limitations": ["Undated in its visible text; the date is taken from PDF metadata", "Labels 896 GB/s as a ring-of-8 aggregate and also lists 7x 128 GB/s per GPU without saying which scope 896 GB/s carries", "States peak figures only; no effective or measured bandwidth"],
+      "status": "active"
+    },
+    {
+      "id": "amd-cdna4-white-paper-2025",
+      "title": "Introducing AMD CDNA 4 Architecture (white paper)",
+      "publisher": "Advanced Micro Devices, Inc.",
+      "source_type": "official_technical_disclosure",
+      "canonical_url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf",
+      "publication_date": "2025-09-30",
+      "accessed_at": "2026-11-11",
+      "ontology_layers": ["design", "interconnect", "memory"],
+      "supported_claim_types": ["technical_specification", "interconnect_specification"],
+      "geographic_scope": "Product-level technical disclosure",
+      "temporal_scope": "PDF created 2025-09-30; edition retrieved 2026-11-11 carries a 9/28/2026 revision date and PDF modification date 2026-09-28",
+      "confidence_use": "May support attributed statements about MI350 Series link rates and AMD's labelling of P2P ring figures; it describes a later generation than MI300X",
+      "use_limitations": ["Describes CDNA 4 (MI350 Series); statements about MI300X-class products must not be transferred without an explicit AMD statement", "The retrieved edition contains endnotes MI350-002, -005, -051, -052 and -053; endnote MI350-007 and any 896 GB/s statement were not found in it", "Peak theoretical figures only"],
       "status": "active"
     },
     {

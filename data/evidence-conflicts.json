@@ -3,7 +3,7 @@
   "schema_version": "1.0.0",
   "status": "maintenance_record",
   "scientific_review": "pending",
-  "as_of": "2026-11-10",
+  "as_of": "2026-11-11",
   "boundary": "A register of material contradictions and open evidence questions, not an Atlas: it records no dependency relationship and approves no claim. A resolution narrows a conclusion only where retrieved primary evidence justifies it; earlier releases are kept unchanged as historical records, and the public statements to revise are listed for editorial review.",
   "state_definitions": {
     "open_conflict": "Two or more sources state the same quantity or fact differently and nothing reviewed explains why",
@@ -31,7 +31,8 @@
         "nvidia-rubin-platform-architecture-2026",
         "nvidia-rubin-gpu-architecture-2026",
         "nvidia-co-design-memory-2026",
-        "nvidia-vera-rubin-nvl72-product-page-2026"
+        "nvidia-vera-rubin-nvl72-product-page-2026",
+        "nvidia-hgx-platform-product-page-2026"
       ],
       "finding_ids": [
         "f-nv-rubin",
@@ -71,15 +72,25 @@
           "source_id": "nvidia-rubin-gpu-architecture-2026",
           "locator": "Article of 2026-07-21: \"22 TB/s\"",
           "observation": "Still published unchanged on 2026-11-10; the passage was found."
+        },
+        {
+          "source_id": "nvidia-hgx-platform-product-page-2026",
+          "locator": "HGX page, individual Rubin GPU: \"288 GB HBM4 | 22 TB/s\"",
+          "observation": "NVIDIA's HGX page (metadata date 2026-09-30) gives 22 TB/s per GPU."
+        },
+        {
+          "source_id": "nvidia-hgx-platform-product-page-2026",
+          "locator": "HGX Rubin NVL8 row: \"2 TB HBM4 | 130 TB/s\"",
+          "observation": "For eight GPUs this is about 16 TB/s per GPU, matching neither per-GPU figure; NVIDIA does not explain it (our arithmetic)."
         }
       ],
-      "posture": "NVIDIA's product specification page and its 2026-11-05 article both give 19.2 TB/s per Rubin GPU; its January and July articles, still published, give 22 TB/s. No NVIDIA source explains the difference, so neither figure is withdrawn here. Public statements should present 19.2 TB/s as the figure on NVIDIA's current specification page and 22 TB/s as an earlier stated figure, each with its date.",
+      "posture": "NVIDIA publishes two per-GPU figures for Rubin memory bandwidth on current pages and in dated posts: 22 TB/s (January and July posts, HGX page) and 19.2 TB/s (November post, Vera Rubin NVL72 page). Neither is withdrawn and no NVIDIA source explains the difference, so neither is selected. Public statements present each figure with its date and source.",
       "unknown": [
         "Whether 22 TB/s described a different memory configuration, speed grade or basis",
         "Whether NVIDIA will correct either article"
       ],
       "next_evidence": "An NVIDIA statement reconciling the two figures, or a versioned Rubin specification document",
-      "inspected_at": "2026-11-10",
+      "inspected_at": "2026-11-11",
       "history": [
         {
           "date": "2026-11-09",
@@ -95,11 +106,16 @@
           "date": "2026-11-10",
           "event": "reassessed",
           "detail": "State set to requires_reassessment: new evidence changes how the figures should be presented, but the conflict is not explained."
+        },
+        {
+          "date": "2026-11-11",
+          "event": "reassessed",
+          "detail": "HGX page registered and rechecked: it gives 22 TB/s per GPU. /hbm-memory/ already presented the split; only its reference note was corrected (rc-009-rubin-memory-bandwidth)."
         }
       ],
       "downstream_review": [
-        "/hbm-memory/#accelerators: present 19.2 TB/s as the current specification-page figure, keeping 22 TB/s with its dates",
-        "Pathway B step b2-device-memory and comparison cmp-rubin-22-vs-19: reassess wording; the verdict stays conditional until NVIDIA explains the difference"
+        "Checked 2026-11-11 (rc-009-rubin-memory-bandwidth): /hbm-memory/#accelerators already presents both figures with dates; reference 16 note corrected",
+        "Synchronized 2026-11-11: comparison cmp-rubin-22-vs-19 reason names the split product pages; verdict stays conditional"
       ]
     },
     {
@@ -118,7 +134,8 @@
         "nvidia-rubin-platform-architecture-2026",
         "nvidia-rubin-gpu-architecture-2026",
         "nvidia-co-design-memory-2026",
-        "nvidia-vera-rubin-nvl72-product-page-2026"
+        "nvidia-vera-rubin-nvl72-product-page-2026",
+        "nvidia-hgx-platform-product-page-2026"
       ],
       "finding_ids": [
         "i-nvidia-nvlink6-figures",
@@ -152,15 +169,25 @@
           "source_id": "nvidia-rubin-platform-architecture-2026",
           "locator": "Article of 2026-01-05: \"3.6 TB/s\"",
           "observation": "Still published on 2026-11-10 as a bidirectional per-GPU figure."
+        },
+        {
+          "source_id": "nvidia-hgx-platform-product-page-2026",
+          "locator": "HGX page, individual Rubin GPU: \"NVLink Bandwidth 3.6 TB/s\"",
+          "observation": "Per-GPU figure on NVIDIA's HGX page; no direction marked in that row."
+        },
+        {
+          "source_id": "nvidia-hgx-platform-product-page-2026",
+          "locator": "HGX Rubin NVL8 row: \"NVLink Switch Bandwidth 24 TB/s\"",
+          "observation": "Marked bidirectional by the page's footnote; 3 TB/s per GPU if divided across eight (our arithmetic)."
         }
       ],
-      "posture": "NVIDIA's specification page (metadata date 2026-10-21) and its 2026-11-05 article give 3 TB/s per Rubin GPU; its January article, still published, gives 3.6 TB/s bidirectional. Neither states the other's basis, so the difference is not attributed to direction. Public comparisons should cite the figure and date they use.",
+      "posture": "NVIDIA publishes NVLink 6 per Rubin GPU as 3.6 TB/s (January post, HGX individual-GPU row) and as 3 TB/s (November post, Vera Rubin NVL72 page). Only the January post marks 3.6 TB/s bidirectional. No reviewed NVIDIA document explains the difference. Public comparisons cite the figure and date they use.",
       "unknown": [
         "Whether 3 TB/s and 3.6 TB/s use the same direction convention",
         "Whether NVIDIA revised the per-GPU figure"
       ],
       "next_evidence": "An NVIDIA NVLink 6 specification stating per-GPU bandwidth with its direction and basis",
-      "inspected_at": "2026-11-10",
+      "inspected_at": "2026-11-11",
       "history": [
         {
           "date": "2026-11-09",
@@ -176,29 +203,36 @@
           "date": "2026-11-10",
           "event": "reassessed",
           "detail": "State set to requires_reassessment; the conflict is narrowed, not explained."
+        },
+        {
+          "date": "2026-11-11",
+          "event": "reassessed",
+          "detail": "HGX page registered: 3.6 TB/s per GPU and 24 TB/s per eight-GPU switch. /interconnects/ updated with both product pages (rc-009-nvlink6-per-gpu); conflict stands."
         }
       ],
       "downstream_review": [
-        "/interconnects/#measurement: add the specification-page figure and date beside the existing entries",
-        "Pathway B comparisons cmp-rack-vs-gpu and cmp-scale-up-vs-scale-out: recheck the 3.6 TB/s figure they use"
+        "Synchronized 2026-11-11 (rc-009-nvlink6-per-gpu): /interconnects/#fabrics and #measurement list both product pages beside the dated posts",
+        "Synchronized 2026-11-11: Pathway B comparisons cmp-rack-vs-gpu and cmp-scale-up-vs-scale-out note that 3.6 TB/s is also published as 3 TB/s"
       ]
     },
     {
       "id": "ec-mi300x-infinity-fabric-scope",
       "title": "MI300X Infinity Fabric: scope and direction of 896 GB/s",
       "question": "Is AMD's 896 GB/s 'P2P ring peak aggregate' figure per GPU or per platform, and in which direction?",
-      "state": "resolved_with_evidence",
+      "state": "requires_reassessment",
       "ontology_layers": [
         "interconnect"
       ],
       "scope": {
         "product": "AMD Instinct MI300X, 8-GPU platform",
-        "temporal": "AMD documents dated 2025-04-07 (white paper) and 2025-06-16 (data sheet)"
+        "temporal": "AMD documents dated 2023-12-04 (platform data sheet) to 2026-09-28 (CDNA 4 paper edition)"
       },
       "source_ids": [
         "amd-cdna3-white-paper-2025",
         "amd-instinct-mi300x-data-sheet-2025",
-        "amd-instinct-mi300x-accelerator-2023"
+        "amd-instinct-mi300x-accelerator-2023",
+        "amd-instinct-mi300x-platform-data-sheet-2023",
+        "amd-cdna4-white-paper-2025"
       ],
       "finding_ids": [
         "i-amd-mi300x-topology",
@@ -237,15 +271,31 @@
           "source_id": "amd-instinct-mi300x-accelerator-2023",
           "locator": "Product page: \"Peak Infinity Fabric™ Link Bandwidth 128 GB/s\"",
           "observation": "The product page gives the same per-link figure but lists 8 Infinity Fabric links."
+        },
+        {
+          "source_id": "amd-instinct-mi300x-platform-data-sheet-2023",
+          "locator": "Platform data sheet: \"a peak aggregate bidirectional Infinity Fabric bandwidth of 896 GB/s\"",
+          "observation": "AMD states the direction explicitly. The sentence says the platform connects all GPUs in the 8-node ring at this bandwidth."
+        },
+        {
+          "source_id": "amd-instinct-mi300x-platform-data-sheet-2023",
+          "locator": "Platform data sheet table: \"7x 128 GB/s per GPU\"; \"Ring of 8 aggregate bandwidth\"",
+          "observation": "AMD gives the per-GPU link set and labels the 896 GB/s figure as a ring-of-8 aggregate."
+        },
+        {
+          "source_id": "amd-cdna4-white-paper-2025",
+          "locator": "CDNA 4 paper: \"Each GPU offers >1TB/s of communication bandwidth within a node\"",
+          "observation": "For the later MI350 generation, AMD's '(8 GPUs)' P2P figure of 1,008 GB/s is described as per-GPU bandwidth; this is a labelling convention, not an MI300X statement."
         }
       ],
-      "posture": "AMD's data sheet states seven Infinity Fabric links per GPU at 128 GB/s bidirectional each. Seven times 128 GB/s is 896 GB/s, so AMD's own documents now support reading the white paper's 896 GB/s as a per-GPU, both-direction aggregate, which Release 004 had derived only as an assumption. The data sheet does not itself state 896 GB/s, and encoding and effective bandwidth remain undisclosed.",
+      "posture": "AMD states that 896 GB/s is a bidirectional peak aggregate and that each MI300X has seven 128 GB/s bidirectional Infinity Fabric links to its peers. Seven times 128 GB/s is 896 GB/s, and AMD uses the same '(8 GPUs)' label for a later figure it describes as per-GPU, so the per-GPU reading is the better-supported one. No reviewed MI300X document states it, and the platform data sheet's wording reads as a ring-level figure, so the scope stays unresolved.",
       "unknown": [
-        "Encoding and effective link bandwidth",
-        "Why the product page lists 8 Infinity Fabric links where the data sheet lists seven scale-up links"
+        "Whether 896 GB/s is per GPU or a ring-level figure",
+        "Link encoding and effective bandwidth",
+        "Whether the product page's eight Infinity Fabric links include the PCIe-capable host link"
       ],
-      "next_evidence": "AMD documentation of link encoding, and of the eighth link the product page counts",
-      "inspected_at": "2026-11-10",
+      "next_evidence": "An AMD statement of whether the MI300X 896 GB/s figure is per GPU, or the CDNA 4 paper edition containing endnote MI350-007",
+      "inspected_at": "2026-11-11",
       "history": [
         {
           "date": "2026-11-09",
@@ -261,11 +311,26 @@
           "date": "2026-11-10",
           "event": "resolved",
           "detail": "Scope and direction resolved from AMD's data sheet: seven links at 128 GB/s bidirectional per GPU make 896 GB/s a per-GPU, both-direction aggregate. Release 004 is unchanged as a historical record; public statements are listed for revision."
+        },
+        {
+          "date": "2026-11-11",
+          "event": "evidence_added",
+          "detail": "MI300X platform data sheet retrieved: 896 GB/s is called a bidirectional peak aggregate and labelled ring of 8; seven 128 GB/s links per GPU."
+        },
+        {
+          "date": "2026-11-11",
+          "event": "evidence_added",
+          "detail": "CDNA 4 paper retrieved; the endnote MI350-007 cited in the PR #18 review is not in the edition published on 2026-11-11."
+        },
+        {
+          "date": "2026-11-11",
+          "event": "reopened",
+          "detail": "The IDE-008 resolution rested on arithmetic. AMD's documents state the direction but label 896 GB/s a ring-of-8 aggregate and never call it per-GPU, so the scope is not established. State set to requires_reassessment; public references corrected under rc-009-mi300x-infinity-fabric."
         }
       ],
       "downstream_review": [
-        "/interconnects/#case-mi300x and #measurement: replace 'scope and direction not stated' with AMD's data-sheet statement, citing it",
-        "Pathway B comparison cmp-mi300x-p2p-vs-nvlink6: reassess; the scope reason no longer holds, but the comparison still crosses vendors and NVLink figures stay in conflict"
+        "Synchronized 2026-11-11 (rc-009-mi300x-infinity-fabric): /interconnects/ prose, Figure 1, tiers, comparison and measurement tables, unresolved list",
+        "Synchronized 2026-11-11: Pathway B steps b4 and b5, the 896 GB/s statement and comparison cmp-mi300x-p2p-vs-nvlink6, whose verdict stays unsupported"
       ]
     },
     {
@@ -695,7 +760,7 @@
       "id": "ec-hbm-export-control-currency",
       "title": "HBM export controls: announcement versus current rule text",
       "question": "What does the current consolidated rule text say about HBM, as distinct from BIS's 2024 announcement?",
-      "state": "requires_reassessment",
+      "state": "missing_primary_evidence",
       "ontology_layers": [
         "controls",
         "memory"
@@ -735,13 +800,13 @@
           "observation": "Current eCFR text retrieved 2026-11-10; one version, dated 2024-12-05."
         }
       ],
-      "posture": "Current consolidated rule text, retrieved from the eCFR on 2026-11-10, contains an HBM licence requirement in section 742.6 and a licence exception for HBM in section 740.25. The 2024 press release remains a historical announcement. This register gives no legal or compliance conclusion and does not classify any transaction.",
+      "posture": "Beyond BIS's 2024 announcement, the current text of two sections has been reviewed: 15 CFR 742.6, whose paragraph (a)(6)(i)(B) imposes an HBM licence requirement for Macau and Country Group D:5 destinations, and 15 CFR 740.25, a licence exception for HBM. Other provisions that may apply were not reviewed, and nothing here determines how any transaction is treated. This register gives no legal or compliance conclusion.",
       "unknown": [
-        "How any named item or transaction is classified",
-        "Amendments after the eCFR's 2026-11-06 currency date"
+        "The ECCN 3A090 entry and other provisions that may apply",
+        "How any named item or transaction is classified or licensed"
       ],
-      "next_evidence": "Transaction-specific classification by qualified counsel; the official Federal Register text of each amendment",
-      "inspected_at": "2026-11-10",
+      "next_evidence": "The ECCN 3A090 entry and other provisions applying to a named item; a transaction-specific classification by qualified counsel",
+      "inspected_at": "2026-11-11",
       "history": [
         {
           "date": "2026-11-10",
@@ -757,11 +822,16 @@
           "date": "2026-11-10",
           "event": "reassessed",
           "detail": "State set to requires_reassessment: public text should cite current rule text alongside the 2024 announcement."
+        },
+        {
+          "date": "2026-11-11",
+          "event": "reassessed",
+          "detail": "eCFR currency rechecked (Title 15 up to date as of 2026-11-09; both sections unchanged). Public references now cite the two sections (rc-009-hbm-export-control-currency). What remains is unreviewed rule text, so the state is missing_primary_evidence."
         }
       ],
       "downstream_review": [
-        "/ai-chip-infrastructure/#network-operations: cite the current eCFR sections with their version dates beside the 2024 announcement",
-        "Pathway C step c8-access: the limitation 'current rule text not reviewed' no longer holds for these two sections"
+        "Synchronized 2026-11-11 (rc-009-hbm-export-control-currency): /ai-chip-infrastructure/ access paragraph, matrix, gaps and questions; /export-control-layer/ freshness note",
+        "Synchronized 2026-11-11: Pathway C step c8-access limitation and next evidence"
       ]
     }
   ]
