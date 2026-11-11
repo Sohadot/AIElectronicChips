@@ -2,8 +2,9 @@
 /*
  * AIElectronicChips.com Research Workbench (IDE-010).
  * Progressive enhancement over a static catalog: adds per-requirement collection status and notes,
- * JSON and CSV export, and a print view. Everything stays in this browser tab: nothing is sent,
- * stored, written to the URL or interpolated as HTML. Reloading the page clears the session.
+ * JSON and CSV export, and a print view. The site itself never submits, stores, writes to the URL or
+ * interpolates as HTML anything entered here; reloading the page clears the session. Browser spelling
+ * and autocorrect services are switched off on the note field, because some send typed text elsewhere.
  */
 (function () {
   var DISCLAIMER = "User-recorded checklist. The evidence listed has not been independently validated: a received document has " +
@@ -108,7 +109,7 @@
     if (!host) { return; }
     var fieldset = document.createElement("fieldset");
     var legend = document.createElement("legend");
-    legend.textContent = "Your collection status (kept only in this tab)";
+    legend.textContent = "Your collection status (held only in this tab)";
     fieldset.appendChild(legend);
     STATUSES.forEach(function (s, i) {
       var id = li.id + "-status-" + s[0];
@@ -131,13 +132,17 @@
     var noteLabel = document.createElement("label");
     noteLabel.htmlFor = noteId;
     noteLabel.className = "wb-note-label";
-    noteLabel.textContent = "Note (optional, up to " + NOTE_LIMIT + " characters, not sent anywhere)";
+    noteLabel.textContent = "Note (optional, up to " + NOTE_LIMIT + " characters; this site does not submit or save it)";
     var note = document.createElement("textarea");
     note.id = noteId;
     note.maxLength = NOTE_LIMIT;
     note.rows = 2;
     note.setAttribute("autocomplete", "off");
-    note.setAttribute("spellcheck", "true");
+    // Browser spell-check services (for example Chrome's Enhanced Spell Check) can send typed text to a third party.
+    note.spellcheck = false;
+    note.setAttribute("spellcheck", "false");
+    note.setAttribute("autocorrect", "off");
+    note.setAttribute("autocapitalize", "off");
     fieldset.appendChild(noteLabel);
     fieldset.appendChild(note);
     host.appendChild(fieldset);

@@ -63,7 +63,7 @@ The validator enforces the following rules:
 
 The four statuses are Not requested, Requested, Document received (not reviewed) and Needs expert review. They record the researcher's own collection progress. The tool does not sum, score or turn them into a result. No status means "verified".
 
-The script never transmits, stores, writes to the URL or injects HTML. The validator rejects all of the following in the script:
+This website never submits, saves or writes to the URL anything entered, and never injects it as HTML. The note field turns off browser spelling and autocorrect services (`spellcheck="false"`, `autocorrect="off"`, `autocapitalize="off"`), because services such as Chrome's Enhanced Spell Check can send typed text to a third party. The page does not promise browser-wide privacy: other browser, extension or operating-system input features follow the user's own settings, and the privacy note says so. The validator rejects an enabled spell-check, a missing `spellcheck="false"` or `autocorrect="off"`, and unconditional privacy claims. The validator rejects all of the following in the script:
 
 - `fetch`, `XMLHttpRequest`, `sendBeacon` and `WebSocket`;
 - browser storage and cookies;
@@ -73,6 +73,18 @@ The script never transmits, stores, writes to the URL or injects HTML. The valid
 Reloading the page clears the session.
 
 Exports carry the disclaimer that the evidence "has not been independently validated". CSV cells are quoted, and any cell that starts with `=`, `+`, `-`, `@`, tab or carriage return is prefixed with `'` so spreadsheets do not run it as a formula.
+
+## Browser test in CI
+
+The validate job installs pinned Playwright 1.63.0 and headless Chromium outside the repository, then runs the regression suite and a named "Research workbench browser functional smoke test" step with `AEC_REQUIRE_BROWSER=1`. In that mode the browser test fails instead of skipping when Node or Playwright is missing. It checks:
+
+- status controls and the note field, including spelling attributes on all 41 notes;
+- JSON and CSV export content, including formula escaping and the disclaimer;
+- the print view: one workflow, traces opened, restored afterwards;
+- that another tab and a reload start from defaults, and that clearing works;
+- no outbound or non-GET requests, empty browser storage and an unchanged URL.
+
+A unit test fails if the workflow stops requiring the browser test.
 
 ## Fail-closed checks
 

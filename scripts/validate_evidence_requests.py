@@ -53,6 +53,7 @@ JS_FORBIDDEN = re.compile(
     r"history\.(?:push|replace)State|location\.(?:search|hash|href)\s*=|location\.assign|location\.replace|postMessage|serviceWorker|navigator\.share")
 
 
+OVERCLAIM = re.compile(r"not sent anywhere|never leaves? (?:your|the) (?:browser|device)|completely private|kept only in this tab", re.I)
 PRESERVED_FIGURES = ("896 GB/s", "22 TB/s", "19.2 TB/s", "3.6 TB/s", "3 TB/s")
 STATUS_VERDICT = re.compile(r"\b(?:verified|approved|qualified|compliant|readiness|score|percent(?:age)?|progress bar)\b", re.I)
 
@@ -199,6 +200,13 @@ def check_script(text: str) -> list[str]:
         errors.append(f"research-workbench.js: status vocabulary '{m.group(0)}' implies review or a result; statuses record collection only")
     for m in JS_FORBIDDEN.finditer(text):
         errors.append(f"research-workbench.js: forbidden API '{m.group(0).strip()}' (no transmission, storage, URL state or HTML interpolation)")
+    if re.search(r"spellcheck[\"']?\s*(?:,|=)\s*[\"']?true", text):
+        errors.append("research-workbench.js: notes must not enable browser spell-check (it can send typed text elsewhere)")
+    for needed in ('setAttribute("spellcheck", "false")', 'setAttribute("autocorrect", "off")'):
+        if needed not in text:
+            errors.append(f"research-workbench.js: note field must set {needed} so browser spelling services stay off")
+    if OVERCLAIM.search(text):
+        errors.append("research-workbench.js: privacy copy must say what this site does, not promise browser-wide privacy")
     for needed in ("not been independently validated", "csvCell", "textContent"):
         if needed not in text:
             errors.append(f"research-workbench.js: missing required safeguard '{needed}'")
@@ -212,6 +220,10 @@ def check_page(page: str, model: dict) -> list[str]:
         errors.append("research-workbench/index.html: must load exactly the local workbench script, deferred")
     if 'href="/data/industrial-evidence-requests.json"' not in page:
         errors.append("research-workbench/index.html: must link the machine-readable model")
+    if OVERCLAIM.search(page):
+        errors.append("research-workbench/index.html: privacy copy must say what this site does, not promise browser-wide privacy")
+    if "browser, extension or operating-system input features follow your own settings" not in page:
+        errors.append("research-workbench/index.html: privacy note must say browser and system input features follow the user's settings")
     if "<noscript>" not in page:
         errors.append("research-workbench/index.html: must explain what works without JavaScript")
     for w in model["workflows"]:

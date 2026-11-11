@@ -24,6 +24,8 @@ import validate_evidence_requests as v  # noqa: E402
 NODE = shutil.which("node")
 PLAYWRIGHT = next((p for p in (os.environ.get("PLAYWRIGHT_MODULE", ""), "/opt/node22/lib/node_modules/playwright")
                    if p and Path(p).is_dir()), None)
+# CI sets AEC_REQUIRE_BROWSER=1 after installing Playwright and Chromium: the browser test then fails instead of skipping.
+REQUIRE_BROWSER = os.environ.get("AEC_REQUIRE_BROWSER") == "1"
 
 
 @functools.lru_cache(maxsize=1)
@@ -183,6 +185,22 @@ class ScriptAndPageTests(unittest.TestCase):
             errs = v.check_script(script() + "\n" + bad + ";\n")
             self.assertTrue(any("forbidden API" in e for e in errs), bad)
 
+    def test_note_field_keeps_browser_spelling_services_off(self):
+        text = script()
+        self.assertIn('setAttribute("spellcheck", "false")', text)
+        self.assertIn('setAttribute("autocorrect", "off")', text)
+        self.assertNotRegex(text, r'spellcheck"?\s*,\s*"true')
+        bad = text.replace('note.setAttribute("spellcheck", "false");', 'note.setAttribute("spellcheck", "true");')
+        self.assertTrue(any("spell-check" in e for e in v.check_script(bad)))
+        bad = text.replace('note.setAttribute("autocorrect", "off");', "")
+        self.assertTrue(any("autocorrect" in e for e in v.check_script(bad)))
+
+    def test_privacy_copy_is_accurate(self):
+        self.assertIn("this website does not submit, save or add to the address", page())
+        self.assertTrue(any("browser-wide privacy" in e for e in v.check_script(script() + '\n"not sent anywhere";\n')))
+        self.assertTrue(any("browser-wide privacy" in e for e in v.check_page(page().replace("Privacy:", "Privacy: completely private."), model())))
+        self.assertTrue(v.check_page(page().replace("follow your own settings", "are disabled"), model()))
+
     def test_script_safeguards_required(self):
         self.assertTrue(v.check_script(script().replace("not been independently validated", "x")))
         self.assertTrue(v.check_script(script().replace("csvCell", "cell")))
@@ -227,6 +245,10 @@ class ScriptAndPageTests(unittest.TestCase):
         launch = (ROOT / "scripts" / "validate_public_launch.py").read_text(encoding="utf-8")
         self.assertIn('"research-workbench/index.html"', launch)
         self.assertIn("/research-workbench/</loc>", (ROOT / "sitemap.xml").read_text(encoding="utf-8"))
+        ci = (ROOT / ".github" / "workflows" / "validate-and-deploy.yml").read_text(encoding="utf-8")
+        self.assertIn("playwright@1.63.0", ci)
+        self.assertGreaterEqual(ci.count("AEC_REQUIRE_BROWSER: '1'"), 2, "CI must require the browser test, not skip it")
+        self.assertIn("tests.test_research_workbench.BrowserTests", ci)
 
     def test_contextual_links(self):
         for route, anchor in (("sovereignty-stack", ""), ("hbm-memory", "#workflow-hbm4-integration"),
@@ -255,12 +277,17 @@ class CsvEscapeTests(unittest.TestCase):
         self.assertEqual(got, '"a","\'=b"\r\n"c",""\r\n')
 
 
-@unittest.skipUnless(NODE and PLAYWRIGHT, "node and Playwright are not available")
 class BrowserTests(unittest.TestCase):
-    """Drive the page in headless Chromium: controls, JSON/CSV export, network silence and no storage."""
+    """Drive the page in headless Chromium: controls, note privacy attributes, JSON/CSV export, print view,
+    per-tab state, network silence and no storage. Required in CI (AEC_REQUIRE_BROWSER=1); skipped elsewhere
+    only when Node or Playwright is absent."""
 
     @classmethod
     def setUpClass(cls):
+        if not (NODE and PLAYWRIGHT):
+            if REQUIRE_BROWSER:
+                raise AssertionError("AEC_REQUIRE_BROWSER=1 but node or Playwright is not available")
+            raise unittest.SkipTest("node and Playwright are not available")
         class Quiet(http.server.SimpleHTTPRequestHandler):
             def log_message(self, *args):
                 pass
@@ -300,6 +327,17 @@ class BrowserTests(unittest.TestCase):
         self.assertIn("\"'=cmd|' /C calc'!A0\"", r["csv"])
         self.assertIn("not been independently validated", r["csv"])
         self.assertEqual(r["after_clear"], {"status": "not_requested", "note": ""})
+        # Note field: browser spelling and autocorrect services off on every note.
+        self.assertEqual(r["note_attrs"], {"count": 41, "spellcheck_false": 41, "prop_false": 41, "autocorrect_off": 41,
+                                           "autocapitalize_off": 41, "maxlength": 41})
+        # Print: only the chosen workflow, traces opened, everything restored afterwards.
+        self.assertEqual(r["print"]["visible"], ["workflow-bandwidth-comparison"])
+        self.assertTrue(r["print"]["traces_open"])
+        self.assertTrue(r["print"]["chrome_hidden"])
+        self.assertEqual(r["after_print"], {"attr": False, "open": 0})
+        # Per tab: another tab and a reload start from defaults.
+        self.assertEqual(r["other_tab"], {"status": "not_requested", "note": ""})
+        self.assertEqual(r["after_reload"], {"status": "not_requested", "note": ""})
 
 
 BROWSER_SCRIPT = r"""
@@ -308,9 +346,10 @@ const fs = require('fs');
 (async () => {
   const [url, dir] = process.argv.slice(2);
   const browser = await chromium.launch();
-  const page = await browser.newPage({ acceptDownloads: true });
+  const context = await browser.newContext({ acceptDownloads: true });
+  const page = await context.newPage();
   const flagged = [];
-  page.on('request', (req) => {
+  context.on('request', (req) => {
     const u = new URL(req.url());
     if (u.origin !== new URL(url).origin || req.method() !== 'GET') flagged.push(req.method() + ' ' + req.url());
   });
@@ -326,12 +365,41 @@ const fs = require('fs');
   const [dc] = await Promise.all([page.waitForEvent('download'), wf.getByRole('button', { name: 'Export CSV' }).click()]);
   await dc.saveAs(dir + '/out.csv');
   const storage = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length, cookie: document.cookie }));
-  await wf.getByRole('button', { name: 'Clear this session' }).click();
-  const afterClear = await wf.locator('li.wb-req').first().evaluate((li) => ({
+  const first = (p) => p.locator('#ra-01-interface-revision').evaluate((li) => ({
     status: li.querySelector('input[type=radio]:checked').value, note: li.querySelector('textarea').value }));
+  const other = await context.newPage();
+  await other.goto(url, { waitUntil: 'load' });
+  const otherTab = await first(other);
+  await other.close();
+  const noteAttrs = await page.evaluate(() => {
+    const t = [...document.querySelectorAll('textarea')];
+    return { count: t.length, spellcheck_false: t.filter((x) => x.getAttribute('spellcheck') === 'false').length,
+      prop_false: t.filter((x) => x.spellcheck === false).length,
+      autocorrect_off: t.filter((x) => x.getAttribute('autocorrect') === 'off').length,
+      autocapitalize_off: t.filter((x) => x.getAttribute('autocapitalize') === 'off').length,
+      maxlength: t.filter((x) => x.maxLength === 500).length };
+  });
+  await page.evaluate(() => { document.body.setAttribute('data-print-workflow', 'workflow-bandwidth-comparison');
+    window.dispatchEvent(new Event('beforeprint')); });
+  await page.emulateMedia({ media: 'print' });
+  const print = await page.evaluate(() => ({
+    visible: [...document.querySelectorAll('.wb-workflow')].filter((e) => getComputedStyle(e).display !== 'none').map((e) => e.id),
+    traces_open: [...document.querySelectorAll('#workflow-bandwidth-comparison details')].every((d) => d.open),
+    chrome_hidden: getComputedStyle(document.querySelector('.site-header')).display === 'none' &&
+      getComputedStyle(document.querySelector('.wb-toolbar')).display === 'none' }));
+  await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
+  await page.emulateMedia({ media: 'screen' });
+  const afterPrint = await page.evaluate(() => ({ attr: document.body.hasAttribute('data-print-workflow'),
+    open: [...document.querySelectorAll('details')].filter((d) => d.open).length }));
+  await wf.getByRole('button', { name: 'Clear this session' }).click();
+  const afterClear = await first(page);
+  await wf.locator('li.wb-req').first().locator('input[value=requested]').check();
+  await page.reload({ waitUntil: 'load' });
+  const afterReload = await first(page);
   console.log(JSON.stringify({ radios, textareas, toolbars_visible: toolbars, external_or_post_requests: flagged, storage,
     url_after: page.url(), json: JSON.parse(fs.readFileSync(dir + '/out.json', 'utf8')),
-    csv: fs.readFileSync(dir + '/out.csv', 'utf8'), after_clear: afterClear }));
+    csv: fs.readFileSync(dir + '/out.csv', 'utf8'), after_clear: afterClear, note_attrs: noteAttrs, print,
+    after_print: afterPrint, other_tab: otherTab, after_reload: afterReload }));
   await browser.close();
 })().catch((e) => { console.error(e); process.exit(1); });
 """
