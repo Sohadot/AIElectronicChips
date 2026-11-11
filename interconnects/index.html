@@ -145,8 +145,8 @@
           <figure class="ref-figure">
             <div class="figure-frame" tabindex="0" role="region" aria-label="Figure 1 chart; scrolls horizontally on narrow screens">
             <svg viewBox="0 0 820 330" role="img" aria-labelledby="bw-fig-title bw-fig-desc">
-              <title id="bw-fig-title">Illustrative MI300X bandwidth tiers: reported and inferred figures with differing scopes, logarithmic scale</title>
-              <desc id="bw-fig-desc">Horizontal bars on a logarithmic scale from 0.1 to 100 terabytes per second. L2 cache aggregate read: 34.4 TB/s. Infinity Cache peak: 17.2 TB/s. HBM3 peak memory: 5.3 TB/s. AMD-reported P2P ring peak aggregate: 0.896 TB/s (labelled 8 GPUs; per-GPU versus per-platform scope not established). One Infinity Fabric link to one peer GPU, calculated: 0.128 TB/s. One x16 PCIe Gen 5 host link, calculated: 0.128 TB/s. The first four are AMD-stated peaks; the last two are this project's arithmetic.</desc>
+              <title id="bw-fig-title">Illustrative MI300X bandwidth tiers: AMD-stated peak figures with differing scopes, logarithmic scale</title>
+              <desc id="bw-fig-desc">Horizontal bars on a logarithmic scale from 0.1 to 100 terabytes per second. L2 cache aggregate read: 34.4 TB/s. Infinity Cache peak: 17.2 TB/s. HBM3 peak memory: 5.3 TB/s. AMD P2P ring peak aggregate, bidirectional: 0.896 TB/s, labelled 8 GPUs; it equals the sum of one GPU's seven 128 GB/s links, but AMD does not state that it is a per-GPU figure. One Infinity Fabric link to one peer GPU: 0.128 TB/s bidirectional. One x16 PCIe Gen 5 host link: 0.128 TB/s. All six are AMD-stated peaks.</desc>
               <line class="f-grid" x1="250" y1="34" x2="250" y2="286"/>
               <line class="f-grid" x1="423" y1="34" x2="423" y2="286"/>
               <line class="f-grid" x1="597" y1="34" x2="597" y2="286"/>
@@ -175,26 +175,26 @@
                 <text class="f-val" x="557" y="142">5.3 TB/s</text>
               </g>
               <g>
-                <title>AMD P2P ring peak aggregate: 896 GB/s (8 GPUs; device-level scope and direction unconfirmed)</title>
-                <text class="f-lbl" x="240" y="183" text-anchor="end">7 GPU LINKS (TOTAL)</text>
+                <title>AMD P2P ring peak aggregate: 896 GB/s, bidirectional, labelled 8 GPUs (AMD-stated peak; per-GPU or ring-level scope not stated)</title>
+                <text class="f-lbl" x="240" y="183" text-anchor="end">P2P RING (8 GPUs)</text>
                 <rect class="f-bar" x="250" y="168" width="165" height="22" rx="2"/>
                 <text class="f-val" x="423" y="184">0.896 TB/s</text>
               </g>
               <g>
-                <title>One Infinity Fabric link to one peer GPU: 128 GB/s both directions (calculated)</title>
+                <title>One Infinity Fabric link to one peer GPU: 128 GB/s bidirectional (AMD-stated peak)</title>
                 <text class="f-lbl" x="240" y="225" text-anchor="end">1 PEER LINK</text>
-                <rect class="f-bar-calc" x="250" y="210" width="19" height="22" rx="2"/>
-                <text class="f-val" x="277" y="226">0.128 TB/s (calculated)</text>
+                <rect class="f-bar" x="250" y="210" width="19" height="22" rx="2"/>
+                <text class="f-val" x="277" y="226">0.128 TB/s</text>
               </g>
               <g>
-                <title>One x16 PCIe Gen 5 link to the host: 128 GB/s both directions, raw (calculated)</title>
+                <title>One x16 PCIe Gen 5 link to the host: 128 GB/s (AMD-stated peak)</title>
                 <text class="f-lbl" x="240" y="267" text-anchor="end">HOST PCIe GEN 5</text>
-                <rect class="f-bar-calc" x="250" y="252" width="19" height="22" rx="2"/>
-                <text class="f-val" x="277" y="268">0.128 TB/s (calculated)</text>
+                <rect class="f-bar" x="250" y="252" width="19" height="22" rx="2"/>
+                <text class="f-val" x="277" y="268">0.128 TB/s</text>
               </g>
             </svg>
             </div>
-            <figcaption>Figure 1. Original chart by AIElectronicChips.com from AMD's stated peaks for MI300X. <a class="cite" href="#ref-1">[1]</a> Solid bars are AMD-stated; dashed bars are our arithmetic (section 10). These values have different physical and reporting scopes. AMD gives 896 GB/s with an '8 GPUs' label but does not confirm whether that figure applies per device or per platform, or whether it combines directions. The one-peer and host-link bars are conditional raw calculations, not measured performance. Each step on the scale is ten times the last. <span class="tag tag-c">C</span></figcaption>
+            <figcaption>Figure 1. Original chart by AIElectronicChips.com from AMD's stated peaks for MI300X. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-10">[10]</a><a class="cite" href="#ref-11">[11]</a> All bars are AMD-stated peaks; they have different physical and reporting scopes. AMD calls 896 GB/s a bidirectional peak aggregate and labels it '8 GPUs' or 'Ring of 8'. Its data sheets give seven 128 GB/s bidirectional links per GPU, which sum to 896 GB/s, but no reviewed AMD document states that 896 GB/s is a per-GPU figure. A 2025 edition of AMD's CDNA 4 paper (PID#2258402-C, dated 10/1/2025) is reported to state 896 GB/s per GPU OAM module in its endnote MI350-007; the 2026 edition AMD now publishes omits that endnote, and the 2025 edition has not been retrieved and checked here, so that statement is pending version verification. Before reconciliation on 2026-11-11, the link and host bars were this project's arithmetic. None of these is measured performance. Each step on the scale is ten times the last. <span class="tag tag-c">C</span></figcaption>
           </figure>
           <div class="table-scroll" tabindex="0" role="region" aria-label="Data movement tiers (scrollable table)">
             <table class="data-table">
@@ -204,9 +204,9 @@
                 <tr><th scope="row">L2 cache</th><td>Data between compute units and their die's cache</td><td class="num">34.4 TB/s</td><td><span class="tag tag-a">A</span>AMD: aggregate read <a class="cite" href="#ref-1">[1]</a></td></tr>
                 <tr><th scope="row">Infinity Cache</th><td>Data between XCDs and the shared cache on the I/O dies</td><td class="num">17.2 TB/s</td><td><span class="tag tag-a">A</span>AMD: peak <a class="cite" href="#ref-1">[1]</a></td></tr>
                 <tr><th scope="row">HBM3</th><td>Data between the package and its eight memory stacks</td><td class="num">5.3 TB/s</td><td><span class="tag tag-a">A</span>AMD: peak theoretical, from bus width × data rate <a class="cite" href="#ref-1">[1]</a></td></tr>
-                <tr><th scope="row">GPU-to-GPU links</th><td>Data between packages over Infinity Fabric</td><td class="num">896 GB/s</td><td><span class="tag tag-a">A</span>AMD: "P2P ring peak aggregate" <a class="cite" href="#ref-1">[1]</a></td></tr>
-                <tr><th scope="row">One peer link</th><td>Data between one specific pair of GPUs</td><td class="num">128 GB/s</td><td><span class="tag tag-c">C</span>Our arithmetic from AMD's link rate and lane count</td></tr>
-                <tr><th scope="row">Host link</th><td>Data between the GPU and the host CPU</td><td class="num">128 GB/s</td><td><span class="tag tag-c">C</span>Our arithmetic for x16 PCIe Gen 5, raw, both directions</td></tr>
+                <tr><th scope="row">GPU-to-GPU links</th><td>Data between packages over Infinity Fabric</td><td class="num">896 GB/s</td><td><span class="tag tag-a">A</span>AMD: "P2P ring peak aggregate", bidirectional, labelled 8 GPUs <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-11">[11]</a></td></tr>
+                <tr><th scope="row">One peer link</th><td>Data between one specific pair of GPUs</td><td class="num">128 GB/s</td><td><span class="tag tag-a">A</span>AMD: 128 GB/s bidirectional per link <a class="cite" href="#ref-10">[10]</a><a class="cite" href="#ref-11">[11]</a></td></tr>
+                <tr><th scope="row">Host link</th><td>Data between the GPU and the host CPU</td><td class="num">128 GB/s</td><td><span class="tag tag-a">A</span>AMD: PCIe Gen 5 x16 (128 GB/s) per GPU <a class="cite" href="#ref-11">[11]</a></td></tr>
               </tbody>
             </table>
           </div>
@@ -230,7 +230,7 @@
             <li><strong>Device-to-device bandwidth:</strong> traffic between accelerators over a fabric, a separate physical path with its own figure.</li>
           </ul>
           <p class="detail"><span class="tag tag-a">A</span>NVIDIA's 2026-07-21 post states, for one Rubin GPU, up to 22 TB/s of peak HBM4 bandwidth and 3,600 GB/s of NVLink 6 scale-up bandwidth. It also gives 1,800 GB/s of NVLink-C2C bandwidth to the CPU and up to 256 GB/s over x16 PCIe Gen 6. <a class="cite" href="#ref-2">[2]</a> These are four different paths and are not interchangeable figures. NVIDIA's 2026-11-05 post gives 19.2 TB/s for Rubin memory bandwidth instead; that conflict stays unresolved in the <a href="/hbm-memory/#accelerators">HBM reference</a>. <a class="cite" href="#ref-4">[4]</a></p>
-          <p class="detail"><span class="tag tag-c">C</span><strong>Where memory bandwidth ends and fabric bandwidth begins (medium confidence).</strong> If AMD's ambiguous 896 GB/s P2P figure is a per-GPU, both-direction sum, MI300X's 5.3 TB/s peak HBM3 is numerically about 6× that figure; it is about 41× the inferred 128 GB/s single-peer-link figure under the same assumptions. On Rubin, peak HBM4 (22 TB/s, or the later 19.2 TB/s) is about 5× to 6× NVLink 6 (3.6 TB/s bidirectional), which NVIDIA's switches make available toward any peer. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> These ratios compare stated peaks from different measurement domains. Memory figures are combined read/write capability; link figures count both directions. They show numerical orders of magnitude under stated assumptions, not memory access speed, peer access latency, achieved throughput, or application performance.</p>
+          <p class="detail"><span class="tag tag-c">C</span><strong>Where memory bandwidth ends and fabric bandwidth begins (medium confidence).</strong> AMD states that its 896 GB/s P2P figure is bidirectional. If it is also a per-GPU sum, as its arithmetic suggests but AMD does not state, MI300X's 5.3 TB/s peak HBM3 is numerically about 6× that figure; it is about 41× the 128 GB/s single-peer-link figure that AMD's data sheets state. On Rubin, peak HBM4 (22 TB/s, or the later 19.2 TB/s) is about 5× to 6× NVLink 6 (3.6 TB/s bidirectional), which NVIDIA's switches make available toward any peer. <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> These ratios compare stated peaks from different measurement domains. Memory figures are combined read/write capability; link figures count both directions. They show numerical orders of magnitude under stated assumptions, not memory access speed, peer access latency, achieved throughput, or application performance.</p>
         </div></article>
 
         <article class="reference-block" id="host"><div class="block-index">07</div><div>
@@ -265,12 +265,12 @@
                 <tr><th scope="row">Topology</th><td><span class="tag tag-a">A</span>Fully connected: seven Infinity Fabric links per GPU, one to each peer <a class="cite" href="#ref-1">[1]</a></td><td><span class="tag tag-a">A</span>Switched: NVLink 6 switch trays forming "a single all-to-all topology across the rack" <a class="cite" href="#ref-3">[3]</a></td></tr>
                 <tr><th scope="row">Domain size</th><td>8 GPUs <a class="cite" href="#ref-1">[1]</a></td><td>72 GPUs <a class="cite" href="#ref-3">[3]</a></td></tr>
                 <tr><th scope="row">Switch silicon</th><td>None shown in AMD's description</td><td>Four NVLink 6 switch chips per switch tray <a class="cite" href="#ref-3">[3]</a></td></tr>
-                <tr><th scope="row">Per-GPU fabric figure</th><td class="num">896 GB/s, direction not stated <a class="cite" href="#ref-1">[1]</a></td><td class="num">3.6 TB/s bidirectional (2026-01-05) <a class="cite" href="#ref-3">[3]</a>; 3.0 TB/s (2026-11-05) <a class="cite" href="#ref-4">[4]</a></td></tr>
+                <tr><th scope="row">Per-GPU fabric figure</th><td class="num">896 GB/s, bidirectional, labelled 8 GPUs; seven 128 GB/s links per GPU <a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-11">[11]</a></td><td class="num">3.6 TB/s bidirectional (2026-01-05) <a class="cite" href="#ref-3">[3]</a>; 3.0 TB/s (2026-11-05) <a class="cite" href="#ref-4">[4]</a>; current product pages: 3 TB/s (Vera Rubin NVL72) <a class="cite" href="#ref-13">[13]</a> and 3.6 TB/s (HGX) <a class="cite" href="#ref-14">[14]</a></td></tr>
                 <tr><th scope="row">Generation and date</th><td>CDNA 3; available 2023</td><td>NVLink 6; announced 2026</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="detail"><span class="tag tag-u">U</span>NVIDIA's own figure for NVLink 6 per Rubin GPU differs across its posts. It is 3.6 TB/s bidirectional on 2026-01-05 and 3,600 GB/s on 2026-07-21, but 3.0 TB/s, with no direction, on 2026-11-05. The later figure was still on the live page on 2026-11-09. <a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> This page does not choose between them.</p>
+          <p class="detail"><span class="tag tag-u">U</span>NVIDIA's own figure for NVLink 6 per Rubin GPU differs across its posts. It is 3.6 TB/s bidirectional on 2026-01-05 and 3,600 GB/s on 2026-07-21, but 3.0 TB/s, with no direction, on 2026-11-05. The later figure was still on the live page on 2026-11-09. <a class="cite" href="#ref-2">[2]</a><a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a> NVIDIA's current product pages split the same way. The Vera Rubin NVL72 page lists 3 TB/s per GPU and 216 TB/s per 72-GPU rack, with no direction stated <a class="cite" href="#ref-13">[13]</a>. The HGX page lists 3.6 TB/s for an individual Rubin GPU, and on the same page 24 TB/s, marked bidirectional, for an eight-GPU NVLink switch: 3 TB/s per GPU if divided evenly, which is our arithmetic <a class="cite" href="#ref-14">[14]</a>. No reviewed NVIDIA document explains the difference, and this page does not choose between the figures.</p>
           <p class="detail"><span class="tag tag-c">C</span><strong>What the topology changes (medium confidence).</strong> In a direct mesh, the link count fixes the domain: seven links reach seven peers, and each pair shares one link. In a switched fabric, the domain is set by switch silicon and rack design, so it can be larger, but it adds a dependency on switch chips. In NVL72, NVIDIA supplies those chips itself. A direct mesh avoids that dependency but caps the domain. This is a structural comparison, not a performance ranking; no measured collective throughput was reviewed for either system.</p>
           <p class="detail"><span class="tag tag-a">A</span>NVIDIA gives a rack-level figure for the previous generation, "130 TB/s of aggregate NVLink bandwidth" on GB200 NVL72. <a class="cite" href="#ref-4">[4]</a> An aggregate over 72 GPUs is a system figure and must not be read as one device's bandwidth.</p>
         </div></article>
@@ -295,13 +295,13 @@
                 <tr><th scope="row">2. Which interface carries it</th><td>Infinity Fabric between GPUs; x16 PCIe Gen 5 to the host CPU</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
                 <tr><th scope="row">3. Which hardware participates</th><td>Eight MI300X OAM modules on one OCP Universal Base Board; each I/O die carries two x16 links, one of which can act as PCIe Gen 5</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
                 <tr><th scope="row">4. The disclosed topology</th><td>Fully connected: seven links per GPU, one to each peer, with no switch shown</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
-                <tr><th scope="row">5. The bandwidth scope</th><td>"P2P ring peak aggregate" 896 GB/s and "total peak aggregate" 1024 GB/s, with no stated direction; links "up to 32Gbps", not stated as per lane</td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row">5. The bandwidth scope</th><td>"P2P ring peak aggregate" 896 GB/s and "total peak aggregate" 1024 GB/s; links "up to 32Gbps" <a class="cite" href="#ref-1">[1]</a>. The platform data sheet calls 896 GB/s a "peak aggregate bidirectional" figure for the ring of eight and gives "7x 128 GB/s per GPU" <a class="cite" href="#ref-11">[11]</a></td><td><span class="tag tag-a">A</span><a class="cite" href="#ref-1">[1]</a><a class="cite" href="#ref-11">[11]</a></td></tr>
                 <tr><th scope="row">6. The dependency created</th><td>Peer traffic depends on AMD's proprietary Infinity Fabric links and on a board that wires the full mesh; the domain is fixed at eight GPUs</td><td><span class="tag tag-c">C</span>Derived from 2–4</td></tr>
-                <tr><th scope="row">7. What remains unknown</th><td>Per-link bandwidth and direction, encoding, measured collective throughput, latency, and any switch in deployed systems</td><td><span class="tag tag-u">U</span></td></tr>
+                <tr><th scope="row">7. What remains unknown</th><td>Whether 896 GB/s is a per-GPU or ring-level figure, link encoding, measured collective throughput, latency, and any switch in deployed systems</td><td><span class="tag tag-u">U</span></td></tr>
               </tbody>
             </table>
           </div>
-          <p class="detail"><span class="tag tag-c">C</span><strong>Checking AMD's figures (medium confidence).</strong> If "32Gbps" is a per-lane rate, an x16 link carries 512 Gb/s, or 64 GB/s, each way: 128 GB/s counting both directions. Seven links give 896 GB/s, AMD's P2P figure. One more x16 link for the host, PCIe Gen 5 at 32 GT/s, adds 128 GB/s, for 1,024 GB/s, AMD's total. AMD's figures are therefore consistent with raw, both-direction sums for one GPU, before encoding overhead. The "8 GPUs" label then names the platform rather than multiplying the figure. AMD does not state this, so it remains an inference.</p>
+          <p class="detail"><span class="tag tag-c">C</span><strong>Checking AMD's figures (medium confidence).</strong> If "32Gbps" is a per-lane rate, an x16 link carries 512 Gb/s, or 64 GB/s, each way: 128 GB/s counting both directions. Seven links give 896 GB/s, AMD's P2P figure. One more x16 link for the host, PCIe Gen 5 at 32 GT/s, adds 128 GB/s, for 1,024 GB/s, AMD's total. AMD's figures are therefore consistent with raw, both-direction sums for one GPU, before encoding overhead. The "8 GPUs" label then names the platform rather than multiplying the figure. AMD's data sheets now state the 128 GB/s bidirectional link figure and "7x 128 GB/s per GPU" directly <a class="cite" href="#ref-10">[10]</a><a class="cite" href="#ref-11">[11]</a>, and AMD applies the same "(8 GPUs)" label to MI350's 1,008 GB/s, which its CDNA 4 paper describes as more than 1 TB/s of communication bandwidth per GPU <a class="cite" href="#ref-12">[12]</a>. That makes the per-GPU reading the better-supported one, but no reviewed MI300X document states it, and the platform data sheet's prose describes 896 GB/s as connecting all GPUs in the ring. Editorial review reports that a 2025 edition of AMD's CDNA 4 paper (PID#2258402-C, 10/1/2025) stated the figure per GPU OAM module in endnote MI350-007, which the 2026 edition omits; until that edition is retrieved and checked, the per-GPU reading remains an inference from AMD's other documents.</p>
         </div></article>
 
         <article class="reference-block" id="measurement"><div class="block-index">11</div><div>
@@ -320,11 +320,14 @@
               <caption>Every interconnect figure on this page, with its unit, direction, scope and basis.</caption>
               <thead><tr><th scope="col">Figure</th><th scope="col">What it measures</th><th scope="col">Direction</th><th scope="col">Scope</th><th scope="col">Basis and date</th></tr></thead>
               <tbody>
-                <tr><th scope="row" class="num">896 GB/s</th><td>MI300X P2P ring peak aggregate</td><td>Not stated</td><td>Not stated (labelled "8 GPUs")</td><td>AMD, revision 2025-04-07 <a class="cite" href="#ref-1">[1]</a></td></tr>
+                <tr><th scope="row" class="num">896 GB/s</th><td>MI300X P2P ring peak aggregate</td><td>Bidirectional</td><td>Labelled "8 GPUs" and "Ring of 8"; equals one GPU's seven 128 GB/s links, per-GPU scope not stated</td><td>AMD, revision 2025-04-07 <a class="cite" href="#ref-1">[1]</a>; platform data sheet, 2023-12-04 <a class="cite" href="#ref-11">[11]</a></td></tr>
+                <tr><th scope="row" class="num">128 GB/s</th><td>MI300X Infinity Fabric link to one peer</td><td>Bidirectional</td><td>Per link</td><td>AMD data sheets, 2023-12-04 and 2025-06-16 <a class="cite" href="#ref-10">[10]</a><a class="cite" href="#ref-11">[11]</a></td></tr>
                 <tr><th scope="row" class="num">1024 GB/s</th><td>MI300X total peak aggregate I/O</td><td>Not stated</td><td>Not stated</td><td>AMD <a class="cite" href="#ref-1">[1]</a></td></tr>
                 <tr><th scope="row" class="num">32 Gbps</th><td>CDNA 3 communication link rate</td><td>Not stated</td><td>Not stated as per lane</td><td>AMD <a class="cite" href="#ref-1">[1]</a></td></tr>
                 <tr><th scope="row" class="num">3.6 TB/s</th><td>NVLink 6 GPU-to-GPU</td><td>Bidirectional</td><td>Per GPU</td><td>NVIDIA, 2026-01-05 <a class="cite" href="#ref-3">[3]</a></td></tr>
                 <tr><th scope="row" class="num">3.0 TB/s</th><td>NVLink 6</td><td>Not stated</td><td>Per GPU</td><td>NVIDIA, 2026-11-05 <a class="cite" href="#ref-4">[4]</a></td></tr>
+                <tr><th scope="row" class="num">3 TB/s</th><td>NVLink 6, Vera Rubin NVL72 specification table</td><td>Not stated</td><td>Per GPU; 216 TB/s per 72-GPU rack</td><td>NVIDIA product page, metadata date 2026-10-21 <a class="cite" href="#ref-13">[13]</a></td></tr>
+                <tr><th scope="row" class="num">3.6 TB/s</th><td>NVLink 6, HGX individual Rubin GPU specification</td><td>Not stated in that row</td><td>Per GPU</td><td>NVIDIA product page, metadata date 2026-09-30 <a class="cite" href="#ref-14">[14]</a></td></tr>
                 <tr><th scope="row" class="num">130 TB/s</th><td>GB200 NVL72 NVLink</td><td>Not stated</td><td>Aggregate, per system</td><td>NVIDIA, 2026-11-05 <a class="cite" href="#ref-4">[4]</a></td></tr>
                 <tr><th scope="row" class="num">1.8 TB/s</th><td>NVLink-C2C, coherent CPU-GPU</td><td>Not stated</td><td>Per link</td><td>NVIDIA, 2026-01-05 <a class="cite" href="#ref-3">[3]</a></td></tr>
                 <tr><th scope="row" class="num">256 GB/s</th><td>x16 PCIe Gen 6 host connectivity</td><td>Not stated</td><td>Per link</td><td>NVIDIA, 2026-07-21 <a class="cite" href="#ref-2">[2]</a></td></tr>
@@ -385,8 +388,8 @@
           <h2>Unresolved questions</h2>
           <p class="detail">These are material questions the reviewed evidence cannot answer. They are recorded, not filled with general industry commentary.</p>
           <ol class="unresolved-list">
-            <li><strong>NVLink 6 per-GPU figure.</strong> 3.6 TB/s bidirectional versus 3.0 TB/s, both from NVIDIA. <a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a></li>
-            <li><strong>MI300X link scope.</strong> Per-link bandwidth, direction and encoding, and whether 896 GB/s is per GPU.</li>
+            <li><strong>NVLink 6 per-GPU figure.</strong> 3.6 TB/s bidirectional versus 3.0 TB/s, both from NVIDIA, with its current product pages split the same way (3.6 TB/s on HGX, 3 TB/s on Vera Rubin NVL72). <a class="cite" href="#ref-3">[3]</a><a class="cite" href="#ref-4">[4]</a><a class="cite" href="#ref-13">[13]</a><a class="cite" href="#ref-14">[14]</a></li>
+            <li><strong>MI300X link scope.</strong> AMD states 128 GB/s bidirectional per link and calls 896 GB/s bidirectional. Whether 896 GB/s is a per-GPU or ring-level figure, and the link encoding, remain unstated. <a class="cite" href="#ref-10">[10]</a><a class="cite" href="#ref-11">[11]</a></li>
             <li><strong>AMD L2 figures.</strong> 34.4 TB/s in the text versus 51.6 TB/s in a legend.</li>
             <li><strong>Effective bandwidth.</strong> No measured collective or application bandwidth for either documented system.</li>
             <li><strong>Latency.</strong> No measured latency with a stated method.</li>
@@ -413,6 +416,11 @@
           <li id="ref-7">CXL Consortium, "CXL Consortium Releases the Compute Express Link 4.0 Specification Increasing Speed and Bandwidth", 2025-11-18. <code>cxl-4-0-specification-release-2025</code>. <a href="https://computeexpresslink.org/wp-content/uploads/2025/11/CXL_4.0-Specification-Release_FINAL_Website-Copy.pdf">computeexpresslink.org</a></li>
           <li id="ref-8">Ultra Ethernet Consortium, "Ultra Ethernet Specification v1.1", 2026-10-12 (introductory sections and contents read). <code>uec-specification-1-1-2026</code>. <a href="https://ultraethernet.org/wp-content/uploads/sites/20/2026/10/UE-Specification-1.1.pdf">ultraethernet.org</a></li>
           <li id="ref-9">Ultra Ethernet Consortium, "Ultra Ethernet Consortium (UEC) Launches Specification 1.0 Transforming Ethernet for AI and HPC at Scale", 2025-06-11. <code>uec-specification-1-0-launch-2025</code>. <a href="https://ultraethernet.org/ultra-ethernet-consortium-uec-launches-specification-1-0-transforming-ethernet-for-ai-and-hpc-at-scale/">ultraethernet.org</a></li>
+          <li id="ref-10">AMD, "AMD Instinct MI300X Accelerator" (data sheet), PDF dated 2025-06-16. <code>amd-instinct-mi300x-data-sheet-2025</code>. <a href="https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf">amd.com</a></li>
+          <li id="ref-11">AMD, "AMD Instinct MI300X Platform" (data sheet), PDF dated 2023-12-04. <code>amd-instinct-mi300x-platform-data-sheet-2023</code>. <a href="https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-platform-data-sheet.pdf">amd.com</a></li>
+          <li id="ref-12">AMD, "Introducing AMD CDNA 4 Architecture" (white paper), PDF created 2025-09-30, edition revised 2026-09-28. <code>amd-cdna4-white-paper-2025</code>. <a href="https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf">amd.com</a></li>
+          <li id="ref-13">NVIDIA, "NVIDIA Vera Rubin NVL72" (product page), page metadata 2026-10-21. <code>nvidia-vera-rubin-nvl72-product-page-2026</code>. <a href="https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/">nvidia.com</a></li>
+          <li id="ref-14">NVIDIA, "NVIDIA HGX Platform" (product page), page metadata 2026-09-30. <code>nvidia-hgx-platform-product-page-2026</code>. <a href="https://www.nvidia.com/en-us/data-center/hgx/">nvidia.com</a></li>
         </ol>
         <div class="posture-grid">
           <article><h3>Can support</h3><p>Attributed statements of what AMD, NVIDIA and the CXL and Ultra Ethernet consortia disclosed about links, topologies, host interfaces and networks, with each figure's stated scope; and what the UE specification's text states.</p></article>

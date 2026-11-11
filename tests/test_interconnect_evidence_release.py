@@ -228,7 +228,9 @@ class BandwidthScopeIntegrityTests(unittest.TestCase):
         self.assertEqual("not_stated", quantity["direction"])
         self.assertEqual("not_stated", quantity["scope"])
         page = PAGE.read_text(encoding="utf-8")
-        self.assertIn("per-GPU versus per-platform scope not established", page)
+        # IDE-009 reconciliation: AMD now states the direction, but per-GPU scope is still not vendor-stated.
+        self.assertIn("AMD does not state that it is a per-GPU figure", page)
+        self.assertIn("no reviewed AMD document states that 896 GB/s is a per-GPU figure", page)
         self.assertIn("not memory access speed", page)
 
 if __name__ == "__main__":

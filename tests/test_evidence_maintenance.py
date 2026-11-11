@@ -30,7 +30,7 @@ from validate_evidence_maintenance import (  # noqa: E402
     metadata_issues,
 )
 
-TODAY = date(2026, 11, 10)
+TODAY = date(2026, 11, 11)
 
 
 def load(name):
@@ -57,8 +57,8 @@ class CommittedStateTests(unittest.TestCase):
     def test_every_registry_record_is_accounted_for(self):
         registry, *_ = context()
         log = load("source-inspections.json")
-        self.assertEqual(sorted(registry), sorted(r["source_id"] for r in log["records"]))
-        self.assertEqual(73, len(registry))
+        self.assertEqual(sorted(registry), sorted({r["source_id"] for r in log["records"]}))
+        self.assertEqual(76, len(registry))
 
     def test_states_are_kept_distinct(self):
         log = load("source-inspections.json")
@@ -122,7 +122,10 @@ class InspectionValidationTests(unittest.TestCase):
         self.expect(lambda log: record(log, "jedec-jesd270-4-hbm4-standard-2025")["states"].append("source_inaccessible"), "source_inaccessible needs")
 
     def test_every_source_needs_a_record(self):
-        self.expect(lambda log: log["records"].pop(), "has no record")
+        def drop(log):
+            sid = log["records"][-1]["source_id"]
+            log["records"] = [r for r in log["records"] if r["source_id"] != sid]
+        self.expect(drop, "has no record")
 
     def test_dates_and_chronology(self):
         self.expect(lambda log: record(log, "jedec-jesd270-4-hbm4-standard-2025").update(inspected_at="2027-01-01"), "inspected_at must be")
@@ -158,14 +161,16 @@ class ConflictValidationTests(unittest.TestCase):
     def test_resolution_needs_evidence_history_and_review_targets(self):
         self.expect("ec-gb200-power-redundancy", lambda c: c.update(state="resolved_with_evidence"), "needs a 'resolved' history entry")
         self.expect("ec-cowos-l-5p5-reticle", lambda c: c.update(state="resolved_with_evidence"), "needs primary evidence")
-        self.expect("ec-mi300x-infinity-fabric-scope", lambda c: c.update(downstream_review=[]), "must name the public statements")
+        self.expect("ec-mi300x-infinity-fabric-scope", lambda c: c.update(state="resolved_with_evidence", downstream_review=[]),
+                    "must name the public statements")
 
     def test_newer_finding_source_alone_cannot_resolve(self):
         def mutate(c):
             c["state"] = "resolved_with_evidence"
-            c["history"].append({"date": "2026-11-10", "event": "resolved", "detail": "Newer article chosen."})
+            c["history"].append({"date": "2026-11-11", "event": "resolved", "detail": "Newer article chosen."})
             c["downstream_review"] = ["x"]
-            c["evidence"] = [e for e in c["evidence"] if e["source_id"] != "nvidia-vera-rubin-nvl72-product-page-2026"]
+            c["evidence"] = [e for e in c["evidence"] if e["source_id"] not in {"nvidia-vera-rubin-nvl72-product-page-2026",
+                                                                                "nvidia-hgx-platform-product-page-2026"}]
         self.expect("ec-rubin-memory-bandwidth", mutate, "evidence beyond the findings")
 
     def test_unresolved_issues_state_what_is_unknown(self):
@@ -227,7 +232,12 @@ class ScientificContentTests(unittest.TestCase):
 
     def test_mi300x_resolution_preserves_history(self):
         c = issue(load("evidence-conflicts.json"), "ec-mi300x-infinity-fabric-scope")
-        self.assertEqual("resolved_with_evidence", c["state"])
+        # IDE-008 resolved it from arithmetic; IDE-009 reopened it because AMD never states the per-GPU scope.
+        self.assertEqual("requires_reassessment", c["state"])
+        events = [h["event"] for h in c["history"]]
+        self.assertIn("resolved", events)
+        self.assertIn("reopened", events)
+        self.assertGreater(events.index("reopened"), events.index("resolved"))
         self.assertIn("amd-instinct-mi300x-data-sheet-2025", {e["source_id"] for e in c["evidence"]})
         self.assertTrue(c["unknown"], "remaining uncertainty must stay visible")
         rel = json.loads((ROOT / "data" / "research" / "interconnect-evidence-release-004.json").read_text(encoding="utf-8"))

@@ -99,6 +99,15 @@ def iso(value) -> date | None:
         return None
 
 
+def latest_records(inspections: dict) -> dict[str, dict]:
+    """The most recent inspection record per source (records are kept for every run; none is overwritten)."""
+    out: dict[str, dict] = {}
+    for r in inspections.get("records", []):
+        if isinstance(r, dict) and (r.get("source_id") not in out or str(r.get("inspected_at")) >= str(out[r["source_id"]].get("inspected_at"))):
+            out[r["source_id"]] = r
+    return out
+
+
 def source_date(record: dict) -> date | None:
     return iso(record.get("publication_date") or record.get("effective_date"))
 
@@ -164,8 +173,13 @@ def build_impact(registry, releases, pathways, dossiers, inspections, conflicts)
     pages = public_pages()
     ref_sources = {route: set(re.findall(r'<li id="ref-\d+">.*?<code>([a-z0-9-]+)</code>', html, re.S)) for route, html in pages.items()}
     listed_sources = {route: set(re.findall(r'<li(?: class="pending")?>([a-z0-9-]+)(?: · pending_review)?</li>', html)) for route, html in pages.items()}
-    log = {r["source_id"]: r for r in inspections.get("records", [])}
+    log = latest_records(inspections)
     finding_index = {f["id"]: (rid, f) for rid, r in releases.items() for f in r["findings"]}
+    recon_ids: dict[str, list[str]] = {}
+    for path in sorted((ROOT / "data").glob("evidence-reconciliations-*.json")):
+        for rc in json.loads(path.read_text(encoding="utf-8")).get("reconciliations", []):
+            for s in rc.get("source_ids", []):
+                recon_ids.setdefault(s, []).append(rc["id"])
     entries = []
     for sid in sorted(registry):
         rec = registry[sid]
@@ -209,6 +223,8 @@ def build_impact(registry, releases, pathways, dossiers, inspections, conflicts)
             revalidate.append("Recheck the listed comparison verdicts and their figures")
         if issue_ids:
             revalidate.append("Reassess the listed conflict-register issues")
+        if recon_ids.get(sid):
+            revalidate.append("Recheck the public text and pathway values set by the listed reconciliations")
         if not revalidate:
             revalidate.append("No finding, page citation or pathway step rests on this source; record the change in the inspection log")
         entries.append({
@@ -221,6 +237,7 @@ def build_impact(registry, releases, pathways, dossiers, inspections, conflicts)
                        "pathway_steps": steps, "comparisons": comparisons, "dossier_requirements": dossier_reqs},
             "contextual": {"unresolved_checked": unresolved_ctx, "listed_on_pages": listed},
             "conflicts": issue_ids,
+            "reconciliations": sorted(recon_ids.get(sid, [])),
             "revalidate": revalidate,
             "not_established_by_change": "A change to this source does not by itself change any finding, verdict or pathway; it identifies what must be re-examined.",
         })
@@ -230,7 +247,7 @@ def build_impact(registry, releases, pathways, dossiers, inspections, conflicts)
         "status": "generated",
         "generated_from": ["data/source-registry.json", "data/research/*.json (findings and unresolved questions only)",
                            "data/research/dossiers/*.json", "data/reference-pathways.json", "data/source-inspections.json",
-                           "data/evidence-conflicts.json", "public reference pages"],
+                           "data/evidence-conflicts.json", "data/evidence-reconciliations-*.json", "public reference pages"],
         "boundary": ("Reference-impact index, not a dependency graph. Each entry names review targets if a source changes; "
                      "candidate Atlas relationships are excluded and nothing here approves or updates a claim."),
         "priority_reason_definitions": dict(PRIORITY_REASONS),
@@ -287,7 +304,7 @@ def check_inspections(log: object, registry: dict, today: date) -> list[str]:
             errors.append(f"source-inspections: run {rid} has an invalid or future inspected_at")
         if not nonempty(run.get("method")) or not nonempty(run.get("tool")):
             errors.append(f"source-inspections: run {rid} must state its method and tool")
-    seen = set()
+    seen, seen_pairs = set(), set()
     for i, rec in enumerate(log["records"]):
         where = f"source-inspections.records[{i}]"
         fields = {"source_id", "run_id", "inspected_at", "states", "metadata_issues", "retrievals", "passage_check", "notes", "next_action"}
@@ -296,8 +313,9 @@ def check_inspections(log: object, registry: dict, today: date) -> list[str]:
             continue
         sid = rec["source_id"]
         where = f"source-inspections[{sid}]"
-        if sid in seen:
-            errors.append(f"{where}: duplicate record")
+        if (sid, rec["run_id"]) in seen_pairs:
+            errors.append(f"{where}: duplicate record for run {rec['run_id']}")
+        seen_pairs.add((sid, rec["run_id"]))
         seen.add(sid)
         if sid not in registry:
             errors.append(f"{where}: source is not registered")
@@ -370,7 +388,7 @@ def check_conflicts(register: object, registry: dict, releases: dict, pathways: 
     unresolved = {u["id"] for r in releases.values() for u in r["unresolved"]}
     steps = {s["id"] for p in pathways["pathways"] for s in p["steps"]}
     comparisons = {c["id"] for p in pathways["pathways"] for c in p.get("comparisons", [])}
-    log = {r["source_id"]: r for r in inspections.get("records", [])}
+    log = latest_records(inspections)
     fields = {"id", "title", "question", "state", "ontology_layers", "scope", "source_ids", "finding_ids", "unresolved_ids",
               "affected_references", "affected_pathway_steps", "affected_comparisons", "evidence", "posture", "unknown",
               "next_evidence", "inspected_at", "history", "downstream_review"}
@@ -431,10 +449,11 @@ def check_conflicts(register: object, registry: dict, releases: dict, pathways: 
                 errors.append(f"{ew}: source must be listed in the issue's source_ids")
             if any(len(q.split()) > MAX_QUOTE_WORDS for q in QUOTED.findall(ev["locator"])):
                 errors.append(f"{ew}: quoted excerpt exceeds {MAX_QUOTE_WORDS} words")
-            rec = log.get(sid)
-            if rec is None or "source_retrieved" not in rec["states"]:
+            retrieved_on = [iso(r["inspected_at"]) for r in inspections.get("records", [])
+                            if r.get("source_id") == sid and "source_retrieved" in r.get("states", []) and iso(r.get("inspected_at"))]
+            if not retrieved_on:
                 errors.append(f"{ew}: evidence must come from a source this inspection retrieved")
-            elif inspected and iso(rec["inspected_at"]) and iso(rec["inspected_at"]) > inspected:
+            elif inspected and min(retrieved_on) > inspected:
                 errors.append(f"{ew}: the issue's inspected_at precedes the source inspection it relies on")
             published = source_date(registry.get(sid, {}))
             if published and inspected and published > inspected:
@@ -523,7 +542,8 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(1)
     log, reg = load(INSPECTIONS), load(CONFLICTS)
     retrieved = sum("source_retrieved" in r["states"] for r in log["records"])
-    print(f"PASS: Evidence maintenance valid ({len(log['records'])} sources inspected for metadata, {retrieved} retrieved; "
+    sources = len({r["source_id"] for r in log["records"]})
+    print(f"PASS: Evidence maintenance valid ({sources} sources across {len(log['runs'])} runs, {len(log['records'])} records, {retrieved} retrievals; "
           f"{len(reg['issues'])} register issues; impact index in sync).")
 
 
