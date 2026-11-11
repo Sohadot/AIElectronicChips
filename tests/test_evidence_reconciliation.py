@@ -61,7 +61,7 @@ class CommittedStateTests(unittest.TestCase):
     def test_history_is_appended_not_rewritten(self):
         c = issue(state(), "ec-mi300x-infinity-fabric-scope")
         events = [h["event"] for h in c["history"]]
-        self.assertEqual(["registered", "evidence_added", "resolved", "evidence_added", "evidence_added", "reopened"], events)
+        self.assertEqual(["registered", "evidence_added", "resolved", "evidence_added", "evidence_added", "reopened", "evidence_added"], events)
 
     def test_historical_releases_untouched(self):
         rel = json.loads((ROOT / "data" / "research" / "interconnect-evidence-release-004.json").read_text(encoding="utf-8"))
@@ -204,6 +204,85 @@ class NegativeFixtureTests(unittest.TestCase):
             r = next(r for r in s["record"]["reconciliations"] if r["decision"] == "unnecessary")
             r["publication_changes"] = [{"route": "/hbm-memory/", "old_text": None, "new_text": "x"}]
         self.expect(mutate, "only an applied reconciliation may change public text")
+
+
+class VersionProvenanceTests(unittest.TestCase):
+    """The 2025 CDNA 4 edition is reported, not retrieved: it is recorded as pending, never as evidence or as nonexistent."""
+
+    def test_2025_edition_pending_and_2026_omission_recorded(self):
+        r = rc(state(), AMD)
+        pv = r["pending_version_verification"][0]
+        self.assertEqual("pending_version_verification", pv["status"])
+        self.assertIn("PID#2258402-C", pv["edition"])
+        self.assertIn("MI350-007", pv["reported_content"])
+        self.assertTrue(pv["retrieval_attempts"])
+        note = r["sources_examined_not_supporting"][0]["observation"]
+        self.assertIn("omits endnote MI350-007", note)
+        self.assertIn("does not show that earlier editions lacked the endnote", note)
+        self.assertNotRegex(note.lower(), r"nonexistent|does not exist|could not be verified")
+        self.assertTrue(r["states"]["conflict_remains_open"])
+
+    def test_public_text_distinguishes_editions(self):
+        text = recon.norm(recon.plain((ROOT / "interconnects" / "index.html").read_text(encoding="utf-8")))
+        self.assertIn("pending version verification", text)
+        self.assertIn("the 2026 edition AMD now publishes omits that endnote", text)
+        self.assertIn('labels it \'8 GPUs\' or \'Ring of 8\'', text)
+        self.assertIn("None of these is measured performance", text)
+
+    def test_pending_item_cannot_be_promoted_or_used(self):
+        def promote(s):
+            rc(s, AMD)["pending_version_verification"][0]["status"] = "verified"
+        def as_evidence(s):
+            r = rc(s, AMD)
+            doc = r["pending_version_verification"][0]["document"]
+            r["new_evidence"][0]["locator"] = doc + ' endnote: "896 GB/s per GPU OAM module"'
+        def no_attempts(s):
+            rc(s, AMD)["pending_version_verification"][0]["retrieval_attempts"] = []
+        for mutate, frag in ((promote, "must stay 'pending_version_verification'"), (as_evidence, "cannot be used as evidence"),
+                             (no_attempts, "must record each attempt")):
+            with self.subTest(frag):
+                s = state()
+                mutate(s)
+                self.assertTrue(any(frag in e for e in run(s)), frag)
+
+
+class FailClosedTests(unittest.TestCase):
+    """Deleting the reconciliation record must fail validation and publishing, never pass silently."""
+
+    def test_validator_fails_when_record_missing(self):
+        saved = recon.RECORD
+        recon.RECORD = ROOT / "data" / "missing-evidence-reconciliations.json"
+        try:
+            with self.assertRaises(SystemExit) as ctx:
+                recon.main()
+            self.assertEqual(1, ctx.exception.code)
+        finally:
+            recon.RECORD = saved
+
+    def test_renderer_refuses_to_publish_without_record(self):
+        import render_evidence_maintenance as rs
+        saved = rs.RECON_PATH
+        rs.RECON_PATH = ROOT / "data" / "missing-evidence-reconciliations.json"
+        try:
+            with self.assertRaises(SystemExit):
+                rs.render()
+        finally:
+            rs.RECON_PATH = saved
+
+    def test_full_pipeline_rejects_missing_record(self):
+        import shutil
+        import subprocess
+        import tempfile
+        record = ROOT / "data" / "evidence-reconciliations-009.json"
+        with tempfile.TemporaryDirectory() as tmp:
+            backup = Path(tmp) / record.name
+            shutil.move(str(record), backup)
+            try:
+                result = subprocess.run([sys.executable, str(ROOT / "scripts" / "validate_all.py")], capture_output=True, text=True, cwd=ROOT)
+            finally:
+                shutil.move(str(backup), record)
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("required reconciliation record missing", result.stdout + result.stderr)
 
 
 class SynchronizationTests(unittest.TestCase):

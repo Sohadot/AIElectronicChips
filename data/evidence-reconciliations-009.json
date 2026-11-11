@@ -70,7 +70,7 @@
         {
           "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf",
           "retrieved_at": "2026-11-11",
-          "observation": "The editorial review of PR #18 cited endnote MI350-007 on printed page 21 as stating 896 GB/s per GPU OAM module. The edition retrieved on 2026-11-11 (21 pages, revision dated 9/28/2026) contains endnotes MI350-002, -005, -051, -052 and -053 only, and no 896 GB/s figure; the cited statement could not be verified."
+          "observation": "The edition served at the canonical URL on 2026-11-11 (21 pages, revision dated 9/28/2026, PDF modified 2026-09-28) contains endnotes MI350-002, -005, -051, -052 and -053 and no 896 GB/s figure: the 2026 edition omits endnote MI350-007. This describes that edition only; it does not show that earlier editions lacked the endnote."
         }
       ],
       "source_ids": [
@@ -88,14 +88,15 @@
       "unresolved_ids": [
         "u-i-amd-link-scope"
       ],
-      "reconciled_interpretation": "AMD states that 896 GB/s is a bidirectional peak aggregate and that each MI300X has seven 128 GB/s bidirectional Infinity Fabric links to its peers. Seven times 128 GB/s is 896 GB/s, and AMD uses the same '(8 GPUs)' label for a later figure it describes as per-GPU, so the per-GPU reading is the better-supported one. No reviewed MI300X document states it, and the platform data sheet's wording reads as a ring-level figure, so the scope stays unresolved.",
+      "reconciled_interpretation": "AMD states that 896 GB/s is a bidirectional peak aggregate and that each MI300X has seven 128 GB/s bidirectional Infinity Fabric links to its peers. The 2023 platform data sheet labels the figure a ring-of-8 aggregate. A 2025 edition of AMD's CDNA 4 paper (PID#2258402-C, 10/1/2025) is reported to state it per GPU OAM module in endnote MI350-007, but the 2026 edition omits that endnote and no copy of the 2025 edition has been retrieved and checked here, so that statement is pending version verification. None of these figures is measured application throughput. The scope stays unresolved.",
       "claim_classification": "attributed_statement",
       "scope": {
         "technical": "AMD Instinct MI300X Infinity Fabric peak figures: per link, per GPU and the labelled ring aggregate",
         "temporal": "AMD documents dated 2023-12-04 to 2026-09-28; inspected 2026-11-11"
       },
       "uncertainty_remaining": [
-        "Whether 896 GB/s is per GPU or a ring-level figure",
+        "Whether 896 GB/s is per GPU or a ring-level figure, pending verification of the 2025 CDNA 4 edition",
+        "Why the 2026 CDNA 4 edition omits endnote MI350-007",
         "Link encoding and effective bandwidth",
         "Whether the product page's eight Infinity Fabric links include the PCIe-capable host link"
       ],
@@ -197,6 +198,16 @@
           "route": "/interconnects/",
           "old_text": "Per-link bandwidth, direction and encoding, and whether 896 GB/s is per GPU.",
           "new_text": "Whether 896 GB/s is a per-GPU or ring-level figure, and the link encoding, remain unstated"
+        },
+        {
+          "route": "/interconnects/",
+          "old_text": null,
+          "new_text": "the 2025 edition has not been retrieved and checked here, so that statement is pending version verification"
+        },
+        {
+          "route": "/interconnects/",
+          "old_text": null,
+          "new_text": "until that edition is retrieved and checked, the per-GPU reading remains an inference from AMD's other documents"
         }
       ],
       "pathway_changes": [
@@ -226,7 +237,35 @@
         }
       ],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": [
+        {
+          "document": "AMD, Introducing AMD CDNA 4 Architecture (white paper)",
+          "edition": "PID#2258402-C, footer dated 10/1/2025",
+          "reported_by": "the editorial review of PR #19 (2026-11-11), from an archived rendering and its extracted text",
+          "reported_content": "Endnote MI350-007, printed page 21: MI325X and MI300X offer up to 896 GB/s peak aggregate P2P transport bandwidth per GPU OAM module, and up to 1,024 GB/s total peak aggregate theoretical GPU transport rate bandwidth.",
+          "canonical_url_note": "The live canonical URL now serves the 2026 edition, so it does not identify the 2025 bytes; a version-specific archival locator is needed.",
+          "retrieval_attempts": [
+            {
+              "url": "https://archive.org/wayback/available?url=https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf&timestamp=20251015",
+              "attempted_at": "2026-11-11",
+              "outcome": "HTTP 200 with no archived snapshot listed"
+            },
+            {
+              "url": "https://web.archive.org/cdx/search/cdx?url=https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf",
+              "attempted_at": "2026-11-11",
+              "outcome": "connection reset; the archive index was unreachable from this environment"
+            },
+            {
+              "url": "https://web.archive.org/web/2025id_/https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf",
+              "attempted_at": "2026-11-11",
+              "outcome": "connection reset; the archive was unreachable from this environment"
+            }
+          ],
+          "status": "pending_version_verification",
+          "next_action": "Obtain a stable version-specific copy of PID#2258402-C (archive capture or AMD document number URL), record its hash, check endnote MI350-007 against it, and register it as a separate, explicitly versioned source."
+        }
+      ]
     },
     {
       "id": "rc-009-rubin-memory-bandwidth",
@@ -315,7 +354,8 @@
         }
       ],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-nvlink6-per-gpu",
@@ -426,7 +466,8 @@
         }
       ],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-hbm-export-control-currency",
@@ -546,7 +587,8 @@
         }
       ],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-cowos-l-5p5-reticle",
@@ -593,7 +635,8 @@
       "publication_changes": [],
       "pathway_changes": [],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-hbm4-package-qualification",
@@ -651,7 +694,8 @@
       "publication_changes": [],
       "pathway_changes": [],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-gb200-power-redundancy",
@@ -703,7 +747,8 @@
       "publication_changes": [],
       "pathway_changes": [],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-gb200-busbar-rack-power",
@@ -755,7 +800,8 @@
       "publication_changes": [],
       "pathway_changes": [],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-scalable-unit-power",
@@ -802,7 +848,8 @@
       "publication_changes": [],
       "pathway_changes": [],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-gb200-coolant-specification",
@@ -854,7 +901,8 @@
       "publication_changes": [],
       "pathway_changes": [],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     },
     {
       "id": "rc-009-mission-control-orchestration-versions",
@@ -901,7 +949,8 @@
       "publication_changes": [],
       "pathway_changes": [],
       "inspected_at": "2026-11-11",
-      "validation_status": "checked_by_validator"
+      "validation_status": "checked_by_validator",
+      "pending_version_verification": []
     }
   ]
 }

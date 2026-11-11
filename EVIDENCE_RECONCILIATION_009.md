@@ -19,11 +19,20 @@ It lists the exact old and new public text and pathway values. The validator fai
 
 | Issue | Decision | Result |
 | --- | --- | --- |
-| MI300X Infinity Fabric | applied; reopened | AMD states 896 GB/s is bidirectional and gives seven 128 GB/s links per GPU, but labels 896 GB/s a ring-of-8 aggregate and never calls it per-GPU. The IDE-008 "resolved" state is reopened as `requires_reassessment`. Endnote MI350-007, cited in the PR #18 review, is not in the CDNA 4 edition published on 2026-11-11. |
+| MI300X Infinity Fabric | applied; reopened | AMD states 896 GB/s is bidirectional and gives seven 128 GB/s links per GPU. The 2023 platform data sheet labels the figure a ring-of-8 aggregate. The 2025 CDNA 4 edition (PID#2258402-C, 10/1/2025) is reported in editorial review to state it per GPU OAM module in endnote MI350-007. The 2026 edition served now omits that endnote, and no stable copy of the 2025 edition could be retrieved from here (archive.org unreachable), so the 2025 statement is recorded as *pending version verification*. None of these figures is measured throughput. The IDE-008 "resolved" state is reopened as `requires_reassessment`. |
 | Rubin memory bandwidth | applied (references only) | `/hbm-memory/` already presented both figures correctly; only its reference note was corrected. The HGX page (22 TB/s) is registered. The conflict stays open. |
 | NVLink 6 per GPU | applied | The current HGX (3.6 TB/s) and Vera Rubin NVL72 (3 TB/s) pages are added to `/interconnects/`. The conflict stays open. |
 | HBM export controls | applied | Public text now cites the current eCFR 742.6 and 740.25 and states that other provisions were not reviewed. State: `missing_primary_evidence`. |
 | Other seven issues | unnecessary or deferred | No new primary evidence; the public references already present the uncertainty. |
+
+## Fail-closed validation
+
+The reconciliation record is required:
+
+- `validate_evidence_reconciliations.py` fails, and `validate_all.py` with it, when the record is missing.
+- `render_evidence_maintenance.py` refuses to render `/sources/` without the record.
+
+Tests cover all three.
 
 ## Registry
 

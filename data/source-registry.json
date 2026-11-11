@@ -1121,7 +1121,7 @@
       "geographic_scope": "Product-level technical disclosure",
       "temporal_scope": "PDF created 2025-09-30; edition retrieved 2026-11-11 carries a 9/28/2026 revision date and PDF modification date 2026-09-28",
       "confidence_use": "May support attributed statements about MI350 Series link rates and AMD's labelling of P2P ring figures; it describes a later generation than MI300X",
-      "use_limitations": ["Describes CDNA 4 (MI350 Series); statements about MI300X-class products must not be transferred without an explicit AMD statement", "The retrieved edition contains endnotes MI350-002, -005, -051, -052 and -053; endnote MI350-007 and any 896 GB/s statement were not found in it", "Peak theoretical figures only"],
+      "use_limitations": ["Describes CDNA 4 (MI350 Series); statements about MI300X-class products must not be transferred without an explicit AMD statement", "This record is the 2026 edition (revision dated 9/28/2026) served at the canonical URL on 2026-11-11; it contains endnotes MI350-002, -005, -051, -052 and -053 and omits MI350-007", "An earlier edition, PID#2258402-C dated 10/1/2025, is reported to contain endnote MI350-007; it is pending version verification and is not covered by this record", "Peak theoretical figures only"],
       "status": "active"
     },
     {

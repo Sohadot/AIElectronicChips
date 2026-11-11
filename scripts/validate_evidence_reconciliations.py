@@ -34,10 +34,12 @@ TOP = {"record_id", "release", "schema_version", "status", "scientific_review", 
 STATES = ["evidence_reviewed", "interpretation_changed", "public_reference_synchronized", "pathway_synchronized", "conflict_remains_open"]
 DECISIONS = ["applied", "unnecessary", "deferred", "blocked"]
 FIELDS = {"id", "conflict_id", "decision", "reason", "states", "original_interpretation", "original_locations", "new_evidence",
-          "sources_examined_not_supporting", "source_ids", "finding_ids", "unresolved_ids", "reconciled_interpretation",
+          "sources_examined_not_supporting", "pending_version_verification", "source_ids", "finding_ids", "unresolved_ids", "reconciled_interpretation",
           "claim_classification", "scope", "uncertainty_remaining", "affected_references", "affected_pathway_steps",
           "affected_comparisons", "publication_changes", "pathway_changes", "inspected_at", "validation_status"}
 CLASSES = {"verified_fact", "attributed_statement", "bounded_analysis", "unresolved"}
+# A document edition reported but not yet retrieved and checked here. It is never evidence until verified.
+PENDING_FIELDS = {"document", "edition", "reported_by", "reported_content", "canonical_url_note", "retrieval_attempts", "status", "next_action"}
 GUARDED_ROUTES = ["/interconnects/", "/hbm-memory/", "/ai-chip-infrastructure/", "/export-control-layer/", "/sovereignty-stack/", "/sources/"]
 NVLINK_EXPLAINED = re.compile(r"\b(?:explains?|explained|reconciles|due to|because|accounted for)\b", re.I)
 COMPLETE_REVIEW = re.compile(r"\b(?:complete|full|entire|all applicable|comprehensive(?:ly)?|fully)\b" r"(?:[^.]|\.(?=\d))*"
@@ -202,6 +204,18 @@ def check(record: object, registry: dict, register: dict, pathways: dict, inspec
                 errors.append(f"{w}.new_evidence[{j}]: source postdates the reconciliation")
             if any(len(q.split()) > MAX_QUOTE_WORDS for q in QUOTED.findall(ev.get("locator", ""))):
                 errors.append(f"{w}.new_evidence[{j}]: quoted excerpt exceeds {MAX_QUOTE_WORDS} words")
+        for k, pv in enumerate(rc["pending_version_verification"] if isinstance(rc["pending_version_verification"], list) else [None]):
+            pw = f"{w}.pending_version_verification[{k}]"
+            if not isinstance(pv, dict) or set(pv) != PENDING_FIELDS:
+                errors.append(f"{pw} must contain exactly {sorted(PENDING_FIELDS)}")
+                continue
+            if pv["status"] != "pending_version_verification":
+                errors.append(f"{pw}: status must stay 'pending_version_verification' until an archived copy is retrieved and checked")
+            if not isinstance(pv["retrieval_attempts"], list) or not pv["retrieval_attempts"] or not all(
+                    isinstance(a, dict) and set(a) == {"url", "attempted_at", "outcome"} and iso(a.get("attempted_at")) for a in pv["retrieval_attempts"]):
+                errors.append(f"{pw}: retrieval_attempts must record each attempt's url, date and outcome")
+            if "source_id" in pv or any(pv["document"] in str(ev.get("locator", "")) for ev in rc["new_evidence"]):
+                errors.append(f"{pw}: an unverified edition cannot be used as evidence")
         if st["evidence_reviewed"] != bool(rc["new_evidence"]):
             errors.append(f"{w}: evidence_reviewed must be true exactly when new evidence is listed")
         # Decisions and states.
@@ -286,9 +300,10 @@ def load_all():
 
 
 def main() -> None:
+    # IDE-009 made the reconciliation record part of the evidence layer: its absence is a failure, never a pass.
     if not RECORD.is_file():
-        print("PASS: No reconciliation record present.")
-        return
+        print(f"FAIL: required reconciliation record missing: {RECORD.relative_to(ROOT)}", file=sys.stderr)
+        raise SystemExit(1)
     errors = check(*load_all())
     if errors:
         for e in errors:

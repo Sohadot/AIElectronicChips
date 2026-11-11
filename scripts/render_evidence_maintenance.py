@@ -20,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 PAGE = ROOT / "sources" / "index.html"
+RECON_PATH = ROOT / "data" / "evidence-reconciliations-009.json"
 START, END = "<!-- evidence-maintenance:start -->", "<!-- evidence-maintenance:end -->"
 e = html.escape
 
@@ -55,8 +56,9 @@ def render() -> str:
     full = runs[0]
     passages = sum(r["passage_check"]["quoted_passages"] for r in by_run[full["run_id"]] if r["passage_check"])
     found = sum(r["passage_check"]["found"] for r in by_run[full["run_id"]] if r["passage_check"])
-    recon_path = ROOT / "data" / "evidence-reconciliations-009.json"
-    recon = json.loads(recon_path.read_text(encoding="utf-8")) if recon_path.is_file() else None
+    if not RECON_PATH.is_file():  # required since IDE-009: never publish the page without it
+        raise SystemExit(f"required reconciliation record missing: {RECON_PATH.relative_to(ROOT)}")
+    recon = json.loads(RECON_PATH.read_text(encoding="utf-8"))
     out = [START]
     out.append('<section class="reference-sections" id="evidence-maintenance" aria-labelledby="maintenance-title">')
     # 08: method and states
@@ -123,7 +125,7 @@ def render() -> str:
         out.append(f'<dt>Next evidence</dt><dd>{e(c["next_evidence"])}</dd>')
         if c["downstream_review"]:
             out.append(f'<dt>To revise after editorial review</dt><dd><ul>{"".join(f"<li>{e(d)}</li>" for d in c["downstream_review"])}</ul></dd>')
-        if recon:
+        if True:  # every issue has a reconciliation entry (validated)
             rc = next((x for x in recon["reconciliations"] if x["conflict_id"] == c["id"]), None)
             if rc:
                 out.append(f'<dt>Reconciliation</dt><dd><a href="#{rc["id"]}">{e(rc["id"])}</a>: {e(rc["decision"])}</dd>')
@@ -157,8 +159,7 @@ def render() -> str:
                    f'<td>{len(entry["direct"]["findings"])}</td><td>{pages}</td><td>{len(entry["direct"]["pathway_steps"])}</td>'
                    f'<td>{issues}</td><td>{e(rec["next_action"])}</td></tr>')
     out.append("</tbody></table></div></div></article>")
-    if recon:
-        out.extend(render_reconciliations(recon, register, registry))
+    out.extend(render_reconciliations(recon, register, registry))
     out.append("</section>")
     out.append(END)
     return "\n".join(out)
@@ -198,6 +199,11 @@ def render_reconciliations(recon, register, registry) -> list[str]:
         if r["sources_examined_not_supporting"]:
             items = "".join(f'<li>{e(x["observation"])} <a href="{e(x["url"])}">Document</a></li>' for x in r["sources_examined_not_supporting"])
             out.append(f"<dt>Examined, not supporting</dt><dd><ul>{items}</ul></dd>")
+        if r["pending_version_verification"]:
+            items = "".join(f'<li>{e(x["document"])}, {e(x["edition"])}: {e(x["reported_content"])} Reported by {e(x["reported_by"])}. '
+                            f'{e(x["canonical_url_note"])} Status: pending version verification. {e(x["next_action"])}</li>'
+                            for x in r["pending_version_verification"])
+            out.append(f"<dt>Pending version verification</dt><dd><ul>{items}</ul></dd>")
         if r["publication_changes"]:
             items = "".join(f'<li><a href="{e(x["route"])}">{e(x["route"])}</a>: '
                             + (f'"{e(x["old_text"])}" became ' if x["old_text"] else "added ") + f'"{e(x["new_text"])}"</li>'
