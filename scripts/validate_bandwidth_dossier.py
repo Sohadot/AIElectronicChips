@@ -56,6 +56,9 @@ STRICTNESS = {"comparable_on_documented_terms": 0, "conditionally_comparable": 1
               "valid": 0, "conditional": 1, "unsupported": 2}
 DIVERGENCE_FIELDS = {"pathway_comparison_id", "pathway_verdict", "dossier_classification", "justification", "status"}
 DIVERGENCE_STATUS = "pending_editorial_reconciliation"
+# Once the public pathway is corrected through a later reconciliation, the divergence stays recorded as history.
+RECONCILED_STATUS = "reconciled"
+LATER_RECONCILIATIONS = ROOT / "data" / "evidence-reconciliations-013.json"
 COVERAGE = {"addressed", "partially_addressed", "open", "not_available"}
 BYTES = {"TB/s": 1e12, "GB/s": 1e9}
 BITS = {"Tb/s": 1e12 / 8, "Gb/s": 1e9 / 8, "Gbps": 1e9 / 8}
@@ -73,7 +76,8 @@ def load_context():
             "issues": {i["id"]: i for i in j(ROOT / "data" / "evidence-conflicts.json")["issues"]},
             "reconciliations": {r["id"]: r for r in j(ROOT / "data" / "evidence-reconciliations-009.json")["reconciliations"]},
             "workbench": j(ROOT / "data" / "industrial-evidence-requests.json"), "pathways": j(ROOT / "data" / "reference-pathways.json"),
-            "atlas": j(ROOT / "data" / "dependency-atlas.json")}
+            "atlas": j(ROOT / "data" / "dependency-atlas.json"),
+            "later_reconciliations": {r["id"]: r for r in (j(LATER_RECONCILIATIONS)["reconciliations"] if LATER_RECONCILIATIONS.is_file() else [])}}
 
 
 def number(value: str) -> float:
@@ -140,6 +144,27 @@ def divergence_errors(w: str, div, pid: str, verdict: str, cls: str) -> list[str
         errs.append(f"{w}: a pathway divergence may only restrict the pathway verdict, never loosen it")
     if div["status"] != DIVERGENCE_STATUS:
         errs.append(f"{w}: a pathway divergence stays '{DIVERGENCE_STATUS}' until the pathway itself is reconciled in a release")
+    if not isinstance(div["justification"], str) or len(div["justification"].strip()) < 60:
+        errs.append(f"{w}: a pathway divergence needs a technical justification")
+    return errs
+
+
+def reconciled_divergence_errors(w: str, div, pid: str, verdict: str, cls: str, ctx) -> list[str]:
+    """Where the class agrees with the pathway, a divergence may stay only as the history of a completed reconciliation."""
+    if not isinstance(div, dict) or div.get("status") != RECONCILED_STATUS:
+        return [f"{w}: a pathway divergence is recorded where the classification agrees with the pathway"]
+    if set(div) != DIVERGENCE_FIELDS | {"reconciled_by"}:
+        return [f"{w}: a reconciled divergence must contain exactly {sorted(DIVERGENCE_FIELDS | {'reconciled_by'})}"]
+    rc = ctx.get("later_reconciliations", {}).get(div["reconciled_by"])
+    errs = []
+    if rc is None:
+        return [f"{w}: reconciled_by names no reconciliation that exists"]
+    if (rc["comparison_id"], rc["previous_verdict"], rc["corrected_verdict"]) != (pid, div["pathway_verdict"], verdict):
+        errs.append(f"{w}: the reconciliation must cover this pathway comparison, from the recorded verdict to the pathway's current one")
+    if div["pathway_comparison_id"] != pid or div["dossier_classification"] != cls:
+        errs.append(f"{w}: the reconciled divergence must keep this comparison's id and classification")
+    if STRICTNESS[cls] <= STRICTNESS[div["pathway_verdict"]]:
+        errs.append(f"{w}: a pathway divergence may only restrict the pathway verdict, never loosen it")
     if not isinstance(div["justification"], str) or len(div["justification"].strip()) < 60:
         errs.append(f"{w}: a pathway divergence needs a technical justification")
     return errs
@@ -349,7 +374,7 @@ def check(d, ctx) -> list[str]:
                 if cls not in PATHWAY_MAP[verdict]:
                     errors += divergence_errors(w, div, pid, verdict, cls)
                 elif div is not None:
-                    errors.append(f"{w}: a pathway divergence is recorded where the classification agrees with the pathway")
+                    errors += reconciled_divergence_errors(w, div, pid, verdict, cls, ctx)
             mapped.add(pid)
         elif div is not None:
             errors.append(f"{w}: a pathway divergence needs a pathway comparison")
