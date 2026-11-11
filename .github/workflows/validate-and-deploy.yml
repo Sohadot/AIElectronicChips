@@ -28,8 +28,26 @@ jobs:
         run: python scripts/validate_all.py
       - name: Verify all public routes, indexability, structured data, assets and links
         run: python scripts/validate_public_launch.py
-      - name: Run negative-test regression suite
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Playwright and headless Chromium (outside the repository)
+        run: |
+          npm install --prefix "$RUNNER_TEMP/pw" --no-save --no-audit --no-fund playwright@1.63.0
+          # Headless Chromium shell only, from Playwright's download host. No apt step: hosted runners already carry
+          # Chrome's system libraries, and a missing one makes the required browser test fail rather than skip.
+          "$RUNNER_TEMP/pw/node_modules/.bin/playwright" install --only-shell chromium
+      - name: Run negative-test regression suite (browser test required, never skipped)
+        env:
+          AEC_REQUIRE_BROWSER: '1'
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/pw/node_modules/playwright
         run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Research workbench browser functional smoke test
+        env:
+          AEC_REQUIRE_BROWSER: '1'
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/pw/node_modules/playwright
+        run: python -m unittest tests.test_research_workbench.BrowserTests -v
 
   deploy:
     name: Deploy gated Pages
