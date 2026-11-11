@@ -27,6 +27,13 @@
       "tool": "scripts/inspect_sources.py",
       "method": "Same method as the 2026-11-10 run. Passages are now also taken from the conflict register and the IDE-009 reconciliation record, so register and reconciliation quotes are checked against the retrieved documents.",
       "scope": "The 13 sources cited by the four IDE-009 reconciliations, including three AMD and NVIDIA documents registered in IDE-009"
+    },
+    {
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "tool": "scripts/inspect_sources.py",
+      "method": "Same method as the 2026-11-10 run: one attempt per URL with the declared, honest user agent, no browser impersonation, and every passage quoted by release findings, the conflict register or reconciliation records searched in the retrieved text.",
+      "scope": "The 24 sources cited by HBM4 Evidence Release 001 findings and candidate relationships, rechecked for the IDE-011 HBM4 integration and qualification dossier"
     }
   ],
   "records": [
@@ -2787,6 +2794,778 @@
         "All 5 quoted passages found, including any quoted by the register or the IDE-009 reconciliation record."
       ],
       "next_action": "Recheck before any current comparison; reconciliation recorded in data/evidence-reconciliations-009.json."
+    },
+    {
+      "source_id": "jedec-jesd270-4-hbm4-standard-2025",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.jedec.org/news/pressreleases/jedec%C2%AE-and-industry-leaders-collaborate-release-jesd270-4-hbm4-standard-advancing",
+          "http_status": 200,
+          "final_url": "https://www.jedec.org/news/pressreleases/jedec%C2%AE-and-industry-leaders-collaborate-release-jesd270-4-hbm4-standard-advancing",
+          "content_type": "text/html",
+          "bytes": 45181,
+          "sha256": "d7fb62ec4d993b1069156b684ef5ac564d62e22a342805a548581b1efd9c82b0",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 12,
+        "found": 12,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 12 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "micron-fy2026-form-10-k",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000023/mu-20260903.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000023/mu-20260903.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner, and recheck the base-die passage."
+    },
+    {
+      "source_id": "micron-hbm4-samples-2025",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investors.micron.com/news-releases/news-release-details/micron-ships-hbm4-key-customers-power-next-gen-ai-platforms",
+          "http_status": 200,
+          "final_url": "https://investors.micron.com/news/press-release/2025/Micron-Ships-HBM4-to-Key-Customers-to-Power-Next-Gen-AI-Platforms-06-10-2025/default.aspx",
+          "content_type": "text/html",
+          "bytes": 511098,
+          "sha256": "804b039950dab799b2bf55fced89ff5f207a3dd757b4323cdb2f13cc646f71f0",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 6 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "micron-hbm4-volume-production-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investors.micron.com/news/press-release/2026/Micron-in-High-Volume-Production-of-HBM4-Designed-for-NVIDIA-Vera-Rubin-PCIe-Gen6-SSD-and-SOCAMM2-03-16-2026/default.aspx",
+          "http_status": 200,
+          "final_url": "https://investors.micron.com/news/press-release/2026/Micron-in-High-Volume-Production-of-HBM4-Designed-for-NVIDIA-Vera-Rubin-PCIe-Gen6-SSD-and-SOCAMM2-03-16-2026/default.aspx",
+          "content_type": "text/html",
+          "bytes": 513475,
+          "sha256": "d09bf8b7bee58bc65d463bdb4f6ffdadeea431e8b91ea1818ca3ba054029732e",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 11,
+        "found": 11,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 11 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "micron-q3-fy2026-results-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000013/a2026q3ex991-pressrelease.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000013/a2026q3ex991-pressrelease.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner."
+    },
+    {
+      "source_id": "nvidia-co-design-memory-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/five-ways-nvidia-co-design-maximizes-the-value-of-every-byte-in-the-ai-factory",
+          "content_type": "text/html",
+          "bytes": 321714,
+          "sha256": "a4c73457346e740557f6ed083140e9ecc118277f5b00d01ba5ea424b0fa2150c",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 7,
+        "found": 7,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 7 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-rubin-ces-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Kicks-Off-the-Next-Generation-of-AI-With-Rubin--Six-New-Chips-One-Incredible-AI-Supercomputer/default.aspx",
+          "http_status": 200,
+          "final_url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Kicks-Off-the-Next-Generation-of-AI-With-Rubin--Six-New-Chips-One-Incredible-AI-Supercomputer/default.aspx",
+          "content_type": "text/html",
+          "bytes": 139028,
+          "sha256": "e8a97bc73dae0a63740fd98c1bed43e49bf65174538bdccfa543e442f8fd3a68",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-rubin-gpu-architecture-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
+          "content_type": "text/html",
+          "bytes": 347538,
+          "sha256": "ed0ff9ae516611fe2d3662ca52e00d4d9f0955a114b44dd9d69c0c005332b34b",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 16,
+        "found": 16,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 16 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-rubin-platform-architecture-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+          "content_type": "text/html",
+          "bytes": 663731,
+          "sha256": "135ff94a1521a7b40d3edda0a4e6c655c82e0ea481c7ead1c9a90430fc28146e",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 23,
+        "found": 23,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 23 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4-commercial-shipment-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsungsemiconductor.com/global/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing/",
+          "http_status": 200,
+          "final_url": "https://news.samsungsemiconductor.com/global/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing/",
+          "content_type": "text/html",
+          "bytes": 48911,
+          "sha256": "674033649deb9f4598641f99d1181e61e0d09b1fa79f31658f3db0dd9a3b0359",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 19,
+        "found": 19,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 19 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4-gtc-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026",
+          "content_type": "text/html",
+          "bytes": 156173,
+          "sha256": "0e96921b1e6126a04f2045efd0a6a46895761f3e43cd563a01a027c7c997bb8d",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 8,
+        "found": 8,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 8 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4-product-page-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://semiconductor.samsung.com/dram/hbm/hbm4/",
+          "http_status": 200,
+          "final_url": "https://semiconductor.samsung.com/dram/hbm/hbm4/",
+          "content_type": "text/html",
+          "bytes": 419508,
+          "sha256": "a72237714177bb57ba1a6bef5e6f9066d9fb5e27dc76a5448eb2f4fd29f2a923",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-hbm4e-samples-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-electronics-begins-shipment-of-industry-first-hbm4e-samples",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-electronics-begins-shipment-of-industry-first-hbm4e-samples",
+          "content_type": "text/html",
+          "bytes": 136613,
+          "sha256": "f3ab45d966ea6094496ee12177d550abdf4441da49d1bad3e5f77ae0125a313b",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 17,
+        "found": 17,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 5,
+        "not_found": []
+      },
+      "notes": [
+        "All 17 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-q3-2025-results-2025",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2025-results",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2025-results",
+          "content_type": "text/html",
+          "bytes": 141992,
+          "sha256": "9f1c304f15b7dcf803c6d3fc0f1ee37b270d60a0388c70ddbe630644c66b383d",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 3,
+        "found": 3,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 3 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "samsung-q3-2026-results-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results",
+          "http_status": 200,
+          "final_url": "https://news.samsung.com/global/samsung-electronics-announces-third-quarter-2026-results",
+          "content_type": "text/html",
+          "bytes": 152209,
+          "sha256": "0faf9f8fa6dbc52e818e2c82e2f0162db756872ab24780fbee96b0e54cff7628",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-3q25-results-2025",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+          "content_type": "text/html",
+          "bytes": 149386,
+          "sha256": "b636cb14dafd8f967988f898343c513c7ea5cae7fdb2cc5de33bda7809fbe910",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-424b4-prospectus-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_inaccessible"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0002120882/000119312526299963/d32785d424b4.htm",
+          "http_status": 403,
+          "final_url": "https://www.sec.gov/Archives/edgar/data/0002120882/000119312526299963/d32785d424b4.htm",
+          "content_type": "text/html",
+          "bytes": 0,
+          "sha256": null,
+          "outcome": "failed"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "SEC EDGAR refuses automated requests that do not declare a contact identity; none was supplied, so the filing was not retrieved."
+      ],
+      "next_action": "Retrieve from EDGAR with a declared contact identity, authorised by the owner, and recheck the custom-HBM passage."
+    },
+    {
+      "source_id": "skhynix-full-stack-memory-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/hbm-to-essd/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/hbm-to-essd/",
+          "content_type": "text/html",
+          "bytes": 167964,
+          "sha256": "da3c3fee231353d83e7c0e9e8cc65cc26331c63b72746ca423e4f2e666fbefa9",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 4,
+        "found": 4,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 3,
+        "not_found": []
+      },
+      "notes": [
+        "All 4 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-fy25-results-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+          "content_type": "text/html",
+          "bytes": 156815,
+          "sha256": "049036e8541ba9fb3ed3b858420410279aac84e4b8f05620134fdca61ff87dc4",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-hbm4-12h-samples-2025",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-ships-world-first-12-layer-hbm4-samples-to-customers/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-ships-world-first-12-layer-hbm4-samples-to-customers/",
+          "content_type": "text/html",
+          "bytes": 144077,
+          "sha256": "6dc57737c732de5a81956b1d293c28b65de24a1390e8fbb58d00f34784f8e437",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 10,
+        "found": 10,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 10 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-hbm4-development-mass-production-2025",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production/",
+          "content_type": "text/html",
+          "bytes": 145758,
+          "sha256": "6ab2c7d625e884c44b8727c4ed6d822017ca9ace316d40157cb68a4e1b90e750",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 8,
+        "found": 8,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 2,
+        "not_found": []
+      },
+      "notes": [
+        "All 8 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-tsmc-hbm4-mou-2024",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/sk-hynix-partners-with-tsmc-to-strengthen-hbm-technological-leadership/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/sk-hynix-partners-with-tsmc-to-strengthen-hbm-technological-leadership/",
+          "content_type": "text/html",
+          "bytes": 145439,
+          "sha256": "4127fdbbaa9ff0a0a139521012a9fe7cfced4537e26d74524a34ff619bc91e2f",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 6 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "skhynix-tsmc-symposium-2026",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://news.skhynix.com/en/tsmc-technology-symposium-2026/",
+          "http_status": 200,
+          "final_url": "https://news.skhynix.com/en/tsmc-technology-symposium-2026/",
+          "content_type": "text/html",
+          "bytes": 164735,
+          "sha256": "55375eb0790336052780b87e99c3e4cfa252541d4acd279b61544fe5af8a3ed8",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 1,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "tsmc-2025-na-technology-symposium",
+      "run_id": "ide-011-2026-11-11",
+      "inspected_at": "2026-11-11",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://pr.tsmc.com/english/news/3228",
+          "http_status": 200,
+          "final_url": "https://pr.tsmc.com/english/news/3228",
+          "content_type": "text/html",
+          "bytes": 188609,
+          "sha256": "b2bd7aa500b869882bd52aa90c459781c16e83381595511781e1af1a28506cfa",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 6 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct.",
+        "Retrieved on this run; the 2026-11-10 run was refused (HTTP 403)."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
     }
   ]
 }

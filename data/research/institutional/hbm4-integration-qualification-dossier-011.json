@@ -1,0 +1,876 @@
+{
+  "dossier_id": "aec-dossier-hbm4-integration-qualification-011",
+  "schema_version": "1.0.0",
+  "release": "IDE-011",
+  "status": "research_candidate",
+  "review_status": "not_reviewed",
+  "scientific_review": "pending",
+  "review_owner": "unassigned",
+  "assessment_method": "ai_assisted_source_check",
+  "as_of": "2026-11-11",
+  "interpretation_standard": "AEC-CS-001",
+  "research_question": "What does the public record establish, and fail to establish, about the integration and qualification of named HBM4 memory in a specific AI accelerator package?",
+  "scope": {
+    "technical": "HBM4 from interface standard to accelerator-maker qualification and volume supply; NVIDIA Rubin is the one accelerator whose maker states HBM4 integration in the reviewed sources",
+    "temporal": "Sources dated 2024-04-19 to 2026-11-05; on 2026-11-11, passages were rechecked for 21 of the 24 cited sources, and the other three could not be retrieved",
+    "geographic": "Disclosures by the three HBM suppliers, TSMC, JEDEC and NVIDIA; no national or regional finding",
+    "excluded": [
+      "Supplier capacity, pricing and market share",
+      "Any national or company sovereignty position",
+      "HBM4E except where it informs HBM4 statements",
+      "Export-control classification of any item or transaction"
+    ]
+  },
+  "boundary": "A review-ready research dossier, not an assessment. It maps which statements the public record supports, at what evidence level, and what would settle the rest. It does not establish that any part is qualified, integrated or available, it does not promote any Atlas relationship, and it records no human or scientific review.",
+  "inputs": {
+    "release_ids": [
+      "aec-hbm4-evidence-release-001"
+    ],
+    "inspection_run_ids": [
+      "ide-008-2026-11-10",
+      "ide-009-2026-11-11",
+      "ide-011-2026-11-11"
+    ],
+    "workflow_id": "workflow-hbm4-integration",
+    "pathway_id": "pathway-hbm-to-advanced-packaging"
+  },
+  "dependency_architecture": [
+    {
+      "id": "st-interface-standard",
+      "title": "Interface standard",
+      "ontology_layer": "memory",
+      "question": "What does the HBM4 standard define, and in which revision?",
+      "evidence_level": "announced_standard",
+      "unresolved_ids": [
+        "u-jedec-text",
+        "u-hbm4e-standard",
+        "u-sphbm4"
+      ],
+      "conflict_ids": [],
+      "documentary_requirement_ids": [
+        "ra-01-interface-revision"
+      ],
+      "candidate_ids": []
+    },
+    {
+      "id": "st-part-configuration",
+      "title": "Named memory part and configuration",
+      "ontology_layer": "memory",
+      "question": "Which HBM4 parts exist, at which stack height, capacity and speed, on each supplier's own statements?",
+      "evidence_level": "supplier_statements",
+      "unresolved_ids": [],
+      "conflict_ids": [],
+      "documentary_requirement_ids": [
+        "ra-02-memory-part"
+      ],
+      "candidate_ids": []
+    },
+    {
+      "id": "st-base-logic-die",
+      "title": "Base logic die",
+      "ontology_layer": "fabrication",
+      "question": "How is each supplier's HBM4 base logic die made, and by whom?",
+      "evidence_level": "supplier_statements",
+      "unresolved_ids": [
+        "u-micron-base-die",
+        "u-skh-base-die-implementation"
+      ],
+      "conflict_ids": [],
+      "documentary_requirement_ids": [
+        "ra-04-base-die"
+      ],
+      "candidate_ids": [
+        "rel-hbm4-requires-logic-base-die",
+        "rel-hbm-base-die-requires-logic-foundry",
+        "rel-hbm-base-die-requires-logic-cmos-fabrication"
+      ]
+    },
+    {
+      "id": "st-stack-assembly",
+      "title": "Stack assembly",
+      "ontology_layer": "packaging",
+      "question": "How are the DRAM core dies and base die assembled into a stack?",
+      "evidence_level": "supplier_statements",
+      "unresolved_ids": [
+        "u-16h-thermal"
+      ],
+      "conflict_ids": [],
+      "documentary_requirement_ids": [
+        "ra-05-stack-assembly"
+      ],
+      "candidate_ids": []
+    },
+    {
+      "id": "st-known-good-stack",
+      "title": "Known-good-stack test",
+      "ontology_layer": "packaging",
+      "question": "How is each stack tested before it is committed to an accelerator package, and by whom?",
+      "evidence_level": "no_public_evidence",
+      "unresolved_ids": [
+        "u-test"
+      ],
+      "conflict_ids": [],
+      "documentary_requirement_ids": [
+        "ra-08-known-good-stack"
+      ],
+      "candidate_ids": []
+    },
+    {
+      "id": "st-package-integration",
+      "title": "Package integration",
+      "ontology_layer": "packaging",
+      "question": "Which package technology, interposer or bridge, substrate and assembler join named HBM4 stacks to a named accelerator?",
+      "evidence_level": "roadmap_statements_only",
+      "unresolved_ids": [
+        "u-interposer-substrate"
+      ],
+      "conflict_ids": [
+        "ec-hbm4-package-qualification",
+        "ec-cowos-l-5p5-reticle"
+      ],
+      "documentary_requirement_ids": [
+        "ra-06-package-technology",
+        "ra-07-substrate-assembly"
+      ],
+      "candidate_ids": [
+        "rel-hbm4-integrates-with-cowos"
+      ]
+    },
+    {
+      "id": "st-power-thermal",
+      "title": "Power and thermal integration",
+      "ontology_layer": "power_thermal",
+      "question": "What power and thermal envelope does an integrated HBM4 stack have in a named package?",
+      "evidence_level": "supplier_statements",
+      "unresolved_ids": [
+        "u-16h-thermal"
+      ],
+      "conflict_ids": [],
+      "documentary_requirement_ids": [
+        "ra-09-power-thermal"
+      ],
+      "candidate_ids": []
+    },
+    {
+      "id": "st-accelerator-integration",
+      "title": "Accelerator integration",
+      "ontology_layer": "memory",
+      "question": "What does the accelerator maker itself state about the HBM4 in its product?",
+      "evidence_level": "accelerator_maker_statements",
+      "unresolved_ids": [
+        "u-rubin-bandwidth"
+      ],
+      "conflict_ids": [
+        "ec-rubin-memory-bandwidth"
+      ],
+      "documentary_requirement_ids": [
+        "ra-10-integration-disclosure"
+      ],
+      "candidate_ids": [
+        "rel-rubin-gpu-requires-hbm4"
+      ]
+    },
+    {
+      "id": "st-qualification",
+      "title": "Accelerator-maker qualification",
+      "ontology_layer": "memory",
+      "question": "Which suppliers' HBM4, at which speed grade, has the accelerator maker qualified for which product?",
+      "evidence_level": "design_target_statements_only",
+      "unresolved_ids": [
+        "u-qualification"
+      ],
+      "conflict_ids": [
+        "ec-hbm4-package-qualification"
+      ],
+      "documentary_requirement_ids": [
+        "ra-03-speed-grade",
+        "ra-11-qualification-acceptance",
+        "ra-13-substitution"
+      ],
+      "candidate_ids": []
+    },
+    {
+      "id": "st-production-supply",
+      "title": "Production and supply",
+      "ontology_layer": "memory",
+      "question": "Which qualified combinations are in volume production, at what capacity and allocation?",
+      "evidence_level": "supplier_statements",
+      "unresolved_ids": [
+        "u-capacity"
+      ],
+      "conflict_ids": [
+        "ec-hbm-export-control-currency"
+      ],
+      "documentary_requirement_ids": [
+        "ra-12-production-integration"
+      ],
+      "candidate_ids": []
+    }
+  ],
+  "evidence_matrix": [
+    {
+      "finding_id": "f-std-interface",
+      "stage_id": "st-interface-standard",
+      "review_requirement": "normative_text_review",
+      "interpretation": "Defines the reference rate (8 Gb/s, 2048 bits) against which supplier pin speeds are described; it is an announced ceiling, not a shipped-part figure. The release's access note is kept as recorded: on 2026-11-09 the text was read from a syndicated copy because jedec.org refused retrieval. The inspection runs of 2026-11-10 and 2026-11-11 then retrieved the jedec.org page itself and found all 12 quoted passages there."
+    },
+    {
+      "finding_id": "f-std-channels",
+      "stage_id": "st-interface-standard",
+      "review_requirement": "normative_text_review",
+      "interpretation": "Channel count matters for controller design; the announcement does not give timing or protocol detail."
+    },
+    {
+      "finding_id": "f-std-compat",
+      "stage_id": "st-interface-standard",
+      "review_requirement": "normative_text_review",
+      "interpretation": "Controller backward compatibility is a standard feature as announced; it does not show that any accelerator uses one controller for both generations."
+    },
+    {
+      "finding_id": "f-std-voltage",
+      "stage_id": "st-interface-standard",
+      "review_requirement": "normative_text_review",
+      "interpretation": "Vendor-specific voltage options mean two compliant parts may differ electrically; integration evidence has to name the option used."
+    },
+    {
+      "finding_id": "f-std-stacks",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "normative_text_review",
+      "interpretation": "The standard permits 4- to 16-high stacks at two die densities; which combination a product uses has to come from the part's own data."
+    },
+    {
+      "finding_id": "f-dram-core-process",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Each supplier names its own DRAM core process; the names are not comparable process metrics."
+    },
+    {
+      "finding_id": "f-skh-io-speed",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "A supplier's operating speed above the standard rate is a product claim; it is not the speed at which an accelerator runs the part."
+    },
+    {
+      "finding_id": "f-mu-2025",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Sample-stage specification from June 2025; later Micron figures supersede it for the volume part."
+    },
+    {
+      "finding_id": "f-mu-2026",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Volume-stage supplier figure; not an accelerator operating point."
+    },
+    {
+      "finding_id": "f-ss-hbm4-speed",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Samsung's figures use its own baselines; the per-stack maximum is a supplier figure, not a measured system result."
+    },
+    {
+      "finding_id": "f-ss-hbm4-config",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Capacity range and the 16-layer plan are supplier statements; the 16-layer offering was a plan at the date of the release."
+    },
+    {
+      "finding_id": "f-ss-hbm4e",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "HBM4E sample figures are outside the HBM4 integration question except as context for the next generation."
+    },
+    {
+      "finding_id": "f-an-bandwidth",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "technical_review",
+      "interpretation": "Arithmetic from interface width and pin rate; it converts supplier pin speeds to per-stack figures and does not add new evidence."
+    },
+    {
+      "finding_id": "f-skh-12h",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Sample shipment in March 2025; sampling is not qualification or volume supply."
+    },
+    {
+      "finding_id": "f-mu-16h",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "16-high samples in March 2026; a sample shipment does not show integration in any product."
+    },
+    {
+      "finding_id": "f-ss-hbm4e-configs",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Planned HBM4E configurations; forward-looking at the date of the release."
+    },
+    {
+      "finding_id": "f-an-die-density",
+      "stage_id": "st-part-configuration",
+      "review_requirement": "technical_review",
+      "interpretation": "Derived die density assumes every layer is a DRAM core die of equal capacity; suppliers do not state this directly."
+    },
+    {
+      "finding_id": "f-skh-base-die",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "documentary_verification",
+      "interpretation": "The 2024 statement was a plan; it is read together with SK hynix's 2026 statements before any present-tense claim."
+    },
+    {
+      "finding_id": "f-skh-base-die-2026",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "documentary_verification",
+      "interpretation": "SK hynix's own 2026 description of applying TSMC logic process technology from HBM4; no node and no independent confirmation."
+    },
+    {
+      "finding_id": "f-tsmc-base-die",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "documentary_verification",
+      "interpretation": "TSMC offers N12 and N3 base dies for HBM4; an offering does not show which supplier's shipping part uses which node."
+    },
+    {
+      "finding_id": "f-ss-base-die",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Samsung names a 4nm logic process for HBM4; Samsung Foundry is named as maker only in the HBM4E release."
+    },
+    {
+      "finding_id": "f-ss-base-die-foundry",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "documentary_verification",
+      "interpretation": "A 2025 plan and a 2026 report of base-die sales growth that does not separate HBM4; neither gives volume or customer."
+    },
+    {
+      "finding_id": "f-mu-base-die",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "documentary_verification",
+      "interpretation": "The in-house base-die statement comes from a filing that automated inspection could not retrieve; a reviewer must read it in the filing."
+    },
+    {
+      "finding_id": "f-skh-custom-hbm",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Defines custom HBM as moving GPU or ASIC functions into the base die; a definition in a prospectus that automated inspection could not retrieve, not evidence of a product."
+    },
+    {
+      "finding_id": "f-an-logic-coupling",
+      "stage_id": "st-base-logic-die",
+      "review_requirement": "technical_review",
+      "interpretation": "Synthesis of three different sourcing models; it rests partly on the unretrieved Micron filing."
+    },
+    {
+      "finding_id": "f-skh-mrmuf",
+      "stage_id": "st-stack-assembly",
+      "review_requirement": "documentary_verification",
+      "interpretation": "SK hynix's assembly method for its own stacks; it says nothing about other suppliers' methods."
+    },
+    {
+      "finding_id": "f-ss-hcb",
+      "stage_id": "st-stack-assembly",
+      "review_requirement": "technical_review",
+      "interpretation": "A comparative thermal claim for a next-generation method; the baseline and test conditions are not published."
+    },
+    {
+      "finding_id": "f-packaging-stages",
+      "stage_id": "st-stack-assembly",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Stack assembly is a memory-supplier capability; it is separate from the accelerator package integration in st-package-integration."
+    },
+    {
+      "finding_id": "f-tsmc-cowos",
+      "stage_id": "st-package-integration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "TSMC speaks of HBM in general and of a 2027 plan; nothing ties a named HBM4 part to a named package."
+    },
+    {
+      "finding_id": "f-skh-cowos",
+      "stage_id": "st-package-integration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "An aim stated at MOU stage in 2024; not a disclosure of a product's package."
+    },
+    {
+      "finding_id": "f-power-claims",
+      "stage_id": "st-power-thermal",
+      "review_requirement": "technical_review",
+      "interpretation": "Efficiency gains are stated against different baselines and cannot be compared with each other."
+    },
+    {
+      "finding_id": "f-tsmc-ivr",
+      "stage_id": "st-power-thermal",
+      "review_requirement": "documentary_verification",
+      "interpretation": "A power-delivery offering; it does not show use in any HBM4 accelerator package."
+    },
+    {
+      "finding_id": "f-nv-rubin",
+      "stage_id": "st-accelerator-integration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "NVIDIA's own statement of Rubin's HBM4 capacity, stack height and 22 TB/s peak; the bandwidth figure is in conflict with NVIDIA's later 19.2 TB/s."
+    },
+    {
+      "finding_id": "f-nv-rubin-192",
+      "stage_id": "st-accelerator-integration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "NVIDIA's later, unqualified 19.2 TB/s; neither figure is withdrawn and neither is selected here."
+    },
+    {
+      "finding_id": "f-nv-on-package",
+      "stage_id": "st-accelerator-integration",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Places the HBM4 stacks in the GPU package; it does not name the package technology, interposer or provider."
+    },
+    {
+      "finding_id": "f-an-rubin-stacks",
+      "stage_id": "st-accelerator-integration",
+      "review_requirement": "technical_review",
+      "interpretation": "Stack count and per-pin rate are inferred from capacity and bandwidth under a stated assumption; NVIDIA states neither."
+    },
+    {
+      "finding_id": "f-an-dependency-pathways",
+      "stage_id": "st-accelerator-integration",
+      "review_requirement": "technical_review",
+      "interpretation": "Separates the chain into stages that need different evidence; it is a reading aid, not a supply-chain finding, and its Micron leg rests on a filing that could not be retrieved."
+    },
+    {
+      "finding_id": "f-an-substitution",
+      "stage_id": "st-qualification",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Supplier 'designed for' statements are the only public evidence; NVIDIA names no memory supplier or qualified part."
+    },
+    {
+      "finding_id": "f-skh-stage",
+      "stage_id": "st-production-supply",
+      "review_requirement": "documentary_verification",
+      "interpretation": "SK hynix's dated stages; no volumes, yields or customers."
+    },
+    {
+      "finding_id": "f-mu-stage",
+      "stage_id": "st-production-supply",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Micron's dated stages; 'qualification samples' are not completed qualification. Two of the four Micron sources, the Q3 FY2026 results release and the FY2026 10-K, could not be retrieved, so their passages were not rechecked."
+    },
+    {
+      "finding_id": "f-ss-stage",
+      "stage_id": "st-production-supply",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Samsung's dated stages; customers unnamed in the February release."
+    },
+    {
+      "finding_id": "f-priority-conflict",
+      "stage_id": "st-production-supply",
+      "review_requirement": "documentary_verification",
+      "interpretation": "Each 'first' uses a different milestone; public sources do not allow one to be placed ahead of another."
+    },
+    {
+      "finding_id": "f-nv-production",
+      "stage_id": "st-production-supply",
+      "review_requirement": "documentary_verification",
+      "interpretation": "NVIDIA's production statement for Rubin; it does not identify memory suppliers or their volumes."
+    }
+  ],
+  "candidate_assessments": [
+    {
+      "candidate_id": "rel-hbm4-requires-logic-base-die",
+      "release_recommendation": "ACCEPT",
+      "dossier_recommendation": "ACCEPT",
+      "reasons": [
+        {
+          "reason": "SK hynix's passage on stacking core DRAM dies on a base die, and Samsung's passages naming a 1c DRAM core with a 4nm logic base die (the core-and-base-die wording is in its HBM4E release), were found again in the documents retrieved on 2026-11-11.",
+          "basis": [
+            "f-skh-base-die",
+            "f-ss-base-die",
+            "inspection:ide-011-2026-11-11:skhynix-tsmc-hbm4-mou-2024",
+            "inspection:ide-011-2026-11-11:samsung-hbm4-commercial-shipment-2026",
+            "inspection:ide-011-2026-11-11:samsung-hbm4e-samples-2026"
+          ]
+        },
+        {
+          "reason": "The relationship is architectural and stated by each supplier about its own product; it makes no claim about sourcing, capacity or customers.",
+          "basis": [
+            "f-an-logic-coupling"
+          ]
+        },
+        {
+          "reason": "The Micron leg rests on its FY2026 10-K, which EDGAR refused to automated retrieval on both inspection runs; the passage has not been rechecked.",
+          "basis": [
+            "f-mu-base-die",
+            "inspection:ide-011-2026-11-11:micron-fy2026-form-10-k"
+          ]
+        }
+      ],
+      "preconditions_for_review": [
+        "The reviewer reads the Micron FY2026 10-K base-die passage in the filing; if it cannot be read, the statement names only SK hynix and Samsung"
+      ],
+      "proposed_revision": null
+    },
+    {
+      "candidate_id": "rel-hbm-base-die-requires-logic-foundry",
+      "release_recommendation": "REJECT",
+      "dossier_recommendation": "REJECT",
+      "reasons": [
+        {
+          "reason": "As a technology-level edge it would state that every HBM base die requires an advanced logic foundry process, as offered by logic foundries, which generalises two suppliers' own sourcing statements.",
+          "basis": [
+            "f-skh-base-die-2026",
+            "f-ss-base-die"
+          ]
+        },
+        {
+          "reason": "Micron reports in-house design and manufacture of its base logic die, which contradicts an industry-wide foundry dependency once the filing passage is confirmed.",
+          "basis": [
+            "f-mu-base-die"
+          ]
+        },
+        {
+          "reason": "The Atlas has no supplier-level node kind, so the supplier-specific dependency cannot be expressed as this edge.",
+          "basis": [
+            "atlas:node_types"
+          ]
+        }
+      ],
+      "preconditions_for_review": [],
+      "proposed_revision": null
+    },
+    {
+      "candidate_id": "rel-hbm4-integrates-with-cowos",
+      "release_recommendation": "DEFER",
+      "dossier_recommendation": "DEFER",
+      "reasons": [
+        {
+          "reason": "TSMC's 2025 symposium passages were retrieved and found on 2026-11-11, after a refusal on 2026-11-10; they speak of CoWoS for logic and HBM in general and of a 2027 plan, not of HBM4 in a product.",
+          "basis": [
+            "f-tsmc-cowos",
+            "inspection:ide-011-2026-11-11:tsmc-2025-na-technology-symposium"
+          ]
+        },
+        {
+          "reason": "SK hynix's CoWoS statement is a 2024 MOU-stage aim.",
+          "basis": [
+            "f-skh-cowos"
+          ]
+        },
+        {
+          "reason": "NVIDIA's Rubin articles place HBM4 on the GPU package but name no packaging technology.",
+          "basis": [
+            "f-nv-on-package"
+          ]
+        },
+        {
+          "reason": "The register records missing primary evidence for HBM4 package integration and qualification.",
+          "basis": [
+            "ec-hbm4-package-qualification"
+          ]
+        }
+      ],
+      "preconditions_for_review": [
+        "A primary disclosure naming the package technology for a specific HBM4 integration (documentary requirement ra-06-package-technology)"
+      ],
+      "proposed_revision": null
+    },
+    {
+      "candidate_id": "rel-rubin-gpu-requires-hbm4",
+      "release_recommendation": "ACCEPT",
+      "dossier_recommendation": "ACCEPT",
+      "reasons": [
+        {
+          "reason": "NVIDIA's own GPU and platform articles state Rubin's HBM4 capacity, 12-Hi stacks and on-package placement; all quoted passages were found on 2026-11-11.",
+          "basis": [
+            "f-nv-rubin",
+            "f-nv-on-package",
+            "inspection:ide-011-2026-11-11:nvidia-rubin-gpu-architecture-2026",
+            "inspection:ide-011-2026-11-11:nvidia-rubin-platform-architecture-2026"
+          ]
+        },
+        {
+          "reason": "The relationship does not depend on the unresolved bandwidth figure or on any supplier claim.",
+          "basis": [
+            "ec-rubin-memory-bandwidth",
+            "f-an-substitution"
+          ]
+        }
+      ],
+      "preconditions_for_review": [
+        "The reviewer keeps the 22 TB/s and 19.2 TB/s figures out of the edge statement while the register issue is open"
+      ],
+      "proposed_revision": null
+    },
+    {
+      "candidate_id": "rel-hbm-base-die-requires-logic-cmos-fabrication",
+      "release_recommendation": "ACCEPT",
+      "dossier_recommendation": "REVISE",
+      "reasons": [
+        {
+          "reason": "The release rationale and the edge's own limitations rely on Samsung's 2026 report of HBM base-die sales growth, but that source is not in the edge's evidence list.",
+          "basis": [
+            "f-ss-base-die-foundry",
+            "samsung-q3-2026-results-2026"
+          ]
+        },
+        {
+          "reason": "The statement bundles the capability dependency with three supplier-specific sourcing claims, so it is not narrow enough to review as one edge.",
+          "basis": [
+            "f-an-logic-coupling"
+          ]
+        },
+        {
+          "reason": "The Micron leg rests on the FY2026 10-K, which could not be retrieved on either inspection run.",
+          "basis": [
+            "f-mu-base-die",
+            "inspection:ide-011-2026-11-11:micron-fy2026-form-10-k"
+          ]
+        },
+        {
+          "reason": "The TSMC symposium source is cited, but the statement does not use it; TSMC's N12 and N3 offering is not tied to any supplier's part.",
+          "basis": [
+            "f-tsmc-base-die"
+          ]
+        }
+      ],
+      "preconditions_for_review": [],
+      "proposed_revision": {
+        "statement": "The HBM4 base logic die is made with a logic CMOS process: SK hynix and Samsung each state a logic process for their HBM4 base die, and Micron states advanced CMOS made in-house.",
+        "evidence_changes": [
+          "Add samsung-q3-2026-results-2026 if the Samsung Foundry statement stays in the limitations",
+          "Remove tsmc-2025-na-technology-symposium, which the statement does not use",
+          "Keep micron-fy2026-form-10-k only after a reviewer reads the passage in the filing"
+        ],
+        "scope_note": "Supplier-by-supplier sourcing moves into the limitations, where it no longer forms part of the edge being reviewed"
+      }
+    }
+  ],
+  "critical_unknowns": [
+    {
+      "id": "cu-qualification",
+      "question": "Which suppliers' HBM4, at which speed grade, is qualified for which accelerator?",
+      "unresolved_ids": [
+        "u-qualification"
+      ],
+      "conflict_ids": [
+        "ec-hbm4-package-qualification"
+      ],
+      "why_critical": "Every integration, substitution and supply statement depends on it, and no accelerator maker publishes it.",
+      "would_establish": [
+        "ra-03-speed-grade",
+        "ra-11-qualification-acceptance"
+      ]
+    },
+    {
+      "id": "cu-package",
+      "question": "Which package technology, interposer or bridge, substrate and assembler integrate HBM4 in a named accelerator?",
+      "unresolved_ids": [
+        "u-interposer-substrate"
+      ],
+      "conflict_ids": [
+        "ec-hbm4-package-qualification",
+        "ec-cowos-l-5p5-reticle"
+      ],
+      "why_critical": "Package capacity and assembly are separate dependencies from memory supply; without the package named, neither can be traced.",
+      "would_establish": [
+        "ra-06-package-technology",
+        "ra-07-substrate-assembly"
+      ]
+    },
+    {
+      "id": "cu-base-die-node",
+      "question": "Which process node and fab make each supplier's shipping HBM4 base die?",
+      "unresolved_ids": [
+        "u-micron-base-die",
+        "u-skh-base-die-implementation"
+      ],
+      "conflict_ids": [],
+      "why_critical": "The base die links memory supply to logic-fab capability; the sourcing model differs by supplier and the nodes are not published.",
+      "would_establish": [
+        "ra-04-base-die"
+      ]
+    },
+    {
+      "id": "cu-known-good-stack",
+      "question": "How and by whom is each HBM4 stack tested before package assembly?",
+      "unresolved_ids": [
+        "u-test"
+      ],
+      "conflict_ids": [],
+      "why_critical": "Who tests each stack before it enters a package, and against what criteria, is a separate dependency from making the stack; no reviewed source describes it.",
+      "would_establish": [
+        "ra-08-known-good-stack"
+      ]
+    },
+    {
+      "id": "cu-capacity",
+      "question": "What are each supplier's HBM4 capacity, yield and allocation?",
+      "unresolved_ids": [
+        "u-capacity"
+      ],
+      "conflict_ids": [],
+      "why_critical": "Production-stage statements carry no volumes; supply cannot be reasoned about from them.",
+      "would_establish": [
+        "ra-12-production-integration"
+      ]
+    },
+    {
+      "id": "cu-rubin-bandwidth",
+      "question": "Is Rubin's per-GPU HBM4 bandwidth 22 TB/s or 19.2 TB/s, and on what basis?",
+      "unresolved_ids": [
+        "u-rubin-bandwidth"
+      ],
+      "conflict_ids": [
+        "ec-rubin-memory-bandwidth"
+      ],
+      "why_critical": "The figure sets the implied per-stack operating point and therefore the speed grade the integration needs.",
+      "would_establish": [
+        "ra-03-speed-grade",
+        "ra-10-integration-disclosure"
+      ]
+    },
+    {
+      "id": "cu-normative-standard",
+      "question": "What do the normative JESD270-4 and JESD270-4A documents specify?",
+      "unresolved_ids": [
+        "u-jedec-text"
+      ],
+      "conflict_ids": [],
+      "why_critical": "Every supplier speed and compatibility claim is framed against the standard, which has been read only as an announcement.",
+      "would_establish": [
+        "ra-01-interface-revision"
+      ]
+    },
+    {
+      "id": "cu-16-high",
+      "question": "What are the thermal limits of 16-high HBM4, and do they require hybrid bonding?",
+      "unresolved_ids": [
+        "u-16h-thermal"
+      ],
+      "conflict_ids": [],
+      "why_critical": "Taller stacks are announced as samples; their integration envelope is not public.",
+      "would_establish": [
+        "ra-05-stack-assembly",
+        "ra-09-power-thermal"
+      ]
+    }
+  ],
+  "prohibited_inferences": [
+    {
+      "id": "pi-supplier-qualified",
+      "inference": "Reading a supplier's 'designed for' statement as the accelerator maker's qualification of that part",
+      "why_not": "A design target is the supplier's statement; qualification is the accelerator maker's decision and is not published.",
+      "basis": [
+        "f-an-substitution",
+        "f-mu-stage"
+      ]
+    },
+    {
+      "id": "pi-multi-sourced",
+      "inference": "Inferring an accelerator's memory suppliers or their number from suppliers' design-target statements",
+      "why_not": "No accelerator maker names its memory suppliers, shares or qualified parts.",
+      "basis": [
+        "f-an-substitution"
+      ]
+    },
+    {
+      "id": "pi-package-technology",
+      "inference": "Naming the package technology that integrates Rubin's HBM4 from foundry roadmaps or supplier aims",
+      "why_not": "NVIDIA names no package technology; TSMC's CoWoS statements concern HBM in general and a 2027 plan.",
+      "basis": [
+        "f-nv-on-package",
+        "f-tsmc-cowos",
+        "ec-hbm4-package-qualification"
+      ]
+    },
+    {
+      "id": "pi-sample-is-supply",
+      "inference": "Reading a sample shipment or a 'first' announcement as evidence of volume supply",
+      "why_not": "Each supplier uses different milestones, and none publishes volume, yield or customer.",
+      "basis": [
+        "f-priority-conflict",
+        "f-skh-stage",
+        "f-ss-stage"
+      ]
+    },
+    {
+      "id": "pi-supplier-speed-is-operating-point",
+      "inference": "Taking a supplier's maximum pin speed as the speed at which an accelerator operates the part",
+      "why_not": "Operating speed is set by the accelerator maker's qualification and is not published.",
+      "basis": [
+        "f-skh-io-speed",
+        "f-ss-hbm4-speed",
+        "f-an-rubin-stacks"
+      ]
+    },
+    {
+      "id": "pi-single-bandwidth",
+      "inference": "Selecting one of NVIDIA's two published Rubin bandwidth figures as the correct one",
+      "why_not": "NVIDIA publishes 22 TB/s and 19.2 TB/s on current pages without explanation.",
+      "basis": [
+        "f-nv-rubin",
+        "f-nv-rubin-192",
+        "ec-rubin-memory-bandwidth"
+      ]
+    },
+    {
+      "id": "pi-foundry-bottleneck",
+      "inference": "Attributing HBM4 supply limits to one logic foundry's base-die capacity",
+      "why_not": "Base-die sourcing differs by supplier and no capacity or allocation figure is published.",
+      "basis": [
+        "f-an-logic-coupling",
+        "u-capacity"
+      ]
+    },
+    {
+      "id": "pi-efficiency-comparison",
+      "inference": "Comparing suppliers' HBM4 power efficiency from their own efficiency claims",
+      "why_not": "Each efficiency claim uses its own baseline and conditions.",
+      "basis": [
+        "f-power-claims"
+      ]
+    },
+    {
+      "id": "pi-standard-is-product",
+      "inference": "Treating a capability the JEDEC announcement permits as a description of a shipped part",
+      "why_not": "The announcement states what the standard allows; shipped parts are described only by their makers.",
+      "basis": [
+        "f-std-interface",
+        "f-std-stacks",
+        "u-jedec-text"
+      ]
+    },
+    {
+      "id": "pi-current-control-status",
+      "inference": "Deriving the export-control treatment of a named HBM4 part or transaction from this dossier",
+      "why_not": "Only two eCFR sections were reviewed and no item was classified.",
+      "basis": [
+        "ec-hbm-export-control-currency"
+      ]
+    }
+  ],
+  "review_requirements": [
+    {
+      "id": "rv-documentary",
+      "scope": "Every evidence-matrix row with review requirement documentary_verification",
+      "requirement": "Reviewer reads the cited passage in the primary document, confirms it says what the finding attributes, and confirms the date and scope"
+    },
+    {
+      "id": "rv-technical",
+      "scope": "Every row with review requirement technical_review (bounded analyses and comparative technical claims)",
+      "requirement": "Technical reviewer checks the derivation, its inputs and its stated assumptions against the primary sources"
+    },
+    {
+      "id": "rv-normative",
+      "scope": "Every row with review requirement normative_text_review",
+      "requirement": "Reviewer reads the normative JEDEC document; the announcement summarises the standard and is not the standard"
+    },
+    {
+      "id": "rv-unretrieved",
+      "scope": "Rows citing a source that automated inspection could not retrieve",
+      "requirement": "Reviewer obtains the document by an accepted route, records how it was read, and confirms or withdraws the passage"
+    },
+    {
+      "id": "rv-candidates",
+      "scope": "Each candidate assessment",
+      "requirement": "A named human reviewer reads every cited passage, applies the Atlas relationship contract, and records the decision in the Atlas change itself; this dossier's recommendation is advice to that reviewer"
+    },
+    {
+      "id": "rv-conflicts",
+      "scope": "Linked conflict-register issues",
+      "requirement": "Reviewer confirms each issue's state against the register on the review date; the dossier does not change register states"
+    }
+  ]
+}
