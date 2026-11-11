@@ -177,6 +177,11 @@ def render_dossier(d, ctx) -> str:
         for c in rows:
             a, b = c["figure_ids"]
             pw = f" Pathway: `{c['pathway_comparison_id']}`." if c["pathway_comparison_id"] else ""
+            if c.get("pathway_divergence"):
+                dv = c["pathway_divergence"]
+                pw += (f" **Divergence from the pathway, {word(dv['status'])}:** reference pathway B still records `{dv['pathway_comparison_id']}` "
+                       f"as {dv['pathway_verdict']}; this dossier classifies it {CLASS_LABEL[dv['dossier_classification']].lower()}. {dv['justification']} "
+                       "The public pathway is unchanged until it is reconciled in a release.")
             out.append(f"- **`{c['id']}`** — {fv(a)} (`{a}`) against {fv(b)} (`{b}`). {c['reason']}"
                        + (" Conditions: " + "; ".join(c["conditions"]) + "." if c["conditions"] else "")
                        + (" Normalizations: " + ", ".join(f"`{x}`" for x in c["normalization_ids"]) + "." if c["normalization_ids"] else "") + pw)

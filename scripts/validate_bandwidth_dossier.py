@@ -51,6 +51,11 @@ PEAKS = {"advertised_peak", "specified_peak", "calculated_peak"}
 CLASSES = {"comparable_on_documented_terms", "conditionally_comparable", "not_comparable", "indeterminate"}
 PATHWAY_MAP = {"valid": {"comparable_on_documented_terms"}, "conditional": {"conditionally_comparable"},
                "unsupported": {"not_comparable", "indeterminate"}}
+# How much a class or verdict permits. A recorded divergence from a pathway verdict may only restrict, never loosen.
+STRICTNESS = {"comparable_on_documented_terms": 0, "conditionally_comparable": 1, "not_comparable": 2, "indeterminate": 2,
+              "valid": 0, "conditional": 1, "unsupported": 2}
+DIVERGENCE_FIELDS = {"pathway_comparison_id", "pathway_verdict", "dossier_classification", "justification", "status"}
+DIVERGENCE_STATUS = "pending_editorial_reconciliation"
 COVERAGE = {"addressed", "partially_addressed", "open", "not_available"}
 BYTES = {"TB/s": 1e12, "GB/s": 1e9}
 BITS = {"Tb/s": 1e12 / 8, "Gb/s": 1e9 / 8, "Gbps": 1e9 / 8}
@@ -107,6 +112,37 @@ def resolve(ref: str, ctx) -> tuple[str | None, str | None, list[str]]:
     if kind == "quantity":
         return item["source_id"], f"{item['value']} {item['unit']}", []
     return item["source_id"], item["locator"], []
+
+
+def quantity_label(ref: str, ctx) -> str | None:
+    """The quantity a release records for a figure, normalised for comparison; None if the figure is not a release quantity."""
+    m = ROUTE.fullmatch(ref)
+    if not m or m.group(1) != "quantity":
+        return None
+    release = ctx["releases"].get(m.group(2))
+    finding = next((f for f in release["findings"] if f["id"] == m.group(3)), None) if release else None
+    items = finding.get("quantities", []) if finding else []
+    idx = int(m.group(4)) if m.group(4) is not None else len(items)
+    return re.sub(r"\s+", " ", items[idx]["quantity"].lower()).strip() if idx < len(items) else None
+
+
+def divergence_errors(w: str, div, pid: str, verdict: str, cls: str) -> list[str]:
+    """A dossier class outside the pathway verdict's mapping needs one exact, restrictive, pending divergence record."""
+    if not isinstance(div, dict):
+        return [f"{w}: classification {cls} contradicts pathway verdict '{verdict}' for {pid} and no divergence is recorded"]
+    errs = []
+    if set(div) != DIVERGENCE_FIELDS:
+        errs.append(f"{w}: pathway divergence must contain exactly {sorted(DIVERGENCE_FIELDS)}")
+        return errs
+    if (div["pathway_comparison_id"], div["pathway_verdict"], div["dossier_classification"]) != (pid, verdict, cls):
+        errs.append(f"{w}: pathway divergence must name this comparison's pathway id, its current verdict ('{verdict}') and this classification")
+    if STRICTNESS[cls] <= STRICTNESS[verdict]:
+        errs.append(f"{w}: a pathway divergence may only restrict the pathway verdict, never loosen it")
+    if div["status"] != DIVERGENCE_STATUS:
+        errs.append(f"{w}: a pathway divergence stays '{DIVERGENCE_STATUS}' until the pathway itself is reconciled in a release")
+    if not isinstance(div["justification"], str) or len(div["justification"].strip()) < 60:
+        errs.append(f"{w}: a pathway divergence needs a technical justification")
+    return errs
 
 
 def appears(value: str, unit: str, text: str) -> bool:
@@ -272,7 +308,6 @@ def check(d, ctx) -> list[str]:
         cond_text = " ".join(c["conditions"]).lower()
         unknown_direction = any(f["direction"] == "not_stated" for f in pair)
         unresolved_scope = any(f["aggregation_scope"] == "unresolved" for f in pair)
-        same_domain = LEVELS[eff[0]["level"]] == LEVELS[eff[1]["level"]]
         same_dimension = (eff[0]["unit"] in BYTES) == (eff[1]["unit"] in BYTES)
         if cls == "comparable_on_documented_terms":
             if eff[0]["level"] != eff[1]["level"] or eff[0]["aggregation"] != eff[1]["aggregation"] or not same_dimension \
@@ -282,8 +317,9 @@ def check(d, ctx) -> list[str]:
         elif cls == "conditionally_comparable":
             if not c["conditions"]:
                 errors.append(f"{w}: a conditional comparison must state its conditions")
-            if not same_domain or eff[0]["aggregation"] != eff[1]["aggregation"] or not same_dimension:
-                errors.append(f"{w}: a conditional comparison needs the same domain, aggregation scope and unit dimension after normalization")
+            if eff[0]["level"] != eff[1]["level"] or eff[0]["aggregation"] != eff[1]["aggregation"] or not same_dimension:
+                errors.append(f"{w}: a conditional comparison needs the same hierarchy level, aggregation scope and unit dimension "
+                              "after normalization; a unit conversion does not make different metrics comparable")
             if unresolved_scope:
                 errors.append(f"{w}: a figure with an unresolved scope cannot be compared; use 'indeterminate'")
             if unknown_direction and "direction" not in cond_text:
@@ -291,21 +327,32 @@ def check(d, ctx) -> list[str]:
             if any(f["status"] == "not_stated" for f in pair) and "peak" not in cond_text:
                 errors.append(f"{w}: a figure does not state its peak status; a condition must name it")
         elif cls == "not_comparable":
-            if same_domain and eff[0]["level"] == eff[1]["level"] and eff[0]["aggregation"] == eff[1]["aggregation"] \
-                    and pair[0]["metric"] == pair[1]["metric"]:
-                errors.append(f"{w}: 'not comparable' needs a difference in domain, level, scope or metric")
+            if eff[0]["level"] == eff[1]["level"] and eff[0]["aggregation"] == eff[1]["aggregation"]:
+                # Same level and scope: the metric difference must come from the release's own quantity records,
+                # not from the dossier's wording of the two figures.
+                labels = [quantity_label(f["ref"], ctx) for f in pair]
+                if None in labels or labels[0] == labels[1]:
+                    errors.append(f"{w}: 'not comparable' at one level and scope needs release quantity records whose "
+                                  "recorded quantities differ; a difference in the dossier's own wording is not enough")
         elif cls == "indeterminate":
             if not (unknown_direction or unresolved_scope):
                 errors.append(f"{w}: 'indeterminate' needs a figure with an unstated direction or unresolved scope")
         if not c["reason"].strip():
             errors.append(f"{w}: a classification needs a reason")
         pid = c.get("pathway_comparison_id")
+        div = c.get("pathway_divergence")
         if pid is not None:
             if pid not in pathway_cmps:
                 errors.append(f"{w}: pathway comparison {pid} does not exist")
-            elif cls not in PATHWAY_MAP[pathway_cmps[pid]["verdict"]]:
-                errors.append(f"{w}: classification {cls} contradicts pathway verdict '{pathway_cmps[pid]['verdict']}' for {pid}")
+            else:
+                verdict = pathway_cmps[pid]["verdict"]
+                if cls not in PATHWAY_MAP[verdict]:
+                    errors += divergence_errors(w, div, pid, verdict, cls)
+                elif div is not None:
+                    errors.append(f"{w}: a pathway divergence is recorded where the classification agrees with the pathway")
             mapped.add(pid)
+        elif div is not None:
+            errors.append(f"{w}: a pathway divergence needs a pathway comparison")
     if set(pathway_cmps) - mapped:
         errors.append(f"bandwidth-dossier: pathway comparisons not classified: {sorted(set(pathway_cmps) - mapped)}")
     # Cases: preserve the IDE-009 reconciliations.

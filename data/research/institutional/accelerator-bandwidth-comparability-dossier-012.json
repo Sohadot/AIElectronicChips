@@ -397,7 +397,7 @@
       "conditions": "unknown",
       "evidence_class": "attributed_statement",
       "uncertainty": [
-        "The same row gives 2 TB of HBM4, which is also not eight times 288 GB"
+        "The same row gives 2 TB of HBM4 against eight times 288 GB (2,304 GB); the page does not say whether rounding, a different configuration or another counting convention accounts for the difference"
       ],
       "restrictions": [
         "A system aggregate; not a per-GPU figure"
@@ -878,7 +878,8 @@
       "normalization_ids": [],
       "conditions": [],
       "reason": "Both are per-stack peak bandwidths of a 2,048-bit HBM4 interface; they differ only in pin rate.",
-      "pathway_comparison_id": "cmp-stack-vs-stack"
+      "pathway_comparison_id": "cmp-stack-vs-stack",
+      "pathway_divergence": null
     },
     {
       "id": "cp-rubin-22-vs-19",
@@ -894,7 +895,8 @@
         "Two of the figures do not state that they are peaks"
       ],
       "reason": "The same metric for the same product from the same publisher, but the values conflict and no source explains why.",
-      "pathway_comparison_id": "cmp-rubin-22-vs-19"
+      "pathway_comparison_id": "cmp-rubin-22-vs-19",
+      "pathway_divergence": null
     },
     {
       "id": "cp-mi300x-vs-rubin-memory",
@@ -910,7 +912,8 @@
         "Carry the open 22 versus 19.2 TB/s conflict"
       ],
       "reason": "Both are per-accelerator peak memory bandwidth, across HBM3 and HBM4 generations.",
-      "pathway_comparison_id": "cmp-mi300x-vs-rubin-memory"
+      "pathway_comparison_id": "cmp-mi300x-vs-rubin-memory",
+      "pathway_divergence": null
     },
     {
       "id": "cp-mi300x-p2p-vs-nvlink6",
@@ -922,7 +925,8 @@
       "normalization_ids": [],
       "conditions": [],
       "reason": "The scope of 896 GB/s is unresolved, and NVIDIA publishes the per-GPU NVLink 6 figure two ways.",
-      "pathway_comparison_id": "cmp-mi300x-p2p-vs-nvlink6"
+      "pathway_comparison_id": "cmp-mi300x-p2p-vs-nvlink6",
+      "pathway_divergence": null
     },
     {
       "id": "cp-memory-vs-scale-up",
@@ -934,7 +938,8 @@
       "normalization_ids": [],
       "conditions": [],
       "reason": "Local memory bandwidth and GPU-to-GPU fabric bandwidth describe different physical paths.",
-      "pathway_comparison_id": "cmp-memory-vs-scale-up"
+      "pathway_comparison_id": "cmp-memory-vs-scale-up",
+      "pathway_divergence": null
     },
     {
       "id": "cp-rack-vs-gpu",
@@ -946,7 +951,8 @@
       "normalization_ids": [],
       "conditions": [],
       "reason": "A prior-generation rack aggregate and a per-GPU figure differ in scope and generation.",
-      "pathway_comparison_id": "cmp-rack-vs-gpu"
+      "pathway_comparison_id": "cmp-rack-vs-gpu",
+      "pathway_divergence": null
     },
     {
       "id": "cp-scale-up-vs-scale-out",
@@ -954,18 +960,20 @@
         "fg-c-36-platform",
         "fg-x-scaleout"
       ],
-      "classification": "conditionally_comparable",
+      "classification": "not_comparable",
       "normalization_ids": [
         "nm-x-scaleout-bytes"
       ],
-      "conditions": [
-        "Convert bits to bytes",
-        "Give both ratios for the two possible directions of 1.6 Tb/s",
-        "Carry the 3 TB/s alternative for NVLink 6",
-        "Neither figure states whether it is a peak"
-      ],
-      "reason": "Comparable in bytes after conversion; the ratio depends on the unstated direction of 1.6 Tb/s.",
-      "pathway_comparison_id": "cmp-scale-up-vs-scale-out"
+      "conditions": [],
+      "reason": "NVLink 6 scale-up bandwidth is a device-fabric aggregate across a GPU's NVLink links to the NVLink Switch; ConnectX-9 scale-out bandwidth is a network-port rate on a different interface, path and protocol, with its own counting. Converting 1.6 Tb/s to 200 GB/s puts both numbers in one unit but does not make them the same physical metric. As arithmetic only, the advertised 3.6 TB/s (stated bidirectional) is about 18 times 200 GB/s, or about 9 times 400 GB/s if 1.6 Tb/s is per direction; neither ratio describes relative delivered throughput.",
+      "pathway_comparison_id": "cmp-scale-up-vs-scale-out",
+      "pathway_divergence": {
+        "pathway_comparison_id": "cmp-scale-up-vs-scale-out",
+        "pathway_verdict": "conditional",
+        "dossier_classification": "not_comparable",
+        "justification": "The pathway treats the pair as comparable after converting bits to bytes. A unit conversion makes the magnitudes expressible together but cannot make a device-fabric aggregate and a scale-out port rate the same metric; under this dossier's rules the two sit at different hierarchy levels.",
+        "status": "pending_editorial_reconciliation"
+      }
     },
     {
       "id": "cp-cxl-vs-pcie6",
@@ -979,7 +987,8 @@
         "State that neither source's passage gives a direction and that the counting basis of NVIDIA's figure is not published"
       ],
       "reason": "Both describe x16 links at the PCIe 6.0 rate, but NVIDIA does not state that its figure uses the same raw both-direction basis.",
-      "pathway_comparison_id": "cmp-cxl-vs-pcie6"
+      "pathway_comparison_id": "cmp-cxl-vs-pcie6",
+      "pathway_divergence": null
     },
     {
       "id": "cp-nvlink-36-vs-3",
@@ -991,7 +1000,8 @@
       "normalization_ids": [],
       "conditions": [],
       "reason": "The same product and nominal metric, but only 3.6 TB/s carries a stated direction, so whether the two use one counting convention is unknown.",
-      "pathway_comparison_id": null
+      "pathway_comparison_id": null,
+      "pathway_divergence": null
     },
     {
       "id": "cp-nvl72-share-vs-column",
@@ -1009,7 +1019,8 @@
         "The result shows the page is internally consistent, not which per-GPU figure is right"
       ],
       "reason": "The rack aggregate divided evenly over 72 GPUs equals the page's per-GPU column.",
-      "pathway_comparison_id": null
+      "pathway_comparison_id": null,
+      "pathway_divergence": null
     },
     {
       "id": "cp-nvl8-share-vs-row",
@@ -1028,7 +1039,8 @@
         "The two figures may count different things; neither is corrected"
       ],
       "reason": "On one HGX page, the eight-GPU switch figure divided evenly gives 3 TB/s per GPU while the individual-GPU row gives 3.6 TB/s.",
-      "pathway_comparison_id": null
+      "pathway_comparison_id": null,
+      "pathway_divergence": null
     },
     {
       "id": "cp-nvl8-memory-share-vs-gpu",
@@ -1043,10 +1055,11 @@
       "conditions": [
         "Even division is an assumption",
         "Neither figure states whether it is a peak",
-        "The row's 2 TB capacity is also not eight times 288 GB"
+        "The row's 2 TB capacity differs from eight times 288 GB for reasons the page does not give"
       ],
       "reason": "On one HGX page, the eight-GPU memory figure divided evenly gives 16.25 TB/s per GPU against 22 TB/s in the individual-GPU row.",
-      "pathway_comparison_id": null
+      "pathway_comparison_id": null,
+      "pathway_divergence": null
     },
     {
       "id": "cp-mi300x-896-vs-link-sum",
@@ -1060,7 +1073,8 @@
       ],
       "conditions": [],
       "reason": "AMD's 896 GB/s equals the sum of the seven 128 GB/s links AMD lists per GPU, but whether the two quantities share a scope is the open question: AMD labels 896 GB/s a ring-of-8 aggregate and does not call it per GPU.",
-      "pathway_comparison_id": null
+      "pathway_comparison_id": null,
+      "pathway_divergence": null
     },
     {
       "id": "cp-mi300x-896-vs-1024",
@@ -1072,7 +1086,8 @@
       "normalization_ids": [],
       "conditions": [],
       "reason": "Two different metrics in one table: P2P ring aggregate and total aggregate I/O, which AMD's text suggests adds the host-capable link.",
-      "pathway_comparison_id": null
+      "pathway_comparison_id": null,
+      "pathway_divergence": null
     }
   ],
   "cases": [
@@ -1137,7 +1152,7 @@
       ],
       "analysis": [
         "On NVIDIA's product pages the split follows the platform (HGX 22 TB/s, Vera Rubin NVL72 19.2 TB/s), and in its dated posts it follows the date (January and July 22 TB/s, November 19.2 TB/s); whether either pattern reflects different configurations is not stated",
-        "The HGX NVL8 row's 130 TB/s is 16.25 TB/s per GPU on even division, matching neither figure, and its 2 TB is less than eight times 288 GB, so the row is not a simple multiple of the individual-GPU row"
+        "The HGX NVL8 row's 130 TB/s is 16.25 TB/s per GPU on even division, matching neither figure, so the row's bandwidth is not eight times either per-GPU figure. Its 2 TB of HBM4 also differs from eight times 288 GB (2,304 GB); the published figures do not explain whether rounding, a different configuration or another counting convention accounts for that"
       ],
       "unresolved_ids": [
         "u-rubin-bandwidth"
@@ -1373,7 +1388,7 @@
       ]
     },
     {
-      "text": "NVIDIA's eight-GPU HGX memory figure (130 TB/s) divides to 16.25 TB/s, matching neither per-GPU memory figure, and its 2 TB capacity is less than eight times 288 GB.",
+      "text": "NVIDIA's eight-GPU HGX memory figure (130 TB/s) divides to 16.25 TB/s, matching neither per-GPU memory figure. Its 2 TB capacity also differs from eight times 288 GB (2,304 GB), and the page does not say whether rounding, configuration or counting explains it.",
       "basis": [
         "nm-b-nvl8-share",
         "cp-nvl8-memory-share-vs-gpu"
