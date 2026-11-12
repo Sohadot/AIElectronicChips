@@ -16,7 +16,7 @@ import validate_evidence_reconciliations as recon  # noqa: E402
 from validate_evidence_maintenance import check_inspections  # noqa: E402
 from validate_source_registry import check_public_index  # noqa: E402
 
-TODAY = date(2026, 11, 11)
+TODAY = date(2026, 11, 12)
 
 
 def state():

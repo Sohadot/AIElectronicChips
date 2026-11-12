@@ -1,0 +1,1367 @@
+{
+  "dossier_id": "aec-dossier-rack-deployment-verification-014",
+  "schema_version": "1.0.0",
+  "release": "IDE-014",
+  "status": "research_candidate",
+  "review_status": "not_reviewed",
+  "scientific_review": "pending",
+  "review_owner": "unassigned",
+  "assessment_method": "ai_assisted_source_check",
+  "as_of": "2026-11-12",
+  "interpretation_standard": "AEC-CS-001",
+  "research_question": "What documentary evidence is necessary to substantiate that a named AI rack configuration at a named site has been installed, commissioned, accepted and operationally observed, and what can the present public record establish?",
+  "scope": {
+    "technical": "NVIDIA GB200 NVL72 racks and the DGX SuperPOD reference architecture, as already recorded in Evidence Release 006 and the IDE-006 dossier",
+    "temporal": "Sources dated 2024 to 2026; ten sources rechecked on 2026-11-12",
+    "site": "None. No site, operator, customer, contract or deployment is represented or implied",
+    "excluded": [
+      "Legal determinations for any transaction",
+      "Statements about whether any particular site is in service",
+      "Commercial terms and supply"
+    ]
+  },
+  "boundary": "A research candidate, not an assessment of any site. It sets out which records could support which evidence state, and finds that the public record supports none of the site-level states. It records no human or scientific review, makes no engineering or legal determination and does not promote any Atlas relationship.",
+  "inputs": {
+    "release_id": "aec-ide-006-deployment-readiness",
+    "dossier_id": "aec-dossier-gb200-nvl72-reference-demo",
+    "workflow_id": "workflow-rack-deployment",
+    "pathway_id": "pathway-rack-to-deployable-compute",
+    "inspection_run_id": "ide-014-2026-11-12"
+  },
+  "attributes": {
+    "named_site": "Identifies one site or facility",
+    "configuration_identity": "Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant",
+    "dated": "Carries the date of the act it records",
+    "issuing_party": "Names the organisation that issued it",
+    "signatory_authority": "Signed by a person able to bind the issuing party",
+    "method": "States the procedure or test method used",
+    "criteria": "States the pass or acceptance thresholds in advance",
+    "results": "Records the observed results, not only a pass mark",
+    "conditions": "States the operating and environmental conditions of the test",
+    "period": "States the observation period",
+    "completeness": "Covers every item it claims to cover, with exceptions listed"
+  },
+  "record_types": [
+    {
+      "id": "rt-product-specification",
+      "label": "Vendor product specification or user guide",
+      "holder": "Vendor",
+      "dimension": "technical",
+      "state_ceiling": "product_specification_documented",
+      "site_specific": false,
+      "required_attributes": [
+        "issuing_party",
+        "dated",
+        "configuration_identity"
+      ],
+      "does_not_establish": "That any unit was ordered, delivered, installed or operated anywhere",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-def-capability-versus-readiness",
+        "d-an-design-vs-deployment"
+      ]
+    },
+    {
+      "id": "rt-reference-architecture",
+      "label": "Vendor reference architecture",
+      "holder": "Vendor",
+      "dimension": "technical",
+      "state_ceiling": "infrastructure_proposed",
+      "site_specific": false,
+      "required_attributes": [
+        "issuing_party",
+        "dated",
+        "configuration_identity"
+      ],
+      "does_not_establish": "That a site follows the design, or that the design was tested at the proposed scale",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-ra-tested-scope",
+        "d-def-capability-versus-readiness"
+      ]
+    },
+    {
+      "id": "rt-documented-procedure",
+      "label": "Vendor deployment, bring-up or operations procedure",
+      "holder": "Vendor",
+      "dimension": "technical",
+      "state_ceiling": "product_specification_documented",
+      "site_specific": false,
+      "required_attributes": [
+        "issuing_party",
+        "dated"
+      ],
+      "does_not_establish": "That the procedure was carried out, by whom or with what result",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-mc-guide-purpose",
+        "d-bringup-sequence",
+        "d-an-design-vs-deployment"
+      ]
+    },
+    {
+      "id": "rt-checklist-template",
+      "label": "Published checklist with unchecked items",
+      "holder": "Vendor",
+      "dimension": "technical",
+      "state_ceiling": "product_specification_documented",
+      "site_specific": false,
+      "required_attributes": [
+        "issuing_party",
+        "dated"
+      ],
+      "does_not_establish": "That any item was checked, or that anyone signed or approved it",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-validation-checklist",
+        "d-an-checklist-not-record"
+      ]
+    },
+    {
+      "id": "rt-performance-specification",
+      "label": "Vendor performance figure or validation-test description",
+      "holder": "Vendor",
+      "dimension": "technical",
+      "state_ceiling": "product_specification_documented",
+      "site_specific": false,
+      "required_attributes": [
+        "issuing_party",
+        "dated"
+      ],
+      "does_not_establish": "That any installed system reached the figure, or under what conditions",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-cluster-validation-tooling",
+        "d-an-software-not-performance"
+      ]
+    },
+    {
+      "id": "rt-site-design",
+      "label": "Site design for a named facility (single-line diagram, mechanical plan)",
+      "holder": "Site operator or designer",
+      "dimension": "technical",
+      "state_ceiling": "infrastructure_proposed",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "issuing_party",
+        "dated",
+        "configuration_identity"
+      ],
+      "does_not_establish": "That the design was built or energised",
+      "basis": "project_defined",
+      "basis_refs": [
+        "d-an-ide005-carryover"
+      ]
+    },
+    {
+      "id": "rt-contract",
+      "label": "Contract, service or utility supply agreement for a named site",
+      "holder": "Contracting parties",
+      "dimension": "technical",
+      "state_ceiling": "capability_contracted",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "issuing_party",
+        "signatory_authority",
+        "dated",
+        "configuration_identity"
+      ],
+      "does_not_establish": "That equipment was delivered or capacity was energised",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-def-evidence-states"
+      ]
+    },
+    {
+      "id": "rt-acceptance-criteria",
+      "label": "Agreed acceptance criteria for a named configuration",
+      "holder": "Contracting parties",
+      "dimension": "technical",
+      "state_ceiling": "capability_contracted",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "criteria",
+        "signatory_authority",
+        "dated"
+      ],
+      "does_not_establish": "That any criterion was met",
+      "basis": "project_defined",
+      "basis_refs": [
+        "d-an-checklist-not-record"
+      ]
+    },
+    {
+      "id": "rt-purchase-order",
+      "label": "Purchase order for named equipment",
+      "holder": "Buyer and supplier",
+      "dimension": "technical",
+      "state_ceiling": "capability_contracted",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "issuing_party",
+        "dated"
+      ],
+      "does_not_establish": "That the equipment was delivered or installed",
+      "basis": "project_defined",
+      "basis_refs": [
+        "d-an-design-vs-deployment"
+      ]
+    },
+    {
+      "id": "rt-delivery-record",
+      "label": "Delivery or receiving record with serial numbers",
+      "holder": "Supplier and site operator",
+      "dimension": "technical",
+      "state_ceiling": "equipment_procured",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "dated",
+        "issuing_party"
+      ],
+      "does_not_establish": "That the equipment was installed or connected",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-def-evidence-states"
+      ]
+    },
+    {
+      "id": "rt-installation-record",
+      "label": "Installation record: rack placement, power, coolant and network connection",
+      "holder": "Installer or site operator",
+      "dimension": "technical",
+      "state_ceiling": "equipment_installed",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "dated",
+        "issuing_party",
+        "completeness"
+      ],
+      "does_not_establish": "That any subsystem was energised or passed a test",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-def-evidence-states",
+        "d-an-checklist-not-record"
+      ]
+    },
+    {
+      "id": "rt-commissioning-record",
+      "label": "Completed commissioning test for one subsystem, with results",
+      "holder": "Commissioning agent or site operator",
+      "dimension": "technical",
+      "state_ceiling": "subsystem_commissioned",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "dated",
+        "method",
+        "criteria",
+        "results",
+        "issuing_party"
+      ],
+      "does_not_establish": "That subsystems work together",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-def-evidence-states",
+        "d-validation-checklist"
+      ]
+    },
+    {
+      "id": "rt-integrated-test-record",
+      "label": "Integrated test across subsystems under stated conditions",
+      "holder": "Commissioning agent or site operator",
+      "dimension": "technical",
+      "state_ceiling": "integrated_configuration_verified",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "dated",
+        "method",
+        "criteria",
+        "results",
+        "conditions",
+        "issuing_party"
+      ],
+      "does_not_establish": "That the parties accepted the configuration, or that it operated over time",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-def-evidence-states",
+        "d-int-bringup-couples-domains"
+      ]
+    },
+    {
+      "id": "rt-acceptance-record",
+      "label": "Signed acceptance of a named configuration against agreed criteria",
+      "holder": "Operator and customer",
+      "dimension": "technical",
+      "state_ceiling": "integrated_configuration_verified",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "dated",
+        "method",
+        "criteria",
+        "results",
+        "signatory_authority",
+        "completeness"
+      ],
+      "does_not_establish": "That the configuration operated as accepted over any later period",
+      "basis": "project_defined",
+      "basis_refs": [
+        "d-an-checklist-not-record",
+        "d-validation-checklist"
+      ]
+    },
+    {
+      "id": "rt-monitoring-record",
+      "label": "Operational monitoring over a stated period",
+      "holder": "Site operator",
+      "dimension": "technical",
+      "state_ceiling": "operational_performance_observed",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "dated",
+        "period",
+        "method",
+        "results",
+        "issuing_party"
+      ],
+      "does_not_establish": "That the workload performance claimed was achieved",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-def-evidence-states",
+        "d-leak-ops"
+      ]
+    },
+    {
+      "id": "rt-workload-measurement",
+      "label": "Measured workload performance with method and conditions",
+      "holder": "Site operator or independent tester",
+      "dimension": "technical",
+      "state_ceiling": "operational_performance_observed",
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "dated",
+        "period",
+        "method",
+        "conditions",
+        "results",
+        "issuing_party"
+      ],
+      "does_not_establish": "That the result generalises to other workloads or sites",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-an-software-not-performance",
+        "d-cluster-validation-tooling"
+      ]
+    },
+    {
+      "id": "rt-rule-text",
+      "label": "Current regulatory text or announcement",
+      "holder": "Regulator",
+      "dimension": "access",
+      "state_ceiling": null,
+      "site_specific": false,
+      "required_attributes": [
+        "issuing_party",
+        "dated"
+      ],
+      "does_not_establish": "How any named item, party or transaction is treated",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-bis-access",
+        "d-an-access-layer"
+      ]
+    },
+    {
+      "id": "rt-transaction-determination",
+      "label": "Licence, classification or determination for a named transaction",
+      "holder": "Exporter and licensing authority",
+      "dimension": "access",
+      "state_ceiling": null,
+      "site_specific": true,
+      "required_attributes": [
+        "named_site",
+        "configuration_identity",
+        "issuing_party",
+        "dated",
+        "signatory_authority"
+      ],
+      "does_not_establish": "That the facility is technically able to operate the system",
+      "basis": "derived_from_published",
+      "basis_refs": [
+        "d-an-access-layer"
+      ]
+    }
+  ],
+  "chain": [
+    {
+      "id": "a-specification-design",
+      "title": "Specification and design",
+      "states": [
+        "product_specification_documented",
+        "infrastructure_proposed"
+      ],
+      "question": "What does the published configuration establish, and what does a design propose?",
+      "record_type_ids": [
+        "rt-product-specification",
+        "rt-reference-architecture",
+        "rt-site-design"
+      ],
+      "category_errors": [
+        {
+          "id": "ce-ra-as-tested",
+          "inference": "Treating a reference architecture as tested at the scale a site builds",
+          "why_not": "NVIDIA states tested scale for its own reference design only, and its wording on that scale is itself unresolved",
+          "basis": [
+            "d-ra-tested-scope",
+            "u-d-tested-scale"
+          ]
+        },
+        {
+          "id": "ce-spec-as-site",
+          "inference": "Treating a product specification as describing any site",
+          "why_not": "A specification states what a product is; it names no site, configuration instance or date",
+          "basis": [
+            "d-def-capability-versus-readiness"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b-procurement-delivery",
+      "title": "Procurement and delivery",
+      "states": [
+        "capability_contracted",
+        "equipment_procured"
+      ],
+      "question": "What shows that the configuration was contracted, ordered and delivered to a named site?",
+      "record_type_ids": [
+        "rt-contract",
+        "rt-purchase-order",
+        "rt-delivery-record"
+      ],
+      "category_errors": [
+        {
+          "id": "ce-announcement-as-procurement",
+          "inference": "Treating a product or customer announcement as procurement",
+          "why_not": "An announcement names no delivered equipment, serial numbers or site",
+          "basis": [
+            "d-an-design-vs-deployment"
+          ]
+        },
+        {
+          "id": "ce-order-as-delivery",
+          "inference": "Treating a purchase order as delivery or installation",
+          "why_not": "An order records intent to buy; delivery and installation are separate records",
+          "basis": [
+            "d-def-evidence-states"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c-installation",
+      "title": "Physical installation",
+      "states": [
+        "equipment_installed"
+      ],
+      "question": "What shows that racks were placed and connected to power, coolant and networks at a named site?",
+      "record_type_ids": [
+        "rt-installation-record"
+      ],
+      "category_errors": [
+        {
+          "id": "ce-guide-as-installation",
+          "inference": "Treating a deployment guide as an installation record",
+          "why_not": "A guide states what an engineer should do; it records nothing done",
+          "basis": [
+            "d-mc-guide-purpose",
+            "d-an-design-vs-deployment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d-commissioning",
+      "title": "Commissioning",
+      "states": [
+        "subsystem_commissioned"
+      ],
+      "question": "What shows that a subsystem passed its commissioning tests?",
+      "record_type_ids": [
+        "rt-commissioning-record"
+      ],
+      "category_errors": [
+        {
+          "id": "ce-checklist-as-commissioning",
+          "inference": "Treating a published checklist as completed commissioning",
+          "why_not": "Unchecked items record what should be checked, not that anything was",
+          "basis": [
+            "d-validation-checklist",
+            "d-an-checklist-not-record"
+          ]
+        },
+        {
+          "id": "ce-procedure-as-test",
+          "inference": "Treating a test procedure as a passed test",
+          "why_not": "A procedure gives steps; a passed test needs results against criteria",
+          "basis": [
+            "d-bringup-sequence"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e-acceptance",
+      "title": "Acceptance",
+      "states": [
+        "integrated_configuration_verified"
+      ],
+      "question": "What shows that the installed configuration, as a whole, met criteria the parties agreed?",
+      "record_type_ids": [
+        "rt-integrated-test-record",
+        "rt-acceptance-criteria",
+        "rt-acceptance-record"
+      ],
+      "category_errors": [
+        {
+          "id": "ce-subsystem-as-system",
+          "inference": "Treating subsystem tests as whole-system acceptance",
+          "why_not": "Bring-up couples power, cooling, network and firmware; passing each alone does not show they work together",
+          "basis": [
+            "d-int-bringup-couples-domains"
+          ]
+        },
+        {
+          "id": "ce-test-as-acceptance",
+          "inference": "Treating a technical test as formal acceptance",
+          "why_not": "Acceptance is a signed decision against agreed criteria; a test supplies results, not the decision",
+          "basis": [
+            "d-an-checklist-not-record"
+          ]
+        },
+        {
+          "id": "ce-undefined-criteria",
+          "inference": "Evaluating acceptance against criteria no public source defines",
+          "why_not": "The published checklist gives items without thresholds, so acceptance can only be judged against the parties' own criteria",
+          "basis": [
+            "u-d-acceptance-criteria"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f-operation",
+      "title": "Operational observation",
+      "states": [
+        "operational_performance_observed"
+      ],
+      "question": "What shows that the configuration operated under stated conditions over a stated period?",
+      "record_type_ids": [
+        "rt-monitoring-record",
+        "rt-workload-measurement"
+      ],
+      "category_errors": [
+        {
+          "id": "ce-peak-as-operation",
+          "inference": "Treating a peak figure, a published test-suite description or a validated design as sustained operation",
+          "why_not": "None records a site, a period or measured results",
+          "basis": [
+            "d-an-software-not-performance",
+            "d-cluster-validation-tooling"
+          ]
+        },
+        {
+          "id": "ce-software-as-performance",
+          "inference": "Treating an installed software stack as performance",
+          "why_not": "Installed components show presence, not results",
+          "basis": [
+            "d-an-software-not-performance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "g-access",
+      "title": "Access and compliance",
+      "states": [],
+      "question": "Which documents bear on who may receive and use the configuration, separately from whether a site can run it?",
+      "record_type_ids": [
+        "rt-rule-text",
+        "rt-transaction-determination"
+      ],
+      "category_errors": [
+        {
+          "id": "ce-announcement-as-rule",
+          "inference": "Treating a 2024 announcement as the rule in force",
+          "why_not": "Only two current eCFR sections were reviewed",
+          "basis": [
+            "ec-hbm-export-control-currency"
+          ]
+        },
+        {
+          "id": "ce-rule-as-determination",
+          "inference": "Treating rule text as a determination for a named transaction",
+          "why_not": "Controls attach to items, destinations, end uses and parties; a determination needs all of them",
+          "basis": [
+            "d-an-access-layer"
+          ]
+        },
+        {
+          "id": "ce-access-as-stage",
+          "inference": "Treating access as a deployment stage that technical records complete",
+          "why_not": "Access is a separate dimension: technical records say nothing about who may receive the system",
+          "basis": [
+            "d-an-access-layer"
+          ]
+        }
+      ]
+    }
+  ],
+  "domains": [
+    {
+      "id": "compute_hardware",
+      "claim": "The named rack configuration is the one NVIDIA describes, and its trays are present",
+      "chain_ids": [
+        "a-specification-design",
+        "b-procurement-delivery",
+        "c-installation"
+      ],
+      "workflow_c_ids": [
+        "rc-01-hardware-configuration",
+        "rc-08-procurement-delivery",
+        "rc-09-installation"
+      ],
+      "depends_on": [],
+      "unresolved_ids": [
+        "u-d-gb300-difference"
+      ],
+      "conflict_ids": [],
+      "acceptance_or_observation": "Serial-numbered delivery and installation records for the named rack",
+      "engineering_review": false,
+      "review_reason": "Documentary comparison of serial numbers against the configuration; no engineering judgement"
+    },
+    {
+      "id": "electrical",
+      "claim": "The site supplies and distributes the rack's power with the stated redundancy",
+      "chain_ids": [
+        "a-specification-design",
+        "b-procurement-delivery",
+        "d-commissioning"
+      ],
+      "workflow_c_ids": [
+        "rc-02-scalable-unit-design",
+        "rc-03-redundancy",
+        "rc-04-busbar",
+        "rc-07-site-electrical-capacity"
+      ],
+      "depends_on": [],
+      "unresolved_ids": [
+        "u-d-ide005-carryover",
+        "u-pt-redundancy-conflict",
+        "u-pt-bus-bar-paths"
+      ],
+      "conflict_ids": [
+        "ec-gb200-power-redundancy",
+        "ec-gb200-busbar-rack-power",
+        "ec-scalable-unit-power"
+      ],
+      "acceptance_or_observation": "Energisation and load tests of the rack power path, with the redundancy scheme exercised",
+      "engineering_review": true,
+      "review_reason": "Redundancy and bus-bar capacity are open conflicts; judging a load test needs an electrical engineer"
+    },
+    {
+      "id": "thermal",
+      "claim": "The facility removes the rack's heat through liquid and air within the stated envelope",
+      "chain_ids": [
+        "a-specification-design",
+        "d-commissioning",
+        "e-acceptance"
+      ],
+      "workflow_c_ids": [
+        "rc-05-cooling-interface"
+      ],
+      "depends_on": [
+        "electrical"
+      ],
+      "unresolved_ids": [
+        "u-d-ide005-carryover",
+        "u-pt-coolant-specification"
+      ],
+      "conflict_ids": [
+        "ec-gb200-coolant-specification"
+      ],
+      "acceptance_or_observation": "Coolant-loop commissioning and a thermal test under load with conditions and thresholds",
+      "engineering_review": true,
+      "review_reason": "No public coolant specification exists to test against; a mechanical engineer must set and judge the criteria"
+    },
+    {
+      "id": "network_interconnect",
+      "claim": "The NVLink domain and north-south network are brought up and integrated",
+      "chain_ids": [
+        "c-installation",
+        "d-commissioning",
+        "e-acceptance"
+      ],
+      "workflow_c_ids": [
+        "rc-10-network-integration"
+      ],
+      "depends_on": [
+        "electrical",
+        "thermal",
+        "software"
+      ],
+      "unresolved_ids": [
+        "u-d-tested-scale"
+      ],
+      "conflict_ids": [],
+      "acceptance_or_observation": "Bring-up logs showing the NVLink domain configured, and north-south switch installation and configuration records",
+      "engineering_review": true,
+      "review_reason": "Bring-up logs need a network engineer to read them against NVIDIA's sequence"
+    },
+    {
+      "id": "software",
+      "claim": "The firmware and software baseline matches a stated, consistent version set, and validation ran",
+      "chain_ids": [
+        "a-specification-design",
+        "d-commissioning",
+        "f-operation"
+      ],
+      "workflow_c_ids": [
+        "rc-06-firmware-software",
+        "rc-11-commissioning"
+      ],
+      "depends_on": [
+        "facility_operations"
+      ],
+      "unresolved_ids": [
+        "u-d-firmware-guide",
+        "u-d-software-versions"
+      ],
+      "conflict_ids": [
+        "ec-mission-control-orchestration-versions"
+      ],
+      "acceptance_or_observation": "A firmware and software inventory compared with the SBOM, and dated validation output",
+      "engineering_review": true,
+      "review_reason": "Version compatibility is not published; consistency must be judged by a specialist"
+    },
+    {
+      "id": "facility_operations",
+      "claim": "The site operates the rack with leak response, artifact handling and a completed handover",
+      "chain_ids": [
+        "e-acceptance",
+        "f-operation"
+      ],
+      "workflow_c_ids": [
+        "rc-12-acceptance",
+        "rc-13-operational-monitoring",
+        "rc-14-workload-performance"
+      ],
+      "depends_on": [
+        "thermal",
+        "software"
+      ],
+      "unresolved_ids": [
+        "u-d-bms-interface",
+        "u-d-acceptance-criteria"
+      ],
+      "conflict_ids": [],
+      "acceptance_or_observation": "An integrated leak-response test, a signed acceptance record and monitoring over a stated period",
+      "engineering_review": true,
+      "review_reason": "Acceptance criteria are not public; whether monitoring evidence suffices is an engineering judgement"
+    },
+    {
+      "id": "access_compliance",
+      "claim": "The parties may receive and use the configuration at the site",
+      "chain_ids": [
+        "g-access"
+      ],
+      "workflow_c_ids": [
+        "rc-15-access-regulatory"
+      ],
+      "depends_on": [],
+      "unresolved_ids": [
+        "u-d-access-current-rules"
+      ],
+      "conflict_ids": [
+        "ec-hbm-export-control-currency"
+      ],
+      "acceptance_or_observation": "A determination for the named transaction under the rules in force",
+      "engineering_review": false,
+      "review_reason": "A legal and compliance question, not an engineering one; no determination is made here"
+    }
+  ],
+  "dependencies": [
+    {
+      "prerequisite": "req-sw-firmware-baseline",
+      "dependent": "req-nw-nvlink-bring-up",
+      "basis": [
+        "d-int-bringup-couples-domains",
+        "d-bringup-sequence"
+      ],
+      "basis_class": "published"
+    },
+    {
+      "prerequisite": "req-nw-nvlink-bring-up",
+      "dependent": "req-sw-validation-results",
+      "basis": [
+        "d-bringup-sequence",
+        "d-cluster-validation-tooling"
+      ],
+      "basis_class": "published"
+    },
+    {
+      "prerequisite": "req-fo-offline-artifacts",
+      "dependent": "req-sw-firmware-baseline",
+      "basis": [
+        "d-predeploy-airgap",
+        "d-int-airgap-shapes-operations"
+      ],
+      "basis_class": "derived_from_published"
+    },
+    {
+      "prerequisite": "req-nw-north-south",
+      "dependent": "req-sw-management-stack",
+      "basis": [
+        "d-ns-network-prereq"
+      ],
+      "basis_class": "derived_from_published"
+    },
+    {
+      "prerequisite": "req-th-liquid-cooling",
+      "dependent": "req-fo-leak-response",
+      "basis": [
+        "d-leak-ops",
+        "d-int-leak-path-spans-domains"
+      ],
+      "basis_class": "derived_from_published"
+    },
+    {
+      "prerequisite": "req-sw-management-stack",
+      "dependent": "req-fo-leak-response",
+      "basis": [
+        "d-int-leak-path-spans-domains"
+      ],
+      "basis_class": "derived_from_published"
+    },
+    {
+      "prerequisite": "req-el-site-capacity",
+      "dependent": "req-nw-nvlink-bring-up",
+      "basis": [
+        "d-validation-checklist",
+        "d-bringup-sequence"
+      ],
+      "basis_class": "project_defined"
+    },
+    {
+      "prerequisite": "req-th-liquid-cooling",
+      "dependent": "req-nw-nvlink-bring-up",
+      "basis": [
+        "d-validation-checklist"
+      ],
+      "basis_class": "project_defined"
+    },
+    {
+      "prerequisite": "req-sw-validation-results",
+      "dependent": "req-th-validated-under-load",
+      "basis": [
+        "d-cluster-validation-tooling"
+      ],
+      "basis_class": "project_defined"
+    },
+    {
+      "prerequisite": "req-sw-validation-results",
+      "dependent": "req-fo-handover",
+      "basis": [
+        "d-validation-checklist"
+      ],
+      "basis_class": "project_defined"
+    },
+    {
+      "prerequisite": "req-th-validated-under-load",
+      "dependent": "req-fo-handover",
+      "basis": [
+        "d-validation-checklist"
+      ],
+      "basis_class": "project_defined"
+    },
+    {
+      "prerequisite": "req-el-site-capacity",
+      "dependent": "req-fo-handover",
+      "basis": [
+        "d-validation-checklist"
+      ],
+      "basis_class": "project_defined"
+    }
+  ],
+  "ide006_consistency": [
+    {
+      "requirement_id": "req-nw-north-south",
+      "evidence_classification": "documented_procedure",
+      "current_state": "infrastructure_proposed",
+      "record_type_id": "rt-documented-procedure",
+      "state_ceiling": "product_specification_documented",
+      "note": "The cited passage is a procedural prerequisite (install the switches before deploying them), not a network design. Either the guide proposes a design, and its classification would be reference design, or the state is product specification documented. IDE-006 is not changed here; the question goes to editorial review."
+    }
+  ],
+  "matrix": [
+    {
+      "requirement_id": "rc-01-hardware-configuration",
+      "ide006_requirement_ids": [
+        "req-ch-rack-configuration"
+      ],
+      "claim": "The rack configuration is 18 compute trays and 9 NVLink switch trays as NVIDIA describes",
+      "target_state": "product_specification_documented",
+      "record_type_ids": [
+        "rt-product-specification"
+      ],
+      "holder": "Vendor",
+      "verification_conditions": [
+        "Configuration identity matches the GB200 NVL72 description; GB200 and GB300 are kept apart"
+      ],
+      "supported_inference": "What the product is specified to contain",
+      "prohibited_inference": "That any named rack contains it",
+      "record_status": "not_obtained",
+      "gap": "None at specification level; GB200 versus GB300 differences are open",
+      "basis_class": "published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-02-scalable-unit-design",
+      "ide006_requirement_ids": [
+        "req-el-scalable-unit-power",
+        "req-nw-tested-scale"
+      ],
+      "claim": "A scalable unit combines eight racks as the reference architecture proposes",
+      "target_state": "infrastructure_proposed",
+      "record_type_ids": [
+        "rt-reference-architecture"
+      ],
+      "holder": "Vendor",
+      "verification_conditions": [
+        "The tested-scale statement is read as written, with its ambiguity recorded"
+      ],
+      "supported_inference": "How NVIDIA proposes racks be combined and supplied",
+      "prohibited_inference": "That any site built or tested a scalable unit",
+      "record_status": "not_obtained",
+      "gap": "Tested scale and the scalable-unit power remainder are unresolved",
+      "basis_class": "published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-03-redundancy",
+      "ide006_requirement_ids": [
+        "req-el-rack-power"
+      ],
+      "claim": "The rack's power path provides the stated redundancy",
+      "target_state": "subsystem_commissioned",
+      "record_type_ids": [
+        "rt-commissioning-record"
+      ],
+      "holder": "Commissioning agent or site operator",
+      "verification_conditions": [
+        "Redundancy scheme stated",
+        "Failover exercised under load",
+        "Results against criteria"
+      ],
+      "supported_inference": "That the redundancy scheme worked in a dated test",
+      "prohibited_inference": "That redundancy is N+N or any scheme, from the conflicting public figures",
+      "record_status": "not_obtained",
+      "gap": "No commissioning record; the published scheme is itself in conflict",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-04-busbar",
+      "ide006_requirement_ids": [
+        "req-el-rack-power"
+      ],
+      "claim": "The bus bar carries the rack's load on the stated paths",
+      "target_state": "subsystem_commissioned",
+      "record_type_ids": [
+        "rt-commissioning-record"
+      ],
+      "holder": "Commissioning agent or site operator",
+      "verification_conditions": [
+        "Path count and rating stated",
+        "Load test with measured current per path"
+      ],
+      "supported_inference": "That the bus bar carried a stated load in a dated test",
+      "prohibited_inference": "The path count, from arithmetic on the public rating",
+      "record_status": "not_obtained",
+      "gap": "No path count is published and no load test is public",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-05-cooling-interface",
+      "ide006_requirement_ids": [
+        "req-th-liquid-cooling",
+        "req-th-coolant-specification"
+      ],
+      "claim": "The facility meets the rack's coolant interface",
+      "target_state": "subsystem_commissioned",
+      "record_type_ids": [
+        "rt-commissioning-record"
+      ],
+      "holder": "Commissioning agent or site operator",
+      "verification_conditions": [
+        "Coolant specification stated by NVIDIA or the parties",
+        "Loop commissioning results against it"
+      ],
+      "supported_inference": "That the coolant loop met a stated specification in a dated test",
+      "prohibited_inference": "Any coolant requirement for GB200 NVL72, which no public source states",
+      "record_status": "not_obtained",
+      "gap": "No public coolant specification exists to commission against",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-06-firmware-software",
+      "ide006_requirement_ids": [
+        "req-sw-firmware-baseline",
+        "req-sw-management-stack"
+      ],
+      "claim": "Firmware and software match a consistent, stated version set",
+      "target_state": "equipment_installed",
+      "record_type_ids": [
+        "rt-installation-record"
+      ],
+      "holder": "Site operator",
+      "verification_conditions": [
+        "Inventory per rack and tray",
+        "Compared with the SBOM and NVIDIA's required versions"
+      ],
+      "supported_inference": "Which versions were installed on a named rack",
+      "prohibited_inference": "That the versions are compatible, which NVIDIA does not publish as a set",
+      "record_status": "not_obtained",
+      "gap": "No public version set; the firmware guide was not reviewed",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-07-site-electrical-capacity",
+      "ide006_requirement_ids": [
+        "req-el-site-capacity"
+      ],
+      "claim": "The site has contracted and energised enough electrical capacity",
+      "target_state": "capability_contracted",
+      "record_type_ids": [
+        "rt-contract",
+        "rt-site-design"
+      ],
+      "holder": "Utility and site operator",
+      "verification_conditions": [
+        "Utility agreement for the named site",
+        "Single-line diagram",
+        "Energisation results for the circuits serving the racks"
+      ],
+      "supported_inference": "That capacity was contracted for a named site",
+      "prohibited_inference": "That contracted capacity was energised or is sufficient",
+      "record_status": "not_obtained",
+      "gap": "No site record is public",
+      "basis_class": "project_defined",
+      "stage_note": "Workflow C places this under 'procured'; a utility capacity record is a site commitment, which the nine states record as capability contracted"
+    },
+    {
+      "requirement_id": "rc-08-procurement-delivery",
+      "ide006_requirement_ids": [
+        "req-ch-rack-configuration"
+      ],
+      "claim": "The configuration was delivered to a named site",
+      "target_state": "equipment_procured",
+      "record_type_ids": [
+        "rt-purchase-order",
+        "rt-delivery-record"
+      ],
+      "holder": "Supplier and site operator",
+      "verification_conditions": [
+        "Delivery record with serial numbers matching the configuration"
+      ],
+      "supported_inference": "That named equipment reached a named site",
+      "prohibited_inference": "That it was installed",
+      "record_status": "not_obtained",
+      "gap": "No delivery record is public",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-09-installation",
+      "ide006_requirement_ids": [
+        "req-ch-rack-configuration"
+      ],
+      "claim": "Racks are installed and connected at a named site",
+      "target_state": "equipment_installed",
+      "record_type_ids": [
+        "rt-installation-record"
+      ],
+      "holder": "Installer or site operator",
+      "verification_conditions": [
+        "Placement, power, coolant and network connections recorded",
+        "Every rack and connection covered"
+      ],
+      "supported_inference": "That named racks were installed",
+      "prohibited_inference": "That any subsystem was energised or tested",
+      "record_status": "not_obtained",
+      "gap": "No installation record is public",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-10-network-integration",
+      "ide006_requirement_ids": [
+        "req-nw-nvlink-bring-up",
+        "req-nw-north-south"
+      ],
+      "claim": "The NVLink domain and north-south network are brought up",
+      "target_state": "subsystem_commissioned",
+      "record_type_ids": [
+        "rt-commissioning-record"
+      ],
+      "holder": "Commissioning agent or site operator",
+      "verification_conditions": [
+        "Bring-up log showing the NVLink domain configured before compute trays",
+        "North-south switch configuration records"
+      ],
+      "supported_inference": "That the network subsystems were brought up on a dated occasion",
+      "prohibited_inference": "That the networks work together with compute under load",
+      "record_status": "not_obtained",
+      "gap": "No bring-up log is public",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-11-commissioning",
+      "ide006_requirement_ids": [
+        "req-sw-validation-results"
+      ],
+      "claim": "Subsystems passed commissioning and validation tests",
+      "target_state": "subsystem_commissioned",
+      "record_type_ids": [
+        "rt-commissioning-record"
+      ],
+      "holder": "Commissioning agent or site operator",
+      "verification_conditions": [
+        "Method, thresholds and results for each test",
+        "Dated, for the named configuration"
+      ],
+      "supported_inference": "That named subsystems passed stated tests",
+      "prohibited_inference": "That the configuration as a whole was accepted",
+      "record_status": "not_obtained",
+      "gap": "No validation output is public; thresholds are not published",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-12-acceptance",
+      "ide006_requirement_ids": [
+        "req-fo-handover"
+      ],
+      "claim": "The installed configuration was accepted against agreed criteria",
+      "target_state": "integrated_configuration_verified",
+      "record_type_ids": [
+        "rt-integrated-test-record",
+        "rt-acceptance-criteria",
+        "rt-acceptance-record"
+      ],
+      "holder": "Operator and customer",
+      "verification_conditions": [
+        "Criteria agreed before testing",
+        "Integrated test results",
+        "Signed by parties able to accept"
+      ],
+      "supported_inference": "That the parties accepted the configuration against stated criteria",
+      "prohibited_inference": "That it met any public criterion, since none is published",
+      "record_status": "not_obtained",
+      "gap": "No acceptance record or criteria are public",
+      "basis_class": "project_defined",
+      "stage_note": "Workflow C places acceptance under 'commissioned'; acceptance presupposes an integrated test, so its earliest supportable state is integrated configuration verified"
+    },
+    {
+      "requirement_id": "rc-13-operational-monitoring",
+      "ide006_requirement_ids": [
+        "req-fo-leak-response"
+      ],
+      "claim": "The site monitored the configuration in operation over a stated period",
+      "target_state": "operational_performance_observed",
+      "record_type_ids": [
+        "rt-monitoring-record"
+      ],
+      "holder": "Site operator",
+      "verification_conditions": [
+        "Observation period stated",
+        "Leak, power and thermal events recorded with the response"
+      ],
+      "supported_inference": "How the configuration behaved over the stated period",
+      "prohibited_inference": "Behaviour outside that period or configuration",
+      "record_status": "not_obtained",
+      "gap": "No monitoring record is public; the building-management interface is not published",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-14-workload-performance",
+      "ide006_requirement_ids": [
+        "req-sw-validation-results"
+      ],
+      "claim": "The configuration delivered stated workload performance",
+      "target_state": "operational_performance_observed",
+      "record_type_ids": [
+        "rt-workload-measurement"
+      ],
+      "holder": "Site operator or independent tester",
+      "verification_conditions": [
+        "Workload, method, software versions and conditions stated",
+        "Repeatable by another party"
+      ],
+      "supported_inference": "Measured performance for the stated workload and conditions",
+      "prohibited_inference": "Peak or vendor figures as delivered performance",
+      "record_status": "not_obtained",
+      "gap": "No measurement is public",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    },
+    {
+      "requirement_id": "rc-15-access-regulatory",
+      "ide006_requirement_ids": [
+        "req-ac-export-controls"
+      ],
+      "claim": "The parties may receive and use the configuration at the site",
+      "target_state": "access",
+      "record_type_ids": [
+        "rt-rule-text",
+        "rt-transaction-determination"
+      ],
+      "holder": "Exporter and licensing authority",
+      "verification_conditions": [
+        "Determination for the named items, parties, destination and end use, under the rules in force"
+      ],
+      "supported_inference": "How a named transaction is treated, once determined",
+      "prohibited_inference": "Any determination from rule text alone",
+      "record_status": "not_obtained",
+      "gap": "Only two current eCFR sections and a 2024 announcement were reviewed; no determination exists",
+      "basis_class": "derived_from_published",
+      "stage_note": null
+    }
+  ],
+  "findings": [
+    {
+      "text": "No registered source supports a site-record claim, so every site-level state (contracted through operational observation) is not established from the reviewed public record for any GB200 NVL72 deployment.",
+      "basis": [
+        "u-d-site-records",
+        "d-an-design-vs-deployment"
+      ]
+    },
+    {
+      "text": "The highest state any reviewed public source supports is infrastructure proposed, from NVIDIA's reference architecture. Under the record model, product documents and procedures reach product specification documented only; applied to the IDE-006 dossier, this flags one entry (req-nw-north-south) whose recorded state exceeds what its cited procedure can support, for editorial review.",
+      "basis": [
+        "d-ra-tested-scope",
+        "d-def-capability-versus-readiness",
+        "d-ns-network-prereq"
+      ]
+    },
+    {
+      "text": "Acceptance cannot be judged from public material even if site records were obtained: the published checklist names items without thresholds, so acceptance rests on criteria only the parties hold.",
+      "basis": [
+        "u-d-acceptance-criteria",
+        "d-an-checklist-not-record"
+      ]
+    },
+    {
+      "text": "NVLink bring-up is the point where four domains meet: it needs power and coolant in place, a consistent firmware baseline, and it precedes cluster validation. A commissioning claim for the network is therefore not separable from electrical, thermal and software evidence.",
+      "basis": [
+        "d-int-bringup-couples-domains",
+        "d-bringup-sequence"
+      ]
+    },
+    {
+      "text": "Two Workflow C requirements sit in stages that differ from the record they need: site electrical capacity (rc-07) is a contracted commitment rather than a procurement, and acceptance (rc-12) presupposes an integrated test rather than subsystem commissioning.",
+      "basis": [
+        "d-def-evidence-states"
+      ]
+    }
+  ],
+  "review_questions": [
+    {
+      "id": "rq-power-acceptance",
+      "question": "What load and failover tests should a commissioning record for a GB200 NVL72 rack power path contain to show the stated redundancy?",
+      "why_it_matters": "Redundancy figures conflict in public sources, so only a test record can show what a site has.",
+      "domain_id": "electrical",
+      "materials": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "nvidia-dgx-superpod-gb200-ra-2025"
+      ],
+      "would_settle": "A test outline that a commissioning record can be checked against"
+    },
+    {
+      "id": "rq-cooling-commissioning",
+      "question": "Without a published coolant specification, what must a liquid-loop commissioning record state for it to show the rack's cooling interface was met?",
+      "why_it_matters": "The thermal domain has no public criterion to commission against.",
+      "domain_id": "thermal",
+      "materials": [
+        "nvidia-dgx-gb-rack-user-guide-2026",
+        "ocp-liquid-to-liquid-cdu-test-methodology-2024"
+      ],
+      "would_settle": "A minimum set of loop parameters and test conditions"
+    },
+    {
+      "id": "rq-bring-up-evidence",
+      "question": "Which entries in an NVLink bring-up log show that the domain was configured as NVIDIA's sequence requires?",
+      "why_it_matters": "Bring-up is where power, cooling, firmware and network evidence meet.",
+      "domain_id": "network_interconnect",
+      "materials": [
+        "nvidia-mission-control-rack-setup-guide-2026"
+      ],
+      "would_settle": "The log fields a reviewer should look for"
+    },
+    {
+      "id": "rq-version-consistency",
+      "question": "How should a reviewer judge whether a rack's firmware and software inventory is a consistent set when NVIDIA does not publish one?",
+      "why_it_matters": "A version inventory shows what is installed, not whether it is compatible.",
+      "domain_id": "software",
+      "materials": [
+        "nvidia-mission-control-gb200-admin-guide-2025",
+        "nvidia-mission-control-rack-setup-guide-2026"
+      ],
+      "would_settle": "A method for checking consistency against NVIDIA's own documents"
+    },
+    {
+      "id": "rq-observation-period",
+      "question": "What observation period and measurements would make an operational monitoring record for an AI rack meaningful?",
+      "why_it_matters": "Operational observation is the last state and the one most often claimed without records.",
+      "domain_id": "facility_operations",
+      "materials": [
+        "nvidia-mission-control-gb200-admin-guide-2025"
+      ],
+      "would_settle": "A minimum period and measurement set, with the reasoning"
+    }
+  ],
+  "applications": [
+    "Listing, before any claim about a named installation, which records must be requested and from whom",
+    "Checking whether a document offered as evidence can support the state claimed for it, or is a category error",
+    "Separating what a vendor documents from what a site has done, domain by domain",
+    "Identifying which domain's evidence a network or acceptance claim depends on",
+    "Keeping access and compliance questions apart from technical deployment evidence"
+  ],
+  "public_reference_decision": {
+    "change_made": false,
+    "reason": "/ai-chip-infrastructure/ already publishes the nine evidence states with the record each needs, the seven-domain matrix and the GB200 NVL72 gaps. The typed record model here is unreviewed and largely refines that ladder, so it stays a research candidate until reviewed."
+  }
+}
