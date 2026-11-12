@@ -697,3 +697,28 @@ A shared unit is not a shared metric. The earlier verdict let a reader conclude 
 
 - The other seven pathway B comparisons, pathways A and C, release 004, the IDE-009 record and the Atlas (zero relationships) are unchanged.
 - The correction is bounded analysis, AI-assisted and not scientifically reviewed.
+
+## ADR-022: Workflow C Documentary Preflight and the North-South State Correction
+
+- **Date:** 2026-11-12
+- **Status:** Proposed (awaiting owner and scientific review)
+
+### Decision
+
+1. **The IDE-014 record model is exposed as a documentary preflight inside Workflow C on `/research-workbench/`.** There is no new route, no new taxonomy and no second workbench. Per requirement, it shows the record types, required attributes, ceilings, category errors and dependencies, all read from the IDE-014 model. The local workbench script adds present, missing and unknown selections, a gap explanation, and a JSON, CSV or print packet. The packet is titled "Documentary Preflight — Not an Evidence Verification or Readiness Assessment".
+2. **Publication follows the ADR-020 rule for research candidates.** The panel states "Scientific review pending", the record model's compilation date and its AI-assisted status, and claims no review. The IDE-014 dossier stays a research candidate outside the Pages artifact. Its content appears only as labelled preparation guidance, not as reference statements, so IDE-014's public-reference decision stands.
+3. **The script never computes an evidence state.** It contains no state name and copies ceilings from the page. Every packet reports that no state is established. A record with every attribute present is described only as ready for substantive human examination.
+4. **`req-nw-north-south` is corrected from infrastructure proposed to product specification documented.** The only cited passage, rechecked on 2026-11-12, is an installation-order instruction. The reviewed introduction page adds switch models and port tables but proposes no design. Every other documented procedure in the dossier is at product specification documented.
+   - The correction changes the IDE-006 dossier state and one row on `/ai-chip-infrastructure/`, with a dated correction note there.
+   - The IDE-014 consistency entry keeps the flag as recorded and gains a `resolution` that names the previous and corrected states, the evidence rechecked, the remaining uncertainty and the public text change. The IDE-014 validator accepts it only if all of these match exactly.
+   - Evidence Release 006, its document and the reconciliation records are unchanged.
+
+### Rationale
+
+Researchers need to know what a document must contain before anyone can examine it. Giving that check the form of a tool, rather than another document, makes the record model useful without turning user reports into findings. The north-south state was the one inconsistency the model found. Correcting it in place, with the original flag preserved, is the smallest defensible change.
+
+### Consequences
+
+- The guide's later pages, including its planning and design section, remain unreviewed. If cited, they could support a reference-design classification and infrastructure proposed.
+- `DEPLOYMENT_EVIDENCE_RELEASE_006.md` still describes the dossier as it was released, with three requirements at infrastructure proposed. It is a historical record.
+- The Atlas has zero relationships. No review, reviewer or approval is recorded.

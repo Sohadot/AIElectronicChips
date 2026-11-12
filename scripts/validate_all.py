@@ -178,6 +178,7 @@ def main() -> None:
         "validate_hbm4_dossier.py",
         "validate_bandwidth_dossier.py",
         "validate_rack_deployment_dossier.py",
+        "validate_deployment_preflight.py",
         "validate_strategic_offerings.py",
         "validate_compute_sovereignty_standard.py",
     ]

@@ -21,6 +21,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = ROOT / "data" / "industrial-evidence-requests.json"
 PAGE = ROOT / "research-workbench" / "index.html"
+PREFLIGHT = ROOT / "data" / "deployment-evidence-preflight.json"
+RECORD_MODEL = ROOT / "data" / "research" / "institutional" / "rack-deployment-verification-dossier-014.json"
+IDE006_DOSSIER = ROOT / "data" / "research" / "dossiers" / "gb200-nvl72-reference-demo.json"
 START, END = "<!-- research-workbench:start -->", "<!-- research-workbench:end -->"
 
 LAYER_NAME = {"design": "Design", "fabrication": "Fabrication", "packaging": "Packaging", "memory": "Memory",
@@ -54,7 +57,178 @@ def load():
         for u in r["unresolved"]:
             unresolved[u["id"]] = u
     conflicts = {i["id"]: i for i in json.loads((ROOT / "data" / "evidence-conflicts.json").read_text(encoding="utf-8"))["issues"]}
-    return model, registry, findings, unresolved, conflicts
+    preflight = {"config": json.loads(PREFLIGHT.read_text(encoding="utf-8")),
+                 "model": json.loads(RECORD_MODEL.read_text(encoding="utf-8")),
+                 "ide006": json.loads(IDE006_DOSSIER.read_text(encoding="utf-8"))}
+    return model, registry, findings, unresolved, conflicts, preflight
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Documentary preflight for Workflow C (IDE-015). Everything below is read from the IDE-014 record model, the IDE-006
+# dossier and data/deployment-evidence-preflight.json, and rendered as plain HTML. The local script only adds
+# present / missing / unknown selections, the gap explanation, export and print; it never computes an evidence state.
+# ---------------------------------------------------------------------------------------------------------------
+STATES = ["product_specification_documented", "infrastructure_proposed", "capability_contracted", "equipment_procured",
+          "equipment_installed", "subsystem_commissioned", "integrated_configuration_verified", "operational_performance_observed"]
+BASIS_CLASS = {"published": "follows NVIDIA's published procedure", "derived_from_published": "derived from published sources",
+               "project_defined": "project-defined, pending engineering review"}
+
+
+def state_label(s: str | None) -> str:
+    return s.replace("_", " ").capitalize() if s else ""
+
+
+def attr_label(a: str) -> str:
+    return {"dated": "Date", "period": "Observation period"}.get(a, state_label(a))
+
+
+def lower_first(s: str) -> str:
+    return s[:1].lower() + s[1:]
+
+
+def preflight_rows(pf):
+    """Per Workflow C requirement: the IDE-014 matrix row with its record types, substitutes, category errors and dependencies."""
+    from render_rack_deployment_dossier import DOMAIN_LABEL
+    d, ide006 = pf["model"], pf["ide006"]
+    types = {t["id"]: t for t in d["record_types"]}
+    reqs = {q["id"]: q for q in ide006["requirements"]}
+    domain_of = {rc: dm["id"] for dm in d["domains"] for rc in dm["workflow_c_ids"]}
+    covers: dict[str, list[str]] = {}
+    for m in d["matrix"]:
+        for q in m["ide006_requirement_ids"]:
+            covers.setdefault(q, []).append(m["requirement_id"])
+    rank = {s: i for i, s in enumerate(STATES)}
+    rows = []
+    for m in d["matrix"]:
+        listed = [types[x] for x in m["record_type_ids"]]
+        target = m["target_state"]
+        access = target == "access"
+        substitutes = [] if access else [t for t in d["record_types"] if t["dimension"] == "technical" and not t["site_specific"]
+                                         and t["id"] not in m["record_type_ids"] and rank[t["state_ceiling"]] < rank[target]]
+        errors = [ce for c in d["chain"] if set(c["record_type_ids"]) & set(m["record_type_ids"]) for ce in c["category_errors"]]
+        own = set(m["ide006_requirement_ids"])
+        deps = []
+        for edge in d["dependencies"]:
+            if edge["dependent"] in own and edge["prerequisite"] not in own:
+                other, direction = edge["prerequisite"], "upstream"
+            elif edge["prerequisite"] in own and edge["dependent"] not in own:
+                other, direction = edge["dependent"], "downstream"
+            else:
+                continue
+            deps.append({"direction": direction, "edge": edge, "other": reqs[other], "rows": [r for r in covers.get(other, []) if r != m["requirement_id"]]})
+        rows.append({"m": m, "records": listed, "access": access, "substitutes": substitutes, "errors": errors, "deps": deps,
+                     "domain": DOMAIN_LABEL[domain_of[m["requirement_id"]]], "rank": rank})
+    return rows
+
+
+def preflight_block(model, pf) -> list[str]:
+    cfg, d = pf["config"], pf["model"]
+    packet = cfg["packet"]
+    attrs = d["attributes"]
+    titles = {r["id"]: r["title"] for w in model["workflows"] for r in w["requirements"]}
+    p = "workflow-rack-deployment-preflight"
+    out = [f'<section class="wb-preflight" id="{p}" aria-labelledby="{p}-title" data-format="{e(packet["format"])}" '
+           f'data-format-version="{e(packet["format_version"])}" data-record-model="{e(cfg["record_model"]["dossier_id"])}" '
+           f'data-record-model-file="{e(cfg["record_model"]["file"])}" data-record-model-compiled="{e(cfg["record_model"]["compiled_at"])}" '
+           f'data-states-release="{e(cfg["evidence_states_release"])}">']
+    out.append(f'<h3 id="{p}-title">Documentary preflight for a Workflow C requirement</h3>')
+    out.append(f'<div class="framing-note pf-label"><strong class="pf-packet-label">{e(packet["label"])}</strong>'
+               f'<span><span class="pf-disclaimer">{e(packet["disclaimer"])}</span> <span class="pf-research-status">{e(packet["research_status"])}</span> '
+               f'Record model compiled: {e(cfg["record_model"]["compiled_at"])} (IDE-014).</span></div>')
+    out.append('<p class="detail">Choose one requirement. The preflight names the record that should exist and who holds it, the attributes '
+               'that record must carry, and the highest evidence state that kind of record could support. Mark the record and each attribute as '
+               'you find it in the document you hold. The preflight then lists what is missing, why it matters, what to request next, and what '
+               'even a complete record would not establish. Definitions: <a href="/data/deployment-evidence-preflight.json">'
+               'deployment-evidence-preflight.json</a>.</p>')
+    out.append(f'<p class="detail pf-boundary">{e(cfg["boundary"])}</p>')
+    out.append('<dl class="wb-definitions pf-status-defs" aria-label="Preflight selections">')
+    for k, label in cfg["attribute_statuses"].items():
+        out.append(f'<dt data-status="{k}" data-document-label="{e(cfg["document_statuses"][k])}">{e(label)}</dt>'
+                   f'<dd>{e(cfg["status_definitions"][k])}</dd>')
+    out.append("</dl>")
+    out.append('<div class="pf-statements" hidden>' + "".join(
+        f'<p data-key="{k}">{e(packet[k])}</p>' for k in ("no_state_statement", "completeness_boundary", "dependency_rule", "access_rule")) + "</div>")
+    out.append('<details class="evidence-trace pf-guide"><summary>Why each attribute matters</summary><dl>')
+    for a, desc in attrs.items():
+        g = cfg["attribute_guidance"][a]
+        out.append(f'<dt data-attr="{a}">{e(attr_label(a))}</dt><dd data-attr="{a}"><span class="pf-desc">{e(desc)}.</span> '
+                   f'<span class="pf-sig">{e(g["significance"])}</span> <span class="pf-ask" hidden>{e(g["request"])}</span></dd>')
+    out.append("</dl></details>")
+    out.append('<details class="evidence-trace pf-boundaries"><summary>Evidence-state boundaries that always apply</summary><ul>')
+    for b in cfg["boundaries"]:
+        out.append(f'<li data-boundary="{b["id"]}">{e(b["statement"])} <span class="muted">({", ".join(f"<code>{r}</code>" for r in b["refs"])})</span></li>')
+    out.append("</ul></details>")
+    out.append('<div class="pf-picker" hidden></div>')
+    out.append('<div class="pf-toolbar" role="group" aria-label="Documentary preflight actions" hidden></div>')
+    for row in preflight_rows(pf):
+        m = row["m"]
+        rid = m["requirement_id"]
+        sid = f"pf-{rid}"
+        out.append(f'<section class="pf-req" id="{sid}" data-requirement="{rid}" data-target-state="{m["target_state"]}" aria-labelledby="{sid}-title">')
+        out.append(f'<h4 id="{sid}-title"><code>{rid[:5]}</code> <span class="pf-title">{e(titles[rid])}</span></h4>')
+        out.append('<dl class="pf-summary">')
+        out.append(f'<dt>Claim under examination</dt><dd class="pf-claim">{e(m["claim"])}</dd>')
+        out.append(f'<dt>Domain</dt><dd class="pf-domain">{e(row["domain"])}</dd>')
+        if row["access"]:
+            out.append(f'<dt>Claim\'s target</dt><dd class="pf-target">Access, which is not a deployment state. {e(packet["access_rule"])}</dd>')
+        else:
+            out.append(f'<dt>Claim\'s target state</dt><dd class="pf-target">{e(state_label(m["target_state"]))}</dd>')
+        if m["stage_note"]:
+            out.append(f'<dt>Stage note</dt><dd class="pf-stage-note">{e(m["stage_note"])}</dd>')
+        out.append(f'<dt>Record holder</dt><dd class="pf-holder">{e(m["holder"])}</dd>')
+        out.append('<dt>Verification conditions</dt><dd><ul class="pf-conditions">' + "".join(f"<li>{e(c)}</li>" for c in m["verification_conditions"]) + "</ul></dd>")
+        out.append(f'<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, '
+                   f'sufficient record: {e(lower_first(m["supported_inference"]))}.</dd>')
+        out.append(f'<dt>Prohibited inference</dt><dd class="pf-prohibited">{e(m["prohibited_inference"])}.</dd>')
+        out.append(f'<dt>Public record</dt><dd class="pf-gap">{e(m["gap"])}. Record status in the IDE-014 model: not obtained.</dd>')
+        out.append("</dl>")
+        for t in row["records"]:
+            if row["access"]:
+                ceiling = 'None: an access record supports no deployment state'
+                note = ""
+                bound = ""
+            else:
+                ceiling = state_label(t["state_ceiling"])
+                bound = " (an upper bound, not a state reached)"
+                note = ("" if row["rank"][t["state_ceiling"]] >= row["rank"][m["target_state"]] else
+                        f' On its own this record type cannot support the claim\'s target state ({e(state_label(m["target_state"]))}).')
+            out.append(f'<div class="pf-record" data-record="{t["id"]}" data-ceiling="{t["state_ceiling"] or ""}">')
+            out.append(f'<h5>Required record: <span class="pf-record-label">{e(t["label"])}</span></h5>')
+            out.append(f'<p class="pf-record-meta">Holder: <span class="pf-record-holder">{e(t["holder"])}</span> · Site-specific: '
+                       f'{"yes" if t["site_specific"] else "no"} · Highest state this kind of record could support after human review: '
+                       f'<strong class="pf-ceiling">{ceiling}</strong>{bound}.{note}</p>')
+            out.append(f'<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>{e(t["does_not_establish"])}.</span></p>')
+            out.append('<div class="pf-doc-controls"></div>')
+            out.append(f'<ul class="pf-attrs" aria-label="Attributes this record must carry">')
+            for a in t["required_attributes"]:
+                out.append(f'<li class="pf-attr" data-attr="{a}"><span class="pf-attr-label">{e(attr_label(a))}</span>: '
+                           f'<span class="pf-attr-desc">{e(attrs[a])}</span><div class="pf-attr-controls"></div></li>')
+            out.append("</ul></div>")
+        if row["substitutes"]:
+            out.append('<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul>' + "".join(
+                f'<li data-record="{t["id"]}"><span class="pf-sub-label">{e(t["label"])}</span>: ceiling {e(state_label(t["state_ceiling"]))}; '
+                f'does not establish <span class="pf-sub-dne">{e(t["does_not_establish"][0].lower() + t["does_not_establish"][1:])}</span>.</li>'
+                for t in row["substitutes"]) + "</ul></div>")
+        out.append('<div class="pf-errors"><h5>Category errors to avoid</h5><ul>' + "".join(
+            f'<li data-error="{ce["id"]}"><span class="pf-error-inference">{e(ce["inference"])}</span>: <span class="pf-error-why">{e(ce["why_not"])}</span>.</li>'
+            for ce in row["errors"]) + "</ul></div>")
+        out.append('<div class="pf-deps"><h5>Documentary dependencies</h5>')
+        if row["deps"]:
+            out.append("<ul>")
+            for dep in row["deps"]:
+                o, edge = dep["other"], dep["edge"]
+                where = (", requested under " + ", ".join(f"<code>{r}</code>" for r in dep["rows"])) if dep["rows"] else ", which no Workflow C requirement requests"
+                lead = "Presupposes records for" if dep["direction"] == "upstream" else "Is presupposed by"
+                out.append(f'<li data-direction="{dep["direction"]}" data-ide006="{o["id"]}">{lead} <code>{o["id"]}</code> '
+                           f'({e(o["required_capability"])}){where}. Basis: {BASIS_CLASS[edge["basis_class"]]}.</li>')
+            out.append("</ul>")
+        else:
+            out.append("<p>None recorded in the IDE-014 model.</p>")
+        out.append(f'<p class="pf-dep-rule">{e(packet["dependency_rule"])}</p></div>')
+        out.append('<div class="pf-result" hidden></div>')
+        out.append("</section>")
+    out.append("</section>")
+    return out
 
 
 def items(values) -> str:
@@ -109,7 +283,7 @@ def requirement(r, n, letter, registry, findings, unresolved, conflicts) -> list
     return out
 
 
-def render(model, registry, findings, unresolved, conflicts) -> str:
+def render(model, registry, findings, unresolved, conflicts, preflight) -> str:
     wfs = model["workflows"]
     total = sum(len(w["requirements"]) for w in wfs)
     out = [START]
@@ -155,7 +329,10 @@ def render(model, registry, findings, unresolved, conflicts) -> str:
         out.append(f'<ol class="pathway-steps wb-requirements" aria-label="Workflow {letter} evidence requirements">')
         for k, r in enumerate(w["requirements"], start=1):
             out += requirement(r, k, letter, registry, findings, unresolved, conflicts)
-        out.append("</ol></div></article></section>")
+        out.append("</ol>")
+        if w["id"] == preflight["config"]["workflow_id"]:
+            out += preflight_block(model, preflight)
+        out.append("</div></article></section>")
     out.append(END)
     return "\n".join(out)
 

@@ -77,10 +77,10 @@
       <p class="eyebrow">Research tool · Evidence requests for three research questions</p>
       <h1>Industrial Evidence Request &amp; Research Workbench</h1>
       <p class="lead">The documents a researcher would need to answer three questions about HBM4 integration, accelerator bandwidth and AI rack deployment, and what each would still leave open.</p>
-      <p class="intro">Every requirement is traced to the release findings, registered sources and conflict-register entries behind it. Where reviewed sources are silent, the requirement is marked as this project's recommendation.</p>
+      <p class="intro">Every requirement is traced to the release findings, registered sources and conflict-register entries behind it. Where reviewed sources are silent, the requirement is marked as this project's recommendation. For the rack workflow, a <a href="#workflow-rack-deployment-preflight">documentary preflight</a> shows which record each claim needs, which attributes it must carry and what it could not establish.</p>
       <div class="framing-note"><strong>Not an assessment</strong><span>The workbench prepares evidence requests. It does not state that any product, supplier or site meets a requirement, and it produces no readiness, qualification, compliance or comparative result.</span></div>
-      <noscript><div class="framing-note wb-noscript"><strong>Without JavaScript</strong><span>The full catalog below is readable and printable. Collection statuses, notes and JSON or CSV export need JavaScript; the machine-readable model is available as <a href="/data/industrial-evidence-requests.json">industrial-evidence-requests.json</a>.</span></div></noscript>
-      <p class="intro wb-privacy">Privacy: this website does not submit, save or add to the address the statuses and notes you enter, and reloading the page clears them. Browser spelling and autocorrect are switched off for notes, but other browser, extension or operating-system input features follow your own settings, so avoid entering confidential material.</p>
+      <noscript><div class="framing-note wb-noscript"><strong>Without JavaScript</strong><span>The full catalog below, including the Workflow C documentary preflight, is readable and printable. Collection statuses, notes, preflight selections and JSON or CSV export need JavaScript; the machine-readable model is available as <a href="/data/industrial-evidence-requests.json">industrial-evidence-requests.json</a>.</span></div></noscript>
+      <p class="intro wb-privacy">Privacy: this website does not submit, save or add to the address the statuses, notes and preflight selections you enter, and reloading the page clears them. The preflight asks only whether a document and its attributes are present; it needs no document, identifier or upload. Browser spelling and autocorrect are switched off for notes, but other browser, extension or operating-system input features follow your own settings, so avoid entering confidential material.</p>
     </header>
     <div class="content-shell">
 <!-- research-workbench:start -->
@@ -343,7 +343,8 @@
 </dl></details>
 <div class="wb-controls"></div>
 </li>
-</ol></div></article></section>
+</ol>
+</div></article></section>
 <section class="reference-sections" aria-labelledby="workflow-bandwidth-comparison-title">
 <article class="reference-block wb-workflow" id="workflow-bandwidth-comparison"><div class="block-index">03</div><div>
 <h2 id="workflow-bandwidth-comparison-title">Workflow B: Accelerator bandwidth comparison evidence request</h2>
@@ -583,7 +584,8 @@
 </dl></details>
 <div class="wb-controls"></div>
 </li>
-</ol></div></article></section>
+</ol>
+</div></article></section>
 <section class="reference-sections" aria-labelledby="workflow-rack-deployment-title">
 <article class="reference-block wb-workflow" id="workflow-rack-deployment"><div class="block-index">04</div><div>
 <h2 id="workflow-rack-deployment-title">Workflow C: AI rack deployment evidence request</h2>
@@ -869,7 +871,616 @@
 </dl></details>
 <div class="wb-controls"></div>
 </li>
-</ol></div></article></section>
+</ol>
+<section class="wb-preflight" id="workflow-rack-deployment-preflight" aria-labelledby="workflow-rack-deployment-preflight-title" data-format="aec-deployment-evidence-preflight" data-format-version="1.0.0" data-record-model="aec-dossier-rack-deployment-verification-014" data-record-model-file="data/research/institutional/rack-deployment-verification-dossier-014.json" data-record-model-compiled="2026-11-12" data-states-release="aec-ide-006-deployment-readiness">
+<h3 id="workflow-rack-deployment-preflight-title">Documentary preflight for a Workflow C requirement</h3>
+<div class="framing-note pf-label"><strong class="pf-packet-label">Documentary Preflight — Not an Evidence Verification or Readiness Assessment</strong><span><span class="pf-disclaimer">User-reported presence of documents and attributes this site has not seen. Nothing here has been reviewed, authenticated or examined by this site or by anyone on its behalf. This preflight establishes no evidence state and is not an engineering judgement, a legal determination or an assessment of any site, supplier or transaction.</span> <span class="pf-research-status">Research candidate: the record model (IDE-014) and this preflight are AI-assisted. Scientific review pending.</span> Record model compiled: 2026-11-12 (IDE-014).</span></div>
+<p class="detail">Choose one requirement. The preflight names the record that should exist and who holds it, the attributes that record must carry, and the highest evidence state that kind of record could support. Mark the record and each attribute as you find it in the document you hold. The preflight then lists what is missing, why it matters, what to request next, and what even a complete record would not establish. Definitions: <a href="/data/deployment-evidence-preflight.json">deployment-evidence-preflight.json</a>.</p>
+<p class="detail pf-boundary">A document-review preparation aid: it records only whether you report that a document and its attributes are present, missing or unknown. It sees no document, reviews and authenticates nothing, establishes no evidence state, and is not an engineering judgement, a legal determination or an assessment of any site.</p>
+<dl class="wb-definitions pf-status-defs" aria-label="Preflight selections">
+<dt data-status="not_marked" data-document-label="Not yet marked">Not yet marked</dt><dd>You have not examined this item yet.</dd>
+<dt data-status="present" data-document-label="Record in hand">Present (as you report it)</dt><dd>You report that the document, or the attribute in it, is there. This site has not seen it.</dd>
+<dt data-status="missing" data-document-label="Record not held">Missing</dt><dd>You report that the document is not held, or that it does not contain the attribute.</dd>
+<dt data-status="unknown" data-document-label="Unknown whether held">Unknown</dt><dd>You cannot establish whether the document is held or contains the attribute.</dd>
+</dl>
+<div class="pf-statements" hidden><p data-key="no_state_statement">No evidence state is established by this preflight. A record type&#x27;s ceiling is the highest state it could support after qualified human review of an authentic, sufficient record; it is not a state reached, and your selections never change it.</p><p data-key="completeness_boundary">Every required attribute is marked present, as you report it. The record is ready only for substantive examination by a qualified human reviewer: this page has not seen, reviewed or authenticated it, and it establishes no evidence state.</p><p data-key="dependency_rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p><p data-key="access_rule">Access is a separate dimension. An access record never advances a deployment state, and technical records say nothing about who may receive or use the system.</p></div>
+<details class="evidence-trace pf-guide"><summary>Why each attribute matters</summary><dl>
+<dt data-attr="named_site">Named site</dt><dd data-attr="named_site"><span class="pf-desc">Identifies one site or facility.</span> <span class="pf-sig">Without a named site the record cannot be tied to any facility, so it can support no site-level state.</span> <span class="pf-ask" hidden>names the site or facility it covers</span></dd>
+<dt data-attr="configuration_identity">Configuration identity</dt><dd data-attr="configuration_identity"><span class="pf-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant.</span> <span class="pf-sig">Without the configuration identity the record cannot be matched to the configuration claimed; GB200 and GB300 records must be kept apart.</span> <span class="pf-ask" hidden>identifies the configuration, with serial numbers where physical units are meant</span></dd>
+<dt data-attr="dated">Date</dt><dd data-attr="dated"><span class="pf-desc">Carries the date of the act it records.</span> <span class="pf-sig">Without a date the order of stages cannot be shown: an undated test or delivery cannot be placed before or after installation.</span> <span class="pf-ask" hidden>carries the date of the act it records</span></dd>
+<dt data-attr="issuing_party">Issuing party</dt><dd data-attr="issuing_party"><span class="pf-desc">Names the organisation that issued it.</span> <span class="pf-sig">Without an issuing party no one answers for the record, and its holder cannot be asked to confirm it.</span> <span class="pf-ask" hidden>names the organisation that issued it</span></dd>
+<dt data-attr="signatory_authority">Signatory authority</dt><dd data-attr="signatory_authority"><span class="pf-desc">Signed by a person able to bind the issuing party.</span> <span class="pf-sig">Without a signature by someone able to bind the issuing party, a contract, determination or acceptance is a statement, not a decision.</span> <span class="pf-ask" hidden>is signed by a person able to bind the issuing party, with that authority stated</span></dd>
+<dt data-attr="method">Method</dt><dd data-attr="method"><span class="pf-desc">States the procedure or test method used.</span> <span class="pf-sig">Without the method, results cannot be interpreted or repeated, and a reviewer cannot tell what was exercised.</span> <span class="pf-ask" hidden>states the procedure or test method used</span></dd>
+<dt data-attr="criteria">Criteria</dt><dd data-attr="criteria"><span class="pf-desc">States the pass or acceptance thresholds in advance.</span> <span class="pf-sig">Without criteria stated in advance there is nothing to judge results against; criteria written after the results can be fitted to them.</span> <span class="pf-ask" hidden>states its thresholds, set before the results were known</span></dd>
+<dt data-attr="results">Results</dt><dd data-attr="results"><span class="pf-desc">Records the observed results, not only a pass mark.</span> <span class="pf-sig">A pass mark without observed results cannot be checked; the observed values are what a reviewer examines.</span> <span class="pf-ask" hidden>records the observed results, not only a pass mark</span></dd>
+<dt data-attr="conditions">Conditions</dt><dd data-attr="conditions"><span class="pf-desc">States the operating and environmental conditions of the test.</span> <span class="pf-sig">Results hold only under the conditions they were obtained in; without them a reviewer cannot tell whether a test reflects the configuration in use.</span> <span class="pf-ask" hidden>states the operating and environmental conditions of the test</span></dd>
+<dt data-attr="period">Observation period</dt><dd data-attr="period"><span class="pf-desc">States the observation period.</span> <span class="pf-sig">Operation can be described only over a stated period; without one, an extract says nothing about how long or how consistently the configuration ran.</span> <span class="pf-ask" hidden>states the observation period it covers</span></dd>
+<dt data-attr="completeness">Completeness</dt><dd data-attr="completeness"><span class="pf-desc">Covers every item it claims to cover, with exceptions listed.</span> <span class="pf-sig">Without stated coverage and listed exceptions, a partial record can be read as covering every rack, connection or item.</span> <span class="pf-ask" hidden>states what it covers and lists any exceptions</span></dd>
+</dl></details>
+<details class="evidence-trace pf-boundaries"><summary>Evidence-state boundaries that always apply</summary><ul>
+<li data-boundary="pb-specification-not-procurement">A vendor specification or announcement does not show procurement. <span class="muted">(<code>ce-spec-as-site</code>, <code>ce-announcement-as-procurement</code>, <code>rt-product-specification</code>)</span></li>
+<li data-boundary="pb-order-not-delivery">A purchase order does not show delivery. <span class="muted">(<code>ce-order-as-delivery</code>, <code>rt-purchase-order</code>)</span></li>
+<li data-boundary="pb-delivery-not-installation">A delivery record does not show installation. <span class="muted">(<code>rt-delivery-record</code>)</span></li>
+<li data-boundary="pb-installation-not-commissioning">An installation record does not show commissioning. <span class="muted">(<code>ce-guide-as-installation</code>, <code>rt-installation-record</code>)</span></li>
+<li data-boundary="pb-procedure-not-execution">A commissioning procedure or checklist does not show that it was carried out. <span class="muted">(<code>ce-procedure-as-test</code>, <code>ce-checklist-as-commissioning</code>, <code>rt-documented-procedure</code>, <code>rt-checklist-template</code>)</span></li>
+<li data-boundary="pb-subsystem-not-integrated">A completed subsystem test does not show integrated acceptance. <span class="muted">(<code>ce-subsystem-as-system</code>, <code>rt-commissioning-record</code>)</span></li>
+<li data-boundary="pb-test-not-acceptance">Technical testing does not itself establish formal contractual acceptance, which is a signed decision against criteria agreed before testing. <span class="muted">(<code>ce-test-as-acceptance</code>, <code>ce-undefined-criteria</code>, <code>rt-integrated-test-record</code>, <code>rt-acceptance-record</code>)</span></li>
+<li data-boundary="pb-peak-not-operation">A published peak specification does not show operational performance. <span class="muted">(<code>ce-peak-as-operation</code>, <code>rt-performance-specification</code>)</span></li>
+<li data-boundary="pb-monitoring-description-not-operation">A description of monitoring does not show sustained operation; only monitoring records over a stated period describe operation, and only for that period. <span class="muted">(<code>ce-peak-as-operation</code>, <code>ce-software-as-performance</code>, <code>rt-monitoring-record</code>)</span></li>
+<li data-boundary="pb-rule-not-determination">Regulatory rule text does not establish a determination for a named transaction, and access records never advance a deployment state. <span class="muted">(<code>ce-rule-as-determination</code>, <code>ce-access-as-stage</code>, <code>rt-rule-text</code>, <code>rt-transaction-determination</code>)</span></li>
+</ul></details>
+<div class="pf-picker" hidden></div>
+<div class="pf-toolbar" role="group" aria-label="Documentary preflight actions" hidden></div>
+<section class="pf-req" id="pf-rc-01-hardware-configuration" data-requirement="rc-01-hardware-configuration" data-target-state="product_specification_documented" aria-labelledby="pf-rc-01-hardware-configuration-title">
+<h4 id="pf-rc-01-hardware-configuration-title"><code>rc-01</code> <span class="pf-title">Rack hardware configuration</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The rack configuration is 18 compute trays and 9 NVLink switch trays as NVIDIA describes</dd>
+<dt>Domain</dt><dd class="pf-domain">Compute hardware and configuration</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Product specification documented</dd>
+<dt>Record holder</dt><dd class="pf-holder">Vendor</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Configuration identity matches the GB200 NVL72 description; GB200 and GB300 are kept apart</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: what the product is specified to contain.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That any named rack contains it.</dd>
+<dt>Public record</dt><dd class="pf-gap">None at specification level; GB200 versus GB300 differences are open. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-product-specification" data-ceiling="product_specification_documented">
+<h5>Required record: <span class="pf-record-label">Vendor product specification or user guide</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Vendor</span> · Site-specific: no · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Product specification documented</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That any unit was ordered, delivered, installed or operated anywhere.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-ra-as-tested"><span class="pf-error-inference">Treating a reference architecture as tested at the scale a site builds</span>: <span class="pf-error-why">NVIDIA states tested scale for its own reference design only, and its wording on that scale is itself unresolved</span>.</li><li data-error="ce-spec-as-site"><span class="pf-error-inference">Treating a product specification as describing any site</span>: <span class="pf-error-why">A specification states what a product is; it names no site, configuration instance or date</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<p>None recorded in the IDE-014 model.</p>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-02-scalable-unit-design" data-requirement="rc-02-scalable-unit-design" data-target-state="infrastructure_proposed" aria-labelledby="pf-rc-02-scalable-unit-design-title">
+<h4 id="pf-rc-02-scalable-unit-design-title"><code>rc-02</code> <span class="pf-title">Scalable-unit design</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">A scalable unit combines eight racks as the reference architecture proposes</dd>
+<dt>Domain</dt><dd class="pf-domain">Electrical infrastructure</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Infrastructure proposed</dd>
+<dt>Record holder</dt><dd class="pf-holder">Vendor</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>The tested-scale statement is read as written, with its ambiguity recorded</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: how NVIDIA proposes racks be combined and supplied.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That any site built or tested a scalable unit.</dd>
+<dt>Public record</dt><dd class="pf-gap">Tested scale and the scalable-unit power remainder are unresolved. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-reference-architecture" data-ceiling="infrastructure_proposed">
+<h5>Required record: <span class="pf-record-label">Vendor reference architecture</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Vendor</span> · Site-specific: no · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Infrastructure proposed</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That a site follows the design, or that the design was tested at the proposed scale.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-ra-as-tested"><span class="pf-error-inference">Treating a reference architecture as tested at the scale a site builds</span>: <span class="pf-error-why">NVIDIA states tested scale for its own reference design only, and its wording on that scale is itself unresolved</span>.</li><li data-error="ce-spec-as-site"><span class="pf-error-inference">Treating a product specification as describing any site</span>: <span class="pf-error-why">A specification states what a product is; it names no site, configuration instance or date</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<p>None recorded in the IDE-014 model.</p>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-03-redundancy" data-requirement="rc-03-redundancy" data-target-state="subsystem_commissioned" aria-labelledby="pf-rc-03-redundancy-title">
+<h4 id="pf-rc-03-redundancy-title"><code>rc-03</code> <span class="pf-title">Power redundancy design and verification</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The rack&#x27;s power path provides the stated redundancy</dd>
+<dt>Domain</dt><dd class="pf-domain">Electrical infrastructure</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Subsystem commissioned</dd>
+<dt>Record holder</dt><dd class="pf-holder">Commissioning agent or site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Redundancy scheme stated</li><li>Failover exercised under load</li><li>Results against criteria</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that the redundancy scheme worked in a dated test.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That redundancy is N+N or any scheme, from the conflicting public figures.</dd>
+<dt>Public record</dt><dd class="pf-gap">No commissioning record; the published scheme is itself in conflict. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-commissioning-record" data-ceiling="subsystem_commissioned">
+<h5>Required record: <span class="pf-record-label">Completed commissioning test for one subsystem, with results</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Commissioning agent or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Subsystem commissioned</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That subsystems work together.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-checklist-as-commissioning"><span class="pf-error-inference">Treating a published checklist as completed commissioning</span>: <span class="pf-error-why">Unchecked items record what should be checked, not that anything was</span>.</li><li data-error="ce-procedure-as-test"><span class="pf-error-inference">Treating a test procedure as a passed test</span>: <span class="pf-error-why">A procedure gives steps; a passed test needs results against criteria</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<p>None recorded in the IDE-014 model.</p>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-04-busbar" data-requirement="rc-04-busbar" data-target-state="subsystem_commissioned" aria-labelledby="pf-rc-04-busbar-title">
+<h4 id="pf-rc-04-busbar-title"><code>rc-04</code> <span class="pf-title">Bus bar topology and rating</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The bus bar carries the rack&#x27;s load on the stated paths</dd>
+<dt>Domain</dt><dd class="pf-domain">Electrical infrastructure</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Subsystem commissioned</dd>
+<dt>Record holder</dt><dd class="pf-holder">Commissioning agent or site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Path count and rating stated</li><li>Load test with measured current per path</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that the bus bar carried a stated load in a dated test.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">The path count, from arithmetic on the public rating.</dd>
+<dt>Public record</dt><dd class="pf-gap">No path count is published and no load test is public. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-commissioning-record" data-ceiling="subsystem_commissioned">
+<h5>Required record: <span class="pf-record-label">Completed commissioning test for one subsystem, with results</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Commissioning agent or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Subsystem commissioned</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That subsystems work together.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-checklist-as-commissioning"><span class="pf-error-inference">Treating a published checklist as completed commissioning</span>: <span class="pf-error-why">Unchecked items record what should be checked, not that anything was</span>.</li><li data-error="ce-procedure-as-test"><span class="pf-error-inference">Treating a test procedure as a passed test</span>: <span class="pf-error-why">A procedure gives steps; a passed test needs results against criteria</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<p>None recorded in the IDE-014 model.</p>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-05-cooling-interface" data-requirement="rc-05-cooling-interface" data-target-state="subsystem_commissioned" aria-labelledby="pf-rc-05-cooling-interface-title">
+<h4 id="pf-rc-05-cooling-interface-title"><code>rc-05</code> <span class="pf-title">Cooling and facility interface specification</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The facility meets the rack&#x27;s coolant interface</dd>
+<dt>Domain</dt><dd class="pf-domain">Thermal and liquid cooling</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Subsystem commissioned</dd>
+<dt>Record holder</dt><dd class="pf-holder">Commissioning agent or site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Coolant specification stated by NVIDIA or the parties</li><li>Loop commissioning results against it</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that the coolant loop met a stated specification in a dated test.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">Any coolant requirement for GB200 NVL72, which no public source states.</dd>
+<dt>Public record</dt><dd class="pf-gap">No public coolant specification exists to commission against. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-commissioning-record" data-ceiling="subsystem_commissioned">
+<h5>Required record: <span class="pf-record-label">Completed commissioning test for one subsystem, with results</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Commissioning agent or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Subsystem commissioned</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That subsystems work together.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-checklist-as-commissioning"><span class="pf-error-inference">Treating a published checklist as completed commissioning</span>: <span class="pf-error-why">Unchecked items record what should be checked, not that anything was</span>.</li><li data-error="ce-procedure-as-test"><span class="pf-error-inference">Treating a test procedure as a passed test</span>: <span class="pf-error-why">A procedure gives steps; a passed test needs results against criteria</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="downstream" data-ide006="req-fo-leak-response">Is presupposed by <code>req-fo-leak-response</code> (Leak detection with events collated in cluster management and coordinated with building management), requested under <code>rc-13-operational-monitoring</code>. Basis: derived from published sources.</li>
+<li data-direction="downstream" data-ide006="req-nw-nvlink-bring-up">Is presupposed by <code>req-nw-nvlink-bring-up</code> (NVLink domain configured before compute trays are powered on), requested under <code>rc-10-network-integration</code>. Basis: project-defined, pending engineering review.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-06-firmware-software" data-requirement="rc-06-firmware-software" data-target-state="equipment_installed" aria-labelledby="pf-rc-06-firmware-software-title">
+<h4 id="pf-rc-06-firmware-software-title"><code>rc-06</code> <span class="pf-title">Firmware and software baseline</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">Firmware and software match a consistent, stated version set</dd>
+<dt>Domain</dt><dd class="pf-domain">Firmware and software</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Equipment installed</dd>
+<dt>Record holder</dt><dd class="pf-holder">Site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Inventory per rack and tray</li><li>Compared with the SBOM and NVIDIA&#x27;s required versions</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: which versions were installed on a named rack.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That the versions are compatible, which NVIDIA does not publish as a set.</dd>
+<dt>Public record</dt><dd class="pf-gap">No public version set; the firmware guide was not reviewed. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-installation-record" data-ceiling="equipment_installed">
+<h5>Required record: <span class="pf-record-label">Installation record: rack placement, power, coolant and network connection</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Installer or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Equipment installed</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That any subsystem was energised or passed a test.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="completeness"><span class="pf-attr-label">Completeness</span>: <span class="pf-attr-desc">Covers every item it claims to cover, with exceptions listed</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-guide-as-installation"><span class="pf-error-inference">Treating a deployment guide as an installation record</span>: <span class="pf-error-why">A guide states what an engineer should do; it records nothing done</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="downstream" data-ide006="req-nw-nvlink-bring-up">Is presupposed by <code>req-nw-nvlink-bring-up</code> (NVLink domain configured before compute trays are powered on), requested under <code>rc-10-network-integration</code>. Basis: follows NVIDIA's published procedure.</li>
+<li data-direction="upstream" data-ide006="req-fo-offline-artifacts">Presupposes records for <code>req-fo-offline-artifacts</code> (Software, firmware and licences prepared for an air-gapped site), which no Workflow C requirement requests. Basis: derived from published sources.</li>
+<li data-direction="upstream" data-ide006="req-nw-north-south">Presupposes records for <code>req-nw-north-south</code> (North-south network switches physically installed before deployment), requested under <code>rc-10-network-integration</code>. Basis: derived from published sources.</li>
+<li data-direction="downstream" data-ide006="req-fo-leak-response">Is presupposed by <code>req-fo-leak-response</code> (Leak detection with events collated in cluster management and coordinated with building management), requested under <code>rc-13-operational-monitoring</code>. Basis: derived from published sources.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-07-site-electrical-capacity" data-requirement="rc-07-site-electrical-capacity" data-target-state="capability_contracted" aria-labelledby="pf-rc-07-site-electrical-capacity-title">
+<h4 id="pf-rc-07-site-electrical-capacity-title"><code>rc-07</code> <span class="pf-title">Site electrical capacity</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The site has contracted and energised enough electrical capacity</dd>
+<dt>Domain</dt><dd class="pf-domain">Electrical infrastructure</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Capability contracted</dd>
+<dt>Stage note</dt><dd class="pf-stage-note">Workflow C places this under &#x27;procured&#x27;; a utility capacity record is a site commitment, which the nine states record as capability contracted</dd>
+<dt>Record holder</dt><dd class="pf-holder">Utility and site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Utility agreement for the named site</li><li>Single-line diagram</li><li>Energisation results for the circuits serving the racks</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that capacity was contracted for a named site.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That contracted capacity was energised or is sufficient.</dd>
+<dt>Public record</dt><dd class="pf-gap">No site record is public. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-contract" data-ceiling="capability_contracted">
+<h5>Required record: <span class="pf-record-label">Contract, service or utility supply agreement for a named site</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Contracting parties</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Capability contracted</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That equipment was delivered or capacity was energised.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="signatory_authority"><span class="pf-attr-label">Signatory authority</span>: <span class="pf-attr-desc">Signed by a person able to bind the issuing party</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-record" data-record="rt-site-design" data-ceiling="infrastructure_proposed">
+<h5>Required record: <span class="pf-record-label">Site design for a named facility (single-line diagram, mechanical plan)</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Site operator or designer</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Infrastructure proposed</strong> (an upper bound, not a state reached). On its own this record type cannot support the claim's target state (Capability contracted).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the design was built or energised.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-ra-as-tested"><span class="pf-error-inference">Treating a reference architecture as tested at the scale a site builds</span>: <span class="pf-error-why">NVIDIA states tested scale for its own reference design only, and its wording on that scale is itself unresolved</span>.</li><li data-error="ce-spec-as-site"><span class="pf-error-inference">Treating a product specification as describing any site</span>: <span class="pf-error-why">A specification states what a product is; it names no site, configuration instance or date</span>.</li><li data-error="ce-announcement-as-procurement"><span class="pf-error-inference">Treating a product or customer announcement as procurement</span>: <span class="pf-error-why">An announcement names no delivered equipment, serial numbers or site</span>.</li><li data-error="ce-order-as-delivery"><span class="pf-error-inference">Treating a purchase order as delivery or installation</span>: <span class="pf-error-why">An order records intent to buy; delivery and installation are separate records</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="downstream" data-ide006="req-nw-nvlink-bring-up">Is presupposed by <code>req-nw-nvlink-bring-up</code> (NVLink domain configured before compute trays are powered on), requested under <code>rc-10-network-integration</code>. Basis: project-defined, pending engineering review.</li>
+<li data-direction="downstream" data-ide006="req-fo-handover">Is presupposed by <code>req-fo-handover</code> (Acceptance and handover of the system for production use), requested under <code>rc-12-acceptance</code>. Basis: project-defined, pending engineering review.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-08-procurement-delivery" data-requirement="rc-08-procurement-delivery" data-target-state="equipment_procured" aria-labelledby="pf-rc-08-procurement-delivery-title">
+<h4 id="pf-rc-08-procurement-delivery-title"><code>rc-08</code> <span class="pf-title">Procurement and delivery records</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The configuration was delivered to a named site</dd>
+<dt>Domain</dt><dd class="pf-domain">Compute hardware and configuration</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Equipment procured</dd>
+<dt>Record holder</dt><dd class="pf-holder">Supplier and site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Delivery record with serial numbers matching the configuration</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that named equipment reached a named site.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That it was installed.</dd>
+<dt>Public record</dt><dd class="pf-gap">No delivery record is public. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-purchase-order" data-ceiling="capability_contracted">
+<h5>Required record: <span class="pf-record-label">Purchase order for named equipment</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Buyer and supplier</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Capability contracted</strong> (an upper bound, not a state reached). On its own this record type cannot support the claim's target state (Equipment procured).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the equipment was delivered or installed.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-record" data-record="rt-delivery-record" data-ceiling="equipment_procured">
+<h5>Required record: <span class="pf-record-label">Delivery or receiving record with serial numbers</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Supplier and site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Equipment procured</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the equipment was installed or connected.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-announcement-as-procurement"><span class="pf-error-inference">Treating a product or customer announcement as procurement</span>: <span class="pf-error-why">An announcement names no delivered equipment, serial numbers or site</span>.</li><li data-error="ce-order-as-delivery"><span class="pf-error-inference">Treating a purchase order as delivery or installation</span>: <span class="pf-error-why">An order records intent to buy; delivery and installation are separate records</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<p>None recorded in the IDE-014 model.</p>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-09-installation" data-requirement="rc-09-installation" data-target-state="equipment_installed" aria-labelledby="pf-rc-09-installation-title">
+<h4 id="pf-rc-09-installation-title"><code>rc-09</code> <span class="pf-title">Installation records</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">Racks are installed and connected at a named site</dd>
+<dt>Domain</dt><dd class="pf-domain">Compute hardware and configuration</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Equipment installed</dd>
+<dt>Record holder</dt><dd class="pf-holder">Installer or site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Placement, power, coolant and network connections recorded</li><li>Every rack and connection covered</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that named racks were installed.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That any subsystem was energised or tested.</dd>
+<dt>Public record</dt><dd class="pf-gap">No installation record is public. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-installation-record" data-ceiling="equipment_installed">
+<h5>Required record: <span class="pf-record-label">Installation record: rack placement, power, coolant and network connection</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Installer or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Equipment installed</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That any subsystem was energised or passed a test.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="completeness"><span class="pf-attr-label">Completeness</span>: <span class="pf-attr-desc">Covers every item it claims to cover, with exceptions listed</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-guide-as-installation"><span class="pf-error-inference">Treating a deployment guide as an installation record</span>: <span class="pf-error-why">A guide states what an engineer should do; it records nothing done</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<p>None recorded in the IDE-014 model.</p>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-10-network-integration" data-requirement="rc-10-network-integration" data-target-state="subsystem_commissioned" aria-labelledby="pf-rc-10-network-integration-title">
+<h4 id="pf-rc-10-network-integration-title"><code>rc-10</code> <span class="pf-title">Network integration records</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The NVLink domain and north-south network are brought up</dd>
+<dt>Domain</dt><dd class="pf-domain">Networking and interconnect</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Subsystem commissioned</dd>
+<dt>Record holder</dt><dd class="pf-holder">Commissioning agent or site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Bring-up log showing the NVLink domain configured before compute trays</li><li>North-south switch configuration records</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that the network subsystems were brought up on a dated occasion.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That the networks work together with compute under load.</dd>
+<dt>Public record</dt><dd class="pf-gap">No bring-up log is public. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-commissioning-record" data-ceiling="subsystem_commissioned">
+<h5>Required record: <span class="pf-record-label">Completed commissioning test for one subsystem, with results</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Commissioning agent or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Subsystem commissioned</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That subsystems work together.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-checklist-as-commissioning"><span class="pf-error-inference">Treating a published checklist as completed commissioning</span>: <span class="pf-error-why">Unchecked items record what should be checked, not that anything was</span>.</li><li data-error="ce-procedure-as-test"><span class="pf-error-inference">Treating a test procedure as a passed test</span>: <span class="pf-error-why">A procedure gives steps; a passed test needs results against criteria</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="upstream" data-ide006="req-sw-firmware-baseline">Presupposes records for <code>req-sw-firmware-baseline</code> (Firmware across compute trays, switches, power shelves and NICs matching a recorded baseline), requested under <code>rc-06-firmware-software</code>. Basis: follows NVIDIA's published procedure.</li>
+<li data-direction="downstream" data-ide006="req-sw-validation-results">Is presupposed by <code>req-sw-validation-results</code> (Recorded results of cluster validation tests), requested under <code>rc-11-commissioning</code>, <code>rc-14-workload-performance</code>. Basis: follows NVIDIA's published procedure.</li>
+<li data-direction="downstream" data-ide006="req-sw-management-stack">Is presupposed by <code>req-sw-management-stack</code> (Cluster management through Base Command Manager and workload orchestration using a version-supported scheduler (Slurm or Kubernetes through RunAI as documented in the 2.5.0 guide)), requested under <code>rc-06-firmware-software</code>. Basis: derived from published sources.</li>
+<li data-direction="upstream" data-ide006="req-el-site-capacity">Presupposes records for <code>req-el-site-capacity</code> (Available electrical capacity at a site for the declared configuration), requested under <code>rc-07-site-electrical-capacity</code>. Basis: project-defined, pending engineering review.</li>
+<li data-direction="upstream" data-ide006="req-th-liquid-cooling">Presupposes records for <code>req-th-liquid-cooling</code> (Liquid cooling of compute trays through rack manifolds and cold plates, with other components air-cooled), requested under <code>rc-05-cooling-interface</code>. Basis: project-defined, pending engineering review.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-11-commissioning" data-requirement="rc-11-commissioning" data-target-state="subsystem_commissioned" aria-labelledby="pf-rc-11-commissioning-title">
+<h4 id="pf-rc-11-commissioning-title"><code>rc-11</code> <span class="pf-title">Commissioning procedure and results</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">Subsystems passed commissioning and validation tests</dd>
+<dt>Domain</dt><dd class="pf-domain">Firmware and software</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Subsystem commissioned</dd>
+<dt>Record holder</dt><dd class="pf-holder">Commissioning agent or site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Method, thresholds and results for each test</li><li>Dated, for the named configuration</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that named subsystems passed stated tests.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That the configuration as a whole was accepted.</dd>
+<dt>Public record</dt><dd class="pf-gap">No validation output is public; thresholds are not published. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-commissioning-record" data-ceiling="subsystem_commissioned">
+<h5>Required record: <span class="pf-record-label">Completed commissioning test for one subsystem, with results</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Commissioning agent or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Subsystem commissioned</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That subsystems work together.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-checklist-as-commissioning"><span class="pf-error-inference">Treating a published checklist as completed commissioning</span>: <span class="pf-error-why">Unchecked items record what should be checked, not that anything was</span>.</li><li data-error="ce-procedure-as-test"><span class="pf-error-inference">Treating a test procedure as a passed test</span>: <span class="pf-error-why">A procedure gives steps; a passed test needs results against criteria</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="upstream" data-ide006="req-nw-nvlink-bring-up">Presupposes records for <code>req-nw-nvlink-bring-up</code> (NVLink domain configured before compute trays are powered on), requested under <code>rc-10-network-integration</code>. Basis: follows NVIDIA's published procedure.</li>
+<li data-direction="downstream" data-ide006="req-th-validated-under-load">Is presupposed by <code>req-th-validated-under-load</code> (Thermal behaviour of an installed rack under load), which no Workflow C requirement requests. Basis: project-defined, pending engineering review.</li>
+<li data-direction="downstream" data-ide006="req-fo-handover">Is presupposed by <code>req-fo-handover</code> (Acceptance and handover of the system for production use), requested under <code>rc-12-acceptance</code>. Basis: project-defined, pending engineering review.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-12-acceptance" data-requirement="rc-12-acceptance" data-target-state="integrated_configuration_verified" aria-labelledby="pf-rc-12-acceptance-title">
+<h4 id="pf-rc-12-acceptance-title"><code>rc-12</code> <span class="pf-title">Acceptance criteria and test results</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The installed configuration was accepted against agreed criteria</dd>
+<dt>Domain</dt><dd class="pf-domain">Facility operations and monitoring</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Integrated configuration verified</dd>
+<dt>Stage note</dt><dd class="pf-stage-note">Workflow C places acceptance under &#x27;commissioned&#x27;; acceptance presupposes an integrated test, so its earliest supportable state is integrated configuration verified</dd>
+<dt>Record holder</dt><dd class="pf-holder">Operator and customer</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Criteria agreed before testing</li><li>Integrated test results</li><li>Signed by parties able to accept</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: that the parties accepted the configuration against stated criteria.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">That it met any public criterion, since none is published.</dd>
+<dt>Public record</dt><dd class="pf-gap">No acceptance record or criteria are public. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-integrated-test-record" data-ceiling="integrated_configuration_verified">
+<h5>Required record: <span class="pf-record-label">Integrated test across subsystems under stated conditions</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Commissioning agent or site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Integrated configuration verified</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the parties accepted the configuration, or that it operated over time.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="conditions"><span class="pf-attr-label">Conditions</span>: <span class="pf-attr-desc">States the operating and environmental conditions of the test</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-record" data-record="rt-acceptance-criteria" data-ceiling="capability_contracted">
+<h5>Required record: <span class="pf-record-label">Agreed acceptance criteria for a named configuration</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Contracting parties</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Capability contracted</strong> (an upper bound, not a state reached). On its own this record type cannot support the claim's target state (Integrated configuration verified).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That any criterion was met.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="signatory_authority"><span class="pf-attr-label">Signatory authority</span>: <span class="pf-attr-desc">Signed by a person able to bind the issuing party</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-record" data-record="rt-acceptance-record" data-ceiling="integrated_configuration_verified">
+<h5>Required record: <span class="pf-record-label">Signed acceptance of a named configuration against agreed criteria</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Operator and customer</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Integrated configuration verified</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the configuration operated as accepted over any later period.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="criteria"><span class="pf-attr-label">Criteria</span>: <span class="pf-attr-desc">States the pass or acceptance thresholds in advance</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="signatory_authority"><span class="pf-attr-label">Signatory authority</span>: <span class="pf-attr-desc">Signed by a person able to bind the issuing party</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="completeness"><span class="pf-attr-label">Completeness</span>: <span class="pf-attr-desc">Covers every item it claims to cover, with exceptions listed</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-subsystem-as-system"><span class="pf-error-inference">Treating subsystem tests as whole-system acceptance</span>: <span class="pf-error-why">Bring-up couples power, cooling, network and firmware; passing each alone does not show they work together</span>.</li><li data-error="ce-test-as-acceptance"><span class="pf-error-inference">Treating a technical test as formal acceptance</span>: <span class="pf-error-why">Acceptance is a signed decision against agreed criteria; a test supplies results, not the decision</span>.</li><li data-error="ce-undefined-criteria"><span class="pf-error-inference">Evaluating acceptance against criteria no public source defines</span>: <span class="pf-error-why">The published checklist gives items without thresholds, so acceptance can only be judged against the parties&#x27; own criteria</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="upstream" data-ide006="req-sw-validation-results">Presupposes records for <code>req-sw-validation-results</code> (Recorded results of cluster validation tests), requested under <code>rc-11-commissioning</code>, <code>rc-14-workload-performance</code>. Basis: project-defined, pending engineering review.</li>
+<li data-direction="upstream" data-ide006="req-th-validated-under-load">Presupposes records for <code>req-th-validated-under-load</code> (Thermal behaviour of an installed rack under load), which no Workflow C requirement requests. Basis: project-defined, pending engineering review.</li>
+<li data-direction="upstream" data-ide006="req-el-site-capacity">Presupposes records for <code>req-el-site-capacity</code> (Available electrical capacity at a site for the declared configuration), requested under <code>rc-07-site-electrical-capacity</code>. Basis: project-defined, pending engineering review.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-13-operational-monitoring" data-requirement="rc-13-operational-monitoring" data-target-state="operational_performance_observed" aria-labelledby="pf-rc-13-operational-monitoring-title">
+<h4 id="pf-rc-13-operational-monitoring-title"><code>rc-13</code> <span class="pf-title">Operational monitoring records</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The site monitored the configuration in operation over a stated period</dd>
+<dt>Domain</dt><dd class="pf-domain">Facility operations and monitoring</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Operational performance observed</dd>
+<dt>Record holder</dt><dd class="pf-holder">Site operator</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Observation period stated</li><li>Leak, power and thermal events recorded with the response</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: how the configuration behaved over the stated period.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">Behaviour outside that period or configuration.</dd>
+<dt>Public record</dt><dd class="pf-gap">No monitoring record is public; the building-management interface is not published. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-monitoring-record" data-ceiling="operational_performance_observed">
+<h5>Required record: <span class="pf-record-label">Operational monitoring over a stated period</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Site operator</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Operational performance observed</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the workload performance claimed was achieved.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="period"><span class="pf-attr-label">Observation period</span>: <span class="pf-attr-desc">States the observation period</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-peak-as-operation"><span class="pf-error-inference">Treating a peak figure, a published test-suite description or a validated design as sustained operation</span>: <span class="pf-error-why">None records a site, a period or measured results</span>.</li><li data-error="ce-software-as-performance"><span class="pf-error-inference">Treating an installed software stack as performance</span>: <span class="pf-error-why">Installed components show presence, not results</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="upstream" data-ide006="req-th-liquid-cooling">Presupposes records for <code>req-th-liquid-cooling</code> (Liquid cooling of compute trays through rack manifolds and cold plates, with other components air-cooled), requested under <code>rc-05-cooling-interface</code>. Basis: derived from published sources.</li>
+<li data-direction="upstream" data-ide006="req-sw-management-stack">Presupposes records for <code>req-sw-management-stack</code> (Cluster management through Base Command Manager and workload orchestration using a version-supported scheduler (Slurm or Kubernetes through RunAI as documented in the 2.5.0 guide)), requested under <code>rc-06-firmware-software</code>. Basis: derived from published sources.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-14-workload-performance" data-requirement="rc-14-workload-performance" data-target-state="operational_performance_observed" aria-labelledby="pf-rc-14-workload-performance-title">
+<h4 id="pf-rc-14-workload-performance-title"><code>rc-14</code> <span class="pf-title">Workload-level measured performance</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The configuration delivered stated workload performance</dd>
+<dt>Domain</dt><dd class="pf-domain">Facility operations and monitoring</dd>
+<dt>Claim's target state</dt><dd class="pf-target">Operational performance observed</dd>
+<dt>Record holder</dt><dd class="pf-holder">Site operator or independent tester</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Workload, method, software versions and conditions stated</li><li>Repeatable by another party</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: measured performance for the stated workload and conditions.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">Peak or vendor figures as delivered performance.</dd>
+<dt>Public record</dt><dd class="pf-gap">No measurement is public. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-workload-measurement" data-ceiling="operational_performance_observed">
+<h5>Required record: <span class="pf-record-label">Measured workload performance with method and conditions</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Site operator or independent tester</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">Operational performance observed</strong> (an upper bound, not a state reached).</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the result generalises to other workloads or sites.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="period"><span class="pf-attr-label">Observation period</span>: <span class="pf-attr-desc">States the observation period</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="method"><span class="pf-attr-label">Method</span>: <span class="pf-attr-desc">States the procedure or test method used</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="conditions"><span class="pf-attr-label">Conditions</span>: <span class="pf-attr-desc">States the operating and environmental conditions of the test</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="results"><span class="pf-attr-label">Results</span>: <span class="pf-attr-desc">Records the observed results, not only a pass mark</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-substitutes"><h5>Documents that cannot substitute for it</h5><ul><li data-record="rt-product-specification"><span class="pf-sub-label">Vendor product specification or user guide</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any unit was ordered, delivered, installed or operated anywhere</span>.</li><li data-record="rt-reference-architecture"><span class="pf-sub-label">Vendor reference architecture</span>: ceiling Infrastructure proposed; does not establish <span class="pf-sub-dne">that a site follows the design, or that the design was tested at the proposed scale</span>.</li><li data-record="rt-documented-procedure"><span class="pf-sub-label">Vendor deployment, bring-up or operations procedure</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that the procedure was carried out, by whom or with what result</span>.</li><li data-record="rt-checklist-template"><span class="pf-sub-label">Published checklist with unchecked items</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any item was checked, or that anyone signed or approved it</span>.</li><li data-record="rt-performance-specification"><span class="pf-sub-label">Vendor performance figure or validation-test description</span>: ceiling Product specification documented; does not establish <span class="pf-sub-dne">that any installed system reached the figure, or under what conditions</span>.</li></ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-peak-as-operation"><span class="pf-error-inference">Treating a peak figure, a published test-suite description or a validated design as sustained operation</span>: <span class="pf-error-why">None records a site, a period or measured results</span>.</li><li data-error="ce-software-as-performance"><span class="pf-error-inference">Treating an installed software stack as performance</span>: <span class="pf-error-why">Installed components show presence, not results</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<ul>
+<li data-direction="upstream" data-ide006="req-nw-nvlink-bring-up">Presupposes records for <code>req-nw-nvlink-bring-up</code> (NVLink domain configured before compute trays are powered on), requested under <code>rc-10-network-integration</code>. Basis: follows NVIDIA's published procedure.</li>
+<li data-direction="downstream" data-ide006="req-th-validated-under-load">Is presupposed by <code>req-th-validated-under-load</code> (Thermal behaviour of an installed rack under load), which no Workflow C requirement requests. Basis: project-defined, pending engineering review.</li>
+<li data-direction="downstream" data-ide006="req-fo-handover">Is presupposed by <code>req-fo-handover</code> (Acceptance and handover of the system for production use), requested under <code>rc-12-acceptance</code>. Basis: project-defined, pending engineering review.</li>
+</ul>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+<section class="pf-req" id="pf-rc-15-access-regulatory" data-requirement="rc-15-access-regulatory" data-target-state="access" aria-labelledby="pf-rc-15-access-regulatory-title">
+<h4 id="pf-rc-15-access-regulatory-title"><code>rc-15</code> <span class="pf-title">Access and regulatory documentation</span></h4>
+<dl class="pf-summary">
+<dt>Claim under examination</dt><dd class="pf-claim">The parties may receive and use the configuration at the site</dd>
+<dt>Domain</dt><dd class="pf-domain">Access and regulatory conditions</dd>
+<dt>Claim's target</dt><dd class="pf-target">Access, which is not a deployment state. Access is a separate dimension. An access record never advances a deployment state, and technical records say nothing about who may receive or use the system.</dd>
+<dt>Record holder</dt><dd class="pf-holder">Exporter and licensing authority</dd>
+<dt>Verification conditions</dt><dd><ul class="pf-conditions"><li>Determination for the named items, parties, destination and end use, under the rules in force</li></ul></dd>
+<dt>Potential supported claim</dt><dd class="pf-supported">What a qualified reviewer could investigate, given an authentic, sufficient record: how a named transaction is treated, once determined.</dd>
+<dt>Prohibited inference</dt><dd class="pf-prohibited">Any determination from rule text alone.</dd>
+<dt>Public record</dt><dd class="pf-gap">Only two current eCFR sections and a 2024 announcement were reviewed; no determination exists. Record status in the IDE-014 model: not obtained.</dd>
+</dl>
+<div class="pf-record" data-record="rt-rule-text" data-ceiling="">
+<h5>Required record: <span class="pf-record-label">Current regulatory text or announcement</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Regulator</span> · Site-specific: no · Highest state this kind of record could support after human review: <strong class="pf-ceiling">None: an access record supports no deployment state</strong>.</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>How any named item, party or transaction is treated.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-record" data-record="rt-transaction-determination" data-ceiling="">
+<h5>Required record: <span class="pf-record-label">Licence, classification or determination for a named transaction</span></h5>
+<p class="pf-record-meta">Holder: <span class="pf-record-holder">Exporter and licensing authority</span> · Site-specific: yes · Highest state this kind of record could support after human review: <strong class="pf-ceiling">None: an access record supports no deployment state</strong>.</p>
+<p class="pf-dne"><strong>Even complete, it does not establish:</strong> <span>That the facility is technically able to operate the system.</span></p>
+<div class="pf-doc-controls"></div>
+<ul class="pf-attrs" aria-label="Attributes this record must carry">
+<li class="pf-attr" data-attr="named_site"><span class="pf-attr-label">Named site</span>: <span class="pf-attr-desc">Identifies one site or facility</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="configuration_identity"><span class="pf-attr-label">Configuration identity</span>: <span class="pf-attr-desc">Identifies the configuration: model, rack or cluster, and serial numbers where a physical unit is meant</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="issuing_party"><span class="pf-attr-label">Issuing party</span>: <span class="pf-attr-desc">Names the organisation that issued it</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="dated"><span class="pf-attr-label">Date</span>: <span class="pf-attr-desc">Carries the date of the act it records</span><div class="pf-attr-controls"></div></li>
+<li class="pf-attr" data-attr="signatory_authority"><span class="pf-attr-label">Signatory authority</span>: <span class="pf-attr-desc">Signed by a person able to bind the issuing party</span><div class="pf-attr-controls"></div></li>
+</ul></div>
+<div class="pf-errors"><h5>Category errors to avoid</h5><ul><li data-error="ce-announcement-as-rule"><span class="pf-error-inference">Treating a 2024 announcement as the rule in force</span>: <span class="pf-error-why">Only two current eCFR sections were reviewed</span>.</li><li data-error="ce-rule-as-determination"><span class="pf-error-inference">Treating rule text as a determination for a named transaction</span>: <span class="pf-error-why">Controls attach to items, destinations, end uses and parties; a determination needs all of them</span>.</li><li data-error="ce-access-as-stage"><span class="pf-error-inference">Treating access as a deployment stage that technical records complete</span>: <span class="pf-error-why">Access is a separate dimension: technical records say nothing about who may receive the system</span>.</li></ul></div>
+<div class="pf-deps"><h5>Documentary dependencies</h5>
+<p>None recorded in the IDE-014 model.</p>
+<p class="pf-dep-rule">Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.</p></div>
+<div class="pf-result" hidden></div>
+</section>
+</section>
+</div></article></section>
 <!-- research-workbench:end -->
       <section class="related" aria-labelledby="related-title">
         <div class="section-label">Continue the reference path</div>

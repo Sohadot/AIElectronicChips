@@ -391,7 +391,7 @@ const fs = require('fs');
   const reqs = await page.evaluate(() => [...document.querySelectorAll('article.wb-workflow')].map((w) => ({
     id: w.id, ids: [...w.querySelectorAll('li.wb-req')].map((li) => li.id),
     refs: [...w.querySelectorAll('li.wb-req .step-link a')].filter((a) => a.offsetParent !== null).length })));
-  const radios = await page.locator('input[type=radio]').count();
+  const radios = await page.locator('li.wb-req .wb-controls input[type=radio]').count();
   const textareas = await page.locator('textarea').count();
   const toolbars = await page.locator('.wb-toolbar:visible').count();
   const wf = page.locator('#workflow-hbm4-integration');

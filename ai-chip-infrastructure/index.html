@@ -413,7 +413,7 @@
                 <tr><th scope="row"><code>req-th-coolant-specification</code></th><td>Thermal</td><td>Coolant type, flow, supply temperature, pressure and liquid-cooling class</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-pt-coolant-specification</code></td></tr>
                 <tr><th scope="row"><code>req-th-validated-under-load</code></th><td>Thermal</td><td>Thermal behaviour of an installed rack under load</td><td><span class="tag tag-u">U</span>Not established</td><td><code>u-d-acceptance-criteria</code>, <code>u-d-site-records</code></td></tr>
                 <tr><th scope="row"><code>req-nw-nvlink-bring-up</code></th><td>Network and interconnect</td><td>NVLink domain configured before compute trays are powered on</td><td><span class="tag tag-a">A</span>Product specification documented</td><td>None recorded</td></tr>
-                <tr><th scope="row"><code>req-nw-north-south</code></th><td>Network and interconnect</td><td>North-south network switches physically installed before deployment</td><td><span class="tag tag-a">A</span>Infrastructure proposed</td><td><code>u-d-gb300-difference</code></td></tr>
+                <tr><th scope="row"><code>req-nw-north-south</code></th><td>Network and interconnect</td><td>North-south network switches physically installed before deployment</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-d-gb300-difference</code></td></tr>
                 <tr><th scope="row"><code>req-nw-tested-scale</code></th><td>Network and interconnect</td><td>The cluster size NVIDIA describes as fully tested</td><td><span class="tag tag-a">A</span>Infrastructure proposed</td><td><code>u-d-tested-scale</code></td></tr>
                 <tr><th scope="row"><code>req-sw-management-stack</code></th><td>Software</td><td>Cluster management through Base Command Manager and scheduling through Slurm</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-d-software-versions</code></td></tr>
                 <tr><th scope="row"><code>req-sw-firmware-baseline</code></th><td>Software</td><td>Firmware across compute trays, switches, power shelves and NICs matching a recorded baseline</td><td><span class="tag tag-a">A</span>Product specification documented</td><td><code>u-d-firmware-guide</code>, <code>u-d-software-versions</code></td></tr>
@@ -425,6 +425,7 @@
               </tbody>
             </table>
           </div>
+          <p class="detail" id="correction-req-nw-north-south"><strong>Correction, 2026-11-12.</strong> <code>req-nw-north-south</code> was shown as Infrastructure proposed. Its only cited passage asks for the switches to be physically installed before they are deployed <a class="cite" href="#ref-5">[5]</a>: a documented procedure, which supports Product specification documented and proposes no network design. The state is corrected; the evidence and the open question are unchanged.</p>
         </div></article>
 
         <article class="reference-block" id="questions"><div class="block-index">13</div><div>

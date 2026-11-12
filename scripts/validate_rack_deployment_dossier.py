@@ -73,6 +73,58 @@ def rank(state) -> int:
     return RANK.get(state, -1)
 
 
+RESOLUTION_FIELDS = {"status", "resolved_by", "resolved_at", "previous_state", "corrected_state", "decision", "evidence_checked",
+                     "uncertainty_remaining", "publication_change"}
+
+
+def check_resolution(x, types, ctx) -> list[str]:
+    """A flagged IDE-006 entry may be resolved only by an exact, recorded correction: the entry still names the state it
+    flagged, the IDE-006 dossier now carries the corrected state within the ceiling, the evidence rechecked is the entry's own
+    cited passage and was found by the named inspection run, and the public page carries the new text and not the old."""
+    w = f"rack-dossier.ide006_consistency[{x.get('requirement_id')}].resolution"
+    res = x["resolution"]
+    if not isinstance(res, dict) or set(res) != RESOLUTION_FIELDS:
+        return [f"{w} must contain exactly {sorted(RESOLUTION_FIELDS)}"]
+    errors = []
+    req = next((q for q in ctx["ide006"]["requirements"] if q["id"] == x.get("requirement_id")), None)
+    t = types.get(x.get("record_type_id"))
+    if req is None or t is None:
+        return [f"{w}: requirement or record type does not exist"]
+    if res["status"] != "corrected" or not str(res["resolved_by"]).startswith("IDE-") or not nonempty(res["resolved_at"]):
+        errors.append(f"{w}: status 'corrected', the release that made it and a date are required")
+    if res["previous_state"] != x["current_state"] or rank(x["current_state"]) <= rank(x["state_ceiling"]):
+        errors.append(f"{w}: previous_state must be the flagged state the entry records, which exceeded the ceiling")
+    if req["current_state"] != res["corrected_state"]:
+        errors.append(f"{w}: the IDE-006 dossier must carry the corrected state {res['corrected_state']}")
+    if res["corrected_state"] not in RANK or rank(res["corrected_state"]) > rank(t["state_ceiling"]):
+        errors.append(f"{w}: the corrected state must be within the ceiling {t['state_ceiling']}")
+    if req["evidence_classification"] != x["evidence_classification"]:
+        errors.append(f"{w}: the evidence classification is not part of this correction and must be unchanged")
+    ev = res["evidence_checked"]
+    if not isinstance(ev, dict) or {"source_id": ev.get("source_id"), "locator": ev.get("locator")} not in req["evidence"]:
+        errors.append(f"{w}: evidence_checked must be the entry's own cited source and locator")
+    else:
+        rec = next((r for r in ctx["log"]["records"] if r["source_id"] == ev["source_id"] and r["run_id"] == ev.get("inspection_run_id")), None)
+        if rec is None or rec["passage_check"]["not_found"] or not rec["passage_check"]["found"]:
+            errors.append(f"{w}: inspection run {ev.get('inspection_run_id')} must have found the cited passage")
+    for field in ("decision", "uncertainty_remaining"):
+        if not nonempty(res[field]):
+            errors.append(f"{w}.{field} must be stated")
+    pc = res["publication_change"]
+    if not isinstance(pc, dict) or set(pc) != {"route", "anchor", "old_text", "new_text"}:
+        errors.append(f"{w}.publication_change must name route, anchor, old_text and new_text")
+    else:
+        from validate_evidence_reconciliations import norm, plain, route_file
+        path = route_file(pc["route"])
+        page = path.read_text(encoding="utf-8") if path.is_file() else ""
+        text = norm(plain(page))
+        if norm(pc["new_text"]) not in text or norm(pc["old_text"]) in text:
+            errors.append(f"{w}: {pc['route']} must carry the new text and not the old")
+        if f'id="{pc["anchor"]}"' not in page or "Correction, " + res["resolved_at"] not in norm(plain(page)):
+            errors.append(f"{w}: {pc['route']} must show a dated correction note at #{pc['anchor']}")
+    return errors
+
+
 def check(d, ctx) -> list[str]:
     if not isinstance(d, dict) or set(d) != TOP:
         return ["rack-dossier: top-level fields mismatch"]
@@ -206,17 +258,22 @@ def check(d, ctx) -> list[str]:
         errors.append("rack-dossier: the dependency graph has a cycle")
 
     # The model applied to the IDE-006 dossier: every entry whose recorded state exceeds its evidence's ceiling is listed, exactly.
+    # An entry keeps the state it recorded when flagged; a later correction is added beside it as a 'resolution', never by rewriting it.
     expected = []
     for q in ctx["ide006"]["requirements"]:
         t = types.get(CLASSIFICATION_TYPES.get(q["evidence_classification"], ""))
         if t and t["state_ceiling"] and q["current_state"] in RANK and rank(q["current_state"]) > rank(t["state_ceiling"]):
             expected.append((q["id"], q["evidence_classification"], q["current_state"], t["id"], t["state_ceiling"]))
+    open_entries = [x for x in d["ide006_consistency"] if x.get("resolution") is None]
     got = [(x.get("requirement_id"), x.get("evidence_classification"), x.get("current_state"), x.get("record_type_id"), x.get("state_ceiling"))
-           for x in d["ide006_consistency"]]
+           for x in open_entries]
     if sorted(got) != sorted(expected):
         errors.append(f"rack-dossier.ide006_consistency must list exactly the IDE-006 entries above their evidence ceiling: {sorted(expected)}")
     if any(not nonempty(x.get("note")) for x in d["ide006_consistency"]):
         errors.append("rack-dossier.ide006_consistency: each entry needs a note for editorial review")
+    for x in d["ide006_consistency"]:
+        if x.get("resolution") is not None:
+            errors += check_resolution(x, types, ctx)
 
     # Claim-to-evidence matrix.
     rows = [r.get("requirement_id") for r in d["matrix"]]

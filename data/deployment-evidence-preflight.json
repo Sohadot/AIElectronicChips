@@ -1,0 +1,145 @@
+{
+  "preflight_id": "aec-deployment-evidence-preflight",
+  "schema_version": "1.0.0",
+  "release": "IDE-015",
+  "status": "research_tool",
+  "scientific_review": "pending",
+  "compiled_at": "2026-11-12",
+  "workflow_id": "workflow-rack-deployment",
+  "record_model": {
+    "dossier_id": "aec-dossier-rack-deployment-verification-014",
+    "file": "data/research/institutional/rack-deployment-verification-dossier-014.json",
+    "document": "AI_RACK_DEPLOYMENT_VERIFICATION_DOSSIER_014.md",
+    "compiled_at": "2026-11-12",
+    "status": "research_candidate"
+  },
+  "evidence_states_release": "aec-ide-006-deployment-readiness",
+  "boundary": "A document-review preparation aid: it records only whether you report that a document and its attributes are present, missing or unknown. It sees no document, reviews and authenticates nothing, establishes no evidence state, and is not an engineering judgement, a legal determination or an assessment of any site.",
+  "packet": {
+    "format": "aec-deployment-evidence-preflight",
+    "format_version": "1.0.0",
+    "label": "Documentary Preflight — Not an Evidence Verification or Readiness Assessment",
+    "disclaimer": "User-reported presence of documents and attributes this site has not seen. Nothing here has been reviewed, authenticated or examined by this site or by anyone on its behalf. This preflight establishes no evidence state and is not an engineering judgement, a legal determination or an assessment of any site, supplier or transaction.",
+    "research_status": "Research candidate: the record model (IDE-014) and this preflight are AI-assisted. Scientific review pending.",
+    "no_state_statement": "No evidence state is established by this preflight. A record type's ceiling is the highest state it could support after qualified human review of an authentic, sufficient record; it is not a state reached, and your selections never change it.",
+    "completeness_boundary": "Every required attribute is marked present, as you report it. The record is ready only for substantive examination by a qualified human reviewer: this page has not seen, reviewed or authenticated it, and it establishes no evidence state.",
+    "dependency_rule": "Marking a record or attribute present here does not advance any requirement it depends on, or any that depends on it; each needs its own record.",
+    "access_rule": "Access is a separate dimension. An access record never advances a deployment state, and technical records say nothing about who may receive or use the system."
+  },
+  "document_statuses": {
+    "not_marked": "Not yet marked",
+    "present": "Record in hand",
+    "missing": "Record not held",
+    "unknown": "Unknown whether held"
+  },
+  "attribute_statuses": {
+    "not_marked": "Not yet marked",
+    "present": "Present (as you report it)",
+    "missing": "Missing",
+    "unknown": "Unknown"
+  },
+  "status_definitions": {
+    "not_marked": "You have not examined this item yet.",
+    "present": "You report that the document, or the attribute in it, is there. This site has not seen it.",
+    "missing": "You report that the document is not held, or that it does not contain the attribute.",
+    "unknown": "You cannot establish whether the document is held or contains the attribute."
+  },
+  "attribute_guidance": {
+    "named_site": {
+      "significance": "Without a named site the record cannot be tied to any facility, so it can support no site-level state.",
+      "request": "names the site or facility it covers"
+    },
+    "configuration_identity": {
+      "significance": "Without the configuration identity the record cannot be matched to the configuration claimed; GB200 and GB300 records must be kept apart.",
+      "request": "identifies the configuration, with serial numbers where physical units are meant"
+    },
+    "dated": {
+      "significance": "Without a date the order of stages cannot be shown: an undated test or delivery cannot be placed before or after installation.",
+      "request": "carries the date of the act it records"
+    },
+    "issuing_party": {
+      "significance": "Without an issuing party no one answers for the record, and its holder cannot be asked to confirm it.",
+      "request": "names the organisation that issued it"
+    },
+    "signatory_authority": {
+      "significance": "Without a signature by someone able to bind the issuing party, a contract, determination or acceptance is a statement, not a decision.",
+      "request": "is signed by a person able to bind the issuing party, with that authority stated"
+    },
+    "method": {
+      "significance": "Without the method, results cannot be interpreted or repeated, and a reviewer cannot tell what was exercised.",
+      "request": "states the procedure or test method used"
+    },
+    "criteria": {
+      "significance": "Without criteria stated in advance there is nothing to judge results against; criteria written after the results can be fitted to them.",
+      "request": "states its thresholds, set before the results were known"
+    },
+    "results": {
+      "significance": "A pass mark without observed results cannot be checked; the observed values are what a reviewer examines.",
+      "request": "records the observed results, not only a pass mark"
+    },
+    "conditions": {
+      "significance": "Results hold only under the conditions they were obtained in; without them a reviewer cannot tell whether a test reflects the configuration in use.",
+      "request": "states the operating and environmental conditions of the test"
+    },
+    "period": {
+      "significance": "Operation can be described only over a stated period; without one, an extract says nothing about how long or how consistently the configuration ran.",
+      "request": "states the observation period it covers"
+    },
+    "completeness": {
+      "significance": "Without stated coverage and listed exceptions, a partial record can be read as covering every rack, connection or item.",
+      "request": "states what it covers and lists any exceptions"
+    }
+  },
+  "boundaries": [
+    {
+      "id": "pb-specification-not-procurement",
+      "statement": "A vendor specification or announcement does not show procurement.",
+      "refs": ["ce-spec-as-site", "ce-announcement-as-procurement", "rt-product-specification"]
+    },
+    {
+      "id": "pb-order-not-delivery",
+      "statement": "A purchase order does not show delivery.",
+      "refs": ["ce-order-as-delivery", "rt-purchase-order"]
+    },
+    {
+      "id": "pb-delivery-not-installation",
+      "statement": "A delivery record does not show installation.",
+      "refs": ["rt-delivery-record"]
+    },
+    {
+      "id": "pb-installation-not-commissioning",
+      "statement": "An installation record does not show commissioning.",
+      "refs": ["ce-guide-as-installation", "rt-installation-record"]
+    },
+    {
+      "id": "pb-procedure-not-execution",
+      "statement": "A commissioning procedure or checklist does not show that it was carried out.",
+      "refs": ["ce-procedure-as-test", "ce-checklist-as-commissioning", "rt-documented-procedure", "rt-checklist-template"]
+    },
+    {
+      "id": "pb-subsystem-not-integrated",
+      "statement": "A completed subsystem test does not show integrated acceptance.",
+      "refs": ["ce-subsystem-as-system", "rt-commissioning-record"]
+    },
+    {
+      "id": "pb-test-not-acceptance",
+      "statement": "Technical testing does not itself establish formal contractual acceptance, which is a signed decision against criteria agreed before testing.",
+      "refs": ["ce-test-as-acceptance", "ce-undefined-criteria", "rt-integrated-test-record", "rt-acceptance-record"]
+    },
+    {
+      "id": "pb-peak-not-operation",
+      "statement": "A published peak specification does not show operational performance.",
+      "refs": ["ce-peak-as-operation", "rt-performance-specification"]
+    },
+    {
+      "id": "pb-monitoring-description-not-operation",
+      "statement": "A description of monitoring does not show sustained operation; only monitoring records over a stated period describe operation, and only for that period.",
+      "refs": ["ce-peak-as-operation", "ce-software-as-performance", "rt-monitoring-record"]
+    },
+    {
+      "id": "pb-rule-not-determination",
+      "statement": "Regulatory rule text does not establish a determination for a named transaction, and access records never advance a deployment state.",
+      "refs": ["ce-rule-as-determination", "ce-access-as-stage", "rt-rule-text", "rt-transaction-determination"]
+    }
+  ]
+}
