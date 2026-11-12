@@ -250,7 +250,7 @@
         }
       ],
       "evidence_classification": "documented_procedure",
-      "current_state": "infrastructure_proposed",
+      "current_state": "product_specification_documented",
       "contradictions": [
         "u-d-gb300-difference"
       ],

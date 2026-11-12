@@ -194,6 +194,42 @@
   .wb-definitions { grid-template-columns: 1fr; }
   .wb-definitions dt { margin-top: .4rem; }
 }
+/* Documentary preflight (IDE-015): Workflow C record attributes, gap explanation, packet export and print. */
+.wb-preflight { border-top: 1px solid var(--line); margin-top: 2rem; padding-top: 1.2rem; }
+.wb-preflight h3 { margin-top: 0; }
+.pf-picker { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 1rem 0 .4rem; }
+.pf-picker[hidden], .pf-toolbar[hidden], .pf-result[hidden], .pf-req[hidden] { display: none; }
+.pf-picker label { font-weight: 600; color: var(--ink-strong); }
+.pf-picker select { font: inherit; font-size: .95rem; min-height: 44px; max-width: 100%; padding: .3rem .5rem; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); }
+.pf-picker select:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: 2px; }
+.pf-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .6rem 0 1rem; }
+.pf-toolbar .button, .wb-controls .button { font: inherit; font-size: .9rem; cursor: pointer; }
+.wb-controls > .button { margin-top: .6rem; }
+.pf-req { border: 1px solid var(--line); background: var(--surface); padding: .9rem 1rem 1rem; margin: 1rem 0; }
+.pf-req h4 { margin: 0 0 .6rem; }
+.pf-summary { display: grid; grid-template-columns: max-content 1fr; gap: .35rem 1rem; margin: 0 0 1rem; font-size: .92rem; }
+.pf-summary dt { font-weight: 600; color: var(--ink-strong); }
+.pf-summary dd { margin: 0; overflow-wrap: anywhere; }
+.pf-summary ul, .pf-result ul { margin: 0; padding-left: 1.2rem; }
+.pf-record { border-left: 3px solid var(--teal); padding: .2rem 0 .2rem .9rem; margin: 1rem 0; }
+.pf-record h5, .pf-substitutes h5, .pf-errors h5, .pf-deps h5, .pf-result h5 { margin: .2rem 0 .4rem; font-size: .98rem; }
+.pf-record-meta, .pf-dne { font-size: .9rem; margin: .3rem 0; max-width: var(--measure); }
+.pf-attrs { list-style: none; padding: 0; margin: .5rem 0 0; }
+.pf-attr { padding: .5rem 0; border-top: 1px solid var(--line); font-size: .92rem; overflow-wrap: anywhere; }
+.pf-options { border: 0; margin: .3rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 1.1rem; min-width: 0; }
+.pf-options legend { font-size: .82rem; color: var(--muted); padding: 0; margin-bottom: .1rem; }
+.pf-doc-controls .pf-options { border: 1px solid var(--line); padding: .4rem .7rem .5rem; margin: .5rem 0; }
+.pf-substitutes, .pf-errors, .pf-deps { font-size: .92rem; margin-top: 1rem; }
+.pf-dep-rule, .pf-no-state { font-size: .9rem; color: var(--muted); }
+.pf-result { margin-top: 1.2rem; padding: .8rem 1rem; background: var(--tint); border: 1px solid var(--line); font-size: .92rem; overflow-wrap: anywhere; }
+.pf-result h6 { font-size: .95rem; margin: .8rem 0 .3rem; }
+.pf-result-head { font-weight: 600; color: var(--ink-strong); margin: .6rem 0 .2rem; }
+.pf-complete { border-left: 3px solid var(--copper); padding-left: .7rem; }
+@media (max-width: 640px) {
+  .pf-summary { grid-template-columns: 1fr; }
+  .pf-summary dt { margin-top: .4rem; }
+  .pf-req { padding: .8rem .7rem; }
+}
 @media print {
   .site-header, .site-footer, .skip-link, .related, .wb-toolbar, .pathway-chooser, .page-hero .trace { display: none !important; }
   body[data-print-workflow] .wb-workflow { display: none; }
@@ -201,6 +237,9 @@
   body[data-print-workflow="workflow-bandwidth-comparison"] #workflow-bandwidth-comparison,
   body[data-print-workflow="workflow-rack-deployment"] #workflow-rack-deployment { display: block; }
   body[data-print-workflow] #workbench-guide { display: none; }
+  .pf-picker, .pf-toolbar, .wb-controls > .button { display: none !important; }
+  body[data-print-preflight] .wb-workflow > div > :not(.wb-preflight):not(h2) { display: none; }
+  .pf-req, .pf-record { break-inside: avoid-page; }
   .evidence-trace > dl { display: block; }
   .wb-req { break-inside: avoid; }
   .wb-controls textarea { border: 1px solid #000; }

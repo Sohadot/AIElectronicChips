@@ -110,6 +110,12 @@ def render_dossier(d, ctx) -> str:
     for x in d["ide006_consistency"]:
         out.append(f"- `{x['requirement_id']}`: {word(x['evidence_classification'])} evidence, recorded at {word(x['current_state'])}, "
                    f"ceiling {word(x['state_ceiling'])}. {x['note']}")
+        res = x.get("resolution")
+        if res:
+            pc = res["publication_change"]
+            out.append(f"  - **Corrected by {res['resolved_by']}, {res['resolved_at']}:** {word(res['previous_state'])} → "
+                       f"{word(res['corrected_state'])}. {res['decision']} Remaining uncertainty: {res['uncertainty_remaining']} "
+                       f"Public correction note: `{pc['route']}#{pc['anchor']}`. The flag above is kept as recorded.")
     out += ["", "## 3. Deployment evidence chain", ""]
     for c in d["chain"]:
         letter = c["id"][0].upper()

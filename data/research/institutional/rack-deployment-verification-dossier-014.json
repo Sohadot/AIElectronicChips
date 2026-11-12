@@ -918,7 +918,27 @@
       "current_state": "infrastructure_proposed",
       "record_type_id": "rt-documented-procedure",
       "state_ceiling": "product_specification_documented",
-      "note": "The cited passage is a procedural prerequisite (install the switches before deploying them), not a network design. Either the guide proposes a design, and its classification would be reference design, or the state is product specification documented. IDE-006 is not changed here; the question goes to editorial review."
+      "note": "The cited passage is a procedural prerequisite (install the switches before deploying them), not a network design. Either the guide proposes a design, and its classification would be reference design, or the state is product specification documented. IDE-006 is not changed here; the question goes to editorial review.",
+      "resolution": {
+        "status": "corrected",
+        "resolved_by": "IDE-015",
+        "resolved_at": "2026-11-12",
+        "previous_state": "infrastructure_proposed",
+        "corrected_state": "product_specification_documented",
+        "decision": "The state is corrected to product specification documented. The cited passage, rechecked on 2026-11-12, is an installation-order instruction; the reviewed introduction page adds switch models and port tables and proposes no network design. The classification, evidence, open question and Evidence Release 006 are unchanged.",
+        "evidence_checked": {
+          "source_id": "nvidia-mission-control-north-south-network-guide-2026",
+          "inspection_run_id": "ide-014-2026-11-12",
+          "locator": "Introduction: \"Complete the physical installation of the network switches (SN5600 and SN2201) before deploying the switches\""
+        },
+        "uncertainty_remaining": "The guide's later pages, including its planning and design section, were not reviewed. If they propose a network design and are cited, a reference-design classification could support infrastructure proposed.",
+        "publication_change": {
+          "route": "/ai-chip-infrastructure/",
+          "anchor": "correction-req-nw-north-south",
+          "old_text": "North-south network switches physically installed before deployment A Infrastructure proposed",
+          "new_text": "North-south network switches physically installed before deployment A Product specification documented"
+        }
+      }
     }
   ],
   "matrix": [

@@ -174,9 +174,14 @@ class NegativeTests(unittest.TestCase):
         self.assertFlags(d, r"exactly one domain")
 
     def test_consistency_list_cannot_hide_or_invent(self):
+        # IDE-015 corrected the one flagged entry; with the IDE-006 state put back, an open entry is again required.
+        c = dict(ctx()); c["ide006"] = copy.deepcopy(c["ide006"])
+        next(q for q in c["ide006"]["requirements"] if q["id"] == "req-nw-north-south")["current_state"] = "infrastructure_proposed"
         d = dossier(); d["ide006_consistency"] = []
-        self.assertFlags(d, r"must list exactly the IDE-006 entries above their evidence ceiling")
-        d = dossier(); d["ide006_consistency"].append(dict(d["ide006_consistency"][0], requirement_id="req-ch-rack-configuration"))
+        self.assertFlags(d, r"must list exactly the IDE-006 entries above their evidence ceiling", c)
+        d = dossier(); d["ide006_consistency"][0]["resolution"] = None
+        self.assertEqual([], [e for e in v.check(d, c) if "ide006_consistency" in e])
+        d = dossier(); d["ide006_consistency"].append(dict(d["ide006_consistency"][0], requirement_id="req-ch-rack-configuration", resolution=None))
         self.assertFlags(d, r"must list exactly")
 
     def test_no_fabricated_review_or_promotion(self):
