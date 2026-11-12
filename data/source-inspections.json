@@ -34,6 +34,13 @@
       "tool": "scripts/inspect_sources.py",
       "method": "Same method as the 2026-11-10 run: one attempt per URL with the declared, honest user agent, no browser impersonation, and every passage quoted by release findings, the conflict register or reconciliation records searched in the retrieved text.",
       "scope": "The 24 sources cited by HBM4 Evidence Release 001 findings and candidate relationships, rechecked for the IDE-011 HBM4 integration and qualification dossier"
+    },
+    {
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "tool": "scripts/inspect_sources.py",
+      "method": "Same method as the 2026-11-10 run: one attempt per URL (and listed pages of multi-page documents) with the declared, honest user agent, no browser impersonation, and every passage quoted by release findings, the conflict register or reconciliation records searched in the retrieved text.",
+      "scope": "The 10 sources cited by IDE-010 workflow C and the IDE-006 GB200 NVL72 dossier, rechecked for the IDE-014 rack deployment verification dossier"
     }
   ],
   "records": [
@@ -3564,6 +3571,399 @@
       "notes": [
         "All 6 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct.",
         "Retrieved on this run; the 2026-11-10 run was refused (HTTP 403)."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-dgx-gb-rack-user-guide-2026",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/dgx/dgxgb200-user-guide/dgxgb200-user-guide.pdf",
+          "content_type": "application/pdf",
+          "bytes": 14567212,
+          "sha256": "b248c2d2198da22f0160c9fdea71a9bba7f86551c0715903b98f0c5525690578",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 30,
+        "found": 30,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 30 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-dgx-superpod-gb200-ra-2025",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-gb200/latest/_downloads/238ab33ee345a7241fc2f15eedc2ff6c/RA11338001-DSPGB200-ReferenceArch.pdf",
+          "content_type": "application/pdf",
+          "bytes": 4732505,
+          "sha256": "9976935adfc1b343a89d250f0be8881a092f9d459f554b58f67aad29a0d6861a",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 16,
+        "found": 16,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 16 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-gb200-nvl72-ocp-contribution-2024",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/",
+          "http_status": 200,
+          "final_url": "https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/",
+          "content_type": "text/html",
+          "bytes": 279261,
+          "sha256": "d671383fd2cdb62689f331ce93b83ea3c822d7714d09031e654ae286a3443278",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 8,
+        "found": 8,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 8 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-mission-control-rack-setup-guide-2026",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/index.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/index.html",
+          "content_type": "text/html",
+          "bytes": 40016,
+          "sha256": "b4e7487232fd35c97fc799218e0851b834929ca6484e44bf5fb66cbf28344874",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/introduction.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/introduction.html",
+          "content_type": "text/html",
+          "bytes": 22240,
+          "sha256": "de854adb6d439fe1f29e8aa87b8bfea2b99a68858fb187c763f9bd3904be9a60",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/pre-deployment-checklist.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/pre-deployment-checklist.html",
+          "content_type": "text/html",
+          "bytes": 24847,
+          "sha256": "900c8b63189f1dd34f42ae57e7cf20b952e0cce49f571fd0160e11481dab1442",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-bring-up.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-bring-up.html",
+          "content_type": "text/html",
+          "bytes": 64983,
+          "sha256": "55d9bf1d0bb53b593172ef65db2a1b15930ed4a779513d94ae7c1b465849d3c9",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-firmware-update.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/rack-firmware-update.html",
+          "content_type": "text/html",
+          "bytes": 20408,
+          "sha256": "09eda2c92d2f5d8293d910f1c95df42f5bf257aecda56ac3e211080456753a6b",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/deployment-summary-validation-checklist.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/rack-bring-up-install/2.5.0/deployment-summary-validation-checklist.html",
+          "content_type": "text/html",
+          "bytes": 113203,
+          "sha256": "191ebc7f3468dc76fb5c4cf2487f2ffe5298ac9bed21c4d002f447751a5940a3",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 24,
+        "found": 24,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 24 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-mission-control-gb200-admin-guide-2025",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/pdf/nvidia-mission-control-software-with-nvidia-gb200-nvl72-systems-administration-guide.pdf",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/pdf/nvidia-mission-control-software-with-nvidia-gb200-nvl72-systems-administration-guide.pdf",
+          "content_type": "application/pdf",
+          "bytes": 6474090,
+          "sha256": "5c43bd54bac4482a0fce554e1aa0adde1c95d60c419d08827263c6bf63be46cb",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 10,
+        "found": 10,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 10 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "nvidia-mission-control-north-south-network-guide-2026",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://docs.nvidia.com/mission-control/docs/ext-north-south-network-gb200-deploy-guide/2.5.0/ext-north-south-network-gb200-intro.html",
+          "http_status": 200,
+          "final_url": "https://docs.nvidia.com/mission-control/docs/ext-north-south-network-gb200-deploy-guide/2.5.0/ext-north-south-network-gb200-intro.html",
+          "content_type": "text/html",
+          "bytes": 27477,
+          "sha256": "0306a4f2581c56a36e5d562137d72b59cb19ff1ad1480868ca5dc1e7fe98e747",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 1,
+        "found": 1,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 1 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "bis-advanced-semiconductor-controls-2024",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
+          "http_status": 200,
+          "final_url": "https://www.bis.gov/press-release/commerce-strengthens-export-controls-restrict-chinas-capability-produce-advanced-semiconductors-military",
+          "content_type": "text/html",
+          "bytes": 73996,
+          "sha256": "9ea91444124ac3e38e347b2f579b1ac7067f7e4e25ed726124ccd208dd48a29c",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 5,
+        "found": 5,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 5 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ocp-liquid-to-liquid-cdu-test-methodology-2024",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.opencompute.org/documents/ocp-wp-l-lcdu-test-methodology-performance-rating-r1-pdf/",
+          "http_status": 200,
+          "final_url": "https://www.opencompute.org/documents/ocp-wp-l-lcdu-test-methodology-performance-rating-r1-pdf/",
+          "content_type": "application/pdf",
+          "bytes": 732511,
+          "sha256": "d275179e3e3c8e837d39d268e9b8017a8e1ab7053ae2fd1438a9a9fb44d1ba6c",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 9,
+        "found": 9,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 9 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ecfr-15-cfr-742-6-2026",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-742/section-742.6",
+          "http_status": 200,
+          "final_url": "https://unblock.federalregister.gov/",
+          "content_type": "text/html",
+          "bytes": 10596,
+          "sha256": "521438acf5c1f1b9313b65939812f887172578f55d2702048e6eef7500b8b49c",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=742&section=742.6",
+          "http_status": 200,
+          "final_url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?subtitle=B&chapter=VII&subchapter=C&part=742&section=742.6",
+          "content_type": "text/html",
+          "bytes": 66177,
+          "sha256": "c9cb8f5ecc4ff9d0bd83254b8b4fef585b695f838fe2bfa0408766373da06a50",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
+      ],
+      "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "ecfr-15-cfr-740-25-2024",
+      "run_id": "ide-014-2026-11-12",
+      "inspected_at": "2026-11-12",
+      "states": [
+        "metadata_validated",
+        "source_retrieved",
+        "source_content_compared"
+      ],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-740/section-740.25",
+          "http_status": 200,
+          "final_url": "https://unblock.federalregister.gov/",
+          "content_type": "text/html",
+          "bytes": 10596,
+          "sha256": "521438acf5c1f1b9313b65939812f887172578f55d2702048e6eef7500b8b49c",
+          "outcome": "retrieved"
+        },
+        {
+          "url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=740&section=740.25",
+          "http_status": 200,
+          "final_url": "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?subtitle=B&chapter=VII&subchapter=C&part=740&section=740.25",
+          "content_type": "text/html",
+          "bytes": 11769,
+          "sha256": "fabd6c52dffe865a8691c9543702d845354aae29ad87a99ddb5088baf92d9f60",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 2,
+        "found": 2,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
       ],
       "next_action": "No action from this inspection; recheck before any current comparison."
     }
