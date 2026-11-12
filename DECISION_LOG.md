@@ -675,3 +675,25 @@ The asset's value is the separation of what a standard establishes, what a compa
 - JEDEC's JESD270-4 announcement is registered as an announcement, not a standard. Its text was read from a Business Wire syndication (jedec.org was unreachable). Figures from it are marked as announcement content, and the normative standard has not been reviewed.
 - Unpublished research candidates are excluded from the Pages artifact, and the validator enforces the exclusion. The public repository still exposes them as labelled research files.
 - AEC-CS-001 is unchanged. No supplier capacity, availability or position conclusion is introduced.
+
+## ADR-021: Correct the Scale-Up versus Scale-Out Comparison in Reference Pathway B
+
+- **Date:** 2026-11-11
+- **Status:** Proposed (awaiting owner and scientific review)
+
+### Decision
+
+1. **`cmp-scale-up-vs-scale-out` changes from `conditional` to `unsupported`.** NVLink 6 scale-up bandwidth (3.6 TB/s per GPU) is a device-fabric aggregate to the NVLink Switch, stated bidirectional. ConnectX-9 scale-out bandwidth (1.6 Tb/s per GPU) is a network-port rate with no stated direction, on a different path, interface and counting basis. Converting bits to bytes puts both in one unit but does not make them the same quantity. The pathway's existing three-value vocabulary is kept: `unsupported` is the verdict for a pair that does not support the comparison, and the reason states that the pair is not comparable as one metric.
+2. **The ratio stays only as arithmetic on advertised figures.** The reason states its direction assumption (about 9x or 18x) and that it says nothing about delivered throughput. The open NVLink 6 3.6 / 3 TB/s question (`ec-nvlink6-per-gpu`) is unchanged and unexplained.
+3. **Two `/interconnects/` passages that expressed scale-out as a fraction of scale-up bandwidth are reworded** to distinguish the two metrics. No other public text changes.
+4. **The correction is recorded in `data/evidence-reconciliations-013.json`, beside, not inside, the IDE-009 record.** It names the IDE-009 value it replaces (`rc-009-nvlink6-per-gpu`), and the validator accepts that replacement only as an exact chain: the later entry must start from the value IDE-009 set, and the model must now carry the later value. IDE-009 remains a historical record and still names its own change.
+5. **The IDE-012 divergence is marked `reconciled` by `rc-013-scale-up-vs-scale-out`** and stays recorded. The IDE-012 validator accepts a reconciled divergence only when that reconciliation exists, covers the same comparison, quotes the earlier verdict and matches the pathway's current one.
+
+### Rationale
+
+A shared unit is not a shared metric. The earlier verdict let a reader conclude that two advertised figures on different networks measure the same thing in different proportions. Saying precisely what each figure describes is more useful to engineers and analysts than a ratio, and it follows the IDE-012 comparability method without replacing the pathway vocabulary.
+
+### Consequences
+
+- The other seven pathway B comparisons, pathways A and C, release 004, the IDE-009 record and the Atlas (zero relationships) are unchanged.
+- The correction is bounded analysis, AI-assisted and not scientifically reviewed.

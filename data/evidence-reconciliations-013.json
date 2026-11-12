@@ -1,0 +1,68 @@
+{
+  "record_id": "aec-evidence-reconciliation-013",
+  "release": "IDE-013",
+  "schema_version": "1.0.0",
+  "status": "maintenance_record",
+  "scientific_review": "pending",
+  "as_of": "2026-11-11",
+  "boundary": "An editorial correction of public references, made after the IDE-009 reconciliation; not an Atlas and not a scientific review. The IDE-009 record and earlier releases are kept unchanged as historical records: each correction here names the value it replaces, and that value must be the one an earlier record set or the one the public text carried.",
+  "reconciliations": [
+    {
+      "id": "rc-013-scale-up-vs-scale-out",
+      "comparison_id": "cmp-scale-up-vs-scale-out",
+      "previous_verdict": "conditional",
+      "corrected_verdict": "unsupported",
+      "supersedes": ["rc-009-nvlink6-per-gpu"],
+      "original_interpretation": "Reference pathway B treated NVLink 6 scale-up bandwidth (3.6 TB/s per GPU) and ConnectX-9 scale-out bandwidth (1.6 Tb/s per GPU) as comparable once bits are converted to bytes, giving a ratio of about 9x or 18x.",
+      "reconciled_interpretation": "The two figures are different physical metrics: a GPU's aggregate fabric bandwidth to the NVLink Switch, stated bidirectional, and a network port's rate, with no stated direction, on a different path, interface and counting basis. Converting bits to bytes puts them in one unit but does not make them the same quantity, so the comparison is unsupported. A ratio may still be stated as arithmetic on advertised figures, with its direction assumption, but it says nothing about delivered throughput.",
+      "why_previous_insufficient": "A shared unit was taken as evidence of a shared metric. The pathway's own figures place the two at different levels of the system (device fabric aggregate and scale-out port), and no reviewed source defines a common basis for them.",
+      "basis": {
+        "finding_ids": ["i-an-units-and-directions", "i-an-scale-up-to-out", "i-nvidia-nvlink6-figures", "i-nvidia-scale-out"],
+        "source_ids": ["nvidia-rubin-platform-architecture-2026"],
+        "dossier_id": "aec-dossier-accelerator-bandwidth-comparability-012",
+        "dossier_comparison_id": "cp-scale-up-vs-scale-out"
+      },
+      "claim_classification": "bounded_analysis",
+      "scope": {
+        "technical": "One reference pathway B comparison and the two /interconnects/ passages that expressed the same ratio as a fraction of scale-up bandwidth",
+        "temporal": "Figures as published by NVIDIA on 2026-01-05; corrected 2026-11-11"
+      },
+      "uncertainty_remaining": [
+        "Whether NVIDIA's 1.6 Tb/s per GPU is per direction or counts both",
+        "Whether NVLink 6 per GPU is 3.6 TB/s or 3 TB/s (ec-nvlink6-per-gpu stays open)",
+        "Delivered scale-up and scale-out throughput, which no reviewed source publishes"
+      ],
+      "pathway_changes": [
+        {
+          "target": "cmp-scale-up-vs-scale-out",
+          "field": "verdict",
+          "old": "conditional",
+          "new": "unsupported"
+        },
+        {
+          "target": "cmp-scale-up-vs-scale-out",
+          "field": "reason",
+          "old": "Comparable only after converting bits to bytes; the ratio is about 9x or 18x depending on the unstated direction of the 1.6 Tb/s figure, and it uses the 3.6 TB/s NVLink 6 figure, which NVIDIA also publishes as 3 TB/s.",
+          "new": "Not comparable as one metric: 3.6 TB/s is NVLink 6 per-GPU fabric bandwidth to the NVLink Switch, stated bidirectional, and 1.6 Tb/s is ConnectX-9 per-GPU network-port bandwidth with no stated direction, on a different path, interface and counting basis. Converting bits to bytes puts both in one unit but does not make them the same quantity. As arithmetic on advertised figures only, the first is about 9x or 18x the second depending on that direction; the ratio says nothing about delivered throughput. NVIDIA also publishes NVLink 6 as 3 TB/s per GPU."
+        }
+      ],
+      "publication_changes": [
+        {
+          "route": "/interconnects/",
+          "old_text": "Per GPU, NVLink 6's 3.6 TB/s (28.8 Tb/s) is about 9× ConnectX-9's 1.6 Tb/s if that figure is per direction, or 18× if it counts both. Scale-out therefore adds NIC, switch, optics and network-software dependencies that the scale-up fabric does not have.",
+          "new_text": "Per GPU, NVIDIA advertises 3.6 TB/s (28.8 Tb/s) for NVLink 6 and 1.6 Tb/s for ConnectX-9. These are different metrics on different paths: a GPU's aggregate fabric bandwidth to the NVLink Switch, and a network port's rate. In one unit the first is about 9 times the second if 1.6 Tb/s is per direction, or 18 times if it counts both; that is arithmetic on advertised figures, not a comparison of delivered throughput, and NVIDIA also publishes NVLink 6 as 3 TB/s per GPU. Scale-out adds NIC, switch, optics and network-software dependencies that the scale-up fabric does not have."
+        },
+        {
+          "route": "/interconnects/",
+          "old_text": "A separate network adds NIC, switch and optics dependencies, at about a ninth to an eighteenth of per-GPU scale-up bandwidth in NVIDIA's design",
+          "new_text": "A separate network adds NIC, switch and optics dependencies; its per-GPU port rate is a different metric from scale-up fabric bandwidth"
+        }
+      ],
+      "dossier_divergence": {
+        "dossier_comparison_id": "cp-scale-up-vs-scale-out",
+        "status_after": "reconciled"
+      },
+      "reconciled_at": "2026-11-11"
+    }
+  ]
+}

@@ -29,6 +29,13 @@ from validate_evidence_maintenance import _content_checks, iso, page_ids, source
 from validate_evidence_releases import MAX_QUOTE_WORDS, NEGATION, QUOTED, sentences  # noqa: E402
 
 RECORD = ROOT / "data" / "evidence-reconciliations-009.json"
+# Later editorial corrections (IDE-013). Each names the value it replaces, so the IDE-009 record stays a historical record:
+# a pathway value IDE-009 set may change only through a later entry that supersedes it and starts from exactly that value.
+LATER_RECORDS = [ROOT / "data" / "evidence-reconciliations-013.json"]
+LATER_TOP = {"record_id", "release", "schema_version", "status", "scientific_review", "as_of", "boundary", "reconciliations"}
+LATER_FIELDS = {"id", "comparison_id", "previous_verdict", "corrected_verdict", "supersedes", "original_interpretation",
+                "reconciled_interpretation", "why_previous_insufficient", "basis", "claim_classification", "scope",
+                "uncertainty_remaining", "pathway_changes", "publication_changes", "dossier_divergence", "reconciled_at"}
 TOP = {"record_id", "release", "schema_version", "status", "scientific_review", "as_of", "boundary", "state_definitions",
        "decision_definitions", "reconciliations"}
 STATES = ["evidence_reviewed", "interpretation_changed", "public_reference_synchronized", "pathway_synchronized", "conflict_remains_open"]
@@ -107,10 +114,23 @@ def semantic_guards(texts: dict[str, str], nvlink_open: bool, amd_applied: bool)
     return errors
 
 
+def later_changes(later: list[dict]) -> dict[tuple[str, str, str], dict]:
+    """(superseded reconciliation id, target, field) -> the later pathway change that replaces that value."""
+    out = {}
+    for rec in later:
+        for rc in rec.get("reconciliations", []):
+            for pc in rc.get("pathway_changes", []):
+                for sid in rc.get("supersedes", []):
+                    out[(sid, pc.get("target"), str(pc.get("field")))] = {**pc, "by": rc.get("id")}
+    return out
+
+
 def check(record: object, registry: dict, register: dict, pathways: dict, inspections: dict, releases: dict,
-          pages: dict[str, str] | None = None, today: date | None = None) -> list[str]:
+          pages: dict[str, str] | None = None, today: date | None = None, later: list[dict] | None = None) -> list[str]:
     today = today or date.today()
     pages = default_pages() if pages is None else pages
+    later = load_later() if later is None else later
+    superseded = later_changes(later)
     errors: list[str] = []
     if not isinstance(record, dict) or set(record) != TOP:
         return ["reconciliations: top-level fields mismatch"]
@@ -261,6 +281,12 @@ def check(record: object, registry: dict, register: dict, pathways: dict, inspec
                 value = obj[m.group(1)]
                 current = value[int(m.group(2))] if m.group(2) is not None and isinstance(value, list) and int(m.group(2)) < len(value) else value
                 ok = current == pc.get("new")
+                nxt = superseded.get((rc["id"], target, field))
+                if nxt is not None:
+                    # Chain of custody: the later correction must start from exactly the value this record set.
+                    if nxt.get("old") != pc.get("new"):
+                        errors.append(f"{w}.pathway_changes[{k}]: {nxt['by']} does not start from the value this reconciliation set")
+                    ok = current == nxt.get("new")
                 if rc["id"] not in obj.get("reconciliations", []):
                     errors.append(f"{w}.pathway_changes[{k}]: {target} does not name this reconciliation")
             if not ok:
@@ -272,9 +298,10 @@ def check(record: object, registry: dict, register: dict, pathways: dict, inspec
     for cid in sorted({c for c in covered if covered.count(c) > 1}):
         errors.append(f"reconciliations: register issue {cid} has more than one reconciliation")
     # Every reconciliation named by the pathway model exists.
+    later_ids = {rc.get("id") for rec in later for rc in rec.get("reconciliations", [])}
     for obj in list(steps.values()) + list(comps.values()):
         for rid in obj.get("reconciliations", []):
-            if rid not in seen_ids:
+            if rid not in seen_ids and rid not in later_ids:
                 errors.append(f"pathways: {obj['id']} names unknown reconciliation {rid}")
     # Content and semantic guards.
     errors += _content_checks(record, "reconciliations", set(), prose_skip=(".boundary", ".old_text", ".old", ".original_interpretation", ".url"))
@@ -284,6 +311,93 @@ def check(record: object, registry: dict, register: dict, pathways: dict, inspec
     texts["reference-pathways.json"] = "\n".join(v for _, v in model_strings(pathways))
     errors += semantic_guards(texts, nvlink_open=bool(nv and nv["states"]["conflict_remains_open"]),
                               amd_applied=bool(amd and amd["decision"] == "applied"))
+    return errors
+
+
+def load_later() -> list[dict]:
+    return [json.loads(p.read_text(encoding="utf-8")) for p in LATER_RECORDS if p.is_file()]
+
+
+def check_later(rec: object, base: dict, registry: dict, pathways: dict, releases: dict, pages: dict[str, str],
+                dossier: dict | None, today: date | None = None) -> list[str]:
+    """Validate a later correction record (IDE-013) against the IDE-009 record, the pathways, the pages and IDE-012."""
+    today = today or date.today()
+    if not isinstance(rec, dict) or set(rec) != LATER_TOP:
+        return ["reconciliations-013: top-level fields mismatch"]
+    errors: list[str] = []
+    if rec["status"] != "maintenance_record" or rec["scientific_review"] != "pending":
+        errors.append("reconciliations-013: status must be 'maintenance_record' and scientific_review 'pending'")
+    if "not an Atlas" not in rec["boundary"] or "not a scientific review" not in rec["boundary"] or "kept unchanged" not in rec["boundary"]:
+        errors.append("reconciliations-013: boundary must say it is not an Atlas or a scientific review and keeps earlier records unchanged")
+    base_rcs = {r["id"]: r for r in base["reconciliations"]}
+    comps = {c["id"]: (c, p) for p in pathways["pathways"] for c in p.get("comparisons", [])}
+    findings = {f["id"] for r in releases.values() for f in r["findings"]}
+    verdict_map = {"valid": {"comparable_on_documented_terms"}, "conditional": {"conditionally_comparable"},
+                   "unsupported": {"not_comparable", "indeterminate"}}
+    for rc in rec["reconciliations"]:
+        if not isinstance(rc, dict) or set(rc) != LATER_FIELDS:
+            errors.append(f"reconciliations-013: entry {rc.get('id') if isinstance(rc, dict) else rc} fields mismatch")
+            continue
+        w = f"reconciliations-013[{rc['id']}]"
+        if not re.fullmatch(r"rc-013-[a-z0-9-]+", rc["id"]):
+            errors.append(f"{w}: invalid id")
+        d = iso(rc["reconciled_at"])
+        if d is None or d > today or d < iso(base["as_of"]):
+            errors.append(f"{w}: reconciled_at must be a valid date, no earlier than the IDE-009 record and not in the future")
+        if rc["comparison_id"] not in comps:
+            errors.append(f"{w}: comparison {rc['comparison_id']} does not exist")
+            continue
+        cmp_, _ = comps[rc["comparison_id"]]
+        if cmp_["verdict"] != rc["corrected_verdict"] or rc["previous_verdict"] == rc["corrected_verdict"]:
+            errors.append(f"{w}: the pathway must carry the corrected verdict, and it must differ from the previous one")
+        if rc["id"] not in cmp_.get("reconciliations", []):
+            errors.append(f"{w}: {rc['comparison_id']} does not name this reconciliation")
+        for sid in rc["supersedes"]:
+            if sid not in base_rcs:
+                errors.append(f"{w}: superseded reconciliation {sid} does not exist")
+            elif sid not in cmp_.get("reconciliations", []):
+                errors.append(f"{w}: {rc['comparison_id']} must keep naming the superseded {sid} (history is kept)")
+        fields_changed = set()
+        for k, pc in enumerate(rc["pathway_changes"]):
+            pw = f"{w}.pathway_changes[{k}]"
+            if pc.get("target") != rc["comparison_id"] or pc.get("field") not in cmp_ or pc.get("old") == pc.get("new"):
+                errors.append(f"{pw}: must change a field of {rc['comparison_id']} to a different value")
+                continue
+            fields_changed.add(pc["field"])
+            if cmp_[pc["field"]] != pc["new"]:
+                errors.append(f"{pw}: the pathway model does not carry the corrected value for {pc['field']}")
+            earlier = [x for sid in rc["supersedes"] for x in base_rcs.get(sid, {}).get("pathway_changes", [])
+                       if x.get("target") == pc["target"] and x.get("field") == pc["field"]]
+            if earlier and earlier[-1]["new"] != pc["old"]:
+                errors.append(f"{pw}: old value must be the one the superseded reconciliation set")
+            if pc["field"] == "verdict" and (pc["old"], pc["new"]) != (rc["previous_verdict"], rc["corrected_verdict"]):
+                errors.append(f"{pw}: verdict change must match previous_verdict and corrected_verdict")
+        if not {"verdict", "reason"} <= fields_changed:
+            errors.append(f"{w}: a verdict correction changes both the verdict and its reason")
+        for k, pc in enumerate(rc["publication_changes"]):
+            route = pc.get("route")
+            text = norm(plain(pages.get(route, "")))
+            if route not in pages or norm(pc.get("new_text", "")) not in text or norm(pc.get("old_text", "")) in text or not pc.get("old_text"):
+                errors.append(f"{w}.publication_changes[{k}]: {route} must carry the new text and no longer carry the old text")
+        ev = rc["basis"]
+        for fid in ev.get("finding_ids", []):
+            if fid not in findings:
+                errors.append(f"{w}: finding {fid} does not exist")
+        for sid in ev.get("source_ids", []):
+            if registry.get(sid, {}).get("status") != "active":
+                errors.append(f"{w}: source {sid} must be an active registered source")
+        # The correction rests on, and agrees with, the IDE-012 classification.
+        dc = next((c for c in (dossier or {}).get("comparisons", []) if c["id"] == ev.get("dossier_comparison_id")), None)
+        if dc is None or (dossier or {}).get("dossier_id") != ev.get("dossier_id"):
+            errors.append(f"{w}: the IDE-012 dossier comparison it rests on must exist")
+        elif dc["classification"] not in verdict_map[rc["corrected_verdict"]] or dc.get("pathway_comparison_id") != rc["comparison_id"]:
+            errors.append(f"{w}: the corrected verdict must agree with the IDE-012 classification of the same pathway comparison")
+        elif not dc.get("pathway_divergence") or dc["pathway_divergence"].get("status") != rc["dossier_divergence"]["status_after"] \
+                or dc["pathway_divergence"].get("reconciled_by") != rc["id"]:
+            errors.append(f"{w}: the IDE-012 divergence must stay recorded and be marked reconciled by this entry")
+        if not rc["uncertainty_remaining"] or not rc["why_previous_insufficient"].strip():
+            errors.append(f"{w}: state why the earlier interpretation was insufficient and what remains uncertain")
+    errors += _content_checks(rec, "reconciliations-013", set(), prose_skip=(".boundary", ".old_text", ".old", ".original_interpretation"))
     return errors
 
 
@@ -305,6 +419,15 @@ def main() -> None:
         print(f"FAIL: required reconciliation record missing: {RECORD.relative_to(ROOT)}", file=sys.stderr)
         raise SystemExit(1)
     errors = check(*load_all())
+    for p in LATER_RECORDS:  # a correction the pathway model names is part of the evidence layer: missing means failure
+        if not p.is_file():
+            errors.append(f"required reconciliation record missing: {p.relative_to(ROOT)}")
+    if not errors:
+        record, registry, _, pathways, _, releases = load_all()
+        dossier_path = ROOT / "data" / "research" / "institutional" / "accelerator-bandwidth-comparability-dossier-012.json"
+        dossier = json.loads(dossier_path.read_text(encoding="utf-8")) if dossier_path.is_file() else None
+        for later in load_later():
+            errors += check_later(later, record, registry, pathways, releases, default_pages(), dossier)
     if errors:
         for e in errors:
             print(f"FAIL: {e}", file=sys.stderr)

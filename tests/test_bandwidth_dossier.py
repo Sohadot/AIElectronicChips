@@ -54,13 +54,12 @@ class DossierTests(unittest.TestCase):
         self.assertEqual(set(mapped), {c["id"] for c in pathway["comparisons"]})
         for c in pathway["comparisons"]:
             ours = mapped[c["id"]]
+            self.assertIn(ours["classification"], v.PATHWAY_MAP[c["verdict"]], c["id"])
             if ours["pathway_divergence"]:
-                # The one documented divergence: stricter than the pathway, and pending reconciliation.
+                # The one documented divergence, reconciled by IDE-013: stricter than the earlier verdict, kept as history.
                 self.assertEqual(c["id"], "cmp-scale-up-vs-scale-out")
-                self.assertGreater(v.STRICTNESS[ours["classification"]], v.STRICTNESS[c["verdict"]])
-                self.assertEqual(ours["pathway_divergence"]["status"], "pending_editorial_reconciliation")
-            else:
-                self.assertIn(ours["classification"], v.PATHWAY_MAP[c["verdict"]], c["id"])
+                self.assertGreater(v.STRICTNESS[ours["classification"]], v.STRICTNESS[ours["pathway_divergence"]["pathway_verdict"]])
+                self.assertEqual(ours["pathway_divergence"]["status"], "reconciled")
 
     def test_ide009_reconciliation_preserved(self):
         d = dossier()
@@ -119,17 +118,18 @@ EXPECTED_NORMALIZATIONS = {"nm-a-7-links": "896", "nm-a-28-links": "3584", "nm-b
 class CorrectionTests(unittest.TestCase):
     """The minimum blocking correction to PR #22: scale-up versus scale-out, and the recorded pathway divergence."""
 
-    def test_scale_up_vs_scale_out_not_comparable_with_pending_divergence(self):
+    def test_scale_up_vs_scale_out_not_comparable_with_reconciled_divergence(self):
+        # IDE-012 recorded the divergence as pending; IDE-013 corrected the public pathway and the record is kept as history.
         c = item(dossier(), "comparisons", "cp-scale-up-vs-scale-out")
         self.assertEqual(c["classification"], "not_comparable")
         self.assertEqual(c["pathway_divergence"], {
             "pathway_comparison_id": "cmp-scale-up-vs-scale-out", "pathway_verdict": "conditional",
             "dossier_classification": "not_comparable", "justification": c["pathway_divergence"]["justification"],
-            "status": "pending_editorial_reconciliation"})
+            "status": "reconciled", "reconciled_by": "rc-013-scale-up-vs-scale-out"})
         self.assertIn("does not make them the same physical metric", c["reason"])
         self.assertIn("neither ratio describes relative delivered throughput", c["reason"])
         pathway = next(p for p in _ctx()["pathways"]["pathways"] if p["id"] == "pathway-memory-bandwidth-to-data-movement")
-        self.assertEqual(next(x for x in pathway["comparisons"] if x["id"] == "cmp-scale-up-vs-scale-out")["verdict"], "conditional")
+        self.assertEqual(next(x for x in pathway["comparisons"] if x["id"] == "cmp-scale-up-vs-scale-out")["verdict"], "unsupported")
 
     def test_only_one_divergence_and_other_classes_unchanged(self):
         d = dossier()
@@ -151,8 +151,15 @@ class CorrectionTests(unittest.TestCase):
         self.assertFlags(d, r"same hierarchy level, aggregation scope and unit dimension after normalization")
 
     def test_unexplained_pathway_discrepancy_fails(self):
+        # With the public pathway back at 'conditional', the class needs a pending divergence again.
+        c = ctx()
+        next(x for p in c["pathways"]["pathways"] for x in p.get("comparisons", []) if x["id"] == "cmp-scale-up-vs-scale-out")["verdict"] = "conditional"
         d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"] = None
-        self.assertFlags(d, r"contradicts pathway verdict 'conditional' for cmp-scale-up-vs-scale-out and no divergence is recorded")
+        self.assertFlags(d, r"contradicts pathway verdict 'conditional' for cmp-scale-up-vs-scale-out and no divergence is recorded", c)
+        d = dossier()  # the reconciled record no longer fits a pathway that disagrees again
+        self.assertFlags(d, r"pathway divergence must contain exactly", c)
+        d = dossier(); dv = item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]; dv.pop("reconciled_by")
+        self.assertFlags(d, r"stays 'pending_editorial_reconciliation'", c)
 
     def test_divergence_cannot_bypass_rules(self):
         # A divergence cannot loosen a pathway verdict.
@@ -163,17 +170,24 @@ class CorrectionTests(unittest.TestCase):
                                    "justification": "An arbitrary declaration written to bypass the classification rules for this pair of figures."}
         self.assertFlags(d, r"may only restrict the pathway verdict")
         self.assertFlags(d, r"unresolved scope cannot be compared")
-        # A divergence cannot be attached where the class already agrees with the pathway.
-        d = dossier(); item(d, "comparisons", "cp-stack-vs-stack")["pathway_divergence"] = copy.deepcopy(item(dossier(), "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"])
+        # A pending divergence cannot be attached where the class already agrees with the pathway.
+        d = dossier(); div = copy.deepcopy(item(dossier(), "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"])
+        div["status"] = "pending_editorial_reconciliation"; div.pop("reconciled_by")
+        item(d, "comparisons", "cp-stack-vs-stack")["pathway_divergence"] = div
         self.assertFlags(d, r"divergence is recorded where the classification agrees")
-        # A divergence must match the comparison exactly.
-        d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]["pathway_verdict"] = "unsupported"
-        self.assertFlags(d, r"must name this comparison's pathway id, its current verdict")
+        # A reconciled divergence cannot be borrowed by another comparison.
+        d = dossier(); item(d, "comparisons", "cp-stack-vs-stack")["pathway_divergence"] = copy.deepcopy(item(dossier(), "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"])
+        self.assertFlags(d, r"must cover this pathway comparison")
+        # A reconciled divergence must name a reconciliation that exists and quote the earlier verdict exactly.
+        d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]["reconciled_by"] = "rc-013-invented"
+        self.assertFlags(d, r"names no reconciliation that exists")
+        d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]["pathway_verdict"] = "valid"
+        self.assertFlags(d, r"from the recorded verdict to the pathway's current one")
         d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]["justification"] = "Because."
         self.assertFlags(d, r"needs a technical justification")
-        # A divergence is never a completed reconciliation.
-        d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]["status"] = "reconciled"
-        self.assertFlags(d, r"stays 'pending_editorial_reconciliation'")
+        # Once the pathway agrees, a divergence stays only as reconciled history, never as pending or otherwise.
+        d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]["status"] = "pending_editorial_reconciliation"
+        self.assertFlags(d, r"divergence is recorded where the classification agrees")
         d = dossier(); item(d, "comparisons", "cp-scale-up-vs-scale-out")["pathway_divergence"]["approved"] = True
         self.assertFlags(d, r"must contain exactly")
 
@@ -188,8 +202,8 @@ class CorrectionTests(unittest.TestCase):
         self.assertIn("do not explain whether rounding, a different configuration or another counting convention", text)
         self.assertNotIn("250 GB", text)
 
-    def assertFlags(self, d, pattern):
-        errs = v.check(d, ctx())
+    def assertFlags(self, d, pattern, c=None):
+        errs = v.check(d, c or ctx())
         self.assertTrue(any(re.search(pattern, e) for e in errs), f"expected /{pattern}/ in {errs}")
 
 

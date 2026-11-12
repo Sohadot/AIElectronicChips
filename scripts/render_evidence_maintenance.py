@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 PAGE = ROOT / "sources" / "index.html"
 RECON_PATH = ROOT / "data" / "evidence-reconciliations-009.json"
+LATER_PATHS = [ROOT / "data" / "evidence-reconciliations-013.json"]  # later corrections (IDE-013); IDE-009 stays as recorded
 START, END = "<!-- evidence-maintenance:start -->", "<!-- evidence-maintenance:end -->"
 e = html.escape
 
@@ -87,7 +88,8 @@ def render() -> str:
                '<a href="/data/source-inspections.json">source-inspections.json</a>, '
                '<a href="/data/evidence-conflicts.json">evidence-conflicts.json</a>, '
                '<a href="/data/evidence-impact-index.json">evidence-impact-index.json</a> and '
-               '<a href="/data/evidence-reconciliations-009.json">evidence-reconciliations-009.json</a>.</p>')
+               '<a href="/data/evidence-reconciliations-009.json">evidence-reconciliations-009.json</a>'
+               + "".join(f', <a href="/data/{p.name}">{p.name}</a>' for p in LATER_PATHS if p.is_file()) + '.</p>')
     out.append("</div></article>")
     # 09: conflict register
     out.append('<article class="reference-block" id="conflict-register"><div class="block-index">09</div><div>')
@@ -159,7 +161,8 @@ def render() -> str:
                    f'<td>{len(entry["direct"]["findings"])}</td><td>{pages}</td><td>{len(entry["direct"]["pathway_steps"])}</td>'
                    f'<td>{issues}</td><td>{e(rec["next_action"])}</td></tr>')
     out.append("</tbody></table></div></div></article>")
-    out.extend(render_reconciliations(recon, register, registry))
+    later = [json.loads(p.read_text(encoding="utf-8")) for p in LATER_PATHS if p.is_file()]
+    out.extend(render_reconciliations(recon, register, registry, later))
     out.append("</section>")
     out.append(END)
     return "\n".join(out)
@@ -168,8 +171,11 @@ def render() -> str:
 YES = {True: "Yes", False: "No", "not_required": "Not required"}
 
 
-def render_reconciliations(recon, register, registry) -> list[str]:
+def render_reconciliations(recon, register, registry, later=()) -> list[str]:
     titles = {c["id"]: c["title"] for c in register["issues"]}
+    # A pathway value an IDE-009 entry set and a later correction replaced: shown with a link to the later entry.
+    superseded = {(sid, pc["target"], pc["field"]): rc["id"] for rec in later for rc in rec["reconciliations"]
+                  for sid in rc["supersedes"] for pc in rc["pathway_changes"]}
     out = ['<article class="reference-block" id="reconciliation"><div class="block-index">11</div><div>',
            f'<h2>Reconciliation, {e(recon["as_of"])}</h2>',
            f'<p class="detail">{e(recon["boundary"])} Each entry keeps five states apart: whether new evidence was reviewed, whether it '
@@ -214,12 +220,42 @@ def render_reconciliations(recon, register, registry) -> list[str]:
                 if target.startswith("cmp-"):
                     return target
                 return target.split(".")[0] if target.startswith("pathway-") else "step-" + target
+            def later_note(x):
+                by = superseded.get((r["id"], x["target"], x["field"]))
+                return f'. Later replaced by <a href="#{e(by)}">{e(by)}</a>.' if by else ""
             items = "".join(f'<li><a href="/sovereignty-stack/#{e(anchor(x["target"]))}">'
-                            f'{e(x["target"])}</a> {e(x["field"])}: "{e(x["old"])}" became "{e(x["new"])}"</li>' for x in r["pathway_changes"])
+                            f'{e(x["target"])}</a> {e(x["field"])}: "{e(x["old"])}" became "{e(x["new"])}"{later_note(x)}</li>' for x in r["pathway_changes"])
             out.append(f"<dt>Pathway model changed</dt><dd><ul>{items}</ul></dd>")
         out.append(f'<dt>Still uncertain</dt><dd><ul>{"".join(f"<li>{e(u)}</li>" for u in r["uncertainty_remaining"])}</ul></dd>')
         out.append("</dl></details></li>")
-    out.append("</ol></div></article>")
+    out.append("</ol>")
+    for rec in later:
+        out.append(f'<h3>Later correction, {e(rec["as_of"])} ({e(rec["release"])})</h3>')
+        out.append(f'<p class="detail">{e(rec["boundary"])}</p><ol class="conflict-list">')
+        for rc in rec["reconciliations"]:
+            out.append(f'<li id="{rc["id"]}" class="conflict-item"><div class="step-head"><h3>'
+                       f'<a href="/sovereignty-stack/#{e(rc["comparison_id"])}">{e(rc["comparison_id"])}</a>: '
+                       f'{e(rc["previous_verdict"])} became {e(rc["corrected_verdict"])}</h3><span class="tag tag-c">applied</span></div>')
+            out.append(f'<p><strong>Corrected interpretation.</strong> {e(rc["reconciled_interpretation"])}</p>')
+            out.append(f'<p><strong>Why the earlier reading was insufficient.</strong> {e(rc["why_previous_insufficient"])}</p>')
+            out.append('<details class="evidence-trace"><summary>Evidence and exact changes</summary><dl>')
+            out.append(f'<dt>Earlier interpretation</dt><dd>{e(rc["original_interpretation"])}</dd>')
+            replaces = ", ".join('<a href="#' + e(x) + '">' + e(x) + "</a>" for x in rc["supersedes"])
+            out.append(f"<dt>Replaces</dt><dd>{replaces}, kept as recorded</dd>")
+            ev = rc["basis"]
+            out.append(f'<dt>Evidence</dt><dd>Release findings {", ".join(f"<code>{x}</code>" for x in ev["finding_ids"])}; '
+                       f'registered source {", ".join(f"<code>{x}</code>" for x in ev["source_ids"])}; research dossier '
+                       f'<code>{e(ev["dossier_id"])}</code>, comparison <code>{e(ev["dossier_comparison_id"])}</code> (an unreviewed research candidate)</dd>')
+            items = "".join(f'<li><a href="/sovereignty-stack/#{e(x["target"])}">{e(x["target"])}</a> {e(x["field"])}: '
+                            f'"{e(x["old"])}" became "{e(x["new"])}"</li>' for x in rc["pathway_changes"])
+            out.append(f"<dt>Pathway model changed</dt><dd><ul>{items}</ul></dd>")
+            items = "".join(f'<li><a href="{e(x["route"])}">{e(x["route"])}</a>: "{e(x["old_text"])}" became "{e(x["new_text"])}"</li>'
+                            for x in rc["publication_changes"])
+            out.append(f"<dt>Public text changed</dt><dd><ul>{items}</ul></dd>")
+            out.append(f'<dt>Still uncertain</dt><dd><ul>{"".join(f"<li>{e(u)}</li>" for u in rc["uncertainty_remaining"])}</ul></dd>')
+            out.append("</dl></details></li>")
+        out.append("</ol>")
+    out.append("</div></article>")
     return out
 
 

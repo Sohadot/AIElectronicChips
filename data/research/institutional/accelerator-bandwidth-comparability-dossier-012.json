@@ -972,7 +972,8 @@
         "pathway_verdict": "conditional",
         "dossier_classification": "not_comparable",
         "justification": "The pathway treats the pair as comparable after converting bits to bytes. A unit conversion makes the magnitudes expressible together but cannot make a device-fabric aggregate and a scale-out port rate the same metric; under this dossier's rules the two sit at different hierarchy levels.",
-        "status": "pending_editorial_reconciliation"
+        "status": "reconciled",
+        "reconciled_by": "rc-013-scale-up-vs-scale-out"
       }
     },
     {
