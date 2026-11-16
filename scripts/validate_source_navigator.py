@@ -80,7 +80,10 @@ def check_page(page: str, registry: dict) -> list[str]:
         if r["status"] != "active" and "nav-pending" not in item:
             errors.append(f"{w}: a non-active source must be marked visibly")
     text = re.sub(r"\s+", " ", own_text(section))
-    for phrase in ("registration does not verify any claim", "not that its contents are still current", "attributed to the publisher",
+    if "has passed identity and metadata review" in text or "passed review" in text.lower():
+        errors.append("navigator: registration must not be described as a completed review; two records are pending review")
+    for phrase in ("The registry records source identity and metadata, including entries still pending review. Registration does not verify any claim.",
+                   "not that its contents are still current", "attributed to the publisher",
                    "conflicting evidence stays recorded", "an empty result means only that no registered source carries this metadata"):
         if phrase not in text:
             errors.append(f"navigator: boundary wording missing: {phrase!r}")

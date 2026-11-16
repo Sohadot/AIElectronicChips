@@ -27,6 +27,8 @@ NODE = shutil.which("node")
 PLAYWRIGHT = next((p for p in (os.environ.get("PLAYWRIGHT_MODULE", ""), "/opt/node22/lib/node_modules/playwright")
                    if p and Path(p).is_dir()), None)
 REQUIRE_BROWSER = os.environ.get("AEC_REQUIRE_BROWSER") == "1"
+REGISTRATION = ("The registry records source identity and metadata, including entries still pending review. "
+                "Registration does not verify any claim.")
 
 
 def registry():
@@ -82,7 +84,19 @@ class PageTests(unittest.TestCase):
             self.assertIn("Pending review", item)
         section = v.block(page())
         self.assertIsNone(v.INVENTED.search(v.own_text(section)))
-        self.assertIn("registration does not verify any claim", section)
+        self.assertIn(REGISTRATION, section)
+        self.assertNotIn("has passed identity and metadata review", section)
+
+    def test_status_is_never_promoted_by_registration(self):
+        # Every record keeps its registry status on the page; pending records are labelled, and nothing says "verified".
+        p = page()
+        for r in records():
+            item = re.search(rf'<li class="nav-source" id="nav-{r["id"]}".*?\n</li>', p, re.S).group(0)
+            self.assertIn(f'class="nav-status{" nav-pending" if r["status"] != "active" else ""}" data-value="{r["status"]}"', item)
+            meta = re.search(r'<p class="nav-meta">.*?</p>', item).group(0)
+            self.assertNotRegex(meta.lower(), r"\bverified\b|\bvalidated\b|\bapproved\b")
+        self.assertEqual(sorted(r["id"] for r in records() if r["status"] == "pending_review"),
+                         ["asml-2024-annual-reports", "ucie-2-specification-release-2024"])
 
     def test_commercial_pointer_restrained(self):
         section = v.block(page())
@@ -120,7 +134,9 @@ class NegativeTests(unittest.TestCase):
         self.assertFlags(p.replace(r0["use_limitations"][0], "No limitation", 1), "recorded text missing")
         self.assertFlags(p.replace("<h2 id=\"navigator-title\">Evidence navigator</h2>", "<h2 id=\"navigator-title\">Evidence navigator</h2><p>Trust score: 9</p>"),
                          "evaluative wording")
-        self.assertFlags(p.replace("registration does not verify any claim", "registration confirms each claim"), "boundary wording")
+        self.assertFlags(p.replace("Registration does not verify any claim.", "Registration confirms each claim."), "boundary wording")
+        self.assertFlags(p.replace("The registry records source identity and metadata, including entries still pending review.",
+                                   "A registered source has passed identity and metadata review."), "completed review")
         self.assertFlags(p.replace("Scoped work beyond the public inventory</h3>", "Scoped work beyond the public inventory</h3><p>From $499 per month</p>"),
                          "no prices")
         self.assertFlags(p.replace('<script src="/assets/js/source-navigator.js" defer></script>',
@@ -219,7 +235,7 @@ class BrowserTests(unittest.TestCase):
     def test_json_export_is_the_registry_record(self):
         j = self.r["json"]
         self.assertEqual((j["format"], j["format_version"], j["registry_version"]), ("aec-source-inventory", "1.0.0", registry()["registry_version"]))
-        self.assertIn("registration does not verify any claim", j["boundary"])
+        self.assertIn(REGISTRATION, j["boundary"])
         self.assertEqual(j["filters"]["layers"], ["packaging", "memory", "interconnect"])
         by_id = {x["id"]: x for x in records()}
         self.assertEqual(j["count"], len(j["sources"]))
@@ -243,7 +259,7 @@ class BrowserTests(unittest.TestCase):
             self.assertEqual(rec["canonical_url"], src["canonical_url"])
             self.assertEqual(rec["use_limitations"], " | ".join(src["use_limitations"]))
         meta = {row[0]: row[1] for row in rows if row[0] in ("boundary", "filters", "count", "format")}
-        self.assertIn("registration does not verify any claim", meta["boundary"])
+        self.assertIn(REGISTRATION, meta["boundary"])
         self.assertIn("status active", meta["filters"])
         self.assertTrue(all(line.startswith('"') for line in self.r["csv"].strip().split("\r\n")))
 
