@@ -1,0 +1,55 @@
+# GitHub Pages publication allowlist: the only files that may enter the aielectronicchips.com artifact.
+#
+# scripts/stage_pages.py copies exactly these paths from the committed tree (HEAD) and fails closed on anything
+# else. A file under assets/ or data/ is not published unless it is listed here. To publish a new public file, add
+# its exact path in sorted order and have the change reviewed. Never generate or extend this list automatically.
+# Internal material (.github/, data/research/, scripts/, tests/, Markdown) is rejected even if listed.
+.nojekyll
+CNAME
+ai-chip-infrastructure/index.html
+assets/css/evidence.css
+assets/css/main.css
+assets/js/chip-dependency-map.js
+assets/js/research-workbench.js
+assets/js/strategic-inquiry.js
+assets/og/ai-chip-infrastructure.png
+assets/og/chip-dependency-map.png
+assets/og/compute-sovereignty.png
+assets/og/design-fabrication-packaging.png
+assets/og/export-control-layer.png
+assets/og/hbm-memory.png
+assets/og/home.png
+assets/og/interconnects.png
+assets/og/methodology.png
+assets/og/power-and-thermal-limits.png
+assets/og/research-workbench.png
+assets/og/sources.png
+assets/og/sovereignty-stack.png
+assets/og/strategic-availability.png
+chip-dependency-map/index.html
+compute-sovereignty/index.html
+data/chip-dependency-model.json
+data/dependency-atlas.json
+data/deployment-evidence-preflight.json
+data/evidence-conflicts.json
+data/evidence-impact-index.json
+data/evidence-reconciliations-009.json
+data/evidence-reconciliations-013.json
+data/industrial-evidence-requests.json
+data/reference-pathways.json
+data/source-inspections.json
+data/source-registry.json
+data/strategic-offerings.json
+design-fabrication-packaging/index.html
+export-control-layer/index.html
+hbm-memory/index.html
+index.html
+interconnects/index.html
+methodology/index.html
+power-and-thermal-limits/index.html
+research-workbench/index.html
+robots.txt
+sitemap.xml
+sources/index.html
+sovereignty-stack/index.html
+strategic-availability/index.html

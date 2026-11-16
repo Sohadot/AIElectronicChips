@@ -1,0 +1,39 @@
+# Local artifacts only. Publication is controlled separately by .github/pages-allowlist.txt.
+
+# Python caches and tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Node dependencies and caches
+node_modules/
+.npm/
+
+# Local environment and secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs and temporary output
+*.log
+tmp/
+.tmp/

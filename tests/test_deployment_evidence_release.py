@@ -324,7 +324,10 @@ class AtlasBoundaryTests(unittest.TestCase):
 
     def test_research_material_is_excluded_from_the_site(self):
         self.assertEqual([], check_pages_exclusion(WORKFLOW, RESEARCH))
-        self.assertIn("--exclude='data/research'", WORKFLOW.read_text(encoding="utf-8"))
+        self.assertIn("scripts/stage_pages.py --out", WORKFLOW.read_text(encoding="utf-8"))
+        entries = [line for line in (WORKFLOW.parent.parent / "pages-allowlist.txt").read_text(encoding="utf-8").splitlines()
+                   if line.strip() and not line.startswith("#")]
+        self.assertFalse([e for e in entries if e.startswith("data/research")])
         self.assertTrue(DOSSIER.is_relative_to(RESEARCH))
 
 
