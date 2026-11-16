@@ -112,9 +112,9 @@
       "supported_claim_types": ["company_disclosure", "reported_risk", "business_model_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and publication-date disclosures",
-      "confidence_use": "May identify the official annual reports and support attributed company disclosures",
-      "use_limitations": ["Canonical URL corrected on 2026-11-16 from the publication notice (HTTP 403 on 2026-11-10 and 2026-11-16) to the report PDF hosted on ASML's ourbrand.asml.com domain; the investor-relations archive also refused automated retrieval", "One of ASML's 2024 annual reports; the statutory EU-IFRS report and the Annual Report on Form 20-F are separate documents, and this record does not establish which of them a claim should cite", "No independent verification of company statements"],
-      "status": "pending_review"
+      "confidence_use": "May support attributed ASML company disclosures within the 2024 US GAAP annual report's stated reporting period; each detailed claim still requires passage-level review",
+      "use_limitations": ["This is the 2024 US GAAP annual report, not the former publication notice; the separate statutory EU-IFRS report and Form 20-F were not cross-verified", "Company-reported statements and forward-looking information are not independently verified", "No inference about current production capacity or supplier availability without separate evidence"],
+      "status": "active"
     },
     {
       "id": "nvidia-fiscal-2025-form-10-k",
@@ -187,14 +187,14 @@
       "source_type": "official_technical_disclosure",
       "canonical_url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
       "publication_date": "2024-08-06",
-      "accessed_at": "2026-06-14",
+      "accessed_at": "2026-11-16",
       "ontology_layers": ["interconnect", "packaging"],
       "supported_claim_types": ["standard_release", "technical_scope"],
-      "geographic_scope": "Consortium announcement of a standard with international applicability",
-      "temporal_scope": "UCIe 2.0 release dated 2024-08-06",
-      "confidence_use": "May support attributed statements about the released specification's stated scope",
-      "use_limitations": ["Press release is not a substitute for reviewing the specification", "Does not establish adoption or interoperability for a specific deployment", "Canonical URL corrected on 2026-11-10 from the consortium's press-release listing to the release PDF it links", "Announcement only: the normative UCIe 2.0 specification is available separately by request under the consortium's licence terms and was not reviewed"],
-      "status": "pending_review"
+      "geographic_scope": "Industry consortium announcement; no country-specific deployment is established",
+      "temporal_scope": "Public UCIe 2.0 announcement dated 2024-08-06, not a current implementation assessment",
+      "confidence_use": "May support attributed descriptions of the UCIe 2.0 release announcement and its publicly stated technical scope, not normative requirements",
+      "use_limitations": ["This two-page press release is not the normative UCIe 2.0 specification", "The normative specification is requested separately under terms that prohibit submission to AI systems; it was not reviewed", "Consortium statements do not demonstrate adoption, conformance or cross-vendor interoperability in a specific deployment", "The canonical URL was corrected on 2026-11-10 from a press-release listing to the PDF release itself"],
+      "status": "active"
     },
     {
       "id": "ucie-1-specification-launch-2022",

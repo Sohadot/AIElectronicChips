@@ -66,16 +66,18 @@ class PackagingReleaseTests(unittest.TestCase):
         release, _, _ = load()
         self.assertNotIn("verified_fact", {f["claim_class"] for f in release["findings"]})
 
-    def test_findings_citing_pending_ucie_release_declare_it(self):
+    def test_findings_citing_reviewed_ucie_release_keep_attribution(self):
         release, _, _ = load()
         for f in release["findings"]:
             if any(e["source_id"] == "ucie-2-specification-release-2024" for e in f["evidence"]):
-                self.assertEqual("includes_pending_source", f["evidence_state"], f["id"])
+                self.assertEqual("cited_sources_active", f["evidence_state"], f["id"])
+                self.assertNotEqual("verified_fact", f["claim_class"], f["id"])
 
     def test_pending_source_must_be_declared(self):
-        release, _, _ = load()
-        finding(release, "p-ucie-2-3d-dfx")["evidence_state"] = "cited_sources_active"
-        self.assertTrue(any("evidence_state must be includes_pending_source" in e for e in self.errors(release)))
+        release, registry, atlas = load()
+        next(s for s in registry["source_records"] if s["id"] == "ucie-2-specification-release-2024")["status"] = "pending_review"
+        errs = check_release(release, registry, atlas, TODAY, "fixture")
+        self.assertTrue(any("evidence_state must be includes_pending_source" in e for e in errs), errs)
 
     def test_packaging_topics_accepted_and_unknown_topic_rejected(self):
         release, _, _ = load()
@@ -143,9 +145,10 @@ class ReferencePageMappingTests(unittest.TestCase):
         errs = check_inference_boundaries(hbm, PAGE)
         self.assertTrue(any("ties CoWoS to a product" in e for e in errs), errs)
 
-    def test_ucie_pending_marker_is_visible(self):
+    def test_ucie_reviewed_release_keeps_normative_boundary(self):
         html = PAGE.read_text(encoding="utf-8")
-        self.assertRegex(html, r"<code>ucie-2-specification-release-2024</code>, pending_review")
+        self.assertRegex(html, r"<code>ucie-2-specification-release-2024</code>\.")
+        self.assertIn("normative specification was not examined", html)
 
 
 class EvidenceGatedCowosTests(unittest.TestCase):
