@@ -873,15 +873,25 @@ def check_cross_release_consistency(releases: dict[str, dict], sitemap: Path | N
 
 
 def check_pages_exclusion(workflow: Path, research_dir: Path) -> list[str]:
-    """Unpublished research candidates must not ship in the Pages artifact."""
+    """Unpublished research candidates must not ship in the Pages artifact.
+
+    The workflow must stage the site only through scripts/stage_pages.py, which copies the files listed in
+    .github/pages-allowlist.txt and nothing else, and the allowlist must not name anything under data/research/."""
     if not any(research_dir.glob("*.json")):
         return []
     try:
         text = workflow.read_text(encoding="utf-8")
     except OSError:
         return ["Pages workflow not found; cannot confirm data/research is excluded from the site artifact"]
-    if "--exclude='data/research'" not in text or "path: .\n" in text:
-        return ["Pages workflow must stage the site with data/research/ excluded before upload"]
+    if 'scripts/stage_pages.py --out "$RUNNER_TEMP/site"' not in text or "path: .\n" in text or "git archive" in text:
+        return ["Pages workflow must stage the site only from .github/pages-allowlist.txt via scripts/stage_pages.py before upload"]
+    allowlist = workflow.parent.parent / "pages-allowlist.txt"
+    try:
+        entries = [line.strip() for line in allowlist.read_text(encoding="utf-8").splitlines()]
+    except OSError:
+        return ["Pages allowlist .github/pages-allowlist.txt not found; cannot confirm data/research is excluded"]
+    if any(e.startswith("data/research") for e in entries):
+        return ["Pages allowlist must not list anything under data/research/"]
     return []
 
 

@@ -232,6 +232,22 @@ class PublicExposureTests(unittest.TestCase):
             errors = check_pages_exclusion(wf, ROOT / "data" / "research")
         self.assertTrue(errors)
 
+    def test_workflow_must_stage_from_allowlist_without_research(self):
+        good = 'python3 scripts/stage_pages.py --out "$RUNNER_TEMP/site"\n'
+        for workflow, allowlist, fragment in (
+                ("git archive HEAD | tar -x -C site\n", "index.html\n", "only from .github/pages-allowlist.txt"),
+                (good + "git archive HEAD\n", "index.html\n", "only from .github/pages-allowlist.txt"),
+                (good, "data/research/deployment-evidence-release-006.json\nindex.html\n", "must not list anything under data/research"),
+                (good, None, "not found")):
+            with self.subTest(fragment=fragment), tempfile.TemporaryDirectory() as tmp:
+                (Path(tmp) / "workflows").mkdir()
+                wf = Path(tmp) / "workflows" / "wf.yml"
+                wf.write_text(workflow, encoding="utf-8")
+                if allowlist is not None:
+                    (Path(tmp) / "pages-allowlist.txt").write_text(allowlist, encoding="utf-8")
+                errors = check_pages_exclusion(wf, ROOT / "data" / "research")
+                self.assertTrue(any(fragment in e for e in errors), errors)
+
 
 class ReviewRepresentationTests(unittest.TestCase):
     """Evidence compilation, automated validation and human review are different events."""
