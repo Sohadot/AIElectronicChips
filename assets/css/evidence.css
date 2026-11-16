@@ -245,3 +245,38 @@
   .wb-controls textarea { border: 1px solid #000; }
   a[href^="/"]::after { content: " (aielectronicchips.com" attr(href) ")"; font-size: .75em; }
 }
+
+/* Institutional Evidence Navigator (IDE-017): source inventory on /sources/, local filters and export. */
+.nav-controls { border: 1px solid var(--line); background: var(--surface); padding: .9rem 1rem 1rem; margin: 1rem 0; }
+.nav-controls[hidden], .nav-empty[hidden], .nav-source[hidden] { display: none; }
+.nav-filter-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .6rem 1.2rem; }
+.nav-group { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; }
+.nav-group legend { font-size: .85rem; font-weight: 600; color: var(--ink-strong); padding: 0; margin-bottom: .2rem; }
+.nav-group .wb-option { min-height: 32px; }
+.nav-mode { display: flex; flex-wrap: wrap; gap: 0 1rem; margin-top: .3rem; border-top: 1px solid var(--line); padding-top: .2rem; }
+.nav-field { display: block; font-size: .85rem; font-weight: 600; color: var(--ink-strong); margin: .7rem 0 .25rem; }
+.nav-controls select, .nav-controls input[type="search"] { font: inherit; font-size: .95rem; min-height: 44px; width: 100%; max-width: 32rem; padding: .3rem .5rem; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); }
+.nav-controls select:focus-visible, .nav-controls input:focus-visible { outline: 2px solid var(--teal-ink); outline-offset: 2px; }
+.nav-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .9rem; }
+.nav-toolbar .button { font: inherit; font-size: .9rem; cursor: pointer; }
+.nav-count { font-weight: 600; color: var(--ink-strong); margin: .6rem 0; }
+.nav-empty { border-left: 3px solid var(--copper); padding-left: .7rem; }
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-source { border: 1px solid var(--line); background: var(--surface); padding: .8rem 1rem; margin: .7rem 0; overflow-wrap: anywhere; }
+.nav-title { font-size: 1rem; margin: 0 0 .3rem; }
+.nav-meta, .nav-links { font-size: .88rem; color: var(--muted); margin: .2rem 0; }
+.nav-pending { color: var(--copper-ink); font-weight: 600; }
+.nav-fields { display: grid; grid-template-columns: max-content 1fr; gap: .3rem 1rem; font-size: .9rem; margin: .5rem 0; }
+.nav-fields dt { font-weight: 600; color: var(--ink-strong); }
+.nav-fields dd { margin: 0; min-width: 0; }
+.nav-fields ul { margin: 0; padding-left: 1.1rem; }
+.nav-layers, .nav-claims { display: flex; flex-wrap: wrap; gap: .2rem .9rem; list-style: none; padding-left: 0 !important; }
+@media (max-width: 640px) {
+  .nav-fields { grid-template-columns: 1fr; }
+  .nav-fields dt { margin-top: .35rem; }
+  .nav-source { padding: .7rem; }
+}
+@media print {
+  .nav-controls { display: none !important; }
+  .nav-source { break-inside: avoid; }
+}

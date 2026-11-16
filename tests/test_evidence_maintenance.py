@@ -348,7 +348,9 @@ class PublicSurfaceTests(unittest.TestCase):
             self.assertIn(f'id="{c["id"]}"', text)
         for f in ("source-inspections.json", "evidence-conflicts.json", "evidence-impact-index.json"):
             self.assertIn(f'href="/data/{f}"', text)
-        self.assertEqual(['<script type="application/ld+json">'], re.findall(r"<script\b[^>]*>", text))
+        # Structured data plus, since ADR-023, exactly the local deferred evidence-navigator script.
+        self.assertEqual(['<script type="application/ld+json">', '<script src="/assets/js/source-navigator.js" defer>'],
+                         re.findall(r"<script\b[^>]*>", text))
         self.assertIn('"@id": "https://aielectronicchips.com/sources/#registry"', text)
         self.assertIn('<link rel="canonical" href="https://aielectronicchips.com/sources/">', text)
 

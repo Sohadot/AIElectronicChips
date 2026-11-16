@@ -722,3 +722,20 @@ Researchers need to know what a document must contain before anyone can examine 
 - The guide's later pages, including its planning and design section, remain unreviewed. If cited, they could support a reference-design classification and infrastructure proposed.
 - `DEPLOYMENT_EVIDENCE_RELEASE_006.md` still describes the dossier as it was released, with three requirements at infrastructure proposed. It is a historical record.
 - The Atlas has zero relationships. No review, reviewer or approval is recorded.
+
+## ADR-023: Institutional Evidence Navigator on /sources/
+
+- **Date:** 2026-11-16
+- **Status:** Proposed (awaiting owner review)
+
+### Decision
+
+1. **`/sources/` gains an evidence navigator instead of a new route.** All 76 registry records are rendered as plain HTML by `scripts/render_source_navigator.py`. Each shows its title and canonical URL, publisher, type, status, dates, ontology layers, the statement types it may support, recorded use, scope, limitations, latest inspection, where it is used and the conflict-register issues that name it. The inputs are `data/source-registry.json`, `data/evidence-impact-index.json` and `data/evidence-conflicts.json`, unchanged.
+2. **`/sources/` is authorized to load one local, deferred script, `assets/js/source-navigator.js`,** under the same rules as the other script pages: no transmission, storage, URL state, dynamic code or HTML interpolation. It filters what is already on the page (layers, any or every; type; status; year; register issue; text) and exports the sources shown as JSON or CSV. Each record is rebuilt from the page markup, so the export equals the registry record. The asset is listed explicitly in `.github/pages-allowlist.txt`.
+3. **The navigator evaluates nothing.** It shows that registration is not verification, that dates are not currency, and that statements are attributed to their publishers. It derives no score, rating, ranking or confidence, and `scripts/validate_source_navigator.py` fails if its own wording does.
+4. **One restrained pointer to `/strategic-availability/`** names the published offerings. It carries no price, subscription or promise of availability.
+
+### Consequences
+
+- The plain list of registry IDs and the maintenance tables are unchanged. The navigator links to each source's inspection row.
+- Registry records, findings, classifications, reconciliations and review states are unchanged.
