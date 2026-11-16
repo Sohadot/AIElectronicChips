@@ -16,13 +16,14 @@ DOMAIN = "https://aielectronicchips.com"
 ALLOWED_SKIP_TARGETS = {"#main"}
 # Pages authorized to load local, same-origin JavaScript for a governed
 # client-side surface (CHIP_DEPENDENCY_MAP_ENGINE_SPEC.md, ADR-017; Qualified
-# Inquiry Builder, ADR-018; Research Workbench, IDE-010). Every other page must remain script-free. Script
+# Inquiry Builder, ADR-018; Research Workbench, IDE-010; Evidence Navigator, ADR-023). Every other page must remain script-free. Script
 # tags on allowed pages may only reference local /assets/js/ files — never a
 # CDN or third-party URL.
 SCRIPT_ALLOWED_PAGES = {
     "chip-dependency-map/index.html",
     "strategic-availability/index.html",
     "research-workbench/index.html",
+    "sources/index.html",
 }
 
 RISKY_TERMS = [
