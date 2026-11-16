@@ -113,7 +113,7 @@
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and publication-date disclosures",
       "confidence_use": "May support attributed ASML company disclosures within the 2024 US GAAP annual report's stated reporting period; each detailed claim still requires passage-level review",
-      "use_limitations": ["This is the 2024 US GAAP annual report, not the publication notice or a separately verified statutory report", "Company-reported statements and forward-looking information are not independently verified", "No inference about current production capacity or supplier availability without separate evidence"],
+      "use_limitations": ["This is the 2024 US GAAP annual report, not the former publication notice; the separate statutory EU-IFRS report and Form 20-F were not cross-verified", "Company-reported statements and forward-looking information are not independently verified", "No inference about current production capacity or supplier availability without separate evidence"],
       "status": "active"
     },
     {

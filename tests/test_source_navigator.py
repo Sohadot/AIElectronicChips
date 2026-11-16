@@ -224,6 +224,7 @@ class BrowserTests(unittest.TestCase):
         self.assertEqual(f["maintenance"], self.ids(lambda x: x["source_type"] == "company_announcement" and x["status"] == "active"))
         self.assertEqual(f["year_2025"], self.ids(lambda x: year(x) == "2025"))
         self.assertEqual(f["pending"], self.ids(lambda x: x["status"] == "pending_review"))
+        self.assertEqual(f["pending_control_present"], bool(self.ids(lambda x: x["status"] == "pending_review")))
         blobs = dict(re.findall(r'data-id="([a-z0-9-]+)"[^>]*data-search="([^"]*)"', page()))
         self.assertEqual(f["search_hbm4_base"], sorted(i for i, s in blobs.items() if "hbm4" in s and "base" in s))
         self.assertTrue(f["search_hbm4_base"])
@@ -325,7 +326,11 @@ const fs = require('fs');
   const [dc] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export shown sources (CSV)' }).click()]);
   await dc.saveAs(dir + '/inv.csv');
   await reset(); await page.selectOption('#nav-year', '2025'); filters.year_2025 = (await state()).ids;
-  await reset(); await page.check('input[name=nav-status][value=pending_review]'); filters.pending = (await state()).ids;
+  await reset();
+  const pendingChoice = page.locator('input[name=nav-status][value=pending_review]');
+  filters.pending_control_present = await pendingChoice.count() > 0;
+  if (filters.pending_control_present) { await pendingChoice.check(); filters.pending = (await state()).ids; }
+  else { filters.pending = []; }
   await reset(); await page.fill('#nav-search', 'HBM4  Base'); filters.search_hbm4_base = (await state()).ids;
   await reset(); await page.selectOption('#nav-year', 'undated'); await layer('controls');
   const empty = await state();
