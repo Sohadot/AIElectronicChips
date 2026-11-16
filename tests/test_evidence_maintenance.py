@@ -30,7 +30,7 @@ from validate_evidence_maintenance import (  # noqa: E402
     metadata_issues,
 )
 
-TODAY = date(2026, 11, 12)
+TODAY = date(2026, 11, 16)
 
 
 def load(name):

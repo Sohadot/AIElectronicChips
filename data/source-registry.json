@@ -1,6 +1,6 @@
 {
-  "registry_version": "0.4.0",
-  "updated_at": "2026-11-11",
+  "registry_version": "0.4.1",
+  "updated_at": "2026-11-16",
   "source_policy_reference": "SOURCE_POLICY.md",
   "claim_boundary_reference": "CLAIM_BOUNDARY_MATRIX.md",
   "source_records": [
@@ -102,18 +102,18 @@
     },
     {
       "id": "asml-2024-annual-reports",
-      "title": "ASML publishes 2024 Annual Reports",
+      "title": "2024 Annual Report based on US GAAP",
       "publisher": "ASML Holding N.V.",
       "source_type": "annual_report",
-      "canonical_url": "https://www.asml.com/en/news/press-releases/2025/asml-publishes-2024-annual-reports",
+      "canonical_url": "https://ourbrand.asml.com/m/79d325b168e0fd7e/original/2024-Annual-Report-based-on-US-GAAP.pdf",
       "publication_date": "2025-03-05",
-      "accessed_at": "2026-06-14",
+      "accessed_at": "2026-11-16",
       "ontology_layers": ["fabrication", "controls"],
       "supported_claim_types": ["company_disclosure", "reported_risk", "business_model_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and publication-date disclosures",
       "confidence_use": "May identify the official annual reports and support attributed company disclosures",
-      "use_limitations": ["Registry entry points to the publication notice; underlying reports must support detailed claims", "No independent verification of company statements"],
+      "use_limitations": ["Canonical URL corrected on 2026-11-16 from the publication notice (HTTP 403 on 2026-11-10 and 2026-11-16) to the report PDF hosted on ASML's ourbrand.asml.com domain; the investor-relations archive also refused automated retrieval", "One of ASML's 2024 annual reports; the statutory EU-IFRS report and the Annual Report on Form 20-F are separate documents, and this record does not establish which of them a claim should cite", "No independent verification of company statements"],
       "status": "pending_review"
     },
     {
@@ -184,16 +184,16 @@
       "id": "ucie-2-specification-release-2024",
       "title": "UCIe Consortium Releases 2.0 Specification Supporting Manageability System Architecture and 3D Packaging",
       "publisher": "UCIe Consortium",
-      "source_type": "technical_standard",
+      "source_type": "official_technical_disclosure",
       "canonical_url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
       "publication_date": "2024-08-06",
       "accessed_at": "2026-06-14",
       "ontology_layers": ["interconnect", "packaging"],
       "supported_claim_types": ["standard_release", "technical_scope"],
-      "geographic_scope": "Technical standard with international applicability",
+      "geographic_scope": "Consortium announcement of a standard with international applicability",
       "temporal_scope": "UCIe 2.0 release dated 2024-08-06",
       "confidence_use": "May support attributed statements about the released specification's stated scope",
-      "use_limitations": ["Press release is not a substitute for reviewing the specification", "Does not establish adoption or interoperability for a specific deployment", "Canonical URL corrected on 2026-11-10 from the consortium's press-release listing to the release PDF it links"],
+      "use_limitations": ["Press release is not a substitute for reviewing the specification", "Does not establish adoption or interoperability for a specific deployment", "Canonical URL corrected on 2026-11-10 from the consortium's press-release listing to the release PDF it links", "Announcement only: the normative UCIe 2.0 specification is available separately by request under the consortium's licence terms and was not reviewed"],
       "status": "pending_review"
     },
     {

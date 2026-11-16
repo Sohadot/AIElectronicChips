@@ -443,10 +443,10 @@
         "pending_review"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-16",
         "states": [
           "metadata_validated",
-          "source_inaccessible",
+          "source_retrieved",
           "review_required"
         ]
       },
@@ -3440,12 +3440,13 @@
     {
       "source_id": "ucie-2-specification-release-2024",
       "status": "pending_review",
-      "freshness_basis": "Standard or specification release: check for later revisions and the normative text",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
       "priority_reasons": [
+        "product_architecture",
         "pending_review"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-16",
         "states": [
           "metadata_validated",
           "source_retrieved",

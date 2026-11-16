@@ -15,6 +15,18 @@ TOP_LEVEL = {"registry_version", "updated_at", "source_policy_reference", "sourc
 REQUIRED = {"id", "title", "publisher", "source_type", "canonical_url", "accessed_at", "ontology_layers", "supported_claim_types", "geographic_scope", "temporal_scope", "confidence_use", "use_limitations", "status"}
 
 
+ANNOUNCEMENT = re.compile(r"(?i)\b(?:press release|announcement)\b")
+
+
+def announcement_typed_as_standard(record: dict) -> str | None:
+    """A record whose own limitations say it is an announcement or press release describes a standard; it is not one."""
+    if record.get("source_type") == "technical_standard" and any(
+            ANNOUNCEMENT.search(str(lim)) for lim in record.get("use_limitations", [])):
+        return (f"{record.get('id')}: limitations describe an announcement or press release, so source_type cannot be "
+                "technical_standard (use official_technical_disclosure)")
+    return None
+
+
 def check_public_index(page: Path, records: list) -> list[str]:
     """The public /sources/ index must list exactly the registry IDs, marking pending ones."""
     try:
@@ -78,6 +90,9 @@ def main() -> None:
             errors.append(f"{label} has invalid ontology_layers: {layers}")
         if not str(record.get("canonical_url", "")).startswith("https://"):
             errors.append(f"{label} canonical_url must use https")
+        misread = announcement_typed_as_standard(record)
+        if misread:
+            errors.append(misread)
     errors.extend(check_public_index(path.parents[1] / "sources" / "index.html", records))
     if errors:
         for error in errors:
