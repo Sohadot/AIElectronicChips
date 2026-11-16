@@ -41,6 +41,13 @@
       "tool": "scripts/inspect_sources.py",
       "method": "Same method as the 2026-11-10 run: one attempt per URL (and listed pages of multi-page documents) with the declared, honest user agent, no browser impersonation, and every passage quoted by release findings, the conflict register or reconciliation records searched in the retrieved text.",
       "scope": "The 10 sources cited by IDE-010 workflow C and the IDE-006 GB200 NVL72 dossier, rechecked for the IDE-014 rack deployment verification dossier"
+    },
+    {
+      "run_id": "ide-018-2026-11-16",
+      "inspected_at": "2026-11-16",
+      "tool": "scripts/inspect_sources.py and documentary source-identity review",
+      "method": "Retrieve each current canonical public PDF once with the declared inspection user agent, record response metadata and SHA-256, and compare every quoted release passage. Compare the official ASML-hosted report with the owner-supplied copy by SHA-256 and visually inspect its cover. Distinguish the public UCIe press release from the separately licensed normative specification; do not access the latter.",
+      "scope": "Two formerly pending registry records: ASML 2024 US GAAP annual report and the official UCIe 2.0 release announcement. Identity and classification only, not scientific claim review."
     }
   ],
   "records": [
@@ -3966,6 +3973,62 @@
         "All 2 quoted passages were found in the retrieved document. This shows the passages are still published, not that the claims are still correct."
       ],
       "next_action": "No action from this inspection; recheck before any current comparison."
+    },
+    {
+      "source_id": "asml-2024-annual-reports",
+      "run_id": "ide-018-2026-11-16",
+      "inspected_at": "2026-11-16",
+      "states": ["metadata_validated", "source_retrieved"],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://ourbrand.asml.com/m/79d325b168e0fd7e/original/2024-Annual-Report-based-on-US-GAAP.pdf",
+          "http_status": 200,
+          "final_url": "https://ourbrand.asml.com/m/79d325b168e0fd7e/original/2024-Annual-Report-based-on-US-GAAP.pdf",
+          "content_type": "application/pdf",
+          "bytes": 32408363,
+          "sha256": "24570fe735f00c8c8b3305568c1b343be9051626ca04a465e8f505d2b97726a8",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": null,
+      "notes": [
+        "The official-hosted PDF and the owner-supplied copy have identical SHA-256 hashes; PDF metadata reports 410 pages and the 2024 US GAAP annual report title.",
+        "The corrected canonical URL is the report itself. The prior 403 response for the publication notice remains in the 2026-11-10 inspection.",
+        "No research-release finding cites this record, so no claim passage was checked. Source-identity acceptance does not assess company statements or current capacity."
+      ],
+      "next_action": "For any first detailed claim use, examine the report passage, accounting basis and reporting period; do not infer current production capacity."
+    },
+    {
+      "source_id": "ucie-2-specification-release-2024",
+      "run_id": "ide-018-2026-11-16",
+      "inspected_at": "2026-11-16",
+      "states": ["metadata_validated", "source_retrieved", "source_content_compared"],
+      "metadata_issues": [],
+      "retrievals": [
+        {
+          "url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
+          "http_status": 200,
+          "final_url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
+          "content_type": "application/pdf",
+          "bytes": 92701,
+          "sha256": "dacaaa4158b6942ab61cea26691e6dd8fe8b3c39dce42428ce0adbc8f4d99a31",
+          "outcome": "retrieved"
+        }
+      ],
+      "passage_check": {
+        "quoted_passages": 6,
+        "found": 6,
+        "found_after_hyphenation_fallback": 0,
+        "found_after_character_fallback": 0,
+        "not_found": []
+      },
+      "notes": [
+        "The two-page August 6, 2024 consortium PDF is a press release about UCIe 2.0, not the normative specification; its SHA-256 matches the earlier inspection.",
+        "All six passages quoted in IDE-003 findings were found in this public release. This supports traceability of the quoted announcement, not normative compliance or deployment outcomes.",
+        "The actual specification is separately requested under terms that prohibit submitting it to AI systems. No restricted document was accessed."
+      ],
+      "next_action": "Keep attributed announcement claims within this public release. Normative compliance or implementation claims require separate properly licensed expert evidence."
     }
   ]
 }

@@ -739,3 +739,23 @@ Researchers need to know what a document must contain before anyone can examine 
 
 - The plain list of registry IDs and the maintenance tables are unchanged. The navigator links to each source's inspection row.
 - Registry records, findings, classifications, reconciliations and review states are unchanged.
+
+## ADR-024: Review the ASML 2024 Report and the UCIe 2.0 Public Announcement as Sources
+
+- **Date:** 2026-11-16
+- **Status:** Proposed for owner ratification on PR merge
+
+### Decision
+
+1. **Resolve two source-identity and metadata review holds, not scientific findings.** Under `SOURCE_REGISTRY_PROTOCOL.md`, `active` means the canonical source and metadata were reviewed; it does not approve or substantiate its detailed claims. The owner's instruction was to complete reviews supported by available public documents and seek outside expertise only for claims that actually require it.
+2. **ASML (`asml-2024-annual-reports`).** Use the official `2024 Annual Report based on US GAAP` PDF rather than the earlier press notice. The ASML-hosted 410-page file, 32,408,363 bytes, SHA-256 `24570fe735f00c8c8b3305568c1b343be9051626ca04a465e8f505d2b97726a8`, matches the owner's copy. Preserve `annual_report` and the historical failed notice retrieval. The annual report is period-bound, attributed company disclosure; no finding currently cites it. No equivalence with a separate statutory filing or current-capacity claim is asserted.
+3. **UCIe (`ucie-2-specification-release-2024`).** Correct the document type from `technical_standard` to `official_technical_disclosure`: the canonical 92,701-byte PDF (SHA-256 `dacaaa4158b6942ab61cea26691e6dd8fe8b3c39dce42428ce0adbc8f4d99a31`) is the consortium's August 6, 2024 **press release**, not the normative UCIe 2.0 specification. Six passages already quoted by IDE-003 were located again in the public release. Keep claims attributed; neither released technical requirements nor adoption, conformance or demonstrated interoperability are established. The separately requested normative specification was not acquired or processed because its evaluation terms restrict AI use.
+4. **Dated trace and derived states.** Append inspection `ide-018-2026-11-16` without overwriting the IDE-008 results; update both access dates and registry version `0.4.1`. Set the two identity-reviewed records to `active`. Synchronize the three status-derived `evidence_state` fields in IDE-003 (no claim-class or statement promotion), source lists, rendered navigator, impact index, and affected reference markers. Preserve the unresolved normative UCIe question and all candidate Atlas relationship review holds.
+5. **Correct the navigator's general boundary sentence** to `The registry records source identity, metadata and review status. Registration does not verify any claim.` This remains true even with zero current `pending_review` records and does not promise future registrations are reviewed.
+
+### Limits and consequences
+
+- A source's `active` status is source-identity and metadata acceptance only. Research candidates, Atlas relationships and scientific findings have their own independent gates and are **not** approved by this status change.
+- The original IDE-003 `includes_pending_source` values are retained in Git history; replacing those three fields with `cited_sources_active` records the derived source-status transition, not new evidence or a reinterpretation of the underlying technical statements.
+- No company production figures or normative UCIe clauses are added. Any future normative, compliance or specific-product UCIe conclusion requires separately licensed expert evidence; no reviewer is needed simply to cite this public announcement as an attributed announcement.
+- This decision becomes operative only if the owner authorizes and merges its separate PR. It does not authorize the executing agent to merge.

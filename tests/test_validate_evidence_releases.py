@@ -150,6 +150,7 @@ class EvidenceReleaseTests(unittest.TestCase):
 
     def test_candidate_citing_pending_source_is_blocked(self):
         release, registry, atlas = load()
+        next(s for s in registry["source_records"] if s["id"] == "ucie-2-specification-release-2024")["status"] = "pending_review"
         release["candidate_relationships"][0]["evidence"].append(
             {"source_id": "ucie-2-specification-release-2024", "supported_claim_type": "standard_release"})
         self.assert_fails(release, registry, atlas, "source is not active")

@@ -53,10 +53,6 @@ EXTRA_PAGES = {
     # eCFR pages are read through the eCFR renderer API, which returns the same current section text.
     "ecfr-15-cfr-742-6-2026": ["https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=742&section=742.6"],
     "ecfr-15-cfr-740-25-2024": ["https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-15?part=740&section=740.25"],
-    # The registry's canonical URL is the consortium's press-release listing; the release itself is this PDF.
-    "ucie-2-specification-release-2024": [
-        "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
-    ],
 }
 
 Fetcher = Callable[[str], tuple[int, str, str, bytes]]

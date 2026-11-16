@@ -1,6 +1,6 @@
 {
-  "registry_version": "0.4.0",
-  "updated_at": "2026-11-11",
+  "registry_version": "0.4.1",
+  "updated_at": "2026-11-16",
   "source_policy_reference": "SOURCE_POLICY.md",
   "claim_boundary_reference": "CLAIM_BOUNDARY_MATRIX.md",
   "source_records": [
@@ -102,19 +102,19 @@
     },
     {
       "id": "asml-2024-annual-reports",
-      "title": "ASML publishes 2024 Annual Reports",
+      "title": "2024 Annual Report based on US GAAP",
       "publisher": "ASML Holding N.V.",
       "source_type": "annual_report",
-      "canonical_url": "https://www.asml.com/en/news/press-releases/2025/asml-publishes-2024-annual-reports",
+      "canonical_url": "https://ourbrand.asml.com/m/79d325b168e0fd7e/original/2024-Annual-Report-based-on-US-GAAP.pdf",
       "publication_date": "2025-03-05",
-      "accessed_at": "2026-06-14",
+      "accessed_at": "2026-11-16",
       "ontology_layers": ["fabrication", "controls"],
       "supported_claim_types": ["company_disclosure", "reported_risk", "business_model_context"],
       "geographic_scope": "Company-reported global operations",
       "temporal_scope": "Fiscal year 2024 and publication-date disclosures",
-      "confidence_use": "May identify the official annual reports and support attributed company disclosures",
-      "use_limitations": ["Registry entry points to the publication notice; underlying reports must support detailed claims", "No independent verification of company statements"],
-      "status": "pending_review"
+      "confidence_use": "May support attributed ASML company disclosures within the 2024 US GAAP annual report's stated reporting period; each detailed claim still requires passage-level review",
+      "use_limitations": ["This is the 2024 US GAAP annual report, not the publication notice or a separately verified statutory report", "Company-reported statements and forward-looking information are not independently verified", "No inference about current production capacity or supplier availability without separate evidence"],
+      "status": "active"
     },
     {
       "id": "nvidia-fiscal-2025-form-10-k",
@@ -184,17 +184,17 @@
       "id": "ucie-2-specification-release-2024",
       "title": "UCIe Consortium Releases 2.0 Specification Supporting Manageability System Architecture and 3D Packaging",
       "publisher": "UCIe Consortium",
-      "source_type": "technical_standard",
+      "source_type": "official_technical_disclosure",
       "canonical_url": "https://www.uciexpress.org/_files/ugd/0c1418_c9fb71cbbd4644e3b73b123216fa2e52.pdf",
       "publication_date": "2024-08-06",
-      "accessed_at": "2026-06-14",
+      "accessed_at": "2026-11-16",
       "ontology_layers": ["interconnect", "packaging"],
       "supported_claim_types": ["standard_release", "technical_scope"],
-      "geographic_scope": "Technical standard with international applicability",
-      "temporal_scope": "UCIe 2.0 release dated 2024-08-06",
-      "confidence_use": "May support attributed statements about the released specification's stated scope",
-      "use_limitations": ["Press release is not a substitute for reviewing the specification", "Does not establish adoption or interoperability for a specific deployment", "Canonical URL corrected on 2026-11-10 from the consortium's press-release listing to the release PDF it links"],
-      "status": "pending_review"
+      "geographic_scope": "Industry consortium announcement; no country-specific deployment is established",
+      "temporal_scope": "Public UCIe 2.0 announcement dated 2024-08-06, not a current implementation assessment",
+      "confidence_use": "May support attributed descriptions of the UCIe 2.0 release announcement and its publicly stated technical scope, not normative requirements",
+      "use_limitations": ["This two-page press release is not the normative UCIe 2.0 specification", "The normative specification is requested separately under terms that prohibit submission to AI systems; it was not reviewed", "Consortium statements do not demonstrate adoption, conformance or cross-vendor interoperability in a specific deployment", "The canonical URL was corrected on 2026-11-10 from a press-release listing to the PDF release itself"],
+      "status": "active"
     },
     {
       "id": "ucie-1-specification-launch-2022",

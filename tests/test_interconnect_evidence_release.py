@@ -101,10 +101,12 @@ class InterconnectReleaseTests(unittest.TestCase):
         self.assertTrue({("3.6", "TB/s"), ("3.0", "TB/s")} <= values)
         self.assertIn("u-i-nvlink6-figure", {u["id"] for u in release["unresolved"]})
 
-    def test_ucie_2_stays_pending(self):
+    def test_ucie_2_is_active_as_an_announcement_only(self):
         _, registry, _ = load()
         record = next(s for s in registry["source_records"] if s["id"] == "ucie-2-specification-release-2024")
-        self.assertEqual("pending_review", record["status"])
+        self.assertEqual("active", record["status"])
+        self.assertEqual("official_technical_disclosure", record["source_type"])
+        self.assertIn("not the normative UCIe 2.0 specification", " ".join(record["use_limitations"]))
 
 
 class QuantityScopeTests(unittest.TestCase):

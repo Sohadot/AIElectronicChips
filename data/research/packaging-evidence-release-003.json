@@ -335,11 +335,11 @@
           "locator": "\"UCIe-3D is optimized for hybrid bonding\"; \"bump pitches as big as 10-25 microns to as small as 1 micron or less\"; \"from sort to management in the field\"; \"establishes an initial framework for physical, adapter, and protocol compliance testing\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "UCIe 2.0 as announced on 2024-08-06",
       "as_of": "2026-11-09",
       "limitations": [
-        "The registry record for this announcement is pending owner review",
+        "The source identity and press-release classification were reviewed on 2026-11-16; the normative specification was not examined",
         "Announcement, not the specification; the normative UCIe 2.0 text was not reviewed",
         "An initial compliance framework is not a published compliance or interoperability result"
       ]
@@ -431,7 +431,7 @@
           "locator": "\"from sort to management in the field\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Generic pathway for interposer-based AI accelerators, assembled from the reviewed disclosures",
       "as_of": "2026-11-09",
       "limitations": [
@@ -497,7 +497,7 @@
           "locator": "\"how our members are already actively implementing UCIe chiplet solutions\""
         }
       ],
-      "evidence_state": "includes_pending_source",
+      "evidence_state": "cited_sources_active",
       "scope": "Conceptual distinction applied to the reviewed sources",
       "as_of": "2026-11-09",
       "limitations": [

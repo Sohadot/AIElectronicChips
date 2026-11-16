@@ -117,10 +117,12 @@ class NegativeModelTests(unittest.TestCase):
         self.assertFlags(m, r"not cited by the requirement's findings")
 
     def test_pending_review_source(self):
-        registry = context()[0]
-        pending = next(s for s, rec in registry.items() if rec["status"] == "pending_review")
-        m = model(); req(m, "ra-01-interface-revision")["source_ids"].append(pending)
-        self.assertFlags(m, r"not active evidence")
+        # Build a synthetic pending state: the current reviewed registry has no pending records.
+        ctx = copy.deepcopy(context())
+        m = model(); sid = req(m, "ra-01-interface-revision")["source_ids"][0]
+        ctx[0][sid]["status"] = "pending_review"
+        errs = v.check_model(m, *ctx)
+        self.assertTrue(any(re.search(r"not active evidence", e) for e in errs), errs)
 
     def test_unknown_conflict_and_broken_reference(self):
         m = model(); r = req(m, "rb-03-stack-bandwidth")

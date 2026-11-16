@@ -40,7 +40,7 @@ STATUS_MEANING = {"active": "identity and metadata reviewed", "pending_review": 
 RECORD_FIELDS = ["id", "title", "publisher", "source_type", "status", "publication_date", "effective_date", "accessed_at",
                  "canonical_url", "ontology_layers", "supported_claim_types", "geographic_scope", "temporal_scope",
                  "confidence_use", "use_limitations"]
-BOUNDARY = ("The registry records source identity and metadata, including entries still pending review. Registration does not "
+BOUNDARY = ("The registry records source identity, metadata and review status. Registration does not "
             "verify any claim. Support "
             "for a statement is assessed finding by finding, only within the claim types and limitations listed. Publication "
             "and access dates show when a source was issued and read, not that its contents are still current. Statements "

@@ -30,7 +30,7 @@ from validate_evidence_maintenance import (  # noqa: E402
     metadata_issues,
 )
 
-TODAY = date(2026, 11, 12)
+TODAY = date(2026, 11, 16)
 
 
 def load(name):
@@ -67,21 +67,27 @@ class CommittedStateTests(unittest.TestCase):
             self.assertFalse({"source_retrieved", "source_inaccessible"} <= set(r["states"]), r["source_id"])
             self.assertNotIn("verified", json.dumps(r).lower().replace("unverified", ""))
 
-    def test_pending_sources_stay_pending_with_an_outcome(self):
+    def test_two_source_identity_reviews_preserve_prior_inspections(self):
         registry, *_ = context()
         log = load("source-inspections.json")
         for sid in ("asml-2024-annual-reports", "ucie-2-specification-release-2024"):
-            self.assertEqual("pending_review", registry[sid]["status"])
-            r = record(log, sid)
-            self.assertIn("review_required", r["states"])
-            self.assertTrue(r["next_action"].startswith("Keep pending_review"))
+            self.assertEqual("active", registry[sid]["status"])
+            prior = record(log, sid)
+            self.assertIn("review_required", prior["states"])
+            current = next(r for r in log["records"] if r["source_id"] == sid and r["run_id"] == "ide-018-2026-11-16")
+            self.assertEqual("2026-11-16", current["inspected_at"])
+            self.assertIn("source_retrieved", current["states"])
+            self.assertNotIn("review_required", current["states"])
+        ucie = next(r for r in log["records"] if r["source_id"] == "ucie-2-specification-release-2024" and r["run_id"] == "ide-018-2026-11-16")
+        self.assertEqual((ucie["passage_check"]["found"], ucie["passage_check"]["quoted_passages"]), (6, 6))
 
-    def test_inspection_did_not_rewrite_access_dates(self):
+    def test_access_dates_reflect_new_source_review_only(self):
         registry, *_ = context()
         # Retrieved in this run but not re-used for a claim: the registry access date stays the claim-work date.
         self.assertEqual("2026-11-09", registry["nvidia-rubin-platform-architecture-2026"]["accessed_at"])
         self.assertEqual("2026-11-09", registry["amd-cdna3-white-paper-2025"]["accessed_at"])
-        self.assertEqual("2026-06-14", registry["ucie-2-specification-release-2024"]["accessed_at"])
+        self.assertEqual("2026-11-16", registry["ucie-2-specification-release-2024"]["accessed_at"])
+        self.assertEqual("2026-11-16", registry["asml-2024-annual-reports"]["accessed_at"])
 
 
 class InspectionValidationTests(unittest.TestCase):

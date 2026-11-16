@@ -437,17 +437,14 @@
     },
     {
       "source_id": "asml-2024-annual-reports",
-      "status": "pending_review",
+      "status": "active",
       "freshness_basis": "Period-bound report: historically valid for its period; a later report may supersede it for current use",
-      "priority_reasons": [
-        "pending_review"
-      ],
+      "priority_reasons": [],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-16",
         "states": [
           "metadata_validated",
-          "source_inaccessible",
-          "review_required"
+          "source_retrieved"
         ]
       },
       "direct": {
@@ -3439,18 +3436,17 @@
     },
     {
       "source_id": "ucie-2-specification-release-2024",
-      "status": "pending_review",
-      "freshness_basis": "Standard or specification release: check for later revisions and the normative text",
+      "status": "active",
+      "freshness_basis": "Product or technical disclosure: figures and configurations may be revised; recheck before current comparisons",
       "priority_reasons": [
-        "pending_review"
+        "product_architecture"
       ],
       "latest_inspection": {
-        "inspected_at": "2026-11-10",
+        "inspected_at": "2026-11-16",
         "states": [
           "metadata_validated",
           "source_retrieved",
-          "source_content_compared",
-          "review_required"
+          "source_content_compared"
         ]
       },
       "direct": {

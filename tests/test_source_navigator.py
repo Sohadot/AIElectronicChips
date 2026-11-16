@@ -27,7 +27,7 @@ NODE = shutil.which("node")
 PLAYWRIGHT = next((p for p in (os.environ.get("PLAYWRIGHT_MODULE", ""), "/opt/node22/lib/node_modules/playwright")
                    if p and Path(p).is_dir()), None)
 REQUIRE_BROWSER = os.environ.get("AEC_REQUIRE_BROWSER") == "1"
-REGISTRATION = ("The registry records source identity and metadata, including entries still pending review. "
+REGISTRATION = ("The registry records source identity, metadata and review status. "
                 "Registration does not verify any claim.")
 
 
@@ -75,9 +75,9 @@ class PageTests(unittest.TestCase):
             self.assertIn(f'href="#source-{r["id"]}"', item)
             self.assertIn(f'id="source-{r["id"]}"', p)  # the linked inspection row exists
 
-    def test_pending_sources_visible_and_nothing_promoted(self):
+    def test_current_source_statuses_and_boundary_are_truthful(self):
         pending = [r["id"] for r in records() if r["status"] == "pending_review"]
-        self.assertEqual(len(pending), 2)
+        self.assertEqual(pending, [])  # dated identity review resolved both remaining records
         for sid in pending:
             item = re.search(rf'<li class="nav-source" id="nav-{sid}".*?\n</li>', page(), re.S).group(0)
             self.assertIn("nav-pending", item)
@@ -95,8 +95,13 @@ class PageTests(unittest.TestCase):
             self.assertIn(f'class="nav-status{" nav-pending" if r["status"] != "active" else ""}" data-value="{r["status"]}"', item)
             meta = re.search(r'<p class="nav-meta">.*?</p>', item).group(0)
             self.assertNotRegex(meta.lower(), r"\bverified\b|\bvalidated\b|\bapproved\b")
-        self.assertEqual(sorted(r["id"] for r in records() if r["status"] == "pending_review"),
-                         ["asml-2024-annual-reports", "ucie-2-specification-release-2024"])
+        self.assertEqual([r["id"] for r in records() if r["status"] == "pending_review"], [])
+
+    def test_simulated_pending_source_cannot_be_displayed_active(self):
+        fixture = registry()
+        fixture["source_records"][0]["status"] = "pending_review"
+        errs = v.check_page(page(), fixture)
+        self.assertTrue(any("status or source type" in e for e in errs), errs)
 
     def test_commercial_pointer_restrained(self):
         section = v.block(page())
@@ -125,17 +130,16 @@ class NegativeTests(unittest.TestCase):
         p = page()
         first = records()[0]["id"]
         self.assertFlags(p.replace(f'id="nav-{first}"', 'id="nav-invented-source"', 1), "every registry record exactly once")
-        pend = next(r for r in records() if r["status"] == "pending_review")
-        item = re.search(rf'<li class="nav-source" id="nav-{pend["id"]}".*?\n</li>', p, re.S).group(0)
-        self.assertFlags(p.replace(item, item.replace('data-status="pending_review"', 'data-status="active"')), "status or source type")
-        self.assertFlags(p.replace(item, item.replace(" nav-pending", "")), "marked visibly")
+        selected = records()[0]
+        item = re.search(rf'<li class="nav-source" id="nav-{selected["id"]}".*?\n</li>', p, re.S).group(0)
+        self.assertFlags(p.replace(item, item.replace('data-status="active"', 'data-status="pending_review"')), "status or source type")
         r0 = records()[0]
         self.assertFlags(p.replace(f'href="{r0["canonical_url"]}"', 'href="https://example.invalid/"', 1), "canonical URL")
         self.assertFlags(p.replace(r0["use_limitations"][0], "No limitation", 1), "recorded text missing")
         self.assertFlags(p.replace("<h2 id=\"navigator-title\">Evidence navigator</h2>", "<h2 id=\"navigator-title\">Evidence navigator</h2><p>Trust score: 9</p>"),
                          "evaluative wording")
         self.assertFlags(p.replace("Registration does not verify any claim.", "Registration confirms each claim."), "boundary wording")
-        self.assertFlags(p.replace("The registry records source identity and metadata, including entries still pending review.",
+        self.assertFlags(p.replace("The registry records source identity, metadata and review status.",
                                    "A registered source has passed identity and metadata review."), "completed review")
         self.assertFlags(p.replace("Scoped work beyond the public inventory</h3>", "Scoped work beyond the public inventory</h3><p>From $499 per month</p>"),
                          "no prices")
